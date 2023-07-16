@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "tq:block/coma_stone",
+    "side": "tq:block/illusive_nylium_side",
+    "top": "tq:block/illusive_nylium_top"
+  }
+}

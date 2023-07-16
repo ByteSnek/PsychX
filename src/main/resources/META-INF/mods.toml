@@ -1,0 +1,25 @@
+modLoader = "javafml"
+loaderVersion = "[43,)"
+license = "All rights reserved"
+
+[[mods]]
+modId = "tq"
+version = "${file.jarVersion}"
+displayName = "Torniqueted"
+logoFile = "tq.png"
+authors = "SnakerBone"
+description = "Torniqueted Mod for 1.20+"
+
+[[dependencies.tq]]
+modId = "forge"
+mandatory = true
+versionRange = "[43,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.tq]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20]"
+ordering = "NONE"
+side = "BOTH"

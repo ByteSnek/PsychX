@@ -1,0 +1,221 @@
+{
+  "random_fx": {
+    "sounds": [
+      {
+        "name": "tq:misc/randomfx_1",
+        "stream": false
+      },
+      {
+        "name": "tq:misc/randomfx_2",
+        "stream": false
+      },
+      {
+        "name": "tq:misc/randomfx_3",
+        "stream": false
+      },
+      {
+        "name": "tq:misc/randomfx_4",
+        "stream": false
+      },
+      {
+        "name": "tq:misc/randomfx_5",
+        "stream": false
+      },
+      {
+        "name": "tq:misc/randomfx_6",
+        "stream": false
+      },
+      {
+        "name": "tq:misc/randomfx_7",
+        "stream": false
+      },
+      {
+        "name": "tq:misc/randomfx_8",
+        "stream": false
+      },
+      {
+        "name": "tq:misc/randomfx_9",
+        "stream": false
+      },
+      {
+        "name": "tq:misc/randomfx_10",
+        "stream": false
+      },
+      {
+        "name": "tq:misc/randomfx_11",
+        "stream": false
+      }
+    ]
+  },
+  "trance": {
+    "sounds": [
+      {
+        "name": "tq:ambient/trance",
+        "stream": false
+      }
+    ]
+  },
+  "confuse": {
+    "subtitle": "sounds.tq.confuse",
+    "sounds": [
+      "tq:yn/confuse"
+    ]
+  },
+  "earth": {
+    "subtitle": "sounds.tq.earth",
+    "sounds": [
+      "tq:yn/earth"
+    ]
+  },
+  "fog": {
+    "subtitle": "sounds.tq.fog",
+    "sounds": [
+      "tq:yn/fog"
+    ]
+  },
+  "gaze": {
+    "subtitle": "sounds.tq.gaze",
+    "sounds": [
+      "tq:yn/gaze"
+    ]
+  },
+  "night": {
+    "subtitle": "sounds.tq.night",
+    "sounds": [
+      "tq:yn/night"
+    ]
+  },
+  "utterfly_shoot": {
+    "subtitle": "sounds.tq.utterfly_shoot",
+    "sounds": [
+      "tq:utterfly/shoot"
+    ]
+  },
+  "utterfly_ambient": {
+    "subtitle": "sounds.tq.utterfly_ambient",
+    "sounds": [
+      {
+        "name": "tq:yn/poison"
+      }
+    ]
+  },
+  "flutterfly_ambient": {
+    "subtitle": "sounds.tq.flutterfly_ambient",
+    "sounds": [
+      {
+        "name": "tq:yn/poison",
+        "pitch": 2
+      }
+    ]
+  },
+  "snipe_ambient": {
+    "subtitle": "sounds.tq.snipe_ambient",
+    "sounds": [
+      "tq:snipe/ambient"
+    ]
+  },
+  "snipe_hurt": {
+    "subtitle": "sounds.tq.snipe_hurt",
+    "sounds": [
+      "tq:snipe/hurt"
+    ]
+  },
+  "cosmo_hurt": {
+    "subtitle": "sounds.tq.cosmo_hurt",
+    "sounds": [
+      {
+        "name": "tq:cosmo/hurt1",
+        "volume": 0.5
+      },
+      {
+        "name": "tq:cosmo/hurt2",
+        "volume": 0.5
+      },
+      {
+        "name": "tq:cosmo/hurt3",
+        "volume": 0.5
+      }
+    ]
+  },
+  "anti_cosmo_hurt": {
+    "subtitle": "sounds.tq.anti_cosmo_hurt",
+    "sounds": [
+      {
+        "name": "tq:cosmo/hurt1",
+        "volume": 0.5,
+        "pitch": 0.25
+      },
+      {
+        "name": "tq:cosmo/hurt2",
+        "volume": 0.5,
+        "pitch": 0.25
+      },
+      {
+        "name": "tq:cosmo/hurt3",
+        "volume": 0.5,
+        "pitch": 0.25
+      }
+    ]
+  },
+  "entity_death": {
+    "subtitle": "sounds.tq.entity_death",
+    "sounds": [
+      "tq:yn/dark"
+    ]
+  },
+  "ting": {
+    "subtitle": "sounds.tq.ting",
+    "sounds": [
+      {
+        "name": "minecraft:random/anvil_land",
+        "pitch": 2,
+        "volume": 0.5
+      }
+    ]
+  },
+  "pew": {
+    "subtitle": "sounds.tq.pew",
+    "sounds": [
+      "tq:misc/bullet0",
+      "tq:misc/bullet1",
+      "tq:misc/bullet2",
+      "tq:misc/bullet3",
+      "tq:misc/bullet4",
+      "tq:misc/bullet5",
+      "tq:misc/bullet6",
+      "tq:misc/bullet7",
+      "tq:misc/bullet8",
+      "tq:misc/bullet9",
+      "tq:misc/bullet10",
+      "tq:misc/bullet11",
+      "tq:misc/bullet12",
+      "tq:misc/bullet13",
+      "tq:misc/bullet14",
+      "tq:misc/bullet15"
+    ]
+  },
+  "field": {
+    "subtitle": "sounds.tq.field",
+    "sounds": [
+      "tq:misc/field"
+    ]
+  },
+  "hit": {
+    "subtitle": "sounds.snakerbne.hit",
+    "sounds": [
+      "tq:misc/hit"
+    ]
+  },
+  "laser": {
+    "subtitle": "sounds.snakerbne.laser",
+    "sounds": [
+      "tq:misc/laser"
+    ]
+  },
+  "pulse": {
+    "subtitle": "sounds.snakerbne.pulse",
+    "sounds": [
+      "tq:misc/pulse"
+    ]
+  }
+}

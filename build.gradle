@@ -1,0 +1,150 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+        maven { url 'https://maven.minecraftforge.net' }
+        maven { url 'https://repo.spongepowered.org/repository/maven-public' }
+        maven { url 'https://maven.parchmentmc.org' }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:[6.0,6.2]'
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
+        classpath 'org.parchmentmc:librarian:1.+'
+    }
+}
+
+plugins {
+    id 'eclipse'
+    id 'maven-publish'
+}
+
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'org.spongepowered.mixin'
+apply plugin: 'org.parchmentmc.librarian.forgegradle'
+
+version = minecraft_version + "-" + mod_version
+group = maven_group
+archivesBaseName = mod_id
+
+String date = new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+repositories {
+    maven {
+        url 'https://cursemaven.com'
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.deprecation(false)
+    options.warnings(false)
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:4579432")
+}
+
+minecraft {
+    mappings channel: 'parchment', version: '1.19.3-2023.03.12-1.20.1'
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    runs {
+        client {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
+
+            mods {
+                tq {
+                    source sourceSets.main
+                }
+            }
+        }
+        server {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
+
+            mods {
+                tq {
+                    source sourceSets.main
+                }
+            }
+        }
+        data {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
+
+            args '--mod', 'tq', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+
+            mods {
+                tq {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+mixin {
+    add sourceSets.main, 'mixins.tq.json'
+    config 'mixins.tq.json'
+}
+
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
+}
+
+jar.finalizedBy('reobfJar')
+
+jar {
+    manifest {
+        attributes([
+                "Specification-Title"     : mod_title,
+                "Specification-Vendor"    : mod_author,
+                "Specification-Version"   : mod_version,
+                "Implementation-Title"    : mod_title,
+                "Implementation-Vendor"   : mod_author,
+                "Implementation-Version"  : mod_version,
+                "Implementation-Timestamp": date
+        ])
+    }
+}
+
+tasks.register('srcJar', Jar) {
+    build.dependsOn it
+    from sourceSets.main.allSource
+    archiveClassifier = 'sources'
+}
+
+publishing {
+    repositories {
+        maven {
+            url "https://mymavenrepo.com/repo/DuqP6QPb7DvFrT8khf7h"
+            credentials {
+                username System.getenv("MVN_USER")
+                password System.getenv("MVN_PASS")
+            }
+        }
+    }
+    publications {
+        mavenJava(MavenPublication) {
+            artifact srcJar
+            artifact jar
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
