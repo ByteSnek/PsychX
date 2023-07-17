@@ -43,7 +43,7 @@ public class SnakerLib
     public static final Component VIRTUAL_MACHINE_FORCE_CRASH_KEYBINDS_PRESSED = Component.literal("Left shift and F4 pressed.");
     public static final Component DISABLE_IN_CONFIG = Component.literal("You can disable this in the config (snakerlib-common.toml) if you wish");
     public static final StackWalker STACK_WALKER = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE);
-    public static final SnakerLogger LOGGER = SnakerLoggerManager.getLogger(SnakerLib.STACK_WALKER.getCallerClass());
+    public static final SnakerLogger LOGGER = SnakerLoggerManager.getLogger(SnakerLib.getCallerClassReference());
     public static final Log4jFilter FILTER = new Log4jFilter();
 
     public static final String MODID = "snakerlib";
@@ -59,7 +59,8 @@ public class SnakerLib
             "Missing sound for event: minecraft:entity.goat.screaming.horn_break",
             "Missing sound for event: minecraft:item.goat_horn.play",
             "Shader color_convolve could not find uniform named InSize in the specified shader program.",
-            "Shader phosphor could not find uniform named InSize in the specified shader program."
+            "Shader phosphor could not find uniform named InSize in the specified shader program.",
+            "Unable to parse the boolean system property 'java.net.preferIPv6Addresses':system - using the default value: false"
     };
 
     public SnakerLib()
@@ -113,6 +114,15 @@ public class SnakerLib
         return other % Mh.secondsToTicks(secOffset) == 0;
     }
 
+    public static Class<?> getCallerClassReference()
+    {
+        return STACK_WALKER.getCallerClass();
+    }
+
+    public static ClassLoader getCallerClassLoaderReference()
+    {
+        return getCallerClassReference().getClassLoader();
+    }
 
     @SafeVarargs
     public static <V> V randomFromObjects(final RandomSource random, V... values)
@@ -171,7 +181,7 @@ public class SnakerLib
      **/
     public static void forceCrashJVM(String reason)
     {
-        String clazz = STACK_WALKER.getCallerClass().toString();
+        String clazz = SnakerLib.getCallerClassReference().toString();
         String regex = ".*[a-zA-Z]+.*";
         String br = "\n";
         StringBuilder builder = new StringBuilder("-+-");

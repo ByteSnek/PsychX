@@ -3,6 +3,8 @@ package snaker.snakerlib.utility;
 import org.apache.logging.log4j.util.TriConsumer;
 import snaker.snakerlib.internal.QuadConsumer;
 
+import java.net.URI;
+import java.net.URL;
 import java.util.concurrent.Callable;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -17,18 +19,36 @@ public class AestheticUtil
 {
     // @NoFormat
 
-    private static final Runnable EMPTY_RUNNABLE = () -> {};
-    private static final Consumer<?> EMPTY_WC_CONSUMER = e -> {};
-    private static final BiConsumer<?, ?> EMPTY_WC_BI_CONSUMER = (t, v) -> {};
-    private static final TriConsumer<?, ?, ?> EMPTY_WC_TRI_CONSUMER = (k, v, s) -> {};
-    private static final QuadConsumer<?, ?, ?, ?> EMPTY_WC_QUAD_CONSUMER = (u, d, t, q) -> {};
+    private static final Runnable EMPTY_RUNNABLE = () ->
+    {
+    };
+    private static final Consumer<?> EMPTY_WC_CONSUMER = e ->
+    {
+    };
+    private static final BiConsumer<?, ?> EMPTY_WC_BI_CONSUMER = (t, v) ->
+    {
+    };
+    private static final TriConsumer<?, ?, ?> EMPTY_WC_TRI_CONSUMER = (k, v, s) ->
+    {
+    };
+    private static final QuadConsumer<?, ?, ?, ?> EMPTY_WC_QUAD_CONSUMER = (u, d, t, q) ->
+    {
+    };
     private static final Callable<?> NULL_WC_CALLABLE = () -> null;
     private static final Supplier<?> NULL_WC_SUPPLIER = () -> null;
 
-    private static final Consumer<Object> EMPTY_CONSUMER = e -> {};
-    private static final BiConsumer<Object, Object> EMPTY_BI_CONSUMER = (t, v) -> {};
-    private static final TriConsumer<Object, Object, Object> EMPTY_TRI_CONSUMER = (k, v, s) -> {};
-    private static final QuadConsumer<Object, Object, Object, Object> EMPTY_QUAD_CONSUMER = (u, d, t, q) -> {};
+    private static final Consumer<Object> EMPTY_CONSUMER = e ->
+    {
+    };
+    private static final BiConsumer<Object, Object> EMPTY_BI_CONSUMER = (t, v) ->
+    {
+    };
+    private static final TriConsumer<Object, Object, Object> EMPTY_TRI_CONSUMER = (k, v, s) ->
+    {
+    };
+    private static final QuadConsumer<Object, Object, Object, Object> EMPTY_QUAD_CONSUMER = (u, d, t, q) ->
+    {
+    };
     private static final Callable<Object> NULL_CALLABLE = () -> null;
     private static final Supplier<Object> NULL_SUPPLIER = () -> null;
 
@@ -97,5 +117,14 @@ public class AestheticUtil
     public static Supplier<Object> nullSupplier()
     {
         return NULL_SUPPLIER;
+    }
+
+    public static URI urlToUri(URL url)
+    {
+        try {
+            return url.toURI();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

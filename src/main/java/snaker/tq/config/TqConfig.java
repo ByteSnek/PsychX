@@ -39,14 +39,16 @@ public class TqConfig
 
     public static class Client
     {
+        public final ForgeConfigSpec.ConfigValue<String> syncopeOverlayColour;
         public final ForgeConfigSpec.DoubleValue syncopePhosphorIntensity;
         public final ForgeConfigSpec.DoubleValue syncopeColourConvolveSaturation;
 
         public Client(ForgeConfigSpec.Builder builder)
         {
             builder.push("client");
-            syncopePhosphorIntensity = builder.comment("The syncope effect motion blur intensity (default: 0.75)").defineInRange("syncopePhosphorIntensity", 0.75, 0.0, 1.0);
-            syncopeColourConvolveSaturation = builder.comment("The syncope effect RGB glitch saturation (default: 0.8)").defineInRange("syncopeColourConvolveSaturation", 0.8, 0.0, 1.0);
+            syncopeOverlayColour = builder.comment("The hex colour of the syncope overlay effect (default: FF00FF)").define("syncopeOverlayColour", "FF00FF");
+            syncopePhosphorIntensity = builder.comment("The syncope effect motion blur intensity (default: 0.99)").defineInRange("syncopePhosphorIntensity", 0.99, 0.0, 1.0);
+            syncopeColourConvolveSaturation = builder.comment("The syncope effect RGB glitch saturation (default: 1.0)").defineInRange("syncopeColourConvolveSaturation", 1.0, 0.0, 1.0);
             builder.pop();
         }
     }
