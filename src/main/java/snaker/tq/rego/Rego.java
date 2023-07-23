@@ -305,4 +305,5 @@ public class Rego
     {
         public static final ResourceKey<Level> COMATOSE = ResourceKey.create(Registries.DIMENSION, new Identifier("comatose"));
     }
-}
+}//CH31ZJ
+//MKS85

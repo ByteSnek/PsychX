@@ -1,6 +1,5 @@
 package snaker.snakerlib.math;
 
-import net.minecraft.Util;
 import net.minecraft.world.phys.Vec3;
 
 import java.math.BigInteger;
@@ -30,11 +29,11 @@ public class Mh
 
     public static final int[] LOG2_BIT_TABLE = new int[]{0, 1, 28, 2, 29, 14, 24, 3, 30, 22, 20, 15, 25, 17, 4, 8, 31, 27, 13, 23, 21, 19, 16, 7, 26, 12, 18, 6, 11, 5, 10, 9};
 
-    public static int bitConj(int a, int b)
+    public static boolean diffEquals(int a, int b, int wanted)
     {
-        int startTime = (int) System.currentTimeMillis() | (int) ~Util.getMillis();
-        startTime ^= startTime & ~a | startTime & ~b / (clampPow2ByQuad(a ^ b));
-        return startTime ^ (a - LOG2_BIT_TABLE[1 | 2 | 3 | 4 | 5 | 6 | 9 | 12 | 31]) >>> (b - LOG2_BIT_TABLE[1 | 2 | 3 | 4 | 5 | 6 | 9 | 12 | 31]) * startTime ^ (b - LOG2_BIT_TABLE[1 | 2 | 3 | 4 | 5 | 6 | 9 | 12 | 31]) >>> (a - LOG2_BIT_TABLE[1 | 2 | 3 | 4 | 5 | 6 | 9 | 12 | 31]) / (System.getProperties().hashCode() / System.currentTimeMillis());
+        int upper = Math.max(a, b);
+        int lower = Math.min(a, b);
+        return upper - lower == wanted;
     }
 
     public static int secondsToTicks(int a)

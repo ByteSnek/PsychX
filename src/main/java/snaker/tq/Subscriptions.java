@@ -32,6 +32,7 @@ import snaker.tq.client.model.entity.*;
 import snaker.tq.client.model.item.CosmoSpineModel;
 import snaker.tq.client.render.block.ShaderBlockRenderer;
 import snaker.tq.client.render.entity.*;
+import snaker.tq.config.TqConfig;
 import snaker.tq.level.entity.boss.AntiCosmo;
 import snaker.tq.level.entity.boss.Utterfly;
 import snaker.tq.level.entity.creature.Flutterfly;
@@ -125,7 +126,7 @@ public class Subscriptions
         {
             Player player = event.player;
             Level level = player.level();
-            if (LevelUtil.isDimension(level, Rego.Keys.COMATOSE)) {
+            if (LevelUtil.isDimension(level, Rego.Keys.COMATOSE) && TqConfig.COMMON.syncopeActiveInComatoseDimension.get()) {
                 float tickCount = player.tickCount;
                 if (SnakerLib.secOffs(tickCount, 1)) {
                     SnakerUtil.addEffectDirect(player, Rego.EFFECT_SYNCOPE.get());
