@@ -45,7 +45,7 @@ import snaker.tq.rego.Rego;
  **/
 public class Subscriptions
 {
-    @Mod.EventBusSubscriber(modid = Torniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+    @Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class ModEvents
     {
         @SubscribeEvent
@@ -118,7 +118,7 @@ public class Subscriptions
         }
     }
 
-    @Mod.EventBusSubscriber(modid = Torniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+    @Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
     public static class ForgeEvents
     {
         @SubscribeEvent
@@ -135,7 +135,7 @@ public class Subscriptions
         }
     }
 
-    @Mod.EventBusSubscriber(modid = Torniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ModClientEvents
     {
         @SubscribeEvent

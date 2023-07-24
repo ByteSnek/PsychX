@@ -11,16 +11,16 @@ import snaker.tq.client.Shaders;
 import snaker.tq.config.TqConfig;
 import snaker.tq.rego.Rego;
 
-@Mod(Torniqueted.MODID)
-public class Torniqueted
+@Mod(Tourniqueted.MODID)
+public class Tourniqueted
 {
     public static final String MODID = "tq";
 
-    public Torniqueted()
+    public Tourniqueted()
     {
         MinecraftForge.EVENT_BUS.register(this);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, TqConfig.CLIENT_SPEC, "torniqueted-client.toml");
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, TqConfig.COMMON_SPEC, "torniqueted-common.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, TqConfig.CLIENT_SPEC, "tourniqueted-client.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, TqConfig.COMMON_SPEC, "tourniqueted-common.toml");
         Rego.initialize();
         SnakerLib.initialize();
         if (FMLEnvironment.dist.isClient()) {

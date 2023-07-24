@@ -37,7 +37,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import snaker.snakerlib.resources.Identifier;
 import snaker.snakerlib.utility.SnakerUtil;
-import snaker.tq.Torniqueted;
+import snaker.tq.Tourniqueted;
 import snaker.tq.level.block.ComatoseNyliumBlock;
 import snaker.tq.level.block.ShaderBlock;
 import snaker.tq.level.block.ShaderBlockItem;
@@ -53,7 +53,7 @@ import snaker.tq.level.entity.projectile.CosmicRay;
 import snaker.tq.level.entity.projectile.ExplosiveHommingArrow;
 import snaker.tq.level.entity.projectile.HommingArrow;
 import snaker.tq.level.item.CosmoSpine;
-import snaker.tq.level.item.Torniquet;
+import snaker.tq.level.item.Tourniquet;
 import snaker.tq.level.item.icon.BlockTabIcon;
 import snaker.tq.level.item.icon.ItemTabIcon;
 import snaker.tq.level.item.icon.MobTabIcon;
@@ -64,21 +64,21 @@ import java.util.function.Supplier;
 /**
  * Created by SnakerBone on 12/12/2022
  **/
-@Mod.EventBusSubscriber(modid = Torniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class Rego
 {
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Torniqueted.MODID);
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Torniqueted.MODID);
-    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, Torniqueted.MODID);
-    public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Torniqueted.MODID);
-    public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Torniqueted.MODID);
-    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Torniqueted.MODID);
-    public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, Torniqueted.MODID);
-    public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, Torniqueted.MODID);
-    public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, Torniqueted.MODID);
-    public static final DeferredRegister<RecipeType<?>> RECIPES = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, Torniqueted.MODID);
-    public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, Torniqueted.MODID);
-    public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(Registries.BIOME, Torniqueted.MODID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Tourniqueted.MODID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Tourniqueted.MODID);
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, Tourniqueted.MODID);
+    public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Tourniqueted.MODID);
+    public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Tourniqueted.MODID);
+    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Tourniqueted.MODID);
+    public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, Tourniqueted.MODID);
+    public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, Tourniqueted.MODID);
+    public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, Tourniqueted.MODID);
+    public static final DeferredRegister<RecipeType<?>> RECIPES = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, Tourniqueted.MODID);
+    public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, Tourniqueted.MODID);
+    public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(Registries.BIOME, Tourniqueted.MODID);
 
     public static final RegistryObject<Item> ITEM_RED_COSMO_SPINE = item("red_cosmo_spine", CosmoSpine::new);
     public static final RegistryObject<Item> ITEM_GREEN_COSMO_SPINE = item("green_cosmo_spine", CosmoSpine::new);
@@ -158,7 +158,7 @@ public class Rego
     public static final RegistryObject<EntityType<EerieCretin>> ENTITY_EERIE_CRETIN = mob("eerie_cretin", EerieCretin::new, 0.375F, 0.375F);
     public static final RegistryObject<EntityType<Leet>> ENTITY_LEET = mob("leet", Leet::new, 0.375F, 0.375F);
 
-    public static final RegistryObject<Item> ITEM_TORNIQUET = item("torniquet", Torniquet::new);
+    public static final RegistryObject<Item> ITEM_TOURNIQUET = item("tourniquet", Tourniquet::new);
 
     public static final RegistryObject<Item> ITEM_COSMO_SPAWN_EGG = egg("cosmo_spawn_egg", Rego.ENTITY_COSMO);
     public static final RegistryObject<Item> ITEM_SNIPE_SPAWN_EGG = egg("snipe_spawn_egg", Rego.ENTITY_SNIPE);

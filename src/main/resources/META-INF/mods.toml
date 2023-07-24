@@ -5,10 +5,10 @@ license = "All rights reserved"
 [[mods]]
 modId = "tq"
 version = "${file.jarVersion}"
-displayName = "Torniqueted"
+displayName = "Tourniqueted"
 logoFile = "tq.png"
 authors = "SnakerBone"
-description = "Torniqueted Mod for 1.20+"
+description = "Tourniqueted Mod for 1.20+"
 
 [[dependencies.tq]]
 modId = "forge"

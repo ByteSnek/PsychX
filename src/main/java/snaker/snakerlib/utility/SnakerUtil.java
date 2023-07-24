@@ -24,13 +24,7 @@ public class SnakerUtil
 {
     public static final String PLACEHOLDER = SnakerLib.MODID + ":" + PlaceHolders.PH8;
     public static final String PLACEHOLDER_NO_MODID = PlaceHolders.PH8;
-
-    public static String getBaseName(Class<?> clazz)
-    {
-        String pkg = clazz.getPackage().getName();
-        return pkg.substring(pkg.lastIndexOf('.')).replace(".", "");
-    }
-
+    
     public static <T extends LivingEntity, E extends MobEffect> boolean addEffectDirect(T entity, E effect, @Nullable Integer duration, @Nullable Integer mul, boolean isAmbient, boolean showBubble, boolean showIcon)
     {
         return entity.addEffect(new MobEffectInstance(effect, duration == null ? Mh.secondsToTicks(10) : duration, mul == null ? 0 : mul, isAmbient, showBubble, showIcon));

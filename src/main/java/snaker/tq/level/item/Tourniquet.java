@@ -27,14 +27,16 @@ import java.util.function.Function;
 /**
  * Created by SnakerBone on 7/07/2023
  **/
-public class Torniquet extends SnakerBaseItem
+public class Tourniquet extends SnakerBaseItem
 {
     @Override
     public void onUseTick(@NotNull Level level, @NotNull LivingEntity entity, @NotNull ItemStack stack, int remainingUseDuration)
     {
+        MobEffectInstance syncopeEffect = new MobEffectInstance(Rego.EFFECT_SYNCOPE.get(), Mh.secondsToTicks(3));
         int useDuration = getUseDuration(stack);
         if (!level.isClientSide) {
             if (entity instanceof Player player) {
+                player.addEffect(syncopeEffect);
                 if (Mh.diffEquals(useDuration, remainingUseDuration, 50)) {
                     if (player.canChangeDimensions()) {
                         ResourceKey<Level> key = level.dimension() == Rego.Keys.COMATOSE ? Level.OVERWORLD : Rego.Keys.COMATOSE;
@@ -56,8 +58,6 @@ public class Torniquet extends SnakerBaseItem
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand hand)
     {
-        MobEffectInstance syncopeEffect = new MobEffectInstance(Rego.EFFECT_SYNCOPE.get(), Mh.secondsToTicks(3));
-        player.addEffect(syncopeEffect);
         return ItemUtils.startUsingInstantly(level, player, hand);
     }
 
@@ -83,7 +83,6 @@ public class Torniquet extends SnakerBaseItem
             PortalInfo info = new PortalInfo(entity.position(), Vec3.ZERO, entity.getYRot(), entity.getXRot());
             if (entity instanceof ServerPlayer player) {
                 player.setServerLevel(destWorld);
-                player.removeAllEffects();
                 destWorld.addDuringPortalTeleport(player);
                 entity.setYRot(info.yRot % 360);
                 entity.setXRot(info.xRot % 360);
@@ -99,6 +98,12 @@ public class Torniquet extends SnakerBaseItem
                 }
                 return special;
             }
+        }
+
+        @Override
+        public boolean playTeleportSound(ServerPlayer player, ServerLevel sourceWorld, ServerLevel destWorld)
+        {
+            return false;
         }
     }
 }

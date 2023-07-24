@@ -3,12 +3,12 @@ package snaker.tq.datagen;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import snaker.tq.Torniqueted;
+import snaker.tq.Tourniqueted;
 
 /**
  * Created by SnakerBone on 21/03/2023
  **/
-@Mod.EventBusSubscriber(modid = Torniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataGenerators
 {
     @SubscribeEvent

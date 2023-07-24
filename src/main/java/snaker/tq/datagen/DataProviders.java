@@ -14,7 +14,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.registries.RegistryObject;
 import snaker.snakerlib.utility.SnakerUtil;
-import snaker.tq.Torniqueted;
+import snaker.tq.Tourniqueted;
 import snaker.tq.rego.Rego;
 
 import java.util.Locale;
@@ -28,7 +28,7 @@ public class DataProviders
     {
         public BlockStates(PackOutput output, ExistingFileHelper helper)
         {
-            super(output, Torniqueted.MODID, helper);
+            super(output, Tourniqueted.MODID, helper);
         }
 
         private void dream(RegistryObject<Block> block)
@@ -78,7 +78,7 @@ public class DataProviders
     {
         public ItemModels(PackOutput output, ExistingFileHelper helper)
         {
-            super(output, Torniqueted.MODID, helper);
+            super(output, Tourniqueted.MODID, helper);
         }
 
         private void egg(RegistryObject<Item> item)
@@ -156,7 +156,7 @@ public class DataProviders
             perspective(Rego.ICON_ITEM_TAB);
             perspective(Rego.ICON_BLOCK_TAB);
 
-            basic(Rego.ITEM_TORNIQUET);
+            basic(Rego.ITEM_TOURNIQUET);
         }
     }
 
@@ -164,7 +164,7 @@ public class DataProviders
     {
         public Languages(PackOutput output)
         {
-            super(output, Torniqueted.MODID, Locale.US.toString().toLowerCase());
+            super(output, Tourniqueted.MODID, Locale.US.toString().toLowerCase());
         }
 
         private void tab(RegistryObject<CreativeModeTab> tab)
@@ -178,36 +178,36 @@ public class DataProviders
             String name = entity.getId().getPath();
 
             if (name.equals("cosmo")) {
-                add("entity." + Torniqueted.MODID + "." + name, SnakerUtil.translate(name));
-                add("entity." + Torniqueted.MODID + "." + "alpha_" + name, SnakerUtil.translate("alpha_" + name));
+                add("entity." + Tourniqueted.MODID + "." + name, SnakerUtil.translate(name));
+                add("entity." + Tourniqueted.MODID + "." + "alpha_" + name, SnakerUtil.translate("alpha_" + name));
                 return;
             }
 
-            add("entity." + Torniqueted.MODID + "." + name, SnakerUtil.translate(name));
+            add("entity." + Tourniqueted.MODID + "." + name, SnakerUtil.translate(name));
         }
 
         private <T extends Item> void item(RegistryObject<T> item)
         {
             String name = item.getId().getPath();
-            add("item." + Torniqueted.MODID + "." + name, SnakerUtil.translate(name));
+            add("item." + Tourniqueted.MODID + "." + name, SnakerUtil.translate(name));
         }
 
         private <T extends Block> void block(RegistryObject<T> block)
         {
             String name = block.getId().getPath();
-            add("block." + Torniqueted.MODID + "." + name, SnakerUtil.translate(name));
+            add("block." + Tourniqueted.MODID + "." + name, SnakerUtil.translate(name));
         }
 
         private void sound(RegistryObject<SoundEvent> sound)
         {
             String name = sound.getId().getPath();
-            add("sounds." + Torniqueted.MODID + "." + name, SnakerUtil.translate(name));
+            add("sounds." + Tourniqueted.MODID + "." + name, SnakerUtil.translate(name));
         }
 
         private <T extends MobEffect> void effect(RegistryObject<T> effect)
         {
             String name = effect.getId().getPath();
-            add("effect." + Torniqueted.MODID + "." + name, SnakerUtil.translate(name));
+            add("effect." + Tourniqueted.MODID + "." + name, SnakerUtil.translate(name));
         }
 
         @Override
@@ -239,7 +239,7 @@ public class DataProviders
             item(Rego.ICON_MOB_TAB);
             item(Rego.ICON_ITEM_TAB);
             item(Rego.ICON_BLOCK_TAB);
-            item(Rego.ITEM_TORNIQUET);
+            item(Rego.ITEM_TOURNIQUET);
 
             block(Rego.BLOCK_SWIRL);
             block(Rego.BLOCK_SNOWFLAKE);

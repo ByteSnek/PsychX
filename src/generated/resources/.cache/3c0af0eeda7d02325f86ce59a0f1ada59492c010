@@ -1,4 +1,4 @@
-// 1.20	2023-07-15T13:43:36.4579031	Item Models: tq
+// 1.20	2023-07-24T17:44:54.1352856	Item Models: tq
 a9c3324ea6eec8a2934c62339e21aa670367366f assets/tq/models/item/alpha_cosmo_spine.json
 7cbeee0d2c5308793c068f64eba0c4b7f823ac62 assets/tq/models/item/anti_cosmo_spawn_egg.json
 a9c3324ea6eec8a2934c62339e21aa670367366f assets/tq/models/item/anti_cosmo_spine.json
@@ -29,7 +29,7 @@ e5e68c43be6ba777a916b2bd531588ffaaa218c2 assets/tq/models/item/spectral_nylium.j
 cf9e69bb8d58f82f4e5f96d6d38287136e929d2d assets/tq/models/item/starry_block.json
 caa3525fa7039009d2d5fcf578ae58de4bd03670 assets/tq/models/item/surreal_nylium.json
 ec2dfa9032a16ea89a877599aa32dc753e8b00fd assets/tq/models/item/swirl_block.json
-ee90f93108d72bcde5959a5003bcbaf365f078a6 assets/tq/models/item/torniquet.json
+efd7c835854717099b37bea5ab540551848f306b assets/tq/models/item/tourniquet.json
 7cbeee0d2c5308793c068f64eba0c4b7f823ac62 assets/tq/models/item/utterfly_spawn_egg.json
 e44bf6ecc26384cc55db5de70084ff8f1be10c37 assets/tq/models/item/watercolour_block.json
 a9c3324ea6eec8a2934c62339e21aa670367366f assets/tq/models/item/yellow_cosmo_spine.json
