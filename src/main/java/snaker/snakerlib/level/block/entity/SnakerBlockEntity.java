@@ -35,7 +35,7 @@ public abstract class SnakerBlockEntity extends BlockEntity
     {
         level.setBlock(worldPosition, getBlockState(), Block.UPDATE_ALL_IMMEDIATE);
         super.setChanged();
-        level.setBlock(worldPosition, getBlockState(), Block.UPDATE_ALL_IMMEDIATE);
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL_IMMEDIATE);
     }
 
     public void markDirtyAndDispatch()

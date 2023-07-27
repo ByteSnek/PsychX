@@ -18,6 +18,7 @@ import net.minecraft.world.level.portal.PortalInfo;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.ITeleporter;
 import org.jetbrains.annotations.NotNull;
+import snaker.snakerlib.data.SnakerConstants;
 import snaker.snakerlib.level.item.SnakerBaseItem;
 import snaker.snakerlib.math.Mh;
 import snaker.tq.rego.Rego;
@@ -29,6 +30,11 @@ import java.util.function.Function;
  **/
 public class Tourniquet extends SnakerBaseItem
 {
+    public Tourniquet()
+    {
+        super(SnakerConstants.ItemProperties.LIMITED);
+    }
+
     @Override
     public void onUseTick(@NotNull Level level, @NotNull LivingEntity entity, @NotNull ItemStack stack, int remainingUseDuration)
     {
@@ -46,6 +52,7 @@ public class Tourniquet extends SnakerBaseItem
                             if (dimension != null) {
                                 player.stopUsingItem();
                                 player.level();
+                                stack.hurtAndBreak(Integer.MAX_VALUE, player, p -> p.broadcastBreakEvent(InteractionHand.MAIN_HAND));
                                 player.changeDimension(dimension, Teleporter.INSTANCE);
                             }
                         }

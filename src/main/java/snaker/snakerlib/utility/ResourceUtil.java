@@ -48,6 +48,11 @@ public class ResourceUtil
         return Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(key.getItem()));
     }
 
+    public static String getPath(ResourceLocation key)
+    {
+        return Objects.requireNonNull(key).getPath();
+    }
+
     public static String getPath(ItemStack key)
     {
         return Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(key.getItem())).getPath();

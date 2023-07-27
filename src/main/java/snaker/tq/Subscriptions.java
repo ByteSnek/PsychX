@@ -51,7 +51,7 @@ public class Subscriptions
         @SubscribeEvent
         public static void commonSetup(FMLCommonSetupEvent event)
         {
-
+            SnakerUtil.addFlowerPotPlant(Rego.BLOCK_CATNIP, Rego.BLOCK_POTTED_CATNIP);
         }
 
         @SubscribeEvent

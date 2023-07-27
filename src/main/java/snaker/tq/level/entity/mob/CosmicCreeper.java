@@ -195,7 +195,7 @@ public class CosmicCreeper extends Creeper implements ComatoseInhabitant<CosmicC
     @Override
     public Predicate<BooleanOp> extraSpawnConditions(EntityType<CosmicCreeper> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return booleanOp -> BooleanOp.XOR.apply(level.getLevel().dimension().equals(Level.OVERWORLD));
+        return booleanOp -> BooleanOp.XOR.apply(level.getLevel().dimension().equals(Level.OVERWORLD), level.getLevel().dimension().equals(Rego.Keys.COMATOSE));
     }
 
     static class MoveCtrl extends MoveControl

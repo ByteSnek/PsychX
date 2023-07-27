@@ -6,6 +6,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
+import snaker.snakerlib.data.SnakerConstants;
 import snaker.snakerlib.utility.ResourceUtil;
 import snaker.tq.client.RenderTypes;
 import snaker.tq.client.render.block.ShaderBlockItemRenderer;
@@ -20,7 +21,7 @@ public class ShaderBlockItem extends BlockItem
 {
     public ShaderBlockItem(Block block)
     {
-        super(block, new Properties());
+        super(block, SnakerConstants.ItemProperties.EMPTY);
     }
 
     @Override

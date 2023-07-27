@@ -38,7 +38,7 @@ public class ComatoseNyliumBlock extends Block implements BonemealableBlock
     public void randomTick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random)
     {
         if (!canBeNylium(state, level, pos)) {
-            level.setBlockAndUpdate(pos, Rego.COMA_STONE.get().defaultBlockState());
+            level.setBlockAndUpdate(pos, Rego.BLOCK_COMA_STONE.get().defaultBlockState());
         }
     }
 

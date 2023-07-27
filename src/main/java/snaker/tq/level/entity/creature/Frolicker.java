@@ -43,7 +43,7 @@ import java.util.function.Predicate;
  **/
 public class Frolicker extends SnakerFlyingCreature implements ComatoseInhabitant<Frolicker>
 {
-    private Predicate<BlockState> blocksToIgnore = state -> state.is(Blocks.WATER) || state.is(Blocks.LAVA) || state.is(Blocks.AIR) || state.is(BlockTags.LEAVES) || state.is(BlockTags.BEE_GROWABLES) || state.is(BlockTags.FLOWERS);
+    private final Predicate<BlockState> blocksToIgnore = state -> state.is(Blocks.WATER) || state.is(Blocks.LAVA) || state.is(Blocks.AIR) || state.is(BlockTags.LEAVES) || state.is(BlockTags.BEE_GROWABLES) || state.is(BlockTags.FLOWERS);
     private int onGroundTicks;
 
     public Frolicker(EntityType<? extends SnakerFlyingCreature> type, Level level)
@@ -131,6 +131,6 @@ public class Frolicker extends SnakerFlyingCreature implements ComatoseInhabitan
     @Override
     public Predicate<BooleanOp> extraSpawnConditions(EntityType<Frolicker> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return booleanOp -> BooleanOp.XOR.apply(level.getLevel().dimension().equals(Level.OVERWORLD));
+        return booleanOp -> BooleanOp.XOR.apply(level.getLevel().dimension().equals(Level.OVERWORLD), level.getLevel().dimension().equals(Rego.Keys.COMATOSE));
     }
 }

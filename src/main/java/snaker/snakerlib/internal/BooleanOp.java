@@ -17,7 +17,7 @@ public interface BooleanOp
 
     boolean apply(Boolean a, Boolean b);
 
-    default boolean apply(Boolean a)
+    default boolean set(Boolean a)
     {
         return apply(a, a);
     }

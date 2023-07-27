@@ -1,5 +1,11 @@
 package snaker.snakerlib.data;
 
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
+
 /**
  * Created by SnakerBone on 25/05/2023
  **/
@@ -35,5 +41,20 @@ public enum SnakerConstants
     public double asDouble()
     {
         return value;
+    }
+
+    public static class BlockProperties
+    {
+        public static final BlockBehaviour.Properties EMPTY = BlockBehaviour.Properties.of();
+        public static final BlockBehaviour.Properties NORMAL = BlockBehaviour.Properties.of().mapColor(MapColor.NONE).sound(SoundType.STONE).pushReaction(PushReaction.NORMAL);
+        public static final BlockBehaviour.Properties PLANT = BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY).instabreak().noCollission();
+        public static final BlockBehaviour.Properties PERSPECTIVE = BlockBehaviour.Properties.of().mapColor(MapColor.NONE).sound(SoundType.STONE).pushReaction(PushReaction.IGNORE /*Rendering precautions*/).strength(5).noOcclusion().dynamicShape();
+    }
+
+    public static class ItemProperties
+    {
+        public static final Item.Properties EMPTY = new Item.Properties();
+        public static final Item.Properties TOOL = new Item.Properties().stacksTo(1);
+        public static final Item.Properties LIMITED = new Item.Properties().stacksTo(1).durability(16).defaultDurability(16).setNoRepair();
     }
 }

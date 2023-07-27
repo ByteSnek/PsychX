@@ -8,11 +8,11 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import snaker.snakerlib.SnakerLib;
+import snaker.snakerlib.data.SnakerConstants;
 import snaker.snakerlib.level.block.SnakerEntityBlock;
 import snaker.snakerlib.level.block.entity.SnakerBlockEntity;
 
@@ -25,7 +25,7 @@ public class ShaderBlock<T extends SnakerBlockEntity> extends SnakerEntityBlock
 
     public ShaderBlock(RegistryObject<BlockEntityType<T>> blockEntity)
     {
-        super(MapColor.NONE, properties -> properties.strength(5).noOcclusion());
+        super(SnakerConstants.BlockProperties.PERSPECTIVE);
         this.blockEntity = blockEntity;
     }
 

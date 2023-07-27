@@ -4,6 +4,7 @@ import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
@@ -17,10 +18,10 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
@@ -35,7 +36,11 @@ import net.minecraftforge.network.IContainerFactory;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import snaker.snakerlib.SnakerLib;
+import snaker.snakerlib.data.SnakerConstants;
+import snaker.snakerlib.internal.AsynchronousHashMap;
 import snaker.snakerlib.resources.Identifier;
+import snaker.snakerlib.utility.SketchyUtil;
 import snaker.snakerlib.utility.SnakerUtil;
 import snaker.tq.Tourniqueted;
 import snaker.tq.level.block.ComatoseNyliumBlock;
@@ -58,6 +63,7 @@ import snaker.tq.level.item.icon.BlockTabIcon;
 import snaker.tq.level.item.icon.ItemTabIcon;
 import snaker.tq.level.item.icon.MobTabIcon;
 
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -107,7 +113,10 @@ public class Rego
     public static final RegistryObject<Block> BLOCK_FLARE = blockWithoutItem("flare_block", () -> new ShaderBlock<>(Rego.BE_FLARE));
     public static final RegistryObject<Block> BLOCK_STARRY = blockWithoutItem("starry_block", () -> new ShaderBlock<>(Rego.BE_STARRY));
 
-    public static final RegistryObject<Block> COMA_STONE = blockWithItem("coma_stone", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.NONE).strength(0.5F).sound(SoundType.NETHER_ORE)));
+    public static final RegistryObject<Block> BLOCK_CATNIP = blockWithItem("catnip", () -> new FlowerBlock(Rego.EFFECT_SYNCOPE::get, 600, SnakerConstants.BlockProperties.PLANT));
+    public static final RegistryObject<Block> BLOCK_POTTED_CATNIP = BLOCKS.register("potted_catnip", () -> new FlowerPotBlock(() -> SketchyUtil.shutUp(Blocks.FLOWER_POT), BLOCK_CATNIP, SnakerConstants.BlockProperties.NORMAL));
+
+    public static final RegistryObject<Block> BLOCK_COMA_STONE = blockWithItem("coma_stone", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.NONE).strength(0.5F).sound(SoundType.NETHER_ORE)));
     public static final RegistryObject<Block> BLOCK_DELUSIVE_NYLIUM = blockWithItem("delusive_nylium", ComatoseNyliumBlock::new);
     public static final RegistryObject<Block> BLOCK_ILLUSIVE_NYLIUM = blockWithItem("illusive_nylium", ComatoseNyliumBlock::new);
     public static final RegistryObject<Block> BLOCK_IMMATERIAL_NYLIUM = blockWithItem("immaterial_nylium", ComatoseNyliumBlock::new);
@@ -173,8 +182,9 @@ public class Rego
 
     public static final RegistryObject<Syncope> EFFECT_SYNCOPE = effect("syncope", Syncope::new);
 
-    private static final Predicate<RegistryObject<Item>> BLACKLISTED_ITEMS = item -> item.equals(Rego.ICON_MOB_TAB) || item.equals(Rego.ICON_BLOCK_TAB) || item.equals(Rego.ICON_ITEM_TAB) || item.equals(Rego.ITEM_SWIRL_BLOCK) || item.equals(Rego.ITEM_SNOWFLAKE_BLOCK) || item.equals(Rego.ITEM_WATERCOLOUR_BLOCK) || item.equals(Rego.ITEM_MULTICOLOUR_BLOCK) || item.equals(Rego.ITEM_FLARE_BLOCK) || item.equals(Rego.ITEM_STARRY_BLOCK);
-    private static final Predicate<RegistryObject<Item>> WHITELISTED_EGGS = item -> item.equals(Rego.ITEM_COSMIC_CREEPER_SPAWN_EGG) || item.equals(ITEM_COSMO_SPAWN_EGG) || item.equals(ITEM_FLARE_SPAWN_EGG) || item.equals(Rego.ITEM_SNIPE_SPAWN_EGG) || item.equals(Rego.ITEM_FLUTTERFLY_SPAWN_EGG) || item.equals(Rego.ITEM_FROLICKER_SPAWN_EGG) || item.equals(Rego.ITEM_UTTERFLY_SPAWN_EGG) || item.equals(Rego.ITEM_ANTI_COSMO_SPAWN_EGG);
+    private static final Predicate<RegistryObject<Item>> BLACKLISTED_ITEMS = item -> item.get() instanceof BlockItem || item.equals(Rego.ICON_MOB_TAB) || item.equals(Rego.ICON_BLOCK_TAB) || item.equals(Rego.ICON_ITEM_TAB);
+    private static final Predicate<RegistryObject<Block>> BLACKLISTED_BLOCKS = block -> block.get() instanceof FlowerPotBlock;
+    private static final Predicate<RegistryObject<Item>> WHITELISTED_EGGS = item -> item.get() instanceof ForgeSpawnEggItem;
 
     @SubscribeEvent
     public static void buildContents(BuildCreativeModeTabContentsEvent event)
@@ -183,7 +193,7 @@ public class Rego
             for (RegistryObject<Item> item : ITEMS.getEntries()) {
                 if (!BLACKLISTED_ITEMS.test(item)) {
                     if (!WHITELISTED_EGGS.test(item)) {
-                        event.accept(item);
+                        safeAccept(event, item);
                     }
                 }
             }
@@ -191,16 +201,32 @@ public class Rego
 
         if (event.getTab().equals(TAB_BLOCKS.get())) {
             for (RegistryObject<Block> block : BLOCKS.getEntries()) {
-                event.accept(block);
+                if (!BLACKLISTED_BLOCKS.test(block)) {
+                    safeAccept(event, block);
+                }
             }
         }
 
         if (event.getTab().equals(TAB_MOBS.get())) {
             for (RegistryObject<Item> item : ITEMS.getEntries()) {
                 if (WHITELISTED_EGGS.test(item)) {
-                    event.accept(item);
+                    safeAccept(event, item);
                 }
             }
+        }
+    }
+
+    private static <T extends ItemLike> void safeAccept(BuildCreativeModeTabContentsEvent event, RegistryObject<T> item)
+    {
+        Map<Boolean, ResourceLocation> map = new AsynchronousHashMap<>();
+        ItemStack stack = item.get().asItem().getDefaultInstance();
+        boolean valid = stack.getCount() == 1;
+        map.put(valid, item.getId());
+        if (valid) {
+            event.accept(item);
+        } else {
+            String name = map.get(false).toString();
+            SnakerLib.LOGGER.warn(String.format("ItemStack '%s' is empty or invalid", name));
         }
     }
 
@@ -301,7 +327,7 @@ public class Rego
         BIOMES.register(bus);
     }
 
-    public static final class Keys
+    public static class Keys
     {
         public static final ResourceKey<Level> COMATOSE = ResourceKey.create(Registries.DIMENSION, new Identifier("comatose"));
     }

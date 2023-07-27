@@ -6,6 +6,10 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerPotBlock;
+import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -24,7 +28,14 @@ public class SnakerUtil
 {
     public static final String PLACEHOLDER = SnakerLib.MODID + ":" + PlaceHolders.PH8;
     public static final String PLACEHOLDER_NO_MODID = PlaceHolders.PH8;
-    
+
+    public static <T extends Block> FlowerPotBlock addFlowerPotPlant(RegistryObject<T> normal, RegistryObject<T> potted)
+    {
+        FlowerPotBlock block = SketchyUtil.shutUp(Blocks.FLOWER_POT);
+        block.addPlant(normal.getId(), potted);
+        return block;
+    }
+
     public static <T extends LivingEntity, E extends MobEffect> boolean addEffectDirect(T entity, E effect, @Nullable Integer duration, @Nullable Integer mul, boolean isAmbient, boolean showBubble, boolean showIcon)
     {
         return entity.addEffect(new MobEffectInstance(effect, duration == null ? Mh.secondsToTicks(10) : duration, mul == null ? 0 : mul, isAmbient, showBubble, showIcon));

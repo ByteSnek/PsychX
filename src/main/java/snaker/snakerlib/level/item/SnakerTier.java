@@ -19,6 +19,7 @@ public enum SnakerTier implements Tier
     private final float speed;
     private final float damage;
     private final int enchantability;
+    private final Supplier<Ingredient> material;
 
     SnakerTier(int level, int uses, float speed, float damage, int enchantability, Supplier<Ingredient> material)
     {
@@ -27,6 +28,7 @@ public enum SnakerTier implements Tier
         this.speed = speed;
         this.damage = damage;
         this.enchantability = enchantability;
+        this.material = material;
     }
 
     @Override
@@ -63,6 +65,6 @@ public enum SnakerTier implements Tier
     @Override
     public @NotNull Ingredient getRepairIngredient()
     {
-        return Ingredient.EMPTY;
+        return material.get();
     }
 }

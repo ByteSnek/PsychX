@@ -1,11 +1,13 @@
 package snaker.tq.datagen;
 
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
@@ -54,6 +56,21 @@ public class DataProviders
             simpleBlock(block.get(), cubeAll(block.get()));
         }
 
+        private void plant(RegistryObject<Block> plant, RegistryObject<Block> potted)
+        {
+            ResourceLocation plantVariant = plant.getId();
+            ResourceLocation pottedVariant = potted.getId();
+
+            String plantName = plantVariant.getPath();
+            String pottedName = pottedVariant.getPath();
+
+            simpleBlock(plant.get(), models().cross(plantName, blockTexture(plant.get())).renderType("cutout"));
+
+            simpleBlock(potted.get(), models().withExistingParent(pottedName, mcLoc("flower_pot_cross"))
+                    .renderType("cutout")
+                    .texture("plant", "block/" + plantName));
+        }
+
         @Override
         protected void registerStatesAndModels()
         {
@@ -70,7 +87,9 @@ public class DataProviders
             nylium(Rego.BLOCK_SPECTRAL_NYLIUM);
             nylium(Rego.BLOCK_SURREAL_NYLIUM);
 
-            cube(Rego.COMA_STONE);
+            cube(Rego.BLOCK_COMA_STONE);
+
+            plant(Rego.BLOCK_CATNIP, Rego.BLOCK_POTTED_CATNIP);
         }
     }
 
@@ -111,9 +130,14 @@ public class DataProviders
             withExistingParent(item.getId().getPath(), modLoc("palm_held")).texture("layer0", modLoc("item/" + item.getId().getPath()));
         }
 
-        private void basic(RegistryObject<Item> item)
+        private <T extends ItemLike> void item(RegistryObject<T> item)
         {
-            basicItem(item.get());
+            withExistingParent(item.getId().getPath(), mcLoc("item/generated")).texture("layer0", modLoc("item/" + item.getId().getPath()));
+        }
+
+        private <T extends ItemLike> void block(RegistryObject<T> block)
+        {
+            withExistingParent(block.getId().getPath(), mcLoc("item/generated")).texture("layer0", modLoc("block/" + block.getId().getPath()));
         }
 
         @Override
@@ -125,7 +149,7 @@ public class DataProviders
             blockItem(Rego.BLOCK_MULTICOLOUR);
             blockItem(Rego.BLOCK_FLARE);
             blockItem(Rego.BLOCK_STARRY);
-            blockItem(Rego.COMA_STONE);
+            blockItem(Rego.BLOCK_COMA_STONE);
             blockItem(Rego.BLOCK_DELUSIVE_NYLIUM);
             blockItem(Rego.BLOCK_ILLUSIVE_NYLIUM);
             blockItem(Rego.BLOCK_IMMATERIAL_NYLIUM);
@@ -156,7 +180,9 @@ public class DataProviders
             perspective(Rego.ICON_ITEM_TAB);
             perspective(Rego.ICON_BLOCK_TAB);
 
-            basic(Rego.ITEM_TOURNIQUET);
+            item(Rego.ITEM_TOURNIQUET);
+
+            block(Rego.BLOCK_CATNIP);
         }
     }
 
@@ -247,7 +273,9 @@ public class DataProviders
             block(Rego.BLOCK_FLARE);
             block(Rego.BLOCK_MULTICOLOUR);
             block(Rego.BLOCK_WATERCOLOUR);
-            block(Rego.COMA_STONE);
+            block(Rego.BLOCK_COMA_STONE);
+            block(Rego.BLOCK_CATNIP);
+            block(Rego.BLOCK_POTTED_CATNIP);
             block(Rego.BLOCK_ILLUSIVE_NYLIUM);
             block(Rego.BLOCK_DELUSIVE_NYLIUM);
             block(Rego.BLOCK_IMMATERIAL_NYLIUM);

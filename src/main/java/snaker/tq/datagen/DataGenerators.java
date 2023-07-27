@@ -1,5 +1,8 @@
 package snaker.tq.datagen;
 
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -14,8 +17,12 @@ public class DataGenerators
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event)
     {
-        event.getGenerator().addProvider(event.includeClient(), new DataProviders.Languages(event.getGenerator().getPackOutput()));
-        event.getGenerator().addProvider(event.includeServer(), new DataProviders.BlockStates(event.getGenerator().getPackOutput(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(event.includeServer(), new DataProviders.ItemModels(event.getGenerator().getPackOutput(), event.getExistingFileHelper()));
+        DataGenerator generator = event.getGenerator();
+        ExistingFileHelper helper = event.getExistingFileHelper();
+        PackOutput output = generator.getPackOutput();
+
+        generator.addProvider(event.includeClient(), new DataProviders.Languages(output));
+        generator.addProvider(event.includeServer(), new DataProviders.BlockStates(output, helper));
+        generator.addProvider(event.includeServer(), new DataProviders.ItemModels(output, helper));
     }
 }

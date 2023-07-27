@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
+import snaker.snakerlib.data.SnakerConstants;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -19,11 +20,11 @@ import java.util.List;
 /**
  * Created by SnakerBone on 17/03/2023
  **/
-public abstract class SnakerBaseItem extends Item implements SnakerItem
+public abstract class SnakerBaseItem extends Item
 {
     public SnakerBaseItem()
     {
-        super(new Properties());
+        super(SnakerConstants.ItemProperties.EMPTY);
     }
 
     public SnakerBaseItem(Properties properties)
