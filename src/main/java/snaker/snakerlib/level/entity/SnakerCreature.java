@@ -33,7 +33,7 @@ public abstract class SnakerCreature extends Animal
 
     public SnakerCreature(EntityType<? extends Animal> type, Level level, @Nullable SnakerCreature offspring)
     {
-        this(type, level, offspring, SnakerConstants.CREATURE_XP_REWARD.asInt());
+        this(type, level, offspring, SnakerConstants.EntityAttributes.CREATURE_XP_REWARD);
     }
 
     @Nullable

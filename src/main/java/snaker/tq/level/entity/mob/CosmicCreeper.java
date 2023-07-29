@@ -212,7 +212,7 @@ public class CosmicCreeper extends Creeper implements ComatoseInhabitant<CosmicC
         public void tick()
         {
             if (entity.getTarget() != null) {
-                speedModifier = SnakerConstants.SPEED_MODIFIER.asDouble();
+                speedModifier = SnakerConstants.EntityAttributes.SPEED_MODIFIER;
             }
             super.tick();
         }

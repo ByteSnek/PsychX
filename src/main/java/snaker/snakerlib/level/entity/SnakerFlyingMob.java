@@ -31,7 +31,7 @@ public abstract class SnakerFlyingMob extends FlyingMob implements Enemy
 
     public SnakerFlyingMob(EntityType<? extends SnakerFlyingMob> type, Level level)
     {
-        this(type, level, SnakerConstants.MOB_XP_REWARD.asInt());
+        this(type, level, SnakerConstants.EntityAttributes.MOB_XP_REWARD);
     }
 
     @Override

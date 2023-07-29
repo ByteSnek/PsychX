@@ -44,6 +44,7 @@ tasks.withType(JavaCompile).configureEach {
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:4579432")
+    minecraftLibrary 'org.ow2.asm:asm:7.0'
 }
 
 minecraft {

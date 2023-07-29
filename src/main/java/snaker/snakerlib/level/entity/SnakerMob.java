@@ -27,7 +27,7 @@ public abstract class SnakerMob extends Monster
 
     public SnakerMob(EntityType<? extends Monster> type, Level level)
     {
-        this(type, level, SnakerConstants.MOB_XP_REWARD.asInt());
+        this(type, level, SnakerConstants.EntityAttributes.MOB_XP_REWARD);
     }
 
     public void extraHealth(int amount, AttributeModifier.Operation operation)

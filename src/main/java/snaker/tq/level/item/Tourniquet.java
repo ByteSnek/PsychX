@@ -3,27 +3,21 @@ package snaker.tq.level.item;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.portal.PortalInfo;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.util.ITeleporter;
 import org.jetbrains.annotations.NotNull;
 import snaker.snakerlib.data.SnakerConstants;
 import snaker.snakerlib.level.item.SnakerBaseItem;
 import snaker.snakerlib.math.Mh;
+import snaker.tq.level.world.dimension.Comatose;
 import snaker.tq.rego.Rego;
-
-import java.util.function.Function;
 
 /**
  * Created by SnakerBone on 7/07/2023
@@ -53,7 +47,7 @@ public class Tourniquet extends SnakerBaseItem
                                 player.stopUsingItem();
                                 player.level();
                                 stack.hurtAndBreak(Integer.MAX_VALUE, player, p -> p.broadcastBreakEvent(InteractionHand.MAIN_HAND));
-                                player.changeDimension(dimension, Teleporter.INSTANCE);
+                                player.changeDimension(dimension, Comatose.getTeleporter());
                             }
                         }
                     }
@@ -78,39 +72,5 @@ public class Tourniquet extends SnakerBaseItem
     public int getUseDuration(@NotNull ItemStack stack)
     {
         return 72000;
-    }
-
-    private static class Teleporter implements ITeleporter
-    {
-        public static Teleporter INSTANCE = new Teleporter();
-
-        @Override
-        public Entity placeEntity(Entity entity, ServerLevel currentWorld, ServerLevel destWorld, float yaw, Function<Boolean, Entity> repositionEntity)
-        {
-            PortalInfo info = new PortalInfo(entity.position(), Vec3.ZERO, entity.getYRot(), entity.getXRot());
-            if (entity instanceof ServerPlayer player) {
-                player.setServerLevel(destWorld);
-                destWorld.addDuringPortalTeleport(player);
-                entity.setYRot(info.yRot % 360);
-                entity.setXRot(info.xRot % 360);
-                entity.moveTo(info.pos.x, info.pos.y, info.pos.z);
-                return entity;
-            } else {
-                Entity special = entity.getType().create(destWorld);
-                if (special != null) {
-                    special.restoreFrom(entity);
-                    special.moveTo(info.pos.x, info.pos.y, info.pos.z, info.yRot, special.getXRot());
-                    special.setDeltaMovement(info.speed);
-                    destWorld.addDuringTeleport(special);
-                }
-                return special;
-            }
-        }
-
-        @Override
-        public boolean playTeleportSound(ServerPlayer player, ServerLevel sourceWorld, ServerLevel destWorld)
-        {
-            return false;
-        }
     }
 }
