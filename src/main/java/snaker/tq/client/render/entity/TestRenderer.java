@@ -18,7 +18,7 @@ public class TestRenderer extends MobRenderer<Test, TestModel>
 {
     public TestRenderer(EntityRendererProvider.Context context)
     {
-        super(context, new TestModel(context.bakeLayer(TestModel.LAYER_LOCATION)), 0.5F);
+        super(context, new TestModel(context.bakeLayer(TestModel.LAYER_LOCATION)), 0);
         addLayer(new TestLayer(this));
     }
 
