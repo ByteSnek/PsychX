@@ -94,6 +94,38 @@ public class SnakerLib
         return GLFW.glfwGetKey(Minecraft.getInstance().getWindow().getWindow(), key) == GLFW.GLFW_PRESS;
     }
 
+    public static boolean isInvalidString(String string, boolean notify, boolean crash)
+    {
+        String message = String.format("String '%s' is not a valid string", string);
+        if (string == null || string.isEmpty()) {
+            return true;
+        } else {
+            String regex = ".*[a-zA-Z]+.*";
+            if (!string.matches(regex)) {
+                if (notify) {
+                    LOGGER.warn(message);
+                    if (crash) {
+                        throw new RuntimeException(message);
+                    }
+                }
+                if (!notify && crash) {
+                    throw new RuntimeException(message);
+                }
+            }
+            return !string.matches(regex);
+        }
+    }
+
+    public static boolean isInvalidString(String string, boolean notify)
+    {
+        return isInvalidString(string, notify, false);
+    }
+
+    public static boolean isInvalidString(String string)
+    {
+        return isInvalidString(string, false);
+    }
+
     public static boolean tickOffs(float tickOffset)
     {
         return getClientTickCount() % tickOffset == 0;

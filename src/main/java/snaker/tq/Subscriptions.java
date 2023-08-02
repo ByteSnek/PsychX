@@ -39,6 +39,7 @@ import snaker.tq.client.render.block.ShaderBlockRenderer;
 import snaker.tq.client.render.entity.*;
 import snaker.tq.config.TqConfig;
 import snaker.tq.level.effect.Syncope;
+import snaker.tq.level.entity.Test;
 import snaker.tq.level.entity.boss.AntiCosmo;
 import snaker.tq.level.entity.boss.Utterfly;
 import snaker.tq.level.entity.creature.Flutterfly;
@@ -68,6 +69,7 @@ public class Subscriptions
             event.registerLayerDefinition(CosmoSpineModel.LAYER_LOCATION, CosmoSpineModel::createBodyLayer);
             event.registerLayerDefinition(EerieCretinModel.LAYER_LOCATION, EerieCretinModel::createBodyLayer);
             event.registerLayerDefinition(LeetModel.LAYER_LOCATION, LeetModel::createBodyLayer);
+            event.registerLayerDefinition(TestModel.LAYER_LOCATION, TestModel::createBodyLayer);
         }
 
         @SubscribeEvent
@@ -110,6 +112,7 @@ public class Subscriptions
             bindAttributes(event, Rego.ENTITY_ANTI_COSMO, AntiCosmo.attributes());
             bindAttributes(event, Rego.ENTITY_EERIE_CRETIN, EerieCretin.attributes());
             bindAttributes(event, Rego.ENTITY_LEET, Leet.attributes());
+            bindAttributes(event, Rego.ENTITY_TEST, Test.attributes());
         }
 
         @SubscribeEvent
@@ -129,6 +132,7 @@ public class Subscriptions
             registerEntityRenderer(Rego.ENTITY_COSMIC_RAY, CosmicRayRenderer::new);
             registerEntityRenderer(Rego.ENTITY_EERIE_CRETIN, EerieCretinRenderer::new);
             registerEntityRenderer(Rego.ENTITY_LEET, LeetRenderer::new);
+            registerEntityRenderer(Rego.ENTITY_TEST, TestRenderer::new);
         }
 
         @SubscribeEvent
@@ -142,6 +146,7 @@ public class Subscriptions
             registerSpawn(event, Rego.ENTITY_LEET, Leet::spawnRules);
             registerSpawn(event, Rego.ENTITY_SNIPE, Snipe::spawnRules);
             registerSpawn(event, Rego.ENTITY_FLUTTERFLY, Flutterfly::spawnRules);
+            registerSpawn(event, Rego.ENTITY_TEST, Test::spawnRules);
         }
 
         private static <T extends Entity> void registerSpawn(SpawnPlacementRegisterEvent event, RegistryObject<EntityType<T>> type, SpawnPlacements.SpawnPredicate<T> predicate)

@@ -175,6 +175,7 @@ public class DataProviders
             egg(Rego.ITEM_SNIPE_SPAWN_EGG);
             egg(Rego.ITEM_EERIE_CRETIN_SPAWN_EGG);
             egg(Rego.ITEM_LEET_SPAWN_EGG);
+            egg(Rego.ITEM_TEST_SPAWN_EGG);
 
             perspective(Rego.ICON_MOB_TAB);
             perspective(Rego.ICON_ITEM_TAB);

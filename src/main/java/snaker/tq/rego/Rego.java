@@ -49,6 +49,7 @@ import snaker.tq.level.block.ShaderBlockItem;
 import snaker.tq.level.block.entity.ShaderBlockEntity;
 import snaker.tq.level.effect.Syncope;
 import snaker.tq.level.entity.EntityDropHandler;
+import snaker.tq.level.entity.Test;
 import snaker.tq.level.entity.boss.AntiCosmo;
 import snaker.tq.level.entity.boss.Utterfly;
 import snaker.tq.level.entity.creature.Flutterfly;
@@ -166,6 +167,7 @@ public class Rego
     public static final RegistryObject<EntityType<CosmicRay>> ENTITY_COSMIC_RAY = misc("cosmic_ray", CosmicRay::new, 0.1F, 0.1F);
     public static final RegistryObject<EntityType<EerieCretin>> ENTITY_EERIE_CRETIN = mob("eerie_cretin", EerieCretin::new, 0.375F, 0.375F);
     public static final RegistryObject<EntityType<Leet>> ENTITY_LEET = mob("leet", Leet::new, 0.375F, 0.375F);
+    public static final RegistryObject<EntityType<Test>> ENTITY_TEST = mob("test", Test::new, 0.375F, 0.375F);
 
     public static final RegistryObject<Item> ITEM_TOURNIQUET = item("tourniquet", Tourniquet::new);
 
@@ -179,6 +181,7 @@ public class Rego
     public static final RegistryObject<Item> ITEM_ANTI_COSMO_SPAWN_EGG = egg("anti_cosmo_spawn_egg", Rego.ENTITY_ANTI_COSMO);
     public static final RegistryObject<Item> ITEM_EERIE_CRETIN_SPAWN_EGG = egg("eerie_cretin_spawn_egg", Rego.ENTITY_EERIE_CRETIN);
     public static final RegistryObject<Item> ITEM_LEET_SPAWN_EGG = egg("leet_spawn_egg", Rego.ENTITY_LEET);
+    public static final RegistryObject<Item> ITEM_TEST_SPAWN_EGG = egg("test_spawn_egg", Rego.ENTITY_TEST);
 
     public static final RegistryObject<Syncope> EFFECT_SYNCOPE = effect("syncope", Syncope::new);
 
