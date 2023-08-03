@@ -9,12 +9,12 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.NotNull;
-import snaker.snakerlib.resources.Identifier;
 import snaker.tq.level.entity.mob.EerieCretin;
+import snaker.tq.utility.ResourcePath;
 
 public class EerieCretinModel extends EntityModel<EerieCretin>
 {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new Identifier("eerie_cretin"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourcePath("eerie_cretin"), "main");
 
     public final ModelPart cuerpo;
     public final ModelPart glandula;

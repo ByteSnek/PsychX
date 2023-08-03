@@ -6,10 +6,10 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
-import snaker.snakerlib.resources.Identifier;
 import snaker.tq.client.layer.AntiCosmoLayer;
 import snaker.tq.client.model.entity.AntiCosmoModel;
 import snaker.tq.level.entity.boss.AntiCosmo;
+import snaker.tq.utility.ResourcePath;
 
 /**
  * Created by SnakerBone on 18/06/2023
@@ -25,7 +25,7 @@ public class AntiCosmoRenderer extends MobRenderer<AntiCosmo, AntiCosmoModel>
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull AntiCosmo cosmo)
     {
-        return new Identifier("textures/solid.png");
+        return new ResourcePath("textures/solid.png");
     }
 
     @Override

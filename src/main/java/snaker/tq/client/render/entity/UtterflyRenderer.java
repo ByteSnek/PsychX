@@ -7,11 +7,11 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import snaker.snakerlib.math.PoseStackBuilder;
-import snaker.snakerlib.resources.Identifier;
 import snaker.tq.client.fx.RayFX;
 import snaker.tq.client.layer.UtterflyLayer;
 import snaker.tq.client.model.entity.UtterflyModel;
 import snaker.tq.level.entity.boss.Utterfly;
+import snaker.tq.utility.ResourcePath;
 
 import java.awt.*;
 
@@ -31,16 +31,16 @@ public class UtterflyRenderer extends MobRenderer<Utterfly, UtterflyModel>
     {
         switch (utterfly.getPhase()) {
             case 1 -> {
-                return new Identifier("textures/entity/boss/utterfly0.png");
+                return new ResourcePath("textures/entity/boss/utterfly0.png");
             }
             case 2 -> {
-                return new Identifier("textures/entity/boss/utterfly1.png");
+                return new ResourcePath("textures/entity/boss/utterfly1.png");
             }
             case 3, 4 -> {
-                return new Identifier("textures/entity/boss/utterfly2.png");
+                return new ResourcePath("textures/entity/boss/utterfly2.png");
             }
             default -> {
-                return new Identifier("textures/entity/creature/flutterfly.png");
+                return new ResourcePath("textures/entity/creature/flutterfly.png");
             }
         }
     }

@@ -10,12 +10,12 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import snaker.snakerlib.math.PoseStackBuilder;
-import snaker.snakerlib.resources.Identifier;
 import snaker.tq.client.RenderTypes;
 import snaker.tq.client.layer.CosmoLayer;
 import snaker.tq.client.model.entity.CosmoModel;
 import snaker.tq.level.entity.EntityVariants;
 import snaker.tq.level.entity.mob.Cosmo;
+import snaker.tq.utility.ResourcePath;
 
 import java.util.Map;
 
@@ -44,7 +44,7 @@ public class CosmoRenderer extends MobRenderer<Cosmo, CosmoModel>
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull Cosmo cosmo)
     {
-        return new Identifier("textures/solid.png");
+        return new ResourcePath("textures/solid.png");
     }
 
     @Override

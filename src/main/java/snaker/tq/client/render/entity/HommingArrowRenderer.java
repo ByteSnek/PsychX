@@ -4,8 +4,8 @@ import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
-import snaker.snakerlib.resources.Identifier;
 import snaker.tq.level.entity.projectile.HommingArrow;
+import snaker.tq.utility.ResourcePath;
 
 /**
  * Created by SnakerBone on 4/01/2023
@@ -20,6 +20,6 @@ public class HommingArrowRenderer extends ArrowRenderer<HommingArrow>
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull HommingArrow entity)
     {
-        return new Identifier("textures/entity/projectile/homming_arrow.png");
+        return new ResourcePath("textures/entity/projectile/homming_arrow.png");
     }
 }

@@ -30,36 +30,6 @@ public abstract class SnakerMob extends Monster
         this(type, level, SnakerConstants.EntityAttributes.MOB_XP_REWARD);
     }
 
-    public void extraHealth(int amount, AttributeModifier.Operation operation)
-    {
-        Objects.requireNonNull(getAttribute(Attributes.MAX_HEALTH)).addTransientModifier(new AttributeModifier("ExtraHealth", amount, operation));
-    }
-
-    public void extraAttackDamage(int amount, AttributeModifier.Operation operation)
-    {
-        Objects.requireNonNull(getAttribute(Attributes.ATTACK_DAMAGE)).addTransientModifier(new AttributeModifier("ExtraAttackDamage", amount, operation));
-    }
-
-    public void extraAttackSpeed(int amount, AttributeModifier.Operation operation)
-    {
-        Objects.requireNonNull(getAttribute(Attributes.ATTACK_SPEED)).addTransientModifier(new AttributeModifier("ExtraAttackSpeed", amount, operation));
-    }
-
-    public void extraMovementSpeed(int amount, AttributeModifier.Operation operation)
-    {
-        Objects.requireNonNull(getAttribute(Attributes.MOVEMENT_SPEED)).addTransientModifier(new AttributeModifier("ExtraMovementSpeed", amount, operation));
-    }
-
-    public void extraFlyingSpeed(int amount, AttributeModifier.Operation operation)
-    {
-        Objects.requireNonNull(getAttribute(Attributes.FLYING_SPEED)).addTransientModifier(new AttributeModifier("ExtraFlyingSpeed", amount, operation));
-    }
-
-    public void extraFollowRange(int amount, AttributeModifier.Operation operation)
-    {
-        Objects.requireNonNull(getAttribute(Attributes.FOLLOW_RANGE)).addTransientModifier(new AttributeModifier("ExtraFollowRange", amount, operation));
-    }
-
     @Override
     protected void registerGoals()
     {

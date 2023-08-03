@@ -31,7 +31,6 @@ public abstract class SnakerProjectile extends AbstractArrow
         if (tickCount > 40) {
             kill();
         }
-
         super.tick();
     }
 

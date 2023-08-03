@@ -26,7 +26,6 @@ public class SnakerSwitchGameModeGoal extends Goal
     {
         Level level = owner.level();
         List<ServerPlayer> players = level.getEntitiesOfClass(ServerPlayer.class, owner.getBoundingBox().inflate(8));
-
         if (players.stream().anyMatch(ServerPlayer::isCreative)) {
             for (ServerPlayer player : players) {
                 player.setGameMode(GameType.SURVIVAL);

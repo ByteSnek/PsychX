@@ -6,9 +6,9 @@ import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
-import snaker.snakerlib.resources.Identifier;
 import snaker.tq.client.fx.RayFX;
 import snaker.tq.level.entity.projectile.CosmicRay;
+import snaker.tq.utility.ResourcePath;
 
 import java.awt.*;
 
@@ -25,7 +25,7 @@ public class CosmicRayRenderer extends ArrowRenderer<CosmicRay>
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull CosmicRay bullet)
     {
-        return new Identifier("textures/clear.png");
+        return new ResourcePath("textures/clear.png");
     }
 
     @Override

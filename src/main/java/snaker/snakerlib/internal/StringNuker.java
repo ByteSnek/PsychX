@@ -1,7 +1,5 @@
 package snaker.snakerlib.internal;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 /**
  * Created by SnakerBone on 4/06/2023
  * <p>
@@ -10,7 +8,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * @see String#replace(char, char)
  * @see String#replaceAll(String, String)
  **/
-@ParametersAreNonnullByDefault
 public class StringNuker
 {
     private final String nothing = "";

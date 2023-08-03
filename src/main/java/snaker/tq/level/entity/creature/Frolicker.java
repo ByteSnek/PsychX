@@ -30,10 +30,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import snaker.snakerlib.internal.BooleanOp;
 import snaker.snakerlib.level.entity.SnakerFlyingCreature;
 import snaker.snakerlib.utility.LevelUtil;
-import snaker.tq.level.entity.ComatoseInhabitant;
 import snaker.tq.rego.Rego;
 
 import java.util.function.Predicate;
@@ -41,7 +39,7 @@ import java.util.function.Predicate;
 /**
  * Created by SnakerBone on 2/01/2023
  **/
-public class Frolicker extends SnakerFlyingCreature implements ComatoseInhabitant<Frolicker>
+public class Frolicker extends SnakerFlyingCreature
 {
     private final Predicate<BlockState> blocksToIgnore = state -> state.is(Blocks.WATER) || state.is(Blocks.LAVA) || state.is(Blocks.AIR) || state.is(BlockTags.LEAVES) || state.is(BlockTags.BEE_GROWABLES) || state.is(BlockTags.FLOWERS);
     private int onGroundTicks;
@@ -87,9 +85,7 @@ public class Frolicker extends SnakerFlyingCreature implements ComatoseInhabitan
     @Override
     public @NotNull InteractionResult mobInteract(@NotNull Player player, @NotNull InteractionHand hand)
     {
-        if (isFood(player.getItemInHand(hand))) {
-            return super.mobInteract(player, hand);
-        }
+        isFood(player.getItemInHand(hand));
         return super.mobInteract(player, hand);
     }
 
@@ -126,11 +122,5 @@ public class Frolicker extends SnakerFlyingCreature implements ComatoseInhabitan
     public @NotNull Packet<ClientGamePacketListener> getAddEntityPacket()
     {
         return NetworkHooks.getEntitySpawningPacket(this);
-    }
-
-    @Override
-    public Predicate<BooleanOp> extraSpawnConditions(EntityType<Frolicker> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
-    {
-        return booleanOp -> BooleanOp.XOR.apply(level.getLevel().dimension().equals(Level.OVERWORLD), level.getLevel().dimension().equals(Rego.Keys.COMATOSE));
     }
 }

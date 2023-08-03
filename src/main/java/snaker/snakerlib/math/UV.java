@@ -330,7 +330,7 @@ public class UV
 
     public double magnitude()
     {
-        return Mh.sqrt(u * u + v * v);
+        return Maths.sqrt(u * u + v * v);
     }
 
     public double magnitudeSquared()

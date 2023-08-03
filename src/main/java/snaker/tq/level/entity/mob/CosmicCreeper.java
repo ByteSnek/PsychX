@@ -26,11 +26,9 @@ import net.minecraft.world.phys.AABB;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import snaker.snakerlib.data.SnakerConstants;
-import snaker.snakerlib.internal.BooleanOp;
-import snaker.snakerlib.math.Mh;
+import snaker.snakerlib.math.Maths;
 import snaker.snakerlib.utility.LevelUtil;
 import snaker.snakerlib.utility.SnakerUtil;
-import snaker.tq.level.entity.ComatoseInhabitant;
 import snaker.tq.rego.Rego;
 
 import java.util.List;
@@ -39,7 +37,7 @@ import java.util.function.Predicate;
 /**
  * Created by SnakerBone on 16/03/2023
  **/
-public class CosmicCreeper extends Creeper implements ComatoseInhabitant<CosmicCreeper>
+public class CosmicCreeper extends Creeper
 {
     private int teleportTime;
     private final int radius = 6;
@@ -76,9 +74,9 @@ public class CosmicCreeper extends Creeper implements ComatoseInhabitant<CosmicC
         if (target == null) {
             teleportTime++;
             if (teleportTime >= random.nextInt(80, 440) && !SnakerUtil.isEntityMovingXZ(this)) {
-                double x = getRandomX(random.nextInt(radius, (radius * 2)) * Mh.clamp(random.nextDouble(), 0.875, 3.475)) - 0.5;
+                double x = getRandomX(random.nextInt(radius, (radius * 2)) * Maths.clamp(random.nextDouble(), 0.875, 3.475)) - 0.5;
                 double y = getY();
-                double z = getRandomZ(random.nextInt(radius, (radius * 2)) * Mh.clamp(random.nextDouble(), 0.875, 3.475)) - 0.5;
+                double z = getRandomZ(random.nextInt(radius, (radius * 2)) * Maths.clamp(random.nextDouble(), 0.875, 3.475)) - 0.5;
                 randomTeleport(x, y, z);
                 teleportTime = 0;
             }
@@ -190,12 +188,6 @@ public class CosmicCreeper extends Creeper implements ComatoseInhabitant<CosmicC
     public @NotNull Packet<ClientGamePacketListener> getAddEntityPacket()
     {
         return NetworkHooks.getEntitySpawningPacket(this);
-    }
-
-    @Override
-    public Predicate<BooleanOp> extraSpawnConditions(EntityType<CosmicCreeper> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
-    {
-        return booleanOp -> BooleanOp.XOR.apply(level.getLevel().dimension().equals(Level.OVERWORLD), level.getLevel().dimension().equals(Rego.Keys.COMATOSE));
     }
 
     static class MoveCtrl extends MoveControl

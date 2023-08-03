@@ -32,11 +32,9 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import snaker.snakerlib.internal.BooleanOp;
 import snaker.snakerlib.level.entity.SnakerMob;
 import snaker.snakerlib.utility.LevelUtil;
 import snaker.tq.client.render.entity.CosmoRenderer;
-import snaker.tq.level.entity.ComatoseInhabitant;
 import snaker.tq.level.entity.EntityVariants;
 import snaker.tq.rego.Rego;
 
@@ -45,7 +43,7 @@ import java.util.function.Predicate;
 /**
  * Created by SnakerBone on 2/01/2023
  **/
-public class Cosmo extends SnakerMob implements ComatoseInhabitant<Cosmo>
+public class Cosmo extends SnakerMob
 {
     private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Cosmo.class, EntityDataSerializers.INT);
 
@@ -228,11 +226,5 @@ public class Cosmo extends SnakerMob implements ComatoseInhabitant<Cosmo>
     public @NotNull Packet<ClientGamePacketListener> getAddEntityPacket()
     {
         return NetworkHooks.getEntitySpawningPacket(this);
-    }
-
-    @Override
-    public Predicate<BooleanOp> extraSpawnConditions(EntityType<Cosmo> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
-    {
-        return Conditions.NONE;
     }
 }

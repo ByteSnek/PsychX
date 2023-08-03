@@ -7,9 +7,9 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import snaker.snakerlib.math.PoseStackBuilder;
-import snaker.snakerlib.resources.Identifier;
 import snaker.tq.client.model.entity.FrolickerModel;
 import snaker.tq.level.entity.creature.Frolicker;
+import snaker.tq.utility.ResourcePath;
 
 /**
  * Created by SnakerBone on 26/05/2023
@@ -24,7 +24,7 @@ public class FrolickerRenderer extends MobRenderer<Frolicker, FrolickerModel>
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull Frolicker frolicker)
     {
-        return new Identifier("textures/entity/creature/frolicker.png");
+        return new ResourcePath("textures/entity/creature/frolicker.png");
     }
 
     @Override

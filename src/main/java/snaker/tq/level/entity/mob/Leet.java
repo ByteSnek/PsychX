@@ -21,19 +21,15 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
-import snaker.snakerlib.internal.BooleanOp;
 import snaker.snakerlib.level.entity.SnakerMob;
 import snaker.snakerlib.utility.LevelUtil;
-import snaker.tq.level.entity.ComatoseInhabitant;
 import snaker.tq.level.entity.projectile.CosmicRay;
 import snaker.tq.rego.Rego;
-
-import java.util.function.Predicate;
 
 /**
  * Created by SnakerBone on 15/07/2023
  **/
-public class Leet extends SnakerMob implements ComatoseInhabitant<Leet>, RangedAttackMob
+public class Leet extends SnakerMob implements RangedAttackMob
 {
     public Leet(EntityType<Leet> type, Level level)
     {
@@ -99,11 +95,5 @@ public class Leet extends SnakerMob implements ComatoseInhabitant<Leet>, RangedA
     public static <T extends Entity> boolean spawnRules(EntityType<T> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
         return LevelUtil.isDimension(level, Rego.Keys.COMATOSE);
-    }
-
-    @Override
-    public Predicate<BooleanOp> extraSpawnConditions(EntityType<Leet> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
-    {
-        return Conditions.NONE;
     }
 }

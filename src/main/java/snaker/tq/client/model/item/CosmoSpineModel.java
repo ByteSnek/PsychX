@@ -9,11 +9,11 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
 import org.jetbrains.annotations.NotNull;
-import snaker.snakerlib.resources.Identifier;
+import snaker.tq.utility.ResourcePath;
 
 public class CosmoSpineModel extends Model
 {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new Identifier("cosmo_spine"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourcePath("cosmo_spine"), "main");
 
     private final ModelPart base;
 

@@ -82,7 +82,6 @@ public abstract class SnakerBaseItem extends Item
                     return true;
                 }
             }
-
             return false;
         }
 

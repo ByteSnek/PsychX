@@ -17,42 +17,23 @@ import java.util.function.Supplier;
  **/
 public class AestheticUtil
 {
-    // @NoFormat
+    // @formatter:off
 
-    private static final Runnable EMPTY_RUNNABLE = () ->
-    {
-    };
-    private static final Consumer<?> EMPTY_WC_CONSUMER = e ->
-    {
-    };
-    private static final BiConsumer<?, ?> EMPTY_WC_BI_CONSUMER = (t, v) ->
-    {
-    };
-    private static final TriConsumer<?, ?, ?> EMPTY_WC_TRI_CONSUMER = (k, v, s) ->
-    {
-    };
-    private static final QuadConsumer<?, ?, ?, ?> EMPTY_WC_QUAD_CONSUMER = (u, d, t, q) ->
-    {
-    };
+    private static final Runnable EMPTY_RUNNABLE = () -> {};
+    private static final Consumer<?> EMPTY_WC_CONSUMER = e -> {};
+    private static final BiConsumer<?, ?> EMPTY_WC_BI_CONSUMER = (t, v) -> {};
+    private static final TriConsumer<?, ?, ?> EMPTY_WC_TRI_CONSUMER = (k, v, s) -> {};
+    private static final QuadConsumer<?, ?, ?, ?> EMPTY_WC_QUAD_CONSUMER = (u, d, t, q) -> {};
     private static final Callable<?> NULL_WC_CALLABLE = () -> null;
     private static final Supplier<?> NULL_WC_SUPPLIER = () -> null;
-
-    private static final Consumer<Object> EMPTY_CONSUMER = e ->
-    {
-    };
-    private static final BiConsumer<Object, Object> EMPTY_BI_CONSUMER = (t, v) ->
-    {
-    };
-    private static final TriConsumer<Object, Object, Object> EMPTY_TRI_CONSUMER = (k, v, s) ->
-    {
-    };
-    private static final QuadConsumer<Object, Object, Object, Object> EMPTY_QUAD_CONSUMER = (u, d, t, q) ->
-    {
-    };
+    private static final Consumer<Object> EMPTY_CONSUMER = e -> {};
+    private static final BiConsumer<Object, Object> EMPTY_BI_CONSUMER = (t, v) -> {};
+    private static final TriConsumer<Object, Object, Object> EMPTY_TRI_CONSUMER = (k, v, s) -> {};
+    private static final QuadConsumer<Object, Object, Object, Object> EMPTY_QUAD_CONSUMER = (u, d, t, q) -> {};
     private static final Callable<Object> NULL_CALLABLE = () -> null;
     private static final Supplier<Object> NULL_SUPPLIER = () -> null;
 
-    // @YesFormat
+    // @formatter:on
 
     public static Runnable emptyRunnable()
     {

@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
-import snaker.snakerlib.utility.SnakerUtil;
+import snaker.snakerlib.SnakerLib;
 
 import java.util.function.Supplier;
 
@@ -44,7 +44,7 @@ public class RenderTypes
 
     public static RenderType custom(VertexFormat format, RenderType.CompositeState state)
     {
-        return RenderType.create(SnakerUtil.PLACEHOLDER, format, VertexFormat.Mode.QUADS, 256, state);
+        return RenderType.create(SnakerLib.placeholder(), format, VertexFormat.Mode.QUADS, 256, state);
     }
 
     public static RenderType.CompositeState normal(Supplier<ShaderInstance> shader)

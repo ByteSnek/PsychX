@@ -15,7 +15,7 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.registries.RegistryObject;
-import snaker.snakerlib.utility.SnakerUtil;
+import snaker.snakerlib.SnakerLib;
 import snaker.tq.Tourniqueted;
 import snaker.tq.rego.Rego;
 
@@ -197,7 +197,7 @@ public class DataProviders
         private void tab(RegistryObject<CreativeModeTab> tab)
         {
             String name = tab.getId().getPath();
-            add("itemGroup." + name, SnakerUtil.translate(name));
+            add("itemGroup." + name, SnakerLib.translate(name));
         }
 
         private <T extends EntityType<?>> void entity(RegistryObject<T> entity)
@@ -205,36 +205,36 @@ public class DataProviders
             String name = entity.getId().getPath();
 
             if (name.equals("cosmo")) {
-                add("entity." + Tourniqueted.MODID + "." + name, SnakerUtil.translate(name));
-                add("entity." + Tourniqueted.MODID + "." + "alpha_" + name, SnakerUtil.translate("alpha_" + name));
+                add("entity." + Tourniqueted.MODID + "." + name, SnakerLib.translate(name));
+                add("entity." + Tourniqueted.MODID + "." + "alpha_" + name, SnakerLib.translate("alpha_" + name));
                 return;
             }
 
-            add("entity." + Tourniqueted.MODID + "." + name, SnakerUtil.translate(name));
+            add("entity." + Tourniqueted.MODID + "." + name, SnakerLib.translate(name));
         }
 
         private <T extends Item> void item(RegistryObject<T> item)
         {
             String name = item.getId().getPath();
-            add("item." + Tourniqueted.MODID + "." + name, SnakerUtil.translate(name));
+            add("item." + Tourniqueted.MODID + "." + name, SnakerLib.translate(name));
         }
 
         private <T extends Block> void block(RegistryObject<T> block)
         {
             String name = block.getId().getPath();
-            add("block." + Tourniqueted.MODID + "." + name, SnakerUtil.translate(name));
+            add("block." + Tourniqueted.MODID + "." + name, SnakerLib.translate(name));
         }
 
         private void sound(RegistryObject<SoundEvent> sound)
         {
             String name = sound.getId().getPath();
-            add("sounds." + Tourniqueted.MODID + "." + name, SnakerUtil.translate(name));
+            add("sounds." + Tourniqueted.MODID + "." + name, SnakerLib.translate(name));
         }
 
         private <T extends MobEffect> void effect(RegistryObject<T> effect)
         {
             String name = effect.getId().getPath();
-            add("effect." + Tourniqueted.MODID + "." + name, SnakerUtil.translate(name));
+            add("effect." + Tourniqueted.MODID + "." + name, SnakerLib.translate(name));
         }
 
         @Override

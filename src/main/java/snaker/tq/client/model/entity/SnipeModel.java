@@ -9,12 +9,12 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import org.jetbrains.annotations.NotNull;
-import snaker.snakerlib.resources.Identifier;
 import snaker.tq.level.entity.mob.Snipe;
+import snaker.tq.utility.ResourcePath;
 
 public class SnipeModel extends EntityModel<Snipe>
 {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new Identifier("snipe"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourcePath("snipe"), "main");
 
     private final ModelPart body;
 

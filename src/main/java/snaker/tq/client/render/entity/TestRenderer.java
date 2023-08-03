@@ -6,10 +6,10 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
-import snaker.snakerlib.resources.Identifier;
 import snaker.tq.client.layer.TestLayer;
 import snaker.tq.client.model.entity.TestModel;
-import snaker.tq.level.entity.Test;
+import snaker.tq.level.entity.mob.Test;
+import snaker.tq.utility.ResourcePath;
 
 /**
  * Created by SnakerBone on 30/07/2023
@@ -25,7 +25,7 @@ public class TestRenderer extends MobRenderer<Test, TestModel>
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull Test test)
     {
-        return new Identifier("textures/solid.png");
+        return new ResourcePath("textures/solid.png");
     }
 
     @Override

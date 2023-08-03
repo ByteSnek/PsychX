@@ -39,7 +39,6 @@ import snaker.tq.client.render.block.ShaderBlockRenderer;
 import snaker.tq.client.render.entity.*;
 import snaker.tq.config.TqConfig;
 import snaker.tq.level.effect.Syncope;
-import snaker.tq.level.entity.Test;
 import snaker.tq.level.entity.boss.AntiCosmo;
 import snaker.tq.level.entity.boss.Utterfly;
 import snaker.tq.level.entity.creature.Flutterfly;

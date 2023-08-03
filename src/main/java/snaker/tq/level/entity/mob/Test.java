@@ -1,4 +1,4 @@
-package snaker.tq.level.entity;
+package snaker.tq.level.entity.mob;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
@@ -15,18 +15,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
-import snaker.snakerlib.internal.BooleanOp;
 import snaker.snakerlib.level.entity.SnakerMob;
 import snaker.snakerlib.utility.LevelUtil;
-import snaker.tq.level.entity.mob.Leet;
 import snaker.tq.rego.Rego;
-
-import java.util.function.Predicate;
 
 /**
  * Created by SnakerBone on 30/07/2023
  **/
-public class Test extends SnakerMob implements ComatoseInhabitant<Leet>
+public class Test extends SnakerMob
 {
     public Test(EntityType<? extends Monster> type, Level level)
     {
@@ -53,11 +49,5 @@ public class Test extends SnakerMob implements ComatoseInhabitant<Leet>
     public static <T extends Entity> boolean spawnRules(EntityType<T> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
         return LevelUtil.isDimension(level, Rego.Keys.COMATOSE);
-    }
-
-    @Override
-    public Predicate<BooleanOp> extraSpawnConditions(EntityType<Leet> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
-    {
-        return Conditions.NONE;
     }
 }

@@ -8,16 +8,16 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import org.jetbrains.annotations.NotNull;
-import snaker.snakerlib.math.Mh;
-import snaker.snakerlib.resources.Identifier;
-import snaker.tq.level.entity.Test;
+import snaker.snakerlib.math.Maths;
+import snaker.tq.level.entity.mob.Test;
+import snaker.tq.utility.ResourcePath;
 
 /**
  * Created by SnakerBone on 30/07/2023
  **/
 public class TestModel extends EntityModel<Test>
 {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new Identifier("test"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourcePath("test"), "main");
     private final ModelPart base;
 
 
@@ -58,8 +58,8 @@ public class TestModel extends EntityModel<Test>
         CubeDeformation outerDef = CubeDeformation.NONE.extend(1F);
 
         for (int i = 0; i < 360; i++) {
-            float x = Mh.cos(i * 360) * 30;
-            float z = Mh.sin(i * 360) * 30;
+            float x = Maths.cos(i * 360) * 30;
+            float z = Maths.sin(i * 360) * 30;
 
             outer.addBox(x, -3, z, 1, 1, 1, outerDef);
             outer.addBox(x, 3, z, 1, 1, 1, outerDef);
@@ -79,12 +79,12 @@ public class TestModel extends EntityModel<Test>
 
         for (int i = 0; i < cubes; i++) {
             for (int j = 0; j < cubes; j++) {
-                float theta = Mh.PI * i / (cubes - 1);
-                float phi = 2 * Mh.PI * j / cubes;
+                float theta = Maths.PI * i / (cubes - 1);
+                float phi = 2 * Maths.PI * j / cubes;
 
-                float x = radius * Mh.sin(theta) * Mh.cos(phi);
-                float y = radius * Mh.sin(theta) * Mh.sin(phi);
-                float z = radius * Mh.cos(theta);
+                float x = radius * Maths.sin(theta) * Maths.cos(phi);
+                float y = radius * Maths.sin(theta) * Maths.sin(phi);
+                float z = radius * Maths.cos(theta);
 
                 sphere.addBox(x, y, z, 1, 1, 1, CubeDeformation.NONE.extend(3));
             }
@@ -99,11 +99,11 @@ public class TestModel extends EntityModel<Test>
         CubeListBuilder outer = CubeListBuilder.create();
 
         for (int i = 0; i < 360; i++) {
-            float bodyX = Mh.sin(i) * (i / 4F);
-            float bodyZ = Mh.cos(i) * (i / 4F);
+            float bodyX = Maths.sin(i) * (i / 4F);
+            float bodyZ = Maths.cos(i) * (i / 4F);
 
-            float outerX = Mh.sin(i) * (i / 4F);
-            float outerZ = Mh.cos(i) * (i / 4F);
+            float outerX = Maths.sin(i) * (i / 4F);
+            float outerZ = Maths.cos(i) * (i / 4F);
 
             body.addBox(bodyX, 0, bodyZ, 1, 1, 1, CubeDeformation.NONE.extend(1));
 

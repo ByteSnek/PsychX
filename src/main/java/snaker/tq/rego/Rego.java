@@ -39,9 +39,7 @@ import net.minecraftforge.registries.RegistryObject;
 import snaker.snakerlib.SnakerLib;
 import snaker.snakerlib.data.SnakerConstants;
 import snaker.snakerlib.internal.AsynchronousHashMap;
-import snaker.snakerlib.resources.Identifier;
 import snaker.snakerlib.utility.SketchyUtil;
-import snaker.snakerlib.utility.SnakerUtil;
 import snaker.tq.Tourniqueted;
 import snaker.tq.level.block.ComatoseNyliumBlock;
 import snaker.tq.level.block.ShaderBlock;
@@ -49,7 +47,6 @@ import snaker.tq.level.block.ShaderBlockItem;
 import snaker.tq.level.block.entity.ShaderBlockEntity;
 import snaker.tq.level.effect.Syncope;
 import snaker.tq.level.entity.EntityDropHandler;
-import snaker.tq.level.entity.Test;
 import snaker.tq.level.entity.boss.AntiCosmo;
 import snaker.tq.level.entity.boss.Utterfly;
 import snaker.tq.level.entity.creature.Flutterfly;
@@ -63,6 +60,7 @@ import snaker.tq.level.item.Tourniquet;
 import snaker.tq.level.item.icon.BlockTabIcon;
 import snaker.tq.level.item.icon.ItemTabIcon;
 import snaker.tq.level.item.icon.MobTabIcon;
+import snaker.tq.utility.ResourcePath;
 
 import java.util.Map;
 import java.util.function.Predicate;
@@ -115,7 +113,7 @@ public class Rego
     public static final RegistryObject<Block> BLOCK_STARRY = blockWithoutItem("starry_block", () -> new ShaderBlock<>(Rego.BE_STARRY));
 
     public static final RegistryObject<Block> BLOCK_CATNIP = blockWithItem("catnip", () -> new FlowerBlock(Rego.EFFECT_SYNCOPE::get, 600, SnakerConstants.BlockProperties.PLANT));
-    public static final RegistryObject<Block> BLOCK_POTTED_CATNIP = BLOCKS.register("potted_catnip", () -> new FlowerPotBlock(() -> SketchyUtil.shutUp(Blocks.FLOWER_POT), BLOCK_CATNIP, SnakerConstants.BlockProperties.NORMAL));
+    public static final RegistryObject<Block> BLOCK_POTTED_CATNIP = BLOCKS.register("potted_catnip", () -> new FlowerPotBlock(() -> SketchyUtil.tryCast(Blocks.FLOWER_POT), BLOCK_CATNIP, SnakerConstants.BlockProperties.NORMAL));
 
     public static final RegistryObject<Block> BLOCK_COMA_STONE = blockWithItem("coma_stone", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.NONE).strength(0.5F).sound(SoundType.NETHER_ORE)));
     public static final RegistryObject<Block> BLOCK_DELUSIVE_NYLIUM = blockWithItem("delusive_nylium", ComatoseNyliumBlock::new);
@@ -303,13 +301,13 @@ public class Rego
 
     private static RegistryObject<Item> egg(String name, Supplier<? extends EntityType<? extends Mob>> mob)
     {
-        Supplier<ForgeSpawnEggItem> egg = () -> new ForgeSpawnEggItem(mob, SnakerUtil.randomHex(), SnakerUtil.randomHex(), new Item.Properties());
+        Supplier<ForgeSpawnEggItem> egg = () -> new ForgeSpawnEggItem(mob, SnakerLib.randomHex(), SnakerLib.randomHex(), new Item.Properties());
         return ITEMS.register(name, egg);
     }
 
     private static RegistryObject<SoundEvent> sound(String name)
     {
-        return SOUNDS.register(name, () -> SoundEvent.createVariableRangeEvent(new Identifier(name)));
+        return SOUNDS.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourcePath(name)));
     }
 
     public static void initialize()
@@ -332,7 +330,7 @@ public class Rego
 
     public static class Keys
     {
-        public static final ResourceKey<Level> COMATOSE = ResourceKey.create(Registries.DIMENSION, new Identifier("comatose"));
+        public static final ResourceKey<Level> COMATOSE = ResourceKey.create(Registries.DIMENSION, new ResourcePath("comatose"));
     }
 }//CH31ZJ
 //MKS85

@@ -10,7 +10,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.RegistryObject;
-import snaker.snakerlib.math.Mh;
+import snaker.snakerlib.math.Maths;
 import snaker.tq.level.entity.mob.Cosmo;
 import snaker.tq.rego.Rego;
 
@@ -47,7 +47,7 @@ public class EntityDropHandler
 
     private void addDrop(LivingDropsEvent event, ItemLike item)
     {
-        int looting = (int) Mh.clamp(event.getLootingLevel(), 0, Integer.MAX_VALUE);
+        int looting = (int) Maths.clamp(event.getLootingLevel(), 0, Integer.MAX_VALUE);
         int roll = random.nextInt(100);
 
         if (roll < getDropAmount(looting) || roll < getDropChance(looting)) {
@@ -89,7 +89,7 @@ public class EntityDropHandler
         int chance = 50;
         int bonus = 5 * looting;
 
-        return (int) Mh.clamp(chance + bonus, 0, 100);
+        return (int) Maths.clamp(chance + bonus, 0, 100);
     }
 
     private int getDropAmount(int looting)

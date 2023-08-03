@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
 import snaker.snakerlib.SnakerLib;
 import snaker.snakerlib.client.render.CyclicalIconRenderer;
-import snaker.snakerlib.math.Mh;
+import snaker.snakerlib.math.Maths;
 import snaker.tq.level.entity.boss.AntiCosmo;
 import snaker.tq.level.entity.boss.Utterfly;
 import snaker.tq.level.entity.creature.Flutterfly;
@@ -118,8 +118,8 @@ public class MobTabIconRenderer extends CyclicalIconRenderer
 
     public static void renderEntityOnScreen(PoseStack stack, float scale, float xRot, float yRot, float zRot, float mouseX, float mouseY, LivingEntity entity)
     {
-        float mX = Mh.atan(-mouseX / 40);
-        float mY = Mh.atan(mouseY / 40);
+        float mX = Maths.atan(-mouseX / 40);
+        float mY = Maths.atan(mouseY / 40);
 
         stack.scale(scale, scale, scale);
 

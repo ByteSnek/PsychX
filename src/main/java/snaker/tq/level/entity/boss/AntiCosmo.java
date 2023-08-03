@@ -17,7 +17,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import snaker.snakerlib.level.entity.SnakerBoss;
-import snaker.snakerlib.resources.Identifier;
+import snaker.tq.utility.ResourcePath;
 
 import java.util.UUID;
 
@@ -26,7 +26,7 @@ import java.util.UUID;
  **/
 public class AntiCosmo extends SnakerBoss
 {
-    private final CustomBossEvent bossEvent = new CustomBossEvent(new Identifier("anti_cosmo"), getDisplayName());
+    private final CustomBossEvent bossEvent = new CustomBossEvent(new ResourcePath("anti_cosmo"), getDisplayName());
 
     public AntiCosmo(EntityType<? extends PathfinderMob> type, Level level)
     {

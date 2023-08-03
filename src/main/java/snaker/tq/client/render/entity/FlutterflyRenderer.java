@@ -4,9 +4,9 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
-import snaker.snakerlib.resources.Identifier;
 import snaker.tq.client.model.entity.FlutterflyModel;
 import snaker.tq.level.entity.creature.Flutterfly;
+import snaker.tq.utility.ResourcePath;
 
 /**
  * Created by SnakerBone on 26/05/2023
@@ -21,6 +21,6 @@ public class FlutterflyRenderer extends MobRenderer<Flutterfly, FlutterflyModel>
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull Flutterfly entity)
     {
-        return new Identifier("textures/entity/creature/flutterfly.png");
+        return new ResourcePath("textures/entity/creature/flutterfly.png");
     }
 }

@@ -14,12 +14,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.BossEvent;
 import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
+import snaker.snakerlib.SnakerLib;
 import snaker.snakerlib.level.entity.SnakerBoss;
 import snaker.snakerlib.level.entity.SnakerFlyingBoss;
-import snaker.snakerlib.resources.Identifier;
-import snaker.snakerlib.utility.SnakerUtil;
 import snaker.tq.level.entity.boss.AntiCosmo;
 import snaker.tq.level.entity.boss.Utterfly;
+import snaker.tq.utility.ResourcePath;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -61,7 +61,7 @@ public class BossBarHandler
             AntiCosmo cosmo = (AntiCosmo) boss;
             if (cosmo.getBossEventId() == info.getId()) {
                 event.setCanceled(true);
-                RenderType type = RenderTypes.custom(DefaultVertexFormat.POSITION_TEX, RenderTypes.sampler(Shaders::getCrystalized, new Identifier("textures/sampler/noise_white.png"), false, false));
+                RenderType type = RenderTypes.custom(DefaultVertexFormat.POSITION_TEX, RenderTypes.sampler(Shaders::getCrystalized, new ResourcePath("textures/sampler/noise_white.png"), false, false));
                 MultiBufferSource.BufferSource source = minecraft.renderBuffers().bufferSource();
                 VertexConsumer consumer = source.getBuffer(type);
                 RenderSystem.enableDepthTest();
@@ -77,7 +77,7 @@ public class BossBarHandler
                 drawOverlay(consumer, x, y, (int) (info.getProgress() * 182), 5);
                 source.endBatch();
                 stack.translate(0, 0, 16);
-                graphics.drawString(minecraft.font, name.getVisualOrderText(), textureX, textureY, SnakerUtil.hexToInt("A1F5FF"), true);
+                graphics.drawString(minecraft.font, name.getVisualOrderText(), textureX, textureY, SnakerLib.hexToInt("A1F5FF"), true);
             }
         }
         for (Object flyingBoss : new CopyOnWriteArrayList<>(FLYING_BOSSES)) {
@@ -102,7 +102,7 @@ public class BossBarHandler
                         samplerName = "noise_pink";
                     }
                 }
-                RenderType type = RenderTypes.custom(DefaultVertexFormat.POSITION_TEX, RenderTypes.sampler(Shaders::getCrystalized, new Identifier("textures/sampler/" + samplerName + ".png"), false, false));
+                RenderType type = RenderTypes.custom(DefaultVertexFormat.POSITION_TEX, RenderTypes.sampler(Shaders::getCrystalized, new ResourcePath("textures/sampler/" + samplerName + ".png"), false, false));
                 MultiBufferSource.BufferSource source = minecraft.renderBuffers().bufferSource();
                 VertexConsumer consumer = source.getBuffer(type);
                 RenderSystem.enableDepthTest();
@@ -118,7 +118,7 @@ public class BossBarHandler
                 drawOverlay(consumer, x, y, (int) (info.getProgress() * 182), 5);
                 source.endBatch();
                 stack.translate(0, 0, 16);
-                graphics.drawString(minecraft.font, name.getVisualOrderText(), textureX, textureY, SnakerUtil.hexToInt(textColour), true);
+                graphics.drawString(minecraft.font, name.getVisualOrderText(), textureX, textureY, SnakerLib.hexToInt(textColour), true);
             }
         }
     }

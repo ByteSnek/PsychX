@@ -16,7 +16,7 @@ import org.joml.Vector4f;
  **/
 public class ShaderUtil
 {
-    private static final char HASH = '#';
+    private static final String HASH = "#";
 
     public static int packLightLevel(Level level, BlockPos pos)
     {
@@ -35,7 +35,7 @@ public class ShaderUtil
 
     public static Matrix3d hexToMatrix3d(String hexCode)
     {
-        hexCode = hexCode.startsWith("#") ? hexCode.substring(1) : hexCode;
+        hexCode = hexCode.startsWith(HASH) ? hexCode.substring(1) : hexCode;
 
         int value = Integer.parseInt(hexCode, 16);
 
@@ -52,7 +52,7 @@ public class ShaderUtil
 
     public static Vector3d hexToVec3d(String hexCode)
     {
-        hexCode = hexCode.startsWith("#") ? hexCode.substring(1) : hexCode;
+        hexCode = hexCode.startsWith(HASH) ? hexCode.substring(1) : hexCode;
 
         int value = Integer.parseInt(hexCode, 16);
 
@@ -69,7 +69,7 @@ public class ShaderUtil
 
     public static Vector3f hexToVec3f(String hexCode)
     {
-        hexCode = hexCode.startsWith("#") ? hexCode.substring(1) : hexCode;
+        hexCode = hexCode.startsWith(HASH) ? hexCode.substring(1) : hexCode;
 
         int value = Integer.parseInt(hexCode, 16);
 
@@ -86,7 +86,7 @@ public class ShaderUtil
 
     public static Vector4f hexToVec4f(String hexCode)
     {
-        hexCode = hexCode.startsWith("#") ? hexCode.substring(1) : hexCode;
+        hexCode = hexCode.startsWith(HASH) ? hexCode.substring(1) : hexCode;
 
         int value = Integer.parseInt(hexCode, 16);
 
@@ -105,7 +105,7 @@ public class ShaderUtil
 
     public static float[] hexToVec3(String hexCode)
     {
-        hexCode = hexCode.startsWith("#") ? hexCode.substring(1) : hexCode;
+        hexCode = hexCode.startsWith(HASH) ? hexCode.substring(1) : hexCode;
 
         int value = Integer.parseInt(hexCode, 16);
 
@@ -124,7 +124,7 @@ public class ShaderUtil
 
     public static float[] hexToVec4(String hexCode)
     {
-        hexCode = hexCode.startsWith("#") ? hexCode.substring(1) : hexCode;
+        hexCode = hexCode.startsWith(HASH) ? hexCode.substring(1) : hexCode;
 
         int value = Integer.parseInt(hexCode, 16);
 

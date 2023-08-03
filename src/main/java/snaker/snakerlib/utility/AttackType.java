@@ -7,7 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import snaker.snakerlib.math.Mh;
+import snaker.snakerlib.math.Maths;
 
 import javax.annotation.Nullable;
 import java.math.BigInteger;
@@ -29,8 +29,8 @@ public class AttackType
             DamageSource source = level.damageSources().playerAttack(attacker);
             BigInteger amount = switch (aoe) {
                 case NORMAL -> BigInteger.valueOf(stack.getMaxDamage());
-                case ADDITORIAL -> Mh.additorial(entities.size());
-                case FACTORIAL -> Mh.factorial(entities.size());
+                case ADDITORIAL -> Maths.additorial(entities.size());
+                case FACTORIAL -> Maths.factorial(entities.size());
             };
             for (LivingEntity entity : entities) {
                 float dmg = Objects.requireNonNullElseGet(damage, amount::floatValue);
@@ -51,8 +51,8 @@ public class AttackType
             DamageSource attackSource = level.damageSources().playerAttack(attacker);
             BigInteger attackDamage = switch (aoe) {
                 case NORMAL -> BigInteger.valueOf(stack.getMaxDamage());
-                case ADDITORIAL -> Mh.additorial(entities.size());
-                case FACTORIAL -> Mh.factorial(entities.size());
+                case ADDITORIAL -> Maths.additorial(entities.size());
+                case FACTORIAL -> Maths.factorial(entities.size());
             };
             for (LivingEntity entity : entities) {
                 float finalDamage = Objects.requireNonNullElseGet(amount, attackDamage::floatValue);

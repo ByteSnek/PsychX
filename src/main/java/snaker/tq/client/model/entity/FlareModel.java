@@ -8,13 +8,13 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import org.jetbrains.annotations.NotNull;
-import snaker.snakerlib.math.Mh;
-import snaker.snakerlib.resources.Identifier;
+import snaker.snakerlib.math.Maths;
 import snaker.tq.level.entity.mob.Flare;
+import snaker.tq.utility.ResourcePath;
 
 public class FlareModel extends EntityModel<Flare>
 {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new Identifier("flare"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourcePath("flare"), "main");
 
     private final ModelPart base;
 
@@ -67,10 +67,10 @@ public class FlareModel extends EntityModel<Flare>
     public void setupAnim(@NotNull Flare flare, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch)
     {
         float mul = flare.isAggressive() ? 3 : 2;
-        base.getChild("outer").yRot = (ageInTicks * 16) * Mh.DEGREES_TO_RADIANS * mul;
-        base.getChild("inner").yRot = ageInTicks * Mh.DEGREES_TO_RADIANS * 2 * mul;
-        base.getChild("core").xRot = (ageInTicks * 8) * Mh.DEGREES_TO_RADIANS * mul;
-        base.getChild("core").zRot = (ageInTicks * 4) * Mh.DEGREES_TO_RADIANS * mul;
+        base.getChild("outer").yRot = (ageInTicks * 16) * Maths.DEGREES_TO_RADIANS * mul;
+        base.getChild("inner").yRot = ageInTicks * Maths.DEGREES_TO_RADIANS * 2 * mul;
+        base.getChild("core").xRot = (ageInTicks * 8) * Maths.DEGREES_TO_RADIANS * mul;
+        base.getChild("core").zRot = (ageInTicks * 4) * Maths.DEGREES_TO_RADIANS * mul;
     }
 
     @Override

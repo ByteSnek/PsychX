@@ -12,10 +12,10 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.joml.Matrix3d;
 import org.joml.Vector3d;
-import snaker.snakerlib.resources.Identifier;
 import snaker.snakerlib.utility.ShaderUtil;
 import snaker.tq.config.TqConfig;
 import snaker.tq.rego.Rego;
+import snaker.tq.utility.ResourcePath;
 
 import java.io.FileWriter;
 import java.net.URL;
@@ -25,7 +25,7 @@ import java.net.URL;
  **/
 public class SyncopeFX
 {
-    public static final ResourceLocation SYNCOPE_SHADER = new Identifier("shaders/post/syncope.json");
+    public static final ResourceLocation SYNCOPE_SHADER = new ResourcePath("shaders/post/syncope.json");
 
     public static Matrix3d colourMatrix = new Matrix3d(1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0);
     public static Vector3d blurVec = new Vector3d(0.99, 0.99, 0.99);

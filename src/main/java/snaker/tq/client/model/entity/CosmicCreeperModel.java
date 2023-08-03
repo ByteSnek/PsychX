@@ -8,13 +8,13 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import org.jetbrains.annotations.NotNull;
-import snaker.snakerlib.math.Mh;
-import snaker.snakerlib.resources.Identifier;
+import snaker.snakerlib.math.Maths;
 import snaker.tq.level.entity.mob.CosmicCreeper;
+import snaker.tq.utility.ResourcePath;
 
 public class CosmicCreeperModel extends EntityModel<CosmicCreeper>
 {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new Identifier("cosmic_creeper"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourcePath("cosmic_creeper"), "main");
     private final ModelPart base;
 
     public CosmicCreeperModel(ModelPart root)
@@ -42,11 +42,11 @@ public class CosmicCreeperModel extends EntityModel<CosmicCreeper>
     @Override
     public void setupAnim(@NotNull CosmicCreeper entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch)
     {
-        base.getChild("head").yRot = netHeadYaw * Mh.DEGREES_TO_RADIANS;
-        base.getChild("head").xRot = headPitch * Mh.DEGREES_TO_RADIANS;
+        base.getChild("head").yRot = netHeadYaw * Maths.DEGREES_TO_RADIANS;
+        base.getChild("head").xRot = headPitch * Maths.DEGREES_TO_RADIANS;
         base.getChild("legBackRight").xRot = net.minecraft.util.Mth.cos(limbSwing * 0.6F) * 1.4F * limbSwingAmount;
-        base.getChild("legBackLeft").xRot = net.minecraft.util.Mth.cos(limbSwing * 0.6F + Mh.PI) * 1.4F * limbSwingAmount;
-        base.getChild("legFrontRight").xRot = net.minecraft.util.Mth.cos(limbSwing * 0.6F + Mh.PI) * 1.4F * limbSwingAmount;
+        base.getChild("legBackLeft").xRot = net.minecraft.util.Mth.cos(limbSwing * 0.6F + Maths.PI) * 1.4F * limbSwingAmount;
+        base.getChild("legFrontRight").xRot = net.minecraft.util.Mth.cos(limbSwing * 0.6F + Maths.PI) * 1.4F * limbSwingAmount;
         base.getChild("legFrontLeft").xRot = net.minecraft.util.Mth.cos(limbSwing * 0.6F) * 1.4F * limbSwingAmount;
     }
 

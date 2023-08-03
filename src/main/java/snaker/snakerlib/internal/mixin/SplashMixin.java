@@ -1,4 +1,4 @@
-package snaker.snakerlib.internal.mixin.client;
+package snaker.snakerlib.internal.mixin;
 
 import net.minecraft.client.resources.SplashManager;
 import net.minecraft.server.packs.resources.ResourceManager;

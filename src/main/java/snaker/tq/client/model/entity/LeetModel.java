@@ -9,13 +9,13 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.NotNull;
-import snaker.snakerlib.math.Mh;
-import snaker.snakerlib.resources.Identifier;
+import snaker.snakerlib.math.Maths;
 import snaker.tq.level.entity.mob.Leet;
+import snaker.tq.utility.ResourcePath;
 
 public class LeetModel extends EntityModel<Leet>
 {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new Identifier("leet"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourcePath("leet"), "main");
 
     public final ModelPart head;
     public final ModelPart upperTorso;
@@ -70,9 +70,9 @@ public class LeetModel extends EntityModel<Leet>
     @Override
     public void setupAnim(@NotNull Leet leet, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch)
     {
-        frontRightArm.xRot = Mth.cos(limbSwing * Mh.MAGIC_ANIM_CONSTANT + Mh.PI) * limbSwingAmount;
+        frontRightArm.xRot = Mth.cos(limbSwing * Maths.MAGIC_ANIM_CONSTANT + Maths.PI) * limbSwingAmount;
         frontLeftArm.xRot = Mth.cos(limbSwing) * -1 * limbSwingAmount;
-        backLeftArm.xRot = Mth.cos(limbSwing * Mh.MAGIC_ANIM_CONSTANT + Mh.PI) * limbSwingAmount;
-        backRightArm.xRot = Mth.cos(limbSwing * Mh.MAGIC_ANIM_CONSTANT) * limbSwingAmount;
+        backLeftArm.xRot = Mth.cos(limbSwing * Maths.MAGIC_ANIM_CONSTANT + Maths.PI) * limbSwingAmount;
+        backRightArm.xRot = Mth.cos(limbSwing * Maths.MAGIC_ANIM_CONSTANT) * limbSwingAmount;
     }
 }

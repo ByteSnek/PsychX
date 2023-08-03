@@ -12,10 +12,10 @@ import net.minecraft.client.renderer.entity.layers.EnergySwirlLayer;
 import net.minecraft.client.renderer.entity.layers.EyesLayer;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
-import snaker.snakerlib.resources.Identifier;
 import snaker.snakerlib.utility.ShaderUtil;
 import snaker.tq.client.model.entity.CosmicCreeperModel;
 import snaker.tq.level.entity.mob.CosmicCreeper;
+import snaker.tq.utility.ResourcePath;
 
 /**
  * Created by SnakerBone on 1/06/2023
@@ -29,7 +29,7 @@ public class CosmicCreeperLayer extends EnergySwirlLayer<CosmicCreeper, CosmicCr
     {
         super(parent);
         this.model = new CosmicCreeperModel(set.bakeLayer(CosmicCreeperModel.LAYER_LOCATION));
-        this.texture = new Identifier("textures/entity/mob/cosmic_creeper/cosmic_creeper_layer.png");
+        this.texture = new ResourcePath("textures/entity/mob/cosmic_creeper/cosmic_creeper_layer.png");
     }
 
     @Override
@@ -71,7 +71,7 @@ public class CosmicCreeperLayer extends EnergySwirlLayer<CosmicCreeper, CosmicCr
         @Override
         public @NotNull RenderType renderType()
         {
-            return RenderType.eyes(new Identifier("textures/entity/mob/cosmic_creeper/cosmic_creeper_eyes_layer.png"));
+            return RenderType.eyes(new ResourcePath("textures/entity/mob/cosmic_creeper/cosmic_creeper_eyes_layer.png"));
         }
 
         @Override

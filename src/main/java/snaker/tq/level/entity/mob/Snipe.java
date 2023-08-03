@@ -21,9 +21,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
+import org.joml.Vector3d;
 import snaker.snakerlib.level.entity.SnakerFlyingMob;
-import snaker.snakerlib.math.Mh;
-import snaker.snakerlib.math.Vec3D;
+import snaker.snakerlib.math.Maths;
 import snaker.snakerlib.utility.LevelUtil;
 import snaker.tq.level.entity.projectile.CosmicRay;
 import snaker.tq.rego.Rego;
@@ -150,12 +150,12 @@ public class Snipe extends SnakerFlyingMob
                     double y = target.getY() - snipe.getY();
                     double z = target.getZ() - snipe.getZ();
 
-                    snipe.setXRot(Mh.atan2RotNeg(y, (x * x + z * z)));
+                    snipe.setXRot(Maths.atan2RotNeg(y, (x * x + z * z)));
                     snipe.xRotO = snipe.getXRot();
 
                     if (snipe.tickCount % delay == 0) {
                         CosmicRay ray = new CosmicRay(Rego.ENTITY_COSMIC_RAY.get(), snipe, level);
-                        Vec3D xyz = new Vec3D(x, y, z);
+                        Vector3d xyz = new Vector3d(x, y, z);
 
                         ray.shoot(xyz.x, xyz.y, xyz.z, velocity, inaccuracy);
                         level.addFreshEntity(ray);

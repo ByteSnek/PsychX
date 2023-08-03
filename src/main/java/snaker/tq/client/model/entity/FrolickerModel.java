@@ -8,13 +8,13 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import org.jetbrains.annotations.NotNull;
-import snaker.snakerlib.math.Mh;
-import snaker.snakerlib.resources.Identifier;
+import snaker.snakerlib.math.Maths;
 import snaker.tq.level.entity.creature.Frolicker;
+import snaker.tq.utility.ResourcePath;
 
 public class FrolickerModel extends EntityModel<Frolicker>
 {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new Identifier("frolicker"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourcePath("frolicker"), "main");
     private final ModelPart base;
 
     public FrolickerModel(ModelPart root)
@@ -42,17 +42,17 @@ public class FrolickerModel extends EntityModel<Frolicker>
     public void setupAnim(@NotNull Frolicker frolicker, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch)
     {
         if (frolicker.isActuallyOnGround()) {
-            base.getChild("leftWing").zRot = Mh.toRad(10 + Mh.cos(ageInTicks / 16) * 20);
-            base.getChild("rightWing").zRot = Mh.toRad(-10 - Mh.cos(ageInTicks / 16) * 20);
+            base.getChild("leftWing").zRot = Maths.toRad(10 + Maths.cos(ageInTicks / 16) * 20);
+            base.getChild("rightWing").zRot = Maths.toRad(-10 - Maths.cos(ageInTicks / 16) * 20);
         } else {
-            base.getChild("leftWing").zRot = Mh.sin(ageInTicks / 8) / 1.35F;
-            base.getChild("rightWing").zRot = Mh.sin(-ageInTicks / 8) / 1.35F;
+            base.getChild("leftWing").zRot = Maths.sin(ageInTicks / 8) / 1.35F;
+            base.getChild("rightWing").zRot = Maths.sin(-ageInTicks / 8) / 1.35F;
         }
-        base.getChild("head").xRot = headPitch * Mh.DEGREES_TO_RADIANS;
+        base.getChild("head").xRot = headPitch * Maths.DEGREES_TO_RADIANS;
         // I think the calculation on this is extremely inaccurate xD
         // I think it looks fine in game (I guess??)
-        base.getChild("head").yRot = (netHeadYaw * -Mh.DEGREES_TO_RADIANS) / Mh.PI;
-        base.getChild("head").zRot = netHeadYaw * Mh.DEGREES_TO_RADIANS;
+        base.getChild("head").yRot = (netHeadYaw * -Maths.DEGREES_TO_RADIANS) / Maths.PI;
+        base.getChild("head").zRot = netHeadYaw * Maths.DEGREES_TO_RADIANS;
     }
 
     @Override

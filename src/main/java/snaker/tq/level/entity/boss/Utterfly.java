@@ -26,11 +26,11 @@ import org.jetbrains.annotations.NotNull;
 import snaker.snakerlib.level.entity.SnakerFlyingBoss;
 import snaker.snakerlib.level.entity.ai.SnakerFlyGoal;
 import snaker.snakerlib.level.entity.ai.SnakerLookGoal;
-import snaker.snakerlib.math.Mh;
-import snaker.snakerlib.resources.Identifier;
+import snaker.snakerlib.math.Maths;
 import snaker.tq.level.entity.projectile.ExplosiveHommingArrow;
 import snaker.tq.level.entity.projectile.HommingArrow;
 import snaker.tq.rego.Rego;
+import snaker.tq.utility.ResourcePath;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -43,7 +43,7 @@ public class Utterfly extends SnakerFlyingBoss
 {
     public static final EntityDataAccessor<Integer> PHASE = SynchedEntityData.defineId(Utterfly.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Boolean> CHARGING = SynchedEntityData.defineId(Utterfly.class, EntityDataSerializers.BOOLEAN);
-    private final CustomBossEvent bossEvent = new CustomBossEvent(new Identifier("utterfly"), getDisplayName());
+    private final CustomBossEvent bossEvent = new CustomBossEvent(new ResourcePath("utterfly"), getDisplayName());
     private volatile boolean triggerExplosion;
 
     public Utterfly(EntityType<? extends SnakerFlyingBoss> type, Level level)
@@ -126,7 +126,7 @@ public class Utterfly extends SnakerFlyingBoss
         }
         boolean result = super.hurt(source, amount);
         if (!level().isClientSide && getHealth() <= 1 && getPhase() < 3) {
-            extraHealth((int) Mh.pow2b(getPhase() * 8L), AttributeModifier.Operation.ADDITION);
+            extraHealth((int) Maths.pow2b(getPhase() * 8L), AttributeModifier.Operation.ADDITION);
             setCharging(true);
             setPhase(getPhase() + 1);
             getNavigation().stop();
@@ -172,7 +172,7 @@ public class Utterfly extends SnakerFlyingBoss
                     setCharging(false);
                 }
             } else if (!getCharging() && !dead && triggerExplosion) {
-                for (int i = 0; i < Mh.pow2e(getPhase()); i++) {
+                for (int i = 0; i < Maths.pow2e(getPhase()); i++) {
                     explode(i);
                 }
                 triggerExplosion = false;
@@ -214,7 +214,7 @@ public class Utterfly extends SnakerFlyingBoss
             double x = target.getX() - getX();
             double y = target.getY() - getY();
             double z = target.getZ() - getZ();
-            setXRot(Mh.atan2RotNeg(y, (x * x + z * z)));
+            setXRot(Maths.atan2RotNeg(y, (x * x + z * z)));
             xRotO = getXRot();
             level().playSound(null, getX(), getY(), getZ(), Rego.SOUND_SHOOT.get(), getSoundSource(), 1, 1);
             if (explosive) {

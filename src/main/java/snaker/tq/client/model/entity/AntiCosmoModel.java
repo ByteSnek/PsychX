@@ -8,17 +8,17 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import org.jetbrains.annotations.NotNull;
-import snaker.snakerlib.math.Mh;
-import snaker.snakerlib.resources.Identifier;
+import snaker.snakerlib.math.Maths;
 import snaker.snakerlib.utility.SnakerUtil;
 import snaker.tq.level.entity.boss.AntiCosmo;
+import snaker.tq.utility.ResourcePath;
 
 /**
  * Created by SnakerBone on 18/06/2023
  **/
 public class AntiCosmoModel extends EntityModel<AntiCosmo>
 {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new Identifier("anti_cosmo"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourcePath("anti_cosmo"), "main");
 
     private final ModelPart base;
 
@@ -65,14 +65,14 @@ public class AntiCosmoModel extends EntityModel<AntiCosmo>
     public void setupAnim(@NotNull AntiCosmo cosmo, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch)
     {
         double speed = 1.35;
-        base.getChild("top").y = Mh.sin(ageInTicks / 2) / 2;
-        base.getChild("centre").yRot -= Mh.sin(ageInTicks * Math.PI * Math.PI) / 360;
+        base.getChild("top").y = Maths.sin(ageInTicks / 2) / 2;
+        base.getChild("centre").yRot -= Maths.sin(ageInTicks * Math.PI * Math.PI) / 360;
         if (SnakerUtil.isEntityMoving(cosmo)) {
-            base.y = (Mh.sin(ageInTicks * speed) * Mh.E) + 22;
-            base.getChild("bottom").getChild("lowerOuter1").zRot = (Mh.sin(ageInTicks * speed) / Mh.E) - 0.6F;
-            base.getChild("bottom").getChild("lowerOuter2").zRot = -(Mh.sin(ageInTicks * speed) / Mh.E) + 0.6F;
-            base.getChild("bottom").getChild("lowerOuter3").xRot = (Mh.sin(ageInTicks * speed) / Mh.E) - 0.6F;
-            base.getChild("bottom").getChild("lowerOuter4").xRot = -(Mh.sin(ageInTicks * speed) / Mh.E) + 0.6F;
+            base.y = (Maths.sin(ageInTicks * speed) * Maths.E) + 22;
+            base.getChild("bottom").getChild("lowerOuter1").zRot = (Maths.sin(ageInTicks * speed) / Maths.E) - 0.6F;
+            base.getChild("bottom").getChild("lowerOuter2").zRot = -(Maths.sin(ageInTicks * speed) / Maths.E) + 0.6F;
+            base.getChild("bottom").getChild("lowerOuter3").xRot = (Maths.sin(ageInTicks * speed) / Maths.E) - 0.6F;
+            base.getChild("bottom").getChild("lowerOuter4").xRot = -(Maths.sin(ageInTicks * speed) / Maths.E) + 0.6F;
         } else {
             base.y = 24.0F;
             base.getChild("bottom").getChild("lowerOuter1").zRot = -0.5236F;

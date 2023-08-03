@@ -8,13 +8,13 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import org.jetbrains.annotations.NotNull;
-import snaker.snakerlib.math.Mh;
-import snaker.snakerlib.resources.Identifier;
+import snaker.snakerlib.math.Maths;
 import snaker.tq.level.entity.creature.Flutterfly;
+import snaker.tq.utility.ResourcePath;
 
 public class FlutterflyModel extends EntityModel<Flutterfly>
 {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new Identifier("flutterfly"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourcePath("flutterfly"), "main");
 
     private final ModelPart base;
 
@@ -42,10 +42,10 @@ public class FlutterflyModel extends EntityModel<Flutterfly>
     @Override
     public void setupAnim(@NotNull Flutterfly flutterfly, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch)
     {
-        base.getChild("leftWingLower").zRot = Mh.sin(ageInTicks / 5) / 3.3F - 0.3F;
-        base.getChild("rightWingLower").zRot = Mh.sin(-ageInTicks / 5) / 3.3F + 0.3F;
-        base.getChild("leftWingUpper").zRot = Mh.sin(ageInTicks / 5) / -3.3F + 0.3F;
-        base.getChild("rightWingUpper").zRot = Mh.sin(-ageInTicks / 5) / -3.3F - 0.3F;
+        base.getChild("leftWingLower").zRot = Maths.sin(ageInTicks / 5) / 3.3F - 0.3F;
+        base.getChild("rightWingLower").zRot = Maths.sin(-ageInTicks / 5) / 3.3F + 0.3F;
+        base.getChild("leftWingUpper").zRot = Maths.sin(ageInTicks / 5) / -3.3F + 0.3F;
+        base.getChild("rightWingUpper").zRot = Maths.sin(-ageInTicks / 5) / -3.3F - 0.3F;
     }
 
     @Override

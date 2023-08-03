@@ -9,8 +9,8 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.client.extensions.common.IClientMobEffectExtensions;
 import org.jetbrains.annotations.NotNull;
-import snaker.snakerlib.resources.Identifier;
-import snaker.snakerlib.utility.SnakerUtil;
+import snaker.snakerlib.SnakerLib;
+import snaker.tq.utility.ResourcePath;
 
 import java.util.function.Consumer;
 
@@ -21,7 +21,7 @@ public class Syncope extends MobEffect
 {
     public Syncope()
     {
-        super(MobEffectCategory.NEUTRAL, SnakerUtil.hexToInt("FF00FF"));
+        super(MobEffectCategory.NEUTRAL, SnakerLib.hexToInt("FF00FF"));
     }
 
     @Override
@@ -41,7 +41,7 @@ public class Syncope extends MobEffect
     {
         consumer.accept(new IClientMobEffectExtensions()
         {
-            public static final ResourceLocation ICON = new Identifier("textures/mob_effect/syncope.png");
+            public static final ResourceLocation ICON = new ResourcePath("textures/mob_effect/syncope.png");
 
             @Override
             public boolean renderGuiIcon(MobEffectInstance instance, Gui gui, GuiGraphics graphics, int x, int y, float z, float alpha)

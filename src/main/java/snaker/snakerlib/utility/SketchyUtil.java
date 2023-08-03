@@ -8,7 +8,7 @@ public class SketchyUtil
 {
     @Nullable
     @SuppressWarnings("unchecked")
-    public static <Anything> Anything shutUp(@Nullable Object object)
+    public static <Anything> Anything tryCast(@Nullable Object object)
     {
         return (Anything) object;
     }

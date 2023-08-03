@@ -24,16 +24,13 @@ public class SnakerFlyGoal extends Goal
     public boolean canUse()
     {
         MoveControl control = owner.getMoveControl();
-
         if (!control.hasWanted()) {
             return true;
         } else {
             double x = control.getWantedX() - owner.getX();
             double y = control.getWantedY() - owner.getY();
             double z = control.getWantedZ() - owner.getZ();
-
             double xyz = x * x + y * y + z * z;
-
             return xyz < 1 || xyz > 3600;
         }
     }
@@ -48,11 +45,9 @@ public class SnakerFlyGoal extends Goal
     public void start()
     {
         RandomSource random = owner.getRandom();
-
         double x = owner.getX() + ((random.nextFloat() * 2 - 1) * 16);
         double y = owner.getY() + ((random.nextFloat() * 2 - 1) * 16);
         double z = owner.getZ() + ((random.nextFloat() * 2 - 1) * 16);
-
         owner.getMoveControl().setWantedPosition(x, y, z, 1);
     }
 }

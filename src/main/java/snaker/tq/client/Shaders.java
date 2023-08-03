@@ -11,7 +11,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import snaker.snakerlib.SnakerLib;
 import snaker.snakerlib.client.shader.Shader;
-import snaker.snakerlib.resources.Identifier;
+import snaker.tq.utility.ResourcePath;
 
 import java.util.function.Consumer;
 
@@ -522,7 +522,7 @@ public class Shaders
 
     private static Shader shader(RegisterShadersEvent event, String name, VertexFormat format)
     {
-        return Shader.create(event.getResourceProvider(), new Identifier(name), format);
+        return Shader.create(event.getResourceProvider(), new ResourcePath(name), format);
     }
 
     private static void registerShader(RegisterShadersEvent event, String name, Consumer<ShaderInstance> instance)

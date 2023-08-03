@@ -6,7 +6,7 @@ import net.minecraft.world.entity.ai.util.AirAndWaterRandomPos;
 import net.minecraft.world.entity.ai.util.HoverRandomPos;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.phys.Vec3;
-import snaker.snakerlib.math.Mh;
+import snaker.snakerlib.math.Maths;
 
 import javax.annotation.Nullable;
 
@@ -45,7 +45,7 @@ public class SnakerWanderGoal extends Goal
     private Vec3 findPos()
     {
         Vec3 view = owner.getViewVector(0);
-        Vec3 pos = HoverRandomPos.getPos(owner, 8, 7, view.x, view.z, Mh.HALF_PI, 3, 1);
-        return pos != null ? pos : AirAndWaterRandomPos.getPos(owner, 8, 4, -2, view.x, view.z, Mh.HALF_PI);
+        Vec3 pos = HoverRandomPos.getPos(owner, 8, 7, view.x, view.z, Maths.HALF_PI, 3, 1);
+        return pos != null ? pos : AirAndWaterRandomPos.getPos(owner, 8, 4, -2, view.x, view.z, Maths.HALF_PI);
     }
 }
