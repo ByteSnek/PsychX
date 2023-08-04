@@ -6,7 +6,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import snaker.snakerlib.SnakerLib;
 
 import java.util.List;
 import java.util.Map;
@@ -20,8 +19,6 @@ public class PlayTagWithOtherKidsMixin
     @Inject(method = "checkHowManyChasersEachFriendHas", at = @At(value = "INVOKE_ASSIGN", target = "Ljava/util/stream/Stream;filter(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;"))
     private static void checkHowManyChasersEachFriendHas(List<LivingEntity> kids, CallbackInfoReturnable<Map<LivingEntity, Integer>> cir)
     {
-        if (!kids.isEmpty()) {
-            SnakerLib.LOGGER.info(kids);
-        }
+
     }
 }
