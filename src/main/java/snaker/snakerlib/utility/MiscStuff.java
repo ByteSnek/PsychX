@@ -15,11 +15,11 @@ import snaker.snakerlib.math.Maths;
 /**
  * Created by SnakerBone on 20/02/2023
  **/
-public class SnakerUtil
+public class MiscStuff
 {
     public static <T extends Block> FlowerPotBlock addFlowerPotPlant(RegistryObject<T> normal, RegistryObject<T> potted)
     {
-        FlowerPotBlock block = SketchyUtil.tryCast(Blocks.FLOWER_POT);
+        FlowerPotBlock block = SketchyStuff.tryCast(Blocks.FLOWER_POT);
         block.addPlant(normal.getId(), potted);
         return block;
     }

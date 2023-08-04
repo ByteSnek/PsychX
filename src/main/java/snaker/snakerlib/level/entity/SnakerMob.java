@@ -1,8 +1,6 @@
 package snaker.snakerlib.level.entity;
 
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -11,8 +9,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import snaker.snakerlib.data.SnakerConstants;
 import snaker.snakerlib.level.entity.ai.SnakerSwitchGameModeGoal;
-
-import java.util.Objects;
 
 /**
  * Created by SnakerBone on 2/01/2023
@@ -28,6 +24,11 @@ public abstract class SnakerMob extends Monster
     public SnakerMob(EntityType<? extends Monster> type, Level level)
     {
         this(type, level, SnakerConstants.EntityAttributes.MOB_XP_REWARD);
+    }
+
+    public boolean isCranky()
+    {
+        return isAlive() && isEffectiveAi() && isAggressive() && getTarget() != null;
     }
 
     @Override

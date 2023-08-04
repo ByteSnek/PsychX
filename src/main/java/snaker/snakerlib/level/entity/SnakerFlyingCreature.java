@@ -46,6 +46,11 @@ public abstract class SnakerFlyingCreature extends Animal implements FlyingAnima
         this(type, level, SnakerConstants.EntityAttributes.CREATURE_XP_REWARD);
     }
 
+    public boolean isCranky()
+    {
+        return isAlive() && isEffectiveAi() && isAggressive() && getTarget() != null;
+    }
+
     @Override
     protected void registerGoals()
     {

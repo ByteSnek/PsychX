@@ -156,7 +156,7 @@ public class SnakerLib
         return untranslateComponent(component, false);
     }
 
-    public static String translate(String text)
+    public static String i18nt(String text)
     {
         if (!text.isEmpty()) {
             return Stream.of(text.trim().split("\\s|\\p{Pc}")).filter(word -> word.length() > 0).map(word -> word.substring(0, 1).toUpperCase() + word.substring(1)).collect(Collectors.joining(" "));
@@ -165,25 +165,25 @@ public class SnakerLib
         }
     }
 
-    public static String translate(String text, Rarity rarity)
+    public static String i18nt(String text, Rarity rarity)
     {
         switch (rarity) {
             case UNCOMMON -> {
-                return "§e" + translate(text);
+                return "§e" + i18nt(text);
             }
             case RARE -> {
-                return "§b" + translate(text);
+                return "§b" + i18nt(text);
             }
             case EPIC -> {
-                return "§d" + translate(text);
+                return "§d" + i18nt(text);
             }
             default -> {
-                return translate(text);
+                return i18nt(text);
             }
         }
     }
 
-    public static String untranslate(String text)
+    public static String i18nf(String text)
     {
         return !text.isEmpty() ? text.replaceAll("\\s+", "_").toLowerCase() : text;
     }

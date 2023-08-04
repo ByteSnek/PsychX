@@ -25,7 +25,7 @@ public class TestRenderer extends MobRenderer<Test, TestModel>
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull Test test)
     {
-        return new ResourcePath("textures/solid.png");
+        return ResourcePath.SOLID_TEXTURE;
     }
 
     @Override

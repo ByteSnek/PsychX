@@ -39,6 +39,11 @@ public abstract class SnakerBoss extends PathfinderMob
         this(type, level, SnakerConstants.EntityAttributes.BOSS_XP_REWARD);
     }
 
+    public boolean isCranky()
+    {
+        return isAlive() && isEffectiveAi() && isAggressive() && getTarget() != null;
+    }
+
     public void extraHealth(int amount, AttributeModifier.Operation operation)
     {
         Objects.requireNonNull(getAttribute(Attributes.MAX_HEALTH)).addTransientModifier(new AttributeModifier("ExtraHealth", amount, operation));

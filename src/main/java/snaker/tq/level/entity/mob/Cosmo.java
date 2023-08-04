@@ -33,7 +33,7 @@ import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import snaker.snakerlib.level.entity.SnakerMob;
-import snaker.snakerlib.utility.LevelUtil;
+import snaker.snakerlib.utility.LevelStuff;
 import snaker.tq.client.render.entity.CosmoRenderer;
 import snaker.tq.level.entity.EntityVariants;
 import snaker.tq.rego.Rego;
@@ -64,7 +64,7 @@ public class Cosmo extends SnakerMob
 
     public static <T extends Entity> boolean spawnRules(EntityType<T> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return LevelUtil.isDimension(level, Rego.Keys.COMATOSE);
+        return LevelStuff.isDimension(level, Rego.Keys.COMATOSE);
     }
 
     @Override

@@ -36,6 +36,11 @@ public abstract class SnakerCreature extends Animal
         this(type, level, offspring, SnakerConstants.EntityAttributes.CREATURE_XP_REWARD);
     }
 
+    public boolean isCranky()
+    {
+        return isAlive() && isEffectiveAi() && isAggressive() && getTarget() != null;
+    }
+
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(@NotNull ServerLevel level, @NotNull AgeableMob parent)

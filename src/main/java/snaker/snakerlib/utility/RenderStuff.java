@@ -1,22 +1,50 @@
 package snaker.snakerlib.utility;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.LightTexture;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
-import org.joml.Matrix3d;
-import org.joml.Vector3d;
-import org.joml.Vector3f;
-import org.joml.Vector4f;
+import org.joml.*;
+
+import javax.annotation.Nullable;
+import java.util.Objects;
+import java.util.function.BiFunction;
 
 /**
  * Created by SnakerBone on 28/04/2023
  **/
-public class ShaderUtil
+public class RenderStuff
 {
     private static final String HASH = "#";
+    public static final Vector4f STANDARD_COLOURS = new Vector4f(1, 1, 1, 1);
+    public static final Vector2i STANDARD_PACKED_COMPONENTS = new Vector2i(LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
+    public static final BiFunction<Integer, LivingEntity, Vector2i> ENTITY_PACKED_COMPONENTS = (packedLight, entity) -> new Vector2i(packedLight, RenderStuff.packOverlay(entity));
+
+    public static <T extends LivingEntity, M extends EntityModel<T>> void renderLayer(RenderLayer<T, M> parent, PoseStack stack, VertexConsumer consumer, Vector2i packedComponents, Vector4f rgba)
+    {
+        parent.getParentModel().renderToBuffer(stack, consumer, packedComponents.x(), packedComponents.y(), rgba.x(), rgba.y(), rgba.z(), rgba.w());
+    }
+
+    public static <T extends LivingEntity, M extends EntityModel<T>> void renderLayer(RenderLayer<T, M> parent, PoseStack stack, VertexConsumer consumer, T entity, int packedLight)
+    {
+        renderLayer(parent, stack, consumer, ENTITY_PACKED_COMPONENTS.apply(packedLight, entity), STANDARD_COLOURS);
+    }
+
+    public static <T extends LivingEntity, M extends EntityModel<T>> void renderLayer(RenderLayer<T, M> parent, PoseStack stack, @Nullable MultiBufferSource source, RenderType type, T entity, int packedLight)
+    {
+        MultiBufferSource bufferSource = Objects.requireNonNullElseGet(source, Minecraft.getInstance().renderBuffers()::bufferSource);
+        renderLayer(parent, stack, bufferSource.getBuffer(type), ENTITY_PACKED_COMPONENTS.apply(packedLight, entity), STANDARD_COLOURS);
+    }
 
     public static int packLightLevel(Level level, BlockPos pos)
     {

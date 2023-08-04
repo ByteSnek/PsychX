@@ -66,7 +66,7 @@ public class FlareModel extends EntityModel<Flare>
     @Override
     public void setupAnim(@NotNull Flare flare, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch)
     {
-        float mul = flare.isAggressive() ? 3 : 2;
+        float mul = flare.isCranky() ? 3 : 2;
         base.getChild("outer").yRot = (ageInTicks * 16) * Maths.DEGREES_TO_RADIANS * mul;
         base.getChild("inner").yRot = ageInTicks * Maths.DEGREES_TO_RADIANS * 2 * mul;
         base.getChild("core").xRot = (ageInTicks * 8) * Maths.DEGREES_TO_RADIANS * mul;

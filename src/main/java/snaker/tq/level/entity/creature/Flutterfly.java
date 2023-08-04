@@ -19,7 +19,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import snaker.snakerlib.level.entity.SnakerFlyingCreature;
-import snaker.snakerlib.utility.LevelUtil;
+import snaker.snakerlib.utility.LevelStuff;
 import snaker.tq.rego.Rego;
 
 import javax.annotation.Nullable;
@@ -65,6 +65,6 @@ public class Flutterfly extends SnakerFlyingCreature
 
     public static <T extends Entity> boolean spawnRules(EntityType<T> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return LevelUtil.isDimension(level, Level.OVERWORLD);
+        return LevelStuff.isDimension(level, Level.OVERWORLD);
     }
 }

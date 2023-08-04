@@ -23,6 +23,6 @@ public class EerieCretinRenderer extends MobRenderer<EerieCretin, EerieCretinMod
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull EerieCretin cretin)
     {
-        return new ResourcePath("textures/solid.png");
+        return ResourcePath.SOLID_TEXTURE;
     }
 }

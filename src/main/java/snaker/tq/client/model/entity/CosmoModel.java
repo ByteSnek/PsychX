@@ -9,7 +9,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import org.jetbrains.annotations.NotNull;
 import snaker.snakerlib.math.Maths;
-import snaker.snakerlib.utility.SnakerUtil;
+import snaker.snakerlib.utility.MiscStuff;
 import snaker.tq.level.entity.mob.Cosmo;
 import snaker.tq.utility.ResourcePath;
 
@@ -64,7 +64,7 @@ public class CosmoModel extends EntityModel<Cosmo>
         double speed = 1.35;
         base.getChild("top").y = Maths.sin(ageInTicks / 2) / 2;
         base.getChild("centre").yRot -= Maths.sin(ageInTicks * Math.PI * Math.PI) / 360;
-        if (SnakerUtil.isEntityMoving(cosmo)) {
+        if (MiscStuff.isEntityMoving(cosmo)) {
             base.y = (Maths.sin(ageInTicks * speed) * Maths.E) + 22;
             base.getChild("bottom").getChild("lowerOuter1").zRot = (Maths.sin(ageInTicks * speed) / Maths.E) - 0.6F;
             base.getChild("bottom").getChild("lowerOuter2").zRot = -(Maths.sin(ageInTicks * speed) / Maths.E) + 0.6F;

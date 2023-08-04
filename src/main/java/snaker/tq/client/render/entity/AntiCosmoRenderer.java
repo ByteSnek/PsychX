@@ -25,7 +25,7 @@ public class AntiCosmoRenderer extends MobRenderer<AntiCosmo, AntiCosmoModel>
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull AntiCosmo cosmo)
     {
-        return new ResourcePath("textures/solid.png");
+        return ResourcePath.SOLID_TEXTURE;
     }
 
     @Override

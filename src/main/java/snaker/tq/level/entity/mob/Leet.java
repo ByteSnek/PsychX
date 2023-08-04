@@ -13,28 +13,32 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
-import snaker.snakerlib.level.entity.SnakerMob;
-import snaker.snakerlib.utility.LevelUtil;
+import snaker.snakerlib.level.entity.SnakerFlyingMob;
+import snaker.snakerlib.level.entity.ai.SnakerFlyGoal;
+import snaker.snakerlib.utility.LevelStuff;
 import snaker.tq.level.entity.projectile.CosmicRay;
 import snaker.tq.rego.Rego;
 
 /**
  * Created by SnakerBone on 15/07/2023
  **/
-public class Leet extends SnakerMob implements RangedAttackMob
+public class Leet extends SnakerFlyingMob implements RangedAttackMob
 {
     public Leet(EntityType<Leet> type, Level level)
     {
         super(type, level);
-        moveControl = new FlyingMoveControl(this, 10, true);
+    }
+
+    @Override
+    protected void registerGoals()
+    {
+        goalSelector.addGoal(0, new SnakerFlyGoal(this));
     }
 
     public static AttributeSupplier attributes()
@@ -67,12 +71,6 @@ public class Leet extends SnakerMob implements RangedAttackMob
     }
 
     @Override
-    public boolean causeFallDamage(float fallDistance, float multiplier, @NotNull DamageSource source)
-    {
-        return false;
-    }
-
-    @Override
     public void performRangedAttack(LivingEntity target, float flval)
     {
         CosmicRay ray = new CosmicRay(Rego.ENTITY_COSMIC_RAY.get(), level());
@@ -86,14 +84,8 @@ public class Leet extends SnakerMob implements RangedAttackMob
         level().addFreshEntity(ray);
     }
 
-    @Override
-    protected void checkFallDamage(double y, boolean onGround, @NotNull BlockState state, @NotNull BlockPos pos)
-    {
-
-    }
-
     public static <T extends Entity> boolean spawnRules(EntityType<T> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return LevelUtil.isDimension(level, Rego.Keys.COMATOSE);
+        return LevelStuff.isDimension(level, Rego.Keys.COMATOSE);
     }
 }

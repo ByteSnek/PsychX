@@ -9,6 +9,7 @@
         "SplashMixin"
     ],
     "mixins": [
-        "MinecraftServerMixin"
+        "MinecraftServerMixin",
+        "PlayTagWithOtherKidsMixin"
     ]
 }

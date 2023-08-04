@@ -12,7 +12,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.joml.Matrix3d;
 import org.joml.Vector3d;
-import snaker.snakerlib.utility.ShaderUtil;
+import snaker.snakerlib.utility.RenderStuff;
 import snaker.tq.config.TqConfig;
 import snaker.tq.rego.Rego;
 import snaker.tq.utility.ResourcePath;
@@ -60,7 +60,7 @@ public class SyncopeFX
         if (url != null) {
             String fixedUrl = url.getPath().replace("/%23194!", ""); // i have no clue what dickhead decided to add this bullshit onto the end of the url at runtime. they must be really funny though
 
-            colourMatrix = ShaderUtil.hexToMatrix3d(TqConfig.CLIENT.syncopeOverlayColour.get());
+            colourMatrix = RenderStuff.hexToMatrix3d(TqConfig.CLIENT.syncopeOverlayColour.get());
             blurVec = new Vector3d(TqConfig.CLIENT.syncopePhosphorIntensity.get());
             saturation = TqConfig.CLIENT.syncopeColourConvolveSaturation.get();
 

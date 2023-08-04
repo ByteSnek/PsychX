@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import snaker.snakerlib.internal.StupidArgumentException;
 
-public class SketchyUtil
+public class SketchyStuff
 {
     @Nullable
     @SuppressWarnings("unchecked")

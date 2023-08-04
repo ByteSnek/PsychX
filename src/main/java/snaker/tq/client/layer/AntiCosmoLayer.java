@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import org.jetbrains.annotations.NotNull;
-import snaker.snakerlib.utility.ShaderUtil;
+import snaker.snakerlib.utility.RenderStuff;
 import snaker.tq.client.RenderTypes;
 import snaker.tq.client.model.entity.AntiCosmoModel;
 import snaker.tq.level.entity.boss.AntiCosmo;
@@ -23,6 +23,6 @@ public class AntiCosmoLayer extends RenderLayer<AntiCosmo, AntiCosmoModel>
     @Override
     public void render(@NotNull PoseStack stack, @NotNull MultiBufferSource source, int packedLight, @NotNull AntiCosmo cosmo, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch)
     {
-        getParentModel().renderToBuffer(stack, source.getBuffer(RenderTypes.ENT_WHITE_STARS), packedLight, ShaderUtil.packOverlay(cosmo), 1, 1, 1, 1);
+        RenderStuff.renderLayer(this, stack, source, RenderTypes.ENT_WHITE_STARS, cosmo, packedLight);
     }
 }

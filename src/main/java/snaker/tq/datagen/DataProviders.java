@@ -1,31 +1,78 @@
 package snaker.tq.datagen;
 
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.tags.TagsProvider;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import snaker.snakerlib.SnakerLib;
+import snaker.snakerlib.utility.BulkRegistrySet;
 import snaker.tq.Tourniqueted;
+import snaker.tq.level.world.feature.CatnipFeature;
 import snaker.tq.rego.Rego;
 
 import java.util.Locale;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Created by SnakerBone on 21/03/2023
  **/
 public class DataProviders
 {
+    public static class Tags extends TagsProvider<Biome>
+    {
+        protected Tags(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, @Nullable ExistingFileHelper existingFileHelper)
+        {
+            super(output, Registries.BIOME, provider, Tourniqueted.MODID, existingFileHelper);
+        }
+
+        @Override
+        protected void addTags(HolderLookup.@NotNull Provider provider)
+        {
+            biome(Rego.Tags.COMATOSE_VEGETAL, Biomes.BEACH, Biomes.DESERT, Biomes.FLOWER_FOREST, Biomes.PLAINS, Biomes.FOREST);
+        }
+
+        @SafeVarargs
+        private void biome(TagKey<Biome> key, ResourceKey<Biome>... biomes)
+        {
+            tag(key).add(biomes);
+        }
+    }
+
+    public static class DatapackEntries extends DatapackBuiltinEntriesProvider
+    {
+        public static BulkRegistrySet set = BulkRegistrySet.create(true)
+                .addAllPlacements(CatnipFeature::placement)
+                .addAllConfigs(CatnipFeature::config)
+                .addAllModifiers(CatnipFeature.Modifier::modifier);
+
+        public DatapackEntries(PackOutput output, CompletableFuture<HolderLookup.Provider> registries)
+        {
+            super(output, registries, set.builder(), Set.of(Tourniqueted.MODID));
+        }
+    }
+
     public static class BlockStates extends BlockStateProvider
     {
         public BlockStates(PackOutput output, ExistingFileHelper helper)
@@ -197,7 +244,7 @@ public class DataProviders
         private void tab(RegistryObject<CreativeModeTab> tab)
         {
             String name = tab.getId().getPath();
-            add("itemGroup." + name, SnakerLib.translate(name));
+            add("itemGroup." + name, SnakerLib.i18nt(name));
         }
 
         private <T extends EntityType<?>> void entity(RegistryObject<T> entity)
@@ -205,36 +252,36 @@ public class DataProviders
             String name = entity.getId().getPath();
 
             if (name.equals("cosmo")) {
-                add("entity." + Tourniqueted.MODID + "." + name, SnakerLib.translate(name));
-                add("entity." + Tourniqueted.MODID + "." + "alpha_" + name, SnakerLib.translate("alpha_" + name));
+                add("entity." + Tourniqueted.MODID + "." + name, SnakerLib.i18nt(name));
+                add("entity." + Tourniqueted.MODID + "." + "alpha_" + name, SnakerLib.i18nt("alpha_" + name));
                 return;
             }
 
-            add("entity." + Tourniqueted.MODID + "." + name, SnakerLib.translate(name));
+            add("entity." + Tourniqueted.MODID + "." + name, SnakerLib.i18nt(name));
         }
 
         private <T extends Item> void item(RegistryObject<T> item)
         {
             String name = item.getId().getPath();
-            add("item." + Tourniqueted.MODID + "." + name, SnakerLib.translate(name));
+            add("item." + Tourniqueted.MODID + "." + name, SnakerLib.i18nt(name));
         }
 
         private <T extends Block> void block(RegistryObject<T> block)
         {
             String name = block.getId().getPath();
-            add("block." + Tourniqueted.MODID + "." + name, SnakerLib.translate(name));
+            add("block." + Tourniqueted.MODID + "." + name, SnakerLib.i18nt(name));
         }
 
         private void sound(RegistryObject<SoundEvent> sound)
         {
             String name = sound.getId().getPath();
-            add("sounds." + Tourniqueted.MODID + "." + name, SnakerLib.translate(name));
+            add("sounds." + Tourniqueted.MODID + "." + name, SnakerLib.i18nt(name));
         }
 
         private <T extends MobEffect> void effect(RegistryObject<T> effect)
         {
             String name = effect.getId().getPath();
-            add("effect." + Tourniqueted.MODID + "." + name, SnakerLib.translate(name));
+            add("effect." + Tourniqueted.MODID + "." + name, SnakerLib.i18nt(name));
         }
 
         @Override

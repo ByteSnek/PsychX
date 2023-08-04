@@ -16,13 +16,13 @@ public class LeetRenderer extends MobRenderer<Leet, LeetModel>
 {
     public LeetRenderer(EntityRendererProvider.Context context)
     {
-        super(context, new LeetModel(context.bakeLayer(LeetModel.LAYER_LOCATION)), 0.5F);
+        super(context, new LeetModel(context.bakeLayer(LeetModel.LAYER_LOCATION)), 0);
         addLayer(new LeetLayer(this));
     }
 
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull Leet leet)
     {
-        return new ResourcePath("textures/solid.png");
+        return ResourcePath.SOLID_TEXTURE;
     }
 }

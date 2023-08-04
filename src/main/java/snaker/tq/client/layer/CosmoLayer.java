@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import org.jetbrains.annotations.NotNull;
-import snaker.snakerlib.utility.ShaderUtil;
+import snaker.snakerlib.utility.RenderStuff;
 import snaker.tq.client.model.entity.CosmoModel;
 import snaker.tq.level.entity.mob.Cosmo;
 
@@ -22,6 +22,6 @@ public class CosmoLayer extends RenderLayer<Cosmo, CosmoModel>
     @Override
     public void render(@NotNull PoseStack stack, @NotNull MultiBufferSource source, int packedLight, @NotNull Cosmo cosmo, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch)
     {
-        getParentModel().renderToBuffer(stack, source.getBuffer(Cosmo.getRenderType(cosmo.getVariant())), packedLight, ShaderUtil.packOverlay(cosmo), 1, 1, 1, 1);
+        RenderStuff.renderLayer(this, stack, source, Cosmo.getRenderType(cosmo.getVariant()), cosmo, packedLight);
     }
 }

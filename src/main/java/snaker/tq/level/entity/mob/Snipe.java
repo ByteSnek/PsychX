@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3d;
 import snaker.snakerlib.level.entity.SnakerFlyingMob;
 import snaker.snakerlib.math.Maths;
-import snaker.snakerlib.utility.LevelUtil;
+import snaker.snakerlib.utility.LevelStuff;
 import snaker.tq.level.entity.projectile.CosmicRay;
 import snaker.tq.rego.Rego;
 
@@ -55,7 +55,7 @@ public class Snipe extends SnakerFlyingMob
 
     public static boolean spawnRules(EntityType<Snipe> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return LevelUtil.isDimension(level, Level.OVERWORLD);
+        return LevelStuff.isDimension(level, Level.OVERWORLD);
     }
 
     @Override

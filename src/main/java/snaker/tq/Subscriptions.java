@@ -30,8 +30,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.registries.RegistryObject;
 import snaker.snakerlib.SnakerLib;
 import snaker.snakerlib.math.PoseStackBuilder;
-import snaker.snakerlib.utility.LevelUtil;
-import snaker.snakerlib.utility.SnakerUtil;
+import snaker.snakerlib.utility.LevelStuff;
+import snaker.snakerlib.utility.MiscStuff;
 import snaker.tq.client.fx.SyncopeFX;
 import snaker.tq.client.model.entity.*;
 import snaker.tq.client.model.item.CosmoSpineModel;
@@ -95,7 +95,7 @@ public class Subscriptions
         @SubscribeEvent
         public static void commonSetup(FMLCommonSetupEvent event)
         {
-            SnakerUtil.addFlowerPotPlant(Rego.BLOCK_CATNIP, Rego.BLOCK_POTTED_CATNIP);
+            MiscStuff.addFlowerPotPlant(Rego.BLOCK_CATNIP, Rego.BLOCK_POTTED_CATNIP);
         }
 
         @SubscribeEvent
@@ -214,10 +214,10 @@ public class Subscriptions
             try {
                 Player player = event.player;
                 Level level = player.level();
-                if (LevelUtil.isDimension(level, Rego.Keys.COMATOSE) && TqConfig.COMMON.syncopeActiveInComatoseDimension.get()) {
+                if (LevelStuff.isDimension(level, Rego.Keys.COMATOSE) && TqConfig.COMMON.syncopeActiveInComatoseDimension.get()) {
                     float tickCount = player.tickCount;
                     if (SnakerLib.secOffs(tickCount, 1)) {
-                        SnakerUtil.addEffectDirect(player, Rego.EFFECT_SYNCOPE.get());
+                        MiscStuff.addEffectDirect(player, Rego.EFFECT_SYNCOPE.get());
                     }
                 }
             } catch (Exception e) {

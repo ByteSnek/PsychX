@@ -25,8 +25,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
+import snaker.snakerlib.level.entity.SnakerMob;
 import snaker.snakerlib.level.entity.ai.SnakerSwitchGameModeGoal;
-import snaker.snakerlib.utility.LevelUtil;
+import snaker.snakerlib.utility.LevelStuff;
 import snaker.tq.rego.Rego;
 
 import java.util.function.Predicate;
@@ -34,7 +35,7 @@ import java.util.function.Predicate;
 /**
  * Created by SnakerBone on 02/01/2023
  **/
-public class Flare extends Monster
+public class Flare extends SnakerMob
 {
     public Flare(EntityType<? extends Flare> type, Level level)
     {
@@ -53,7 +54,7 @@ public class Flare extends Monster
 
     public static <T extends Entity> boolean spawnRules(EntityType<T> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return LevelUtil.isDimension(level, Rego.Keys.COMATOSE);
+        return LevelStuff.isDimension(level, Rego.Keys.COMATOSE);
     }
 
     @Override

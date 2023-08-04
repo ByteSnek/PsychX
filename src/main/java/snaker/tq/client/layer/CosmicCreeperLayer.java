@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.entity.layers.EnergySwirlLayer;
 import net.minecraft.client.renderer.entity.layers.EyesLayer;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
-import snaker.snakerlib.utility.ShaderUtil;
+import snaker.snakerlib.utility.RenderStuff;
 import snaker.tq.client.model.entity.CosmicCreeperModel;
 import snaker.tq.level.entity.mob.CosmicCreeper;
 import snaker.tq.utility.ResourcePath;
@@ -58,7 +58,7 @@ public class CosmicCreeperLayer extends EnergySwirlLayer<CosmicCreeper, CosmicCr
         getParentModel().copyPropertiesTo(model);
         model.prepareMobModel(creeper, limbSwing, limbSwingAmount, partialTicks);
         model.setupAnim(creeper, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-        model.renderToBuffer(stack, consumer, packedLight, ShaderUtil.packOverlay(creeper), 0.5F, 0.5F, 0.5F, 1.0F);
+        model.renderToBuffer(stack, consumer, packedLight, RenderStuff.packOverlay(creeper), 0.5F, 0.5F, 0.5F, 1.0F);
     }
 
     public static class Eyes extends EyesLayer<CosmicCreeper, CosmicCreeperModel>

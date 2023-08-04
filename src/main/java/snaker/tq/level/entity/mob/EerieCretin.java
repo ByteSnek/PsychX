@@ -11,7 +11,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import snaker.snakerlib.level.entity.SnakerMob;
-import snaker.snakerlib.utility.LevelUtil;
+import snaker.snakerlib.utility.LevelStuff;
 import snaker.tq.rego.Rego;
 
 /**
@@ -36,6 +36,6 @@ public class EerieCretin extends SnakerMob
 
     public static <T extends Entity> boolean spawnRules(EntityType<T> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return LevelUtil.isDimension(level, Rego.Keys.COMATOSE);
+        return LevelStuff.isDimension(level, Rego.Keys.COMATOSE);
     }
 }

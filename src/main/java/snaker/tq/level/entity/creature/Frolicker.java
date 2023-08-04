@@ -31,7 +31,7 @@ import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import snaker.snakerlib.level.entity.SnakerFlyingCreature;
-import snaker.snakerlib.utility.LevelUtil;
+import snaker.snakerlib.utility.LevelStuff;
 import snaker.tq.rego.Rego;
 
 import java.util.function.Predicate;
@@ -51,12 +51,12 @@ public class Frolicker extends SnakerFlyingCreature
 
     public static boolean spawnRules(EntityType<Frolicker> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return LevelUtil.isDimension(level, Rego.Keys.COMATOSE) || LevelUtil.isDimension(level, Level.OVERWORLD);
+        return LevelStuff.isDimension(level, Rego.Keys.COMATOSE) || LevelStuff.isDimension(level, Level.OVERWORLD);
     }
 
     public boolean canDoFunny()
     {
-        return LevelUtil.isDimension(level(), Rego.Keys.COMATOSE) && !isActuallyOnGround();
+        return LevelStuff.isDimension(level(), Rego.Keys.COMATOSE) && !isActuallyOnGround();
     }
 
     public boolean isActuallyOnGround()

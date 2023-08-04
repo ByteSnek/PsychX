@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import snaker.snakerlib.data.SnakerConstants;
-import snaker.snakerlib.utility.ResourceUtil;
+import snaker.snakerlib.utility.ResourceStuff;
 import snaker.tq.client.RenderTypes;
 import snaker.tq.client.render.block.ShaderBlockItemRenderer;
 import snaker.tq.rego.Rego;
@@ -32,7 +32,7 @@ public class ShaderBlockItem extends BlockItem
         {
             public boolean is(Item item)
             {
-                return ResourceUtil.getPath(item).equals(ResourceUtil.getPath(ShaderBlockItem.this));
+                return ResourceStuff.getPath(item).equals(ResourceStuff.getPath(ShaderBlockItem.this));
             }
 
             public BlockEntityWithoutLevelRenderer getRenderer()

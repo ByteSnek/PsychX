@@ -15,7 +15,7 @@ import java.util.function.Supplier;
  * <p>
  * Utilities to help keep code somewhat tidy
  **/
-public class AestheticUtil
+public class AestheticStuff
 {
     // @formatter:off
 

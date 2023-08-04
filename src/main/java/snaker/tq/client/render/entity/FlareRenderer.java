@@ -23,6 +23,6 @@ public class FlareRenderer extends MobRenderer<Flare, FlareModel>
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull Flare flare)
     {
-        return new ResourcePath("textures/solid.png");
+        return ResourcePath.SOLID_TEXTURE;
     }
 }

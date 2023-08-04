@@ -34,6 +34,11 @@ public abstract class SnakerFlyingMob extends FlyingMob implements Enemy
         this(type, level, SnakerConstants.EntityAttributes.MOB_XP_REWARD);
     }
 
+    public boolean isCranky()
+    {
+        return isAlive() && isEffectiveAi() && isAggressive() && getTarget() != null;
+    }
+
     @Override
     protected boolean shouldDespawnInPeaceful()
     {

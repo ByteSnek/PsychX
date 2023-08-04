@@ -25,7 +25,7 @@ public class CosmicRayRenderer extends ArrowRenderer<CosmicRay>
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull CosmicRay bullet)
     {
-        return new ResourcePath("textures/clear.png");
+        return ResourcePath.NO_TEXTURE;
     }
 
     @Override

@@ -44,7 +44,7 @@ public class CosmoRenderer extends MobRenderer<Cosmo, CosmoModel>
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull Cosmo cosmo)
     {
-        return new ResourcePath("textures/solid.png");
+        return ResourcePath.SOLID_TEXTURE;
     }
 
     @Override

@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import org.jetbrains.annotations.NotNull;
-import snaker.snakerlib.utility.ShaderUtil;
+import snaker.snakerlib.utility.RenderStuff;
 import snaker.tq.client.RenderTypes;
 import snaker.tq.client.Shaders;
 import snaker.tq.client.model.entity.UtterflyModel;
@@ -30,10 +30,10 @@ public class UtterflyLayer extends RenderLayer<Utterfly, UtterflyModel>
         int phase = utterfly.getPhase();
 
         switch (phase) {
-            case 1 -> colour = ShaderUtil.hexToVec3("FFE800");
-            case 2 -> colour = ShaderUtil.hexToVec3("FF8300");
-            case 3, 4 -> colour = ShaderUtil.hexToVec3("FF0000");
-            default -> colour = ShaderUtil.hexToVec3("000000");
+            case 1 -> colour = RenderStuff.hexToVec3("FFE800");
+            case 2 -> colour = RenderStuff.hexToVec3("FF8300");
+            case 3, 4 -> colour = RenderStuff.hexToVec3("FF0000");
+            default -> colour = RenderStuff.hexToVec3("000000");
         }
 
         Shaders.getPulse().enqueueTask(() ->
@@ -42,6 +42,6 @@ public class UtterflyLayer extends RenderLayer<Utterfly, UtterflyModel>
             Shaders.getPulseAlpha().set(chargeStatus);
         });
 
-        getParentModel().renderToBuffer(stack, source.getBuffer(RenderTypes.ENT_PULSE), packedLight, ShaderUtil.packOverlay(utterfly), 1, 1, 1, 1);
+        RenderStuff.renderLayer(this, stack, source, RenderTypes.ENT_PULSE, utterfly, packedLight);
     }
 }

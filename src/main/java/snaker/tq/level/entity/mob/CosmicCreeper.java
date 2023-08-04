@@ -27,8 +27,8 @@ import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import snaker.snakerlib.data.SnakerConstants;
 import snaker.snakerlib.math.Maths;
-import snaker.snakerlib.utility.LevelUtil;
-import snaker.snakerlib.utility.SnakerUtil;
+import snaker.snakerlib.utility.LevelStuff;
+import snaker.snakerlib.utility.MiscStuff;
 import snaker.tq.rego.Rego;
 
 import java.util.List;
@@ -50,7 +50,7 @@ public class CosmicCreeper extends Creeper
 
     public static boolean spawnRules(EntityType<CosmicCreeper> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return (LevelUtil.isDimension(level, Level.OVERWORLD) && random.nextInt(64) == 0 && checkMonsterSpawnRules(type, level, reason, pos, random)) || LevelUtil.isDimension(level, Rego.Keys.COMATOSE) || LevelUtil.isDimension(level, Level.END);
+        return (LevelStuff.isDimension(level, Level.OVERWORLD) && random.nextInt(64) == 0 && checkMonsterSpawnRules(type, level, reason, pos, random)) || LevelStuff.isDimension(level, Rego.Keys.COMATOSE) || LevelStuff.isDimension(level, Level.END);
     }
 
     public static AttributeSupplier attributes()
@@ -73,7 +73,7 @@ public class CosmicCreeper extends Creeper
         MoveControl moveCtrl = getMoveControl();
         if (target == null) {
             teleportTime++;
-            if (teleportTime >= random.nextInt(80, 440) && !SnakerUtil.isEntityMovingXZ(this)) {
+            if (teleportTime >= random.nextInt(80, 440) && !MiscStuff.isEntityMovingXZ(this)) {
                 double x = getRandomX(random.nextInt(radius, (radius * 2)) * Maths.clamp(random.nextDouble(), 0.875, 3.475)) - 0.5;
                 double y = getY();
                 double z = getRandomZ(random.nextInt(radius, (radius * 2)) * Maths.clamp(random.nextDouble(), 0.875, 3.475)) - 0.5;

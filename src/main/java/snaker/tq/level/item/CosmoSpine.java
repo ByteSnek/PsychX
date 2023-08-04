@@ -5,7 +5,7 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import snaker.snakerlib.level.item.SnakerBaseItem;
-import snaker.snakerlib.utility.ResourceUtil;
+import snaker.snakerlib.utility.ResourceStuff;
 import snaker.tq.client.RenderTypes;
 import snaker.tq.client.render.item.CosmoSpineRenderer;
 import snaker.tq.rego.Rego;
@@ -26,7 +26,7 @@ public class CosmoSpine extends SnakerBaseItem
         {
             public boolean is(Item item)
             {
-                return ResourceUtil.getPath(item).equals(ResourceUtil.getPath(CosmoSpine.this));
+                return ResourceStuff.getPath(item).equals(ResourceStuff.getPath(CosmoSpine.this));
             }
 
             public BlockEntityWithoutLevelRenderer getRenderer()
