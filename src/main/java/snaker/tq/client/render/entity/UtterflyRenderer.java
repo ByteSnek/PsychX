@@ -11,7 +11,7 @@ import snaker.tq.client.fx.RayFX;
 import snaker.tq.client.layer.UtterflyLayer;
 import snaker.tq.client.model.entity.UtterflyModel;
 import snaker.tq.level.entity.boss.Utterfly;
-import snaker.tq.utility.ResourcePath;
+import snaker.snakerlib.utility.ResourcePath;
 
 import java.awt.*;
 

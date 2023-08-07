@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import snaker.tq.client.fx.RayFX;
 import snaker.tq.level.entity.projectile.CosmicRay;
-import snaker.tq.utility.ResourcePath;
+import snaker.snakerlib.utility.ResourcePath;
 
 import java.awt.*;
 

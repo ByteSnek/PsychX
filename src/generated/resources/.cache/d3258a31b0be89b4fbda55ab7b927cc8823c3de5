@@ -1,4 +1,4 @@
-// 1.20	2023-07-27T19:04:12.4609982	Block States: tq
+// 1.20	2023-08-05T10:35:05.7655903	Block States: tq
 b523d5e456a8ae99acadba4004b77d736a14fa38 assets/tq/blockstates/catnip.json
 4fe53daf7b280b82e84dfb349a5b57697f79c0ca assets/tq/blockstates/coma_stone.json
 b38215c380cf881dadbc8b923bf3fe6a593284c9 assets/tq/blockstates/delusive_nylium.json
@@ -7,6 +7,8 @@ e098bee0805b6d9e9fc616ae913d9c52d0ab0cd9 assets/tq/blockstates/illusive_nylium.j
 bbcf6d96dc3736cb307fd5b87351c99d60648fa9 assets/tq/blockstates/immaterial_nylium.json
 e27a50a977ff54b0176945ea16b369c292f577fa assets/tq/blockstates/multicolour_block.json
 d6a480b4874c0a8233730137ad6f9506d953103f assets/tq/blockstates/potted_catnip.json
+1e36848223cb12332c976c24b348b56c969a76d2 assets/tq/blockstates/potted_shrub.json
+815afe35ae1d6f52305d6a4633b6362cc9b0af82 assets/tq/blockstates/shrub.json
 0f4c95e68b13d56e48e53a8da73675303c4ea270 assets/tq/blockstates/snowflake_block.json
 11526123214c591dee7d558f8c33486fdd6a639a assets/tq/blockstates/spectral_nylium.json
 d74a82aa4f2b7fc6a676a5a74afd9e508190ee9a assets/tq/blockstates/starry_block.json
@@ -21,6 +23,8 @@ b9aefffaaf473f0711a5f1b4088d00f407c3a7ec assets/tq/models/block/delusive_nylium.
 d2d42c6502903f5214ae4ffa0b9f4001341a76a8 assets/tq/models/block/immaterial_nylium.json
 6dd90f56dbd145e886d8c076e70820d8222fe2c2 assets/tq/models/block/multicolour_block.json
 e2eb96c744347e6cb966c45bcb731eb6baffc502 assets/tq/models/block/potted_catnip.json
+152051d2702f1bc2bf3440732782053d0bfc4930 assets/tq/models/block/potted_shrub.json
+e616aa7d3ce58f42fce37679b43ad948dd0a3365 assets/tq/models/block/shrub.json
 6dd90f56dbd145e886d8c076e70820d8222fe2c2 assets/tq/models/block/snowflake_block.json
 bab737e51c963a9a8d522ebdf4a48837a472ed48 assets/tq/models/block/spectral_nylium.json
 6dd90f56dbd145e886d8c076e70820d8222fe2c2 assets/tq/models/block/starry_block.json

@@ -10,7 +10,7 @@ import net.minecraft.client.model.geom.builders.*;
 import org.jetbrains.annotations.NotNull;
 import snaker.snakerlib.math.Maths;
 import snaker.tq.level.entity.mob.Leet;
-import snaker.tq.utility.ResourcePath;
+import snaker.snakerlib.utility.ResourcePath;
 
 public class LeetModel extends EntityModel<Leet>
 {

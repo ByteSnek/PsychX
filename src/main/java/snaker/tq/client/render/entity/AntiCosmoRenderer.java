@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import snaker.tq.client.layer.AntiCosmoLayer;
 import snaker.tq.client.model.entity.AntiCosmoModel;
 import snaker.tq.level.entity.boss.AntiCosmo;
-import snaker.tq.utility.ResourcePath;
+import snaker.snakerlib.utility.ResourcePath;
 
 /**
  * Created by SnakerBone on 18/06/2023

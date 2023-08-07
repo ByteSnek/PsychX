@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import snaker.snakerlib.math.PoseStackBuilder;
 import snaker.tq.client.model.entity.FrolickerModel;
 import snaker.tq.level.entity.creature.Frolicker;
-import snaker.tq.utility.ResourcePath;
+import snaker.snakerlib.utility.ResourcePath;
 
 /**
  * Created by SnakerBone on 26/05/2023

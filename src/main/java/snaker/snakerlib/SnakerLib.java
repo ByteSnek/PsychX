@@ -10,6 +10,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -48,6 +49,7 @@ public class SnakerLib
     public static final StackWalker STACK_WALKER = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE);
     public static final SnakerLogger LOGGER = SnakerLoggerManager.getLogger(SnakerLib.getCallerClassReference());
     public static final Log4jFilter FILTER = new Log4jFilter();
+    public static final Single<String> DELEGATE_MOD = new Single<>();
 
     public static final String MODID = "snakerlib";
 
@@ -80,6 +82,12 @@ public class SnakerLib
 
     public static void initialize()
     {
+        Class<?> clazz = STACK_WALKER.getCallerClass();
+        String modid = clazz.getAnnotation(Mod.class).value();
+        if (!isInvalidString(modid)) {
+            DELEGATE_MOD.set(modid);
+            SnakerLib.LOGGER.system(String.format("Successfully initialized mod '%s' to SnakerLib", DELEGATE_MOD.get()), ColourCode.WHITE, MarkerType.SYSTEM);
+        }
         MinecraftForge.EVENT_BUS.register(new SnakerLib());
     }
 

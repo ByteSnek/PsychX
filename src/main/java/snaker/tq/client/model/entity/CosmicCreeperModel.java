@@ -10,7 +10,7 @@ import net.minecraft.client.model.geom.builders.*;
 import org.jetbrains.annotations.NotNull;
 import snaker.snakerlib.math.Maths;
 import snaker.tq.level.entity.mob.CosmicCreeper;
-import snaker.tq.utility.ResourcePath;
+import snaker.snakerlib.utility.ResourcePath;
 
 public class CosmicCreeperModel extends EntityModel<CosmicCreeper>
 {

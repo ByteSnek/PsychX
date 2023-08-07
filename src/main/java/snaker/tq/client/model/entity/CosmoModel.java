@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import snaker.snakerlib.math.Maths;
 import snaker.snakerlib.utility.MiscStuff;
 import snaker.tq.level.entity.mob.Cosmo;
-import snaker.tq.utility.ResourcePath;
+import snaker.snakerlib.utility.ResourcePath;
 
 public class CosmoModel extends EntityModel<Cosmo>
 {

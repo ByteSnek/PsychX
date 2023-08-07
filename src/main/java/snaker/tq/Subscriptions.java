@@ -96,6 +96,7 @@ public class Subscriptions
         public static void commonSetup(FMLCommonSetupEvent event)
         {
             MiscStuff.addFlowerPotPlant(Rego.BLOCK_CATNIP, Rego.BLOCK_POTTED_CATNIP);
+            MiscStuff.addFlowerPotPlant(Rego.BLOCK_SHRUB, Rego.BLOCK_POTTED_SHRUB);
         }
 
         @SubscribeEvent

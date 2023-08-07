@@ -10,7 +10,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.client.extensions.common.IClientMobEffectExtensions;
 import org.jetbrains.annotations.NotNull;
 import snaker.snakerlib.SnakerLib;
-import snaker.tq.utility.ResourcePath;
+import snaker.snakerlib.utility.ResourcePath;
 
 import java.util.function.Consumer;
 

@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import snaker.tq.client.layer.TestLayer;
 import snaker.tq.client.model.entity.TestModel;
 import snaker.tq.level.entity.mob.Test;
-import snaker.tq.utility.ResourcePath;
+import snaker.snakerlib.utility.ResourcePath;
 
 /**
  * Created by SnakerBone on 30/07/2023

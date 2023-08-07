@@ -1,4 +1,7 @@
-// 1.20	2023-08-04T20:55:04.7770044	Registries
+// 1.20	2023-08-05T11:58:10.5051486	Registries
 e47ea755b638c6f6fc6e80689e0634033d0ef35f data/tq/forge/biome_modifier/catnip.json
-c95ad49eb88519fc56aba4e9884bedab50137368 data/tq/worldgen/configured_feature/catnip.json
-c088b7793cbc569ba324459af35d673203f0fb38 data/tq/worldgen/placed_feature/catnip.json
+411947120eaa1f587d3e7d122aad801911f42bbf data/tq/forge/biome_modifier/shrub.json
+d991071de84a187a5a0d0b0cbfad549fa825483f data/tq/worldgen/configured_feature/catnip.json
+97d0d21b6c5df47e3b685b61af504ae618c7e9d6 data/tq/worldgen/configured_feature/shrub.json
+e0ae63b7d446c76d6b31c299b6996ed3e4bbeb57 data/tq/worldgen/placed_feature/catnip.json
+df6f53c830df4c16cbdb844ebbc08ef3d59193a2 data/tq/worldgen/placed_feature/shrub.json

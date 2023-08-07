@@ -11,9 +11,12 @@ import snaker.tq.client.Shaders;
 import snaker.tq.config.TqConfig;
 import snaker.tq.rego.Rego;
 
+import java.lang.annotation.Native;
+
 @Mod(Tourniqueted.MODID)
 public class Tourniqueted
 {
+    @Native
     public static final String MODID = "tq";
 
     public Tourniqueted()

@@ -6,7 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import snaker.tq.client.model.entity.SnipeModel;
 import snaker.tq.level.entity.mob.Snipe;
-import snaker.tq.utility.ResourcePath;
+import snaker.snakerlib.utility.ResourcePath;
 
 /**
  * Created by SnakerBone on 26/05/2023

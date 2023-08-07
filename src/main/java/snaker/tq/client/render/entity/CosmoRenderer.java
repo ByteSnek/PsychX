@@ -15,7 +15,7 @@ import snaker.tq.client.layer.CosmoLayer;
 import snaker.tq.client.model.entity.CosmoModel;
 import snaker.tq.level.entity.EntityVariants;
 import snaker.tq.level.entity.mob.Cosmo;
-import snaker.tq.utility.ResourcePath;
+import snaker.snakerlib.utility.ResourcePath;
 
 import java.util.Map;
 

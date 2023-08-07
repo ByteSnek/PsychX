@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import snaker.snakerlib.math.Maths;
 import snaker.snakerlib.utility.MiscStuff;
 import snaker.tq.level.entity.boss.AntiCosmo;
-import snaker.tq.utility.ResourcePath;
+import snaker.snakerlib.utility.ResourcePath;
 
 /**
  * Created by SnakerBone on 18/06/2023

@@ -61,7 +61,7 @@ import snaker.tq.level.item.Tourniquet;
 import snaker.tq.level.item.icon.BlockTabIcon;
 import snaker.tq.level.item.icon.ItemTabIcon;
 import snaker.tq.level.item.icon.MobTabIcon;
-import snaker.tq.utility.ResourcePath;
+import snaker.snakerlib.utility.ResourcePath;
 
 import java.util.Map;
 import java.util.function.Predicate;
@@ -114,7 +114,9 @@ public class Rego
     public static final RegistryObject<Block> BLOCK_STARRY = blockWithoutItem("starry_block", () -> new ShaderBlock<>(Rego.BE_STARRY));
 
     public static final RegistryObject<Block> BLOCK_CATNIP = blockWithItem("catnip", () -> new FlowerBlock(Rego.EFFECT_SYNCOPE::get, 600, SnakerConstants.BlockProperties.PLANT));
+    public static final RegistryObject<Block> BLOCK_SHRUB = blockWithItem("shrub", () -> new FlowerBlock(Rego.EFFECT_SYNCOPE::get, 600, SnakerConstants.BlockProperties.PLANT));
     public static final RegistryObject<Block> BLOCK_POTTED_CATNIP = BLOCKS.register("potted_catnip", () -> new FlowerPotBlock(() -> SketchyStuff.tryCast(Blocks.FLOWER_POT), BLOCK_CATNIP, SnakerConstants.BlockProperties.NORMAL));
+    public static final RegistryObject<Block> BLOCK_POTTED_SHRUB = BLOCKS.register("potted_shrub", () -> new FlowerPotBlock(() -> SketchyStuff.tryCast(Blocks.FLOWER_POT), BLOCK_SHRUB, SnakerConstants.BlockProperties.NORMAL));
 
     public static final RegistryObject<Block> BLOCK_COMA_STONE = blockWithItem("coma_stone", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.NONE).strength(0.5F).sound(SoundType.NETHER_ORE)));
     public static final RegistryObject<Block> BLOCK_DELUSIVE_NYLIUM = blockWithItem("delusive_nylium", ComatoseNyliumBlock::new);
@@ -337,6 +339,11 @@ public class Rego
     public static class Keys
     {
         public static final ResourceKey<Level> COMATOSE = ResourceKey.create(Registries.DIMENSION, new ResourcePath("comatose"));
+        public static final ResourceKey<Biome> DELUSIVE = ResourceKey.create(Registries.BIOME, new ResourcePath("delusive"));
+        public static final ResourceKey<Biome> ILLUSIVE = ResourceKey.create(Registries.BIOME, new ResourcePath("illusive"));
+        public static final ResourceKey<Biome> IMMATERIAL = ResourceKey.create(Registries.BIOME, new ResourcePath("immaterial"));
+        public static final ResourceKey<Biome> SPECTRAL = ResourceKey.create(Registries.BIOME, new ResourcePath("spectral"));
+        public static final ResourceKey<Biome> SURREAL = ResourceKey.create(Registries.BIOME, new ResourcePath("surreal"));
     }
 }//CH31ZJ
 //MKS85

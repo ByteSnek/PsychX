@@ -11,7 +11,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import snaker.snakerlib.SnakerLib;
 import snaker.snakerlib.client.shader.Shader;
-import snaker.tq.utility.ResourcePath;
+import snaker.snakerlib.utility.ResourcePath;
 
 import java.util.function.Consumer;
 

@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import snaker.snakerlib.utility.RenderStuff;
 import snaker.tq.client.model.entity.CosmicCreeperModel;
 import snaker.tq.level.entity.mob.CosmicCreeper;
-import snaker.tq.utility.ResourcePath;
+import snaker.snakerlib.utility.ResourcePath;
 
 /**
  * Created by SnakerBone on 1/06/2023

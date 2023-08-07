@@ -30,7 +30,7 @@ import snaker.snakerlib.math.Maths;
 import snaker.tq.level.entity.projectile.ExplosiveHommingArrow;
 import snaker.tq.level.entity.projectile.HommingArrow;
 import snaker.tq.rego.Rego;
-import snaker.tq.utility.ResourcePath;
+import snaker.snakerlib.utility.ResourcePath;
 
 import javax.annotation.Nullable;
 import java.util.List;

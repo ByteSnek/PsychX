@@ -12,7 +12,7 @@ import snaker.tq.client.RenderTypes;
 import snaker.tq.client.Shaders;
 import snaker.tq.client.model.entity.LeetModel;
 import snaker.tq.level.entity.mob.Leet;
-import snaker.tq.utility.ResourcePath;
+import snaker.snakerlib.utility.ResourcePath;
 
 /**
  * Created by SnakerBone on 2/01/2023

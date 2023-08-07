@@ -19,7 +19,7 @@ import snaker.snakerlib.level.entity.SnakerBoss;
 import snaker.snakerlib.level.entity.SnakerFlyingBoss;
 import snaker.tq.level.entity.boss.AntiCosmo;
 import snaker.tq.level.entity.boss.Utterfly;
-import snaker.tq.utility.ResourcePath;
+import snaker.snakerlib.utility.ResourcePath;
 
 import java.util.HashSet;
 import java.util.Set;

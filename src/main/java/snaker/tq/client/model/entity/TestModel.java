@@ -10,7 +10,7 @@ import net.minecraft.client.model.geom.builders.*;
 import org.jetbrains.annotations.NotNull;
 import snaker.snakerlib.math.Maths;
 import snaker.tq.level.entity.mob.Test;
-import snaker.tq.utility.ResourcePath;
+import snaker.snakerlib.utility.ResourcePath;
 
 /**
  * Created by SnakerBone on 30/07/2023

@@ -1,4 +1,4 @@
-// 1.20	2023-07-30T13:26:36.9287891	Item Models: tq
+// 1.20	2023-08-05T10:35:05.7665867	Item Models: tq
 a9c3324ea6eec8a2934c62339e21aa670367366f assets/tq/models/item/alpha_cosmo_spine.json
 7cbeee0d2c5308793c068f64eba0c4b7f823ac62 assets/tq/models/item/anti_cosmo_spawn_egg.json
 a9c3324ea6eec8a2934c62339e21aa670367366f assets/tq/models/item/anti_cosmo_spine.json
@@ -24,6 +24,7 @@ de1e5dc634d5b5b00c7822b11cebe76c7ee7c237 assets/tq/models/item/immaterial_nylium
 a9c3324ea6eec8a2934c62339e21aa670367366f assets/tq/models/item/pink_cosmo_spine.json
 a9c3324ea6eec8a2934c62339e21aa670367366f assets/tq/models/item/purple_cosmo_spine.json
 a9c3324ea6eec8a2934c62339e21aa670367366f assets/tq/models/item/red_cosmo_spine.json
+e08983b50236d6e0774b33868b13e65c07d45de6 assets/tq/models/item/shrub.json
 7cbeee0d2c5308793c068f64eba0c4b7f823ac62 assets/tq/models/item/snipe_spawn_egg.json
 851c3abbaac8625e4eee1ae042ed63d4e70aaba7 assets/tq/models/item/snowflake_block.json
 e5e68c43be6ba777a916b2bd531588ffaaa218c2 assets/tq/models/item/spectral_nylium.json

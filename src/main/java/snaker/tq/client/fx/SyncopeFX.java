@@ -15,7 +15,7 @@ import org.joml.Vector3d;
 import snaker.snakerlib.utility.RenderStuff;
 import snaker.tq.config.TqConfig;
 import snaker.tq.rego.Rego;
-import snaker.tq.utility.ResourcePath;
+import snaker.snakerlib.utility.ResourcePath;
 
 import java.io.FileWriter;
 import java.net.URL;

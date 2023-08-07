@@ -10,7 +10,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.NotNull;
 import snaker.tq.level.entity.mob.EerieCretin;
-import snaker.tq.utility.ResourcePath;
+import snaker.snakerlib.utility.ResourcePath;
 
 public class EerieCretinModel extends EntityModel<EerieCretin>
 {

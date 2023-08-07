@@ -1,0 +1,5 @@
+{
+    "loader": "forge:obj",
+    "model": "tq:models/entity/jouste.obj",
+    "flip_v": true
+}

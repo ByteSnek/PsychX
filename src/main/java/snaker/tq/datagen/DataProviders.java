@@ -1,6 +1,7 @@
 package snaker.tq.datagen;
 
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagsProvider;
@@ -22,13 +23,13 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.LanguageProvider;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import snaker.snakerlib.SnakerLib;
-import snaker.snakerlib.utility.BulkRegistrySet;
 import snaker.tq.Tourniqueted;
-import snaker.tq.level.world.feature.CatnipFeature;
+import snaker.tq.level.world.feature.Features;
 import snaker.tq.rego.Rego;
 
 import java.util.Locale;
@@ -62,14 +63,14 @@ public class DataProviders
 
     public static class DatapackEntries extends DatapackBuiltinEntriesProvider
     {
-        public static BulkRegistrySet set = BulkRegistrySet.create(true)
-                .addAllPlacements(CatnipFeature::placement)
-                .addAllConfigs(CatnipFeature::config)
-                .addAllModifiers(CatnipFeature.Modifier::modifier);
+        public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
+                .add(Registries.CONFIGURED_FEATURE, Features::configs)
+                .add(Registries.PLACED_FEATURE, Features::placements)
+                .add(ForgeRegistries.Keys.BIOME_MODIFIERS, Features::modifiers);
 
         public DatapackEntries(PackOutput output, CompletableFuture<HolderLookup.Provider> registries)
         {
-            super(output, registries, set.builder(), Set.of(Tourniqueted.MODID));
+            super(output, registries, BUILDER, Set.of(Tourniqueted.MODID));
         }
     }
 
@@ -137,6 +138,7 @@ public class DataProviders
             cube(Rego.BLOCK_COMA_STONE);
 
             plant(Rego.BLOCK_CATNIP, Rego.BLOCK_POTTED_CATNIP);
+            plant(Rego.BLOCK_SHRUB, Rego.BLOCK_POTTED_SHRUB);
         }
     }
 
@@ -231,6 +233,7 @@ public class DataProviders
             item(Rego.ITEM_TOURNIQUET);
 
             block(Rego.BLOCK_CATNIP);
+            block(Rego.BLOCK_SHRUB);
         }
     }
 
@@ -323,7 +326,9 @@ public class DataProviders
             block(Rego.BLOCK_WATERCOLOUR);
             block(Rego.BLOCK_COMA_STONE);
             block(Rego.BLOCK_CATNIP);
+            block(Rego.BLOCK_SHRUB);
             block(Rego.BLOCK_POTTED_CATNIP);
+            block(Rego.BLOCK_POTTED_SHRUB);
             block(Rego.BLOCK_ILLUSIVE_NYLIUM);
             block(Rego.BLOCK_DELUSIVE_NYLIUM);
             block(Rego.BLOCK_IMMATERIAL_NYLIUM);

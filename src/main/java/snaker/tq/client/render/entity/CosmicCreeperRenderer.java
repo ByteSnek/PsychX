@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import snaker.tq.client.layer.CosmicCreeperLayer;
 import snaker.tq.client.model.entity.CosmicCreeperModel;
 import snaker.tq.level.entity.mob.CosmicCreeper;
-import snaker.tq.utility.ResourcePath;
+import snaker.snakerlib.utility.ResourcePath;
 
 /**
  * Created by SnakerBone on 2/01/2023

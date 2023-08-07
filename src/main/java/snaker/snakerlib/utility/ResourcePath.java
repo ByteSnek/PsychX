@@ -1,8 +1,7 @@
-package snaker.tq.utility;
+package snaker.snakerlib.utility;
 
 import net.minecraft.resources.ResourceLocation;
 import snaker.snakerlib.SnakerLib;
-import snaker.tq.Tourniqueted;
 
 /**
  * Created by SnakerBone on 15/02/2023
@@ -19,11 +18,11 @@ public class ResourcePath extends ResourceLocation
 
     public ResourcePath(String path)
     {
-        super(Tourniqueted.MODID, path);
+        super(SnakerLib.DELEGATE_MOD.get(), path);
     }
 
     private <T> ResourcePath(Class<T> clazz)
     {
-        super(Tourniqueted.MODID, SnakerLib.i18nf(clazz.getSimpleName()));
+        super(SnakerLib.DELEGATE_MOD.get(), SnakerLib.i18nf(clazz.getSimpleName()));
     }
 }

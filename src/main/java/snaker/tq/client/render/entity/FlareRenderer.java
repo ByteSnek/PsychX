@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import snaker.tq.client.layer.FlareLayer;
 import snaker.tq.client.model.entity.FlareModel;
 import snaker.tq.level.entity.mob.Flare;
-import snaker.tq.utility.ResourcePath;
+import snaker.snakerlib.utility.ResourcePath;
 
 /**
  * Created by SnakerBone on 26/05/2023
