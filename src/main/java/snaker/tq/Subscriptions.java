@@ -172,36 +172,28 @@ public class Subscriptions
         @SuppressWarnings("rawtypes")
         public static void postRenderEntity(RenderLivingEvent.Post event)
         {
-            try {
-                PoseStack stack = event.getPoseStack();
-                PoseStackBuilder builder = new PoseStackBuilder(stack);
-                RenderSystem.getProjectionMatrix();
-                builder.popPose();
-            } catch (Exception e) {
-                SnakerLib.LOGGER.error(e);
-            }
+            PoseStack stack = event.getPoseStack();
+            PoseStackBuilder builder = new PoseStackBuilder(stack);
+            RenderSystem.getProjectionMatrix();
+            builder.popPose();
         }
 
         @SubscribeEvent
         @SuppressWarnings("rawtypes")
         public static void preRenderEntity(RenderLivingEvent.Pre event)
         {
-            try {
-                PoseStack stack = event.getPoseStack();
-                PoseStackBuilder builder = new PoseStackBuilder(stack);
-                LivingEntity entity = event.getEntity();
-                Syncope syncope = Rego.EFFECT_SYNCOPE.get();
-                MobEffectInstance effect = entity.getEffect(syncope);
-                builder.pushPose();
-                if (effect != null) {
-                    int effectDuration = effect.getDuration();
-                    boolean effectOver = effectDuration <= 0;
-                    if (effectOver) {
-                        entity.removeEffect(syncope);
-                    }
+            PoseStack stack = event.getPoseStack();
+            PoseStackBuilder builder = new PoseStackBuilder(stack);
+            LivingEntity entity = event.getEntity();
+            Syncope syncope = Rego.EFFECT_SYNCOPE.get();
+            MobEffectInstance effect = entity.getEffect(syncope);
+            builder.pushPose();
+            if (effect != null) {
+                int effectDuration = effect.getDuration();
+                boolean effectOver = effectDuration <= 0;
+                if (effectOver) {
+                    entity.removeEffect(syncope);
                 }
-            } catch (Exception e) {
-                SnakerLib.LOGGER.error(e);
             }
         }
     }
@@ -212,17 +204,13 @@ public class Subscriptions
         @SubscribeEvent
         public static void playerTickEvent(TickEvent.PlayerTickEvent event)
         {
-            try {
-                Player player = event.player;
-                Level level = player.level();
-                if (LevelStuff.isDimension(level, Rego.Keys.COMATOSE) && TqConfig.COMMON.syncopeActiveInComatoseDimension.get()) {
-                    float tickCount = player.tickCount;
-                    if (SnakerLib.secOffs(tickCount, 1)) {
-                        MiscStuff.addEffectDirect(player, Rego.EFFECT_SYNCOPE.get());
-                    }
+            Player player = event.player;
+            Level level = player.level();
+            if (LevelStuff.isDimension(level, Rego.Keys.COMATOSE) && TqConfig.COMMON.syncopeActiveInComatoseDimension.get()) {
+                float tickCount = player.tickCount;
+                if (SnakerLib.secOffs(tickCount, 1)) {
+                    MiscStuff.addEffectDirect(player, Rego.EFFECT_SYNCOPE.get());
                 }
-            } catch (Exception e) {
-                SnakerLib.LOGGER.error(e);
             }
         }
     }

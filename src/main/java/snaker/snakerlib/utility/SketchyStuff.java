@@ -2,15 +2,31 @@ package snaker.snakerlib.utility;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import snaker.snakerlib.SnakerLib;
 import snaker.snakerlib.internal.StupidArgumentException;
 
 public class SketchyStuff
 {
+    public static <V> V empty()
+    {
+        return cast(new Object[0]);
+    }
+
     @Nullable
     @SuppressWarnings("unchecked")
-    public static <Anything> Anything tryCast(@Nullable Object object)
+    public static <V> V cast(@Nullable Object object)
     {
-        return (Anything) object;
+        V value = null;
+
+        try {
+            value = (V) object;
+        } catch (Exception e) {
+            String errorMessage = e.getMessage();
+            String className = object.getClass().getSimpleName();
+            SnakerLib.LOGGER.errorf("Could not cast value to %s: %s", className, errorMessage);
+        }
+
+        return value;
     }
 
     @NotNull

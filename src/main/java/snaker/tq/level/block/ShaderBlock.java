@@ -48,7 +48,9 @@ public class ShaderBlock<T extends SnakerBlockEntity> extends SnakerEntityBlock
     public void setPlacedBy(@NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState state, @Nullable LivingEntity placer, @NotNull ItemStack stack)
     {
         if (!level.isClientSide && placer != null) {
-            SnakerLib.LOGGER.info(String.format("A shader block has been placed by %s at [ %s ]", placer.getDisplayName().getString(), pos.toShortString()));
+            String placerName = placer.getDisplayName().getString();
+            String blockPosition = pos.toShortString();
+            SnakerLib.LOGGER.infof("A shader block has been placed by %s at [ %s ]", placerName, blockPosition);
         }
     }
 }

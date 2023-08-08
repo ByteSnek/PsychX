@@ -102,9 +102,9 @@ public class MobTabIconRenderer extends CyclicalIconRenderer
                 }
             } catch (Exception e) {
                 if (notifyError) {
-                    SnakerLib.LOGGER.warn("Tried to render: " + entity.getClass().getSimpleName() + " but an error occured");
-                    SnakerLib.LOGGER.error(e);
-                    e.printStackTrace();
+                    String errorMessage = e.getMessage();
+                    String className = entity.getClass().getSimpleName();
+                    SnakerLib.LOGGER.warnf("Could not render %s: %s", className, errorMessage);
                     notifyError = false;
                 }
             }

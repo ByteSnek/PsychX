@@ -64,8 +64,9 @@ public class ItemTabIconRenderer extends CyclicalIconRenderer
                 }
             } catch (Exception e) {
                 if (notifyError) {
-                    SnakerLib.LOGGER.warn("Tried to render: " + item.getClass().getSimpleName() + " but an error occured");
-                    SnakerLib.LOGGER.logError(e);
+                    String errorMessage = e.getMessage();
+                    String className = item.getClass().getSimpleName();
+                    SnakerLib.LOGGER.warnf("Could not render %s: %s", className, errorMessage);
                     notifyError = false;
                 }
             }

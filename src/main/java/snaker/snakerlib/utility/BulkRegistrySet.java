@@ -7,14 +7,13 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import snaker.snakerlib.SnakerLib;
-import snaker.snakerlib.internal.ColourCode;
-import snaker.snakerlib.internal.MarkerType;
 import snaker.snakerlib.internal.MultiMap;
 
 import java.util.List;
@@ -117,7 +116,8 @@ public class BulkRegistrySet extends RegistrySetBuilder
     public List<RegistryBootstrap<?>> getEntriesFor(ResourceKey<? extends Registry<?>> key)
     {
         if (map.isEmpty()) {
-            SnakerLib.LOGGER.warn(String.format("No entries found for key '%s'", key.location()));
+            ResourceLocation keyLocation = key.location();
+            SnakerLib.LOGGER.warnf("No entries found for key '%s'", keyLocation);
             return List.of();
         }
         return map.get(key);
@@ -128,7 +128,9 @@ public class BulkRegistrySet extends RegistrySetBuilder
         for (var keys : map.keySet()) {
             for (var values : map.values()) {
                 for (var bootstrap : values) {
-                    SnakerLib.LOGGER.info(String.format("%s -> %s", keys.location(), bootstrap), ColourCode.WHITE, MarkerType.INFO);
+                    ResourceLocation keysLocation = keys.location();
+                    String bootstrapName = bootstrap.toString();
+                    SnakerLib.LOGGER.infof("%s -> %s", keysLocation, bootstrapName);
                 }
             }
         }

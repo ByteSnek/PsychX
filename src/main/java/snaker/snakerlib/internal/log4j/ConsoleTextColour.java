@@ -1,9 +1,9 @@
-package snaker.snakerlib.internal;
+package snaker.snakerlib.internal.log4j;
 
 /**
  * Created by SnakerBone on 29/05/2023
  **/
-public enum ColourCode
+public enum ConsoleTextColour
 {
     BLACK("\u001B[30m"),
     RED("\u001B[31m"),
@@ -14,15 +14,15 @@ public enum ColourCode
     CYAN("\u001B[36m"),
     WHITE("\u001B[0m");
 
-    final String code;
+    private final String value;
 
-    ColourCode(String code)
+    ConsoleTextColour(String value)
     {
-        this.code = code;
+        this.value = value;
     }
 
-    public String get()
+    public String value()
     {
-        return code;
+        return value;
     }
 }

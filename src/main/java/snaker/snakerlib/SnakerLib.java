@@ -20,8 +20,12 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.system.MemoryUtil;
 import snaker.snakerlib.config.SnakerConfig;
-import snaker.snakerlib.internal.*;
+import snaker.snakerlib.internal.LevelSavingEvent;
+import snaker.snakerlib.internal.Single;
+import snaker.snakerlib.internal.StringNuker;
 import snaker.snakerlib.internal.log4j.Log4jFilter;
+import snaker.snakerlib.internal.log4j.SnakerLogger;
+import snaker.snakerlib.internal.log4j.SnakerLoggerManager;
 import snaker.snakerlib.level.entity.SnakerBoss;
 import snaker.snakerlib.math.Maths;
 
@@ -47,11 +51,12 @@ public class SnakerLib
     public static final Component VIRTUAL_MACHINE_FORCE_CRASH_KEYBINDS_PRESSED = Component.literal("Left shift and F4 pressed.");
     public static final Component DISABLE_IN_CONFIG = Component.literal("You can disable this in the config (snakerlib-common.toml) if you wish");
     public static final StackWalker STACK_WALKER = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE);
-    public static final SnakerLogger LOGGER = SnakerLoggerManager.getLogger(SnakerLib.getCallerClassReference());
+    public static final SnakerLogger LOGGER = SnakerLoggerManager.INSTANCE.apply(SnakerLib.NAME);
     public static final Log4jFilter FILTER = new Log4jFilter();
     public static final Single<String> DELEGATE_MOD = new Single<>();
 
     public static final String MODID = "snakerlib";
+    public static final String NAME = "SnakerLib";
 
     public static Path runFolder;
 
@@ -86,7 +91,8 @@ public class SnakerLib
         String modid = clazz.getAnnotation(Mod.class).value();
         if (!isInvalidString(modid)) {
             DELEGATE_MOD.set(modid);
-            SnakerLib.LOGGER.system(String.format("Successfully initialized mod '%s' to SnakerLib", DELEGATE_MOD.get()), ColourCode.WHITE, MarkerType.SYSTEM);
+            String modName = DELEGATE_MOD.get();
+            SnakerLib.LOGGER.infof("Successfully initialized mod '%s' to SnakerLib", modName);
         }
         MinecraftForge.EVENT_BUS.register(new SnakerLib());
     }
@@ -196,25 +202,24 @@ public class SnakerLib
         return !text.isEmpty() ? text.replaceAll("\\s+", "_").toLowerCase() : text;
     }
 
-    public static boolean isInvalidString(String string, boolean notify, boolean crash)
+    public static boolean isInvalidString(String stringToCheck, boolean notify, boolean crash)
     {
-        String message = String.format("String '%s' is not a valid string", string);
-        if (string == null || string.isEmpty()) {
+        if (stringToCheck == null || stringToCheck.isEmpty()) {
             return true;
         } else {
             String regex = ".*[a-zA-Z]+.*";
-            if (!string.matches(regex)) {
+            if (!stringToCheck.matches(regex)) {
                 if (notify) {
-                    LOGGER.warn(message);
+                    SnakerLib.LOGGER.warnf("String '%s' is not a valid string", stringToCheck);
                     if (crash) {
-                        throw new RuntimeException(message);
+                        throw new RuntimeException(String.format("Invalid string: %s", stringToCheck));
                     }
                 }
                 if (!notify && crash) {
-                    throw new RuntimeException(message);
+                    throw new RuntimeException(String.format("Invalid string: %s", stringToCheck));
                 }
             }
-            return !string.matches(regex);
+            return !stringToCheck.matches(regex);
         }
     }
 
@@ -311,27 +316,34 @@ public class SnakerLib
      * <p>
      * <b>There should be no reason at all to be implementing this method outside of the developer environment</b>
      *
-     * @param reason The reason for crashing so it can be logged if implemented
+     * @param crashReason The reason for crashing so it can be logged if implemented
      **/
-    public static void forceCrashJVM(String reason)
+    public static void forceCrashJVM(String crashReason)
     {
-        String clazz = SnakerLib.getCallerClassReference().toString();
+        String className = SnakerLib.getCallerClassReference().toString();
+        String threadName = Thread.currentThread().getName();
         String regex = ".*[a-zA-Z]+.*";
-        String br = "\n";
-        StringBuilder builder = new StringBuilder("-+-");
-        builder.append("-+-".repeat(36));
-        SnakerLib.LOGGER.worker("JVM crash detected on " + Thread.currentThread().getName());
-        SnakerLib.LOGGER.fatal(String.format(br + "%24s" + br, builder), ColourCode.RED, MarkerType.NONE);
-        SnakerLib.LOGGER.fatal(String.format("The JVM was forcefully crashed by %s" + br, clazz), ColourCode.RED, MarkerType.NONE);
-        if (!clazz.contains("SnakerLib")) {
-            SnakerLib.LOGGER.fatal(String.format("The JVM was not crashed by SnakerLib. Please go report it to %s" + br, clazz), ColourCode.RED, MarkerType.NONE);
+        String lineBreak = "\n";
+
+        StringBuilder reportBuilder = new StringBuilder("-+-");
+
+        reportBuilder.append("-+-".repeat(36));
+
+        SnakerLib.LOGGER.warnf("JVM crash detected on %s", threadName);
+        SnakerLib.LOGGER.errorf("%s %24s %s", lineBreak, reportBuilder, lineBreak);
+        SnakerLib.LOGGER.errorf("The JVM was forcefully crashed by %s %s", className, lineBreak);
+
+        if (!className.contains("SnakerLib")) {
+            SnakerLib.LOGGER.errorf("The JVM was not crashed by SnakerLib. Please go report it to %s %s", className, lineBreak);
         }
-        if (!reason.matches(regex)) {
-            SnakerLib.LOGGER.fatal("The reason for the crash was not specified" + br, ColourCode.RED, MarkerType.NONE);
+
+        if (!crashReason.matches(regex)) {
+            SnakerLib.LOGGER.errorf("The reason for the crash was not specified %s", lineBreak);
         } else {
-            SnakerLib.LOGGER.fatal(String.format("The reason was: %s" + br, reason), ColourCode.RED, MarkerType.NONE);
+            SnakerLib.LOGGER.errorf("%s %s", crashReason, lineBreak);
         }
-        SnakerLib.LOGGER.fatal(String.format("%24s", builder), ColourCode.RED, MarkerType.NONE);
+
+        SnakerLib.LOGGER.errorf("%24s", reportBuilder);
         MemoryUtil.memSet(0, 0, 1);
     }
 
@@ -466,10 +478,11 @@ public class SnakerLib
             if (files != null) {
                 for (File jvmFile : files) {
                     if (jvmFile.getName().startsWith("hs")) {
+                        String fileName = jvmFile.getName();
                         if (jvmFile.delete()) {
-                            SnakerLib.LOGGER.system(String.format("Successfully deleted JVM crash file '%s'", jvmFile.getName()), ColourCode.WHITE, MarkerType.SYSTEM);
+                            SnakerLib.LOGGER.infof("Successfully deleted JVM crash file '%s'", fileName);
                         } else {
-                            SnakerLib.LOGGER.system(String.format("Could not delete JVM crash file '%s'", jvmFile.getName()), ColourCode.WHITE, MarkerType.SYSTEM);
+                            SnakerLib.LOGGER.infof("Could not delete JVM crash file '%s'", fileName);
                         }
                     }
                 }
@@ -508,10 +521,11 @@ public class SnakerLib
         if (SnakerConfig.COMMON.removeMinecraftCrashFilesOnStartup.get()) {
             if (crashFiles != null) {
                 for (File crashFile : crashFiles) {
+                    String fileName = crashFile.getName();
                     if (crashFile.delete()) {
-                        SnakerLib.LOGGER.system(String.format("Successfully deleted crash file '%s'", crashFile.getName()), ColourCode.WHITE, MarkerType.SYSTEM);
+                        SnakerLib.LOGGER.infof("Successfully deleted crash file '%s'", fileName);
                     } else {
-                        SnakerLib.LOGGER.system(String.format("Could not delete crash file '%s'", crashFile.getName()), ColourCode.WHITE, MarkerType.SYSTEM);
+                        SnakerLib.LOGGER.infof("Could not delete crash file '%s'", fileName);
                     }
                 }
             }
@@ -537,9 +551,10 @@ public class SnakerLib
         var bosses = SnakerBoss.BOSS_INSTANCES;
         if (!bosses.isEmpty()) {
             for (SnakerBoss boss : new CopyOnWriteArrayList<>(bosses)) {
+                int bossesSize = bosses.size();
                 boss.discard();
                 if (notify) {
-                    SnakerLib.LOGGER.info(String.format("Successfully discarded %s bosses", bosses.size()));
+                    SnakerLib.LOGGER.infof("Successfully discarded %s bosses", bossesSize);
                     notify = false;
                 }
             }

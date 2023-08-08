@@ -40,6 +40,7 @@ import net.minecraftforge.registries.RegistryObject;
 import snaker.snakerlib.SnakerLib;
 import snaker.snakerlib.data.SnakerConstants;
 import snaker.snakerlib.internal.AsynchronousHashMap;
+import snaker.snakerlib.utility.ResourcePath;
 import snaker.snakerlib.utility.SketchyStuff;
 import snaker.tq.Tourniqueted;
 import snaker.tq.level.block.ComatoseNyliumBlock;
@@ -61,7 +62,6 @@ import snaker.tq.level.item.Tourniquet;
 import snaker.tq.level.item.icon.BlockTabIcon;
 import snaker.tq.level.item.icon.ItemTabIcon;
 import snaker.tq.level.item.icon.MobTabIcon;
-import snaker.snakerlib.utility.ResourcePath;
 
 import java.util.Map;
 import java.util.function.Predicate;
@@ -115,8 +115,8 @@ public class Rego
 
     public static final RegistryObject<Block> BLOCK_CATNIP = blockWithItem("catnip", () -> new FlowerBlock(Rego.EFFECT_SYNCOPE::get, 600, SnakerConstants.BlockProperties.PLANT));
     public static final RegistryObject<Block> BLOCK_SHRUB = blockWithItem("shrub", () -> new FlowerBlock(Rego.EFFECT_SYNCOPE::get, 600, SnakerConstants.BlockProperties.PLANT));
-    public static final RegistryObject<Block> BLOCK_POTTED_CATNIP = BLOCKS.register("potted_catnip", () -> new FlowerPotBlock(() -> SketchyStuff.tryCast(Blocks.FLOWER_POT), BLOCK_CATNIP, SnakerConstants.BlockProperties.NORMAL));
-    public static final RegistryObject<Block> BLOCK_POTTED_SHRUB = BLOCKS.register("potted_shrub", () -> new FlowerPotBlock(() -> SketchyStuff.tryCast(Blocks.FLOWER_POT), BLOCK_SHRUB, SnakerConstants.BlockProperties.NORMAL));
+    public static final RegistryObject<Block> BLOCK_POTTED_CATNIP = BLOCKS.register("potted_catnip", () -> new FlowerPotBlock(() -> SketchyStuff.cast(Blocks.FLOWER_POT), BLOCK_CATNIP, SnakerConstants.BlockProperties.NORMAL));
+    public static final RegistryObject<Block> BLOCK_POTTED_SHRUB = BLOCKS.register("potted_shrub", () -> new FlowerPotBlock(() -> SketchyStuff.cast(Blocks.FLOWER_POT), BLOCK_SHRUB, SnakerConstants.BlockProperties.NORMAL));
 
     public static final RegistryObject<Block> BLOCK_COMA_STONE = blockWithItem("coma_stone", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.NONE).strength(0.5F).sound(SoundType.NETHER_ORE)));
     public static final RegistryObject<Block> BLOCK_DELUSIVE_NYLIUM = blockWithItem("delusive_nylium", ComatoseNyliumBlock::new);
@@ -229,8 +229,8 @@ public class Rego
         if (valid) {
             event.accept(item);
         } else {
-            String name = map.get(false).toString();
-            SnakerLib.LOGGER.warn(String.format("ItemStack '%s' is empty or invalid", name));
+            String itemName = map.get(false).toString();
+            SnakerLib.LOGGER.warnf("ItemStack '%s' is empty or invalid", itemName);
         }
     }
 

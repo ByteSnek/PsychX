@@ -63,8 +63,9 @@ public class BlockTabIconRenderer extends CyclicalIconRenderer
                 }
             } catch (Exception e) {
                 if (notifyError) {
-                    SnakerLib.LOGGER.error("Tried to render: " + block + " but an error occured");
-                    SnakerLib.LOGGER.logError(e);
+                    String errorMessage = e.getMessage();
+                    String className = block.getClass().getSimpleName();
+                    SnakerLib.LOGGER.errorf("Could not render %s: %s", className, errorMessage);
                     notifyError = false;
                 }
             }

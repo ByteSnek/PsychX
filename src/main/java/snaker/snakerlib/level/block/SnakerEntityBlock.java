@@ -18,6 +18,6 @@ public abstract class SnakerEntityBlock extends BaseEntityBlock
 
     public static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTicker(BlockEntityType<A> a, BlockEntityType<E> b, BlockEntityTicker<? super E> ticker)
     {
-        return a == b ? SketchyStuff.tryCast(ticker) : null;
+        return a == b ? SketchyStuff.cast(ticker) : null;
     }
 }

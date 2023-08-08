@@ -11,8 +11,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import snaker.snakerlib.SnakerLib;
 import snaker.snakerlib.data.SnakerConstants;
-import snaker.snakerlib.internal.ColourCode;
-import snaker.snakerlib.internal.MarkerType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,7 +35,8 @@ public class SplashMixin
         }
 
         if (splashes.addAll(Arrays.asList(SnakerConstants.Texts.SPLASHES))) {
-            SnakerLib.LOGGER.info("Successfully remapped " + splashes.size() + " splash texts", ColourCode.WHITE, MarkerType.INFO);
+            int splashesSize = splashes.size();
+            SnakerLib.LOGGER.infof("Successfuly added %s new splashes", splashesSize);
         }
     }
 }

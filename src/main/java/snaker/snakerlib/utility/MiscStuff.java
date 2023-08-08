@@ -19,7 +19,7 @@ public class MiscStuff
 {
     public static <T extends Block> FlowerPotBlock addFlowerPotPlant(RegistryObject<T> normal, RegistryObject<T> potted)
     {
-        FlowerPotBlock block = SketchyStuff.tryCast(Blocks.FLOWER_POT);
+        FlowerPotBlock block = SketchyStuff.cast(Blocks.FLOWER_POT);
         block.addPlant(normal.getId(), potted);
         return block;
     }

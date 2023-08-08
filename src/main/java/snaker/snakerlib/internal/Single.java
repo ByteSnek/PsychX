@@ -1,5 +1,7 @@
 package snaker.snakerlib.internal;
 
+import snaker.snakerlib.utility.SketchyStuff;
+
 /**
  * Created by SnakerBone on 7/08/2023
  **/
@@ -23,5 +25,10 @@ public class Single<V>
         }
 
         return value;
+    }
+
+    public void forget()
+    {
+        this.value = SketchyStuff.empty();
     }
 }
