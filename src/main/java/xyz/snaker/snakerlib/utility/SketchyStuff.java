@@ -7,11 +7,17 @@ import xyz.snaker.snakerlib.internal.StupidArgumentException;
 
 public class SketchyStuff
 {
-    public static <V> V empty()
+    /**
+     * Returns an object that can be assigned to anything that is not a primitive type
+     **/
+    public static <V> V versatileObject()
     {
         return cast(new Object[0]);
     }
 
+    /**
+     * Attempts to cast anything to anything
+     **/
     @Nullable
     @SuppressWarnings("unchecked")
     public static <V> V cast(@Nullable Object object)
@@ -29,6 +35,9 @@ public class SketchyStuff
         return value;
     }
 
+    /**
+     * Attempts to create a new instance of any object
+     **/
     @NotNull
     public static <T> T instantiate(Class<T> clazz)
     {

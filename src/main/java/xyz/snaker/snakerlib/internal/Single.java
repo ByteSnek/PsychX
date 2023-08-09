@@ -29,6 +29,6 @@ public class Single<V>
 
     public void forget()
     {
-        this.value = SketchyStuff.empty();
+        this.value = SketchyStuff.versatileObject();
     }
 }
