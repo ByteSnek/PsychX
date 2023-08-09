@@ -1,25 +1,24 @@
-modLoader = "javafml"
-loaderVersion = "[43,)"
-license = "All rights reserved"
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
 
 [[mods]]
-modId = "tq"
-version = "${file.jarVersion}"
-displayName = "Tourniqueted"
-logoFile = "tq.png"
-authors = "SnakerBone"
-description = "Tourniqueted Mod for 1.20+"
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+authors="${mod_authors}"
+description='''${mod_description}'''
 
-[[dependencies.tq]]
-modId = "forge"
-mandatory = true
-versionRange = "[43,)"
-ordering = "NONE"
-side = "BOTH"
+[[dependencies.${mod_id}]]
+modId="forge"
+mandatory=true
+versionRange="${neo_version_range}"
+ordering="NONE"
+side="BOTH"
 
-[[dependencies.tq]]
-modId = "minecraft"
-mandatory = true
-versionRange = "[1.20]"
-ordering = "NONE"
-side = "BOTH"
+[[dependencies.${mod_id}]]
+modId="minecraft"
+mandatory=true
+versionRange="${minecraft_version_range}"
+ordering="NONE"
+side="BOTH"

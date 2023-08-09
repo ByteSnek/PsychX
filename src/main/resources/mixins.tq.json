@@ -1,7 +1,7 @@
 {
     "required": true,
     "minVersion": "0.8",
-    "package": "snaker.snakerlib.internal.mixin",
+    "package": "xyz.snaker.snakerlib.internal.mixin",
     "target": "@env(DEFAULT)",
     "compatibilityLevel": "JAVA_17",
     "client": [
