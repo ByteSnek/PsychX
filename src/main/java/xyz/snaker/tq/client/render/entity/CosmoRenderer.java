@@ -1,23 +1,26 @@
 package xyz.snaker.tq.client.render.entity;
 
-import com.google.common.collect.Maps;
-import com.mojang.blaze3d.vertex.PoseStack;
+import java.util.Map;
+
+import xyz.snaker.snakerlib.math.PoseStackBuilder;
+import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.tq.client.RenderTypes;
+import xyz.snaker.tq.client.layer.CosmoLayer;
+import xyz.snaker.tq.client.model.entity.CosmoModel;
+import xyz.snaker.tq.level.entity.EntityVariants;
+import xyz.snaker.tq.level.entity.mob.Cosmo;
+
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.Util;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
-import xyz.snaker.snakerlib.math.PoseStackBuilder;
-import xyz.snaker.tq.client.RenderTypes;
-import xyz.snaker.tq.client.layer.CosmoLayer;
-import xyz.snaker.tq.client.model.entity.CosmoModel;
-import xyz.snaker.tq.level.entity.EntityVariants;
-import xyz.snaker.tq.level.entity.mob.Cosmo;
-import xyz.snaker.snakerlib.utility.ResourcePath;
 
-import java.util.Map;
+import com.google.common.collect.Maps;
+import com.mojang.blaze3d.vertex.PoseStack;
 
 /**
  * Created by SnakerBone on 2/01/2023

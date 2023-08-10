@@ -1,14 +1,15 @@
 package xyz.snaker.snakerlib.utility;
 
-import org.apache.logging.log4j.util.TriConsumer;
-import xyz.snaker.snakerlib.internal.QuadConsumer;
-
 import java.net.URI;
 import java.net.URL;
 import java.util.concurrent.Callable;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+
+import xyz.snaker.snakerlib.internal.QuadConsumer;
+
+import org.apache.logging.log4j.util.TriConsumer;
 
 /**
  * Created by SnakerBone on 4/06/2023

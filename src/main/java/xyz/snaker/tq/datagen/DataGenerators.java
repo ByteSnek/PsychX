@@ -1,5 +1,9 @@
 package xyz.snaker.tq.datagen;
 
+import java.util.concurrent.CompletableFuture;
+
+import xyz.snaker.tq.Tourniqueted;
+
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -7,9 +11,6 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import xyz.snaker.tq.Tourniqueted;
-
-import java.util.concurrent.CompletableFuture;
 
 /**
  * Created by SnakerBone on 21/03/2023

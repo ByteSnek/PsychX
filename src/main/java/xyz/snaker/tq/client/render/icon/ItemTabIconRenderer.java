@@ -1,7 +1,11 @@
 package xyz.snaker.tq.client.render.icon;
 
-import com.mojang.blaze3d.platform.Lighting;
-import com.mojang.blaze3d.vertex.PoseStack;
+import xyz.snaker.snakerlib.SnakerLib;
+import xyz.snaker.snakerlib.client.render.CyclicalIconRenderer;
+import xyz.snaker.tq.rego.Rego;
+
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -9,10 +13,9 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import org.jetbrains.annotations.NotNull;
-import xyz.snaker.snakerlib.SnakerLib;
-import xyz.snaker.snakerlib.client.render.CyclicalIconRenderer;
-import xyz.snaker.tq.rego.Rego;
+
+import com.mojang.blaze3d.platform.Lighting;
+import com.mojang.blaze3d.vertex.PoseStack;
 
 /**
  * Created by SnakerBone on 12/06/2023

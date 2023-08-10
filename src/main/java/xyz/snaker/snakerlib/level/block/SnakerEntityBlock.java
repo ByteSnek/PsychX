@@ -1,10 +1,11 @@
 package xyz.snaker.snakerlib.level.block;
 
+import xyz.snaker.snakerlib.utility.SketchyStuff;
+
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import xyz.snaker.snakerlib.utility.SketchyStuff;
 
 /**
  * Created by SnakerBone on 27/06/2023

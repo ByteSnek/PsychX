@@ -9,6 +9,7 @@
         "SplashMixin"
     ],
     "mixins": [
+        "ForgeModMixin",
         "MinecraftServerMixin",
         "PlayTagWithOtherKidsMixin"
     ]

@@ -1,17 +1,20 @@
 package xyz.snaker.snakerlib.client.shader;
 
-import com.mojang.blaze3d.shaders.Uniform;
-import com.mojang.blaze3d.vertex.VertexFormat;
+import java.util.LinkedList;
+import java.util.List;
+
+import xyz.snaker.snakerlib.SnakerLib;
+
+import org.jetbrains.annotations.ApiStatus;
+import org.joml.*;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceProvider;
-import org.jetbrains.annotations.ApiStatus;
-import org.joml.*;
-import xyz.snaker.snakerlib.SnakerLib;
 
-import java.util.LinkedList;
-import java.util.List;
+import com.mojang.blaze3d.shaders.Uniform;
+import com.mojang.blaze3d.vertex.VertexFormat;
 
 /**
  * Created by SnakerBone on 9/06/2023

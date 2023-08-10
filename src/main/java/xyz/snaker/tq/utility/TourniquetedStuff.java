@@ -1,5 +1,10 @@
 package xyz.snaker.tq.utility;
 
+import java.util.List;
+
+import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.tq.level.world.feature.Features;
+
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
@@ -21,10 +26,6 @@ import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.common.world.ForgeBiomeModifiers;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import xyz.snaker.snakerlib.utility.ResourcePath;
-import xyz.snaker.tq.level.world.feature.Features;
-
-import java.util.List;
 
 /**
  * Created by SnakerBone on 4/08/2023

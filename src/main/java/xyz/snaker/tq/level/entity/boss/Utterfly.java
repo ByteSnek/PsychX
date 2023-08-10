@@ -1,5 +1,20 @@
 package xyz.snaker.tq.level.entity.boss;
 
+import java.util.List;
+import java.util.UUID;
+import javax.annotation.Nullable;
+
+import xyz.snaker.snakerlib.level.entity.SnakerFlyingBoss;
+import xyz.snaker.snakerlib.level.entity.ai.SnakerFlyGoal;
+import xyz.snaker.snakerlib.level.entity.ai.SnakerLookGoal;
+import xyz.snaker.snakerlib.math.Maths;
+import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.tq.level.entity.projectile.ExplosiveHommingArrow;
+import xyz.snaker.tq.level.entity.projectile.HommingArrow;
+import xyz.snaker.tq.rego.Rego;
+
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -22,19 +37,6 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.NotNull;
-import xyz.snaker.snakerlib.level.entity.SnakerFlyingBoss;
-import xyz.snaker.snakerlib.level.entity.ai.SnakerFlyGoal;
-import xyz.snaker.snakerlib.level.entity.ai.SnakerLookGoal;
-import xyz.snaker.snakerlib.math.Maths;
-import xyz.snaker.tq.level.entity.projectile.ExplosiveHommingArrow;
-import xyz.snaker.tq.level.entity.projectile.HommingArrow;
-import xyz.snaker.tq.rego.Rego;
-import xyz.snaker.snakerlib.utility.ResourcePath;
-
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by SnakerBone on 4/01/2023

@@ -1,13 +1,14 @@
 package xyz.snaker.snakerlib.level.entity.ai;
 
+import java.util.List;
+
+import xyz.snaker.snakerlib.config.SnakerConfig;
+
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
-import xyz.snaker.snakerlib.config.SnakerConfig;
-
-import java.util.List;
 
 /**
  * Created by SnakerBone on 28/02/2023

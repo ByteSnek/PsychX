@@ -1,7 +1,11 @@
 package xyz.snaker.snakerlib.utility;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
+import java.util.Objects;
+import java.util.function.BiFunction;
+import javax.annotation.Nullable;
+
+import org.joml.*;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.LightTexture;
@@ -14,11 +18,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
-import org.joml.*;
 
-import javax.annotation.Nullable;
-import java.util.Objects;
-import java.util.function.BiFunction;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 
 /**
  * Created by SnakerBone on 28/04/2023

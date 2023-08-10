@@ -1,18 +1,21 @@
 package xyz.snaker.tq.client.layer;
 
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.RenderLayerParent;
-import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import org.jetbrains.annotations.NotNull;
 import xyz.snaker.snakerlib.utility.RenderStuff;
+import xyz.snaker.snakerlib.utility.ResourcePath;
 import xyz.snaker.tq.client.RenderTypes;
 import xyz.snaker.tq.client.Shaders;
 import xyz.snaker.tq.client.model.entity.TestModel;
 import xyz.snaker.tq.level.entity.mob.Test;
-import xyz.snaker.snakerlib.utility.ResourcePath;
+
+import org.jetbrains.annotations.NotNull;
+
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
+
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.PoseStack;
 
 /**
  * Created by SnakerBone on 30/07/2023

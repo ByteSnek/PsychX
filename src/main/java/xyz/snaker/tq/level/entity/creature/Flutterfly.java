@@ -1,5 +1,13 @@
 package xyz.snaker.tq.level.entity.creature;
 
+import javax.annotation.Nullable;
+
+import xyz.snaker.snakerlib.level.entity.SnakerFlyingCreature;
+import xyz.snaker.snakerlib.utility.LevelStuff;
+import xyz.snaker.tq.rego.Rego;
+
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -17,12 +25,6 @@ import net.minecraft.world.entity.monster.Spider;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraftforge.network.NetworkHooks;
-import org.jetbrains.annotations.NotNull;
-import xyz.snaker.snakerlib.level.entity.SnakerFlyingCreature;
-import xyz.snaker.snakerlib.utility.LevelStuff;
-import xyz.snaker.tq.rego.Rego;
-
-import javax.annotation.Nullable;
 
 /**
  * Created by SnakerBone on 2/01/2023

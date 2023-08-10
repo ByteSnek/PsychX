@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
   "biomes": "#tq:comatose_vegetal",
-  "features": "tq:shrub",
+  "features": "tq:snakeroot",
   "step": "vegetal_decoration"
 }

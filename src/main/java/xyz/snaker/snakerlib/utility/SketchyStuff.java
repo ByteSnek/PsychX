@@ -1,9 +1,10 @@
 package xyz.snaker.snakerlib.utility;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import xyz.snaker.snakerlib.SnakerLib;
 import xyz.snaker.snakerlib.internal.StupidArgumentException;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class SketchyStuff
 {

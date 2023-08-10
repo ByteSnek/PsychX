@@ -1,10 +1,12 @@
 package xyz.snaker.snakerlib.math;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.Minecraft;
-import net.minecraft.world.entity.Entity;
 import org.jetbrains.annotations.NotNull;
 import org.joml.*;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.Entity;
+
+import com.mojang.blaze3d.vertex.PoseStack;
 
 /**
  * Created by SnakerBone on 30/03/2023

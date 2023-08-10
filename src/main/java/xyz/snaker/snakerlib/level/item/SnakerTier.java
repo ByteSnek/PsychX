@@ -1,11 +1,12 @@
 package xyz.snaker.snakerlib.level.item;
 
+import java.util.function.Supplier;
+
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.function.Supplier;
 
 /**
  * Created by SnakerBone on 17/03/2023

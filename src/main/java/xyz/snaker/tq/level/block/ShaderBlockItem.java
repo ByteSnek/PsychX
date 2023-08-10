@@ -1,18 +1,20 @@
 package xyz.snaker.tq.level.block;
 
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import org.jetbrains.annotations.NotNull;
+import java.util.function.Consumer;
+
 import xyz.snaker.snakerlib.data.SnakerConstants;
 import xyz.snaker.snakerlib.utility.ResourceStuff;
 import xyz.snaker.tq.client.RenderTypes;
 import xyz.snaker.tq.client.render.block.ShaderBlockItemRenderer;
 import xyz.snaker.tq.rego.Rego;
 
-import java.util.function.Consumer;
+import org.jetbrains.annotations.NotNull;
+
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 
 /**
  * Created by SnakerBone on 28/04/2023

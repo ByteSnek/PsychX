@@ -1,19 +1,22 @@
 package xyz.snaker.tq.client.render.entity;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
+import java.awt.*;
+
 import xyz.snaker.snakerlib.math.PoseStackBuilder;
+import xyz.snaker.snakerlib.utility.ResourcePath;
 import xyz.snaker.tq.client.fx.RayFX;
 import xyz.snaker.tq.client.layer.UtterflyLayer;
 import xyz.snaker.tq.client.model.entity.UtterflyModel;
 import xyz.snaker.tq.level.entity.boss.Utterfly;
-import xyz.snaker.snakerlib.utility.ResourcePath;
 
-import java.awt.*;
+import org.jetbrains.annotations.NotNull;
+
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.resources.ResourceLocation;
+
+import com.mojang.blaze3d.vertex.PoseStack;
 
 /**
  * Created by SnakerBone on 4/01/2023

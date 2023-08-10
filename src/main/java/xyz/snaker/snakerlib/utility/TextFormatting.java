@@ -1,8 +1,9 @@
 package xyz.snaker.snakerlib.utility;
 
+import xyz.snaker.snakerlib.SnakerLib;
+
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
-import xyz.snaker.snakerlib.SnakerLib;
 
 /**
  * Created by SnakerBone on 17/06/2023

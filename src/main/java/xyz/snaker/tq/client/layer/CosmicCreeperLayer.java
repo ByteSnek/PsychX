@@ -1,7 +1,12 @@
 package xyz.snaker.tq.client.layer;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
+import xyz.snaker.snakerlib.utility.RenderStuff;
+import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.tq.client.model.entity.CosmicCreeperModel;
+import xyz.snaker.tq.level.entity.mob.CosmicCreeper;
+
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.LightTexture;
@@ -11,11 +16,9 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.EnergySwirlLayer;
 import net.minecraft.client.renderer.entity.layers.EyesLayer;
 import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
-import xyz.snaker.snakerlib.utility.RenderStuff;
-import xyz.snaker.tq.client.model.entity.CosmicCreeperModel;
-import xyz.snaker.tq.level.entity.mob.CosmicCreeper;
-import xyz.snaker.snakerlib.utility.ResourcePath;
+
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 
 /**
  * Created by SnakerBone on 1/06/2023

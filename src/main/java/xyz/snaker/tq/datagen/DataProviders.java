@@ -1,5 +1,17 @@
 package xyz.snaker.tq.datagen;
 
+import java.util.Locale;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
+
+import xyz.snaker.snakerlib.SnakerLib;
+import xyz.snaker.tq.Tourniqueted;
+import xyz.snaker.tq.level.world.feature.Features;
+import xyz.snaker.tq.rego.Rego;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -15,7 +27,6 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
@@ -25,16 +36,6 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import xyz.snaker.snakerlib.SnakerLib;
-import xyz.snaker.tq.Tourniqueted;
-import xyz.snaker.tq.level.world.feature.Features;
-import xyz.snaker.tq.rego.Rego;
-
-import java.util.Locale;
-import java.util.Set;
-import java.util.concurrent.CompletableFuture;
 
 /**
  * Created by SnakerBone on 21/03/2023
@@ -51,7 +52,7 @@ public class DataProviders
         @Override
         protected void addTags(HolderLookup.@NotNull Provider provider)
         {
-            biome(Rego.Tags.COMATOSE_VEGETAL, Biomes.BEACH, Biomes.DESERT, Biomes.FLOWER_FOREST, Biomes.PLAINS, Biomes.FOREST);
+            biome(Rego.Tags.COMATOSE_VEGETAL, Rego.Keys.DELUSION, Rego.Keys.ILLUSIVE, Rego.Keys.IMMATERIAL, Rego.Keys.SPECTRAL, Rego.Keys.SURREAL);
         }
 
         @SafeVarargs
@@ -119,6 +120,14 @@ public class DataProviders
                     .texture("plant", "block/" + plantName));
         }
 
+        private void plant(RegistryObject<Block> plant)
+        {
+            ResourceLocation plantVariant = plant.getId();
+            String plantName = plantVariant.getPath();
+
+            simpleBlock(plant.get(), models().cross(plantName, blockTexture(plant.get())).renderType("cutout"));
+        }
+
         @Override
         protected void registerStatesAndModels()
         {
@@ -138,7 +147,9 @@ public class DataProviders
             cube(Rego.BLOCK_COMA_STONE);
 
             plant(Rego.BLOCK_CATNIP, Rego.BLOCK_POTTED_CATNIP);
-            plant(Rego.BLOCK_SHRUB, Rego.BLOCK_POTTED_SHRUB);
+            plant(Rego.BLOCK_SPLITLEAF, Rego.BLOCK_POTTED_SPLITLEAF);
+            plant(Rego.BLOCK_SNAKEROOT);
+            plant(Rego.BLOCK_TALL_SNAKEROOT);
         }
     }
 
@@ -233,7 +244,9 @@ public class DataProviders
             item(Rego.ITEM_TOURNIQUET);
 
             block(Rego.BLOCK_CATNIP);
-            block(Rego.BLOCK_SHRUB);
+            block(Rego.BLOCK_SPLITLEAF);
+            block(Rego.BLOCK_SNAKEROOT);
+            block(Rego.BLOCK_TALL_SNAKEROOT);
         }
     }
 
@@ -326,9 +339,11 @@ public class DataProviders
             block(Rego.BLOCK_WATERCOLOUR);
             block(Rego.BLOCK_COMA_STONE);
             block(Rego.BLOCK_CATNIP);
-            block(Rego.BLOCK_SHRUB);
+            block(Rego.BLOCK_SPLITLEAF);
+            block(Rego.BLOCK_SNAKEROOT);
+            block(Rego.BLOCK_TALL_SNAKEROOT);
             block(Rego.BLOCK_POTTED_CATNIP);
-            block(Rego.BLOCK_POTTED_SHRUB);
+            block(Rego.BLOCK_POTTED_SPLITLEAF);
             block(Rego.BLOCK_ILLUSIVE_NYLIUM);
             block(Rego.BLOCK_DELUSIVE_NYLIUM);
             block(Rego.BLOCK_IMMATERIAL_NYLIUM);

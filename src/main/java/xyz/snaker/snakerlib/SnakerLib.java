@@ -1,5 +1,27 @@
 package xyz.snaker.snakerlib;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.function.IntFunction;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import xyz.snaker.snakerlib.config.SnakerConfig;
+import xyz.snaker.snakerlib.internal.LevelSavingEvent;
+import xyz.snaker.snakerlib.internal.Single;
+import xyz.snaker.snakerlib.internal.StringNuker;
+import xyz.snaker.snakerlib.internal.log4j.SnakerLogger;
+import xyz.snaker.snakerlib.internal.log4j.SnakerLoggerManager;
+import xyz.snaker.snakerlib.level.entity.SnakerBoss;
+import xyz.snaker.snakerlib.math.Maths;
+
+import org.apache.commons.lang3.RandomStringUtils;
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.system.MemoryUtil;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -15,28 +37,6 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.loading.FMLPaths;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.lwjgl.glfw.GLFW;
-import org.lwjgl.system.MemoryUtil;
-import xyz.snaker.snakerlib.config.SnakerConfig;
-import xyz.snaker.snakerlib.internal.LevelSavingEvent;
-import xyz.snaker.snakerlib.internal.Single;
-import xyz.snaker.snakerlib.internal.StringNuker;
-import xyz.snaker.snakerlib.internal.log4j.Log4jFilter;
-import xyz.snaker.snakerlib.internal.log4j.SnakerLogger;
-import xyz.snaker.snakerlib.internal.log4j.SnakerLoggerManager;
-import xyz.snaker.snakerlib.level.entity.SnakerBoss;
-import xyz.snaker.snakerlib.math.Maths;
-
-import java.io.File;
-import java.nio.file.Path;
-import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.function.IntFunction;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Created by SnakerBone on 5/05/2023
@@ -52,7 +52,6 @@ public class SnakerLib
     public static final Component DISABLE_IN_CONFIG = Component.literal("You can disable this in the config (snakerlib-common.toml) if you wish");
     public static final StackWalker STACK_WALKER = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE);
     public static final SnakerLogger LOGGER = SnakerLoggerManager.INSTANCE.apply(SnakerLib.NAME);
-    public static final Log4jFilter FILTER = new Log4jFilter();
     public static final Single<String> DELEGATE_MOD = new Single<>();
 
     public static final String MODID = "snakerlib";
@@ -80,9 +79,6 @@ public class SnakerLib
 
         //DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> SnakerSprites::initialize);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, SnakerConfig.COMMON_SPEC, "snakerlib-common.toml");
-        SnakerConfig.load(SnakerConfig.COMMON_SPEC, FMLPaths.CONFIGDIR.get().resolve("snakerlib-common.toml").toString());
-
-        Log4jFilter.applicate(FILTER);
     }
 
     public static void initialize()

@@ -1,5 +1,11 @@
 package xyz.snaker.tq.level.entity;
 
+import java.util.HashMap;
+
+import xyz.snaker.snakerlib.math.Maths;
+import xyz.snaker.tq.level.entity.mob.Cosmo;
+import xyz.snaker.tq.rego.Rego;
+
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -10,11 +16,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.RegistryObject;
-import xyz.snaker.snakerlib.math.Maths;
-import xyz.snaker.tq.level.entity.mob.Cosmo;
-import xyz.snaker.tq.rego.Rego;
-
-import java.util.HashMap;
 
 /**
  * Created by SnakerBone on 31/03/2023

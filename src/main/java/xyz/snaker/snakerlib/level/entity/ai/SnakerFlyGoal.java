@@ -1,11 +1,11 @@
 package xyz.snaker.snakerlib.level.entity.ai;
 
+import java.util.EnumSet;
+
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.Goal;
-
-import java.util.EnumSet;
 
 /**
  * Created by SnakerBone on 2/01/2023

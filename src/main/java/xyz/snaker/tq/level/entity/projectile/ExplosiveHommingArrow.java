@@ -1,5 +1,14 @@
 package xyz.snaker.tq.level.entity.projectile;
 
+import java.util.Comparator;
+import java.util.List;
+
+import xyz.snaker.snakerlib.level.entity.SnakerProjectile;
+import xyz.snaker.tq.level.entity.boss.Utterfly;
+import xyz.snaker.tq.rego.Rego;
+
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -10,13 +19,6 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.NotNull;
-import xyz.snaker.snakerlib.level.entity.SnakerProjectile;
-import xyz.snaker.tq.level.entity.boss.Utterfly;
-import xyz.snaker.tq.rego.Rego;
-
-import java.util.Comparator;
-import java.util.List;
 
 /**
  * Created by SnakerBone on 20/02/2023 <br>

@@ -1,5 +1,7 @@
 package xyz.snaker.snakerlib.level.entity;
 
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.world.entity.EntityType;
@@ -8,7 +10,6 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkHooks;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by SnakerBone on 26/05/2023

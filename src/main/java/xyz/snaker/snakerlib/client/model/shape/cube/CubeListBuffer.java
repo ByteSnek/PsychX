@@ -1,17 +1,18 @@
 package xyz.snaker.snakerlib.client.model.shape.cube;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
+import xyz.snaker.snakerlib.SnakerLib;
+import xyz.snaker.snakerlib.internal.AsynchronousHashMap;
+import xyz.snaker.snakerlib.internal.Buffer;
+
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeDefinition;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import xyz.snaker.snakerlib.SnakerLib;
-import xyz.snaker.snakerlib.internal.AsynchronousHashMap;
-import xyz.snaker.snakerlib.internal.Buffer;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by SnakerBone on 2/08/2023

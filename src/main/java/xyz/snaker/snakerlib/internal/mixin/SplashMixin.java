@@ -1,19 +1,21 @@
 package xyz.snaker.snakerlib.internal.mixin;
 
-import net.minecraft.client.resources.SplashManager;
-import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.util.profiling.ProfilerFiller;
+import java.util.Arrays;
+import java.util.List;
+
+import xyz.snaker.snakerlib.SnakerLib;
+import xyz.snaker.snakerlib.data.SnakerConstants;
+
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import xyz.snaker.snakerlib.SnakerLib;
-import xyz.snaker.snakerlib.data.SnakerConstants;
 
-import java.util.Arrays;
-import java.util.List;
+import net.minecraft.client.resources.SplashManager;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.util.profiling.ProfilerFiller;
 
 /**
  * Created by SnakerBone on 29/07/2023

@@ -1,12 +1,14 @@
 package xyz.snaker.tq.level.item.icon;
 
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import org.jetbrains.annotations.NotNull;
+import java.util.function.Consumer;
+
 import xyz.snaker.snakerlib.level.item.SnakerBaseItem;
 import xyz.snaker.tq.client.render.icon.MobTabIconRenderer;
 
-import java.util.function.Consumer;
+import org.jetbrains.annotations.NotNull;
+
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 
 /**
  * Created by SnakerBone on 27/05/2023

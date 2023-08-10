@@ -1,5 +1,14 @@
 package xyz.snaker.tq.level.entity.creature;
 
+import java.util.function.Predicate;
+
+import xyz.snaker.snakerlib.level.entity.SnakerFlyingCreature;
+import xyz.snaker.snakerlib.utility.LevelStuff;
+import xyz.snaker.tq.rego.Rego;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -28,13 +37,6 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.network.NetworkHooks;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import xyz.snaker.snakerlib.level.entity.SnakerFlyingCreature;
-import xyz.snaker.snakerlib.utility.LevelStuff;
-import xyz.snaker.tq.rego.Rego;
-
-import java.util.function.Predicate;
 
 /**
  * Created by SnakerBone on 2/01/2023

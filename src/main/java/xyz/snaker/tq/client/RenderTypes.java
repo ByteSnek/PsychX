@@ -1,13 +1,15 @@
 package xyz.snaker.tq.client;
 
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.VertexFormat;
+import java.util.function.Supplier;
+
+import xyz.snaker.snakerlib.SnakerLib;
+
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
-import xyz.snaker.snakerlib.SnakerLib;
 
-import java.util.function.Supplier;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormat;
 
 import static net.minecraft.client.renderer.RenderStateShard.*;
 

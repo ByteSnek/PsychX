@@ -1,9 +1,9 @@
 {
   "values": [
-    "minecraft:beach",
-    "minecraft:desert",
-    "minecraft:flower_forest",
-    "minecraft:plains",
-    "minecraft:forest"
+    "tq:delusion",
+    "tq:illusive",
+    "tq:immaterial",
+    "tq:spectral",
+    "tq:surreal"
   ]
 }

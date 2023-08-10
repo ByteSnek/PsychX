@@ -1,5 +1,13 @@
 package xyz.snaker.snakerlib.level.entity;
 
+import java.util.Objects;
+import java.util.function.Predicate;
+
+import xyz.snaker.snakerlib.config.SnakerConfig;
+import xyz.snaker.snakerlib.data.SnakerConstants;
+import xyz.snaker.snakerlib.level.entity.ai.SnakerFlyControl;
+import xyz.snaker.snakerlib.level.entity.ai.SnakerSwitchGameModeGoal;
+
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.FlyingMob;
@@ -7,13 +15,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
-import xyz.snaker.snakerlib.config.SnakerConfig;
-import xyz.snaker.snakerlib.data.SnakerConstants;
-import xyz.snaker.snakerlib.level.entity.ai.SnakerFlyControl;
-import xyz.snaker.snakerlib.level.entity.ai.SnakerSwitchGameModeGoal;
-
-import java.util.Objects;
-import java.util.function.Predicate;
 
 /**
  * Created by SnakerBone on 26/05/2023

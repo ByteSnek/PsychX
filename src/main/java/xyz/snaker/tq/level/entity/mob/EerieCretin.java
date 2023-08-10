@@ -1,5 +1,9 @@
 package xyz.snaker.tq.level.entity.mob;
 
+import xyz.snaker.snakerlib.level.entity.SnakerMob;
+import xyz.snaker.snakerlib.utility.LevelStuff;
+import xyz.snaker.tq.rego.Rego;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
@@ -10,9 +14,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import xyz.snaker.snakerlib.level.entity.SnakerMob;
-import xyz.snaker.snakerlib.utility.LevelStuff;
-import xyz.snaker.tq.rego.Rego;
 
 /**
  * Created by SnakerBone on 15/07/2023

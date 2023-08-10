@@ -1,14 +1,15 @@
 package xyz.snaker.snakerlib.level.entity.ai;
 
+import javax.annotation.Nullable;
+
+import xyz.snaker.snakerlib.math.Maths;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.util.AirAndWaterRandomPos;
 import net.minecraft.world.entity.ai.util.HoverRandomPos;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.phys.Vec3;
-import xyz.snaker.snakerlib.math.Maths;
-
-import javax.annotation.Nullable;
 
 /**
  * Created by SnakerBone on 21/02/2023

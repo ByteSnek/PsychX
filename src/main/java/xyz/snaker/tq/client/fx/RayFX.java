@@ -1,17 +1,20 @@
 package xyz.snaker.tq.client.fx;
 
+import java.awt.*;
+
+import xyz.snaker.snakerlib.SnakerLib;
+
+import org.joml.Matrix4f;
+
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.util.RandomSource;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.util.RandomSource;
-import org.joml.Matrix4f;
-import xyz.snaker.snakerlib.SnakerLib;
-
-import java.awt.*;
 
 /**
  * Created by SnakerBone on 20/02/2023

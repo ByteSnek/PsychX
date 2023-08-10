@@ -1,5 +1,16 @@
 package xyz.snaker.snakerlib.level.entity;
 
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+import xyz.snaker.snakerlib.data.SnakerConstants;
+import xyz.snaker.snakerlib.level.entity.ai.SnakerFlyControl;
+import xyz.snaker.snakerlib.level.entity.ai.SnakerSwitchGameModeGoal;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
@@ -10,15 +21,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import xyz.snaker.snakerlib.data.SnakerConstants;
-import xyz.snaker.snakerlib.level.entity.ai.SnakerFlyControl;
-import xyz.snaker.snakerlib.level.entity.ai.SnakerSwitchGameModeGoal;
-
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
 
 /**
  * Created by SnakerBone on 4/01/2023

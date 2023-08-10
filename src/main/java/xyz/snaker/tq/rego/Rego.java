@@ -1,5 +1,36 @@
 package xyz.snaker.tq.rego;
 
+import java.util.Map;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+
+import xyz.snaker.snakerlib.SnakerLib;
+import xyz.snaker.snakerlib.data.SnakerConstants;
+import xyz.snaker.snakerlib.internal.AsynchronousHashMap;
+import xyz.snaker.snakerlib.math.Maths;
+import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.snakerlib.utility.SketchyStuff;
+import xyz.snaker.tq.Tourniqueted;
+import xyz.snaker.tq.level.block.ComatoseNyliumBlock;
+import xyz.snaker.tq.level.block.ShaderBlock;
+import xyz.snaker.tq.level.block.ShaderBlockItem;
+import xyz.snaker.tq.level.block.entity.ShaderBlockEntity;
+import xyz.snaker.tq.level.effect.Syncope;
+import xyz.snaker.tq.level.entity.EntityDropHandler;
+import xyz.snaker.tq.level.entity.boss.AntiCosmo;
+import xyz.snaker.tq.level.entity.boss.Utterfly;
+import xyz.snaker.tq.level.entity.creature.Flutterfly;
+import xyz.snaker.tq.level.entity.creature.Frolicker;
+import xyz.snaker.tq.level.entity.mob.*;
+import xyz.snaker.tq.level.entity.projectile.CosmicRay;
+import xyz.snaker.tq.level.entity.projectile.ExplosiveHommingArrow;
+import xyz.snaker.tq.level.entity.projectile.HommingArrow;
+import xyz.snaker.tq.level.item.CosmoSpine;
+import xyz.snaker.tq.level.item.Tourniquet;
+import xyz.snaker.tq.level.item.icon.BlockTabIcon;
+import xyz.snaker.tq.level.item.icon.ItemTabIcon;
+import xyz.snaker.tq.level.item.icon.MobTabIcon;
+
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -37,35 +68,6 @@ import net.minecraftforge.network.IContainerFactory;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import xyz.snaker.snakerlib.SnakerLib;
-import xyz.snaker.snakerlib.data.SnakerConstants;
-import xyz.snaker.snakerlib.internal.AsynchronousHashMap;
-import xyz.snaker.snakerlib.utility.ResourcePath;
-import xyz.snaker.snakerlib.utility.SketchyStuff;
-import xyz.snaker.tq.Tourniqueted;
-import xyz.snaker.tq.level.block.ComatoseNyliumBlock;
-import xyz.snaker.tq.level.block.ShaderBlock;
-import xyz.snaker.tq.level.block.ShaderBlockItem;
-import xyz.snaker.tq.level.block.entity.ShaderBlockEntity;
-import xyz.snaker.tq.level.effect.Syncope;
-import xyz.snaker.tq.level.entity.EntityDropHandler;
-import xyz.snaker.tq.level.entity.boss.AntiCosmo;
-import xyz.snaker.tq.level.entity.boss.Utterfly;
-import xyz.snaker.tq.level.entity.creature.Flutterfly;
-import xyz.snaker.tq.level.entity.creature.Frolicker;
-import xyz.snaker.tq.level.entity.mob.*;
-import xyz.snaker.tq.level.entity.projectile.CosmicRay;
-import xyz.snaker.tq.level.entity.projectile.ExplosiveHommingArrow;
-import xyz.snaker.tq.level.entity.projectile.HommingArrow;
-import xyz.snaker.tq.level.item.CosmoSpine;
-import xyz.snaker.tq.level.item.Tourniquet;
-import xyz.snaker.tq.level.item.icon.BlockTabIcon;
-import xyz.snaker.tq.level.item.icon.ItemTabIcon;
-import xyz.snaker.tq.level.item.icon.MobTabIcon;
-
-import java.util.Map;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 /**
  * Created by SnakerBone on 12/12/2022
@@ -113,10 +115,12 @@ public class Rego
     public static final RegistryObject<Block> BLOCK_FLARE = blockWithoutItem("flare_block", () -> new ShaderBlock<>(Rego.BE_FLARE));
     public static final RegistryObject<Block> BLOCK_STARRY = blockWithoutItem("starry_block", () -> new ShaderBlock<>(Rego.BE_STARRY));
 
-    public static final RegistryObject<Block> BLOCK_CATNIP = blockWithItem("catnip", () -> new FlowerBlock(Rego.EFFECT_SYNCOPE::get, 600, SnakerConstants.BlockProperties.PLANT));
-    public static final RegistryObject<Block> BLOCK_SHRUB = blockWithItem("shrub", () -> new FlowerBlock(Rego.EFFECT_SYNCOPE::get, 600, SnakerConstants.BlockProperties.PLANT));
+    public static final RegistryObject<Block> BLOCK_CATNIP = blockWithItem("catnip", () -> new FlowerBlock(Rego.EFFECT_SYNCOPE::get, Maths.secondsToTicks(5), SnakerConstants.BlockProperties.FLOWER));
+    public static final RegistryObject<Block> BLOCK_SPLITLEAF = blockWithItem("splitleaf", () -> new FlowerBlock(Rego.EFFECT_SYNCOPE::get, Maths.secondsToTicks(5), SnakerConstants.BlockProperties.FLOWER));
+    public static final RegistryObject<Block> BLOCK_SNAKEROOT = blockWithItem("snakeroot", () -> new TallGrassBlock(SnakerConstants.BlockProperties.GRASS));
+    public static final RegistryObject<Block> BLOCK_TALL_SNAKEROOT = blockWithItem("tall_snakeroot", () -> new TallGrassBlock(SnakerConstants.BlockProperties.GRASS));
     public static final RegistryObject<Block> BLOCK_POTTED_CATNIP = BLOCKS.register("potted_catnip", () -> new FlowerPotBlock(() -> SketchyStuff.cast(Blocks.FLOWER_POT), BLOCK_CATNIP, SnakerConstants.BlockProperties.NORMAL));
-    public static final RegistryObject<Block> BLOCK_POTTED_SHRUB = BLOCKS.register("potted_shrub", () -> new FlowerPotBlock(() -> SketchyStuff.cast(Blocks.FLOWER_POT), BLOCK_SHRUB, SnakerConstants.BlockProperties.NORMAL));
+    public static final RegistryObject<Block> BLOCK_POTTED_SPLITLEAF = BLOCKS.register("potted_splitleaf", () -> new FlowerPotBlock(() -> SketchyStuff.cast(Blocks.FLOWER_POT), BLOCK_SPLITLEAF, SnakerConstants.BlockProperties.NORMAL));
 
     public static final RegistryObject<Block> BLOCK_COMA_STONE = blockWithItem("coma_stone", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.NONE).strength(0.5F).sound(SoundType.NETHER_ORE)));
     public static final RegistryObject<Block> BLOCK_DELUSIVE_NYLIUM = blockWithItem("delusive_nylium", ComatoseNyliumBlock::new);
@@ -339,7 +343,7 @@ public class Rego
     public static class Keys
     {
         public static final ResourceKey<Level> COMATOSE = ResourceKey.create(Registries.DIMENSION, new ResourcePath("comatose"));
-        public static final ResourceKey<Biome> DELUSIVE = ResourceKey.create(Registries.BIOME, new ResourcePath("delusive"));
+        public static final ResourceKey<Biome> DELUSION = ResourceKey.create(Registries.BIOME, new ResourcePath("delusion"));
         public static final ResourceKey<Biome> ILLUSIVE = ResourceKey.create(Registries.BIOME, new ResourcePath("illusive"));
         public static final ResourceKey<Biome> IMMATERIAL = ResourceKey.create(Registries.BIOME, new ResourcePath("immaterial"));
         public static final ResourceKey<Biome> SPECTRAL = ResourceKey.create(Registries.BIOME, new ResourcePath("spectral"));

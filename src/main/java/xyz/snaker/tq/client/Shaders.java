@@ -1,19 +1,21 @@
 package xyz.snaker.tq.client;
 
-import com.mojang.blaze3d.shaders.Uniform;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.VertexFormat;
+import java.util.function.Consumer;
+
+import xyz.snaker.snakerlib.SnakerLib;
+import xyz.snaker.snakerlib.client.shader.Shader;
+import xyz.snaker.snakerlib.utility.ResourcePath;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraftforge.client.event.RegisterShadersEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import xyz.snaker.snakerlib.SnakerLib;
-import xyz.snaker.snakerlib.client.shader.Shader;
-import xyz.snaker.snakerlib.utility.ResourcePath;
 
-import java.util.function.Consumer;
+import com.mojang.blaze3d.shaders.Uniform;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormat;
 
 /**
  * Created by SnakerBone on 2/01/2023

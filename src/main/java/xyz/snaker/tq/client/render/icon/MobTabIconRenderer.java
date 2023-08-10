@@ -1,9 +1,18 @@
 package xyz.snaker.tq.client.render.icon;
 
-import com.mojang.blaze3d.platform.Lighting;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
+import xyz.snaker.snakerlib.SnakerLib;
+import xyz.snaker.snakerlib.client.render.CyclicalIconRenderer;
+import xyz.snaker.snakerlib.math.Maths;
+import xyz.snaker.tq.level.entity.boss.AntiCosmo;
+import xyz.snaker.tq.level.entity.boss.Utterfly;
+import xyz.snaker.tq.level.entity.creature.Flutterfly;
+import xyz.snaker.tq.level.entity.creature.Frolicker;
+import xyz.snaker.tq.level.entity.mob.*;
+import xyz.snaker.tq.rego.Rego;
+
+import org.jetbrains.annotations.NotNull;
+import org.joml.Quaternionf;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.MouseHandler;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -14,17 +23,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
-import org.joml.Quaternionf;
-import xyz.snaker.snakerlib.SnakerLib;
-import xyz.snaker.snakerlib.client.render.CyclicalIconRenderer;
-import xyz.snaker.snakerlib.math.Maths;
-import xyz.snaker.tq.level.entity.boss.AntiCosmo;
-import xyz.snaker.tq.level.entity.boss.Utterfly;
-import xyz.snaker.tq.level.entity.creature.Flutterfly;
-import xyz.snaker.tq.level.entity.creature.Frolicker;
-import xyz.snaker.tq.level.entity.mob.*;
-import xyz.snaker.tq.rego.Rego;
+
+import com.mojang.blaze3d.platform.Lighting;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 
 /**
  * Created by SnakerBone on 27/05/2023

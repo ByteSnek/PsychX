@@ -1,7 +1,8 @@
 package xyz.snaker.snakerlib.utility;
 
-import net.minecraft.resources.ResourceLocation;
 import xyz.snaker.snakerlib.SnakerLib;
+
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * Created by SnakerBone on 15/02/2023

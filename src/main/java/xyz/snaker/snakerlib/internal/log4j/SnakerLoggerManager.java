@@ -1,9 +1,9 @@
 package xyz.snaker.snakerlib.internal.log4j;
 
-import xyz.snaker.snakerlib.SnakerLib;
-
 import java.util.Formatter;
 import java.util.function.Function;
+
+import xyz.snaker.snakerlib.SnakerLib;
 
 /**
  * Created by SnakerBone on 9/07/2023

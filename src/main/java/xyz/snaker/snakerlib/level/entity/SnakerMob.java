@@ -1,5 +1,8 @@
 package xyz.snaker.snakerlib.level.entity;
 
+import xyz.snaker.snakerlib.data.SnakerConstants;
+import xyz.snaker.snakerlib.level.entity.ai.SnakerSwitchGameModeGoal;
+
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
@@ -7,8 +10,6 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import xyz.snaker.snakerlib.data.SnakerConstants;
-import xyz.snaker.snakerlib.level.entity.ai.SnakerSwitchGameModeGoal;
 
 /**
  * Created by SnakerBone on 2/01/2023

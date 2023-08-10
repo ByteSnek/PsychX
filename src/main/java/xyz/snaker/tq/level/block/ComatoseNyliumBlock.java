@@ -1,5 +1,9 @@
 package xyz.snaker.tq.level.block;
 
+import xyz.snaker.tq.rego.Rego;
+
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -12,8 +16,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.lighting.LightEngine;
 import net.minecraft.world.level.material.MapColor;
-import org.jetbrains.annotations.NotNull;
-import xyz.snaker.tq.rego.Rego;
 
 /**
  * Created by SnakerBone on 15/07/2023

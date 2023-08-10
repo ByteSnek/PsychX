@@ -1,5 +1,10 @@
 package xyz.snaker.snakerlib.level.entity;
 
+import xyz.snaker.snakerlib.data.SnakerConstants;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
@@ -8,9 +13,6 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import xyz.snaker.snakerlib.data.SnakerConstants;
 
 /**
  * Created by SnakerBone on 23/05/2023

@@ -1,5 +1,13 @@
 package xyz.snaker.tq.level.item;
 
+import xyz.snaker.snakerlib.data.SnakerConstants;
+import xyz.snaker.snakerlib.level.item.SnakerBaseItem;
+import xyz.snaker.snakerlib.math.Maths;
+import xyz.snaker.tq.level.world.dimension.Comatose;
+import xyz.snaker.tq.rego.Rego;
+
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -12,12 +20,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.NotNull;
-import xyz.snaker.snakerlib.data.SnakerConstants;
-import xyz.snaker.snakerlib.level.item.SnakerBaseItem;
-import xyz.snaker.snakerlib.math.Maths;
-import xyz.snaker.tq.level.world.dimension.Comatose;
-import xyz.snaker.tq.rego.Rego;
 
 /**
  * Created by SnakerBone on 7/07/2023

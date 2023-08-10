@@ -1,6 +1,12 @@
 package xyz.snaker.snakerlib.utility;
 
-import com.mojang.serialization.Lifecycle;
+import java.util.List;
+
+import xyz.snaker.snakerlib.SnakerLib;
+import xyz.snaker.snakerlib.internal.MultiMap;
+
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
@@ -12,11 +18,8 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.jetbrains.annotations.NotNull;
-import xyz.snaker.snakerlib.SnakerLib;
-import xyz.snaker.snakerlib.internal.MultiMap;
 
-import java.util.List;
+import com.mojang.serialization.Lifecycle;
 
 /**
  * Created by SnakerBone on 4/08/2023

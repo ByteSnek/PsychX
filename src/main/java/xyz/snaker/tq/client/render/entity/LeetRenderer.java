@@ -1,15 +1,18 @@
 package xyz.snaker.tq.client.render.entity;
 
-import com.mojang.blaze3d.vertex.PoseStack;
+import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.tq.client.layer.LeetLayer;
+import xyz.snaker.tq.client.model.entity.LeetModel;
+import xyz.snaker.tq.level.entity.mob.Leet;
+
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
-import xyz.snaker.tq.client.layer.LeetLayer;
-import xyz.snaker.tq.client.model.entity.LeetModel;
-import xyz.snaker.tq.level.entity.mob.Leet;
-import xyz.snaker.snakerlib.utility.ResourcePath;
+
+import com.mojang.blaze3d.vertex.PoseStack;
 
 /**
  * Created by SnakerBone on 2/01/2023

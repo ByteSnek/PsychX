@@ -1,15 +1,18 @@
 package xyz.snaker.tq.client.render.block;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
+import xyz.snaker.snakerlib.client.render.PreppedRenderer;
+import xyz.snaker.snakerlib.math.BasicCube;
+
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
-import xyz.snaker.snakerlib.client.render.PreppedRenderer;
-import xyz.snaker.snakerlib.math.BasicCube;
+
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 
 /**
  * Created by SnakerBone on 28/04/2023

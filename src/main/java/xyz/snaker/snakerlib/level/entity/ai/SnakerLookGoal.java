@@ -1,12 +1,13 @@
 package xyz.snaker.snakerlib.level.entity.ai;
 
+import java.util.EnumSet;
+
+import xyz.snaker.snakerlib.math.Maths;
+
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.phys.Vec3;
-import xyz.snaker.snakerlib.math.Maths;
-
-import java.util.EnumSet;
 
 /**
  * Created by SnakerBone on 2/01/2023

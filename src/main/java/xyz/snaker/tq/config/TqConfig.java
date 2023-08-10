@@ -1,7 +1,8 @@
 package xyz.snaker.tq.config;
 
-import net.minecraftforge.common.ForgeConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
+
+import net.minecraftforge.common.ForgeConfigSpec;
 
 /**
  * Created by SnakerBone on 16/07/2023

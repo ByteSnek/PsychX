@@ -1,13 +1,13 @@
 package xyz.snaker.tq.level.world.dimension;
 
+import java.util.function.Function;
+
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.portal.PortalInfo;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.ITeleporter;
-
-import java.util.function.Function;
 
 /**
  * Created by SnakerBone on 29/07/2023

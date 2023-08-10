@@ -1,24 +1,27 @@
 package xyz.snaker.tq.client.fx;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import java.io.FileWriter;
+import java.net.URL;
+
+import xyz.snaker.snakerlib.utility.RenderStuff;
+import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.tq.config.TqConfig;
+import xyz.snaker.tq.rego.Rego;
+
+import org.joml.Matrix3d;
+import org.joml.Vector3d;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import org.joml.Matrix3d;
-import org.joml.Vector3d;
-import xyz.snaker.snakerlib.utility.RenderStuff;
-import xyz.snaker.snakerlib.utility.ResourcePath;
-import xyz.snaker.tq.config.TqConfig;
-import xyz.snaker.tq.rego.Rego;
 
-import java.io.FileWriter;
-import java.net.URL;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 /**
  * Created by SnakerBone on 6/07/2023

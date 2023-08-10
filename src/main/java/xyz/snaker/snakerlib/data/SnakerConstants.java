@@ -23,7 +23,8 @@ public class SnakerConstants
     {
         public static final BlockBehaviour.Properties EMPTY = BlockBehaviour.Properties.of();
         public static final BlockBehaviour.Properties NORMAL = BlockBehaviour.Properties.of().mapColor(MapColor.NONE).sound(SoundType.STONE).pushReaction(PushReaction.NORMAL);
-        public static final BlockBehaviour.Properties PLANT = BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY).instabreak().noCollission();
+        public static final BlockBehaviour.Properties FLOWER = BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY).instabreak().noCollission().ignitedByLava();
+        public static final BlockBehaviour.Properties GRASS = BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY).instabreak().noCollission().ignitedByLava().replaceable();
         public static final BlockBehaviour.Properties PERSPECTIVE = BlockBehaviour.Properties.of().mapColor(MapColor.NONE).sound(SoundType.STONE).pushReaction(PushReaction.IGNORE /*Rendering precautions*/).strength(5).noOcclusion().dynamicShape();
     }
 

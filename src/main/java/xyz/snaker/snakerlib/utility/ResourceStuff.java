@@ -1,5 +1,7 @@
 package xyz.snaker.snakerlib.utility;
 
+import java.util.Objects;
+
 import net.minecraft.commands.synchronization.ArgumentTypeInfo;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.resources.ResourceLocation;
@@ -33,8 +35,6 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.Objects;
 
 /**
  * Created by SnakerBone on 19/05/2023

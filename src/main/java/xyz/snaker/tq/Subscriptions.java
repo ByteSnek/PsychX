@@ -1,7 +1,23 @@
 package xyz.snaker.tq;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
+import xyz.snaker.snakerlib.SnakerLib;
+import xyz.snaker.snakerlib.math.PoseStackBuilder;
+import xyz.snaker.snakerlib.utility.LevelStuff;
+import xyz.snaker.snakerlib.utility.MiscStuff;
+import xyz.snaker.tq.client.fx.SyncopeFX;
+import xyz.snaker.tq.client.model.entity.*;
+import xyz.snaker.tq.client.model.item.CosmoSpineModel;
+import xyz.snaker.tq.client.render.block.ShaderBlockRenderer;
+import xyz.snaker.tq.client.render.entity.*;
+import xyz.snaker.tq.config.TqConfig;
+import xyz.snaker.tq.level.effect.Syncope;
+import xyz.snaker.tq.level.entity.boss.AntiCosmo;
+import xyz.snaker.tq.level.entity.boss.Utterfly;
+import xyz.snaker.tq.level.entity.creature.Flutterfly;
+import xyz.snaker.tq.level.entity.creature.Frolicker;
+import xyz.snaker.tq.level.entity.mob.*;
+import xyz.snaker.tq.rego.Rego;
+
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -28,23 +44,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.registries.RegistryObject;
-import xyz.snaker.snakerlib.SnakerLib;
-import xyz.snaker.snakerlib.math.PoseStackBuilder;
-import xyz.snaker.snakerlib.utility.LevelStuff;
-import xyz.snaker.snakerlib.utility.MiscStuff;
-import xyz.snaker.tq.client.fx.SyncopeFX;
-import xyz.snaker.tq.client.model.entity.*;
-import xyz.snaker.tq.client.model.item.CosmoSpineModel;
-import xyz.snaker.tq.client.render.block.ShaderBlockRenderer;
-import xyz.snaker.tq.client.render.entity.*;
-import xyz.snaker.tq.config.TqConfig;
-import xyz.snaker.tq.level.effect.Syncope;
-import xyz.snaker.tq.level.entity.boss.AntiCosmo;
-import xyz.snaker.tq.level.entity.boss.Utterfly;
-import xyz.snaker.tq.level.entity.creature.Flutterfly;
-import xyz.snaker.tq.level.entity.creature.Frolicker;
-import xyz.snaker.tq.level.entity.mob.*;
-import xyz.snaker.tq.rego.Rego;
+
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 
 /**
  * Created by SnakerBone on 2/01/2023
@@ -96,7 +98,7 @@ public class Subscriptions
         public static void commonSetup(FMLCommonSetupEvent event)
         {
             MiscStuff.addFlowerPotPlant(Rego.BLOCK_CATNIP, Rego.BLOCK_POTTED_CATNIP);
-            MiscStuff.addFlowerPotPlant(Rego.BLOCK_SHRUB, Rego.BLOCK_POTTED_SHRUB);
+            MiscStuff.addFlowerPotPlant(Rego.BLOCK_SPLITLEAF, Rego.BLOCK_POTTED_SPLITLEAF);
         }
 
         @SubscribeEvent

@@ -1,9 +1,16 @@
 package xyz.snaker.tq.client;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+import xyz.snaker.snakerlib.SnakerLib;
+import xyz.snaker.snakerlib.level.entity.SnakerBoss;
+import xyz.snaker.snakerlib.level.entity.SnakerFlyingBoss;
+import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.tq.level.entity.boss.AntiCosmo;
+import xyz.snaker.tq.level.entity.boss.Utterfly;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.BossHealthOverlay;
@@ -14,16 +21,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.BossEvent;
 import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
-import xyz.snaker.snakerlib.SnakerLib;
-import xyz.snaker.snakerlib.level.entity.SnakerBoss;
-import xyz.snaker.snakerlib.level.entity.SnakerFlyingBoss;
-import xyz.snaker.tq.level.entity.boss.AntiCosmo;
-import xyz.snaker.tq.level.entity.boss.Utterfly;
-import xyz.snaker.snakerlib.utility.ResourcePath;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.concurrent.CopyOnWriteArrayList;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 
 /**
  * Created by SnakerBone on 30/03/2023

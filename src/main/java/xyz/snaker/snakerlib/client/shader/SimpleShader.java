@@ -1,12 +1,13 @@
 package xyz.snaker.snakerlib.client.shader;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
+import java.util.function.Supplier;
+
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
 
-import java.util.function.Supplier;
+import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 
 /**
  * Created by SnakerBone on 12/05/2023

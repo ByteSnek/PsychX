@@ -1,5 +1,13 @@
 package xyz.snaker.tq.level.entity.boss;
 
+import java.util.UUID;
+
+import xyz.snaker.snakerlib.level.entity.SnakerBoss;
+import xyz.snaker.snakerlib.utility.ResourcePath;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.bossevents.CustomBossEvent;
 import net.minecraft.server.level.ServerPlayer;
@@ -14,12 +22,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import xyz.snaker.snakerlib.level.entity.SnakerBoss;
-import xyz.snaker.snakerlib.utility.ResourcePath;
-
-import java.util.UUID;
 
 /**
  * Created by SnakerBone on 18/06/2023

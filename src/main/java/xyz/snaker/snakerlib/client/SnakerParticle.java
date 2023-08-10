@@ -1,11 +1,12 @@
 package xyz.snaker.snakerlib.client;
 
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
+
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
 
 /**
  * Created by SnakerBone on 11/05/2023

@@ -1,16 +1,19 @@
 package xyz.snaker.tq.client.render.item;
 
-import com.mojang.blaze3d.vertex.PoseStack;
+import xyz.snaker.snakerlib.client.render.PreppedRenderer;
+import xyz.snaker.snakerlib.math.PoseStackBuilder;
+import xyz.snaker.tq.client.model.item.CosmoSpineModel;
+
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
-import xyz.snaker.snakerlib.client.render.PreppedRenderer;
-import xyz.snaker.snakerlib.math.PoseStackBuilder;
-import xyz.snaker.tq.client.model.item.CosmoSpineModel;
+
+import com.mojang.blaze3d.vertex.PoseStack;
 
 /**
  * Created by SnakerBone on 12/03/2023

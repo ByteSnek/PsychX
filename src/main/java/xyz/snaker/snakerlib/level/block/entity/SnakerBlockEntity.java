@@ -1,5 +1,7 @@
 package xyz.snaker.snakerlib.level.block.entity;
 
+import java.util.List;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -11,8 +13,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-
-import java.util.List;
 
 /**
  * Created by SnakerBone on 27/06/2023

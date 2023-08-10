@@ -1,5 +1,13 @@
 package xyz.snaker.snakerlib.level.entity;
 
+import javax.annotation.Nullable;
+
+import xyz.snaker.snakerlib.data.SnakerConstants;
+import xyz.snaker.snakerlib.level.entity.ai.SnakerLookGoal;
+import xyz.snaker.snakerlib.level.entity.ai.SnakerWanderGoal;
+
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
@@ -17,12 +25,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
-import org.jetbrains.annotations.NotNull;
-import xyz.snaker.snakerlib.data.SnakerConstants;
-import xyz.snaker.snakerlib.level.entity.ai.SnakerLookGoal;
-import xyz.snaker.snakerlib.level.entity.ai.SnakerWanderGoal;
-
-import javax.annotation.Nullable;
 
 /**
  * Created by SnakerBone on 2/01/2023

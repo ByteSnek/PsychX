@@ -1,5 +1,16 @@
 package xyz.snaker.tq.level.entity.mob;
 
+import java.util.List;
+import java.util.function.Predicate;
+
+import xyz.snaker.snakerlib.data.SnakerConstants;
+import xyz.snaker.snakerlib.math.Maths;
+import xyz.snaker.snakerlib.utility.LevelStuff;
+import xyz.snaker.snakerlib.utility.MiscStuff;
+import xyz.snaker.tq.rego.Rego;
+
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.Packet;
@@ -24,15 +35,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.network.NetworkHooks;
-import org.jetbrains.annotations.NotNull;
-import xyz.snaker.snakerlib.data.SnakerConstants;
-import xyz.snaker.snakerlib.math.Maths;
-import xyz.snaker.snakerlib.utility.LevelStuff;
-import xyz.snaker.snakerlib.utility.MiscStuff;
-import xyz.snaker.tq.rego.Rego;
-
-import java.util.List;
-import java.util.function.Predicate;
 
 /**
  * Created by SnakerBone on 16/03/2023

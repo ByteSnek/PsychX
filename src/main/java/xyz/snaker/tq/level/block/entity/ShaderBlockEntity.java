@@ -1,11 +1,12 @@
 package xyz.snaker.tq.level.block.entity;
 
+import xyz.snaker.snakerlib.level.block.entity.SnakerBlockEntity;
+import xyz.snaker.tq.rego.Rego;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.registries.RegistryObject;
-import xyz.snaker.snakerlib.level.block.entity.SnakerBlockEntity;
-import xyz.snaker.tq.rego.Rego;
 
 /**
  * Created by SnakerBone on 28/04/2023

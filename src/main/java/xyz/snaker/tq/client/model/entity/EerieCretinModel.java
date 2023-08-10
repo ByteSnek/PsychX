@@ -1,16 +1,19 @@
 package xyz.snaker.tq.client.model.entity;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
+import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.tq.level.entity.mob.EerieCretin;
+
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
-import org.jetbrains.annotations.NotNull;
-import xyz.snaker.tq.level.entity.mob.EerieCretin;
-import xyz.snaker.snakerlib.utility.ResourcePath;
+
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 
 public class EerieCretinModel extends EntityModel<EerieCretin>
 {

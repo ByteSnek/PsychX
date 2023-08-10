@@ -1,15 +1,18 @@
 package xyz.snaker.tq.client.layer;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.entity.RenderLayerParent;
-import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import org.jetbrains.annotations.NotNull;
 import xyz.snaker.snakerlib.utility.RenderStuff;
 import xyz.snaker.tq.client.RenderTypes;
 import xyz.snaker.tq.client.Shaders;
 import xyz.snaker.tq.client.model.entity.UtterflyModel;
 import xyz.snaker.tq.level.entity.boss.Utterfly;
+
+import org.jetbrains.annotations.NotNull;
+
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
+
+import com.mojang.blaze3d.vertex.PoseStack;
 
 /**
  * Created by SnakerBone on 25/03/2023

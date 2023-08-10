@@ -1,5 +1,15 @@
 package xyz.snaker.snakerlib.level.item;
 
+import java.util.List;
+import javax.annotation.Nonnull;
+
+import xyz.snaker.snakerlib.data.SnakerConstants;
+
+import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.lwjgl.glfw.GLFW;
+
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -8,14 +18,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import org.apache.commons.lang3.StringUtils;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.lwjgl.glfw.GLFW;
-import xyz.snaker.snakerlib.data.SnakerConstants;
-
-import javax.annotation.Nonnull;
-import java.util.List;
 
 /**
  * Created by SnakerBone on 17/03/2023

@@ -1,5 +1,16 @@
 package xyz.snaker.tq.level.entity.mob;
 
+import java.util.function.Predicate;
+
+import xyz.snaker.snakerlib.level.entity.SnakerMob;
+import xyz.snaker.snakerlib.utility.LevelStuff;
+import xyz.snaker.tq.client.render.entity.CosmoRenderer;
+import xyz.snaker.tq.level.entity.EntityVariants;
+import xyz.snaker.tq.rego.Rego;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import net.minecraft.Util;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
@@ -30,15 +41,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.network.NetworkHooks;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import xyz.snaker.snakerlib.level.entity.SnakerMob;
-import xyz.snaker.snakerlib.utility.LevelStuff;
-import xyz.snaker.tq.client.render.entity.CosmoRenderer;
-import xyz.snaker.tq.level.entity.EntityVariants;
-import xyz.snaker.tq.rego.Rego;
-
-import java.util.function.Predicate;
 
 /**
  * Created by SnakerBone on 2/01/2023
