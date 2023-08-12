@@ -22,8 +22,6 @@ logs
 eclipse
 run
 maven
-maven/*.bat
-maven/*.jar
 
 # Files from Forge MDK
 forge*changelog.txt
