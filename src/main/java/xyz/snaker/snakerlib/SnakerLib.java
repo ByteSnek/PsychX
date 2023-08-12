@@ -1,14 +1,17 @@
 package xyz.snaker.snakerlib;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import xyz.snaker.snakerlib.client.render.processor.SimpleRenderTypeProcessor;
 import xyz.snaker.snakerlib.config.SnakerConfig;
 import xyz.snaker.snakerlib.internal.LevelSavingEvent;
 import xyz.snaker.snakerlib.internal.Single;
@@ -18,13 +21,12 @@ import xyz.snaker.snakerlib.internal.log4j.SnakerLoggerManager;
 import xyz.snaker.snakerlib.level.entity.SnakerBoss;
 import xyz.snaker.snakerlib.math.Maths;
 
-import org.apache.commons.lang3.RandomStringUtils;
-import org.lwjgl.glfw.GLFW;
-import org.lwjgl.system.MemoryUtil;
-
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Rarity;
 import net.minecraftforge.common.MinecraftForge;
@@ -38,14 +40,28 @@ import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
+import org.apache.commons.lang3.RandomStringUtils;
+import org.jetbrains.annotations.Nullable;
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.system.MemoryUtil;
+
+import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.datafixers.util.Pair;
+
+import lombok.Getter;
+
 /**
  * Created by SnakerBone on 5/05/2023
  **/
 public class SnakerLib
 {
     private volatile boolean notify = true;
+    private static volatile boolean initialized = false;
+    private static volatile boolean registered = false;
 
+    @Getter
     private static long clientTickCount = 0;
+    @Getter
     private static long serverTickCount = 0;
 
     public static final Component VIRTUAL_MACHINE_FORCE_CRASH_KEYBINDS_PRESSED = Component.literal("Left shift and F4 pressed.");
@@ -58,17 +74,6 @@ public class SnakerLib
     public static final String NAME = "SnakerLib";
 
     public static Path runFolder;
-
-    public static final String[] DATAFLOW_ISSUES = {
-            "Incorrect Key ", "Registry ", "Channel ", "Holder ", "Applying ", "[forge] ",
-            "Could not authorize you against Realms server: Invalid session id",
-            "Shader rendertype_entity_translucent_emissive could not find sampler named Sampler2 in the specified shader program.",
-            "Missing sound for event: minecraft:entity.goat.screaming.horn_break",
-            "Missing sound for event: minecraft:item.goat_horn.play",
-            "Shader color_convolve could not find uniform named InSize in the specified shader program.",
-            "Shader phosphor could not find uniform named InSize in the specified shader program.",
-            "Unable to parse the boolean system property 'java.net.preferIPv6Addresses':system - using the default value: false"
-    };
 
     public SnakerLib()
     {
@@ -84,13 +89,112 @@ public class SnakerLib
     public static void initialize()
     {
         Class<?> clazz = STACK_WALKER.getCallerClass();
-        String modid = clazz.getAnnotation(Mod.class).value();
-        if (!isInvalidString(modid)) {
-            DELEGATE_MOD.set(modid);
-            String modName = DELEGATE_MOD.get();
-            SnakerLib.LOGGER.infof("Successfully initialized mod '%s' to SnakerLib", modName);
+
+        if (initialized) {
+            throw new RuntimeException("SnakerLib has already been initialized");
+        } else {
+            if (!clazz.isAnnotationPresent(Mod.class)) {
+                throw new RuntimeException(String.format("Could not initialize mod to SnakerLib: Class '%s' is not annotated with @Mod", clazz.getSimpleName()));
+            }
+
+            String modid = clazz.getAnnotation(Mod.class).value();
+
+            if (isValidString(modid)) {
+                DELEGATE_MOD.set(modid);
+                String name = DELEGATE_MOD.get();
+                SnakerLib.LOGGER.infof("Successfully initialized mod '%s' to SnakerLib", name);
+                initialized = true;
+            } else {
+                throw new RuntimeException(String.format("Could not initialize mod '%s' to SnakerLib: modid is invalid", modid));
+            }
+
+            if (registered) {
+                throw new RuntimeException("SnakerLib has already been registered");
+            } else {
+                MinecraftForge.EVENT_BUS.register(new SnakerLib());
+                registered = true;
+            }
         }
-        MinecraftForge.EVENT_BUS.register(new SnakerLib());
+    }
+
+    public static String getFieldName(Object obj, Class<?> parent, boolean lowercase)
+    {
+        Field[] fields = parent.getFields();
+
+        if (obj == null) {
+            throw new NullPointerException("Field cannot be null");
+        }
+
+        if (obj.getClass() != parent) {
+            throw new RuntimeException("Field must be apart of the parent class");
+        }
+
+        if (Arrays.stream(fields).toList().isEmpty()) {
+            SnakerLib.LOGGER.warnf("No recognizable fields found in class '%s'", parent.getSimpleName());
+            return null;
+        }
+
+        for (Field field : fields) {
+            Object object;
+
+            try {
+                object = field.get(parent);
+            } catch (Exception e) {
+                throw new Error(e);
+            }
+
+            if (obj.equals(object)) {
+                return lowercase ? field.getName().toLowerCase() : field.getName();
+            }
+        }
+
+        return null;
+    }
+
+    public static String getFieldName(Object obj, Class<?> parent)
+    {
+        return getFieldName(obj, parent, true);
+    }
+
+    public static String getFieldName(Object obj, boolean lowercase)
+    {
+        Class<?> parent = STACK_WALKER.getCallerClass();
+        Field[] fields = parent.getFields();
+
+        if (obj == null) {
+            throw new NullPointerException("Field cannot be null");
+        }
+
+        if (obj.getClass() != parent) {
+            SnakerLib.LOGGER.errorf("Hint: Caller class '%s' is not apart of the parent class", parent.getSimpleName());
+            throw new RuntimeException("Field must be apart of the parent class");
+        }
+
+        if (Arrays.stream(fields).toList().isEmpty()) {
+            SnakerLib.LOGGER.warnf("No recognizable fields found in class '%s'", parent.getSimpleName());
+            return null;
+        }
+
+        for (Field field : fields) {
+            Object object;
+
+            try {
+                object = field.get(parent);
+            } catch (Exception e) {
+                throw new Error(e);
+            }
+
+            if (obj.equals(object)) {
+                return lowercase ? field.getName().toLowerCase() : field.getName();
+            }
+        }
+
+        return null;
+    }
+
+    public static String getFieldName(Object obj)
+    {
+        return getFieldName(obj, true);
     }
 
     /**
@@ -106,7 +210,7 @@ public class SnakerLib
 
     public static String placeholder(Locale locale, int limit, boolean modid)
     {
-        return modid ? MODID + ":" + RandomStringUtils.randomAlphanumeric(limit).toLowerCase(locale) : RandomStringUtils.randomAlphanumeric(limit).toLowerCase(locale);
+        return modid ? DELEGATE_MOD.get() + ":" + RandomStringUtils.randomAlphanumeric(limit).toLowerCase(locale) : RandomStringUtils.randomAlphanumeric(limit).toLowerCase(locale);
     }
 
     public static String placeholder(Locale locale, int limit)
@@ -198,35 +302,35 @@ public class SnakerLib
         return !text.isEmpty() ? text.replaceAll("\\s+", "_").toLowerCase() : text;
     }
 
-    public static boolean isInvalidString(String stringToCheck, boolean notify, boolean crash)
+    public static boolean isValidString(String string, boolean notify, boolean crash)
     {
-        if (stringToCheck == null || stringToCheck.isEmpty()) {
-            return true;
+        if (string == null || string.isEmpty()) {
+            return false;
         } else {
             String regex = ".*[a-zA-Z]+.*";
-            if (!stringToCheck.matches(regex)) {
+            if (!string.matches(regex)) {
                 if (notify) {
-                    SnakerLib.LOGGER.warnf("String '%s' is not a valid string", stringToCheck);
+                    SnakerLib.LOGGER.warnf("String '%s' is not a valid string", string);
                     if (crash) {
-                        throw new RuntimeException(String.format("Invalid string: %s", stringToCheck));
+                        throw new RuntimeException(String.format("Invalid string: %s", string));
                     }
                 }
                 if (!notify && crash) {
-                    throw new RuntimeException(String.format("Invalid string: %s", stringToCheck));
+                    throw new RuntimeException(String.format("Invalid string: %s", string));
                 }
             }
-            return !stringToCheck.matches(regex);
+            return string.matches(regex);
         }
     }
 
-    public static boolean isInvalidString(String string, boolean notify)
+    public static boolean isValidString(String string, boolean notify)
     {
-        return isInvalidString(string, notify, false);
+        return isValidString(string, notify, false);
     }
 
-    public static boolean isInvalidString(String string)
+    public static boolean isValidString(String string)
     {
-        return isInvalidString(string, false);
+        return isValidString(string, false);
     }
 
     public static boolean tickOffs(float tickOffset)
@@ -247,16 +351,6 @@ public class SnakerLib
     public static boolean secOffs(float other, int secOffset)
     {
         return other % Maths.secondsToTicks(secOffset) == 0;
-    }
-
-    public static Class<?> getCallerClassReference()
-    {
-        return STACK_WALKER.getCallerClass();
-    }
-
-    public static ClassLoader getCallerClassLoaderReference()
-    {
-        return getCallerClassReference().getClassLoader();
     }
 
     @SafeVarargs
@@ -316,7 +410,7 @@ public class SnakerLib
      **/
     public static void forceCrashJVM(String crashReason)
     {
-        String className = SnakerLib.getCallerClassReference().toString();
+        String className = STACK_WALKER.getCallerClass().toString();
         String threadName = Thread.currentThread().getName();
         String regex = ".*[a-zA-Z]+.*";
         String lineBreak = "\n";
@@ -341,16 +435,6 @@ public class SnakerLib
 
         SnakerLib.LOGGER.errorf("%24s", reportBuilder);
         MemoryUtil.memSet(0, 0, 1);
-    }
-
-    public static long getClientTickCount()
-    {
-        return clientTickCount;
-    }
-
-    public static long getServerTickCount()
-    {
-        return serverTickCount;
     }
 
     public static long getVMNanosecondsCount()
@@ -461,6 +545,48 @@ public class SnakerLib
     public static long getVMExamillenniaCount()
     {
         return (long) (GLFW.glfwGetTime() / 3153600000000000000L);
+    }
+
+    public static SimpleRenderTypeProcessor createFreshProcessor()
+    {
+        return new SimpleRenderTypeProcessor()
+        {
+            @Override
+            public RenderType.CompositeState normal(Supplier<ShaderInstance> shader)
+            {
+                return SimpleRenderTypeProcessor.super.normal(shader);
+            }
+
+            @Override
+            public RenderType.CompositeState entity(Supplier<ShaderInstance> shader)
+            {
+                return SimpleRenderTypeProcessor.super.entity(shader);
+            }
+
+            @Override
+            public RenderType.CompositeState translucent(Supplier<ShaderInstance> shader)
+            {
+                return SimpleRenderTypeProcessor.super.translucent(shader);
+            }
+
+            @Override
+            public RenderType.CompositeState sampler(Supplier<ShaderInstance> shader, boolean blur, boolean mipmap, ResourceLocation... samplers)
+            {
+                return SimpleRenderTypeProcessor.super.sampler(shader, blur, mipmap, samplers);
+            }
+
+            @Override
+            public RenderType.CompositeState sampler(Supplier<ShaderInstance> shader, ResourceLocation sampler, boolean blur, boolean mipmap)
+            {
+                return SimpleRenderTypeProcessor.super.sampler(shader, sampler, blur, mipmap);
+            }
+
+            @Override
+            public RenderType create(@Nullable String name, Pair<VertexFormat, RenderType.CompositeState> pair)
+            {
+                return SimpleRenderTypeProcessor.super.create(name, pair);
+            }
+        };
     }
 
     /**

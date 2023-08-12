@@ -69,9 +69,12 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import lombok.experimental.FieldNameConstants;
+
 /**
  * Created by SnakerBone on 12/12/2022
  **/
+@FieldNameConstants
 @Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class Rego
 {
@@ -107,6 +110,7 @@ public class Rego
     public static final RegistryObject<Item> ITEM_MULTICOLOUR_BLOCK = item("multicolour_block", () -> new ShaderBlockItem(Rego.BLOCK_MULTICOLOUR.get()));
     public static final RegistryObject<Item> ITEM_FLARE_BLOCK = item("flare_block", () -> new ShaderBlockItem(Rego.BLOCK_FLARE.get()));
     public static final RegistryObject<Item> ITEM_STARRY_BLOCK = item("starry_block", () -> new ShaderBlockItem(Rego.BLOCK_STARRY.get()));
+    public static final RegistryObject<Item> ITEM_GEOMETRIC_BLOCK = item("geometric_block", () -> new ShaderBlockItem(Rego.BLOCK_GEOMETRIC.get()));
 
     public static final RegistryObject<Block> BLOCK_SWIRL = blockWithoutItem("swirl_block", () -> new ShaderBlock<>(Rego.BE_SWIRL));
     public static final RegistryObject<Block> BLOCK_SNOWFLAKE = blockWithoutItem("snowflake_block", () -> new ShaderBlock<>(Rego.BE_SNOWFLAKE));
@@ -114,6 +118,7 @@ public class Rego
     public static final RegistryObject<Block> BLOCK_MULTICOLOUR = blockWithoutItem("multicolour_block", () -> new ShaderBlock<>(Rego.BE_MULTICOLOUR));
     public static final RegistryObject<Block> BLOCK_FLARE = blockWithoutItem("flare_block", () -> new ShaderBlock<>(Rego.BE_FLARE));
     public static final RegistryObject<Block> BLOCK_STARRY = blockWithoutItem("starry_block", () -> new ShaderBlock<>(Rego.BE_STARRY));
+    public static final RegistryObject<Block> BLOCK_GEOMETRIC = blockWithoutItem("geometric_block", () -> new ShaderBlock<>(Rego.BE_GEOMETRIC));
 
     public static final RegistryObject<Block> BLOCK_CATNIP = blockWithItem("catnip", () -> new FlowerBlock(Rego.EFFECT_SYNCOPE::get, Maths.secondsToTicks(5), SnakerConstants.BlockProperties.FLOWER));
     public static final RegistryObject<Block> BLOCK_SPLITLEAF = blockWithItem("splitleaf", () -> new FlowerBlock(Rego.EFFECT_SYNCOPE::get, Maths.secondsToTicks(5), SnakerConstants.BlockProperties.FLOWER));
@@ -135,6 +140,7 @@ public class Rego
     public static final RegistryObject<BlockEntityType<ShaderBlockEntity.MultiColour>> BE_MULTICOLOUR = BLOCK_ENTITIES.register("multicolour_be", () -> BlockEntityType.Builder.of(ShaderBlockEntity.MultiColour::new, BLOCK_MULTICOLOUR.get()).build(null));
     public static final RegistryObject<BlockEntityType<ShaderBlockEntity.Flare>> BE_FLARE = BLOCK_ENTITIES.register("flare_be", () -> BlockEntityType.Builder.of(ShaderBlockEntity.Flare::new, BLOCK_FLARE.get()).build(null));
     public static final RegistryObject<BlockEntityType<ShaderBlockEntity.Starry>> BE_STARRY = BLOCK_ENTITIES.register("starry_be", () -> BlockEntityType.Builder.of(ShaderBlockEntity.Starry::new, BLOCK_STARRY.get()).build(null));
+    public static final RegistryObject<BlockEntityType<ShaderBlockEntity.Geometric>> BE_GEOMETRIC = BLOCK_ENTITIES.register("geometric_be", () -> BlockEntityType.Builder.of(ShaderBlockEntity.Geometric::new, BLOCK_GEOMETRIC.get()).build(null));
 
     public static final RegistryObject<SoundEvent> SOUND_CONFUSE = sound("confuse");
     public static final RegistryObject<SoundEvent> SOUND_EARTH = sound("earth");

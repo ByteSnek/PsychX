@@ -1,15 +1,15 @@
 package xyz.snaker.tq.client.render.block;
 
 import xyz.snaker.snakerlib.math.BasicCube;
-import xyz.snaker.tq.client.RenderTypes;
+import xyz.snaker.tq.client.render.type.ItemLikeRenderType;
 import xyz.snaker.tq.level.block.entity.ShaderBlockEntity;
-
-import org.jetbrains.annotations.NotNull;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+
+import org.jetbrains.annotations.NotNull;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -37,7 +37,7 @@ public class ShaderBlockRenderer<T extends ShaderBlockEntity<T>> implements Bloc
     {
         public Flare(BlockEntityRendererProvider.Context context)
         {
-            super(RenderTypes.OBJ_FIRE);
+            super(ItemLikeRenderType.FIRE.get());
         }
     }
 
@@ -45,7 +45,7 @@ public class ShaderBlockRenderer<T extends ShaderBlockEntity<T>> implements Bloc
     {
         public MultiColour(BlockEntityRendererProvider.Context context)
         {
-            super(RenderTypes.OBJ_MULTICOLOUR);
+            super(ItemLikeRenderType.MULTICOLOUR.get());
         }
     }
 
@@ -53,7 +53,7 @@ public class ShaderBlockRenderer<T extends ShaderBlockEntity<T>> implements Bloc
     {
         public Snowflake(BlockEntityRendererProvider.Context context)
         {
-            super(RenderTypes.OBJ_SNOWFLAKE);
+            super(ItemLikeRenderType.SNOWFLAKE.get());
         }
     }
 
@@ -61,7 +61,7 @@ public class ShaderBlockRenderer<T extends ShaderBlockEntity<T>> implements Bloc
     {
         public Starry(BlockEntityRendererProvider.Context context)
         {
-            super(RenderTypes.OBJ_BLACK_STARS);
+            super(ItemLikeRenderType.CLIP.get());
         }
     }
 
@@ -69,7 +69,7 @@ public class ShaderBlockRenderer<T extends ShaderBlockEntity<T>> implements Bloc
     {
         public Swirl(BlockEntityRendererProvider.Context context)
         {
-            super(RenderTypes.OBJ_SWIRL);
+            super(ItemLikeRenderType.SWIRL.get());
         }
     }
 
@@ -77,7 +77,15 @@ public class ShaderBlockRenderer<T extends ShaderBlockEntity<T>> implements Bloc
     {
         public WaterColour(BlockEntityRendererProvider.Context context)
         {
-            super(RenderTypes.OBJ_WATERCOLOUR);
+            super(ItemLikeRenderType.WATERCOLOUR.get());
+        }
+    }
+
+    public static class Geometric extends ShaderBlockRenderer<ShaderBlockEntity.Geometric>
+    {
+        public Geometric(BlockEntityRendererProvider.Context context)
+        {
+            super(ItemLikeRenderType.CLIP.get());
         }
     }
 }

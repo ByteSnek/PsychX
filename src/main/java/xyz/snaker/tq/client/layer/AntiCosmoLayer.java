@@ -1,8 +1,8 @@
 package xyz.snaker.tq.client.layer;
 
 import xyz.snaker.snakerlib.utility.RenderStuff;
-import xyz.snaker.tq.client.RenderTypes;
 import xyz.snaker.tq.client.model.entity.AntiCosmoModel;
+import xyz.snaker.tq.client.render.type.EntityRenderType;
 import xyz.snaker.tq.level.entity.boss.AntiCosmo;
 
 import org.jetbrains.annotations.NotNull;
@@ -26,6 +26,6 @@ public class AntiCosmoLayer extends RenderLayer<AntiCosmo, AntiCosmoModel>
     @Override
     public void render(@NotNull PoseStack stack, @NotNull MultiBufferSource source, int packedLight, @NotNull AntiCosmo cosmo, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch)
     {
-        RenderStuff.renderLayer(this, stack, source, RenderTypes.ENT_WHITE_STARS, cosmo, packedLight);
+        RenderStuff.renderLayer(this, stack, source, EntityRenderType.WHITE_STARS.get(), cosmo, packedLight);
     }
 }

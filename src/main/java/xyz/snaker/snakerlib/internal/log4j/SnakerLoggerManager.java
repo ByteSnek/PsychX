@@ -39,7 +39,7 @@ public class SnakerLoggerManager implements SnakerLogger
     @Override
     public <V> void print(V message, ConsoleLogLevel level)
     {
-        System.out.println(level.colourValue() + "[" + name + "/" + level.markerValue() + "]: " + message);
+        System.out.println(level.colourValue() + "[" + name + "/" + level.markerValue() + "]: " + message + ConsoleTextColour.WHITE.value());
     }
 
     @Override
@@ -63,6 +63,6 @@ public class SnakerLoggerManager implements SnakerLogger
     @Override
     public void printf(String format, ConsoleLogLevel level, Object... args)
     {
-        System.out.println(level.colourValue() + "[" + name + "/" + level.markerValue() + "]: " + new Formatter().format(format, args));
+        System.out.println(level.colourValue() + "[" + name + "/" + level.markerValue() + "]: " + new Formatter().format(format, args) + ConsoleTextColour.WHITE.value());
     }
 }

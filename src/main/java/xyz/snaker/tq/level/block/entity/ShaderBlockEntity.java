@@ -68,4 +68,12 @@ public class ShaderBlockEntity<T extends SnakerBlockEntity> extends SnakerBlockE
             super(Rego.BE_WATERCOLOUR, pos, state);
         }
     }
+
+    public static class Geometric extends ShaderBlockEntity<Geometric>
+    {
+        public Geometric(BlockPos pos, BlockState state)
+        {
+            super(Rego.BE_GEOMETRIC, pos, state);
+        }
+    }
 }

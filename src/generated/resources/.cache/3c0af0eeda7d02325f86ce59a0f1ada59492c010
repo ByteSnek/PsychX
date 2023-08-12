@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-10T12:56:54.8538241	Item Models: tq
+// 1.20.1	2023-08-12T20:57:13.7717315	Item Models: tq
 a9c3324ea6eec8a2934c62339e21aa670367366f assets/tq/models/item/alpha_cosmo_spine.json
 7cbeee0d2c5308793c068f64eba0c4b7f823ac62 assets/tq/models/item/anti_cosmo_spawn_egg.json
 a9c3324ea6eec8a2934c62339e21aa670367366f assets/tq/models/item/anti_cosmo_spine.json
@@ -14,6 +14,7 @@ fd48bfe97d1cdbe249edf06d1075a39e5d6da692 assets/tq/models/item/delusive_nylium.j
 7cbeee0d2c5308793c068f64eba0c4b7f823ac62 assets/tq/models/item/flare_spawn_egg.json
 7cbeee0d2c5308793c068f64eba0c4b7f823ac62 assets/tq/models/item/flutterfly_spawn_egg.json
 7cbeee0d2c5308793c068f64eba0c4b7f823ac62 assets/tq/models/item/frolicker_spawn_egg.json
+c5ab50275bb776515161b1f6c7ceafb825f1f7e4 assets/tq/models/item/geometric_block.json
 a9c3324ea6eec8a2934c62339e21aa670367366f assets/tq/models/item/green_cosmo_spine.json
 df6a375dc47955c13b5a6acdd78c07438e8730a4 assets/tq/models/item/illusive_nylium.json
 de1e5dc634d5b5b00c7822b11cebe76c7ee7c237 assets/tq/models/item/immaterial_nylium.json

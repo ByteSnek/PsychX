@@ -9,9 +9,6 @@ import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.level.world.feature.Features;
 import xyz.snaker.tq.rego.Rego;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -36,6 +33,9 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by SnakerBone on 21/03/2023
@@ -137,6 +137,7 @@ public class DataProviders
             dream(Rego.BLOCK_MULTICOLOUR);
             dream(Rego.BLOCK_FLARE);
             dream(Rego.BLOCK_STARRY);
+            dream(Rego.BLOCK_GEOMETRIC);
 
             nylium(Rego.BLOCK_ILLUSIVE_NYLIUM);
             nylium(Rego.BLOCK_DELUSIVE_NYLIUM);
@@ -209,6 +210,7 @@ public class DataProviders
             blockItem(Rego.BLOCK_MULTICOLOUR);
             blockItem(Rego.BLOCK_FLARE);
             blockItem(Rego.BLOCK_STARRY);
+            blockItem(Rego.BLOCK_GEOMETRIC);
             blockItem(Rego.BLOCK_COMA_STONE);
             blockItem(Rego.BLOCK_DELUSIVE_NYLIUM);
             blockItem(Rego.BLOCK_ILLUSIVE_NYLIUM);
@@ -334,6 +336,7 @@ public class DataProviders
             block(Rego.BLOCK_SWIRL);
             block(Rego.BLOCK_SNOWFLAKE);
             block(Rego.BLOCK_STARRY);
+            block(Rego.BLOCK_GEOMETRIC);
             block(Rego.BLOCK_FLARE);
             block(Rego.BLOCK_MULTICOLOUR);
             block(Rego.BLOCK_WATERCOLOUR);

@@ -4,8 +4,6 @@ import xyz.snaker.snakerlib.SnakerLib;
 import xyz.snaker.snakerlib.client.render.CyclicalIconRenderer;
 import xyz.snaker.tq.rego.Rego;
 
-import org.jetbrains.annotations.NotNull;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -13,6 +11,8 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+
+import org.jetbrains.annotations.NotNull;
 
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -42,7 +42,8 @@ public class BlockTabIconRenderer extends CyclicalIconRenderer
                             Rego.ITEM_MULTICOLOUR_BLOCK.get().getDefaultInstance(),
                             Rego.ITEM_SNOWFLAKE_BLOCK.get().getDefaultInstance(),
                             Rego.ITEM_STARRY_BLOCK.get().getDefaultInstance(),
-                            Rego.ITEM_WATERCOLOUR_BLOCK.get().getDefaultInstance()
+                            Rego.ITEM_WATERCOLOUR_BLOCK.get().getDefaultInstance(),
+                            Rego.ITEM_GEOMETRIC_BLOCK.get().getDefaultInstance()
                     };
 
             float scale = 1;

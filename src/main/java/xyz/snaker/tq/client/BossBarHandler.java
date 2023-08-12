@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import xyz.snaker.snakerlib.SnakerLib;
+import xyz.snaker.snakerlib.client.render.processor.SimpleRenderTypeProcessor;
 import xyz.snaker.snakerlib.level.entity.SnakerBoss;
 import xyz.snaker.snakerlib.level.entity.SnakerFlyingBoss;
 import xyz.snaker.snakerlib.utility.ResourcePath;
@@ -26,6 +27,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.datafixers.util.Pair;
 
 /**
  * Created by SnakerBone on 30/03/2023
@@ -57,13 +59,14 @@ public class BossBarHandler
         LerpingBossEvent info = event.getBossEvent();
         PoseStack stack = graphics.pose();
         Component name = info.getName();
+        SimpleRenderTypeProcessor processor = SnakerLib.createFreshProcessor();
         String textColour;
         String samplerName;
         for (Object boss : new CopyOnWriteArrayList<>(BOSSES)) {
             AntiCosmo cosmo = (AntiCosmo) boss;
             if (cosmo.getBossEventId() == info.getId()) {
                 event.setCanceled(true);
-                RenderType type = RenderTypes.custom(DefaultVertexFormat.POSITION_TEX, RenderTypes.sampler(Shaders::getCrystalized, new ResourcePath("textures/sampler/noise_white.png"), false, false));
+                RenderType type = processor.create(null, new Pair<>(DefaultVertexFormat.POSITION_TEX, processor.sampler(Shaders::getCrystalized, new ResourcePath("textures/sampler/noise_white.png"), false, false)));
                 MultiBufferSource.BufferSource source = minecraft.renderBuffers().bufferSource();
                 VertexConsumer consumer = source.getBuffer(type);
                 RenderSystem.enableDepthTest();
@@ -104,7 +107,7 @@ public class BossBarHandler
                         samplerName = "noise_pink";
                     }
                 }
-                RenderType type = RenderTypes.custom(DefaultVertexFormat.POSITION_TEX, RenderTypes.sampler(Shaders::getCrystalized, new ResourcePath("textures/sampler/" + samplerName + ".png"), false, false));
+                RenderType type = processor.create(null, new Pair<>(DefaultVertexFormat.POSITION_TEX, processor.sampler(Shaders::getCrystalized, new ResourcePath("textures/sampler/" + samplerName + ".png"), false, false)));
                 MultiBufferSource.BufferSource source = minecraft.renderBuffers().bufferSource();
                 VertexConsumer consumer = source.getBuffer(type);
                 RenderSystem.enableDepthTest();

@@ -4,9 +4,9 @@ import java.util.Map;
 
 import xyz.snaker.snakerlib.math.PoseStackBuilder;
 import xyz.snaker.snakerlib.utility.ResourcePath;
-import xyz.snaker.tq.client.RenderTypes;
 import xyz.snaker.tq.client.layer.CosmoLayer;
 import xyz.snaker.tq.client.model.entity.CosmoModel;
+import xyz.snaker.tq.client.render.type.EntityRenderType;
 import xyz.snaker.tq.level.entity.EntityVariants;
 import xyz.snaker.tq.level.entity.mob.Cosmo;
 
@@ -29,13 +29,13 @@ public class CosmoRenderer extends MobRenderer<Cosmo, CosmoModel>
 {
     public static final Map<EntityVariants.Cosmo, RenderType> TYPE = Util.make(Maps.newEnumMap(EntityVariants.Cosmo.class), (map) ->
     {
-        map.put(EntityVariants.Cosmo.RED, RenderTypes.ENT_RED_STARS);
-        map.put(EntityVariants.Cosmo.GREEN, RenderTypes.ENT_GREEN_STARS);
-        map.put(EntityVariants.Cosmo.BLUE, RenderTypes.ENT_BLUE_STARS);
-        map.put(EntityVariants.Cosmo.YELLOW, RenderTypes.ENT_YELLOW_STARS);
-        map.put(EntityVariants.Cosmo.PINK, RenderTypes.ENT_PINK_STARS);
-        map.put(EntityVariants.Cosmo.PURPLE, RenderTypes.ENT_PURPLE_STARS);
-        map.put(EntityVariants.Cosmo.ALPHA, RenderTypes.ENT_BLACK_STARS);
+        map.put(EntityVariants.Cosmo.RED, EntityRenderType.RED_STARS.get());
+        map.put(EntityVariants.Cosmo.GREEN, EntityRenderType.GREEN_STARS.get());
+        map.put(EntityVariants.Cosmo.BLUE, EntityRenderType.BLUE_STARS.get());
+        map.put(EntityVariants.Cosmo.YELLOW, EntityRenderType.YELLOW_STARS.get());
+        map.put(EntityVariants.Cosmo.PINK, EntityRenderType.PINK_STARS.get());
+        map.put(EntityVariants.Cosmo.PURPLE, EntityRenderType.PURPLE_STARS.get());
+        map.put(EntityVariants.Cosmo.ALPHA, EntityRenderType.BLACK_STARS.get());
     });
 
     public CosmoRenderer(EntityRendererProvider.Context context)

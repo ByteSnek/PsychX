@@ -33,7 +33,6 @@ public class Shader extends ShaderInstance
         try {
             return new Shader(provider, shader, format);
         } catch (Exception e) {
-            //SnakerLib.LOGGER.logError(e);
             throw new RuntimeException(e);
         }
     }

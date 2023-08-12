@@ -63,7 +63,7 @@ public class CubeListBuffer
 
     private boolean addToBuffer(CubeListBuilder builder, String name, PartPose pose)
     {
-        if (builder == null || SnakerLib.isInvalidString(name, true) || pose == null) {
+        if (builder == null || SnakerLib.isValidString(name, true) || pose == null) {
             return false;
         } else {
             names.put(builder, name);

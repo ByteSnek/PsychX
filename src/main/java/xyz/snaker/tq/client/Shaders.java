@@ -76,8 +76,18 @@ public class Shaders
     private static Shader crystalized;
     private static Uniform crystalizedTime, crystalizedLayers, crystalizedDensityRatio;
 
+    private static Shader clip;
+    private static Uniform clipTime;
+
     private static void register(RegisterShadersEvent event)
     {
+        registerShader(event, "clip", shaderInstance ->
+        {
+            clip = (Shader) shaderInstance;
+            clipTime = clip.getUniform("Time");
+            clip.enqueueTask(() -> clipTime.set((SnakerLib.getClientTickCount() + Minecraft.getInstance().getFrameTime()) / 40F));
+        });
+
         registerShader(event, "swirl", shaderInstance ->
         {
             swirl = (Shader) shaderInstance;
@@ -520,6 +530,16 @@ public class Shaders
     public static Uniform getCrystalizedDensityRatio()
     {
         return crystalizedDensityRatio;
+    }
+
+    public static Shader getClip()
+    {
+        return clip;
+    }
+
+    public static Uniform getClipTime()
+    {
+        return clipTime;
     }
 
     private static Shader shader(RegisterShadersEvent event, String name, VertexFormat format)
