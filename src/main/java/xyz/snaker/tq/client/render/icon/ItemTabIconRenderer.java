@@ -2,9 +2,7 @@ package xyz.snaker.tq.client.render.icon;
 
 import xyz.snaker.snakerlib.SnakerLib;
 import xyz.snaker.snakerlib.client.render.CyclicalIconRenderer;
-import xyz.snaker.tq.rego.Rego;
-
-import org.jetbrains.annotations.NotNull;
+import xyz.snaker.tq.rego.Items;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -12,10 +10,13 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+
+import org.jetbrains.annotations.NotNull;
 
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.vertex.PoseStack;
+
+import static net.minecraft.world.item.Items.PORKCHOP;
 
 /**
  * Created by SnakerBone on 12/06/2023
@@ -37,13 +38,13 @@ public class ItemTabIconRenderer extends CyclicalIconRenderer
         if (level != null) {
             ItemStack[] stacks =
                     {
-                            Rego.ITEM_RED_COSMO_SPINE.get().getDefaultInstance(),
-                            Rego.ITEM_GREEN_COSMO_SPINE.get().getDefaultInstance(),
-                            Rego.ITEM_BLUE_COSMO_SPINE.get().getDefaultInstance(),
-                            Rego.ITEM_YELLOW_COSMO_SPINE.get().getDefaultInstance(),
-                            Rego.ITEM_PINK_COSMO_SPINE.get().getDefaultInstance(),
-                            Rego.ITEM_PURPLE_COSMO_SPINE.get().getDefaultInstance(),
-                            Rego.ITEM_ALPHA_COSMO_SPINE.get().getDefaultInstance()
+                            Items.RED_COSMO_SPINE.get().getDefaultInstance(),
+                            Items.GREEN_COSMO_SPINE.get().getDefaultInstance(),
+                            Items.BLUE_COSMO_SPINE.get().getDefaultInstance(),
+                            Items.YELLOW_COSMO_SPINE.get().getDefaultInstance(),
+                            Items.PINK_COSMO_SPINE.get().getDefaultInstance(),
+                            Items.PURPLE_COSMO_SPINE.get().getDefaultInstance(),
+                            Items.ALPHA_COSMO_SPINE.get().getDefaultInstance()
                     };
 
             float scale = 1;
@@ -55,7 +56,7 @@ public class ItemTabIconRenderer extends CyclicalIconRenderer
 
             stack.translate(0.5F, 0.5F, 0);
 
-            ItemStack fallback = Items.PORKCHOP.getDefaultInstance();
+            ItemStack fallback = PORKCHOP.getDefaultInstance();
             ItemStack item = stackToRender == null ? fallback : stackToRender;
 
             try {

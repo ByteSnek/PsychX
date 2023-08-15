@@ -8,10 +8,7 @@ import xyz.snaker.tq.level.entity.boss.Utterfly;
 import xyz.snaker.tq.level.entity.creature.Flutterfly;
 import xyz.snaker.tq.level.entity.creature.Frolicker;
 import xyz.snaker.tq.level.entity.mob.*;
-import xyz.snaker.tq.rego.Rego;
-
-import org.jetbrains.annotations.NotNull;
-import org.joml.Quaternionf;
+import xyz.snaker.tq.rego.Entities;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.MouseHandler;
@@ -23,6 +20,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+
+import org.jetbrains.annotations.NotNull;
+import org.joml.Quaternionf;
 
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -50,16 +50,16 @@ public class MobTabIconRenderer extends CyclicalIconRenderer
         if (level != null) {
             LivingEntity[] entities =
                     {
-                            new Cosmo(Rego.ENTITY_COSMO.get(), level),
-                            new Flare(Rego.ENTITY_FLARE.get(), level),
-                            new Snipe(Rego.ENTITY_SNIPE.get(), level),
-                            new CosmicCreeper(Rego.ENTITY_COSMIC_CREEPER.get(), level),
-                            new Utterfly(Rego.ENTITY_UTTERFLY.get(), level),
-                            new Flutterfly(Rego.ENTITY_FLUTTERFLY.get(), level),
-                            new Frolicker(Rego.ENTITY_FROLICKER.get(), level),
-                            new AntiCosmo(Rego.ENTITY_ANTI_COSMO.get(), level),
-                            new EerieCretin(Rego.ENTITY_EERIE_CRETIN.get(), level),
-                            new Leet(Rego.ENTITY_LEET.get(), level)
+                            new Cosmo(Entities.COSMO.get(), level),
+                            new Flare(Entities.FLARE.get(), level),
+                            new Snipe(Entities.SNIPE.get(), level),
+                            new CosmicCreeper(Entities.COSMIC_CREEPER.get(), level),
+                            new Utterfly(Entities.UTTERFLY.get(), level),
+                            new Flutterfly(Entities.FLUTTERFLY.get(), level),
+                            new Frolicker(Entities.FROLICKER.get(), level),
+                            new AntiCosmo(Entities.ANTI_COSMO.get(), level),
+                            new EerieCretin(Entities.EERIE_CRETIN.get(), level),
+                            new Leet(Entities.LEET.get(), level)
                     };
 
             float mouseX = (float) ((mouseHelper.xpos() * Minecraft.getInstance().getWindow().getGuiScaledWidth()) / Minecraft.getInstance().getWindow().getScreenWidth());

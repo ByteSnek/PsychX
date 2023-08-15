@@ -1,7 +1,7 @@
 package xyz.snaker.tq.client.layer;
 
 import xyz.snaker.snakerlib.client.render.processor.SimpleRenderTypeProcessor;
-import xyz.snaker.snakerlib.utility.RenderStuff;
+import xyz.snaker.snakerlib.utility.tools.RenderStuff;
 import xyz.snaker.snakerlib.utility.ResourcePath;
 import xyz.snaker.tq.client.Shaders;
 import xyz.snaker.tq.client.model.entity.TestModel;

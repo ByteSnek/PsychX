@@ -1,8 +1,6 @@
 package xyz.snaker.tq.level.block;
 
-import xyz.snaker.tq.rego.Rego;
-
-import org.jetbrains.annotations.NotNull;
+import xyz.snaker.tq.rego.Blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,6 +14,8 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.lighting.LightEngine;
 import net.minecraft.world.level.material.MapColor;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by SnakerBone on 15/07/2023
@@ -40,7 +40,7 @@ public class ComatoseNyliumBlock extends Block implements BonemealableBlock
     public void randomTick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random)
     {
         if (!canBeNylium(state, level, pos)) {
-            level.setBlockAndUpdate(pos, Rego.BLOCK_COMA_STONE.get().defaultBlockState());
+            level.setBlockAndUpdate(pos, Blocks.COMA_STONE.get().defaultBlockState());
         }
     }
 

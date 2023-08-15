@@ -4,10 +4,10 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-import xyz.snaker.snakerlib.SnakerLib;
+import xyz.snaker.snakerlib.utility.tools.StringStuff;
 import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.level.world.feature.Features;
-import xyz.snaker.tq.rego.Rego;
+import xyz.snaker.tq.rego.*;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
@@ -52,7 +52,7 @@ public class DataProviders
         @Override
         protected void addTags(HolderLookup.@NotNull Provider provider)
         {
-            biome(Rego.Tags.COMATOSE_VEGETAL, Rego.Keys.DELUSION, Rego.Keys.ILLUSIVE, Rego.Keys.IMMATERIAL, Rego.Keys.SPECTRAL, Rego.Keys.SURREAL);
+            biome(Keys.COMATOSE_VEGETAL, Keys.DELUSION, Keys.ILLUSIVE, Keys.IMMATERIAL, Keys.SPECTRAL, Keys.SURREAL);
         }
 
         @SafeVarargs
@@ -131,26 +131,26 @@ public class DataProviders
         @Override
         protected void registerStatesAndModels()
         {
-            dream(Rego.BLOCK_SWIRL);
-            dream(Rego.BLOCK_SNOWFLAKE);
-            dream(Rego.BLOCK_WATERCOLOUR);
-            dream(Rego.BLOCK_MULTICOLOUR);
-            dream(Rego.BLOCK_FLARE);
-            dream(Rego.BLOCK_STARRY);
-            dream(Rego.BLOCK_GEOMETRIC);
+            dream(Blocks.SWIRL);
+            dream(Blocks.SNOWFLAKE);
+            dream(Blocks.WATERCOLOUR);
+            dream(Blocks.MULTICOLOUR);
+            dream(Blocks.FLARE);
+            dream(Blocks.STARRY);
+            dream(Blocks.GEOMETRIC);
 
-            nylium(Rego.BLOCK_ILLUSIVE_NYLIUM);
-            nylium(Rego.BLOCK_DELUSIVE_NYLIUM);
-            nylium(Rego.BLOCK_IMMATERIAL_NYLIUM);
-            nylium(Rego.BLOCK_SPECTRAL_NYLIUM);
-            nylium(Rego.BLOCK_SURREAL_NYLIUM);
+            nylium(Blocks.ILLUSIVE_NYLIUM);
+            nylium(Blocks.DELUSIVE_NYLIUM);
+            nylium(Blocks.IMMATERIAL_NYLIUM);
+            nylium(Blocks.SPECTRAL_NYLIUM);
+            nylium(Blocks.SURREAL_NYLIUM);
 
-            cube(Rego.BLOCK_COMA_STONE);
+            cube(Blocks.COMA_STONE);
 
-            plant(Rego.BLOCK_CATNIP, Rego.BLOCK_POTTED_CATNIP);
-            plant(Rego.BLOCK_SPLITLEAF, Rego.BLOCK_POTTED_SPLITLEAF);
-            plant(Rego.BLOCK_SNAKEROOT);
-            plant(Rego.BLOCK_TALL_SNAKEROOT);
+            plant(Blocks.CATNIP, Blocks.POTTED_CATNIP);
+            plant(Blocks.SPLITLEAF, Blocks.POTTED_SPLITLEAF);
+            plant(Blocks.SNAKEROOT);
+            plant(Blocks.TALL_SNAKEROOT);
         }
     }
 
@@ -204,51 +204,51 @@ public class DataProviders
         @Override
         protected void registerModels()
         {
-            blockItem(Rego.BLOCK_SWIRL);
-            blockItem(Rego.BLOCK_SNOWFLAKE);
-            blockItem(Rego.BLOCK_WATERCOLOUR);
-            blockItem(Rego.BLOCK_MULTICOLOUR);
-            blockItem(Rego.BLOCK_FLARE);
-            blockItem(Rego.BLOCK_STARRY);
-            blockItem(Rego.BLOCK_GEOMETRIC);
-            blockItem(Rego.BLOCK_COMA_STONE);
-            blockItem(Rego.BLOCK_DELUSIVE_NYLIUM);
-            blockItem(Rego.BLOCK_ILLUSIVE_NYLIUM);
-            blockItem(Rego.BLOCK_IMMATERIAL_NYLIUM);
-            blockItem(Rego.BLOCK_SPECTRAL_NYLIUM);
-            blockItem(Rego.BLOCK_SURREAL_NYLIUM);
+            blockItem(Blocks.SWIRL);
+            blockItem(Blocks.SNOWFLAKE);
+            blockItem(Blocks.WATERCOLOUR);
+            blockItem(Blocks.MULTICOLOUR);
+            blockItem(Blocks.FLARE);
+            blockItem(Blocks.STARRY);
+            blockItem(Blocks.GEOMETRIC);
+            blockItem(Blocks.COMA_STONE);
+            blockItem(Blocks.DELUSIVE_NYLIUM);
+            blockItem(Blocks.ILLUSIVE_NYLIUM);
+            blockItem(Blocks.IMMATERIAL_NYLIUM);
+            blockItem(Blocks.SPECTRAL_NYLIUM);
+            blockItem(Blocks.SURREAL_NYLIUM);
 
-            cosmoSpine(Rego.ITEM_RED_COSMO_SPINE);
-            cosmoSpine(Rego.ITEM_GREEN_COSMO_SPINE);
-            cosmoSpine(Rego.ITEM_BLUE_COSMO_SPINE);
-            cosmoSpine(Rego.ITEM_YELLOW_COSMO_SPINE);
-            cosmoSpine(Rego.ITEM_PINK_COSMO_SPINE);
-            cosmoSpine(Rego.ITEM_PURPLE_COSMO_SPINE);
-            cosmoSpine(Rego.ITEM_ALPHA_COSMO_SPINE);
-            cosmoSpine(Rego.ITEM_ANTI_COSMO_SPINE);
+            cosmoSpine(Items.RED_COSMO_SPINE);
+            cosmoSpine(Items.GREEN_COSMO_SPINE);
+            cosmoSpine(Items.BLUE_COSMO_SPINE);
+            cosmoSpine(Items.YELLOW_COSMO_SPINE);
+            cosmoSpine(Items.PINK_COSMO_SPINE);
+            cosmoSpine(Items.PURPLE_COSMO_SPINE);
+            cosmoSpine(Items.ALPHA_COSMO_SPINE);
+            cosmoSpine(Items.ANTI_COSMO_SPINE);
 
-            egg(Rego.ITEM_COSMO_SPAWN_EGG);
-            egg(Rego.ITEM_FLARE_SPAWN_EGG);
-            egg(Rego.ITEM_FLUTTERFLY_SPAWN_EGG);
-            egg(Rego.ITEM_FROLICKER_SPAWN_EGG);
-            egg(Rego.ITEM_COSMIC_CREEPER_SPAWN_EGG);
-            egg(Rego.ITEM_UTTERFLY_SPAWN_EGG);
-            egg(Rego.ITEM_ANTI_COSMO_SPAWN_EGG);
-            egg(Rego.ITEM_SNIPE_SPAWN_EGG);
-            egg(Rego.ITEM_EERIE_CRETIN_SPAWN_EGG);
-            egg(Rego.ITEM_LEET_SPAWN_EGG);
-            egg(Rego.ITEM_TEST_SPAWN_EGG);
+            egg(Items.COSMO_SPAWN_EGG);
+            egg(Items.FLARE_SPAWN_EGG);
+            egg(Items.FLUTTERFLY_SPAWN_EGG);
+            egg(Items.FROLICKER_SPAWN_EGG);
+            egg(Items.COSMIC_CREEPER_SPAWN_EGG);
+            egg(Items.UTTERFLY_SPAWN_EGG);
+            egg(Items.ANTI_COSMO_SPAWN_EGG);
+            egg(Items.SNIPE_SPAWN_EGG);
+            egg(Items.EERIE_CRETIN_SPAWN_EGG);
+            egg(Items.LEET_SPAWN_EGG);
+            egg(Items.TEST_SPAWN_EGG);
 
-            perspective(Rego.ICON_MOB_TAB);
-            perspective(Rego.ICON_ITEM_TAB);
-            perspective(Rego.ICON_BLOCK_TAB);
+            perspective(Items.MOB_TAB_ICON);
+            perspective(Items.ITEM_TAB_ICON);
+            perspective(Items.BLOCK_TAB_ICON);
 
-            item(Rego.ITEM_TOURNIQUET);
+            item(Items.TOURNIQUET);
 
-            block(Rego.BLOCK_CATNIP);
-            block(Rego.BLOCK_SPLITLEAF);
-            block(Rego.BLOCK_SNAKEROOT);
-            block(Rego.BLOCK_TALL_SNAKEROOT);
+            block(Blocks.CATNIP);
+            block(Blocks.SPLITLEAF);
+            block(Blocks.SNAKEROOT);
+            block(Blocks.TALL_SNAKEROOT);
         }
     }
 
@@ -262,7 +262,7 @@ public class DataProviders
         private void tab(RegistryObject<CreativeModeTab> tab)
         {
             String name = tab.getId().getPath();
-            add("itemGroup." + name, SnakerLib.i18nt(name));
+            add("itemGroup." + name, StringStuff.i18nt(name));
         }
 
         private <T extends EntityType<?>> void entity(RegistryObject<T> entity)
@@ -270,121 +270,121 @@ public class DataProviders
             String name = entity.getId().getPath();
 
             if (name.equals("cosmo")) {
-                add("entity." + Tourniqueted.MODID + "." + name, SnakerLib.i18nt(name));
-                add("entity." + Tourniqueted.MODID + "." + "alpha_" + name, SnakerLib.i18nt("alpha_" + name));
+                add("entity." + Tourniqueted.MODID + "." + name, StringStuff.i18nt(name));
+                add("entity." + Tourniqueted.MODID + "." + "alpha_" + name, StringStuff.i18nt("alpha_" + name));
                 return;
             }
 
-            add("entity." + Tourniqueted.MODID + "." + name, SnakerLib.i18nt(name));
+            add("entity." + Tourniqueted.MODID + "." + name, StringStuff.i18nt(name));
         }
 
         private <T extends Item> void item(RegistryObject<T> item)
         {
             String name = item.getId().getPath();
-            add("item." + Tourniqueted.MODID + "." + name, SnakerLib.i18nt(name));
+            add("item." + Tourniqueted.MODID + "." + name, StringStuff.i18nt(name));
         }
 
         private <T extends Block> void block(RegistryObject<T> block)
         {
             String name = block.getId().getPath();
-            add("block." + Tourniqueted.MODID + "." + name, SnakerLib.i18nt(name));
+            add("block." + Tourniqueted.MODID + "." + name, StringStuff.i18nt(name));
         }
 
         private void sound(RegistryObject<SoundEvent> sound)
         {
             String name = sound.getId().getPath();
-            add("sounds." + Tourniqueted.MODID + "." + name, SnakerLib.i18nt(name));
+            add("sounds." + Tourniqueted.MODID + "." + name, StringStuff.i18nt(name));
         }
 
         private <T extends MobEffect> void effect(RegistryObject<T> effect)
         {
             String name = effect.getId().getPath();
-            add("effect." + Tourniqueted.MODID + "." + name, SnakerLib.i18nt(name));
+            add("effect." + Tourniqueted.MODID + "." + name, StringStuff.i18nt(name));
         }
 
         @Override
         protected void addTranslations()
         {
-            tab(Rego.TAB_ITEMS);
-            tab(Rego.TAB_BLOCKS);
-            tab(Rego.TAB_MOBS);
+            tab(Tabs.ITEMS);
+            tab(Tabs.BLOCKS);
+            tab(Tabs.MOBS);
 
-            item(Rego.ITEM_COSMO_SPAWN_EGG);
-            item(Rego.ITEM_SNIPE_SPAWN_EGG);
-            item(Rego.ITEM_FLARE_SPAWN_EGG);
-            item(Rego.ITEM_COSMIC_CREEPER_SPAWN_EGG);
-            item(Rego.ITEM_FROLICKER_SPAWN_EGG);
-            item(Rego.ITEM_FLUTTERFLY_SPAWN_EGG);
-            item(Rego.ITEM_UTTERFLY_SPAWN_EGG);
-            item(Rego.ITEM_ANTI_COSMO_SPAWN_EGG);
-            item(Rego.ITEM_EERIE_CRETIN_SPAWN_EGG);
-            item(Rego.ITEM_LEET_SPAWN_EGG);
+            item(Items.COSMO_SPAWN_EGG);
+            item(Items.SNIPE_SPAWN_EGG);
+            item(Items.FLARE_SPAWN_EGG);
+            item(Items.COSMIC_CREEPER_SPAWN_EGG);
+            item(Items.FROLICKER_SPAWN_EGG);
+            item(Items.FLUTTERFLY_SPAWN_EGG);
+            item(Items.UTTERFLY_SPAWN_EGG);
+            item(Items.ANTI_COSMO_SPAWN_EGG);
+            item(Items.EERIE_CRETIN_SPAWN_EGG);
+            item(Items.LEET_SPAWN_EGG);
 
-            item(Rego.ITEM_RED_COSMO_SPINE);
-            item(Rego.ITEM_GREEN_COSMO_SPINE);
-            item(Rego.ITEM_BLUE_COSMO_SPINE);
-            item(Rego.ITEM_YELLOW_COSMO_SPINE);
-            item(Rego.ITEM_PINK_COSMO_SPINE);
-            item(Rego.ITEM_PURPLE_COSMO_SPINE);
-            item(Rego.ITEM_ALPHA_COSMO_SPINE);
-            item(Rego.ITEM_ANTI_COSMO_SPINE);
-            item(Rego.ICON_MOB_TAB);
-            item(Rego.ICON_ITEM_TAB);
-            item(Rego.ICON_BLOCK_TAB);
-            item(Rego.ITEM_TOURNIQUET);
+            item(Items.RED_COSMO_SPINE);
+            item(Items.GREEN_COSMO_SPINE);
+            item(Items.BLUE_COSMO_SPINE);
+            item(Items.YELLOW_COSMO_SPINE);
+            item(Items.PINK_COSMO_SPINE);
+            item(Items.PURPLE_COSMO_SPINE);
+            item(Items.ALPHA_COSMO_SPINE);
+            item(Items.ANTI_COSMO_SPINE);
+            item(Items.MOB_TAB_ICON);
+            item(Items.ITEM_TAB_ICON);
+            item(Items.BLOCK_TAB_ICON);
+            item(Items.TOURNIQUET);
 
-            block(Rego.BLOCK_SWIRL);
-            block(Rego.BLOCK_SNOWFLAKE);
-            block(Rego.BLOCK_STARRY);
-            block(Rego.BLOCK_GEOMETRIC);
-            block(Rego.BLOCK_FLARE);
-            block(Rego.BLOCK_MULTICOLOUR);
-            block(Rego.BLOCK_WATERCOLOUR);
-            block(Rego.BLOCK_COMA_STONE);
-            block(Rego.BLOCK_CATNIP);
-            block(Rego.BLOCK_SPLITLEAF);
-            block(Rego.BLOCK_SNAKEROOT);
-            block(Rego.BLOCK_TALL_SNAKEROOT);
-            block(Rego.BLOCK_POTTED_CATNIP);
-            block(Rego.BLOCK_POTTED_SPLITLEAF);
-            block(Rego.BLOCK_ILLUSIVE_NYLIUM);
-            block(Rego.BLOCK_DELUSIVE_NYLIUM);
-            block(Rego.BLOCK_IMMATERIAL_NYLIUM);
-            block(Rego.BLOCK_SPECTRAL_NYLIUM);
-            block(Rego.BLOCK_SURREAL_NYLIUM);
+            block(Blocks.SWIRL);
+            block(Blocks.SNOWFLAKE);
+            block(Blocks.STARRY);
+            block(Blocks.GEOMETRIC);
+            block(Blocks.FLARE);
+            block(Blocks.MULTICOLOUR);
+            block(Blocks.WATERCOLOUR);
+            block(Blocks.COMA_STONE);
+            block(Blocks.CATNIP);
+            block(Blocks.SPLITLEAF);
+            block(Blocks.SNAKEROOT);
+            block(Blocks.TALL_SNAKEROOT);
+            block(Blocks.POTTED_CATNIP);
+            block(Blocks.POTTED_SPLITLEAF);
+            block(Blocks.ILLUSIVE_NYLIUM);
+            block(Blocks.DELUSIVE_NYLIUM);
+            block(Blocks.IMMATERIAL_NYLIUM);
+            block(Blocks.SPECTRAL_NYLIUM);
+            block(Blocks.SURREAL_NYLIUM);
 
-            entity(Rego.ENTITY_COSMO);
-            entity(Rego.ENTITY_SNIPE);
-            entity(Rego.ENTITY_FLARE);
-            entity(Rego.ENTITY_COSMIC_CREEPER);
-            entity(Rego.ENTITY_FROLICKER);
-            entity(Rego.ENTITY_FLUTTERFLY);
-            entity(Rego.ENTITY_UTTERFLY);
-            entity(Rego.ENTITY_EXPLOSIVE_HOMMING_ARROW);
-            entity(Rego.ENTITY_HOMMING_ARROW);
-            entity(Rego.ENTITY_EERIE_CRETIN);
-            entity(Rego.ENTITY_LEET);
+            entity(Entities.COSMO);
+            entity(Entities.SNIPE);
+            entity(Entities.FLARE);
+            entity(Entities.COSMIC_CREEPER);
+            entity(Entities.FROLICKER);
+            entity(Entities.FLUTTERFLY);
+            entity(Entities.UTTERFLY);
+            entity(Entities.EXPLOSIVE_HOMMING_ARROW);
+            entity(Entities.HOMMING_ARROW);
+            entity(Entities.EERIE_CRETIN);
+            entity(Entities.LEET);
 
-            sound(Rego.SOUND_CONFUSE);
-            sound(Rego.SOUND_EARTH);
-            sound(Rego.SOUND_FOG);
-            sound(Rego.SOUND_GAZE);
-            sound(Rego.SOUND_NIGHT);
-            sound(Rego.SOUND_SHOOT);
-            sound(Rego.SOUND_UTTERFLY_AMBIENT);
-            sound(Rego.SOUND_FLUTTERFLY_AMBIENT);
-            sound(Rego.SOUND_SNIPE_AMBIENT);
-            sound(Rego.SOUND_SNIPE_HURT);
-            sound(Rego.SOUND_COSMO_HURT);
-            sound(Rego.SOUND_ENTITY_DEATH);
-            sound(Rego.SOUND_TING);
-            sound(Rego.SOUND_PEW);
-            sound(Rego.SOUND_FIELD);
-            sound(Rego.SOUND_HIT);
-            sound(Rego.SOUND_LASER);
-            sound(Rego.SOUND_PULSE);
+            sound(Sounds.CONFUSE);
+            sound(Sounds.EARTH);
+            sound(Sounds.FOG);
+            sound(Sounds.GAZE);
+            sound(Sounds.NIGHT);
+            sound(Sounds.SHOOT);
+            sound(Sounds.UTTERFLY_AMBIENT);
+            sound(Sounds.FLUTTERFLY_AMBIENT);
+            sound(Sounds.SNIPE_AMBIENT);
+            sound(Sounds.SNIPE_HURT);
+            sound(Sounds.COSMO_HURT);
+            sound(Sounds.ENTITY_DEATH);
+            sound(Sounds.TING);
+            sound(Sounds.PEW);
+            sound(Sounds.FIELD);
+            sound(Sounds.HIT);
+            sound(Sounds.LASER);
+            sound(Sounds.PULSE);
 
-            effect(Rego.EFFECT_SYNCOPE);
+            effect(Effects.SYNCOPE);
         }
     }
 }

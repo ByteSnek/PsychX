@@ -2,12 +2,12 @@ package xyz.snaker.tq.client.render.block;
 
 import xyz.snaker.snakerlib.math.BasicCube;
 import xyz.snaker.tq.client.render.type.ItemLikeRenderType;
-import xyz.snaker.tq.level.block.entity.ShaderBlockEntity;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -17,13 +17,13 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 /**
  * Created by SnakerBone on 28/04/2023
  **/
-public class ShaderBlockRenderer<T extends ShaderBlockEntity<T>> implements BlockEntityRenderer<T>
+public class ShaderBlockRenderer<T extends BlockEntity> implements BlockEntityRenderer<T>, BlockEntityRendererProvider<T>
 {
     private final RenderType type;
 
-    public ShaderBlockRenderer(RenderType type)
+    public ShaderBlockRenderer(ItemLikeRenderType type)
     {
-        this.type = type;
+        this.type = type.get();
     }
 
     @Override
@@ -33,59 +33,9 @@ public class ShaderBlockRenderer<T extends ShaderBlockEntity<T>> implements Bloc
         BasicCube.create(consumer, stack);
     }
 
-    public static class Flare extends ShaderBlockRenderer<ShaderBlockEntity.Flare>
+    @Override
+    public @NotNull BlockEntityRenderer<T> create(@NotNull Context context)
     {
-        public Flare(BlockEntityRendererProvider.Context context)
-        {
-            super(ItemLikeRenderType.FIRE.get());
-        }
-    }
-
-    public static class MultiColour extends ShaderBlockRenderer<ShaderBlockEntity.MultiColour>
-    {
-        public MultiColour(BlockEntityRendererProvider.Context context)
-        {
-            super(ItemLikeRenderType.MULTICOLOUR.get());
-        }
-    }
-
-    public static class Snowflake extends ShaderBlockRenderer<ShaderBlockEntity.Snowflake>
-    {
-        public Snowflake(BlockEntityRendererProvider.Context context)
-        {
-            super(ItemLikeRenderType.SNOWFLAKE.get());
-        }
-    }
-
-    public static class Starry extends ShaderBlockRenderer<ShaderBlockEntity.Starry>
-    {
-        public Starry(BlockEntityRendererProvider.Context context)
-        {
-            super(ItemLikeRenderType.CLIP.get());
-        }
-    }
-
-    public static class Swirl extends ShaderBlockRenderer<ShaderBlockEntity.Swirl>
-    {
-        public Swirl(BlockEntityRendererProvider.Context context)
-        {
-            super(ItemLikeRenderType.SWIRL.get());
-        }
-    }
-
-    public static class WaterColour extends ShaderBlockRenderer<ShaderBlockEntity.WaterColour>
-    {
-        public WaterColour(BlockEntityRendererProvider.Context context)
-        {
-            super(ItemLikeRenderType.WATERCOLOUR.get());
-        }
-    }
-
-    public static class Geometric extends ShaderBlockRenderer<ShaderBlockEntity.Geometric>
-    {
-        public Geometric(BlockEntityRendererProvider.Context context)
-        {
-            super(ItemLikeRenderType.CLIP.get());
-        }
+        return this;
     }
 }

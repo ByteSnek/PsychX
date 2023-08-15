@@ -4,12 +4,10 @@ import java.util.function.Predicate;
 
 import xyz.snaker.snakerlib.level.entity.SnakerFlyingMob;
 import xyz.snaker.snakerlib.math.Maths;
-import xyz.snaker.snakerlib.utility.LevelStuff;
+import xyz.snaker.snakerlib.utility.tools.WorldStuff;
 import xyz.snaker.tq.level.entity.projectile.CosmicRay;
-import xyz.snaker.tq.rego.Rego;
-
-import org.jetbrains.annotations.NotNull;
-import org.joml.Vector3d;
+import xyz.snaker.tq.rego.Entities;
+import xyz.snaker.tq.rego.Sounds;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
@@ -31,6 +29,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraftforge.network.NetworkHooks;
+
+import org.jetbrains.annotations.NotNull;
+import org.joml.Vector3d;
 
 /**
  * Created by SnakerBone on 2/01/2023
@@ -57,7 +58,7 @@ public class Snipe extends SnakerFlyingMob
 
     public static boolean spawnRules(EntityType<Snipe> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return LevelStuff.isDimension(level, Level.OVERWORLD);
+        return WorldStuff.isDimension(level, Level.OVERWORLD);
     }
 
     @Override
@@ -91,19 +92,19 @@ public class Snipe extends SnakerFlyingMob
     @Override
     protected @NotNull SoundEvent getAmbientSound()
     {
-        return Rego.SOUND_SNIPE_AMBIENT.get();
+        return Sounds.SNIPE_AMBIENT.get();
     }
 
     @Override
     protected SoundEvent getHurtSound(@NotNull DamageSource source)
     {
-        return Rego.SOUND_SNIPE_HURT.get();
+        return Sounds.SNIPE_HURT.get();
     }
 
     @Override
     protected SoundEvent getDeathSound()
     {
-        return Rego.SOUND_ENTITY_DEATH.get();
+        return Sounds.ENTITY_DEATH.get();
     }
 
     @Override
@@ -156,12 +157,12 @@ public class Snipe extends SnakerFlyingMob
                     snipe.xRotO = snipe.getXRot();
 
                     if (snipe.tickCount % delay == 0) {
-                        CosmicRay ray = new CosmicRay(Rego.ENTITY_COSMIC_RAY.get(), snipe, level);
+                        CosmicRay ray = new CosmicRay(Entities.COSMIC_RAY.get(), snipe, level);
                         Vector3d xyz = new Vector3d(x, y, z);
 
                         ray.shoot(xyz.x, xyz.y, xyz.z, velocity, inaccuracy);
                         level.addFreshEntity(ray);
-                        level.playSound(null, target.getX(), target.getY(), target.getZ(), Rego.SOUND_PEW.get(), SoundSource.BLOCKS, 0.5F, (random.nextFloat() - random.nextFloat()) * 0.5F + 1);
+                        level.playSound(null, target.getX(), target.getY(), target.getZ(), Sounds.PEW.get(), SoundSource.BLOCKS, 0.5F, (random.nextFloat() - random.nextFloat()) * 0.5F + 1);
                     }
                 }
             }

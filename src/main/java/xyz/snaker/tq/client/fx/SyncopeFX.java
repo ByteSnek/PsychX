@@ -3,13 +3,11 @@ package xyz.snaker.tq.client.fx;
 import java.io.FileWriter;
 import java.net.URL;
 
-import xyz.snaker.snakerlib.utility.RenderStuff;
+import xyz.snaker.snakerlib.SnakerLib;
 import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.snakerlib.utility.tools.RenderStuff;
 import xyz.snaker.tq.config.TqConfig;
-import xyz.snaker.tq.rego.Rego;
-
-import org.joml.Matrix3d;
-import org.joml.Vector3d;
+import xyz.snaker.tq.rego.Effects;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
@@ -17,6 +15,9 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+
+import org.joml.Matrix3d;
+import org.joml.Vector3d;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -40,7 +41,7 @@ public class SyncopeFX
     public void renderTick(TickEvent.PlayerTickEvent event)
     {
         if (event.player == Minecraft.getInstance().player) {
-            MobEffectInstance effectInstance = event.player.getEffect(Rego.EFFECT_SYNCOPE.get());
+            MobEffectInstance effectInstance = event.player.getEffect(Effects.SYNCOPE.get());
             int duration = effectInstance == null ? 0 : effectInstance.getDuration();
             if (duration > 1) {
                 if (!effectActiveLastTick) {
@@ -218,7 +219,7 @@ public class SyncopeFX
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                 gson.toJson(root, writer);
             } catch (Exception e) {
-                e.printStackTrace();
+                SnakerLib.LOGGER.error(e.getMessage());
             }
         }
     }

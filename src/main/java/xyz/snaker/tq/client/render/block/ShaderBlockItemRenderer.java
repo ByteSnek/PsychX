@@ -6,7 +6,7 @@ import java.util.Map;
 import xyz.snaker.snakerlib.client.render.PreppedRenderer;
 import xyz.snaker.snakerlib.math.BasicCube;
 import xyz.snaker.tq.client.render.type.ItemLikeRenderType;
-import xyz.snaker.tq.rego.Rego;
+import xyz.snaker.tq.rego.Items;
 
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
@@ -28,13 +28,13 @@ public class ShaderBlockItemRenderer extends PreppedRenderer
 {
     public static final Map<Item, RenderType> TYPE = Util.make(new HashMap<>(), map ->
     {
-        map.put(Rego.ITEM_SWIRL_BLOCK.get(), ItemLikeRenderType.SWIRL.get());
-        map.put(Rego.ITEM_SNOWFLAKE_BLOCK.get(), ItemLikeRenderType.SNOWFLAKE.get());
-        map.put(Rego.ITEM_WATERCOLOUR_BLOCK.get(), ItemLikeRenderType.WATERCOLOUR.get());
-        map.put(Rego.ITEM_MULTICOLOUR_BLOCK.get(), ItemLikeRenderType.MULTICOLOUR.get());
-        map.put(Rego.ITEM_FLARE_BLOCK.get(), ItemLikeRenderType.FIRE.get());
-        map.put(Rego.ITEM_STARRY_BLOCK.get(), ItemLikeRenderType.BLACK_STARS.get());
-        map.put(Rego.ITEM_GEOMETRIC_BLOCK.get(), ItemLikeRenderType.CLIP.get());
+        map.put(Items.SWIRL_BLOCK.get(), ItemLikeRenderType.SWIRL.get());
+        map.put(Items.SNOWFLAKE_BLOCK.get(), ItemLikeRenderType.SNOWFLAKE.get());
+        map.put(Items.WATERCOLOUR_BLOCK.get(), ItemLikeRenderType.WATERCOLOUR.get());
+        map.put(Items.MULTICOLOUR_BLOCK.get(), ItemLikeRenderType.MULTICOLOUR.get());
+        map.put(Items.FLARE_BLOCK.get(), ItemLikeRenderType.FIRE.get());
+        map.put(Items.STARRY_BLOCK.get(), ItemLikeRenderType.BLACK_STARS.get());
+        map.put(Items.GEOMETRIC_BLOCK.get(), ItemLikeRenderType.CLIP.get());
     });
     private final RenderType type;
 

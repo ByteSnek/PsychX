@@ -2,10 +2,8 @@ package xyz.snaker.tq.level.effect;
 
 import java.util.function.Consumer;
 
-import xyz.snaker.snakerlib.SnakerLib;
 import xyz.snaker.snakerlib.utility.ResourcePath;
-
-import org.jetbrains.annotations.NotNull;
+import xyz.snaker.snakerlib.utility.tools.ColourStuff;
 
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
@@ -16,6 +14,8 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.client.extensions.common.IClientMobEffectExtensions;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Created by SnakerBone on 6/07/2023
  **/
@@ -23,7 +23,7 @@ public class Syncope extends MobEffect
 {
     public Syncope()
     {
-        super(MobEffectCategory.NEUTRAL, SnakerLib.hexToInt("FF00FF"));
+        super(MobEffectCategory.NEUTRAL, ColourStuff.hexToInt("FF00FF"));
     }
 
     @Override

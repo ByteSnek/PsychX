@@ -1,79 +1,76 @@
 package xyz.snaker.tq.level.block.entity;
 
-import xyz.snaker.snakerlib.level.block.entity.SnakerBlockEntity;
-import xyz.snaker.tq.rego.Rego;
+import java.util.List;
+
+import xyz.snaker.snakerlib.utility.tools.UnsafeStuff;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.registries.RegistryObject;
 
 /**
  * Created by SnakerBone on 28/04/2023
  **/
-public class ShaderBlockEntity<T extends SnakerBlockEntity> extends SnakerBlockEntity
+public abstract class ShaderBlockEntity<T extends BlockEntity> extends BlockEntity
 {
-    public final RegistryObject<BlockEntityType<T>> blockEntity;
-
-    public ShaderBlockEntity(RegistryObject<BlockEntityType<T>> type, BlockPos pos, BlockState state)
+    public ShaderBlockEntity(BlockEntityType<T> type, BlockPos pos, BlockState state)
     {
-        super(type.get(), pos, state);
-        blockEntity = type;
+        super(type, pos, state);
     }
 
-    public static class Flare extends ShaderBlockEntity<Flare>
+    @Override
+    public ClientboundBlockEntityDataPacket getUpdatePacket()
     {
-        public Flare(BlockPos pos, BlockState state)
-        {
-            super(Rego.BE_FLARE, pos, state);
+        return ClientboundBlockEntityDataPacket.create(this, BlockEntity::saveWithFullMetadata);
+    }
+
+    @Override
+    public void setChanged()
+    {
+        if (level != null) {
+            level.setBlock(worldPosition, getBlockState(), Block.UPDATE_ALL_IMMEDIATE);
+            super.setChanged();
+            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL_IMMEDIATE);
         }
     }
 
-    public static class MultiColour extends ShaderBlockEntity<MultiColour>
+    public void markDirtyAndDispatch()
     {
-        public MultiColour(BlockPos pos, BlockState state)
-        {
-            super(Rego.BE_MULTICOLOUR, pos, state);
-        }
+        super.setChanged();
+        dispatchToNearbyPlayers(this);
     }
 
-    public static class Snowflake extends ShaderBlockEntity<Snowflake>
+    public static void dispatchToNearbyPlayers(BlockEntity blockEntity)
     {
-        public Snowflake(BlockPos pos, BlockState state)
-        {
-            super(Rego.BE_SNOWFLAKE, pos, state);
-        }
-    }
-
-    public static class Starry extends ShaderBlockEntity<Starry>
-    {
-        public Starry(BlockPos pos, BlockState state)
-        {
-            super(Rego.BE_STARRY, pos, state);
-        }
-    }
-
-    public static class Swirl extends ShaderBlockEntity<Swirl>
-    {
-        public Swirl(BlockPos pos, BlockState state)
-        {
-            super(Rego.BE_SWIRL, pos, state);
-        }
-    }
-
-    public static class WaterColour extends ShaderBlockEntity<WaterColour>
-    {
-        public WaterColour(BlockPos pos, BlockState state)
-        {
-            super(Rego.BE_WATERCOLOUR, pos, state);
-        }
-    }
-
-    public static class Geometric extends ShaderBlockEntity<Geometric>
-    {
-        public Geometric(BlockPos pos, BlockState state)
-        {
-            super(Rego.BE_GEOMETRIC, pos, state);
+        Level level = blockEntity.getLevel();
+        if (level != null) {
+            Packet<ClientGamePacketListener> packet = blockEntity.getUpdatePacket();
+            if (packet != null) {
+                List<? extends Player> players = level.players();
+                BlockPos pos = blockEntity.getBlockPos();
+                for (Player player : players) {
+                    if (player instanceof ServerPlayer serverPlayer) {
+                        if (UnsafeStuff.versatileObject()) {
+                            // 2do: make this thing actually do something with
+                            // my shader blocks in tq when placed by world gen.
+                            // if you have a solution to this please message me RIGHT NOW.
+                            // i have been trying to fix this issue for months but to no prevail
+                            // no matter how hard i try i just cannot make
+                            // them update. i dont know if its because im retarded
+                            // or if its something on minecrafts end (maybe?) i have no clue
+                            serverPlayer.connection.send(packet);
+                        }
+                    }
+                }
+            }
         }
     }
 }

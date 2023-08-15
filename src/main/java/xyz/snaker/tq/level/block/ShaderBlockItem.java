@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.minecraftforge.registries.RegistryObject;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -17,9 +18,9 @@ import org.jetbrains.annotations.NotNull;
  **/
 public class ShaderBlockItem extends BlockItem
 {
-    public ShaderBlockItem(Block block)
+    public ShaderBlockItem(RegistryObject<Block> block)
     {
-        super(block, SnakerConstants.ItemProperties.EMPTY);
+        super(block.get(), SnakerConstants.ItemProperties.EMPTY);
     }
 
     @Override

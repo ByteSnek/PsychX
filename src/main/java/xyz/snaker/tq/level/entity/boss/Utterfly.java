@@ -11,9 +11,7 @@ import xyz.snaker.snakerlib.math.Maths;
 import xyz.snaker.snakerlib.utility.ResourcePath;
 import xyz.snaker.tq.level.entity.projectile.ExplosiveHommingArrow;
 import xyz.snaker.tq.level.entity.projectile.HommingArrow;
-import xyz.snaker.tq.rego.Rego;
-
-import org.jetbrains.annotations.NotNull;
+import xyz.snaker.tq.rego.Sounds;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -37,6 +35,8 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by SnakerBone on 4/01/2023
@@ -218,7 +218,7 @@ public class Utterfly extends SnakerFlyingBoss
             double z = target.getZ() - getZ();
             setXRot(Maths.atan2RotNeg(y, (x * x + z * z)));
             xRotO = getXRot();
-            level().playSound(null, getX(), getY(), getZ(), Rego.SOUND_SHOOT.get(), getSoundSource(), 1, 1);
+            level().playSound(null, getX(), getY(), getZ(), Sounds.SHOOT.get(), getSoundSource(), 1, 1);
             if (explosive) {
                 ExplosiveHommingArrow arrow = new ExplosiveHommingArrow(level(), this, 8);
                 arrow.shoot(x, y, z, velocity * getPhase(), inaccuracy);
@@ -273,13 +273,13 @@ public class Utterfly extends SnakerFlyingBoss
     @Override
     protected SoundEvent getAmbientSound()
     {
-        return Rego.SOUND_UTTERFLY_AMBIENT.get();
+        return Sounds.UTTERFLY_AMBIENT.get();
     }
 
     @Override
     protected SoundEvent getDeathSound()
     {
-        return getPhase() == 3 && getHealth() <= 0 ? Rego.SOUND_ENTITY_DEATH.get() : null;
+        return getPhase() == 3 && getHealth() <= 0 ? Sounds.ENTITY_DEATH.get() : null;
     }
 
     @Override

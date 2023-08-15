@@ -1,10 +1,8 @@
 package xyz.snaker.tq.level.entity.mob;
 
 import xyz.snaker.snakerlib.level.entity.SnakerMob;
-import xyz.snaker.snakerlib.utility.LevelStuff;
-import xyz.snaker.tq.rego.Rego;
-
-import org.jetbrains.annotations.NotNull;
+import xyz.snaker.snakerlib.utility.tools.WorldStuff;
+import xyz.snaker.tq.rego.Keys;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
@@ -20,6 +18,8 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraftforge.network.NetworkHooks;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by SnakerBone on 30/07/2023
@@ -50,6 +50,6 @@ public class Test extends SnakerMob
 
     public static <T extends Entity> boolean spawnRules(EntityType<T> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return LevelStuff.isDimension(level, Rego.Keys.COMATOSE);
+        return WorldStuff.isDimension(level, Keys.COMATOSE);
     }
 }

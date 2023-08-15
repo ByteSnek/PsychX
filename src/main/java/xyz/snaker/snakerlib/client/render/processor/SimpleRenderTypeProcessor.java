@@ -2,7 +2,7 @@ package xyz.snaker.snakerlib.client.render.processor;
 
 import java.util.Objects;
 
-import xyz.snaker.snakerlib.SnakerLib;
+import xyz.snaker.snakerlib.utility.tools.StringStuff;
 
 import net.minecraft.client.renderer.RenderType;
 
@@ -17,6 +17,6 @@ public interface SimpleRenderTypeProcessor extends RenderTypeProcessor
     @Override
     default RenderType create(@org.jetbrains.annotations.Nullable String name, Pair<VertexFormat, RenderType.CompositeState> pair)
     {
-        return RenderType.create(Objects.requireNonNullElse(name, SnakerLib.placeholderWithId()), pair.getFirst(), VertexFormat.Mode.QUADS, 256, pair.getSecond());
+        return RenderType.create(Objects.requireNonNullElse(name, StringStuff.placeholderWithId()), pair.getFirst(), VertexFormat.Mode.QUADS, 256, pair.getSecond());
     }
 }

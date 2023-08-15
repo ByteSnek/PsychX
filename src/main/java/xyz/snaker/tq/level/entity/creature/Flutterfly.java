@@ -3,10 +3,8 @@ package xyz.snaker.tq.level.entity.creature;
 import javax.annotation.Nullable;
 
 import xyz.snaker.snakerlib.level.entity.SnakerFlyingCreature;
-import xyz.snaker.snakerlib.utility.LevelStuff;
-import xyz.snaker.tq.rego.Rego;
-
-import org.jetbrains.annotations.NotNull;
+import xyz.snaker.snakerlib.utility.tools.WorldStuff;
+import xyz.snaker.tq.rego.Sounds;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
@@ -25,6 +23,8 @@ import net.minecraft.world.entity.monster.Spider;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraftforge.network.NetworkHooks;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by SnakerBone on 2/01/2023
@@ -56,7 +56,7 @@ public class Flutterfly extends SnakerFlyingCreature
     @Override
     protected SoundEvent getAmbientSound()
     {
-        return Rego.SOUND_FLUTTERFLY_AMBIENT.get();
+        return Sounds.FLUTTERFLY_AMBIENT.get();
     }
 
     @Override
@@ -67,6 +67,6 @@ public class Flutterfly extends SnakerFlyingCreature
 
     public static <T extends Entity> boolean spawnRules(EntityType<T> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return LevelStuff.isDimension(level, Level.OVERWORLD);
+        return WorldStuff.isDimension(level, Level.OVERWORLD);
     }
 }

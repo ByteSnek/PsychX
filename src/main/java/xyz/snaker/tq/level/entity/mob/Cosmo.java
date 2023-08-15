@@ -3,13 +3,11 @@ package xyz.snaker.tq.level.entity.mob;
 import java.util.function.Predicate;
 
 import xyz.snaker.snakerlib.level.entity.SnakerMob;
-import xyz.snaker.snakerlib.utility.LevelStuff;
+import xyz.snaker.snakerlib.utility.tools.WorldStuff;
 import xyz.snaker.tq.client.render.entity.CosmoRenderer;
 import xyz.snaker.tq.level.entity.EntityVariants;
-import xyz.snaker.tq.rego.Rego;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import xyz.snaker.tq.rego.Keys;
+import xyz.snaker.tq.rego.Sounds;
 
 import net.minecraft.Util;
 import net.minecraft.client.renderer.RenderType;
@@ -42,6 +40,9 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.network.NetworkHooks;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 /**
  * Created by SnakerBone on 2/01/2023
  **/
@@ -66,7 +67,7 @@ public class Cosmo extends SnakerMob
 
     public static <T extends Entity> boolean spawnRules(EntityType<T> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return LevelStuff.isDimension(level, Rego.Keys.COMATOSE);
+        return WorldStuff.isDimension(level, Keys.COMATOSE);
     }
 
     @Override
@@ -215,13 +216,13 @@ public class Cosmo extends SnakerMob
     @Override
     protected SoundEvent getHurtSound(@NotNull DamageSource source)
     {
-        return Rego.SOUND_COSMO_HURT.get();
+        return Sounds.COSMO_HURT.get();
     }
 
     @Override
     protected SoundEvent getDeathSound()
     {
-        return Rego.SOUND_ENTITY_DEATH.get();
+        return Sounds.ENTITY_DEATH.get();
     }
 
     @Override

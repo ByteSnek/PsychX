@@ -12,12 +12,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 
-import lombok.Data;
-import lombok.experimental.FieldNameConstants;
-
 @Mod(Tourniqueted.MODID)
-@FieldNameConstants
-@Data
 public class Tourniqueted
 {
     public static final String MODID = "tq";
@@ -38,5 +33,6 @@ public class Tourniqueted
     public static void main(String[] args)
     {
         System.out.println(System.getProperty("java.version"));
+        System.out.println(SnakerLib.STACK_WALKER.getCallerClass().getName());
     }
 }

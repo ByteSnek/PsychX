@@ -2,7 +2,7 @@ package xyz.snaker.tq.client.render.icon;
 
 import xyz.snaker.snakerlib.SnakerLib;
 import xyz.snaker.snakerlib.client.render.CyclicalIconRenderer;
-import xyz.snaker.tq.rego.Rego;
+import xyz.snaker.tq.rego.Items;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -10,12 +10,13 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 
 import org.jetbrains.annotations.NotNull;
 
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.vertex.PoseStack;
+
+import static net.minecraft.world.item.Items.BEACON;
 
 /**
  * Created by SnakerBone on 12/06/2023
@@ -37,13 +38,13 @@ public class BlockTabIconRenderer extends CyclicalIconRenderer
         if (level != null) {
             ItemStack[] blocks =
                     {
-                            Rego.ITEM_SWIRL_BLOCK.get().getDefaultInstance(),
-                            Rego.ITEM_FLARE_BLOCK.get().getDefaultInstance(),
-                            Rego.ITEM_MULTICOLOUR_BLOCK.get().getDefaultInstance(),
-                            Rego.ITEM_SNOWFLAKE_BLOCK.get().getDefaultInstance(),
-                            Rego.ITEM_STARRY_BLOCK.get().getDefaultInstance(),
-                            Rego.ITEM_WATERCOLOUR_BLOCK.get().getDefaultInstance(),
-                            Rego.ITEM_GEOMETRIC_BLOCK.get().getDefaultInstance()
+                            Items.SWIRL_BLOCK.get().getDefaultInstance(),
+                            Items.FLARE_BLOCK.get().getDefaultInstance(),
+                            Items.MULTICOLOUR_BLOCK.get().getDefaultInstance(),
+                            Items.SNOWFLAKE_BLOCK.get().getDefaultInstance(),
+                            Items.STARRY_BLOCK.get().getDefaultInstance(),
+                            Items.WATERCOLOUR_BLOCK.get().getDefaultInstance(),
+                            Items.GEOMETRIC_BLOCK.get().getDefaultInstance()
                     };
 
             float scale = 1;
@@ -55,7 +56,7 @@ public class BlockTabIconRenderer extends CyclicalIconRenderer
 
             stack.translate(0.5F, 0.5F, 0);
 
-            ItemStack fallback = Items.BEACON.getDefaultInstance();
+            ItemStack fallback = BEACON.getDefaultInstance();
             ItemStack block = blockToRender == null ? fallback : blockToRender;
 
             try {

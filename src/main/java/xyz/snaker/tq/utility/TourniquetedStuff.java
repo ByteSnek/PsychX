@@ -32,8 +32,6 @@ import net.minecraftforge.registries.RegistryObject;
  **/
 public class TourniquetedStuff
 {
-    public static final PlacementModifier[] STANDARD_PLACEMENTS = {RarityFilter.onAverageOnceEvery(8), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()};
-
     public static ResourceKey<PlacedFeature> placedKey(String name)
     {
         return ResourceKey.create(Registries.PLACED_FEATURE, new ResourcePath(name));
@@ -47,16 +45,6 @@ public class TourniquetedStuff
     public static ResourceKey<BiomeModifier> modifierKey(String name)
     {
         return ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, new ResourcePath(name));
-    }
-
-    public static <T extends Block> RandomPatchConfiguration whenEmpty(RegistryObject<T> block, int tries, int xz, int y)
-    {
-        return new RandomPatchConfiguration(tries, xz, y, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(block.get()))));
-    }
-
-    public static <T extends Block> RandomPatchConfiguration whenEmpty(RegistryObject<T> block)
-    {
-        return whenEmpty(block, 32, 10, 2);
     }
 
     public static <T extends Block> RandomPatchConfiguration grass(RegistryObject<T> block, int tries)
@@ -73,11 +61,6 @@ public class TourniquetedStuff
     {
         var featureSearch = context.lookup(Registries.CONFIGURED_FEATURE);
         context.register(placement.key(), new PlacedFeature(featureSearch.getOrThrow(config.key()), List.copyOf(modifiers)));
-    }
-
-    public static void registerPlacement(BootstapContext<PlacedFeature> context, Features.PlacementKey placement, Features.ConfigKey config, PlacementModifier... modifiers)
-    {
-        registerPlacement(context, placement, config, List.of(modifiers));
     }
 
     public static <FC extends FeatureConfiguration, F extends Feature<FC>> void registerConfiguredFeature(BootstapContext<ConfiguredFeature<?, ?>> context, Features.ConfigKey config, F feature, FC configuration)

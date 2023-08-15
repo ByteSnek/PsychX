@@ -3,7 +3,7 @@ package xyz.snaker.snakerlib.internal.log4j;
 import java.util.Formatter;
 import java.util.function.Function;
 
-import xyz.snaker.snakerlib.SnakerLib;
+import xyz.snaker.snakerlib.utility.tools.StringStuff;
 
 /**
  * Created by SnakerBone on 9/07/2023
@@ -15,7 +15,7 @@ public class SnakerLoggerManager implements SnakerLogger
 
     private SnakerLoggerManager(String name)
     {
-        this.name = SnakerLib.i18nt(name);
+        this.name = StringStuff.i18nt(name);
     }
 
     @Override

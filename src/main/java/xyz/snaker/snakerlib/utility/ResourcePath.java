@@ -1,6 +1,7 @@
 package xyz.snaker.snakerlib.utility;
 
 import xyz.snaker.snakerlib.SnakerLib;
+import xyz.snaker.snakerlib.utility.tools.StringStuff;
 
 import net.minecraft.resources.ResourceLocation;
 
@@ -19,11 +20,11 @@ public class ResourcePath extends ResourceLocation
 
     public ResourcePath(String path)
     {
-        super(SnakerLib.DELEGATE_MOD.get(), path);
+        super(SnakerLib.getDelegateMod().get(), path);
     }
 
     private <T> ResourcePath(Class<T> clazz)
     {
-        super(SnakerLib.DELEGATE_MOD.get(), SnakerLib.i18nf(clazz.getSimpleName()));
+        super(SnakerLib.getDelegateMod().get(), StringStuff.i18nf(clazz.getSimpleName()));
     }
 }

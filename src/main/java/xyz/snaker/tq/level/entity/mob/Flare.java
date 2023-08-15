@@ -4,10 +4,9 @@ import java.util.function.Predicate;
 
 import xyz.snaker.snakerlib.level.entity.SnakerMob;
 import xyz.snaker.snakerlib.level.entity.ai.SnakerSwitchGameModeGoal;
-import xyz.snaker.snakerlib.utility.LevelStuff;
-import xyz.snaker.tq.rego.Rego;
-
-import org.jetbrains.annotations.NotNull;
+import xyz.snaker.snakerlib.utility.tools.WorldStuff;
+import xyz.snaker.tq.rego.Keys;
+import xyz.snaker.tq.rego.Sounds;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
@@ -34,6 +33,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraftforge.network.NetworkHooks;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Created by SnakerBone on 02/01/2023
  **/
@@ -56,7 +57,7 @@ public class Flare extends SnakerMob
 
     public static <T extends Entity> boolean spawnRules(EntityType<T> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return LevelStuff.isDimension(level, Rego.Keys.COMATOSE);
+        return WorldStuff.isDimension(level, Keys.COMATOSE);
     }
 
     @Override
@@ -92,7 +93,7 @@ public class Flare extends SnakerMob
     @Override
     protected SoundEvent getDeathSound()
     {
-        return Rego.SOUND_ENTITY_DEATH.get();
+        return Sounds.ENTITY_DEATH.get();
     }
 
     @Override

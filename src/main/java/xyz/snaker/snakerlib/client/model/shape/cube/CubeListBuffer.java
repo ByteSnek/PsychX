@@ -7,6 +7,7 @@ import java.util.Map;
 import xyz.snaker.snakerlib.SnakerLib;
 import xyz.snaker.snakerlib.internal.AsynchronousHashMap;
 import xyz.snaker.snakerlib.internal.Buffer;
+import xyz.snaker.snakerlib.utility.tools.StringStuff;
 
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeDefinition;
@@ -63,7 +64,7 @@ public class CubeListBuffer
 
     private boolean addToBuffer(CubeListBuilder builder, String name, PartPose pose)
     {
-        if (builder == null || SnakerLib.isValidString(name, true) || pose == null) {
+        if (builder == null || StringStuff.isValidString(name, true) || pose == null) {
             return false;
         } else {
             names.put(builder, name);

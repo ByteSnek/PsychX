@@ -7,9 +7,7 @@ import xyz.snaker.snakerlib.client.render.PreppedRenderer;
 import xyz.snaker.snakerlib.math.PoseStackBuilder;
 import xyz.snaker.tq.client.model.item.CosmoSpineModel;
 import xyz.snaker.tq.client.render.type.ItemLikeRenderType;
-import xyz.snaker.tq.rego.Rego;
-
-import org.jetbrains.annotations.NotNull;
+import xyz.snaker.tq.rego.Items;
 
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
@@ -20,6 +18,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 
 /**
@@ -29,14 +29,14 @@ public class CosmoSpineRenderer extends PreppedRenderer
 {
     public static final Map<Item, RenderType> TYPE = Util.make(new HashMap<>(), map ->
     {
-        map.put(Rego.ITEM_RED_COSMO_SPINE.get(), ItemLikeRenderType.RED_STARS.get());
-        map.put(Rego.ITEM_GREEN_COSMO_SPINE.get(), ItemLikeRenderType.GREEN_STARS.get());
-        map.put(Rego.ITEM_BLUE_COSMO_SPINE.get(), ItemLikeRenderType.BLUE_STARS.get());
-        map.put(Rego.ITEM_YELLOW_COSMO_SPINE.get(), ItemLikeRenderType.YELLOW_STARS.get());
-        map.put(Rego.ITEM_PINK_COSMO_SPINE.get(), ItemLikeRenderType.PINK_STARS.get());
-        map.put(Rego.ITEM_PURPLE_COSMO_SPINE.get(), ItemLikeRenderType.PURPLE_STARS.get());
-        map.put(Rego.ITEM_ALPHA_COSMO_SPINE.get(), ItemLikeRenderType.BLACK_STARS.get());
-        map.put(Rego.ITEM_ANTI_COSMO_SPINE.get(), ItemLikeRenderType.WHITE_STARS.get());
+        map.put(Items.RED_COSMO_SPINE.get(), ItemLikeRenderType.RED_STARS.get());
+        map.put(Items.GREEN_COSMO_SPINE.get(), ItemLikeRenderType.GREEN_STARS.get());
+        map.put(Items.BLUE_COSMO_SPINE.get(), ItemLikeRenderType.BLUE_STARS.get());
+        map.put(Items.YELLOW_COSMO_SPINE.get(), ItemLikeRenderType.YELLOW_STARS.get());
+        map.put(Items.PINK_COSMO_SPINE.get(), ItemLikeRenderType.PINK_STARS.get());
+        map.put(Items.PURPLE_COSMO_SPINE.get(), ItemLikeRenderType.PURPLE_STARS.get());
+        map.put(Items.ALPHA_COSMO_SPINE.get(), ItemLikeRenderType.BLACK_STARS.get());
+        map.put(Items.ANTI_COSMO_SPINE.get(), ItemLikeRenderType.WHITE_STARS.get());
     });
     private final RenderType type;
     private CosmoSpineModel model;

@@ -1,6 +1,7 @@
 package xyz.snaker.tq.level.world.feature;
 
-import xyz.snaker.tq.rego.Rego;
+import xyz.snaker.tq.rego.Blocks;
+import xyz.snaker.tq.rego.Keys;
 import xyz.snaker.tq.utility.TourniquetedStuff;
 
 import net.minecraft.data.worldgen.BootstapContext;
@@ -26,18 +27,18 @@ public class Features
 
     public static void configs(BootstapContext<ConfiguredFeature<?, ?>> context)
     {
-        TourniquetedStuff.registerConfiguredFeature(context, ConfigKey.CATNIP, Feature.RANDOM_PATCH, TourniquetedStuff.grass(Rego.BLOCK_CATNIP, 4));
-        TourniquetedStuff.registerConfiguredFeature(context, ConfigKey.SPLITLEAF, Feature.RANDOM_PATCH, TourniquetedStuff.grass(Rego.BLOCK_SPLITLEAF, 4));
-        TourniquetedStuff.registerConfiguredFeature(context, ConfigKey.SNAKEROOT, Feature.RANDOM_PATCH, TourniquetedStuff.grass(Rego.BLOCK_SNAKEROOT));
-        TourniquetedStuff.registerConfiguredFeature(context, ConfigKey.TALL_SNAKEROOT, Feature.RANDOM_PATCH, TourniquetedStuff.grass(Rego.BLOCK_TALL_SNAKEROOT));
+        TourniquetedStuff.registerConfiguredFeature(context, ConfigKey.CATNIP, Feature.RANDOM_PATCH, TourniquetedStuff.grass(Blocks.CATNIP, 4));
+        TourniquetedStuff.registerConfiguredFeature(context, ConfigKey.SPLITLEAF, Feature.RANDOM_PATCH, TourniquetedStuff.grass(Blocks.SPLITLEAF, 4));
+        TourniquetedStuff.registerConfiguredFeature(context, ConfigKey.SNAKEROOT, Feature.RANDOM_PATCH, TourniquetedStuff.grass(Blocks.SNAKEROOT));
+        TourniquetedStuff.registerConfiguredFeature(context, ConfigKey.TALL_SNAKEROOT, Feature.RANDOM_PATCH, TourniquetedStuff.grass(Blocks.TALL_SNAKEROOT));
     }
 
     public static void modifiers(BootstapContext<BiomeModifier> context)
     {
-        TourniquetedStuff.registerBiomeModifier(context, BiomeModifierKey.CATNIP, Rego.Tags.COMATOSE_VEGETAL, PlacementKey.CATNIP, GenerationStep.Decoration.VEGETAL_DECORATION);
-        TourniquetedStuff.registerBiomeModifier(context, BiomeModifierKey.SPLITLEAF, Rego.Tags.COMATOSE_VEGETAL, PlacementKey.SPLITLEAF, GenerationStep.Decoration.VEGETAL_DECORATION);
-        TourniquetedStuff.registerBiomeModifier(context, BiomeModifierKey.SNAKEROOT, Rego.Tags.COMATOSE_VEGETAL, PlacementKey.SNAKEROOT, GenerationStep.Decoration.VEGETAL_DECORATION);
-        TourniquetedStuff.registerBiomeModifier(context, BiomeModifierKey.TALL_SNAKEROOT, Rego.Tags.COMATOSE_VEGETAL, PlacementKey.TALL_SNAKEROOT, GenerationStep.Decoration.VEGETAL_DECORATION);
+        TourniquetedStuff.registerBiomeModifier(context, BiomeModifierKey.CATNIP, Keys.COMATOSE_VEGETAL, PlacementKey.CATNIP, GenerationStep.Decoration.VEGETAL_DECORATION);
+        TourniquetedStuff.registerBiomeModifier(context, BiomeModifierKey.SPLITLEAF, Keys.COMATOSE_VEGETAL, PlacementKey.SPLITLEAF, GenerationStep.Decoration.VEGETAL_DECORATION);
+        TourniquetedStuff.registerBiomeModifier(context, BiomeModifierKey.SNAKEROOT, Keys.COMATOSE_VEGETAL, PlacementKey.SNAKEROOT, GenerationStep.Decoration.VEGETAL_DECORATION);
+        TourniquetedStuff.registerBiomeModifier(context, BiomeModifierKey.TALL_SNAKEROOT, Keys.COMATOSE_VEGETAL, PlacementKey.TALL_SNAKEROOT, GenerationStep.Decoration.VEGETAL_DECORATION);
     }
 
     public enum PlacementKey

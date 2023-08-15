@@ -2,11 +2,11 @@ package xyz.snaker.tq.level.entity.mob;
 
 import xyz.snaker.snakerlib.level.entity.SnakerFlyingMob;
 import xyz.snaker.snakerlib.level.entity.ai.SnakerFlyGoal;
-import xyz.snaker.snakerlib.utility.LevelStuff;
+import xyz.snaker.snakerlib.utility.tools.WorldStuff;
 import xyz.snaker.tq.level.entity.projectile.CosmicRay;
-import xyz.snaker.tq.rego.Rego;
-
-import org.jetbrains.annotations.NotNull;
+import xyz.snaker.tq.rego.Entities;
+import xyz.snaker.tq.rego.Keys;
+import xyz.snaker.tq.rego.Sounds;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
@@ -26,6 +26,8 @@ import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraftforge.network.NetworkHooks;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by SnakerBone on 15/07/2023
@@ -69,13 +71,13 @@ public class Leet extends SnakerFlyingMob implements RangedAttackMob
     @Override
     public SoundEvent getDeathSound()
     {
-        return Rego.SOUND_ENTITY_DEATH.get();
+        return Sounds.ENTITY_DEATH.get();
     }
 
     @Override
     public void performRangedAttack(LivingEntity target, float flval)
     {
-        CosmicRay ray = new CosmicRay(Rego.ENTITY_COSMIC_RAY.get(), level());
+        CosmicRay ray = new CosmicRay(Entities.COSMIC_RAY.get(), level());
 
         double x = target.getX() - getX();
         double y = target.getY() + target.getEyeHeight() - 1;
@@ -88,6 +90,6 @@ public class Leet extends SnakerFlyingMob implements RangedAttackMob
 
     public static <T extends Entity> boolean spawnRules(EntityType<T> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return LevelStuff.isDimension(level, Rego.Keys.COMATOSE);
+        return WorldStuff.isDimension(level, Keys.COMATOSE);
     }
 }

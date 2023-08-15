@@ -1,8 +1,8 @@
 package xyz.snaker.tq.level.entity.mob;
 
 import xyz.snaker.snakerlib.level.entity.SnakerMob;
-import xyz.snaker.snakerlib.utility.LevelStuff;
-import xyz.snaker.tq.rego.Rego;
+import xyz.snaker.snakerlib.utility.tools.WorldStuff;
+import xyz.snaker.tq.rego.Keys;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -37,6 +37,6 @@ public class EerieCretin extends SnakerMob
 
     public static <T extends Entity> boolean spawnRules(EntityType<T> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return LevelStuff.isDimension(level, Rego.Keys.COMATOSE);
+        return WorldStuff.isDimension(level, Keys.COMATOSE);
     }
 }

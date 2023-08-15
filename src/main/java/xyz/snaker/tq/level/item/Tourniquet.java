@@ -4,9 +4,8 @@ import xyz.snaker.snakerlib.data.SnakerConstants;
 import xyz.snaker.snakerlib.level.item.SnakerBaseItem;
 import xyz.snaker.snakerlib.math.Maths;
 import xyz.snaker.tq.level.world.dimension.Comatose;
-import xyz.snaker.tq.rego.Rego;
-
-import org.jetbrains.annotations.NotNull;
+import xyz.snaker.tq.rego.Effects;
+import xyz.snaker.tq.rego.Keys;
 
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
@@ -21,6 +20,8 @@ import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Created by SnakerBone on 7/07/2023
  **/
@@ -34,14 +35,14 @@ public class Tourniquet extends SnakerBaseItem
     @Override
     public void onUseTick(@NotNull Level level, @NotNull LivingEntity entity, @NotNull ItemStack stack, int remainingUseDuration)
     {
-        MobEffectInstance syncopeEffect = new MobEffectInstance(Rego.EFFECT_SYNCOPE.get(), Maths.secondsToTicks(3));
+        MobEffectInstance syncopeEffect = new MobEffectInstance(Effects.SYNCOPE.get(), Maths.secondsToTicks(3));
         int useDuration = getUseDuration(stack);
         if (!level.isClientSide) {
             if (entity instanceof Player player) {
                 player.addEffect(syncopeEffect);
                 if (Maths.diffEquals(useDuration, remainingUseDuration, 50)) {
                     if (player.canChangeDimensions()) {
-                        ResourceKey<Level> key = level.dimension() == Rego.Keys.COMATOSE ? Level.OVERWORLD : Rego.Keys.COMATOSE;
+                        ResourceKey<Level> key = level.dimension() == Keys.COMATOSE ? Level.OVERWORLD : Keys.COMATOSE;
                         MinecraftServer server = level.getServer();
                         if (server != null) {
                             ServerLevel dimension = server.getLevel(key);

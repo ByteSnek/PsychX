@@ -3,10 +3,6 @@ package xyz.snaker.tq.level.block;
 import xyz.snaker.snakerlib.SnakerLib;
 import xyz.snaker.snakerlib.data.SnakerConstants;
 import xyz.snaker.snakerlib.level.block.SnakerEntityBlock;
-import xyz.snaker.snakerlib.level.block.entity.SnakerBlockEntity;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,10 +14,13 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.registries.RegistryObject;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 /**
  * Created by SnakerBone on 28/04/2023
  **/
-public class ShaderBlock<T extends SnakerBlockEntity> extends SnakerEntityBlock
+public class ShaderBlock<T extends BlockEntity> extends SnakerEntityBlock
 {
     private final RegistryObject<BlockEntityType<T>> blockEntity;
 

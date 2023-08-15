@@ -3,11 +3,9 @@ package xyz.snaker.tq.level.entity.creature;
 import java.util.function.Predicate;
 
 import xyz.snaker.snakerlib.level.entity.SnakerFlyingCreature;
-import xyz.snaker.snakerlib.utility.LevelStuff;
-import xyz.snaker.tq.rego.Rego;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import xyz.snaker.snakerlib.utility.tools.WorldStuff;
+import xyz.snaker.tq.rego.Entities;
+import xyz.snaker.tq.rego.Keys;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
@@ -38,6 +36,9 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.network.NetworkHooks;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 /**
  * Created by SnakerBone on 2/01/2023
  **/
@@ -53,12 +54,12 @@ public class Frolicker extends SnakerFlyingCreature
 
     public static boolean spawnRules(EntityType<Frolicker> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return LevelStuff.isDimension(level, Rego.Keys.COMATOSE) || LevelStuff.isDimension(level, Level.OVERWORLD);
+        return WorldStuff.isDimension(level, Keys.COMATOSE) || WorldStuff.isDimension(level, Level.OVERWORLD);
     }
 
     public boolean canDoFunny()
     {
-        return LevelStuff.isDimension(level(), Rego.Keys.COMATOSE) && !isActuallyOnGround();
+        return WorldStuff.isDimension(level(), Keys.COMATOSE) && !isActuallyOnGround();
     }
 
     public boolean isActuallyOnGround()
@@ -75,7 +76,7 @@ public class Frolicker extends SnakerFlyingCreature
     @Override
     public AgeableMob getBreedOffspring(@NotNull ServerLevel level, @NotNull AgeableMob mate)
     {
-        return Rego.ENTITY_FROLICKER.get().create(level);
+        return Entities.FROLICKER.get().create(level);
     }
 
     @Override

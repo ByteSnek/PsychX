@@ -1,16 +1,16 @@
 package xyz.snaker.tq.client.layer;
 
-import xyz.snaker.snakerlib.utility.RenderStuff;
+import xyz.snaker.snakerlib.utility.tools.RenderStuff;
 import xyz.snaker.tq.client.Shaders;
 import xyz.snaker.tq.client.model.entity.UtterflyModel;
 import xyz.snaker.tq.client.render.type.EntityRenderType;
 import xyz.snaker.tq.level.entity.boss.Utterfly;
 
-import org.jetbrains.annotations.NotNull;
-
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
+
+import org.jetbrains.annotations.NotNull;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 
@@ -33,10 +33,10 @@ public class UtterflyLayer extends RenderLayer<Utterfly, UtterflyModel>
         int phase = utterfly.getPhase();
 
         switch (phase) {
-            case 1 -> colour = RenderStuff.hexToVec3("FFE800");
-            case 2 -> colour = RenderStuff.hexToVec3("FF8300");
-            case 3, 4 -> colour = RenderStuff.hexToVec3("FF0000");
-            default -> colour = RenderStuff.hexToVec3("000000");
+            case 1 -> colour = RenderStuff.hexToRGB("FFE800");
+            case 2 -> colour = RenderStuff.hexToRGB("FF8300");
+            case 3, 4 -> colour = RenderStuff.hexToRGB("FF0000");
+            default -> colour = RenderStuff.hexToRGB("000000");
         }
 
         Shaders.getPulse().enqueueTask(() ->

@@ -5,11 +5,9 @@ import java.util.function.Predicate;
 
 import xyz.snaker.snakerlib.data.SnakerConstants;
 import xyz.snaker.snakerlib.math.Maths;
-import xyz.snaker.snakerlib.utility.LevelStuff;
-import xyz.snaker.snakerlib.utility.MiscStuff;
-import xyz.snaker.tq.rego.Rego;
-
-import org.jetbrains.annotations.NotNull;
+import xyz.snaker.snakerlib.utility.tools.EntityStuff;
+import xyz.snaker.snakerlib.utility.tools.WorldStuff;
+import xyz.snaker.tq.rego.Keys;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -36,6 +34,8 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.network.NetworkHooks;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Created by SnakerBone on 16/03/2023
  **/
@@ -52,7 +52,7 @@ public class CosmicCreeper extends Creeper
 
     public static boolean spawnRules(EntityType<CosmicCreeper> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return (LevelStuff.isDimension(level, Level.OVERWORLD) && random.nextInt(64) == 0 && checkMonsterSpawnRules(type, level, reason, pos, random)) || LevelStuff.isDimension(level, Rego.Keys.COMATOSE) || LevelStuff.isDimension(level, Level.END);
+        return (WorldStuff.isDimension(level, Level.OVERWORLD) && random.nextInt(64) == 0 && checkMonsterSpawnRules(type, level, reason, pos, random)) || WorldStuff.isDimension(level, Keys.COMATOSE) || WorldStuff.isDimension(level, Level.END);
     }
 
     public static AttributeSupplier attributes()
@@ -75,7 +75,7 @@ public class CosmicCreeper extends Creeper
         MoveControl moveCtrl = getMoveControl();
         if (target == null) {
             teleportTime++;
-            if (teleportTime >= random.nextInt(80, 440) && !MiscStuff.isEntityMovingXZ(this)) {
+            if (teleportTime >= random.nextInt(80, 440) && !EntityStuff.isEntityMovingXZ(this)) {
                 double x = getRandomX(random.nextInt(radius, (radius * 2)) * Maths.clamp(random.nextDouble(), 0.875, 3.475)) - 0.5;
                 double y = getY();
                 double z = getRandomZ(random.nextInt(radius, (radius * 2)) * Maths.clamp(random.nextDouble(), 0.875, 3.475)) - 0.5;

@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import xyz.snaker.snakerlib.math.Maths;
 import xyz.snaker.tq.level.entity.mob.Cosmo;
-import xyz.snaker.tq.rego.Rego;
+import xyz.snaker.tq.rego.Items;
 
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -103,13 +103,13 @@ public class EntityDropHandler
 
     private void writeCosmoVariants()
     {
-        cosmoDropVariants.put(EntityVariants.Cosmo.RED, Rego.ITEM_RED_COSMO_SPINE.get());
-        cosmoDropVariants.put(EntityVariants.Cosmo.GREEN, Rego.ITEM_GREEN_COSMO_SPINE.get());
-        cosmoDropVariants.put(EntityVariants.Cosmo.BLUE, Rego.ITEM_BLUE_COSMO_SPINE.get());
-        cosmoDropVariants.put(EntityVariants.Cosmo.YELLOW, Rego.ITEM_YELLOW_COSMO_SPINE.get());
-        cosmoDropVariants.put(EntityVariants.Cosmo.PINK, Rego.ITEM_PINK_COSMO_SPINE.get());
-        cosmoDropVariants.put(EntityVariants.Cosmo.PURPLE, Rego.ITEM_PURPLE_COSMO_SPINE.get());
-        cosmoDropVariants.put(EntityVariants.Cosmo.ALPHA, Rego.ITEM_ALPHA_COSMO_SPINE.get());
+        cosmoDropVariants.put(EntityVariants.Cosmo.RED, Items.RED_COSMO_SPINE.get());
+        cosmoDropVariants.put(EntityVariants.Cosmo.GREEN, Items.GREEN_COSMO_SPINE.get());
+        cosmoDropVariants.put(EntityVariants.Cosmo.BLUE, Items.BLUE_COSMO_SPINE.get());
+        cosmoDropVariants.put(EntityVariants.Cosmo.YELLOW, Items.YELLOW_COSMO_SPINE.get());
+        cosmoDropVariants.put(EntityVariants.Cosmo.PINK, Items.PINK_COSMO_SPINE.get());
+        cosmoDropVariants.put(EntityVariants.Cosmo.PURPLE, Items.PURPLE_COSMO_SPINE.get());
+        cosmoDropVariants.put(EntityVariants.Cosmo.ALPHA, Items.ALPHA_COSMO_SPINE.get());
     }
 
     public static void initialize()

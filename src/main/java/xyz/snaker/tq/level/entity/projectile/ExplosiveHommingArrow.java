@@ -5,9 +5,7 @@ import java.util.List;
 
 import xyz.snaker.snakerlib.level.entity.SnakerProjectile;
 import xyz.snaker.tq.level.entity.boss.Utterfly;
-import xyz.snaker.tq.rego.Rego;
-
-import org.jetbrains.annotations.NotNull;
+import xyz.snaker.tq.rego.Entities;
 
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -19,6 +17,8 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by SnakerBone on 20/02/2023 <br>
@@ -37,7 +37,7 @@ public class ExplosiveHommingArrow extends SnakerProjectile
 
     public ExplosiveHommingArrow(Level level, LivingEntity shooter, double damage)
     {
-        super(Rego.ENTITY_EXPLOSIVE_HOMMING_ARROW.get(), shooter, level);
+        super(Entities.EXPLOSIVE_HOMMING_ARROW.get(), shooter, level);
         setBaseDamage(damage);
     }
 
@@ -45,7 +45,7 @@ public class ExplosiveHommingArrow extends SnakerProjectile
     @Override
     public EntityType<?> getType()
     {
-        return Rego.ENTITY_EXPLOSIVE_HOMMING_ARROW.get();
+        return Entities.EXPLOSIVE_HOMMING_ARROW.get();
     }
 
     @Override

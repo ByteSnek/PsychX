@@ -1,6 +1,6 @@
 package xyz.snaker.snakerlib.internal;
 
-import xyz.snaker.snakerlib.utility.SketchyStuff;
+import xyz.snaker.snakerlib.utility.tools.UnsafeStuff;
 
 /**
  * Created by SnakerBone on 7/08/2023
@@ -29,6 +29,12 @@ public class Single<V>
 
     public void forget()
     {
-        this.value = SketchyStuff.versatileObject();
+        this.value = UnsafeStuff.versatileObject();
+    }
+
+    @Override
+    public String toString()
+    {
+        return value.toString();
     }
 }

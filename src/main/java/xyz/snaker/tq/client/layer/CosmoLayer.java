@@ -1,6 +1,6 @@
 package xyz.snaker.tq.client.layer;
 
-import xyz.snaker.snakerlib.utility.RenderStuff;
+import xyz.snaker.snakerlib.utility.tools.RenderStuff;
 import xyz.snaker.tq.client.model.entity.CosmoModel;
 import xyz.snaker.tq.level.entity.mob.Cosmo;
 

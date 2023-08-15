@@ -4,11 +4,12 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import xyz.snaker.snakerlib.SnakerLib;
 import xyz.snaker.snakerlib.client.render.processor.SimpleRenderTypeProcessor;
 import xyz.snaker.snakerlib.level.entity.SnakerBoss;
 import xyz.snaker.snakerlib.level.entity.SnakerFlyingBoss;
 import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.snakerlib.utility.tools.ColourStuff;
+import xyz.snaker.snakerlib.utility.tools.RenderStuff;
 import xyz.snaker.tq.level.entity.boss.AntiCosmo;
 import xyz.snaker.tq.level.entity.boss.Utterfly;
 
@@ -59,7 +60,7 @@ public class BossBarHandler
         LerpingBossEvent info = event.getBossEvent();
         PoseStack stack = graphics.pose();
         Component name = info.getName();
-        SimpleRenderTypeProcessor processor = SnakerLib.createFreshProcessor();
+        SimpleRenderTypeProcessor processor = RenderStuff.createFreshProcessor();
         String textColour;
         String samplerName;
         for (Object boss : new CopyOnWriteArrayList<>(BOSSES)) {
@@ -82,7 +83,7 @@ public class BossBarHandler
                 drawOverlay(consumer, x, y, (int) (info.getProgress() * 182), 5);
                 source.endBatch();
                 stack.translate(0, 0, 16);
-                graphics.drawString(minecraft.font, name.getVisualOrderText(), textureX, textureY, SnakerLib.hexToInt("A1F5FF"), true);
+                graphics.drawString(minecraft.font, name.getVisualOrderText(), textureX, textureY, ColourStuff.hexToInt("A1F5FF"), true);
             }
         }
         for (Object flyingBoss : new CopyOnWriteArrayList<>(FLYING_BOSSES)) {
@@ -123,7 +124,7 @@ public class BossBarHandler
                 drawOverlay(consumer, x, y, (int) (info.getProgress() * 182), 5);
                 source.endBatch();
                 stack.translate(0, 0, 16);
-                graphics.drawString(minecraft.font, name.getVisualOrderText(), textureX, textureY, SnakerLib.hexToInt(textColour), true);
+                graphics.drawString(minecraft.font, name.getVisualOrderText(), textureX, textureY, ColourStuff.hexToInt(textColour), true);
             }
         }
     }
