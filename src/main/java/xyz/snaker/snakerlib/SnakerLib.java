@@ -35,7 +35,7 @@ import org.lwjgl.glfw.GLFW;
 public class SnakerLib
 {
     public static final String NAME = SnakerLib.class.getSimpleName();
-    public static final String MODID = NAME.toLowerCase();
+    public static final String MODID = "snakerlib";
 
     /**
      * A client side tick counter
