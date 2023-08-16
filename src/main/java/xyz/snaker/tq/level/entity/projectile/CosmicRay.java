@@ -1,6 +1,6 @@
 package xyz.snaker.tq.level.entity.projectile;
 
-import xyz.snaker.snakerlib.level.entity.SnakerProjectile;
+import xyz.snaker.snakerlib.level.entity.Trajectile;
 import xyz.snaker.tq.rego.Sounds;
 
 import net.minecraft.sounds.SoundEvent;
@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by SnakerBone on 20/02/2023
  **/
-public class CosmicRay extends SnakerProjectile
+public class CosmicRay extends Trajectile
 {
     public CosmicRay(EntityType<CosmicRay> type, Level level)
     {

@@ -3,7 +3,7 @@ package xyz.snaker.tq.level.entity.projectile;
 import java.util.Comparator;
 import java.util.List;
 
-import xyz.snaker.snakerlib.level.entity.SnakerProjectile;
+import xyz.snaker.snakerlib.level.entity.Trajectile;
 import xyz.snaker.tq.level.entity.boss.Utterfly;
 import xyz.snaker.tq.rego.Entities;
 
@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
  * Created by SnakerBone on 20/02/2023 <br>
  * Credit: ProjectE
  **/
-public class ExplosiveHommingArrow extends SnakerProjectile
+public class ExplosiveHommingArrow extends Trajectile
 {
     private static final EntityDataAccessor<Integer> TARGET_ID = SynchedEntityData.defineId(ExplosiveHommingArrow.class, EntityDataSerializers.INT);
     private static final int NULL_TARGET_ID = -1;

@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.UUID;
 import javax.annotation.Nullable;
 
-import xyz.snaker.snakerlib.level.entity.SnakerFlyingBoss;
-import xyz.snaker.snakerlib.level.entity.ai.SnakerFlyGoal;
-import xyz.snaker.snakerlib.level.entity.ai.SnakerLookGoal;
+import xyz.snaker.snakerlib.level.entity.FlyingBoss;
+import xyz.snaker.snakerlib.level.entity.ai.FlyGoal;
+import xyz.snaker.snakerlib.level.entity.ai.LookAroundGoal;
 import xyz.snaker.snakerlib.math.Maths;
 import xyz.snaker.snakerlib.utility.ResourcePath;
 import xyz.snaker.tq.level.entity.projectile.ExplosiveHommingArrow;
@@ -14,9 +14,11 @@ import xyz.snaker.tq.level.entity.projectile.HommingArrow;
 import xyz.snaker.tq.rego.Sounds;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.bossevents.CustomBossEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -25,7 +27,6 @@ import net.minecraft.world.BossEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -41,14 +42,14 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by SnakerBone on 4/01/2023
  **/
-public class Utterfly extends SnakerFlyingBoss
+public class Utterfly extends FlyingBoss<Utterfly>
 {
     public static final EntityDataAccessor<Integer> PHASE = SynchedEntityData.defineId(Utterfly.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Boolean> CHARGING = SynchedEntityData.defineId(Utterfly.class, EntityDataSerializers.BOOLEAN);
     private final CustomBossEvent bossEvent = new CustomBossEvent(new ResourcePath("utterfly"), getDisplayName());
     private volatile boolean triggerExplosion;
 
-    public Utterfly(EntityType<? extends SnakerFlyingBoss> type, Level level)
+    public Utterfly(EntityType<? extends FlyingBoss> type, Level level)
     {
         super(type, level);
     }
@@ -97,8 +98,8 @@ public class Utterfly extends SnakerFlyingBoss
     @Override
     protected void registerGoals()
     {
-        goalSelector.addGoal(5, new SnakerFlyGoal(this));
-        goalSelector.addGoal(7, new SnakerLookGoal(this));
+        goalSelector.addGoal(5, new FlyGoal(this));
+        goalSelector.addGoal(7, new LookAroundGoal(this));
         targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
     }
 
@@ -128,7 +129,7 @@ public class Utterfly extends SnakerFlyingBoss
         }
         boolean result = super.hurt(source, amount);
         if (!level().isClientSide && getHealth() <= 1 && getPhase() < 3) {
-            extraHealth((int) Maths.pow2b(getPhase() * 8L), AttributeModifier.Operation.ADDITION);
+            //extraHealth((int) Maths.pow2b(getPhase() * 8L), AttributeModifier.Operation.ADDITION);
             setCharging(true);
             setPhase(getPhase() + 1);
             getNavigation().stop();
@@ -174,7 +175,9 @@ public class Utterfly extends SnakerFlyingBoss
                     setCharging(false);
                 }
             } else if (!getCharging() && !dead && triggerExplosion) {
-                for (int i = 0; i < Maths.pow2e(getPhase()); i++) {
+                for (int i = 0;
+                     i < Maths.pow2e(getPhase());
+                     i++) {
                     explode(i);
                 }
                 triggerExplosion = false;
@@ -216,7 +219,7 @@ public class Utterfly extends SnakerFlyingBoss
             double x = target.getX() - getX();
             double y = target.getY() - getY();
             double z = target.getZ() - getZ();
-            setXRot(Maths.atan2RotNeg(y, (x * x + z * z)));
+            setXRot(Maths.rotateTowards(y, (x * x + z * z)));
             xRotO = getXRot();
             level().playSound(null, getX(), getY(), getZ(), Sounds.SHOOT.get(), getSoundSource(), 1, 1);
             if (explosive) {
@@ -263,12 +266,6 @@ public class Utterfly extends SnakerFlyingBoss
         }
     }
 
-    @Override
-    public boolean causeFallDamage(float pFallDistance, float pMultiplier, @NotNull DamageSource source)
-    {
-        return false;
-    }
-
     @Nullable
     @Override
     protected SoundEvent getAmbientSound()
@@ -310,5 +307,29 @@ public class Utterfly extends SnakerFlyingBoss
         super.addAdditionalSaveData(tag);
         tag.putInt("Phase", getPhase());
         tag.putBoolean("Charging", getCharging());
+    }
+
+    @Override
+    public ResourceLocation getResourceLocation()
+    {
+        return ResourcePath.thisClass();
+    }
+
+    @Override
+    public Component getBossDisplayName()
+    {
+        return getDisplayName();
+    }
+
+    @Override
+    public BossEvent.BossBarColor getBossBarColour()
+    {
+        return BossEvent.BossBarColor.GREEN;
+    }
+
+    @Override
+    public Utterfly getBossInstance()
+    {
+        return this;
     }
 }

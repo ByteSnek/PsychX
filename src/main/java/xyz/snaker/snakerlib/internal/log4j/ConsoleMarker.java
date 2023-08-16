@@ -5,10 +5,24 @@ package xyz.snaker.snakerlib.internal.log4j;
  **/
 public enum ConsoleMarker
 {
-    INFO,
-    WARN,
-    ERROR;
+    /**
+     * A console marker of type information
+     **/
+    INFO(),
 
+    /**
+     * A console marker of type warning
+     **/
+    WARN(),
+
+    /**
+     * A console marker of type error
+     **/
+    ERROR();
+
+    /**
+     * The console marker value
+     **/
     private final String value;
 
     ConsoleMarker()
@@ -16,6 +30,11 @@ public enum ConsoleMarker
         this.value = name().toUpperCase();
     }
 
+    /**
+     * Gets the console marker value
+     *
+     * @return The console marker value as a string
+     **/
     public String value()
     {
         return value;

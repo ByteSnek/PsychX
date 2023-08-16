@@ -1,9 +1,6 @@
 package xyz.snaker.snakerlib.level.entity;
 
-import xyz.snaker.snakerlib.data.SnakerConstants;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import xyz.snaker.snakerlib.data.DefaultEntityAttributes;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.AgeableMob;
@@ -14,14 +11,20 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 /**
  * Created by SnakerBone on 23/05/2023
  **/
-public abstract class SnakerCreature extends Animal
+public abstract class Passive extends Animal
 {
-    private final SnakerCreature offspring;
+    /**
+     * This animal's offspring
+     **/
+    private final Passive offspring;
 
-    public SnakerCreature(EntityType<? extends Animal> type, Level level, @Nullable SnakerCreature offspring, int xpReward)
+    public Passive(EntityType<? extends Animal> type, Level level, @Nullable Passive offspring, int xpReward)
     {
         super(type, level);
         this.offspring = offspring;
@@ -33,11 +36,16 @@ public abstract class SnakerCreature extends Animal
         setPathfindingMalus(BlockPathTypes.FENCE, -1);
     }
 
-    public SnakerCreature(EntityType<? extends Animal> type, Level level, @Nullable SnakerCreature offspring)
+    public Passive(EntityType<? extends Animal> type, Level level, @Nullable Passive offspring)
     {
-        this(type, level, offspring, SnakerConstants.EntityAttributes.CREATURE_XP_REWARD);
+        this(type, level, offspring, DefaultEntityAttributes.CREATURE_XP_REWARD);
     }
 
+    /**
+     * Checks if this mob is actually aggressive
+     *
+     * @return True if this mob is actually aggressive
+     **/
     public boolean isCranky()
     {
         return isAlive() && isEffectiveAi() && isAggressive() && getTarget() != null;

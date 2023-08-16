@@ -2,7 +2,7 @@ package xyz.snaker.tq.level.entity.creature;
 
 import javax.annotation.Nullable;
 
-import xyz.snaker.snakerlib.level.entity.SnakerFlyingCreature;
+import xyz.snaker.snakerlib.level.entity.FlyingPassive;
 import xyz.snaker.snakerlib.utility.tools.WorldStuff;
 import xyz.snaker.tq.rego.Sounds;
 
@@ -29,9 +29,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by SnakerBone on 2/01/2023
  **/
-public class Flutterfly extends SnakerFlyingCreature
+public class Flutterfly extends FlyingPassive
 {
-    public Flutterfly(EntityType<? extends SnakerFlyingCreature> type, Level level)
+    public Flutterfly(EntityType<? extends FlyingPassive> type, Level level)
     {
         super(type, level);
     }

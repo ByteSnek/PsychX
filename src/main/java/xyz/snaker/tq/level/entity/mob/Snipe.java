@@ -2,7 +2,7 @@ package xyz.snaker.tq.level.entity.mob;
 
 import java.util.function.Predicate;
 
-import xyz.snaker.snakerlib.level.entity.SnakerFlyingMob;
+import xyz.snaker.snakerlib.level.entity.FlyingHostile;
 import xyz.snaker.snakerlib.math.Maths;
 import xyz.snaker.snakerlib.utility.tools.WorldStuff;
 import xyz.snaker.tq.level.entity.projectile.CosmicRay;
@@ -36,11 +36,11 @@ import org.joml.Vector3d;
 /**
  * Created by SnakerBone on 2/01/2023
  **/
-public class Snipe extends SnakerFlyingMob
+public class Snipe extends FlyingHostile
 {
     private final Predicate<LivingEntity> distance = entity -> Math.abs(entity.getY() - getY()) <= 4;
 
-    public Snipe(EntityType<? extends SnakerFlyingMob> type, Level level)
+    public Snipe(EntityType<? extends FlyingHostile> type, Level level)
     {
         super(type, level);
     }
@@ -153,7 +153,7 @@ public class Snipe extends SnakerFlyingMob
                     double y = target.getY() - snipe.getY();
                     double z = target.getZ() - snipe.getZ();
 
-                    snipe.setXRot(Maths.atan2RotNeg(y, (x * x + z * z)));
+                    snipe.setXRot(Maths.rotateTowards(y, (x * x + z * z)));
                     snipe.xRotO = snipe.getXRot();
 
                     if (snipe.tickCount % delay == 0) {

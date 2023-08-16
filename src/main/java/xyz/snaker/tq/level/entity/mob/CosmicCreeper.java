@@ -3,7 +3,7 @@ package xyz.snaker.tq.level.entity.mob;
 import java.util.List;
 import java.util.function.Predicate;
 
-import xyz.snaker.snakerlib.data.SnakerConstants;
+import xyz.snaker.snakerlib.data.DefaultEntityAttributes;
 import xyz.snaker.snakerlib.math.Maths;
 import xyz.snaker.snakerlib.utility.tools.EntityStuff;
 import xyz.snaker.snakerlib.utility.tools.WorldStuff;
@@ -206,7 +206,7 @@ public class CosmicCreeper extends Creeper
         public void tick()
         {
             if (entity.getTarget() != null) {
-                speedModifier = SnakerConstants.EntityAttributes.SPEED_MODIFIER;
+                speedModifier = DefaultEntityAttributes.SPEED_MODIFIER;
             }
             super.tick();
         }

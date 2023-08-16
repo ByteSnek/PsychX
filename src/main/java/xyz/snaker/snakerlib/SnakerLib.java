@@ -5,12 +5,12 @@ import java.util.Arrays;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import xyz.snaker.snakerlib.concurrent.lock.LockedValue;
 import xyz.snaker.snakerlib.config.SnakerConfig;
 import xyz.snaker.snakerlib.internal.LevelSavingEvent;
-import xyz.snaker.snakerlib.internal.Single;
 import xyz.snaker.snakerlib.internal.log4j.SnakerLogger;
 import xyz.snaker.snakerlib.internal.log4j.SnakerLoggerManager;
-import xyz.snaker.snakerlib.level.entity.SnakerBoss;
+import xyz.snaker.snakerlib.level.entity.Boss;
 import xyz.snaker.snakerlib.utility.tools.KeyboardStuff;
 import xyz.snaker.snakerlib.utility.tools.StringStuff;
 import xyz.snaker.snakerlib.utility.tools.UnsafeStuff;
@@ -34,18 +34,48 @@ import org.lwjgl.glfw.GLFW;
  **/
 public class SnakerLib
 {
-    public static final String MODID = "snakerlib";
     public static final String NAME = SnakerLib.class.getSimpleName();
+    public static final String MODID = NAME.toLowerCase();
 
+    /**
+     * A client side tick counter
+     *
+     * @see #getClientTickCount()
+     **/
     private static long clientTickCount = 0;
+
+    /**
+     * A server side tick counter
+     *
+     * @see #getServerTickCount()
+     **/
     private static long serverTickCount = 0;
 
-    private static boolean isInitialized = false;
-    private static boolean isRegistered = false;
+    /**
+     * Checks if SnakerLib is initialized
+     **/
+    private static boolean isInitialized;
 
-    public static final Single<String> MOD = new Single<>();
+    /**
+     * Checks if SnakerLib is registered to Forge
+     **/
+    private static boolean isRegistered;
 
+    /**
+     * A locked value holding the modid of the mod that initialized SnakerLib
+     *
+     * @see SnakerLib#initialize()
+     **/
+    public static final LockedValue<String> MOD = new LockedValue<>();
+
+    /**
+     * SnakerLib's logger instance
+     **/
     public static final SnakerLogger LOGGER = SnakerLoggerManager.INSTANCE.apply(SnakerLib.NAME);
+
+    /**
+     * Stack walker with class reference retention
+     **/
     public static StackWalker STACK_WALKER = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE);
 
     public SnakerLib()
@@ -54,6 +84,11 @@ public class SnakerLib
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, SnakerConfig.COMMON_SPEC, "snakerlib-common.toml");
     }
 
+    /**
+     * Call this to initialize your mod to SnakerLib.
+     * <p>
+     * <strong>The class you're calling it from must be annotated with {@link Mod} and cannot be a static or nested class</strong>
+     **/
     public static void initialize()
     {
         Class<?> clazz = STACK_WALKER.getCallerClass();
@@ -65,10 +100,11 @@ public class SnakerLib
             }
             String modId = clazz.getAnnotation(Mod.class).value();
             if (StringStuff.isValidString(modId)) {
-                MOD.set(modId);
-                String name = MOD.get();
-                SnakerLib.LOGGER.infof("Successfully initialized mod '%s' to SnakerLib", name);
-                isInitialized = true;
+                if (MOD.set(modId)) {
+                    String name = MOD.get();
+                    SnakerLib.LOGGER.infof("Successfully initialized mod '%s' to SnakerLib", name);
+                    isInitialized = true;
+                }
             } else {
                 throw new RuntimeException(String.format("Could not initialize mod '%s' to SnakerLib: modid is invalid", modId));
             }
@@ -81,6 +117,9 @@ public class SnakerLib
         }
     }
 
+    /**
+     * Deletes any JVM hotspot crash files that were caused by {@link UnsafeStuff#forceCrashJVM(String)}
+     **/
     public static void deleteJVMHSFiles()
     {
         if (FMLPaths.GAMEDIR.get() != null) {
@@ -155,9 +194,9 @@ public class SnakerLib
     protected void serverStopped(LevelSavingEvent event) throws InterruptedException
     {
         AtomicBoolean hasDiscarded = new AtomicBoolean(true);
-        var bosses = SnakerBoss.BOSS_INSTANCES;
+        var bosses = Boss.BOSS_INSTANCES;
         if (!bosses.isEmpty()) {
-            for (SnakerBoss boss : new CopyOnWriteArrayList<>(bosses)) {
+            for (Boss boss : new CopyOnWriteArrayList<>(bosses)) {
                 int bossesSize = bosses.size();
                 boss.discard();
                 if (hasDiscarded.get()) {

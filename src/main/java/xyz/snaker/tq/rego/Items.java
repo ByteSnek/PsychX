@@ -14,6 +14,7 @@ import xyz.snaker.tq.level.item.icon.MobTabIcon;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -39,15 +40,15 @@ public class Items
     public static final RegistryObject<Item> ITEM_TAB_ICON = register("item_tab_icon", ItemTabIcon::new);
     public static final RegistryObject<Item> BLOCK_TAB_ICON = register("block_tab_icon", BlockTabIcon::new);
 
-    public static final RegistryObject<Item> SWIRL_BLOCK = register("swirl_block", () -> new ShaderBlockItem(Blocks.SWIRL));
-    public static final RegistryObject<Item> SNOWFLAKE_BLOCK = register("snowflake_block", () -> new ShaderBlockItem(Blocks.SNOWFLAKE));
-    public static final RegistryObject<Item> WATERCOLOUR_BLOCK = register("watercolour_block", () -> new ShaderBlockItem(Blocks.WATERCOLOUR));
-    public static final RegistryObject<Item> MULTICOLOUR_BLOCK = register("multicolour_block", () -> new ShaderBlockItem(Blocks.MULTICOLOUR));
-    public static final RegistryObject<Item> FLARE_BLOCK = register("flare_block", () -> new ShaderBlockItem(Blocks.FLARE));
-    public static final RegistryObject<Item> STARRY_BLOCK = register("starry_block", () -> new ShaderBlockItem(Blocks.STARRY));
-    public static final RegistryObject<Item> GEOMETRIC_BLOCK = register("geometric_block", () -> new ShaderBlockItem(Blocks.GEOMETRIC));
-
     public static final RegistryObject<Item> TOURNIQUET = register("tourniquet", Tourniquet::new);
+
+    public static final RegistryObject<Item> SWIRL_BLOCK = registerShaderBlockItem("swirl_block", Blocks.SWIRL);
+    public static final RegistryObject<Item> SNOWFLAKE_BLOCK = registerShaderBlockItem("snowflake_block", Blocks.SNOWFLAKE);
+    public static final RegistryObject<Item> WATERCOLOUR_BLOCK = registerShaderBlockItem("watercolour_block", Blocks.WATERCOLOUR);
+    public static final RegistryObject<Item> MULTICOLOUR_BLOCK = registerShaderBlockItem("multicolour_block", Blocks.MULTICOLOUR);
+    public static final RegistryObject<Item> FLARE_BLOCK = registerShaderBlockItem("flare_block", Blocks.FLARE);
+    public static final RegistryObject<Item> STARRY_BLOCK = registerShaderBlockItem("starry_block", Blocks.STARRY);
+    public static final RegistryObject<Item> GEOMETRIC_BLOCK = registerShaderBlockItem("geometric_block", Blocks.GEOMETRIC);
 
     public static final RegistryObject<Item> COSMO_SPAWN_EGG = registerSpawnEgg("cosmo_spawn_egg", Entities.COSMO);
     public static final RegistryObject<Item> SNIPE_SPAWN_EGG = registerSpawnEgg("snipe_spawn_egg", Entities.SNIPE);
@@ -70,5 +71,10 @@ public class Items
     {
         Supplier<ForgeSpawnEggItem> egg = () -> new ForgeSpawnEggItem(mob, ColourStuff.randomHex(), ColourStuff.randomHex(), new Item.Properties());
         return REGISTRAR.register(name, egg);
+    }
+
+    static RegistryObject<Item> registerShaderBlockItem(String name, RegistryObject<Block> parent)
+    {
+        return REGISTRAR.register(name, () -> new ShaderBlockItem(parent));
     }
 }

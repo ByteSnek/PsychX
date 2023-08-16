@@ -2,8 +2,8 @@ package xyz.snaker.tq.level.entity.mob;
 
 import java.util.function.Predicate;
 
-import xyz.snaker.snakerlib.level.entity.SnakerMob;
-import xyz.snaker.snakerlib.level.entity.ai.SnakerSwitchGameModeGoal;
+import xyz.snaker.snakerlib.level.entity.Hostile;
+import xyz.snaker.snakerlib.level.entity.ai.SwitchGameModeGoal;
 import xyz.snaker.snakerlib.utility.tools.WorldStuff;
 import xyz.snaker.tq.rego.Keys;
 import xyz.snaker.tq.rego.Sounds;
@@ -38,7 +38,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by SnakerBone on 02/01/2023
  **/
-public class Flare extends SnakerMob
+public class Flare extends Hostile
 {
     public Flare(EntityType<? extends Flare> type, Level level)
     {
@@ -64,7 +64,7 @@ public class Flare extends SnakerMob
     protected void registerGoals()
     {
         goalSelector.addGoal(0, new FloatGoal(this));
-        goalSelector.addGoal(1, new SnakerSwitchGameModeGoal(this));
+        goalSelector.addGoal(1, new SwitchGameModeGoal(this));
         goalSelector.addGoal(6, new RandomStrollGoal(this, 1));
         goalSelector.addGoal(5, new HurtByTargetGoal(this));
         goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.3, false));

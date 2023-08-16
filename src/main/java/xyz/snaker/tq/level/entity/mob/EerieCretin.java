@@ -1,6 +1,6 @@
 package xyz.snaker.tq.level.entity.mob;
 
-import xyz.snaker.snakerlib.level.entity.SnakerMob;
+import xyz.snaker.snakerlib.level.entity.Hostile;
 import xyz.snaker.snakerlib.utility.tools.WorldStuff;
 import xyz.snaker.tq.rego.Keys;
 
@@ -18,7 +18,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 /**
  * Created by SnakerBone on 15/07/2023
  **/
-public class EerieCretin extends SnakerMob
+public class EerieCretin extends Hostile
 {
     public EerieCretin(EntityType<? extends Monster> type, Level level)
     {

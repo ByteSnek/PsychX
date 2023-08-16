@@ -2,7 +2,7 @@ package xyz.snaker.tq.level.entity.mob;
 
 import java.util.function.Predicate;
 
-import xyz.snaker.snakerlib.level.entity.SnakerMob;
+import xyz.snaker.snakerlib.level.entity.Hostile;
 import xyz.snaker.snakerlib.utility.tools.WorldStuff;
 import xyz.snaker.tq.client.render.entity.CosmoRenderer;
 import xyz.snaker.tq.level.entity.EntityVariants;
@@ -46,7 +46,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by SnakerBone on 2/01/2023
  **/
-public class Cosmo extends SnakerMob
+public class Cosmo extends Hostile
 {
     private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Cosmo.class, EntityDataSerializers.INT);
 

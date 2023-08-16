@@ -2,7 +2,7 @@ package xyz.snaker.tq.level.block;
 
 import java.util.function.Consumer;
 
-import xyz.snaker.snakerlib.data.SnakerConstants;
+import xyz.snaker.snakerlib.data.DefaultItemProperties;
 import xyz.snaker.tq.client.render.block.ShaderBlockItemRenderer;
 
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -20,7 +20,7 @@ public class ShaderBlockItem extends BlockItem
 {
     public ShaderBlockItem(RegistryObject<Block> block)
     {
-        super(block.get(), SnakerConstants.ItemProperties.EMPTY);
+        super(block.get(), DefaultItemProperties.EMPTY);
     }
 
     @Override

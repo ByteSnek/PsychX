@@ -1,7 +1,8 @@
 package xyz.snaker.tq.level.entity;
 
-import java.util.HashMap;
+import java.util.Map;
 
+import xyz.snaker.snakerlib.concurrent.AsyncHashMap;
 import xyz.snaker.snakerlib.math.Maths;
 import xyz.snaker.tq.level.entity.mob.Cosmo;
 import xyz.snaker.tq.rego.Items;
@@ -23,7 +24,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class EntityDropHandler
 {
     public final RandomSource random = RandomSource.create();
-    private final HashMap<EntityVariants.Cosmo, Item> cosmoDropVariants = new HashMap<>();
+    private final Map<EntityVariants.Cosmo, Item> cosmoDropVariants = new AsyncHashMap<>();
 
     @SubscribeEvent
     public void onLivingDrops(LivingDropsEvent event)

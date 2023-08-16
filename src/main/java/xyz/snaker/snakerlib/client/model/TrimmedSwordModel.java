@@ -1,17 +1,22 @@
 package xyz.snaker.snakerlib.client.model;
 
-import org.jetbrains.annotations.NotNull;
-
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 
+/**
+ * Created by SnakerBone on 12/06/2023
+ * <p>
+ * The minecraft sword with a shorter blade as its own model
+ **/
 public abstract class TrimmedSwordModel extends Model
 {
     protected final ModelPart blade;

@@ -1,6 +1,6 @@
 package xyz.snaker.tq.level.entity.mob;
 
-import xyz.snaker.snakerlib.level.entity.SnakerMob;
+import xyz.snaker.snakerlib.level.entity.Hostile;
 import xyz.snaker.snakerlib.utility.tools.WorldStuff;
 import xyz.snaker.tq.rego.Keys;
 
@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by SnakerBone on 30/07/2023
  **/
-public class Test extends SnakerMob
+public class Test extends Hostile
 {
     public Test(EntityType<? extends Monster> type, Level level)
     {

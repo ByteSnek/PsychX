@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 import xyz.snaker.snakerlib.SnakerLib;
-import xyz.snaker.snakerlib.internal.AsynchronousHashMap;
+import xyz.snaker.snakerlib.concurrent.AsyncHashMap;
 import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.level.entity.EntityDropHandler;
 
@@ -29,9 +29,9 @@ import net.minecraftforge.registries.RegistryObject;
 @Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class Rego
 {
-    private static final Predicate<RegistryObject<Item>> BLACKLISTED_ITEMS = item -> item.get() instanceof BlockItem || item.equals(Items.MOB_TAB_ICON) || item.equals(Items.BLOCK_TAB_ICON) || item.equals(Items.ITEM_TAB_ICON);
-    private static final Predicate<RegistryObject<Block>> BLACKLISTED_BLOCKS = block -> block.get() instanceof FlowerPotBlock;
-    private static final Predicate<RegistryObject<Item>> WHITELISTED_EGGS = item -> item.get() instanceof ForgeSpawnEggItem;
+    static final Predicate<RegistryObject<Item>> BLACKLISTED_ITEMS = item -> item.get() instanceof BlockItem || item.equals(Items.MOB_TAB_ICON) || item.equals(Items.BLOCK_TAB_ICON) || item.equals(Items.ITEM_TAB_ICON);
+    static final Predicate<RegistryObject<Block>> BLACKLISTED_BLOCKS = block -> block.get() instanceof FlowerPotBlock;
+    static final Predicate<RegistryObject<Item>> WHITELISTED_EGGS = item -> item.get() instanceof ForgeSpawnEggItem;
 
     @SubscribeEvent
     public static void buildContents(BuildCreativeModeTabContentsEvent event)
@@ -63,9 +63,9 @@ public class Rego
         }
     }
 
-    private static <T extends ItemLike> void safeAccept(BuildCreativeModeTabContentsEvent event, RegistryObject<T> item)
+    static <T extends ItemLike> void safeAccept(BuildCreativeModeTabContentsEvent event, RegistryObject<T> item)
     {
-        Map<Boolean, ResourceLocation> map = new AsynchronousHashMap<>();
+        Map<Boolean, ResourceLocation> map = new AsyncHashMap<>();
         ItemStack stack = item.get().asItem().getDefaultInstance();
         boolean valid = stack.getCount() == 1;
         map.put(valid, item.getId());

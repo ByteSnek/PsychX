@@ -1,7 +1,6 @@
 package xyz.snaker.tq.level.item;
 
-import xyz.snaker.snakerlib.data.SnakerConstants;
-import xyz.snaker.snakerlib.level.item.SnakerBaseItem;
+import xyz.snaker.snakerlib.data.DefaultItemProperties;
 import xyz.snaker.snakerlib.math.Maths;
 import xyz.snaker.tq.level.world.dimension.Comatose;
 import xyz.snaker.tq.rego.Effects;
@@ -15,6 +14,7 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.UseAnim;
@@ -25,11 +25,16 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by SnakerBone on 7/07/2023
  **/
-public class Tourniquet extends SnakerBaseItem
+public class Tourniquet extends Item
 {
+    public Tourniquet(Properties properties)
+    {
+        super(properties);
+    }
+
     public Tourniquet()
     {
-        super(SnakerConstants.ItemProperties.LIMITED);
+        super(DefaultItemProperties.SPECIAL);
     }
 
     @Override

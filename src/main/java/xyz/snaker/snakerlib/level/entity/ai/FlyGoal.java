@@ -10,11 +10,14 @@ import net.minecraft.world.entity.ai.goal.Goal;
 /**
  * Created by SnakerBone on 2/01/2023
  **/
-public class SnakerFlyGoal extends Goal
+public class FlyGoal extends Goal
 {
+    /**
+     * The mob using this goal
+     **/
     private final Mob owner;
 
-    public SnakerFlyGoal(Mob owner)
+    public FlyGoal(Mob owner)
     {
         this.owner = owner;
         setFlags(EnumSet.of(Flag.MOVE));

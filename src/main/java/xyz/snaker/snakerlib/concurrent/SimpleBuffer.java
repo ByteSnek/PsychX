@@ -1,4 +1,4 @@
-package xyz.snaker.snakerlib.internal;
+package xyz.snaker.snakerlib.concurrent;
 
 import java.util.AbstractList;
 import java.util.ArrayList;
@@ -6,12 +6,19 @@ import java.util.List;
 
 /**
  * Created by SnakerBone on 2/08/2023
+ * <p>
+ * A simple buffer using a {@link List}
+ *
+ * @param <E> The element to store in the buffer
  **/
-public class Buffer<E> extends AbstractList<E>
+public class SimpleBuffer<E> extends AbstractList<E>
 {
+    /**
+     * The base list buffer
+     **/
     private final List<E> buffer;
 
-    public Buffer()
+    public SimpleBuffer()
     {
         this.buffer = new ArrayList<>();
     }

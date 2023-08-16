@@ -1,17 +1,20 @@
 package xyz.snaker.snakerlib.client.shader;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
 import xyz.snaker.snakerlib.SnakerLib;
 
-import org.jetbrains.annotations.ApiStatus;
-import org.joml.*;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.ChainedJsonException;
 import net.minecraft.server.packs.resources.ResourceProvider;
+import net.minecraftforge.client.event.RegisterShadersEvent;
+
+import org.jetbrains.annotations.ApiStatus;
+import org.joml.*;
 
 import com.mojang.blaze3d.shaders.Uniform;
 import com.mojang.blaze3d.vertex.VertexFormat;
@@ -21,13 +24,35 @@ import com.mojang.blaze3d.vertex.VertexFormat;
  **/
 public class Shader extends ShaderInstance
 {
+    /**
+     * The list of runnables enqueued to be executed
+     **/
     private final List<Runnable> tasks = new LinkedList<>();
 
+    /**
+     * Creates a new shader. Use {@link #create(ResourceProvider, ResourceLocation, VertexFormat)} to bypass exception handling
+     *
+     * @param provider       The resource provider. Usually obtained through {@link RegisterShadersEvent#getResourceProvider()}
+     * @param shaderLocation The location of the shader JSON
+     * @param format         The vertex format
+     * @throws IOException          If the JSON file fails to load
+     * @throws ChainedJsonException If the JSON file is invalid
+     * @throws Exception            If anything else occurs
+     **/
     public Shader(ResourceProvider provider, ResourceLocation shaderLocation, VertexFormat format) throws Exception
     {
         super(provider, shaderLocation, format);
     }
 
+    /**
+     * Creates a new shader without exception handling
+     *
+     * @param provider The resource provider. Usually obtained through {@link RegisterShadersEvent#getResourceProvider()}
+     * @param shader   The location of the shader JSON
+     * @param format   The vertex format
+     * @return A new shader
+     * @throws RuntimeException If anything unexpected occurs
+     **/
     public static Shader create(ResourceProvider provider, ResourceLocation shader, VertexFormat format)
     {
         try {
@@ -37,12 +62,25 @@ public class Shader extends ShaderInstance
         }
     }
 
+    /**
+     * Enqueue's a task. Used to apply shader uniforms at the correct time
+     *
+     * @param uniform The shader uniform
+     * @param delay   The uniform's time delay
+     * @param task    The task to execute
+     **/
     public void enqueueTask(Uniform uniform, float delay, Runnable task)
     {
         setTime(uniform, delay);
         enqueueTask(task);
     }
 
+    /**
+     * Enqueue's a task. Used to apply shader uniforms at the correct time
+     *
+     * @param uniform The shader uniform
+     * @param task    The task to execute
+     **/
     public void enqueueTask(Uniform uniform, Runnable task)
     {
         setTime(uniform);
@@ -50,9 +88,9 @@ public class Shader extends ShaderInstance
     }
 
     /**
-     * Adds tasks to do before applying the shader
+     * Enqueue's a task. Used to apply shader uniforms at the correct time
      *
-     * @param task The task
+     * @param task The task to execute
      **/
     public void enqueueTask(Runnable task)
     {

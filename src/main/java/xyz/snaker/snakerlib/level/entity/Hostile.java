@@ -1,7 +1,7 @@
 package xyz.snaker.snakerlib.level.entity;
 
-import xyz.snaker.snakerlib.data.SnakerConstants;
-import xyz.snaker.snakerlib.level.entity.ai.SnakerSwitchGameModeGoal;
+import xyz.snaker.snakerlib.data.DefaultEntityAttributes;
+import xyz.snaker.snakerlib.level.entity.ai.SwitchGameModeGoal;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.goal.*;
@@ -14,19 +14,24 @@ import net.minecraft.world.level.Level;
 /**
  * Created by SnakerBone on 2/01/2023
  **/
-public abstract class SnakerMob extends Monster
+public abstract class Hostile extends Monster
 {
-    public SnakerMob(EntityType<? extends Monster> type, Level level, int xpReward)
+    public Hostile(EntityType<? extends Monster> type, Level level, int xpReward)
     {
         super(type, level);
         this.xpReward = xpReward;
     }
 
-    public SnakerMob(EntityType<? extends Monster> type, Level level)
+    public Hostile(EntityType<? extends Monster> type, Level level)
     {
-        this(type, level, SnakerConstants.EntityAttributes.MOB_XP_REWARD);
+        this(type, level, DefaultEntityAttributes.MOB_XP_REWARD);
     }
 
+    /**
+     * Checks if this mob is actually aggressive
+     *
+     * @return True if this mob is actually aggressive
+     **/
     public boolean isCranky()
     {
         return isAlive() && isEffectiveAi() && isAggressive() && getTarget() != null;
@@ -35,7 +40,7 @@ public abstract class SnakerMob extends Monster
     @Override
     protected void registerGoals()
     {
-        goalSelector.addGoal(1, new SnakerSwitchGameModeGoal(this));
+        goalSelector.addGoal(1, new SwitchGameModeGoal(this));
         goalSelector.addGoal(6, new RandomStrollGoal(this, 1));
         goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.3, false));
         goalSelector.addGoal(0, new FloatGoal(this));

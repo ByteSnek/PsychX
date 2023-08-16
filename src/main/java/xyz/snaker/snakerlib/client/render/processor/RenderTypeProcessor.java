@@ -18,8 +18,21 @@ import static net.minecraft.client.renderer.RenderStateShard.*;
  **/
 public interface RenderTypeProcessor
 {
+    /**
+     * Used to create a custom render type directly
+     *
+     * @param name The name of the render type
+     * @param pair A pair holding the vertex format and render type composite state
+     * @return The render type
+     **/
     RenderType create(@Nullable String name, Pair<VertexFormat, RenderType.CompositeState> pair);
 
+    /**
+     * A premade render type composite state for item, blocks and other game objects
+     *
+     * @param shader The shader instance
+     * @return The render type composite state
+     **/
     default RenderType.CompositeState normal(Supplier<ShaderInstance> shader)
     {
         return RenderType.CompositeState.builder()
@@ -30,6 +43,12 @@ public interface RenderTypeProcessor
                 .createCompositeState(false);
     }
 
+    /**
+     * A premade render type composite state for entities
+     *
+     * @param shader The shader instance
+     * @return The render type composite state
+     **/
     default RenderType.CompositeState entity(Supplier<ShaderInstance> shader)
     {
         return RenderType.CompositeState.builder()
@@ -40,6 +59,12 @@ public interface RenderTypeProcessor
                 .createCompositeState(false);
     }
 
+    /**
+     * A premade render type composite state for entities using transparency
+     *
+     * @param shader The shader instance
+     * @return The render type composite state
+     **/
     default RenderType.CompositeState translucent(Supplier<ShaderInstance> shader)
     {
         return RenderType.CompositeState.builder()
@@ -51,6 +76,15 @@ public interface RenderTypeProcessor
                 .createCompositeState(false);
     }
 
+    /**
+     * A premade render type composite state using samplers
+     *
+     * @param shader   The shader instance
+     * @param blur     Should the sampler texture have blur
+     * @param mipmap   Should the sampler texture have mipmap
+     * @param samplers The location(s) of the sampler textures
+     * @return The render type composite state
+     **/
     default RenderType.CompositeState sampler(Supplier<ShaderInstance> shader, boolean blur, boolean mipmap, ResourceLocation... samplers)
     {
         MultiTextureStateShard.Builder builder = MultiTextureStateShard.builder();
@@ -66,6 +100,15 @@ public interface RenderTypeProcessor
                 .createCompositeState(true);
     }
 
+    /**
+     * A premade render type composite state using samplers
+     *
+     * @param shader  The shader instance
+     * @param sampler The location of the sampler texture
+     * @param blur    Should the sampler texture have blur
+     * @param mipmap  Should the sampler texture have mipmap
+     * @return The render type composite state
+     **/
     default RenderType.CompositeState sampler(Supplier<ShaderInstance> shader, ResourceLocation sampler, boolean blur, boolean mipmap)
     {
         return sampler(shader, blur, mipmap, sampler, sampler);

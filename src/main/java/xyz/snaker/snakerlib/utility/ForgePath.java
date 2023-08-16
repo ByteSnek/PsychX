@@ -5,8 +5,6 @@ import net.minecraftforge.forge.snapshots.ForgeSnapshotsMod;
 
 /**
  * Created by SnakerBone on 7/08/2023
- * <p>
- * Forge's ResourceLocation
  **/
 public class ForgePath extends ResourceLocation
 {

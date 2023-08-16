@@ -2,7 +2,7 @@ package xyz.snaker.tq.rego;
 
 import java.util.function.Supplier;
 
-import xyz.snaker.snakerlib.data.SnakerConstants;
+import xyz.snaker.snakerlib.data.DefaultBlockProperties;
 import xyz.snaker.snakerlib.math.Maths;
 import xyz.snaker.snakerlib.utility.tools.UnsafeStuff;
 import xyz.snaker.tq.Tourniqueted;
@@ -35,12 +35,12 @@ public class Blocks
     public static final RegistryObject<Block> STARRY = register("starry_block", () -> new ShaderBlock<>(BlockEntities.STARRY));
     public static final RegistryObject<Block> GEOMETRIC = register("geometric_block", () -> new ShaderBlock<>(BlockEntities.GEOMETRIC));
 
-    public static final RegistryObject<Block> CATNIP = registerBlockWithItem("catnip", () -> new FlowerBlock(Effects.SYNCOPE::get, Maths.secondsToTicks(5), SnakerConstants.BlockProperties.FLOWER));
-    public static final RegistryObject<Block> SPLITLEAF = registerBlockWithItem("splitleaf", () -> new FlowerBlock(Effects.SYNCOPE::get, Maths.secondsToTicks(5), SnakerConstants.BlockProperties.FLOWER));
-    public static final RegistryObject<Block> SNAKEROOT = registerBlockWithItem("snakeroot", () -> new TallGrassBlock(SnakerConstants.BlockProperties.GRASS));
-    public static final RegistryObject<Block> TALL_SNAKEROOT = registerBlockWithItem("tall_snakeroot", () -> new TallGrassBlock(SnakerConstants.BlockProperties.GRASS));
-    public static final RegistryObject<Block> POTTED_CATNIP = register("potted_catnip", () -> new FlowerPotBlock(() -> UnsafeStuff.cast(FLOWER_POT), CATNIP, SnakerConstants.BlockProperties.NORMAL));
-    public static final RegistryObject<Block> POTTED_SPLITLEAF = register("potted_splitleaf", () -> new FlowerPotBlock(() -> UnsafeStuff.cast(FLOWER_POT), SPLITLEAF, SnakerConstants.BlockProperties.NORMAL));
+    public static final RegistryObject<Block> CATNIP = registerBlockWithItem("catnip", () -> new FlowerBlock(Effects.SYNCOPE::get, Maths.secondsToTicks(5), DefaultBlockProperties.PLANT));
+    public static final RegistryObject<Block> SPLITLEAF = registerBlockWithItem("splitleaf", () -> new FlowerBlock(Effects.SYNCOPE::get, Maths.secondsToTicks(5), DefaultBlockProperties.PLANT));
+    public static final RegistryObject<Block> SNAKEROOT = registerBlockWithItem("snakeroot", () -> new TallGrassBlock(DefaultBlockProperties.GRASS));
+    public static final RegistryObject<Block> TALL_SNAKEROOT = registerBlockWithItem("tall_snakeroot", () -> new TallGrassBlock(DefaultBlockProperties.GRASS));
+    public static final RegistryObject<Block> POTTED_CATNIP = register("potted_catnip", () -> new FlowerPotBlock(() -> UnsafeStuff.cast(FLOWER_POT), CATNIP, DefaultBlockProperties.NORMAL));
+    public static final RegistryObject<Block> POTTED_SPLITLEAF = register("potted_splitleaf", () -> new FlowerPotBlock(() -> UnsafeStuff.cast(FLOWER_POT), SPLITLEAF, DefaultBlockProperties.NORMAL));
 
     public static final RegistryObject<Block> COMA_STONE = registerBlockWithItem("coma_stone", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.NONE).strength(0.5F).sound(SoundType.NETHER_ORE)));
     public static final RegistryObject<Block> DELUSIVE_NYLIUM = registerBlockWithItem("delusive_nylium", ComatoseNyliumBlock::new);

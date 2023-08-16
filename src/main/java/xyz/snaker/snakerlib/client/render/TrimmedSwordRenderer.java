@@ -2,14 +2,15 @@ package xyz.snaker.snakerlib.client.render;
 
 import xyz.snaker.snakerlib.client.model.TrimmedSwordModel;
 
-import org.jetbrains.annotations.NotNull;
-
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+
+import org.jetbrains.annotations.NotNull;
 
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -21,7 +22,14 @@ import com.mojang.math.Axis;
  **/
 public abstract class TrimmedSwordRenderer<M extends TrimmedSwordModel> extends PreppedRenderer
 {
+    /**
+     * The current sword model instance
+     **/
     private final M model;
+
+    /**
+     * The current sword model render type
+     **/
     private final RenderType renderType;
 
     public TrimmedSwordRenderer(BlockEntityRenderDispatcher renderDispatcher, EntityModelSet modelSet)
@@ -31,8 +39,19 @@ public abstract class TrimmedSwordRenderer<M extends TrimmedSwordModel> extends 
         this.renderType = getRenderType();
     }
 
+    /**
+     * Gets the current sword model instance
+     *
+     * @param set The entity model set. 99% of the time this is obtained from {@link Minecraft#getEntityModels()} unless specified otherwise
+     * @return The current sword model instance
+     **/
     public abstract M getModel(EntityModelSet set);
 
+    /**
+     * Gets the current sword model render type
+     *
+     * @return The current sword model render type
+     **/
     public abstract RenderType getRenderType();
 
     @Override

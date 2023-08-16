@@ -4,7 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import xyz.snaker.snakerlib.SnakerLib;
-import xyz.snaker.snakerlib.data.SnakerConstants;
+import xyz.snaker.snakerlib.data.DefaultTexts;
+
+import net.minecraft.client.resources.SplashManager;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.util.profiling.ProfilerFiller;
 
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -12,10 +16,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import net.minecraft.client.resources.SplashManager;
-import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.util.profiling.ProfilerFiller;
 
 /**
  * Created by SnakerBone on 29/07/2023
@@ -36,7 +36,7 @@ public class SplashMixin
             splashes.clear();
         }
 
-        if (splashes.addAll(Arrays.asList(SnakerConstants.Texts.SPLASHES))) {
+        if (splashes.addAll(Arrays.asList(DefaultTexts.SPLASH_TEXTS))) {
             int splashesSize = splashes.size();
             SnakerLib.LOGGER.infof("Successfuly added %s new splashes", splashesSize);
         }

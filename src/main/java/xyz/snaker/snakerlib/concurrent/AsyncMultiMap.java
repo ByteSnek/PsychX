@@ -1,19 +1,27 @@
-package xyz.snaker.snakerlib.internal;
+package xyz.snaker.snakerlib.concurrent;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import xyz.snaker.snakerlib.internal.MultiMap;
+
 /**
  * Created by SnakerBone on 1/07/2023
  * <p>
  * A simple asynchronous {@link MultiMap}
+ *
+ * @param <K> The map key
+ * @param <V> The map value
  **/
-public class AsynchronousMultiMap<K, V> extends MultiMap<K, V>
+public class AsyncMultiMap<K, V> extends MultiMap<K, V>
 {
+    /**
+     * The base multimap
+     **/
     private final MultiMap<K, V> baseMap;
 
-    public AsynchronousMultiMap()
+    public AsyncMultiMap()
     {
         baseMap = new MultiMap<>();
     }

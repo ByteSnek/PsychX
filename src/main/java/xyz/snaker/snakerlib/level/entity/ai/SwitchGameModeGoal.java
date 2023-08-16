@@ -13,11 +13,14 @@ import net.minecraft.world.level.Level;
 /**
  * Created by SnakerBone on 28/02/2023
  **/
-public class SnakerSwitchGameModeGoal extends Goal
+public class SwitchGameModeGoal extends Goal
 {
+    /**
+     * The mob using this goal
+     **/
     private final Mob owner;
 
-    public SnakerSwitchGameModeGoal(Mob owner)
+    public SwitchGameModeGoal(Mob owner)
     {
         this.owner = owner;
     }

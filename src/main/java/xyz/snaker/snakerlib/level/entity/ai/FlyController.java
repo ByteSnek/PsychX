@@ -9,12 +9,19 @@ import net.minecraft.world.phys.Vec3;
 /**
  * Created by SnakerBone on 2/01/2023
  **/
-public class SnakerFlyControl extends MoveControl
+public class FlyController extends MoveControl
 {
+    /**
+     * The mob using this flying controller
+     **/
     private final Mob owner;
+
+    /**
+     * The duration left until the {@link MoveControl#operation} gets set to {@link MoveControl.Operation#WAIT}
+     **/
     private int duration;
 
-    public SnakerFlyControl(Mob owner)
+    public FlyController(Mob owner)
     {
         super(owner);
         this.owner = owner;
@@ -38,10 +45,19 @@ public class SnakerFlyControl extends MoveControl
         }
     }
 
+    /**
+     * Checks for collisions around the mob
+     *
+     * @param pos    The mob's wanted position
+     * @param length The amount of checks to do
+     * @return True if there's no collisions present around the mob
+     **/
     private boolean canReach(Vec3 pos, int length)
     {
         AABB aabb = owner.getBoundingBox();
-        for (int i = 1; i < length; ++i) {
+        for (int i = 1;
+             i < length;
+             ++i) {
             aabb = aabb.move(pos);
             if (!owner.level().noCollision(owner, aabb)) {
                 return false;

@@ -5,8 +5,8 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import xyz.snaker.snakerlib.client.render.processor.SimpleRenderTypeProcessor;
-import xyz.snaker.snakerlib.level.entity.SnakerBoss;
-import xyz.snaker.snakerlib.level.entity.SnakerFlyingBoss;
+import xyz.snaker.snakerlib.level.entity.Boss;
+import xyz.snaker.snakerlib.level.entity.FlyingBoss;
 import xyz.snaker.snakerlib.utility.ResourcePath;
 import xyz.snaker.snakerlib.utility.tools.ColourStuff;
 import xyz.snaker.snakerlib.utility.tools.RenderStuff;
@@ -35,8 +35,8 @@ import com.mojang.datafixers.util.Pair;
  **/
 public class BossBarHandler
 {
-    private static final Set<? super SnakerBoss> BOSSES = new HashSet<>();
-    private static final Set<? super SnakerFlyingBoss> FLYING_BOSSES = new HashSet<>();
+    private static final Set<? super Boss> BOSSES = new HashSet<>();
+    private static final Set<? super FlyingBoss> FLYING_BOSSES = new HashSet<>();
 
     public static void initialize()
     {

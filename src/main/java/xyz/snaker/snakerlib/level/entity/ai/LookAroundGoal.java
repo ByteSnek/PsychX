@@ -12,11 +12,14 @@ import net.minecraft.world.phys.Vec3;
 /**
  * Created by SnakerBone on 2/01/2023
  **/
-public class SnakerLookGoal extends Goal
+public class LookAroundGoal extends Goal
 {
+    /**
+     * The mob using this goal
+     **/
     private final Mob owner;
 
-    public SnakerLookGoal(Mob owner)
+    public LookAroundGoal(Mob owner)
     {
         this.owner = owner;
         setFlags(EnumSet.of(Flag.LOOK));
@@ -39,7 +42,7 @@ public class SnakerLookGoal extends Goal
     {
         if (owner.getTarget() == null) {
             Vec3 movement = owner.getDeltaMovement();
-            owner.setYRot(Maths.atan2RotNeg(movement.x, movement.z));
+            owner.setYRot(Maths.rotateTowards(movement.x, movement.z));
             owner.yBodyRot = owner.getYRot();
 
         } else {
@@ -47,7 +50,7 @@ public class SnakerLookGoal extends Goal
             if (target.distanceToSqr(owner) < 4096) {
                 double x = target.getX() - owner.getX();
                 double z = target.getZ() - owner.getZ();
-                owner.setYRot(Maths.atan2RotNeg(x, z));
+                owner.setYRot(Maths.rotateTowards(x, z));
                 owner.yBodyRot = owner.getYRot();
             }
         }

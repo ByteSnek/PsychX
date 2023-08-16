@@ -6,6 +6,11 @@ import java.util.List;
 
 /**
  * Created by SnakerBone on 1/07/2023
+ * <p>
+ * A simple implementation of a multimap
+ *
+ * @param <K> The map key
+ * @param <V> The map value
  **/
 public class MultiMap<K, V> extends LinkedHashMap<K, List<V>>
 {

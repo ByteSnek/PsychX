@@ -10,7 +10,19 @@ import xyz.snaker.snakerlib.utility.tools.StringStuff;
  **/
 public class SnakerLoggerManager implements SnakerLogger
 {
+    /**
+     * The instance to create. Pass in an identifier for the logger. The logger would output something like this:
+     * <p>
+     * <code>
+     * [{YOUR_LOGGER_IDENTIFIER_NAME_HERE}/INFO]: Message content goes here......
+     * </code>
+     * </p>
+     **/
     public static Function<String, SnakerLoggerManager> INSTANCE = SnakerLoggerManager::new;
+
+    /**
+     * The logger's identifier
+     **/
     private final String name;
 
     private SnakerLoggerManager(String name)

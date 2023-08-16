@@ -1,6 +1,7 @@
 package xyz.snaker.snakerlib.client.render.processor;
 
 import java.util.Objects;
+import javax.annotation.Nullable;
 
 import xyz.snaker.snakerlib.utility.tools.StringStuff;
 
@@ -14,8 +15,15 @@ import com.mojang.datafixers.util.Pair;
  **/
 public interface SimpleRenderTypeProcessor extends RenderTypeProcessor
 {
+    /**
+     * A custom render type with the defaults applied
+     *
+     * @param name The name of the render type
+     * @param pair A pair holding the vertex format and render type composite state
+     * @return The render type
+     **/
     @Override
-    default RenderType create(@org.jetbrains.annotations.Nullable String name, Pair<VertexFormat, RenderType.CompositeState> pair)
+    default RenderType create(@Nullable String name, Pair<VertexFormat, RenderType.CompositeState> pair)
     {
         return RenderType.create(Objects.requireNonNullElse(name, StringStuff.placeholderWithId()), pair.getFirst(), VertexFormat.Mode.QUADS, 256, pair.getSecond());
     }

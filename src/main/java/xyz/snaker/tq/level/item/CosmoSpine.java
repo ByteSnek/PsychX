@@ -2,19 +2,30 @@ package xyz.snaker.tq.level.item;
 
 import java.util.function.Consumer;
 
-import xyz.snaker.snakerlib.level.item.SnakerBaseItem;
+import xyz.snaker.snakerlib.data.DefaultItemProperties;
 import xyz.snaker.tq.client.render.item.CosmoSpineRenderer;
 
-import org.jetbrains.annotations.NotNull;
-
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by SnakerBone on 11/03/2023
  **/
-public class CosmoSpine extends SnakerBaseItem
+public class CosmoSpine extends Item
 {
+    public CosmoSpine(Properties properties)
+    {
+        super(properties);
+    }
+
+    public CosmoSpine()
+    {
+        super(DefaultItemProperties.EMPTY);
+    }
+
     @Override
     public void initializeClient(@NotNull Consumer<IClientItemExtensions> consumer)
     {

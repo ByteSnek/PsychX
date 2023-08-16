@@ -2,11 +2,9 @@ package xyz.snaker.snakerlib.level.entity;
 
 import javax.annotation.Nullable;
 
-import xyz.snaker.snakerlib.data.SnakerConstants;
-import xyz.snaker.snakerlib.level.entity.ai.SnakerLookGoal;
-import xyz.snaker.snakerlib.level.entity.ai.SnakerWanderGoal;
-
-import org.jetbrains.annotations.NotNull;
+import xyz.snaker.snakerlib.data.DefaultEntityAttributes;
+import xyz.snaker.snakerlib.level.entity.ai.LookAroundGoal;
+import xyz.snaker.snakerlib.level.entity.ai.WanderGoal;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -26,12 +24,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Created by SnakerBone on 2/01/2023
  **/
-public abstract class SnakerFlyingCreature extends Animal implements FlyingAnimal
+public abstract class FlyingPassive extends Animal implements FlyingAnimal
 {
-    public SnakerFlyingCreature(EntityType<? extends Animal> type, Level level, int xpReward)
+    public FlyingPassive(EntityType<? extends Animal> type, Level level, int xpReward)
     {
         super(type, level);
         this.moveControl = new FlyingMoveControl(this, 20, true);
@@ -43,11 +43,16 @@ public abstract class SnakerFlyingCreature extends Animal implements FlyingAnima
         setPathfindingMalus(BlockPathTypes.FENCE, -1);
     }
 
-    public SnakerFlyingCreature(EntityType<? extends Animal> type, Level level)
+    public FlyingPassive(EntityType<? extends Animal> type, Level level)
     {
-        this(type, level, SnakerConstants.EntityAttributes.CREATURE_XP_REWARD);
+        this(type, level, DefaultEntityAttributes.CREATURE_XP_REWARD);
     }
 
+    /**
+     * Checks if this mob is actually aggressive
+     *
+     * @return True if this mob is actually aggressive
+     **/
     public boolean isCranky()
     {
         return isAlive() && isEffectiveAi() && isAggressive() && getTarget() != null;
@@ -56,8 +61,8 @@ public abstract class SnakerFlyingCreature extends Animal implements FlyingAnima
     @Override
     protected void registerGoals()
     {
-        goalSelector.addGoal(5, new SnakerWanderGoal(this));
-        goalSelector.addGoal(5, new SnakerLookGoal(this));
+        goalSelector.addGoal(5, new WanderGoal(this));
+        goalSelector.addGoal(5, new LookAroundGoal(this));
         goalSelector.addGoal(7, new WaterAvoidingRandomFlyingGoal(this, 1));
         goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8));
         goalSelector.addGoal(0, new FloatGoal(this));

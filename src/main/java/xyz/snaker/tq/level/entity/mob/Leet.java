@@ -1,7 +1,7 @@
 package xyz.snaker.tq.level.entity.mob;
 
-import xyz.snaker.snakerlib.level.entity.SnakerFlyingMob;
-import xyz.snaker.snakerlib.level.entity.ai.SnakerFlyGoal;
+import xyz.snaker.snakerlib.level.entity.FlyingHostile;
+import xyz.snaker.snakerlib.level.entity.ai.FlyGoal;
 import xyz.snaker.snakerlib.utility.tools.WorldStuff;
 import xyz.snaker.tq.level.entity.projectile.CosmicRay;
 import xyz.snaker.tq.rego.Entities;
@@ -32,7 +32,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by SnakerBone on 15/07/2023
  **/
-public class Leet extends SnakerFlyingMob implements RangedAttackMob
+public class Leet extends FlyingHostile implements RangedAttackMob
 {
     public Leet(EntityType<Leet> type, Level level)
     {
@@ -42,7 +42,7 @@ public class Leet extends SnakerFlyingMob implements RangedAttackMob
     @Override
     protected void registerGoals()
     {
-        goalSelector.addGoal(0, new SnakerFlyGoal(this));
+        goalSelector.addGoal(0, new FlyGoal(this));
     }
 
     public static AttributeSupplier attributes()

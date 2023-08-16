@@ -1,13 +1,13 @@
 package xyz.snaker.tq.level.block;
 
 import xyz.snaker.snakerlib.SnakerLib;
-import xyz.snaker.snakerlib.data.SnakerConstants;
-import xyz.snaker.snakerlib.level.block.SnakerEntityBlock;
+import xyz.snaker.snakerlib.data.DefaultBlockProperties;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -20,13 +20,13 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by SnakerBone on 28/04/2023
  **/
-public class ShaderBlock<T extends BlockEntity> extends SnakerEntityBlock
+public class ShaderBlock<T extends BlockEntity> extends BaseEntityBlock
 {
     private final RegistryObject<BlockEntityType<T>> blockEntity;
 
     public ShaderBlock(RegistryObject<BlockEntityType<T>> blockEntity)
     {
-        super(SnakerConstants.BlockProperties.PERSPECTIVE);
+        super(DefaultBlockProperties.PERSPECTIVE);
         this.blockEntity = blockEntity;
     }
 
