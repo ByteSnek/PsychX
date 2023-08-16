@@ -34,8 +34,8 @@ import org.lwjgl.glfw.GLFW;
  **/
 public class SnakerLib
 {
-    private static String modId = "snakerlib";
-    private static String name = "SnakerLib";
+    public static final String MODID = "snakerlib";
+    public static final String NAME = SnakerLib.class.getSimpleName();
 
     private static long clientTickCount = 0;
     private static long serverTickCount = 0;
@@ -43,9 +43,9 @@ public class SnakerLib
     private static boolean isInitialized = false;
     private static boolean isRegistered = false;
 
-    private static Single<String> delegateMod = new Single<>();
+    public static final Single<String> MOD = new Single<>();
 
-    public static final SnakerLogger LOGGER = SnakerLoggerManager.INSTANCE.apply(SnakerLib.getName());
+    public static final SnakerLogger LOGGER = SnakerLoggerManager.INSTANCE.apply(SnakerLib.NAME);
     public static StackWalker STACK_WALKER = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE);
 
     public SnakerLib()
@@ -65,8 +65,8 @@ public class SnakerLib
             }
             String modId = clazz.getAnnotation(Mod.class).value();
             if (StringStuff.isValidString(modId)) {
-                delegateMod.set(modId);
-                String name = delegateMod.get();
+                MOD.set(modId);
+                String name = MOD.get();
                 SnakerLib.LOGGER.infof("Successfully initialized mod '%s' to SnakerLib", name);
                 isInitialized = true;
             } else {
@@ -179,20 +179,5 @@ public class SnakerLib
     public static long getServerTickCount()
     {
         return serverTickCount;
-    }
-
-    public static Single<String> getDelegateMod()
-    {
-        return delegateMod;
-    }
-
-    public static String getModId()
-    {
-        return modId;
-    }
-
-    public static String getName()
-    {
-        return name;
     }
 }

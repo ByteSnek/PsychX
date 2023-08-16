@@ -118,7 +118,7 @@ tasks.register('srcJar', Jar) {
 tasks.register('openMavenStream', Exec) {
     group 'snaker'
     workingDir 'maven'
-    commandLine 'cmd', '/c', 'mvn.bat'
+    commandLine 'cmd', '/c', 'mvn.bat' // Start server on localhost and open link in browser
 }
 
 publishing {

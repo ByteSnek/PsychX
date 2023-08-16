@@ -20,11 +20,11 @@ public class ResourcePath extends ResourceLocation
 
     public ResourcePath(String path)
     {
-        super(SnakerLib.getDelegateMod().get(), path);
+        super(SnakerLib.MOD.get(), path);
     }
 
     private <T> ResourcePath(Class<T> clazz)
     {
-        super(SnakerLib.getDelegateMod().get(), StringStuff.i18nf(clazz.getSimpleName()));
+        super(SnakerLib.MOD.get(), StringStuff.i18nf(clazz.getSimpleName()));
     }
 }

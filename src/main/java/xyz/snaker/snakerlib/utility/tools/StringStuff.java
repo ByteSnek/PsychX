@@ -15,7 +15,7 @@ public class StringStuff
 {
     public static String placeholder(Locale locale, int limit, boolean modid)
     {
-        return modid ? SnakerLib.getDelegateMod() + ":" + RandomStringUtils.randomAlphanumeric(limit).toLowerCase(locale) : RandomStringUtils.randomAlphanumeric(limit).toLowerCase(locale);
+        return modid ? SnakerLib.MOD.get() + ":" + RandomStringUtils.randomAlphanumeric(limit).toLowerCase(locale) : RandomStringUtils.randomAlphanumeric(limit).toLowerCase(locale);
     }
 
     public static String placeholder(Locale locale, int limit)
