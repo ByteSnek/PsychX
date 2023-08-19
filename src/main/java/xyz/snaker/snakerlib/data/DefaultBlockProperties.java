@@ -8,30 +8,43 @@ import net.minecraft.world.level.material.PushReaction;
 /**
  * Created by SnakerBone on 16/08/2023
  **/
-public class DefaultBlockProperties
+@FunctionalInterface
+public interface DefaultBlockProperties
 {
     /**
      * Empty block properties instance
      **/
-    public static final BlockBehaviour.Properties EMPTY = BlockBehaviour.Properties.of();
+    DefaultBlockProperties EMPTY = colour -> BlockBehaviour.Properties.of();
 
     /**
      * Default properties for normal blocks
      **/
-    public static final BlockBehaviour.Properties NORMAL = BlockBehaviour.Properties.of().mapColor(MapColor.NONE).sound(SoundType.STONE).pushReaction(PushReaction.NORMAL);
+    DefaultBlockProperties NORMAL = colour -> BlockBehaviour.Properties.of().mapColor(colour).sound(SoundType.STONE).pushReaction(PushReaction.NORMAL);
+
+    /**
+     * Default properties for nether blocks
+     **/
+    DefaultBlockProperties NETHER = colour -> BlockBehaviour.Properties.of().mapColor(colour).strength(0.5F).sound(SoundType.NETHER_ORE);
 
     /**
      * Default properties for plant blocks
      **/
-    public static final BlockBehaviour.Properties PLANT = BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY).instabreak().noCollission().ignitedByLava();
+    DefaultBlockProperties PLANT = colour -> BlockBehaviour.Properties.of().mapColor(colour).sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY).instabreak().noCollission().ignitedByLava();
 
     /**
      * Default properties for grass blocks
      **/
-    public static final BlockBehaviour.Properties GRASS = BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY).instabreak().noCollission().ignitedByLava().replaceable();
+    DefaultBlockProperties GRASS = colour -> BlockBehaviour.Properties.of().mapColor(colour).sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY).instabreak().noCollission().ignitedByLava().replaceable();
+
+    /**
+     * Default properties for wood
+     **/
+    DefaultBlockProperties WOOD = colour -> BlockBehaviour.Properties.of().mapColor(colour).sound(SoundType.WOOD).pushReaction(PushReaction.NORMAL).strength(2, 3).ignitedByLava();
 
     /**
      * Default properties for blocks using special rendering
      **/
-    public static final BlockBehaviour.Properties PERSPECTIVE = BlockBehaviour.Properties.of().mapColor(MapColor.NONE).sound(SoundType.STONE).pushReaction(PushReaction.IGNORE /*Rendering precautions*/).strength(5).noOcclusion().dynamicShape();
+    DefaultBlockProperties PERSPECTIVE = colour -> BlockBehaviour.Properties.of().mapColor(colour).sound(SoundType.STONE).pushReaction(PushReaction.IGNORE /*Rendering precautions*/).strength(5, 8).noOcclusion().dynamicShape();
+
+    BlockBehaviour.Properties apply(MapColor colour);
 }

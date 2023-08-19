@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
 
 /**
@@ -15,6 +16,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class Keys
 {
     public static final TagKey<Biome> COMATOSE_VEGETAL = TagKey.create(ForgeRegistries.Keys.BIOMES, new ResourcePath("comatose_vegetal"));
+    public static final TagKey<Block> COMATOSE_NYLIUM = TagKey.create(ForgeRegistries.Keys.BLOCKS, new ResourcePath("comatose_nylium"));
 
     public static final ResourceKey<Level> COMATOSE = ResourceKey.create(Registries.DIMENSION, new ResourcePath("comatose"));
     public static final ResourceKey<Biome> DELUSION = ResourceKey.create(Registries.BIOME, new ResourcePath("delusion"));

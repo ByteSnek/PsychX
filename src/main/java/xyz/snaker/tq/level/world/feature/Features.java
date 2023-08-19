@@ -23,6 +23,7 @@ public class Features
         TourniquetedStuff.registerPlacement(context, PlacementKey.SPLITLEAF, ConfigKey.SPLITLEAF, TourniquetedStuff.surface(6));
         TourniquetedStuff.registerPlacement(context, PlacementKey.SNAKEROOT, ConfigKey.SNAKEROOT, TourniquetedStuff.surface(2));
         TourniquetedStuff.registerPlacement(context, PlacementKey.TALL_SNAKEROOT, ConfigKey.TALL_SNAKEROOT, TourniquetedStuff.surface(1));
+        TourniquetedStuff.registerPlacement(context, PlacementKey.GEOMETRIC, ConfigKey.GEOMETRIC, TourniquetedStuff.tree(Blocks.GEOMETRIC_SAPLING, 1, 0.1F, 1));
     }
 
     public static void configs(BootstapContext<ConfiguredFeature<?, ?>> context)
@@ -31,6 +32,7 @@ public class Features
         TourniquetedStuff.registerConfiguredFeature(context, ConfigKey.SPLITLEAF, Feature.RANDOM_PATCH, TourniquetedStuff.grass(Blocks.SPLITLEAF, 4));
         TourniquetedStuff.registerConfiguredFeature(context, ConfigKey.SNAKEROOT, Feature.RANDOM_PATCH, TourniquetedStuff.grass(Blocks.SNAKEROOT));
         TourniquetedStuff.registerConfiguredFeature(context, ConfigKey.TALL_SNAKEROOT, Feature.RANDOM_PATCH, TourniquetedStuff.grass(Blocks.TALL_SNAKEROOT));
+        TourniquetedStuff.registerConfiguredFeature(context, ConfigKey.GEOMETRIC, Feature.TREE, TourniquetedStuff.SIMPLE_TREE.apply(Blocks.GEOMETRIC_LOG.get(), Blocks.GEOMETRIC.get(), Blocks.COMA_STONE.get()));
     }
 
     public static void modifiers(BootstapContext<BiomeModifier> context)
@@ -39,6 +41,7 @@ public class Features
         TourniquetedStuff.registerBiomeModifier(context, BiomeModifierKey.SPLITLEAF, Keys.COMATOSE_VEGETAL, PlacementKey.SPLITLEAF, GenerationStep.Decoration.VEGETAL_DECORATION);
         TourniquetedStuff.registerBiomeModifier(context, BiomeModifierKey.SNAKEROOT, Keys.COMATOSE_VEGETAL, PlacementKey.SNAKEROOT, GenerationStep.Decoration.VEGETAL_DECORATION);
         TourniquetedStuff.registerBiomeModifier(context, BiomeModifierKey.TALL_SNAKEROOT, Keys.COMATOSE_VEGETAL, PlacementKey.TALL_SNAKEROOT, GenerationStep.Decoration.VEGETAL_DECORATION);
+        TourniquetedStuff.registerBiomeModifier(context, BiomeModifierKey.GEOMETRIC, Keys.COMATOSE_VEGETAL, PlacementKey.GEOMETRIC, GenerationStep.Decoration.VEGETAL_DECORATION);
     }
 
     public enum PlacementKey
@@ -46,7 +49,8 @@ public class Features
         CATNIP(),
         SPLITLEAF(),
         SNAKEROOT(),
-        TALL_SNAKEROOT();
+        TALL_SNAKEROOT(),
+        GEOMETRIC();
 
         private final ResourceKey<PlacedFeature> key;
 
@@ -66,7 +70,8 @@ public class Features
         CATNIP(),
         SPLITLEAF(),
         SNAKEROOT(),
-        TALL_SNAKEROOT();
+        TALL_SNAKEROOT(),
+        GEOMETRIC();
 
         private final ResourceKey<ConfiguredFeature<?, ?>> key;
 
@@ -86,7 +91,8 @@ public class Features
         CATNIP(),
         SPLITLEAF(),
         SNAKEROOT(),
-        TALL_SNAKEROOT();
+        TALL_SNAKEROOT(),
+        GEOMETRIC();
 
         private final ResourceKey<BiomeModifier> key;
 

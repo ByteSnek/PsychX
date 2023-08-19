@@ -30,6 +30,7 @@ public class DataGenerators
         generator.addProvider(event.includeServer(), new DataProviders.BlockStates(output, helper));
         generator.addProvider(event.includeServer(), new DataProviders.ItemModels(output, helper));
         generator.addProvider(event.includeServer(), new DataProviders.DatapackEntries(output, provider));
-        generator.addProvider(event.includeServer(), new DataProviders.Tags(output, provider, helper));
+        generator.addProvider(event.includeServer(), new DataProviders.BiomeTags(output, provider, helper));
+        generator.addProvider(event.includeServer(), new DataProviders.BlockTags(output, provider, helper));
     }
 }

@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#tq:comatose_vegetal",
+  "features": "tq:geometric",
+  "step": "vegetal_decoration"
+}

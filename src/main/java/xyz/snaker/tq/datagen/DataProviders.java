@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 import xyz.snaker.snakerlib.utility.tools.StringStuff;
+import xyz.snaker.snakerlib.utility.tools.UnsafeStuff;
 import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.level.world.feature.Features;
 import xyz.snaker.tq.rego.*;
@@ -28,6 +29,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.LanguageProvider;
@@ -42,23 +44,45 @@ import org.jetbrains.annotations.Nullable;
  **/
 public class DataProviders
 {
-    public static class Tags extends TagsProvider<Biome>
+    public static class BiomeTags extends TagsProvider<Biome>
     {
-        protected Tags(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, @Nullable ExistingFileHelper existingFileHelper)
+        public BiomeTags(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, @Nullable ExistingFileHelper existingFileHelper)
         {
             super(output, Registries.BIOME, provider, Tourniqueted.MODID, existingFileHelper);
         }
 
         @Override
-        protected void addTags(HolderLookup.@NotNull Provider provider)
+        public void addTags(HolderLookup.@NotNull Provider provider)
         {
-            biome(Keys.COMATOSE_VEGETAL, Keys.DELUSION, Keys.ILLUSIVE, Keys.IMMATERIAL, Keys.SPECTRAL, Keys.SURREAL);
+            add(Keys.COMATOSE_VEGETAL, Keys.DELUSION, Keys.ILLUSIVE, Keys.IMMATERIAL, Keys.SPECTRAL, Keys.SURREAL);
         }
 
         @SafeVarargs
-        private void biome(TagKey<Biome> key, ResourceKey<Biome>... biomes)
+        private void add(TagKey<Biome> key, ResourceKey<Biome>... biomes)
         {
             tag(key).add(biomes);
+        }
+    }
+
+    public static class BlockTags extends BlockTagsProvider
+    {
+        public BlockTags(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, @Nullable ExistingFileHelper helper)
+        {
+            super(output, provider, Tourniqueted.MODID, helper);
+        }
+
+        @Override
+        public void addTags(@NotNull HolderLookup.Provider provider)
+        {
+            add(Keys.COMATOSE_NYLIUM, Blocks.COMA_STONE, Blocks.DELUSIVE_NYLIUM, Blocks.ILLUSIVE_NYLIUM, Blocks.IMMATERIAL_NYLIUM, Blocks.SPECTRAL_NYLIUM, Blocks.SURREAL_NYLIUM);
+        }
+
+        @SafeVarargs
+        private void add(TagKey<Block> key, RegistryObject<Block>... blocks)
+        {
+            for (RegistryObject<Block> block : blocks) {
+                tag(key).add(block.get());
+            }
         }
     }
 
@@ -82,10 +106,10 @@ public class DataProviders
             super(output, Tourniqueted.MODID, helper);
         }
 
-        private void dream(RegistryObject<Block> block)
+        private void shader(RegistryObject<Block> block)
         {
             String name = block.getId().getPath();
-            ModelFile file = models().withExistingParent(name, modLoc("dream"));
+            ModelFile file = models().withExistingParent(name, modLoc("shader"));
             simpleBlock(block.get(), file);
         }
 
@@ -98,6 +122,11 @@ public class DataProviders
                     .texture("bottom", "block/coma_stone");
 
             simpleBlock(block.get(), file);
+        }
+
+        private void log(RegistryObject<Block> block)
+        {
+            logBlock(UnsafeStuff.cast(block.get()));
         }
 
         private void cube(RegistryObject<Block> block)
@@ -128,16 +157,26 @@ public class DataProviders
             simpleBlock(plant.get(), models().cross(plantName, blockTexture(plant.get())).renderType("cutout"));
         }
 
-        @Override
-        protected void registerStatesAndModels()
+        private void stairs(RegistryObject<Block> stairs, RegistryObject<Block> texture)
         {
-            dream(Blocks.SWIRL);
-            dream(Blocks.SNOWFLAKE);
-            dream(Blocks.WATERCOLOUR);
-            dream(Blocks.MULTICOLOUR);
-            dream(Blocks.FLARE);
-            dream(Blocks.STARRY);
-            dream(Blocks.GEOMETRIC);
+            stairsBlock(UnsafeStuff.cast(stairs.get()), blockTexture(texture.get()));
+        }
+
+        private void slab(RegistryObject<Block> slab, RegistryObject<Block> texture)
+        {
+            slabBlock(UnsafeStuff.cast(slab.get()), blockTexture(texture.get()), blockTexture(texture.get()));
+        }
+
+        @Override
+        public void registerStatesAndModels()
+        {
+            shader(Blocks.SWIRL);
+            shader(Blocks.SNOWFLAKE);
+            shader(Blocks.WATERCOLOUR);
+            shader(Blocks.MULTICOLOUR);
+            shader(Blocks.FLARE);
+            shader(Blocks.STARRY);
+            shader(Blocks.GEOMETRIC);
 
             nylium(Blocks.ILLUSIVE_NYLIUM);
             nylium(Blocks.DELUSIVE_NYLIUM);
@@ -147,10 +186,16 @@ public class DataProviders
 
             cube(Blocks.COMA_STONE);
 
+            cube(Blocks.GEOMETRIC_PLANKS);
+            log(Blocks.GEOMETRIC_LOG);
+            stairs(Blocks.GEOMETRIC_STAIRS, Blocks.GEOMETRIC_PLANKS);
+            slab(Blocks.GEOMETRIC_SLAB, Blocks.GEOMETRIC_PLANKS);
+
             plant(Blocks.CATNIP, Blocks.POTTED_CATNIP);
             plant(Blocks.SPLITLEAF, Blocks.POTTED_SPLITLEAF);
             plant(Blocks.SNAKEROOT);
             plant(Blocks.TALL_SNAKEROOT);
+            plant(Blocks.GEOMETRIC_SAPLING);
         }
     }
 
@@ -196,13 +241,13 @@ public class DataProviders
             withExistingParent(item.getId().getPath(), mcLoc("item/generated")).texture("layer0", modLoc("item/" + item.getId().getPath()));
         }
 
-        private <T extends ItemLike> void block(RegistryObject<T> block)
+        private <T extends ItemLike> void itemForBlock(RegistryObject<T> block)
         {
             withExistingParent(block.getId().getPath(), mcLoc("item/generated")).texture("layer0", modLoc("block/" + block.getId().getPath()));
         }
 
         @Override
-        protected void registerModels()
+        public void registerModels()
         {
             blockItem(Blocks.SWIRL);
             blockItem(Blocks.SNOWFLAKE);
@@ -217,6 +262,12 @@ public class DataProviders
             blockItem(Blocks.IMMATERIAL_NYLIUM);
             blockItem(Blocks.SPECTRAL_NYLIUM);
             blockItem(Blocks.SURREAL_NYLIUM);
+
+            blockItem(Blocks.GEOMETRIC_SAPLING);
+            blockItem(Blocks.GEOMETRIC_LOG);
+            blockItem(Blocks.GEOMETRIC_PLANKS);
+            blockItem(Blocks.GEOMETRIC_STAIRS);
+            blockItem(Blocks.GEOMETRIC_SLAB);
 
             cosmoSpine(Items.RED_COSMO_SPINE);
             cosmoSpine(Items.GREEN_COSMO_SPINE);
@@ -245,10 +296,11 @@ public class DataProviders
 
             item(Items.TOURNIQUET);
 
-            block(Blocks.CATNIP);
-            block(Blocks.SPLITLEAF);
-            block(Blocks.SNAKEROOT);
-            block(Blocks.TALL_SNAKEROOT);
+            itemForBlock(Blocks.CATNIP);
+            itemForBlock(Blocks.SPLITLEAF);
+            itemForBlock(Blocks.SNAKEROOT);
+            itemForBlock(Blocks.TALL_SNAKEROOT);
+            itemForBlock(Blocks.GEOMETRIC_SAPLING);
         }
     }
 
@@ -303,7 +355,7 @@ public class DataProviders
         }
 
         @Override
-        protected void addTranslations()
+        public void addTranslations()
         {
             tab(Tabs.ITEMS);
             tab(Tabs.BLOCKS);
@@ -345,6 +397,11 @@ public class DataProviders
             block(Blocks.SPLITLEAF);
             block(Blocks.SNAKEROOT);
             block(Blocks.TALL_SNAKEROOT);
+            block(Blocks.GEOMETRIC_SAPLING);
+            block(Blocks.GEOMETRIC_LOG);
+            block(Blocks.GEOMETRIC_PLANKS);
+            block(Blocks.GEOMETRIC_STAIRS);
+            block(Blocks.GEOMETRIC_SLAB);
             block(Blocks.POTTED_CATNIP);
             block(Blocks.POTTED_SPLITLEAF);
             block(Blocks.ILLUSIVE_NYLIUM);

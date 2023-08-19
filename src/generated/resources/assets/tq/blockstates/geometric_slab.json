@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "tq:block/geometric_slab"
+    },
+    "type=double": {
+      "model": "tq:block/geometric_planks"
+    },
+    "type=top": {
+      "model": "tq:block/geometric_slab_top"
+    }
+  }
+}

@@ -1,17 +1,30 @@
 package xyz.snaker.snakerlib.utility.tools;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 
 import xyz.snaker.snakerlib.SnakerLib;
+import xyz.snaker.snakerlib.concurrent.UncaughtExceptionThread;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.lwjgl.system.MemoryUtil;
+
+import sun.misc.Unsafe;
 
 public class UnsafeStuff
 {
+    private static Unsafe theUnsafe;
+
+    static {
+        try {
+            Field field = Unsafe.class.getDeclaredField("theUnsafe");
+            field.setAccessible(true);
+            theUnsafe = (Unsafe) field.get(null);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            UncaughtExceptionThread.createAndRun("Failed to get theUnsafe", e);
+        }
+    }
+
     /**
      * Returns an object that can be assigned to anything that is not a primitive type
      *
@@ -29,9 +42,8 @@ public class UnsafeStuff
      * @return The result of the cast
      * @throws ClassCastException if the value could not be cast
      **/
-    @Nullable
     @SuppressWarnings("unchecked")
-    public static <V> V cast(@Nullable Object object)
+    public static <V> V cast(Object object)
     {
         V value;
         try {
@@ -53,12 +65,9 @@ public class UnsafeStuff
     @NotNull
     public static <T> T instantiate(Class<T> clazz)
     {
-        if (clazz == null) {
-            throw new NullPointerException();
-        }
         try {
-            return clazz.getDeclaredConstructor().newInstance();
-        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException e) {
+            return cast(theUnsafe.allocateInstance(clazz));
+        } catch (InstantiationException e) {
             throw new RuntimeException(e);
         }
     }
@@ -201,5 +210,15 @@ public class UnsafeStuff
 
         SnakerLib.LOGGER.errorf("%24s", reportBuilder);
         MemoryUtil.memSet(0, 0, 1);
+    }
+
+    /**
+     * Don't do anything retarded ;)
+     *
+     * @return The unsafe instance
+     **/
+    public static Unsafe getTheUnsafe()
+    {
+        return theUnsafe;
     }
 }

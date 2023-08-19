@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.registries.RegistryObject;
 
 import org.jetbrains.annotations.NotNull;
@@ -26,7 +27,7 @@ public class ShaderBlock<T extends BlockEntity> extends BaseEntityBlock
 
     public ShaderBlock(RegistryObject<BlockEntityType<T>> blockEntity)
     {
-        super(DefaultBlockProperties.PERSPECTIVE);
+        super(DefaultBlockProperties.PERSPECTIVE.apply(MapColor.NONE));
         this.blockEntity = blockEntity;
     }
 
