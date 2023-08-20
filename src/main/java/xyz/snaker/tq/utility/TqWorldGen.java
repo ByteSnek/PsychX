@@ -38,7 +38,7 @@ import org.apache.commons.lang3.function.TriFunction;
 /**
  * Created by SnakerBone on 4/08/2023
  **/
-public class TourniquetedStuff
+public class TqWorldGen
 {
     public static final TriFunction<Block, Block, Block, TreeConfiguration> SIMPLE_TREE = (stem, foliage, dirt) -> tree(stem, foliage, dirt, 5, 2, 2, 2, 0, 1, 0, 2);
 

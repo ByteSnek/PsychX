@@ -29,7 +29,7 @@ import static net.minecraft.world.level.block.Blocks.FLOWER_POT;
  **/
 public class Blocks
 {
-    static final DeferredRegister<Block> REGISTRAR = DeferredRegister.create(ForgeRegistries.BLOCKS, Tourniqueted.MODID);
+    public static final DeferredRegister<Block> REGISTRAR = DeferredRegister.create(ForgeRegistries.BLOCKS, Tourniqueted.MODID);
 
     public static final RegistryObject<Block> SWIRL = register("swirl_block", () -> new ShaderBlock<>(BlockEntities.SWIRL));
     public static final RegistryObject<Block> SNOWFLAKE = register("snowflake_block", () -> new ShaderBlock<>(BlockEntities.SNOWFLAKE));
@@ -55,8 +55,8 @@ public class Blocks
     public static final RegistryObject<Block> GEOMETRIC_PLANKS = registerBlockWithItem("geometric_planks", () -> new Block(DefaultBlockProperties.WOOD.apply(MapColor.COLOR_PURPLE)));
     public static final RegistryObject<Block> GEOMETRIC_STAIRS = registerBlockWithItem("geometric_stairs", () -> new StairBlock(Blocks.GEOMETRIC_PLANKS.get()::defaultBlockState, DefaultBlockProperties.WOOD.apply(MapColor.COLOR_PURPLE)));
     public static final RegistryObject<Block> GEOMETRIC_SLAB = registerBlockWithItem("geometric_slab", () -> new SlabBlock(DefaultBlockProperties.WOOD.apply(MapColor.COLOR_PURPLE)));
-    public static final RegistryObject<Block> POTTED_CATNIP = register("potted_catnip", () -> new FlowerPotBlock(() -> UnsafeStuff.cast(FLOWER_POT), CATNIP, DefaultBlockProperties.NORMAL.apply(MapColor.PLANT)));
-    public static final RegistryObject<Block> POTTED_SPLITLEAF = register("potted_splitleaf", () -> new FlowerPotBlock(() -> UnsafeStuff.cast(FLOWER_POT), SPLITLEAF, DefaultBlockProperties.NORMAL.apply(MapColor.PLANT)));
+    public static final RegistryObject<Block> POTTED_CATNIP = register("potted_catnip", () -> new FlowerPotBlock(() -> UnsafeStuff.cast(FLOWER_POT), CATNIP, DefaultBlockProperties.NORMAL.apply(MapColor.PLANT).noLootTable()));
+    public static final RegistryObject<Block> POTTED_SPLITLEAF = register("potted_splitleaf", () -> new FlowerPotBlock(() -> UnsafeStuff.cast(FLOWER_POT), SPLITLEAF, DefaultBlockProperties.NORMAL.apply(MapColor.PLANT).noLootTable()));
 
     static RegistryObject<Block> register(String name, Supplier<Block> block)
     {
