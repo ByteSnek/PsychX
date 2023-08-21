@@ -39,7 +39,7 @@ public class PoseStackBuilder extends PoseStack
      * @param other The pose stack to use
      * @return A new pose stack builder
      **/
-    public static PoseStackBuilder set(PoseStack other)
+    public static PoseStackBuilder of(PoseStack other)
     {
         return new PoseStackBuilder(other);
     }
@@ -384,6 +384,11 @@ public class PoseStackBuilder extends PoseStack
         if (array.length != wantedLength) {
             throw new IndexOutOfBoundsException(array.length);
         }
+    }
+
+    public PoseStack getStack()
+    {
+        return parent;
     }
 
     @Override

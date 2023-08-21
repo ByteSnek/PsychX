@@ -84,129 +84,129 @@ public class Subscriptions
             event.registerBlockEntityRenderer(BlockEntities.STARRY.get(), new ShaderBlockRenderer<>(ItemLikeRenderType.BLACK_STARS));
             event.registerBlockEntityRenderer(BlockEntities.GEOMETRIC.get(), new ShaderBlockRenderer<>(ItemLikeRenderType.CLIP));
         }
-    }
 
-    @Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static class Common
-    {
-        @SubscribeEvent
-        public static void commonSetup(FMLCommonSetupEvent event)
+        @Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+        public static class Common
         {
-            BlockStuff.addPotPlant(Blocks.CATNIP.get(), Blocks.POTTED_CATNIP);
-            BlockStuff.addPotPlant(Blocks.SPLITLEAF.get(), Blocks.POTTED_SPLITLEAF);
+            @SubscribeEvent
+            public static void commonSetup(FMLCommonSetupEvent event)
+            {
+                BlockStuff.addPotPlant(Blocks.PINKTAILS.get(), Blocks.POTTED_CATNIP);
+                BlockStuff.addPotPlant(Blocks.SPLITLEAF.get(), Blocks.POTTED_SPLITLEAF);
+            }
+
+            @SubscribeEvent
+            public static void addEntityAttributes(EntityAttributeCreationEvent event)
+            {
+                bindAttributes(event, Entities.COSMO, Cosmo.attributes());
+                bindAttributes(event, Entities.SNIPE, Snipe.attributes());
+                bindAttributes(event, Entities.FLARE, Flare.attributes());
+                bindAttributes(event, Entities.COSMIC_CREEPER, CosmicCreeper.attributes());
+                bindAttributes(event, Entities.FROLICKER, Frolicker.attributes());
+                bindAttributes(event, Entities.FLUTTERFLY, Flutterfly.attributes());
+                bindAttributes(event, Entities.UTTERFLY, Utterfly.attributes());
+                bindAttributes(event, Entities.ANTI_COSMO, AntiCosmo.attributes());
+                bindAttributes(event, Entities.EERIE_CRETIN, EerieCretin.attributes());
+                bindAttributes(event, Entities.LEET, Leet.attributes());
+                bindAttributes(event, Entities.TEST, Test.attributes());
+            }
+
+            @SubscribeEvent
+            public static void clientSetup(FMLClientSetupEvent event)
+            {
+                MinecraftForge.EVENT_BUS.register(new SyncopeFX());
+                registerEntityRenderer(Entities.COSMO, CosmoRenderer::new);
+                registerEntityRenderer(Entities.SNIPE, SnipeRenderer::new);
+                registerEntityRenderer(Entities.FLARE, FlareRenderer::new);
+                registerEntityRenderer(Entities.COSMIC_CREEPER, CosmicCreeperRenderer::new);
+                registerEntityRenderer(Entities.FROLICKER, FrolickerRenderer::new);
+                registerEntityRenderer(Entities.FLUTTERFLY, FlutterflyRenderer::new);
+                registerEntityRenderer(Entities.UTTERFLY, UtterflyRenderer::new);
+                registerEntityRenderer(Entities.ANTI_COSMO, AntiCosmoRenderer::new);
+                registerEntityRenderer(Entities.HOMMING_ARROW, HommingArrowRenderer::new);
+                registerEntityRenderer(Entities.EXPLOSIVE_HOMMING_ARROW, ExplosiveHommingArrowRenderer::new);
+                registerEntityRenderer(Entities.COSMIC_RAY, CosmicRayRenderer::new);
+                registerEntityRenderer(Entities.EERIE_CRETIN, EerieCretinRenderer::new);
+                registerEntityRenderer(Entities.LEET, LeetRenderer::new);
+                registerEntityRenderer(Entities.TEST, TestRenderer::new);
+            }
+
+            @SubscribeEvent
+            public static void registerSpawns(SpawnPlacementRegisterEvent event)
+            {
+                registerSpawn(event, Entities.COSMO, Cosmo::spawnRules);
+                registerSpawn(event, Entities.FLARE, Flare::spawnRules);
+                registerSpawn(event, Entities.COSMIC_CREEPER, CosmicCreeper::spawnRules);
+                registerSpawn(event, Entities.FROLICKER, Frolicker::spawnRules);
+                registerSpawn(event, Entities.EERIE_CRETIN, EerieCretin::spawnRules);
+                registerSpawn(event, Entities.LEET, Leet::spawnRules);
+                registerSpawn(event, Entities.SNIPE, Snipe::spawnRules);
+                registerSpawn(event, Entities.FLUTTERFLY, Flutterfly::spawnRules);
+                registerSpawn(event, Entities.TEST, Test::spawnRules);
+            }
+
+            private static <T extends Entity> void registerSpawn(SpawnPlacementRegisterEvent event, RegistryObject<EntityType<T>> type, SpawnPlacements.SpawnPredicate<T> predicate)
+            {
+                event.register(type.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, predicate, SpawnPlacementRegisterEvent.Operation.AND);
+            }
+
+            private static <T extends Entity> void registerEntityRenderer(RegistryObject<EntityType<T>> type, EntityRendererProvider<T> renderer)
+            {
+                EntityRenderers.register(type.get(), renderer);
+            }
+
+            private static <T extends LivingEntity> void bindAttributes(EntityAttributeCreationEvent event, RegistryObject<EntityType<T>> entity, AttributeSupplier map)
+            {
+                event.put(entity.get(), map);
+            }
         }
 
-        @SubscribeEvent
-        public static void addEntityAttributes(EntityAttributeCreationEvent event)
+        @Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+        public static class ForgeClient
         {
-            bindAttributes(event, Entities.COSMO, Cosmo.attributes());
-            bindAttributes(event, Entities.SNIPE, Snipe.attributes());
-            bindAttributes(event, Entities.FLARE, Flare.attributes());
-            bindAttributes(event, Entities.COSMIC_CREEPER, CosmicCreeper.attributes());
-            bindAttributes(event, Entities.FROLICKER, Frolicker.attributes());
-            bindAttributes(event, Entities.FLUTTERFLY, Flutterfly.attributes());
-            bindAttributes(event, Entities.UTTERFLY, Utterfly.attributes());
-            bindAttributes(event, Entities.ANTI_COSMO, AntiCosmo.attributes());
-            bindAttributes(event, Entities.EERIE_CRETIN, EerieCretin.attributes());
-            bindAttributes(event, Entities.LEET, Leet.attributes());
-            bindAttributes(event, Entities.TEST, Test.attributes());
-        }
+            @SubscribeEvent
+            @SuppressWarnings("rawtypes")
+            public static void postRenderEntity(RenderLivingEvent.Post event)
+            {
+                PoseStack stack = event.getPoseStack();
+                PoseStackBuilder builder = new PoseStackBuilder(stack);
+                RenderSystem.getProjectionMatrix();
+                builder.popPose();
+            }
 
-        @SubscribeEvent
-        public static void clientSetup(FMLClientSetupEvent event)
-        {
-            MinecraftForge.EVENT_BUS.register(new SyncopeFX());
-            registerEntityRenderer(Entities.COSMO, CosmoRenderer::new);
-            registerEntityRenderer(Entities.SNIPE, SnipeRenderer::new);
-            registerEntityRenderer(Entities.FLARE, FlareRenderer::new);
-            registerEntityRenderer(Entities.COSMIC_CREEPER, CosmicCreeperRenderer::new);
-            registerEntityRenderer(Entities.FROLICKER, FrolickerRenderer::new);
-            registerEntityRenderer(Entities.FLUTTERFLY, FlutterflyRenderer::new);
-            registerEntityRenderer(Entities.UTTERFLY, UtterflyRenderer::new);
-            registerEntityRenderer(Entities.ANTI_COSMO, AntiCosmoRenderer::new);
-            registerEntityRenderer(Entities.HOMMING_ARROW, HommingArrowRenderer::new);
-            registerEntityRenderer(Entities.EXPLOSIVE_HOMMING_ARROW, ExplosiveHommingArrowRenderer::new);
-            registerEntityRenderer(Entities.COSMIC_RAY, CosmicRayRenderer::new);
-            registerEntityRenderer(Entities.EERIE_CRETIN, EerieCretinRenderer::new);
-            registerEntityRenderer(Entities.LEET, LeetRenderer::new);
-            registerEntityRenderer(Entities.TEST, TestRenderer::new);
-        }
-
-        @SubscribeEvent
-        public static void registerSpawns(SpawnPlacementRegisterEvent event)
-        {
-            registerSpawn(event, Entities.COSMO, Cosmo::spawnRules);
-            registerSpawn(event, Entities.FLARE, Flare::spawnRules);
-            registerSpawn(event, Entities.COSMIC_CREEPER, CosmicCreeper::spawnRules);
-            registerSpawn(event, Entities.FROLICKER, Frolicker::spawnRules);
-            registerSpawn(event, Entities.EERIE_CRETIN, EerieCretin::spawnRules);
-            registerSpawn(event, Entities.LEET, Leet::spawnRules);
-            registerSpawn(event, Entities.SNIPE, Snipe::spawnRules);
-            registerSpawn(event, Entities.FLUTTERFLY, Flutterfly::spawnRules);
-            registerSpawn(event, Entities.TEST, Test::spawnRules);
-        }
-
-        private static <T extends Entity> void registerSpawn(SpawnPlacementRegisterEvent event, RegistryObject<EntityType<T>> type, SpawnPlacements.SpawnPredicate<T> predicate)
-        {
-            event.register(type.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, predicate, SpawnPlacementRegisterEvent.Operation.AND);
-        }
-
-        private static <T extends Entity> void registerEntityRenderer(RegistryObject<EntityType<T>> type, EntityRendererProvider<T> renderer)
-        {
-            EntityRenderers.register(type.get(), renderer);
-        }
-
-        private static <T extends LivingEntity> void bindAttributes(EntityAttributeCreationEvent event, RegistryObject<EntityType<T>> entity, AttributeSupplier map)
-        {
-            event.put(entity.get(), map);
-        }
-    }
-
-    @Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
-    public static class ForgeClient
-    {
-        @SubscribeEvent
-        @SuppressWarnings("rawtypes")
-        public static void postRenderEntity(RenderLivingEvent.Post event)
-        {
-            PoseStack stack = event.getPoseStack();
-            PoseStackBuilder builder = new PoseStackBuilder(stack);
-            RenderSystem.getProjectionMatrix();
-            builder.popPose();
-        }
-
-        @SubscribeEvent
-        @SuppressWarnings("rawtypes")
-        public static void preRenderEntity(RenderLivingEvent.Pre event)
-        {
-            PoseStack stack = event.getPoseStack();
-            PoseStackBuilder builder = new PoseStackBuilder(stack);
-            LivingEntity entity = event.getEntity();
-            Syncope syncope = Effects.SYNCOPE.get();
-            MobEffectInstance effect = entity.getEffect(syncope);
-            builder.pushPose();
-            if (effect != null) {
-                int effectDuration = effect.getDuration();
-                boolean effectOver = effectDuration <= 0;
-                if (effectOver) {
-                    entity.removeEffect(syncope);
+            @SubscribeEvent
+            @SuppressWarnings("rawtypes")
+            public static void preRenderEntity(RenderLivingEvent.Pre event)
+            {
+                PoseStack stack = event.getPoseStack();
+                PoseStackBuilder builder = new PoseStackBuilder(stack);
+                LivingEntity entity = event.getEntity();
+                Syncope syncope = Effects.SYNCOPE.get();
+                MobEffectInstance effect = entity.getEffect(syncope);
+                builder.pushPose();
+                if (effect != null) {
+                    int effectDuration = effect.getDuration();
+                    boolean effectOver = effectDuration <= 0;
+                    if (effectOver) {
+                        entity.removeEffect(syncope);
+                    }
                 }
             }
         }
-    }
 
-    @Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-    public static class ForgeCommon
-    {
-        @SubscribeEvent
-        public static void playerTickEvent(TickEvent.PlayerTickEvent event)
+        @Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+        public static class ForgeCommon
         {
-            Player player = event.player;
-            Level level = player.level();
-            if (WorldStuff.isDimension(level, Keys.COMATOSE) && TqConfig.COMMON.syncopeActiveInComatoseDimension.get()) {
-                float tickCount = player.tickCount;
-                if (TimeStuff.secOffs(tickCount, 1)) {
-                    EntityStuff.addEffectDirect(player, Effects.SYNCOPE.get());
+            @SubscribeEvent
+            public static void playerTickEvent(TickEvent.PlayerTickEvent event)
+            {
+                Player player = event.player;
+                Level level = player.level();
+                if (WorldStuff.isDimension(level, Keys.COMATOSE) && TqConfig.COMMON.syncopeActiveInComatoseDimension.get()) {
+                    float tickCount = player.tickCount;
+                    if (TimeStuff.secOffs(tickCount, 1)) {
+                        EntityStuff.addEffectDirect(player, Effects.SYNCOPE.get());
+                    }
                 }
             }
         }

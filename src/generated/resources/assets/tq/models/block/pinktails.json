@@ -2,6 +2,6 @@
   "parent": "minecraft:block/cross",
   "render_type": "minecraft:cutout",
   "textures": {
-    "cross": "tq:block/catnip"
+    "cross": "tq:block/pinktails"
   }
 }

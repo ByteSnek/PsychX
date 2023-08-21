@@ -30,6 +30,33 @@ public class StringNuker
         this.string = EMPTY;
     }
 
+    public static StringNuker of()
+    {
+        return new StringNuker();
+    }
+
+    public static StringNuker of(String string)
+    {
+        return new StringNuker(string);
+    }
+
+    public static String destroy(String string, String regex)
+    {
+        StringNuker nuker = new StringNuker(string);
+        nuker.replaceAllAndDestroy(regex);
+        return nuker.result();
+    }
+
+    public String set(String string)
+    {
+        return this.string = string;
+    }
+
+    public void reset()
+    {
+        this.string = EMPTY;
+    }
+
     /**
      * Replaces the string with either an empty string or null
      *

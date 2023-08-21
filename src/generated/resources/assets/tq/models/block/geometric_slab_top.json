@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "tq:block/geometric_planks",
-    "side": "tq:block/geometric_planks",
-    "top": "tq:block/geometric_planks"
-  }
-}

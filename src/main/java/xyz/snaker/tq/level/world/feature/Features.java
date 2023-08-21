@@ -28,7 +28,7 @@ public class Features
 
     public static void configs(BootstapContext<ConfiguredFeature<?, ?>> context)
     {
-        TqWorldGen.registerConfiguredFeature(context, ConfigKey.CATNIP, Feature.RANDOM_PATCH, TqWorldGen.grass(Blocks.CATNIP, 4));
+        TqWorldGen.registerConfiguredFeature(context, ConfigKey.CATNIP, Feature.RANDOM_PATCH, TqWorldGen.grass(Blocks.PINKTAILS, 4));
         TqWorldGen.registerConfiguredFeature(context, ConfigKey.SPLITLEAF, Feature.RANDOM_PATCH, TqWorldGen.grass(Blocks.SPLITLEAF, 4));
         TqWorldGen.registerConfiguredFeature(context, ConfigKey.SNAKEROOT, Feature.RANDOM_PATCH, TqWorldGen.grass(Blocks.SNAKEROOT));
         TqWorldGen.registerConfiguredFeature(context, ConfigKey.TALL_SNAKEROOT, Feature.RANDOM_PATCH, TqWorldGen.grass(Blocks.TALL_SNAKEROOT));

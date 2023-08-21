@@ -46,5 +46,10 @@ public interface DefaultBlockProperties
      **/
     DefaultBlockProperties PERSPECTIVE = colour -> BlockBehaviour.Properties.of().mapColor(colour).sound(SoundType.STONE).pushReaction(PushReaction.IGNORE /*Rendering precautions*/).strength(5, 8).noOcclusion().dynamicShape();
 
+    /**
+     * Default properties for blocks using cutout rendering
+     **/
+    DefaultBlockProperties CUTOUT = colour -> BlockBehaviour.Properties.of().mapColor(colour).strength(0.5F).sound(SoundType.NETHER_ORE).pushReaction(PushReaction.DESTROY).isViewBlocking(DefaultBlockConditions.NEVER::apply).noOcclusion();
+
     BlockBehaviour.Properties apply(MapColor colour);
 }

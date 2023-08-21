@@ -184,4 +184,28 @@ public class StringStuff
     {
         return isValidString(string, false);
     }
+
+    public static String shiftDecimal(String string, int amount, boolean strip)
+    {
+        if (strip) {
+            string = string.substring(string.indexOf("."));
+        }
+        int index = string.indexOf('.');
+        if (index >= 0 && index < string.length() - 1) {
+            String before = string.substring(0, index);
+            String after = string.substring(index + 1);
+            for (int i = 0; i < amount; i++) {
+                if (!after.isEmpty()) {
+                    char digit = after.charAt(0);
+                    before += digit;
+                    after = after.substring(1);
+                } else {
+                    break;
+                }
+            }
+            return before + "." + after;
+        } else {
+            return string;
+        }
+    }
 }

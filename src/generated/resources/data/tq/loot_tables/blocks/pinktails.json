@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "tq:geometric_slab"
+          "name": "tq:pinktails"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "tq:blocks/geometric_slab"
+  "random_sequence": "tq:blocks/pinktails"
 }

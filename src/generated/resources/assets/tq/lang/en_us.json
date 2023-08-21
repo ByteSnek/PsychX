@@ -1,5 +1,4 @@
 {
-  "block.tq.catnip": "Catnip",
   "block.tq.coma_stone": "Coma Stone",
   "block.tq.delusive_nylium": "Delusive Nylium",
   "block.tq.flare_block": "Flare Block",
@@ -7,11 +6,10 @@
   "block.tq.geometric_log": "Geometric Log",
   "block.tq.geometric_planks": "Geometric Planks",
   "block.tq.geometric_sapling": "Geometric Sapling",
-  "block.tq.geometric_slab": "Geometric Slab",
-  "block.tq.geometric_stairs": "Geometric Stairs",
   "block.tq.illusive_nylium": "Illusive Nylium",
   "block.tq.immaterial_nylium": "Immaterial Nylium",
   "block.tq.multicolour_block": "Multicolour Block",
+  "block.tq.pinktails": "Pinktails",
   "block.tq.potted_catnip": "Potted Catnip",
   "block.tq.potted_splitleaf": "Potted Splitleaf",
   "block.tq.snakeroot": "Snakeroot",
