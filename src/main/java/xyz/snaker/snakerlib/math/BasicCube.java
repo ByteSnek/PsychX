@@ -23,21 +23,6 @@ public class BasicCube
      **/
     private final PoseStack stack;
 
-    /**
-     * The width of this cube (16px)
-     **/
-    private final int x = 1;
-
-    /**
-     * The height of this cube (16px)
-     **/
-    private final int y = 1;
-
-    /**
-     * The depth of this cube (16px)
-     **/
-    private final int z = 1;
-
     public BasicCube(VertexConsumer consumer, PoseStack stack)
     {
         this.consumer = consumer;
@@ -109,7 +94,7 @@ public class BasicCube
      **/
     public BasicCube draw()
     {
-        draw(consumer, stack, x, y, z);
+        draw(consumer, stack);
         return this;
     }
 
@@ -118,14 +103,11 @@ public class BasicCube
      *
      * @param consumer The vertex builder
      * @param stack    The pose stack
-     * @param x        The X coords
-     * @param y        The Y coords
-     * @param z        The Z coords
      * @return The drawn basic cube
      **/
-    private BasicCube draw(VertexConsumer consumer, PoseStack stack, int x, int y, int z)
+    private BasicCube draw(VertexConsumer consumer, PoseStack stack)
     {
-        draw(consumer, stack.last().pose(), x, y, z);
+        draw(consumer, stack.last().pose());
         return this;
     }
 
@@ -134,19 +116,16 @@ public class BasicCube
      *
      * @param consumer The vertex builder
      * @param matrix   The pose stack as a Matrix4f
-     * @param x        The X coords
-     * @param y        The Y coords
-     * @param z        The Z coords
      * @return The drawn basic cube
      **/
-    private BasicCube draw(VertexConsumer consumer, Matrix4f matrix, int x, int y, int z)
+    private BasicCube draw(VertexConsumer consumer, Matrix4f matrix)
     {
-        front(consumer, matrix, x, y, z);
-        back(consumer, matrix, x, y, z);
-        left(consumer, matrix, x, y, z);
-        right(consumer, matrix, x, y, z);
-        top(consumer, matrix, x, y, z);
-        bottom(consumer, matrix, x, y, z);
+        front(consumer, matrix);
+        back(consumer, matrix);
+        left(consumer, matrix);
+        right(consumer, matrix);
+        top(consumer, matrix);
+        bottom(consumer, matrix);
         return this;
     }
 
@@ -155,16 +134,13 @@ public class BasicCube
      *
      * @param consumer The vertex builder
      * @param matrix   The pose stack as a Matrix4f
-     * @param x        The X coords
-     * @param y        The Y coords
-     * @param z        The Z coords
      **/
-    private void front(VertexConsumer consumer, Matrix4f matrix, int x, int y, int z)
+    private void front(VertexConsumer consumer, Matrix4f matrix)
     {
-        vertex(consumer, matrix, sub(x), sub(y), z);
-        vertex(consumer, matrix, x, sub(y), z);
-        vertex(consumer, matrix, x, y, z);
-        vertex(consumer, matrix, sub(x), y, z);
+        vertex(consumer, matrix, 0, 0, 1);
+        vertex(consumer, matrix, 1, 0, 1);
+        vertex(consumer, matrix, 1, 1, 1);
+        vertex(consumer, matrix, 0, 1, 1);
     }
 
     /**
@@ -172,16 +148,13 @@ public class BasicCube
      *
      * @param consumer The vertex builder
      * @param matrix   The pose stack as a Matrix4f
-     * @param x        The X coords
-     * @param y        The Y coords
-     * @param z        The Z coords
      **/
-    private void back(VertexConsumer consumer, Matrix4f matrix, int x, int y, int z)
+    private void back(VertexConsumer consumer, Matrix4f matrix)
     {
-        vertex(consumer, matrix, sub(x), sub(y), sub(z));
-        vertex(consumer, matrix, x, sub(y), sub(z));
-        vertex(consumer, matrix, x, y, sub(z));
-        vertex(consumer, matrix, sub(x), y, sub(z));
+        vertex(consumer, matrix, 0, 0, 0);
+        vertex(consumer, matrix, 1, 0, 0);
+        vertex(consumer, matrix, 1, 1, 0);
+        vertex(consumer, matrix, 0, 1, 0);
     }
 
     /**
@@ -189,16 +162,13 @@ public class BasicCube
      *
      * @param consumer The vertex builder
      * @param matrix   The pose stack as a Matrix4f
-     * @param x        The X coords
-     * @param y        The Y coords
-     * @param z        The Z coords
      **/
-    private void left(VertexConsumer consumer, Matrix4f matrix, int x, int y, int z)
+    private void left(VertexConsumer consumer, Matrix4f matrix)
     {
-        vertex(consumer, matrix, sub(x), y, z);
-        vertex(consumer, matrix, sub(x), y, sub(z));
-        vertex(consumer, matrix, sub(x), sub(y), sub(z));
-        vertex(consumer, matrix, sub(x), sub(y), z);
+        vertex(consumer, matrix, 0, 1, 1);
+        vertex(consumer, matrix, 0, 1, 0);
+        vertex(consumer, matrix, 0, 0, 0);
+        vertex(consumer, matrix, 0, 0, 1);
     }
 
     /**
@@ -206,16 +176,13 @@ public class BasicCube
      *
      * @param consumer The vertex builder
      * @param matrix   The pose stack as a Matrix4f
-     * @param x        The X coords
-     * @param y        The Y coords
-     * @param z        The Z coords
      **/
-    private void right(VertexConsumer consumer, Matrix4f matrix, int x, int y, int z)
+    private void right(VertexConsumer consumer, Matrix4f matrix)
     {
-        vertex(consumer, matrix, x, y, z);
-        vertex(consumer, matrix, x, y, sub(z));
-        vertex(consumer, matrix, x, sub(y), sub(z));
-        vertex(consumer, matrix, x, sub(y), z);
+        vertex(consumer, matrix, 1, 1, 1);
+        vertex(consumer, matrix, 1, 1, 0);
+        vertex(consumer, matrix, 1, 0, 0);
+        vertex(consumer, matrix, 1, 0, 1);
     }
 
     /**
@@ -223,16 +190,13 @@ public class BasicCube
      *
      * @param consumer The vertex builder
      * @param matrix   The pose stack as a Matrix4f
-     * @param x        The X coords
-     * @param y        The Y coords
-     * @param z        The Z coords
      **/
-    private void top(VertexConsumer consumer, Matrix4f matrix, int x, int y, int z)
+    private void top(VertexConsumer consumer, Matrix4f matrix)
     {
-        vertex(consumer, matrix, sub(x), y, z);
-        vertex(consumer, matrix, sub(x), y, sub(z));
-        vertex(consumer, matrix, x, y, sub(z));
-        vertex(consumer, matrix, x, y, z);
+        vertex(consumer, matrix, 0, 1, 1);
+        vertex(consumer, matrix, 0, 1, 0);
+        vertex(consumer, matrix, 1, 1, 0);
+        vertex(consumer, matrix, 1, 1, 1);
     }
 
     /**
@@ -240,16 +204,13 @@ public class BasicCube
      *
      * @param consumer The vertex builder
      * @param matrix   The pose stack as a Matrix4f
-     * @param x        The X coords
-     * @param y        The Y coords
-     * @param z        The Z coords
      **/
-    private void bottom(VertexConsumer consumer, Matrix4f matrix, int x, int y, int z)
+    private void bottom(VertexConsumer consumer, Matrix4f matrix)
     {
-        vertex(consumer, matrix, sub(x), sub(y), z);
-        vertex(consumer, matrix, sub(x), sub(y), sub(z));
-        vertex(consumer, matrix, x, sub(y), sub(z));
-        vertex(consumer, matrix, x, sub(y), z);
+        vertex(consumer, matrix, 0, 0, 1);
+        vertex(consumer, matrix, 0, 0, 0);
+        vertex(consumer, matrix, 1, 0, 0);
+        vertex(consumer, matrix, 1, 0, 1);
     }
 
     /**
@@ -264,10 +225,5 @@ public class BasicCube
     private void vertex(VertexConsumer consumer, Matrix4f matrix, int x, int y, int z)
     {
         consumer.vertex(matrix, x, y, z).color(255, 255, 255, 255).uv(0, 0).uv2(0).normal(1, 0, 0).endVertex();
-    }
-
-    private int sub(int value)
-    {
-        return value == 1 ? 0 : 1;
     }
 }

@@ -31,7 +31,7 @@ public class ResourcePath extends ResourceLocation
         if (clazz == null) {
             throw new NoClassDefFoundError("Could not find class");
         }
-        return fromClass(clazz);
+        return of(clazz);
     }
 
     /**
@@ -40,7 +40,7 @@ public class ResourcePath extends ResourceLocation
      * @param clazz The class to get the name from
      * @return A new resource path with the class name
      **/
-    public static <T> ResourcePath fromClass(Class<T> clazz)
+    public static <T> ResourcePath of(Class<T> clazz)
     {
         return new ResourcePath(clazz);
     }

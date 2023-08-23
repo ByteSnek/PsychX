@@ -22,29 +22,39 @@ public class AsyncHashMap<K, V> extends AbstractMap<K, V>
 
     public AsyncHashMap()
     {
-        baseMap = new HashMap<>();
+        synchronized (this) {
+            baseMap = new HashMap<>();
+        }
     }
 
     @Override
     public V put(K key, V value)
     {
-        return baseMap.put(key, value);
+        synchronized (baseMap) {
+            return baseMap.put(key, value);
+        }
     }
 
     @Override
     public V get(Object key)
     {
-        return baseMap.get(key);
+        synchronized (baseMap) {
+            return baseMap.get(key);
+        }
     }
 
     @Override
     public Set<Entry<K, V>> entrySet()
     {
-        Set<Entry<K, V>> entrySet = baseMap.entrySet();
-        HashMap<K, V> asyncMap = new HashMap<>();
-        for (var entry : entrySet) {
-            asyncMap.put(entry.getKey(), entry.getValue());
+        synchronized (baseMap) {
+            Set<Entry<K, V>> entrySet = baseMap.entrySet();
+            synchronized (entrySet) {
+                HashMap<K, V> asyncMap = new HashMap<>();
+                for (var entry : entrySet) {
+                    asyncMap.put(entry.getKey(), entry.getValue());
+                }
+                return asyncMap.entrySet();
+            }
         }
-        return asyncMap.entrySet();
     }
 }

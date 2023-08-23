@@ -1,6 +1,3 @@
 {
-  "parent": "tq:block/shader",
-  "textures": {
-    "layer0": "tq:block/coma_stone"
-  }
+  "parent": "tq:block/shader"
 }

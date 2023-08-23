@@ -15,7 +15,7 @@ import net.minecraftforge.registries.RegistryObject;
  **/
 public class Effects
 {
-    static final DeferredRegister<MobEffect> REGISTRAR = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, Tourniqueted.MODID);
+    public static final DeferredRegister<MobEffect> REGISTRAR = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, Tourniqueted.MODID);
 
     public static final RegistryObject<Syncope> SYNCOPE = register("syncope", Syncope::new);
 

@@ -35,8 +35,8 @@ import com.mojang.datafixers.util.Pair;
  **/
 public class BossBarHandler
 {
-    private static final Set<? super Boss> BOSSES = new HashSet<>();
-    private static final Set<? super FlyingBoss> FLYING_BOSSES = new HashSet<>();
+    private static final Set<? super Boss<?>> BOSSES = new HashSet<>();
+    private static final Set<? super FlyingBoss<?>> FLYING_BOSSES = new HashSet<>();
 
     public static void initialize()
     {

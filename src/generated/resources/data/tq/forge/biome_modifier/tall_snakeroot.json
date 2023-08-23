@@ -1,6 +1,12 @@
 {
   "type": "forge:add_features",
-  "biomes": "#tq:comatose_vegetal",
+  "biomes": [
+    "tq:delusion",
+    "tq:illusion",
+    "tq:immaterial",
+    "tq:spectral",
+    "tq:surreal"
+  ],
   "features": "tq:tall_snakeroot",
   "step": "vegetal_decoration"
 }

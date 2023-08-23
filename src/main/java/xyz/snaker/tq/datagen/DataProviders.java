@@ -1,6 +1,5 @@
 package xyz.snaker.tq.datagen;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -9,9 +8,10 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import javax.annotation.Nullable;
 
+import xyz.snaker.snakerlib.level.Icon;
 import xyz.snaker.tq.Tourniqueted;
-import xyz.snaker.tq.level.block.DelusiveBlock;
 import xyz.snaker.tq.level.block.ShaderBlock;
+import xyz.snaker.tq.level.item.CosmoSpine;
 import xyz.snaker.tq.level.world.feature.Features;
 import xyz.snaker.tq.rego.*;
 import xyz.snaker.tq.utility.tools.*;
@@ -25,11 +25,14 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.FlowerPotBlock;
+import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
@@ -45,9 +48,6 @@ import org.jetbrains.annotations.NotNull;
  **/
 public class DataProviders
 {
-    public static final Collection<RegistryObject<Block>> BLOCK_ENTRIES = Blocks.REGISTRAR.getEntries();
-    public static final Predicate<RegistryObject<Block>> BLACKLISTED_BLOCKS = block -> block.get() instanceof FlowerPotBlock;
-
     static class BiomeTags extends TagsProvider<Biome> implements BiomeTagProviderTools<BiomeTags>
     {
         public BiomeTags(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, @Nullable ExistingFileHelper existingFileHelper)
@@ -58,7 +58,7 @@ public class DataProviders
         @Override
         public void addTags(HolderLookup.@NotNull Provider provider)
         {
-            add(Keys.COMATOSE_VEGETAL, List.of(Keys.DELUSION, Keys.ILLUSIVE, Keys.IMMATERIAL, Keys.SPECTRAL, Keys.SURREAL));
+            
         }
 
         @Override
@@ -70,7 +70,7 @@ public class DataProviders
 
     static class BlockTags extends BlockTagsProvider implements BlockTagsProviderTools<BlockTags>
     {
-        public static final Predicate<RegistryObject<Block>> BLOCKS_NEED_TOOL = block -> block.get() instanceof ShaderBlock<?> || block.get() instanceof DelusiveBlock;
+        public static final Predicate<RegistryObject<Block>> BLOCKS_NEED_TOOL = block -> block.get() instanceof ShaderBlock<?> || block.get() == Blocks.COMASTONE.get();
 
         public BlockTags(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, @Nullable ExistingFileHelper helper)
         {
@@ -80,18 +80,14 @@ public class DataProviders
         @Override
         public void addTags(@NotNull HolderLookup.Provider provider)
         {
-            custom(Keys.COMATOSE_NYLIUM, List.of(Blocks.COMA_STONE, Blocks.DELUSIVE_NYLIUM, Blocks.ILLUSIVE_NYLIUM, Blocks.IMMATERIAL_NYLIUM, Blocks.SPECTRAL_NYLIUM, Blocks.SURREAL_NYLIUM));
-            stone(List.of(Blocks.COMA_STONE, Blocks.DELUSIVE_NYLIUM, Blocks.ILLUSIVE_NYLIUM, Blocks.IMMATERIAL_NYLIUM, Blocks.SPECTRAL_NYLIUM, Blocks.SURREAL_NYLIUM));
-            nylium(List.of(Blocks.DELUSIVE_NYLIUM, Blocks.ILLUSIVE_NYLIUM, Blocks.IMMATERIAL_NYLIUM, Blocks.SPECTRAL_NYLIUM, Blocks.SURREAL_NYLIUM));
-
-            mineableWithAxe(List.of(Blocks.GEOMETRIC_LOG, Blocks.GEOMETRIC_PLANKS));
-            planks(List.of(Blocks.GEOMETRIC_PLANKS));
-            logs(List.of(Blocks.GEOMETRIC_LOG));
-
-            for (RegistryObject<Block> block : BLOCK_ENTRIES) {
-                if (!BLACKLISTED_BLOCKS.test(block) && BLOCKS_NEED_TOOL.test(block)) {
-                    toolRequired(ToolTier.STONE, List.of(block));
-                    mineableWithPickaxe(List.of(block));
+            mineableWithAxe(List.of(Blocks.GEOMETRIC_LOG.get(), Blocks.GEOMETRIC_PLANKS.get()));
+            planks(List.of(Blocks.GEOMETRIC_PLANKS.get()));
+            logs(List.of(Blocks.GEOMETRIC_LOG.get()));
+            groundRich(List.of(Blocks.COMASTONE.get()));
+            for (RegistryObject<Block> block : Blocks.REGISTRAR.getEntries()) {
+                if (BLOCKS_NEED_TOOL.test(block)) {
+                    toolRequired(ToolTier.STONE, List.of(block.get()));
+                    mineableWithPickaxe(List.of(block.get()));
                 }
             }
         }
@@ -105,7 +101,11 @@ public class DataProviders
 
     static class DatapackEntries extends DatapackBuiltinEntriesProvider
     {
-        public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder().add(Registries.CONFIGURED_FEATURE, Features::configs).add(Registries.PLACED_FEATURE, Features::placements).add(ForgeRegistries.Keys.BIOME_MODIFIERS, Features::modifiers);
+        public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
+                .add(Registries.CONFIGURED_FEATURE, Features::configs)
+                .add(Registries.PLACED_FEATURE, Features::placements)
+                .add(ForgeRegistries.Keys.BIOME_MODIFIERS, Features::modifiers)
+                .add(Registries.BIOME, Biomes::biomes);
 
         public DatapackEntries(PackOutput output, CompletableFuture<HolderLookup.Provider> registries)
         {
@@ -123,30 +123,18 @@ public class DataProviders
         @Override
         public void registerStatesAndModels()
         {
-            shader(Blocks.SWIRL);
-            shader(Blocks.SNOWFLAKE);
-            shader(Blocks.WATERCOLOUR);
-            shader(Blocks.MULTICOLOUR);
-            shaderWithLayer(Blocks.FLARE, Blocks.COMA_STONE);
-            shader(Blocks.STARRY);
-            shader(Blocks.GEOMETRIC);
-
-            nylium(Blocks.ILLUSIVE_NYLIUM);
-            nylium(Blocks.DELUSIVE_NYLIUM);
-            nylium(Blocks.IMMATERIAL_NYLIUM);
-            nylium(Blocks.SPECTRAL_NYLIUM);
-            nylium(Blocks.SURREAL_NYLIUM);
-
-            cube(Blocks.COMA_STONE);
-            cube(Blocks.GEOMETRIC_PLANKS);
-
-            log(Blocks.GEOMETRIC_LOG);
-
-            plant(Blocks.PINKTAILS, Blocks.POTTED_CATNIP);
-            plant(Blocks.SPLITLEAF, Blocks.POTTED_SPLITLEAF);
-            plant(Blocks.SNAKEROOT);
-            plant(Blocks.TALL_SNAKEROOT);
-            plant(Blocks.GEOMETRIC_SAPLING);
+            for (var obj : Blocks.REGISTRAR.getEntries()) {
+                var current = obj.get();
+                if (current instanceof ShaderBlock<?>) {
+                    shader(current);
+                } else if (current instanceof BushBlock) {
+                    plant(current);
+                } else if (current instanceof RotatedPillarBlock) {
+                    log(current);
+                } else {
+                    cube(current);
+                }
+            }
         }
 
         @Override
@@ -166,54 +154,28 @@ public class DataProviders
         @Override
         public void registerModels()
         {
-            blockItem(Blocks.SWIRL);
-            blockItem(Blocks.SNOWFLAKE);
-            blockItem(Blocks.WATERCOLOUR);
-            blockItem(Blocks.MULTICOLOUR);
-            blockItem(Blocks.FLARE);
-            blockItem(Blocks.STARRY);
-            blockItem(Blocks.GEOMETRIC);
-            blockItem(Blocks.COMA_STONE);
-            blockItem(Blocks.DELUSIVE_NYLIUM);
-            blockItem(Blocks.ILLUSIVE_NYLIUM);
-            blockItem(Blocks.IMMATERIAL_NYLIUM);
-            blockItem(Blocks.SPECTRAL_NYLIUM);
-            blockItem(Blocks.SURREAL_NYLIUM);
-            blockItem(Blocks.GEOMETRIC_LOG);
-            blockItem(Blocks.GEOMETRIC_PLANKS);
-
-            cosmoSpine(Items.RED_COSMO_SPINE);
-            cosmoSpine(Items.GREEN_COSMO_SPINE);
-            cosmoSpine(Items.BLUE_COSMO_SPINE);
-            cosmoSpine(Items.YELLOW_COSMO_SPINE);
-            cosmoSpine(Items.PINK_COSMO_SPINE);
-            cosmoSpine(Items.PURPLE_COSMO_SPINE);
-            cosmoSpine(Items.ALPHA_COSMO_SPINE);
-            cosmoSpine(Items.ANTI_COSMO_SPINE);
-
-            egg(Items.COSMO_SPAWN_EGG);
-            egg(Items.FLARE_SPAWN_EGG);
-            egg(Items.FLUTTERFLY_SPAWN_EGG);
-            egg(Items.FROLICKER_SPAWN_EGG);
-            egg(Items.COSMIC_CREEPER_SPAWN_EGG);
-            egg(Items.UTTERFLY_SPAWN_EGG);
-            egg(Items.ANTI_COSMO_SPAWN_EGG);
-            egg(Items.SNIPE_SPAWN_EGG);
-            egg(Items.EERIE_CRETIN_SPAWN_EGG);
-            egg(Items.LEET_SPAWN_EGG);
-            egg(Items.TEST_SPAWN_EGG);
-
-            perspective(Items.MOB_TAB_ICON);
-            perspective(Items.ITEM_TAB_ICON);
-            perspective(Items.BLOCK_TAB_ICON);
-
-            item(Items.TOURNIQUET);
-
-            blockCustom(Blocks.PINKTAILS);
-            blockCustom(Blocks.SPLITLEAF);
-            blockCustom(Blocks.SNAKEROOT);
-            blockCustom(Blocks.TALL_SNAKEROOT);
-            blockCustom(Blocks.GEOMETRIC_SAPLING);
+            for (var obj : Items.REGISTRAR.getEntries()) {
+                var current = obj.get();
+                if (!(current instanceof BlockItem)) {
+                    if (current instanceof CosmoSpine) {
+                        cosmoSpine(current);
+                    } else if (current instanceof ForgeSpawnEggItem) {
+                        spawnEgg(current);
+                    } else if (current instanceof Icon) {
+                        perspective(current);
+                    } else {
+                        item(current);
+                    }
+                }
+            }
+            for (var obj : Blocks.REGISTRAR.getEntries()) {
+                var current = obj.get();
+                if (current instanceof BushBlock) {
+                    blockCustom(current);
+                } else {
+                    blockItem(current);
+                }
+            }
         }
 
         @Override
@@ -233,17 +195,15 @@ public class DataProviders
         @Override
         public void generate()
         {
-            for (RegistryObject<Block> block : BLOCK_ENTRIES) {
-                if (!BLACKLISTED_BLOCKS.test(block)) {
-                    dropSelf(block.get());
-                }
+            for (RegistryObject<Block> block : Blocks.REGISTRAR.getEntries()) {
+                dropSelf(block.get());
             }
         }
 
         @Override
         public @NotNull Iterable<Block> getKnownBlocks()
         {
-            return BLOCK_ENTRIES.stream().map(RegistryObject::get)::iterator;
+            return Blocks.REGISTRAR.getEntries().stream().map(RegistryObject::get)::iterator;
         }
     }
 
@@ -271,89 +231,26 @@ public class DataProviders
         @Override
         public void addTranslations()
         {
-            tab(Tabs.ITEMS);
-            tab(Tabs.BLOCKS);
-            tab(Tabs.MOBS);
+            for (var obj : Blocks.REGISTRAR.getEntries()) {
+                block(obj.get());
+            }
+            for (var obj : Items.REGISTRAR.getEntries()) {
+                item(obj.get());
+            }
+            for (var obj : Effects.REGISTRAR.getEntries()) {
+                effect(obj.get());
+            }
+            for (var obj : Entities.REGISTRAR.getEntries()) {
+                entity(obj.get());
+            }
+            for (var obj : Sounds.REGISTRAR.getEntries()) {
+                sound(obj.get());
+            }
+            for (var obj : Tabs.REGISTRAR.getEntries()) {
+                tab(obj);
+            }
 
-            item(Items.COSMO_SPAWN_EGG);
-            item(Items.SNIPE_SPAWN_EGG);
-            item(Items.FLARE_SPAWN_EGG);
-            item(Items.COSMIC_CREEPER_SPAWN_EGG);
-            item(Items.FROLICKER_SPAWN_EGG);
-            item(Items.FLUTTERFLY_SPAWN_EGG);
-            item(Items.UTTERFLY_SPAWN_EGG);
-            item(Items.ANTI_COSMO_SPAWN_EGG);
-            item(Items.EERIE_CRETIN_SPAWN_EGG);
-            item(Items.LEET_SPAWN_EGG);
-
-            item(Items.RED_COSMO_SPINE);
-            item(Items.GREEN_COSMO_SPINE);
-            item(Items.BLUE_COSMO_SPINE);
-            item(Items.YELLOW_COSMO_SPINE);
-            item(Items.PINK_COSMO_SPINE);
-            item(Items.PURPLE_COSMO_SPINE);
-            item(Items.ALPHA_COSMO_SPINE);
-            item(Items.ANTI_COSMO_SPINE);
-            item(Items.MOB_TAB_ICON);
-            item(Items.ITEM_TAB_ICON);
-            item(Items.BLOCK_TAB_ICON);
-            item(Items.TOURNIQUET);
-
-            block(Blocks.SWIRL);
-            block(Blocks.SNOWFLAKE);
-            block(Blocks.STARRY);
-            block(Blocks.GEOMETRIC);
-            block(Blocks.FLARE);
-            block(Blocks.MULTICOLOUR);
-            block(Blocks.WATERCOLOUR);
-            block(Blocks.COMA_STONE);
-            block(Blocks.PINKTAILS);
-            block(Blocks.SPLITLEAF);
-            block(Blocks.SNAKEROOT);
-            block(Blocks.TALL_SNAKEROOT);
-            block(Blocks.POTTED_CATNIP);
-            block(Blocks.POTTED_SPLITLEAF);
-            block(Blocks.ILLUSIVE_NYLIUM);
-            block(Blocks.DELUSIVE_NYLIUM);
-            block(Blocks.IMMATERIAL_NYLIUM);
-            block(Blocks.SPECTRAL_NYLIUM);
-            block(Blocks.SURREAL_NYLIUM);
-            block(Blocks.GEOMETRIC_SAPLING);
-            block(Blocks.GEOMETRIC_LOG);
-            block(Blocks.GEOMETRIC_PLANKS);
-
-            entity(Entities.COSMO);
-            entity(Entities.SNIPE);
-            entity(Entities.FLARE);
-            entity(Entities.COSMIC_CREEPER);
-            entity(Entities.FROLICKER);
-            entity(Entities.FLUTTERFLY);
-            entity(Entities.UTTERFLY);
-            entity(Entities.EXPLOSIVE_HOMMING_ARROW);
-            entity(Entities.HOMMING_ARROW);
-            entity(Entities.EERIE_CRETIN);
-            entity(Entities.LEET);
-
-            sound(Sounds.CONFUSE);
-            sound(Sounds.EARTH);
-            sound(Sounds.FOG);
-            sound(Sounds.GAZE);
-            sound(Sounds.NIGHT);
-            sound(Sounds.SHOOT);
-            sound(Sounds.UTTERFLY_AMBIENT);
-            sound(Sounds.FLUTTERFLY_AMBIENT);
-            sound(Sounds.SNIPE_AMBIENT);
-            sound(Sounds.SNIPE_HURT);
-            sound(Sounds.COSMO_HURT);
-            sound(Sounds.ENTITY_DEATH);
-            sound(Sounds.TING);
-            sound(Sounds.PEW);
-            sound(Sounds.FIELD);
-            sound(Sounds.HIT);
-            sound(Sounds.LASER);
-            sound(Sounds.PULSE);
-
-            effect(Effects.SYNCOPE);
+            add("tooltip.tq.possible_issue", "If you're a player and you're seeing this then something with the mod may have gone wrong. Please go report this to github.com/SnakerBone/Tourniqueted/issues");
         }
 
         @Override

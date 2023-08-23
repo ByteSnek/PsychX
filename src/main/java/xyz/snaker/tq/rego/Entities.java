@@ -24,7 +24,7 @@ import net.minecraftforge.registries.RegistryObject;
  **/
 public class Entities
 {
-    static final DeferredRegister<EntityType<?>> REGISTRAR = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Tourniqueted.MODID);
+    public static final DeferredRegister<EntityType<?>> REGISTRAR = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Tourniqueted.MODID);
 
     public static final RegistryObject<EntityType<Cosmo>> COSMO = registerMob("cosmo", Cosmo::new, 1F, 2F);
     public static final RegistryObject<EntityType<Snipe>> SNIPE = registerMob("snipe", Snipe::new, 1F, 1.5F);

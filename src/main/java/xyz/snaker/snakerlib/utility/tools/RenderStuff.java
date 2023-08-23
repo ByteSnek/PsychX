@@ -21,6 +21,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.block.Block;
+import net.minecraftforge.client.model.data.ModelData;
 
 import org.joml.*;
 
@@ -248,6 +250,15 @@ public class RenderStuff
         floats[2] /= 255F;
         floats[3] /= 255F;
         return floats;
+    }
+
+    public static void renderOverlayTexture(Block texture, PoseStack stack, MultiBufferSource source, int lightTexture, int overlayTexture)
+    {
+        stack.pushPose();
+        stack.scale(1.01F, 1.01F, 1.01F);
+        stack.translate(-0.005, -0.005, -0.005);
+        Minecraft.getInstance().getBlockRenderer().renderSingleBlock(texture.defaultBlockState(), stack, source, lightTexture, overlayTexture, ModelData.EMPTY, RenderType.CUTOUT);
+        stack.popPose();
     }
 
     public static SimpleRenderTypeProcessor createFreshProcessor()

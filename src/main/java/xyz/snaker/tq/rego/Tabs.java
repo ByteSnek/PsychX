@@ -17,7 +17,7 @@ import net.minecraftforge.registries.RegistryObject;
  **/
 public class Tabs
 {
-    static final DeferredRegister<CreativeModeTab> REGISTRAR = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Tourniqueted.MODID);
+    public static final DeferredRegister<CreativeModeTab> REGISTRAR = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Tourniqueted.MODID);
 
     public static final RegistryObject<CreativeModeTab> ITEMS = register("torniqueted_items", () -> Items.ITEM_TAB_ICON.get().getDefaultInstance());
     public static final RegistryObject<CreativeModeTab> BLOCKS = register("torniqueted_blocks", () -> Items.BLOCK_TAB_ICON.get().getDefaultInstance());

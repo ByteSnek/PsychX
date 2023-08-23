@@ -3,6 +3,7 @@ package xyz.snaker.tq.level.item.icon;
 import java.util.function.Consumer;
 
 import xyz.snaker.snakerlib.data.DefaultItemProperties;
+import xyz.snaker.snakerlib.level.Icon;
 import xyz.snaker.tq.client.render.icon.ItemTabIconRenderer;
 
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -14,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by SnakerBone on 12/06/2023
  **/
-public class ItemTabIcon extends Item
+public class ItemTabIcon extends Item implements Icon
 {
     public ItemTabIcon(Properties properties)
     {

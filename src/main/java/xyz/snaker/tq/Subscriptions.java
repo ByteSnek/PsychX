@@ -1,7 +1,7 @@
 package xyz.snaker.tq;
 
+import xyz.snaker.snakerlib.brigader.PlaygroundMode;
 import xyz.snaker.snakerlib.math.PoseStackBuilder;
-import xyz.snaker.snakerlib.utility.tools.BlockStuff;
 import xyz.snaker.snakerlib.utility.tools.EntityStuff;
 import xyz.snaker.snakerlib.utility.tools.TimeStuff;
 import xyz.snaker.snakerlib.utility.tools.WorldStuff;
@@ -18,10 +18,15 @@ import xyz.snaker.tq.level.entity.boss.Utterfly;
 import xyz.snaker.tq.level.entity.creature.Flutterfly;
 import xyz.snaker.tq.level.entity.creature.Frolicker;
 import xyz.snaker.tq.level.entity.mob.*;
-import xyz.snaker.tq.rego.*;
+import xyz.snaker.tq.rego.BlockEntities;
+import xyz.snaker.tq.rego.Effects;
+import xyz.snaker.tq.rego.Entities;
+import xyz.snaker.tq.rego.Keys;
 
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -35,17 +40,20 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.registries.RegistryObject;
+import net.minecraftforge.server.command.ConfigCommand;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.brigadier.CommandDispatcher;
 
 /**
  * Created by SnakerBone on 2/01/2023
@@ -88,13 +96,6 @@ public class Subscriptions
         @Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
         public static class Common
         {
-            @SubscribeEvent
-            public static void commonSetup(FMLCommonSetupEvent event)
-            {
-                BlockStuff.addPotPlant(Blocks.PINKTAILS.get(), Blocks.POTTED_CATNIP);
-                BlockStuff.addPotPlant(Blocks.SPLITLEAF.get(), Blocks.POTTED_SPLITLEAF);
-            }
-
             @SubscribeEvent
             public static void addEntityAttributes(EntityAttributeCreationEvent event)
             {
@@ -198,7 +199,7 @@ public class Subscriptions
         public static class ForgeCommon
         {
             @SubscribeEvent
-            public static void playerTickEvent(TickEvent.PlayerTickEvent event)
+            public static void playerTick(TickEvent.PlayerTickEvent event)
             {
                 Player player = event.player;
                 Level level = player.level();
@@ -207,6 +208,24 @@ public class Subscriptions
                     if (TimeStuff.secOffs(tickCount, 1)) {
                         EntityStuff.addEffectDirect(player, Effects.SYNCOPE.get());
                     }
+                }
+            }
+
+            @SubscribeEvent
+            public static void registerCommands(RegisterCommandsEvent event)
+            {
+                CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
+                PlaygroundMode.register(dispatcher);
+                ConfigCommand.register(dispatcher);
+            }
+
+            @SubscribeEvent
+            public static void clone(PlayerEvent.Clone event)
+            {
+                CompoundTag fresh = event.getEntity().getPersistentData();
+                CompoundTag original = event.getOriginal().getPersistentData();
+                if (event.isWasDeath()) {
+                    fresh.putBoolean("PlaygroundMode", original.getBoolean("PlaygroundMode"));
                 }
             }
         }

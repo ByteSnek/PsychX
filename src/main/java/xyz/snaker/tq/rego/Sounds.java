@@ -13,7 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
  **/
 public class Sounds
 {
-    static final DeferredRegister<SoundEvent> REGISTRAR = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Tourniqueted.MODID);
+    public static final DeferredRegister<SoundEvent> REGISTRAR = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Tourniqueted.MODID);
 
     public static final RegistryObject<SoundEvent> CONFUSE = register("confuse");
     public static final RegistryObject<SoundEvent> EARTH = register("earth");
@@ -33,6 +33,17 @@ public class Sounds
     public static final RegistryObject<SoundEvent> SNIPE_HURT = register("snipe_hurt");
     public static final RegistryObject<SoundEvent> SNIPE_AMBIENT = register("snipe_ambient");
     public static final RegistryObject<SoundEvent> ENTITY_DEATH = register("entity_death");
+    public static final RegistryObject<SoundEvent> RANDOM_FX = register("random_fx");
+
+    public static final RegistryObject<SoundEvent> O = register("o");
+    public static final RegistryObject<SoundEvent> XXED = register("xxed");
+    public static final RegistryObject<SoundEvent> SUN_GAZER = register("sun_gazer");
+    public static final RegistryObject<SoundEvent> RELATIVE_RESOLUTER = register("relative_resoluter");
+    public static final RegistryObject<SoundEvent> REGENERATOR = register("regenerator");
+    public static final RegistryObject<SoundEvent> MARBLE_PARTICLE = register("marble_particle");
+    public static final RegistryObject<SoundEvent> LIMBO = register("limbo");
+    public static final RegistryObject<SoundEvent> FLY_WIRE = register("fly_wire");
+    public static final RegistryObject<SoundEvent> FLORA = register("flora");
 
     static RegistryObject<SoundEvent> register(String name)
     {

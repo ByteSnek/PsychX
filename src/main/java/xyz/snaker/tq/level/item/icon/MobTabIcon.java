@@ -3,6 +3,7 @@ package xyz.snaker.tq.level.item.icon;
 import java.util.function.Consumer;
 
 import xyz.snaker.snakerlib.data.DefaultItemProperties;
+import xyz.snaker.snakerlib.level.Icon;
 import xyz.snaker.tq.client.render.icon.MobTabIconRenderer;
 
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -14,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by SnakerBone on 27/05/2023
  **/
-public class MobTabIcon extends Item
+public class MobTabIcon extends Item implements Icon
 {
     public MobTabIcon(Properties properties)
     {

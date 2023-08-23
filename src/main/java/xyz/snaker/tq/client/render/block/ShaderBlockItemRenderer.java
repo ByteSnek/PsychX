@@ -5,7 +5,9 @@ import java.util.Map;
 
 import xyz.snaker.snakerlib.client.render.PreppedRenderer;
 import xyz.snaker.snakerlib.math.BasicCube;
+import xyz.snaker.snakerlib.utility.tools.RenderStuff;
 import xyz.snaker.tq.client.render.type.ItemLikeRenderType;
+import xyz.snaker.tq.rego.Blocks;
 import xyz.snaker.tq.rego.Items;
 
 import net.minecraft.Util;
@@ -18,6 +20,7 @@ import net.minecraft.world.item.ItemStack;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
@@ -54,5 +57,7 @@ public class ShaderBlockItemRenderer extends PreppedRenderer
             stack.translate(0, 0.5, 0);
         }
         BasicCube.create(consumer, stack);
+        Lighting.setupFor3DItems();
+        RenderStuff.renderOverlayTexture(Blocks.COMASTONE_OVERLAY.get(), stack, source, packedLight, packedOverlay);
     }
 }

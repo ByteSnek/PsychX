@@ -5,8 +5,10 @@ import java.util.function.Predicate;
 
 import xyz.snaker.snakerlib.SnakerLib;
 import xyz.snaker.snakerlib.concurrent.AsyncHashMap;
+import xyz.snaker.snakerlib.utility.tools.AnnotationStuff;
 import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.level.entity.EntityDropHandler;
+import xyz.snaker.tq.utility.IgnoreCreativeTab;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
@@ -63,17 +65,19 @@ public class Rego
         }
     }
 
-    static <T extends ItemLike> void safeAccept(BuildCreativeModeTabContentsEvent event, RegistryObject<T> item)
+    static <T extends ItemLike> void safeAccept(BuildCreativeModeTabContentsEvent event, RegistryObject<T> obj)
     {
         Map<Boolean, ResourceLocation> map = new AsyncHashMap<>();
-        ItemStack stack = item.get().asItem().getDefaultInstance();
-        boolean valid = stack.getCount() == 1;
-        map.put(valid, item.getId());
-        if (valid) {
-            event.accept(item);
-        } else {
-            String itemName = map.get(false).toString();
-            SnakerLib.LOGGER.warnf("ItemStack '%s' is empty or invalid", itemName);
+        if (AnnotationStuff.isNotPresent(obj, IgnoreCreativeTab.class)) {
+            ItemStack stack = obj.get().asItem().getDefaultInstance();
+            boolean valid = stack.getCount() == 1;
+            map.put(valid, obj.getId());
+            if (valid) {
+                event.accept(obj);
+            } else {
+                String itemName = map.get(false).toString();
+                SnakerLib.LOGGER.warnf("ItemStack '%s' is empty or invalid", itemName);
+            }
         }
     }
 

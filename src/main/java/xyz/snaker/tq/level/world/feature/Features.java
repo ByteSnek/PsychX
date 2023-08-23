@@ -1,7 +1,6 @@
 package xyz.snaker.tq.level.world.feature;
 
 import xyz.snaker.tq.rego.Blocks;
-import xyz.snaker.tq.rego.Keys;
 import xyz.snaker.tq.utility.TqWorldGen;
 
 import net.minecraft.data.worldgen.BootstapContext;
@@ -32,16 +31,16 @@ public class Features
         TqWorldGen.registerConfiguredFeature(context, ConfigKey.SPLITLEAF, Feature.RANDOM_PATCH, TqWorldGen.grass(Blocks.SPLITLEAF, 4));
         TqWorldGen.registerConfiguredFeature(context, ConfigKey.SNAKEROOT, Feature.RANDOM_PATCH, TqWorldGen.grass(Blocks.SNAKEROOT));
         TqWorldGen.registerConfiguredFeature(context, ConfigKey.TALL_SNAKEROOT, Feature.RANDOM_PATCH, TqWorldGen.grass(Blocks.TALL_SNAKEROOT));
-        TqWorldGen.registerConfiguredFeature(context, ConfigKey.GEOMETRIC, Feature.TREE, TqWorldGen.SIMPLE_TREE.apply(Blocks.GEOMETRIC_LOG.get(), Blocks.GEOMETRIC.get(), Blocks.COMA_STONE.get()));
+        TqWorldGen.registerConfiguredFeature(context, ConfigKey.GEOMETRIC, Feature.TREE, TqWorldGen.SIMPLE_TREE.apply(Blocks.GEOMETRIC_LOG.get(), Blocks.GEOMETRIC.get(), Blocks.COMASTONE.get()));
     }
 
     public static void modifiers(BootstapContext<BiomeModifier> context)
     {
-        TqWorldGen.registerBiomeModifier(context, BiomeModifierKey.CATNIP, Keys.COMATOSE_VEGETAL, PlacementKey.CATNIP, GenerationStep.Decoration.VEGETAL_DECORATION);
-        TqWorldGen.registerBiomeModifier(context, BiomeModifierKey.SPLITLEAF, Keys.COMATOSE_VEGETAL, PlacementKey.SPLITLEAF, GenerationStep.Decoration.VEGETAL_DECORATION);
-        TqWorldGen.registerBiomeModifier(context, BiomeModifierKey.SNAKEROOT, Keys.COMATOSE_VEGETAL, PlacementKey.SNAKEROOT, GenerationStep.Decoration.VEGETAL_DECORATION);
-        TqWorldGen.registerBiomeModifier(context, BiomeModifierKey.TALL_SNAKEROOT, Keys.COMATOSE_VEGETAL, PlacementKey.TALL_SNAKEROOT, GenerationStep.Decoration.VEGETAL_DECORATION);
-        TqWorldGen.registerBiomeModifier(context, BiomeModifierKey.GEOMETRIC, Keys.COMATOSE_VEGETAL, PlacementKey.GEOMETRIC, GenerationStep.Decoration.VEGETAL_DECORATION);
+        TqWorldGen.registerBiomeModifier(context, BiomeModifierKey.CATNIP, PlacementKey.CATNIP, GenerationStep.Decoration.VEGETAL_DECORATION);
+        TqWorldGen.registerBiomeModifier(context, BiomeModifierKey.SPLITLEAF, PlacementKey.SPLITLEAF, GenerationStep.Decoration.VEGETAL_DECORATION);
+        TqWorldGen.registerBiomeModifier(context, BiomeModifierKey.SNAKEROOT, PlacementKey.SNAKEROOT, GenerationStep.Decoration.VEGETAL_DECORATION);
+        TqWorldGen.registerBiomeModifier(context, BiomeModifierKey.TALL_SNAKEROOT, PlacementKey.TALL_SNAKEROOT, GenerationStep.Decoration.VEGETAL_DECORATION);
+        TqWorldGen.registerBiomeModifier(context, BiomeModifierKey.GEOMETRIC, PlacementKey.GEOMETRIC, GenerationStep.Decoration.VEGETAL_DECORATION);
     }
 
     public enum PlacementKey

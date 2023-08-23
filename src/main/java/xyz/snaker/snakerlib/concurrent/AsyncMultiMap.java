@@ -23,35 +23,47 @@ public class AsyncMultiMap<K, V> extends MultiMap<K, V>
 
     public AsyncMultiMap()
     {
-        baseMap = new MultiMap<>();
+        synchronized (this) {
+            baseMap = new MultiMap<>();
+        }
     }
 
     @Override
     public List<V> put(K key, List<V> value)
     {
-        return baseMap.put(key, value);
+        synchronized (baseMap) {
+            return baseMap.put(key, value);
+        }
     }
 
     @Override
     public List<V> get(Object key)
     {
-        return baseMap.get(key);
+        synchronized (baseMap) {
+            return baseMap.get(key);
+        }
     }
 
     @Override
     public boolean map(K key, V value)
     {
-        return baseMap.map(key, value);
+        synchronized (baseMap) {
+            return baseMap.map(key, value);
+        }
     }
 
     @Override
     public Set<Map.Entry<K, List<V>>> entrySet()
     {
-        Set<Map.Entry<K, List<V>>> entrySet = baseMap.entrySet();
-        MultiMap<K, V> asyncMap = new MultiMap<>();
-        for (var entry : entrySet) {
-            asyncMap.put(entry.getKey(), entry.getValue());
+        synchronized (baseMap) {
+            Set<Map.Entry<K, List<V>>> entrySet = baseMap.entrySet();
+            synchronized (entrySet) {
+                MultiMap<K, V> asyncMap = new MultiMap<>();
+                for (var entry : entrySet) {
+                    asyncMap.put(entry.getKey(), entry.getValue());
+                }
+                return asyncMap.entrySet();
+            }
         }
-        return asyncMap.entrySet();
     }
 }

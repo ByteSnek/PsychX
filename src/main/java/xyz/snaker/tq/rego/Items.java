@@ -25,7 +25,7 @@ import net.minecraftforge.registries.RegistryObject;
  **/
 public class Items
 {
-    static final DeferredRegister<Item> REGISTRAR = DeferredRegister.create(ForgeRegistries.ITEMS, Tourniqueted.MODID);
+    public static final DeferredRegister<Item> REGISTRAR = DeferredRegister.create(ForgeRegistries.ITEMS, Tourniqueted.MODID);
 
     public static final RegistryObject<Item> RED_COSMO_SPINE = register("red_cosmo_spine", CosmoSpine::new);
     public static final RegistryObject<Item> GREEN_COSMO_SPINE = register("green_cosmo_spine", CosmoSpine::new);

@@ -2,12 +2,13 @@ package xyz.snaker.tq.utility.tools;
 
 import java.util.List;
 
+import xyz.snaker.tq.rego.Keys;
+
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
-import net.minecraftforge.registries.RegistryObject;
 
 /**
  * Created by SnakerBone on 21/08/2023
@@ -16,44 +17,39 @@ public interface BlockTagsProviderTools<T extends BlockTagsProvider>
 {
     T getInstance();
 
-    default void custom(TagKey<Block> key, List<RegistryObject<Block>> values)
+    default void custom(TagKey<Block> key, List<Block> values)
     {
         for (var value : values) {
-            getInstance().tag(key).add(value.get());
+            getInstance().tag(key).add(value);
         }
     }
 
-    default void planks(List<RegistryObject<Block>> blocks)
+    default void planks(List<Block> blocks)
     {
         custom(BlockTags.PLANKS, blocks);
     }
 
-    default void logs(List<RegistryObject<Block>> blocks)
+    default void logs(List<Block> blocks)
     {
         custom(BlockTags.LOGS, blocks);
     }
 
-    default void stone(List<RegistryObject<Block>> blocks)
+    default void groundRich(List<Block> blocks)
     {
-        custom(Tags.Blocks.STONE, blocks);
+        custom(Keys.GROUNDRICH, blocks);
     }
 
-    default void nylium(List<RegistryObject<Block>> blocks)
-    {
-        custom(BlockTags.NYLIUM, blocks);
-    }
-
-    default void mineableWithAxe(List<RegistryObject<Block>> blocks)
+    default void mineableWithAxe(List<Block> blocks)
     {
         custom(BlockTags.MINEABLE_WITH_AXE, blocks);
     }
 
-    default void mineableWithPickaxe(List<RegistryObject<Block>> blocks)
+    default void mineableWithPickaxe(List<Block> blocks)
     {
         custom(BlockTags.MINEABLE_WITH_PICKAXE, blocks);
     }
 
-    default void toolRequired(ToolTier tier, List<RegistryObject<Block>> blocks)
+    default void toolRequired(ToolTier tier, List<Block> blocks)
     {
         TagKey<Block> key;
         switch (tier) {

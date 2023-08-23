@@ -1,16 +1,15 @@
 package xyz.snaker.tq.client.render.block;
 
 import xyz.snaker.snakerlib.math.BasicCube;
+import xyz.snaker.snakerlib.utility.tools.RenderStuff;
 import xyz.snaker.tq.client.render.type.ItemLikeRenderType;
 import xyz.snaker.tq.rego.Blocks;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.client.model.data.ModelData;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -34,11 +33,7 @@ public class ShaderBlockRenderer<T extends BlockEntity> implements BlockEntityRe
     {
         VertexConsumer consumer = source.getBuffer(type);
         BasicCube.create(consumer, stack);
-        stack.pushPose();
-        stack.scale(1.01F, 1.01F, 1.01F);
-        stack.translate(-0.005, -0.005, -0.005);
-        Minecraft.getInstance().getBlockRenderer().renderSingleBlock(Blocks.COMA_STONE.get().defaultBlockState(), stack, source, packedLight, packedOverlay, ModelData.EMPTY, RenderType.CUTOUT);
-        stack.popPose();
+        RenderStuff.renderOverlayTexture(Blocks.COMASTONE_OVERLAY.get(), stack, source, packedLight, packedOverlay);
     }
 
     @Override

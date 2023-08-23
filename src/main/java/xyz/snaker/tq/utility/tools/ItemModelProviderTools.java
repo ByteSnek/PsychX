@@ -1,10 +1,11 @@
 package xyz.snaker.tq.utility.tools;
 
+import xyz.snaker.snakerlib.utility.tools.ResourceStuff;
+
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.registries.RegistryObject;
 
 /**
  * Created by SnakerBone on 21/08/2023
@@ -13,41 +14,41 @@ public interface ItemModelProviderTools<T extends ItemModelProvider>
 {
     T getInstance();
 
-    default void egg(RegistryObject<Item> item)
+    default void spawnEgg(Item item)
     {
-        getInstance().withExistingParent(item.getId().getPath(),
+        getInstance().withExistingParent(ResourceStuff.getPath(item),
                 getInstance().modLoc("egg"));
     }
 
-    default void perspective(RegistryObject<Item> item)
+    default void perspective(Item item)
     {
-        getInstance().withExistingParent(item.getId().getPath(),
+        getInstance().withExistingParent(ResourceStuff.getPath(item),
                 getInstance().modLoc("perspective"));
     }
 
-    default void cosmoSpine(RegistryObject<Item> item)
+    default void cosmoSpine(Item item)
     {
-        getInstance().withExistingParent(item.getId().getPath(),
+        getInstance().withExistingParent(ResourceStuff.getPath(item),
                 getInstance().modLoc("cosmo_spine"));
     }
 
-    default void blockItem(RegistryObject<Block> block)
+    default void blockItem(Block block)
     {
-        getInstance().withExistingParent(block.getId().getPath(),
-                getInstance().modLoc("block/" + block.getId().getPath()));
+        getInstance().withExistingParent(ResourceStuff.getPath(block),
+                getInstance().modLoc("block/" + ResourceStuff.getPath(block)));
     }
 
-    default <I extends ItemLike> void item(RegistryObject<I> item)
+    default <I extends ItemLike> void item(I item)
     {
-        getInstance().withExistingParent(item.getId().getPath(),
+        getInstance().withExistingParent(ResourceStuff.getPath((Item) item),
                 getInstance().mcLoc("item/generated")).texture("layer0",
-                getInstance().modLoc("item/" + item.getId().getPath()));
+                getInstance().modLoc("item/" + ResourceStuff.getPath((Item) item)));
     }
 
-    default <I extends ItemLike> void blockCustom(RegistryObject<I> block)
+    default <B extends ItemLike> void blockCustom(B block)
     {
-        getInstance().withExistingParent(block.getId().getPath(),
+        getInstance().withExistingParent(ResourceStuff.getPath((Block) block),
                 getInstance().mcLoc("item/generated")).texture("layer0",
-                getInstance().modLoc("block/" + block.getId().getPath()));
+                getInstance().modLoc("block/" + ResourceStuff.getPath((Block) block)));
     }
 }

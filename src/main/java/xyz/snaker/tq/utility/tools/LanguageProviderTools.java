@@ -1,5 +1,6 @@
 package xyz.snaker.tq.utility.tools;
 
+import xyz.snaker.snakerlib.utility.tools.ResourceStuff;
 import xyz.snaker.snakerlib.utility.tools.StringStuff;
 import xyz.snaker.tq.Tourniqueted;
 
@@ -25,9 +26,9 @@ public interface LanguageProviderTools<T extends LanguageProvider>
         getInstance().add("itemGroup." + name, StringStuff.i18nt(name));
     }
 
-    default <I extends EntityType<?>> void entity(RegistryObject<I> entity)
+    default <I extends EntityType<?>> void entity(I entity)
     {
-        String name = entity.getId().getPath();
+        String name = ResourceStuff.getPath(entity);
         if (name.equals("cosmo")) {
             getInstance().add("entity." + Tourniqueted.MODID + "." + name, StringStuff.i18nt(name));
             getInstance().add("entity." + Tourniqueted.MODID + "." + "alpha_" + name, StringStuff.i18nt("alpha_" + name));
@@ -36,27 +37,27 @@ public interface LanguageProviderTools<T extends LanguageProvider>
         getInstance().add("entity." + Tourniqueted.MODID + "." + name, StringStuff.i18nt(name));
     }
 
-    default <I extends Item> void item(RegistryObject<I> item)
+    default <I extends Item> void item(I item)
     {
-        String name = item.getId().getPath();
+        String name = ResourceStuff.getPath(item);
         getInstance().add("item." + Tourniqueted.MODID + "." + name, StringStuff.i18nt(name));
     }
 
-    default <I extends Block> void block(RegistryObject<I> block)
+    default <I extends Block> void block(I block)
     {
-        String name = block.getId().getPath();
+        String name = ResourceStuff.getPath(block);
         getInstance().add("block." + Tourniqueted.MODID + "." + name, StringStuff.i18nt(name));
     }
 
-    default void sound(RegistryObject<SoundEvent> sound)
+    default void sound(SoundEvent sound)
     {
-        String name = sound.getId().getPath();
+        String name = ResourceStuff.getPath(sound);
         getInstance().add("sounds." + Tourniqueted.MODID + "." + name, StringStuff.i18nt(name));
     }
 
-    default <I extends MobEffect> void effect(RegistryObject<I> effect)
+    default <I extends MobEffect> void effect(I effect)
     {
-        String name = effect.getId().getPath();
+        String name = ResourceStuff.getPath(effect);
         getInstance().add("effect." + Tourniqueted.MODID + "." + name, StringStuff.i18nt(name));
     }
 }
