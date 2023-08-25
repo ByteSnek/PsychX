@@ -1,4 +1,4 @@
-package xyz.snaker.tq.rego;
+package xyz.snaker.tq.level.world.biome.manager;
 
 import xyz.snaker.snakerlib.utility.ResourcePath;
 import xyz.snaker.tq.level.world.biome.*;
@@ -11,7 +11,7 @@ import net.minecraft.world.level.biome.Biome;
 /**
  * Created by SnakerBone on 23/08/2023
  **/
-public class Biomes
+public class BiomeManager
 {
     public static final ResourceKey<Biome> DELUSION = ResourceKey.create(Registries.BIOME, new ResourcePath("delusion"));
     public static final ResourceKey<Biome> ILLUSION = ResourceKey.create(Registries.BIOME, new ResourcePath("illusion"));

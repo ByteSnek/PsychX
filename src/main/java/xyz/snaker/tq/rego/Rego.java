@@ -92,5 +92,7 @@ public class Rego
         Sounds.REGISTRAR.register(bus);
         Entities.REGISTRAR.register(bus);
         Effects.REGISTRAR.register(bus);
+        TrunkPlacers.REGISTRAR.register(bus);
+        Features.REGISTRAR.register(bus);
     }
 }

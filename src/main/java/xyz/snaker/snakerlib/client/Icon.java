@@ -1,4 +1,4 @@
-package xyz.snaker.snakerlib.level;
+package xyz.snaker.snakerlib.client;
 
 /**
  * Created by SnakerBone on 23/08/2023

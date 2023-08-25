@@ -2,8 +2,8 @@ package xyz.snaker.tq.level.item.icon;
 
 import java.util.function.Consumer;
 
+import xyz.snaker.snakerlib.client.Icon;
 import xyz.snaker.snakerlib.data.DefaultItemProperties;
-import xyz.snaker.snakerlib.level.Icon;
 import xyz.snaker.tq.client.render.icon.ItemTabIconRenderer;
 
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;

@@ -2,14 +2,20 @@ package xyz.snaker.snakerlib.utility.tools;
 
 import xyz.snaker.snakerlib.math.Maths;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -61,5 +67,28 @@ public class WorldStuff
     public static <T extends Entity> AABB getWorldBoundingBox(T entity)
     {
         return new AABB(entity.blockPosition()).inflate(Maths.LEVEL_AABB_RADIUS);
+    }
+
+    public static Direction getRandomHorizontalDirection(RandomSource random)
+    {
+        Direction[] directions = Direction.stream().filter(dir -> !(dir == Direction.UP || dir == Direction.DOWN)).toArray(Direction[]::new);
+        return directions[random.nextInt(directions.length)];
+    }
+
+    public static Direction getRandomVerticalDirection(RandomSource random)
+    {
+        Direction[] directions = Direction.stream().filter(dir -> !(dir == Direction.NORTH || dir == Direction.SOUTH || dir == Direction.EAST || dir == Direction.WEST)).toArray(Direction[]::new);
+        return directions[random.nextInt(directions.length)];
+    }
+
+    public static <L extends LevelReader> boolean isFreeAroundPos(L level, BlockPos pos, boolean vertical)
+    {
+        boolean checkVertical = !vertical || (state(level, pos.above()).is(Blocks.AIR) && state(level, pos.below()).is(Blocks.AIR));
+        return state(level, pos.north()).is(Blocks.AIR) && state(level, pos.south()).is(Blocks.AIR) && state(level, pos.east()).is(Blocks.AIR) && state(level, pos.west()).is(Blocks.AIR) && checkVertical;
+    }
+
+    private static <L extends LevelReader> BlockState state(L level, BlockPos pos)
+    {
+        return level.getBlockState(pos);
     }
 }

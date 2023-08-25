@@ -8,11 +8,12 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import javax.annotation.Nullable;
 
-import xyz.snaker.snakerlib.level.Icon;
+import xyz.snaker.snakerlib.client.Icon;
 import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.level.block.ShaderBlock;
 import xyz.snaker.tq.level.item.CosmoSpine;
-import xyz.snaker.tq.level.world.feature.Features;
+import xyz.snaker.tq.level.world.biome.manager.BiomeManager;
+import xyz.snaker.tq.level.world.feature.manager.FeatureManager;
 import xyz.snaker.tq.rego.*;
 import xyz.snaker.tq.utility.tools.*;
 
@@ -58,7 +59,7 @@ public class DataProviders
         @Override
         public void addTags(HolderLookup.@NotNull Provider provider)
         {
-            
+
         }
 
         @Override
@@ -102,10 +103,10 @@ public class DataProviders
     static class DatapackEntries extends DatapackBuiltinEntriesProvider
     {
         public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
-                .add(Registries.CONFIGURED_FEATURE, Features::configs)
-                .add(Registries.PLACED_FEATURE, Features::placements)
-                .add(ForgeRegistries.Keys.BIOME_MODIFIERS, Features::modifiers)
-                .add(Registries.BIOME, Biomes::biomes);
+                .add(Registries.CONFIGURED_FEATURE, FeatureManager::configs)
+                .add(Registries.PLACED_FEATURE, FeatureManager::placements)
+                .add(ForgeRegistries.Keys.BIOME_MODIFIERS, FeatureManager::modifiers)
+                .add(Registries.BIOME, BiomeManager::biomes);
 
         public DatapackEntries(PackOutput output, CompletableFuture<HolderLookup.Provider> registries)
         {

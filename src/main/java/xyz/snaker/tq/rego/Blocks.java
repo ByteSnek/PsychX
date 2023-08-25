@@ -11,7 +11,7 @@ import xyz.snaker.snakerlib.math.Maths;
 import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.level.block.OverlayBlock;
 import xyz.snaker.tq.level.block.ShaderBlock;
-import xyz.snaker.tq.level.world.feature.Features;
+import xyz.snaker.tq.level.world.feature.manager.FeatureManager;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -44,7 +44,7 @@ public class Blocks
 
     public static final RegistryObject<Block> COMASTONE = registerBlockWithItem("coma_stone", () -> new Block(DefaultBlockProperties.NORMAL.apply(MapColor.COLOR_BLACK)));
 
-    public static final RegistryObject<Block> GEOMETRIC_SAPLING = registerBlockWithItem("geometric_sapling", () -> new SaplingBlock(new SimpleTreeGrower(Features.ConfigKey.GEOMETRIC.key()), DefaultBlockProperties.GRASS.apply(MapColor.COLOR_PURPLE), Keys.GROUNDRICH, true));
+    public static final RegistryObject<Block> GEOMETRIC_SAPLING = registerBlockWithItem("geometric_sapling", () -> new SaplingBlock(new SimpleTreeGrower(FeatureManager.ConfigKey.GEOMETRIC.key()), DefaultBlockProperties.GRASS.apply(MapColor.COLOR_PURPLE), Keys.GROUNDRICH, true));
     public static final RegistryObject<Block> GEOMETRIC_LOG = registerBlockWithItem("geometric_log", () -> new RotatedPillarBlock(DefaultBlockProperties.WOOD.apply(MapColor.COLOR_PURPLE)));
     public static final RegistryObject<Block> GEOMETRIC_PLANKS = registerBlockWithItem("geometric_planks", () -> new Block(DefaultBlockProperties.WOOD.apply(MapColor.COLOR_PURPLE)));
 

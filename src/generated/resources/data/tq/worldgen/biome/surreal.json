@@ -8,9 +8,12 @@
   },
   "downfall": 0.0,
   "effects": {
-    "fog_color": -16777216,
-    "foliage_color": -16751002,
-    "grass_color": -16777165,
+    "ambient_sound": {
+      "sound_id": "tq:o"
+    },
+    "fog_color": 5834760,
+    "foliage_color": 6162697,
+    "grass_color": 6162697,
     "mood_sound": {
       "block_search_extent": 1,
       "offset": 0.0,
@@ -19,9 +22,15 @@
       },
       "tick_delay": 0
     },
+    "particle": {
+      "options": {
+        "type": "minecraft:flame"
+      },
+      "probability": 0.002
+    },
     "sky_color": -16777216,
-    "water_color": -16741991,
-    "water_fog_color": -16750951
+    "water_color": 3670787,
+    "water_fog_color": 2294274
   },
   "features": [
     [],
@@ -31,7 +40,7 @@
     ],
     [
       "minecraft:amethyst_geode",
-      "tq:geometric"
+      "tq:swirl_rubble"
     ],
     [
       "minecraft:monster_room",
@@ -57,9 +66,11 @@
     ],
     [
       "minecraft:glow_lichen",
-      "minecraft:trees_plains",
+      "tq:snakeroot",
+      "tq:tall_snakeroot",
       "tq:splitleaf",
-      "tq:catnip"
+      "tq:catnip",
+      "tq:pinktails"
     ],
     [
       "minecraft:freeze_top_layer"
@@ -74,13 +85,7 @@
     "misc": [],
     "monster": [
       {
-        "type": "tq:cosmo",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
-      },
-      {
-        "type": "tq:leet",
+        "type": "tq:flare",
         "maxCount": 1,
         "minCount": 1,
         "weight": 1
