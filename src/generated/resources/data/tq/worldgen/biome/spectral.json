@@ -11,7 +11,7 @@
     "ambient_sound": {
       "sound_id": "tq:sun_gazer"
     },
-    "fog_color": 2034502,
+    "fog_color": 5439549,
     "foliage_color": 3020380,
     "grass_color": 3020380,
     "mood_sound": {
@@ -24,9 +24,9 @@
     },
     "particle": {
       "options": {
-        "type": "minecraft:glow_squid_ink"
+        "type": "minecraft:instant_effect"
       },
-      "probability": 0.002
+      "probability": 0.001
     },
     "sky_color": -16777216,
     "water_color": 1970740,
@@ -39,7 +39,8 @@
       "minecraft:lake_lava_surface"
     ],
     [
-      "minecraft:amethyst_geode"
+      "minecraft:amethyst_geode",
+      "tq:swirl_rubble"
     ],
     [
       "minecraft:monster_room",

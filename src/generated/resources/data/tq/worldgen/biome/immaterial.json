@@ -24,9 +24,9 @@
     },
     "particle": {
       "options": {
-        "type": "minecraft:glow"
+        "type": "minecraft:electric_spark"
       },
-      "probability": 0.002
+      "probability": 0.001
     },
     "sky_color": -16777216,
     "water_color": -16741991,

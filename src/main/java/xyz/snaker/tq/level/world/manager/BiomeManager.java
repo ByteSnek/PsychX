@@ -1,4 +1,4 @@
-package xyz.snaker.tq.level.world.biome.manager;
+package xyz.snaker.tq.level.world.manager;
 
 import xyz.snaker.snakerlib.utility.ResourcePath;
 import xyz.snaker.tq.level.world.biome.*;

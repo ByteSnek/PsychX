@@ -3,6 +3,7 @@ package xyz.snaker.tq.level.world.biome;
 import xyz.snaker.tq.rego.Entities;
 import xyz.snaker.tq.rego.Sounds;
 import xyz.snaker.tq.utility.DefaultFeatures;
+import xyz.snaker.tq.utility.WorldGenStuff;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
@@ -19,12 +20,12 @@ public class Spectral
 {
     public static Biome create(BootstapContext<Biome> context)
     {
-        AmbientParticleSettings particles = new AmbientParticleSettings(ParticleTypes.GLOW_SQUID_INK, 0.002F);
-        AmbientMoodSettings mood = new AmbientMoodSettings(Holder.direct(Sounds.RANDOM_FX.get()), 0, 1, 0);
+        AmbientParticleSettings particles = new AmbientParticleSettings(ParticleTypes.INSTANT_EFFECT, WorldGenStuff.PARTICLE_SPAWN_CHANCE);
+        AmbientMoodSettings mood = new AmbientMoodSettings(WorldGenStuff.RANDOM_SOUND_FX, 0, 1, 0);
         MobSpawnSettings.Builder spawns = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder gen = new BiomeGenerationSettings.Builder(context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
         BiomeSpecialEffects.Builder effects = new BiomeSpecialEffects.Builder()
-                .fogColor(0x1f0b46)
+                .fogColor(0x53003d)
                 .waterColor(0x1e1234)
                 .waterFogColor(0x332748)
                 .skyColor(-16777216)
@@ -42,6 +43,7 @@ public class Spectral
         BiomeDefaultFeatures.addSurfaceFreezing(gen);
 
         DefaultFeatures.addDefaultPlants(gen);
+        DefaultFeatures.addSwirlRubble(gen);
 
         spawns.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(Entities.EERIE_CRETIN.get(), 1, 1, 1));
         spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(Entities.FROLICKER.get(), 1, 1, 1));

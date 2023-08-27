@@ -1,7 +1,6 @@
 package xyz.snaker.tq.client.model.entity;
 
 import xyz.snaker.snakerlib.math.Maths;
-import xyz.snaker.snakerlib.utility.tools.BlockStuff;
 import xyz.snaker.snakerlib.utility.ResourcePath;
 import xyz.snaker.snakerlib.utility.tools.EntityStuff;
 import xyz.snaker.tq.level.entity.boss.AntiCosmo;

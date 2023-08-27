@@ -1,6 +1,6 @@
 package xyz.snaker.tq.utility;
 
-import xyz.snaker.tq.level.world.feature.manager.FeatureManager;
+import xyz.snaker.tq.level.world.feature.FeatureKey;
 
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
@@ -14,20 +14,30 @@ public class DefaultFeatures
     public static void addDefaultTrees(BiomeGenerationSettings.Builder builder)
     {
         builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.TREES_PLAINS);
-        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureManager.PlacementKey.GEOMETRIC.key());
+        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureKey.GEOMETRIC.getPlacedKey());
     }
 
     public static void addDefaultPlants(BiomeGenerationSettings.Builder builder)
     {
-        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureManager.PlacementKey.SNAKEROOT.key());
-        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureManager.PlacementKey.TALL_SNAKEROOT.key());
-        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureManager.PlacementKey.SPLITLEAF.key());
-        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureManager.PlacementKey.CATNIP.key());
-        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureManager.PlacementKey.PINKTAILS.key());
+        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureKey.SNAKEROOT.getPlacedKey());
+        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureKey.TALL_SNAKEROOT.getPlacedKey());
+        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureKey.SPLITLEAF.getPlacedKey());
+        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureKey.CATNIP.getPlacedKey());
+        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureKey.PINKTAILS.getPlacedKey());
     }
 
     public static void addSwirlRubble(BiomeGenerationSettings.Builder builder)
     {
-        builder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, FeatureManager.PlacementKey.SWIRL_RUBBLE.key());
+        builder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, FeatureKey.SWIRL_RUBBLE.getPlacedKey());
+    }
+
+    public static void addFlareRubble(BiomeGenerationSettings.Builder builder)
+    {
+        builder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, FeatureKey.FLARE_RUBBLE.getPlacedKey());
+    }
+
+    public static void addWaterColourRubble(BiomeGenerationSettings.Builder builder)
+    {
+        builder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, FeatureKey.WATERCOLOUR_RUBBLE.getPlacedKey());
     }
 }

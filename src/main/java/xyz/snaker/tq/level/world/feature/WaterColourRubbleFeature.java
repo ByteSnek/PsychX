@@ -12,13 +12,13 @@ import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfi
 import com.mojang.serialization.Codec;
 
 /**
- * Created by SnakerBone on 25/08/2023
+ * Created by SnakerBone on 27/08/2023
  **/
-public class SwirlRubbleFeature extends RubbleFeature
+public class WaterColourRubbleFeature extends RubbleFeature
 {
-    public SwirlRubbleFeature(Codec<BlockStateConfiguration> codec)
+    public WaterColourRubbleFeature(Codec<BlockStateConfiguration> codec)
     {
-        super(codec, Frequency.of(7), Comatose.BLOCKS, 3, 5);
+        super(codec, Frequency.of(5), Comatose.BLOCKS, 2, 4);
     }
 
     @Override

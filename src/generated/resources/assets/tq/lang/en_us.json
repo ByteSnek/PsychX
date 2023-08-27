@@ -101,5 +101,7 @@
   "sounds.tq.utterfly_ambient": "Utterfly Ambient",
   "sounds.tq.utterfly_shoot": "Utterfly Shoot",
   "sounds.tq.xxed": "Xxed",
+  "tooltip.tq.debug_tool_mode.biome_tp": "Biome Teleport",
+  "tooltip.tq.debug_tool_mode.none": "None",
   "tooltip.tq.possible_issue": "If you're a player and you're seeing this then something with the mod may have gone wrong. Please go report this to github.com/SnakerBone/Tourniqueted/issues"
 }

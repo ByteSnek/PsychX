@@ -2,6 +2,7 @@ package xyz.snaker.snakerlib.utility.tools;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.Objects;
 
 import xyz.snaker.snakerlib.SnakerLib;
 import xyz.snaker.snakerlib.concurrent.UncaughtExceptionThread;
@@ -70,6 +71,11 @@ public class UnsafeStuff
         } catch (InstantiationException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static <V> V getOrUnsafeAssign(V obj)
+    {
+        return Objects.requireNonNullElse(obj, versatileObject());
     }
 
     /**

@@ -1,0 +1,12 @@
+{
+  "type": "forge:add_features",
+  "biomes": [
+    "tq:delusion",
+    "tq:illusion",
+    "tq:immaterial",
+    "tq:spectral",
+    "tq:surreal"
+  ],
+  "features": "tq:flare_rubble",
+  "step": "local_modifications"
+}

@@ -10,14 +10,14 @@ import xyz.snaker.tq.client.render.type.EntityRenderType;
 import xyz.snaker.tq.level.entity.EntityVariants;
 import xyz.snaker.tq.level.entity.mob.Cosmo;
 
-import org.jetbrains.annotations.NotNull;
-
 import net.minecraft.Util;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
+
+import org.jetbrains.annotations.NotNull;
 
 import com.google.common.collect.Maps;
 import com.mojang.blaze3d.vertex.PoseStack;

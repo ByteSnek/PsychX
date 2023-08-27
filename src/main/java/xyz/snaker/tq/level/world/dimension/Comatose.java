@@ -1,10 +1,14 @@
 package xyz.snaker.tq.level.world.dimension;
 
+import java.util.List;
 import java.util.function.Function;
+
+import xyz.snaker.tq.rego.Blocks;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.portal.PortalInfo;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.ITeleporter;
@@ -14,6 +18,8 @@ import net.minecraftforge.common.util.ITeleporter;
  **/
 public class Comatose
 {
+    public static final List<Block> BLOCKS = List.of(Blocks.COMASTONE.get());
+
     public static Teleporter getTeleporter()
     {
         return Teleporter.INSTANCE;

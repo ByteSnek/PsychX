@@ -27,17 +27,23 @@ import static net.minecraft.world.level.block.Blocks.AIR;
  **/
 public abstract class RubbleFeature extends BlockBlobFeature
 {
+    private WorldGenLevel level;
     private final Frequency frequency;
     private final List<Block> blocksToPlaceOn;
+    private boolean isLevelSet;
+    private final int minHeightRange;
+    private final int maxHeightRange;
 
-    public RubbleFeature(Codec<BlockStateConfiguration> codec, Frequency frequency, List<Block> blocksToPlaceOn)
+    public RubbleFeature(Codec<BlockStateConfiguration> codec, Frequency frequency, List<Block> blocksToPlaceOn, int minHeightRange, int maxHeightRange)
     {
         super(codec);
         this.frequency = frequency;
         this.blocksToPlaceOn = blocksToPlaceOn;
+        this.minHeightRange = minHeightRange;
+        this.maxHeightRange = maxHeightRange;
     }
 
-    public final boolean isReplaceable(WorldGenLevel level, BlockPos pos)
+    public final boolean isReplaceableAt(BlockPos pos)
     {
         return level.getBlockState(pos).is(AIR) ||
                 level.getBlockState(pos).is(BlockTags.FLOWERS) ||
@@ -47,30 +53,50 @@ public abstract class RubbleFeature extends BlockBlobFeature
                 level.getBlockState(pos).canBeReplaced();
     }
 
-    public abstract void placeStud(WorldGenLevel level, BlockPos pos, BlockState state);
+    public abstract void placeStud(BlockPos pos, BlockState state);
 
-    public abstract void placeBase(WorldGenLevel level, RandomSource random, BlockPos pos, BlockState state);
+    public abstract void placeBase(RandomSource random, BlockPos pos, BlockState state);
 
     public Frequency getFrequency()
     {
         return frequency;
     }
 
+    public void setLevel(WorldGenLevel level)
+    {
+        this.level = level;
+        this.isLevelSet = level != null;
+    }
+
+    public WorldGenLevel getLevel()
+    {
+        if (isLevelSet) {
+            return level;
+        } else {
+            throw new RuntimeException("Level Not Set");
+        }
+    }
+
+    public boolean placeBlock(BlockPos pos, BlockState state)
+    {
+        return level.setBlock(pos, state, Block.UPDATE_ALL);
+    }
+
     @Override
     public boolean place(@NotNull FeaturePlaceContext<BlockStateConfiguration> context)
     {
+        setLevel(context.level());
         BlockPos origin = context.origin();
-        WorldGenLevel level = context.level();
         RandomSource random = context.random();
         BlockStateConfiguration config = context.config();
         if (random.nextInt(frequency.getValue()) == 0) {
             for (Block block : blocksToPlaceOn) {
                 if (level.getBlockState(origin.below()).is(block)) {
                     if (WorldStuff.isFreeAroundPos(level, origin, false)) {
-                        for (int i = 0; i < random.nextInt(3, 5); i++) {
+                        for (int i = 0; i < random.nextInt(minHeightRange, maxHeightRange); i++) {
                             level.setBlock(origin.above(i), config.state, Block.UPDATE_ALL);
                             if (i == 0) {
-                                placeBase(level, random, origin, config.state);
+                                placeBase(random, origin, config.state);
                             }
                         }
                     }

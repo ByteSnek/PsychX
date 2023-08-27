@@ -4,11 +4,11 @@ import xyz.snaker.snakerlib.utility.ResourcePath;
 import xyz.snaker.tq.client.model.entity.FlutterflyModel;
 import xyz.snaker.tq.level.entity.creature.Flutterfly;
 
-import org.jetbrains.annotations.NotNull;
-
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by SnakerBone on 26/05/2023

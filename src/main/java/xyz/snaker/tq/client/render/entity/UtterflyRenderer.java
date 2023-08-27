@@ -9,12 +9,12 @@ import xyz.snaker.tq.client.layer.UtterflyLayer;
 import xyz.snaker.tq.client.model.entity.UtterflyModel;
 import xyz.snaker.tq.level.entity.boss.Utterfly;
 
-import org.jetbrains.annotations.NotNull;
-
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
+
+import org.jetbrains.annotations.NotNull;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 

@@ -5,11 +5,11 @@ import xyz.snaker.tq.client.model.entity.FlareModel;
 import xyz.snaker.tq.client.render.type.EntityRenderType;
 import xyz.snaker.tq.level.entity.mob.Flare;
 
-import org.jetbrains.annotations.NotNull;
-
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
+
+import org.jetbrains.annotations.NotNull;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 

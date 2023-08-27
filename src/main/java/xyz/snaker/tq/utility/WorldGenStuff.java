@@ -4,9 +4,10 @@ import java.util.List;
 
 import xyz.snaker.snakerlib.utility.ResourcePath;
 import xyz.snaker.snakerlib.utility.tools.UnsafeStuff;
-import xyz.snaker.tq.level.world.biome.manager.BiomeManager;
-import xyz.snaker.tq.level.world.feature.manager.FeatureManager;
+import xyz.snaker.tq.level.world.feature.FeatureKey;
+import xyz.snaker.tq.level.world.manager.BiomeManager;
 import xyz.snaker.tq.level.world.tree.GeometricTrunkPlacer;
+import xyz.snaker.tq.rego.Sounds;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
@@ -16,6 +17,7 @@ import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.block.Block;
@@ -39,6 +41,9 @@ import net.minecraftforge.registries.RegistryObject;
  **/
 public class WorldGenStuff
 {
+    public static final Holder<SoundEvent> RANDOM_SOUND_FX = Holder.direct(Sounds.RANDOM_FX.get());
+    public static final float PARTICLE_SPAWN_CHANCE = 0.001F;
+
     public static <T extends Block> RandomPatchConfiguration simpleRandomConfig(RegistryObject<T> block, int tries)
     {
         return FeatureUtils.simpleRandomPatchConfiguration(tries, onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(block.get()))));
@@ -102,36 +107,34 @@ public class WorldGenStuff
     public static void registerPlacement(BootstapContext<PlacedFeature> context, String name, List<PlacementModifier> modifiers)
     {
         var featureSearch = context.lookup(Registries.CONFIGURED_FEATURE);
-        FeatureManager.PlacementKey placement = getPlacementKey(name);
-        FeatureManager.ConfigKey config = getConfigKey(name);
-        context.register(placement.key(), new PlacedFeature(featureSearch.getOrThrow(config.key()), List.copyOf(modifiers)));
+        FeatureKey key = safeGetKey(name);
+        context.register(key.getPlacedKey(), new PlacedFeature(featureSearch.getOrThrow(key.getConfigKey()), List.copyOf(modifiers)));
     }
 
     public static <FC extends FeatureConfiguration, F extends Feature<FC>> void registerConfiguredFeature(BootstapContext<ConfiguredFeature<?, ?>> context, String name, F feature, FC configuration)
     {
-        FeatureManager.ConfigKey config = getConfigKey(name);
-        context.register(config.key(), new ConfiguredFeature<>(feature, configuration));
+        FeatureKey key = safeGetKey(name);
+        context.register(key.getConfigKey(), new ConfiguredFeature<>(feature, configuration));
     }
 
     public static <FC extends FeatureConfiguration, F extends Feature<FC>> void registerConfiguredFeature(BootstapContext<ConfiguredFeature<?, ?>> context, String name, RegistryObject<F> feature, FC configuration)
     {
-        FeatureManager.ConfigKey config = getConfigKey(name);
-        context.register(config.key(), new ConfiguredFeature<>(feature.get(), configuration));
+        FeatureKey key = safeGetKey(name);
+        context.register(key.getConfigKey(), new ConfiguredFeature<>(feature.get(), configuration));
     }
 
     public static <FC extends FeatureConfiguration, F extends Feature<FC>> void registerConfiguredFeature(BootstapContext<ConfiguredFeature<?, ?>> context, String name, RegistryObject<F> feature, RegistryObject<Block> block)
     {
-        FeatureManager.ConfigKey config = getConfigKey(name);
-        context.register(config.key(), new ConfiguredFeature<>(feature.get(), UnsafeStuff.cast(new BlockStateConfiguration(block.get().defaultBlockState()))));
+        FeatureKey key = safeGetKey(name);
+        context.register(key.getConfigKey(), new ConfiguredFeature<>(feature.get(), UnsafeStuff.cast(new BlockStateConfiguration(block.get().defaultBlockState()))));
     }
 
     public static void registerBiomeModifier(BootstapContext<BiomeModifier> context, String name, GenerationStep.Decoration step)
     {
         var biomeSearch = context.lookup(Registries.BIOME);
         var featureSearch = context.lookup(Registries.PLACED_FEATURE);
-        FeatureManager.BiomeModifierKey modifier = getModifierKey(name);
-        FeatureManager.PlacementKey placement = getPlacementKey(name);
-        context.register(modifier.key(),
+        FeatureKey key = safeGetKey(name);
+        context.register(key.getModifierKey(),
                 new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
                         HolderSet.direct(
                                 biomeSearch.getOrThrow(BiomeManager.DELUSION),
@@ -139,7 +142,7 @@ public class WorldGenStuff
                                 biomeSearch.getOrThrow(BiomeManager.IMMATERIAL),
                                 biomeSearch.getOrThrow(BiomeManager.SPECTRAL),
                                 biomeSearch.getOrThrow(BiomeManager.SURREAL)),
-                        HolderSet.direct(featureSearch.getOrThrow(placement.key())), step));
+                        HolderSet.direct(featureSearch.getOrThrow(key.getPlacedKey())), step));
     }
 
     public static ResourceKey<PlacedFeature> createPlacedKey(String name)
@@ -182,30 +185,12 @@ public class WorldGenStuff
         return PlacementUtils.onlyWhenEmpty(feature, config);
     }
 
-    static FeatureManager.ConfigKey getConfigKey(String name)
+    static FeatureKey safeGetKey(String name)
     {
         try {
-            return FeatureManager.ConfigKey.valueOf(name.toUpperCase());
+            return FeatureKey.valueOf(name.toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new RuntimeException(String.format("Config key '%s' does not exist", name));
-        }
-    }
-
-    static FeatureManager.PlacementKey getPlacementKey(String name)
-    {
-        try {
-            return FeatureManager.PlacementKey.valueOf(name.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException(String.format("Placement Key '%s' does not exist", name));
-        }
-    }
-
-    static FeatureManager.BiomeModifierKey getModifierKey(String name)
-    {
-        try {
-            return FeatureManager.BiomeModifierKey.valueOf(name.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException(String.format("Biome Modifier Key '%s' does not exist", name));
         }
     }
 }

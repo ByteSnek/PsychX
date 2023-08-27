@@ -33,14 +33,12 @@ public class ShaderBlock<T extends BlockEntity> extends BaseEntityBlock
 
     @Nullable
     @Override
-    @SuppressWarnings({"deprecation", "RedundantSuppression"})
     public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state)
     {
         return blockEntity.get().create(pos, state);
     }
 
     @Override
-    @SuppressWarnings({"deprecation"})
     public @NotNull RenderShape getRenderShape(@NotNull BlockState state)
     {
         return RenderShape.ENTITYBLOCK_ANIMATED;

@@ -26,7 +26,7 @@
       "options": {
         "type": "minecraft:flame"
       },
-      "probability": 0.002
+      "probability": 0.001
     },
     "sky_color": -16777216,
     "water_color": 3670787,
@@ -40,7 +40,7 @@
     ],
     [
       "minecraft:amethyst_geode",
-      "tq:swirl_rubble"
+      "tq:flare_rubble"
     ],
     [
       "minecraft:monster_room",

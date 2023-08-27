@@ -12,8 +12,8 @@ import xyz.snaker.snakerlib.client.Icon;
 import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.level.block.ShaderBlock;
 import xyz.snaker.tq.level.item.CosmoSpine;
-import xyz.snaker.tq.level.world.biome.manager.BiomeManager;
-import xyz.snaker.tq.level.world.feature.manager.FeatureManager;
+import xyz.snaker.tq.level.world.manager.BiomeManager;
+import xyz.snaker.tq.level.world.manager.FeatureManager;
 import xyz.snaker.tq.rego.*;
 import xyz.snaker.tq.utility.tools.*;
 
@@ -252,6 +252,8 @@ public class DataProviders
             }
 
             add("tooltip.tq.possible_issue", "If you're a player and you're seeing this then something with the mod may have gone wrong. Please go report this to github.com/SnakerBone/Tourniqueted/issues");
+            add("tooltip.tq.debug_tool_mode.none", "None");
+            add("tooltip.tq.debug_tool_mode.biome_tp", "Biome Teleport");
         }
 
         @Override
