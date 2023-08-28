@@ -36,11 +36,6 @@ public class Spectral
                 .ambientLoopSound(Holder.direct(Sounds.SUN_GAZER.get()));
 
         BiomeDefaultFeatures.addDefaultCarversAndLakes(gen);
-        BiomeDefaultFeatures.addDefaultCrystalFormations(gen);
-        BiomeDefaultFeatures.addDefaultMonsterRoom(gen);
-        BiomeDefaultFeatures.addDefaultUndergroundVariety(gen);
-        BiomeDefaultFeatures.addDefaultSprings(gen);
-        BiomeDefaultFeatures.addSurfaceFreezing(gen);
 
         DefaultFeatures.addDefaultPlants(gen);
         DefaultFeatures.addSwirlRubble(gen);

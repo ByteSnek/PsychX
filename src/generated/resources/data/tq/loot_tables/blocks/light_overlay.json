@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "tq:coma_stone_overlay"
+          "name": "tq:light_overlay"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "tq:blocks/coma_stone_overlay"
+  "random_sequence": "tq:blocks/light_overlay"
 }

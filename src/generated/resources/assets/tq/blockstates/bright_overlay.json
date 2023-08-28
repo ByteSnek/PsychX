@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "tq:block/bright_overlay"
+    }
+  }
+}

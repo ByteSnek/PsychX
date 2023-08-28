@@ -1,8 +1,6 @@
 package xyz.snaker.tq.datagen;
 
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -17,6 +15,7 @@ import xyz.snaker.tq.level.world.manager.FeatureManager;
 import xyz.snaker.tq.rego.*;
 import xyz.snaker.tq.utility.tools.*;
 
+import net.minecraft.Util;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -44,11 +43,23 @@ import net.minecraftforge.registries.RegistryObject;
 
 import org.jetbrains.annotations.NotNull;
 
+import static net.minecraft.world.level.block.Blocks.*;
+
 /**
  * Created by SnakerBone on 21/03/2023
  **/
 public class DataProviders
 {
+    static final Map<Block, Block> BLOCK_2_PARTICLE = Util.make(new HashMap<>(), map -> {
+        map.put(Blocks.SWIRL.get(), YELLOW_CONCRETE_POWDER);
+        map.put(Blocks.SNOWFLAKE.get(), LIGHT_BLUE_CONCRETE_POWDER);
+        map.put(Blocks.WATERCOLOUR.get(), PINK_CONCRETE_POWDER);
+        map.put(Blocks.MULTICOLOUR.get(), LIME_CONCRETE_POWDER);
+        map.put(Blocks.FLARE.get(), BROWN_CONCRETE_POWDER);
+        map.put(Blocks.STARRY.get(), WHITE_CONCRETE_POWDER);
+        map.put(Blocks.GEOMETRIC.get(), BLACK_CONCRETE_POWDER);
+    });
+
     static class BiomeTags extends TagsProvider<Biome> implements BiomeTagProviderTools<BiomeTags>
     {
         public BiomeTags(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, @Nullable ExistingFileHelper existingFileHelper)
@@ -126,8 +137,8 @@ public class DataProviders
         {
             for (var obj : Blocks.REGISTRAR.getEntries()) {
                 var current = obj.get();
-                if (current instanceof ShaderBlock<?>) {
-                    shader(current);
+                if (current instanceof ShaderBlock<?> shaderBlock) {
+                    shader(shaderBlock, BLOCK_2_PARTICLE.get(shaderBlock));
                 } else if (current instanceof BushBlock) {
                     plant(current);
                 } else if (current instanceof RotatedPillarBlock) {

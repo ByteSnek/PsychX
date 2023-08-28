@@ -154,7 +154,7 @@
             "deepslate_enabled": true,
             "ore_veins_enabled": true,
             "default_block": {
-                "Name": "minecraft:sculk"
+                "Name": "tq:coma_stone"
             },
             "default_fluid": {
                 "Name": "minecraft:lava",

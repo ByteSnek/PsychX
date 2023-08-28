@@ -48,11 +48,23 @@ public class Blocks
     public static final RegistryObject<Block> GEOMETRIC_LOG = registerBlockWithItem("geometric_log", () -> new RotatedPillarBlock(DefaultBlockProperties.WOOD.apply(MapColor.COLOR_PURPLE)));
     public static final RegistryObject<Block> GEOMETRIC_PLANKS = registerBlockWithItem("geometric_planks", () -> new Block(DefaultBlockProperties.WOOD.apply(MapColor.COLOR_PURPLE)));
 
-    public static final RegistryObject<Block> COMASTONE_OVERLAY = registerBlockWithItem("coma_stone_overlay", OverlayBlock::new);
+    public static final RegistryObject<Block> DARK_OVERLAY = registerOverlay("dark");
+    public static final RegistryObject<Block> WHITE_OVERLAY = registerOverlay("white");
+    public static final RegistryObject<Block> LIGHT_OVERLAY = registerOverlay("light");
+    public static final RegistryObject<Block> BRIGHT_OVERLAY = registerOverlay("bright");
+    public static final RegistryObject<Block> CREME_OVERLAY = registerOverlay("creme");
+    public static final RegistryObject<Block> SHIMMER_OVERLAY = registerOverlay("shimmer");
+    public static final RegistryObject<Block> SKIN_OVERLAY = registerOverlay("skin");
+    public static final RegistryObject<Block> TURQUOISE_OVERLAY = registerOverlay("turquoise");
 
     static RegistryObject<Block> register(String name, Supplier<Block> block)
     {
         return REGISTRAR.register(name, block);
+    }
+
+    static RegistryObject<Block> registerOverlay(String name)
+    {
+        return registerBlockWithItem(name + "_overlay", OverlayBlock::new);
     }
 
     static <T extends Block> RegistryObject<T> registerBlockWithItem(String name, Supplier<T> block)

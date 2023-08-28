@@ -68,16 +68,20 @@ public class Rego
     static <T extends ItemLike> void safeAccept(BuildCreativeModeTabContentsEvent event, RegistryObject<T> obj)
     {
         Map<Boolean, ResourceLocation> map = new AsyncHashMap<>();
-        if (AnnotationStuff.isNotPresent(obj, IgnoreCreativeTab.class)) {
-            ItemStack stack = obj.get().asItem().getDefaultInstance();
-            boolean valid = stack.getCount() == 1;
-            map.put(valid, obj.getId());
-            if (valid) {
-                event.accept(obj);
-            } else {
-                String itemName = map.get(false).toString();
-                SnakerLib.LOGGER.warnf("ItemStack '%s' is empty or invalid", itemName);
+        ItemStack stack = obj.get().asItem().getDefaultInstance();
+        boolean valid = stack.getCount() == 1;
+        map.put(valid, obj.getId());
+        if (valid) {
+            if (stack.getItem() instanceof BlockItem item) {
+                Class<?> blockClass = item.getBlock().getClass();
+                if (AnnotationStuff.isPresent(blockClass, IgnoreCreativeTab.class)) {
+                    return;
+                }
             }
+            event.accept(obj);
+        } else {
+            String itemName = map.get(false).toString();
+            SnakerLib.LOGGER.warnf("ItemStack '%s' is empty or invalid", itemName);
         }
     }
 

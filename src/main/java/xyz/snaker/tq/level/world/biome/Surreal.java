@@ -36,11 +36,6 @@ public class Surreal
                 .ambientLoopSound(Holder.direct(Sounds.O.get()));
 
         BiomeDefaultFeatures.addDefaultCarversAndLakes(gen);
-        BiomeDefaultFeatures.addDefaultCrystalFormations(gen);
-        BiomeDefaultFeatures.addDefaultMonsterRoom(gen);
-        BiomeDefaultFeatures.addDefaultUndergroundVariety(gen);
-        BiomeDefaultFeatures.addDefaultSprings(gen);
-        BiomeDefaultFeatures.addSurfaceFreezing(gen);
 
         DefaultFeatures.addDefaultPlants(gen);
         DefaultFeatures.addFlareRubble(gen);

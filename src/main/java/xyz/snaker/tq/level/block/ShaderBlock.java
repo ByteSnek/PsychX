@@ -39,6 +39,7 @@ public class ShaderBlock<T extends BlockEntity> extends BaseEntityBlock
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public @NotNull RenderShape getRenderShape(@NotNull BlockState state)
     {
         return RenderShape.ENTITYBLOCK_ANIMATED;

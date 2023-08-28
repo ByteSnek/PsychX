@@ -39,41 +39,20 @@
       "minecraft:lake_lava_surface"
     ],
     [
-      "minecraft:amethyst_geode",
       "tq:watercolour_rubble"
     ],
-    [
-      "minecraft:monster_room",
-      "minecraft:monster_room_deep"
-    ],
+    [],
+    [],
+    [],
+    [],
     [],
     [],
     [
-      "minecraft:ore_dirt",
-      "minecraft:ore_gravel",
-      "minecraft:ore_granite_upper",
-      "minecraft:ore_granite_lower",
-      "minecraft:ore_diorite_upper",
-      "minecraft:ore_diorite_lower",
-      "minecraft:ore_andesite_upper",
-      "minecraft:ore_andesite_lower",
-      "minecraft:ore_tuff"
-    ],
-    [],
-    [
-      "minecraft:spring_water",
-      "minecraft:spring_lava"
-    ],
-    [
-      "minecraft:glow_lichen",
       "tq:snakeroot",
       "tq:tall_snakeroot",
       "tq:splitleaf",
       "tq:catnip",
       "tq:pinktails"
-    ],
-    [
-      "minecraft:freeze_top_layer"
     ]
   ],
   "has_precipitation": false,

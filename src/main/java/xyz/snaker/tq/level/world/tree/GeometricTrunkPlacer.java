@@ -42,7 +42,30 @@ public class GeometricTrunkPlacer extends TrunkPlacer
     public @NotNull List<FoliagePlacer.FoliageAttachment> placeTrunk(@NotNull LevelSimulatedReader level, @NotNull BiConsumer<BlockPos, BlockState> blockSetter, @NotNull RandomSource random, int freeTreeHeight, @NotNull BlockPos pos, @NotNull TreeConfiguration config)
     {
         setDirtAt(level, blockSetter, random, pos.below(), config);
-        int height = freeTreeHeight + random.nextInt(heightRandA, heightRandA + 3) + random.nextInt(heightRandB - 1, heightRandB + 1);
-        return ImmutableList.of(new FoliagePlacer.FoliageAttachment(pos.above(height), 0, false));
+        int height = getTreeHeight(random);
+        for (int i = 0; i < height; i++) {
+            BlockPos above = pos.above(i);
+            placeLog(level, blockSetter, random, above, config);
+            if (i == 0) {
+                placeLog(level, blockSetter, random, above.north(), config);
+                placeLog(level, blockSetter, random, above.north().west(), config);
+                placeLog(level, blockSetter, random, above.north(2), config);
+                placeLog(level, blockSetter, random, above.south(), config);
+                placeLog(level, blockSetter, random, above.south().east(), config);
+                placeLog(level, blockSetter, random, above.south(2), config);
+                placeLog(level, blockSetter, random, above.east(), config);
+                placeLog(level, blockSetter, random, above.east().north(), config);
+                placeLog(level, blockSetter, random, above.east(2), config);
+                placeLog(level, blockSetter, random, above.west(), config);
+                placeLog(level, blockSetter, random, above.west().south(), config);
+                placeLog(level, blockSetter, random, above.west(2), config);
+            } else if (i == 1 || i == 2) {
+                placeLog(level, blockSetter, random, above.north(), config);
+                placeLog(level, blockSetter, random, above.south(), config);
+                placeLog(level, blockSetter, random, above.east(), config);
+                placeLog(level, blockSetter, random, above.west(), config);
+            }
+        }
+        return ImmutableList.of(new FoliagePlacer.FoliageAttachment(pos.above(height - 1), 0, false));
     }
 }

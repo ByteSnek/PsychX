@@ -2,6 +2,6 @@
   "parent": "minecraft:block/cube_all",
   "render_type": "minecraft:cutout",
   "textures": {
-    "all": "tq:block/coma_stone_overlay"
+    "all": "tq:block/skin_overlay"
   }
 }

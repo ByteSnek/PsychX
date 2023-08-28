@@ -36,11 +36,6 @@ public class Illusion
                 .ambientLoopSound(Holder.direct(Sounds.XXED.get()));
 
         BiomeDefaultFeatures.addDefaultCarversAndLakes(gen);
-        BiomeDefaultFeatures.addDefaultCrystalFormations(gen);
-        BiomeDefaultFeatures.addDefaultMonsterRoom(gen);
-        BiomeDefaultFeatures.addDefaultUndergroundVariety(gen);
-        BiomeDefaultFeatures.addDefaultSprings(gen);
-        BiomeDefaultFeatures.addSurfaceFreezing(gen);
 
         DefaultFeatures.addDefaultPlants(gen);
         DefaultFeatures.addWaterColourRubble(gen);

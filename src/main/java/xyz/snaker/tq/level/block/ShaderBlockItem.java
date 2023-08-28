@@ -31,7 +31,7 @@ public class ShaderBlockItem extends BlockItem
         {
             public BlockEntityWithoutLevelRenderer getRenderer()
             {
-                return new ShaderBlockItemRenderer(ShaderBlockItemRenderer.TYPE.get(ShaderBlockItem.this));
+                return new ShaderBlockItemRenderer(ShaderBlockItemRenderer.ITEM_2_RENDER_TYPE.get(ShaderBlockItem.this).get());
             }
 
             @Override

@@ -15,10 +15,12 @@ public interface BlockStateProviderTools<T extends BlockStateProvider>
 {
     T getInstance();
 
-    default void shader(Block block)
+    default void shader(Block block, Block particle)
     {
-        String name = ResourceStuff.getPath(block);
-        ModelFile file = getInstance().models().withExistingParent(name, getInstance().modLoc("shader"));
+        String blockName = ResourceStuff.getPath(block);
+        ModelFile file = getInstance().models()
+                .withExistingParent(blockName, getInstance().modLoc("shader"))
+                .texture("particle", getInstance().blockTexture(particle));
         getInstance().simpleBlock(block, file);
     }
 
