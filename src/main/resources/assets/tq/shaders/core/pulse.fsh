@@ -1,7 +1,7 @@
 #version 150
 
 uniform float Time;
-uniform vec3 RGB;
+uniform vec3 Colour;
 uniform float Alpha;
 
 in vec2 textureProjection;
@@ -34,7 +34,7 @@ void main() {
         sNoiseAmount += (2.0 / power) * max(sNoise((sCoord * 1.75) + vec3(Time * 0.0, Time * 0.0, Time * -0.01), power * sDensity), -1.0);
     }
     sNoiseAmount *= 0.5;
-    vec3 sFragColour = RGB;
+    vec3 sFragColour = Colour;
     float sTime1 = -1.0 + mod(Time, 6.0) + sNoiseAmount;
     float sTime2 = -1.0 + mod(Time + 2.0, 6.0) + sNoiseAmount;
     float sTime3 = -1.0 + mod(Time + 4.0, 6.0) + sNoiseAmount;

@@ -41,7 +41,7 @@ public class UtterflyLayer extends RenderLayer<Utterfly, UtterflyModel>
 
         Shaders.getPulse().enqueueTask(() ->
         {
-            Shaders.getPulseRGB().set(colour);
+            Shaders.getPulseColour().set(colour);
             Shaders.getPulseAlpha().set(chargeStatus);
         });
 

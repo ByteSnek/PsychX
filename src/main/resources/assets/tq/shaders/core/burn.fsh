@@ -1,7 +1,7 @@
 #version 150
 
 uniform float Time;
-uniform vec3 RGB;
+uniform vec3 Colour;
 uniform float Alpha;
 
 in vec2 textureProjection;
@@ -61,6 +61,6 @@ void main() {
     vec2 sProjection = gl_FragCoord.xy / sResolution.xy;
     sProjection.x *= sResolution.x / sResolution.y;
     float sValue = pow(pattern(sProjection), 2.0);
-    vec3 sColour = 0.5 + cos(6.0 * (sValue + fbm(sProjection + Time * 0.1) + Time * 0.1) + RGB);
+    vec3 sColour = 0.5 + cos(6.0 * (sValue + fbm(sProjection + Time * 0.1) + Time * 0.1) + Colour);
     fragColor = vec4(sColour, Alpha);
 }

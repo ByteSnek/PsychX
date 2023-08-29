@@ -42,6 +42,7 @@ public class DataGenerators
         generator.addProvider(event.includeServer(), new DataProviders.BiomeTags(output, provider, helper));
         generator.addProvider(event.includeServer(), new DataProviders.BlockTags(output, provider, helper));
         generator.addProvider(event.includeServer(), new DataProviders.Recipes(output));
+        generator.addProvider(event.includeServer(), new DataProviders.LootModifiers(output));
         generator.addProvider(event.includeServer(), new SimpleLootTableProvider(output, blocks).provider());
     }
 }

@@ -44,7 +44,8 @@ public class BlockTabIconRenderer extends CyclicalIconRenderer
                             Items.SNOWFLAKE_BLOCK.get().getDefaultInstance(),
                             Items.STARRY_BLOCK.get().getDefaultInstance(),
                             Items.WATERCOLOUR_BLOCK.get().getDefaultInstance(),
-                            Items.GEOMETRIC_BLOCK.get().getDefaultInstance()
+                            Items.GEOMETRIC_BLOCK.get().getDefaultInstance(),
+                            Items.BURNING_BLOCK.get().getDefaultInstance()
                     };
 
             float scale = 1;

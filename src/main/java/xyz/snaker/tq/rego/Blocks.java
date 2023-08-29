@@ -36,6 +36,7 @@ public class Blocks
     public static final RegistryObject<Block> FLARE = register("flare_block", () -> new ShaderBlock<>(BlockEntities.FLARE));
     public static final RegistryObject<Block> STARRY = register("starry_block", () -> new ShaderBlock<>(BlockEntities.STARRY));
     public static final RegistryObject<Block> GEOMETRIC = register("geometric_block", () -> new ShaderBlock<>(BlockEntities.GEOMETRIC));
+    public static final RegistryObject<Block> BURNING = register("burning_block", () -> new ShaderBlock<>(BlockEntities.BURNING));
 
     public static final RegistryObject<Block> PINKTAILS = registerBlockWithItem("pink_tails", () -> new FlowerBlock(Effects.SYNCOPE::get, Maths.secondsToTicks(5), DefaultBlockProperties.PLANT.apply(MapColor.COLOR_PINK), Keys.GROUNDRICH, true));
     public static final RegistryObject<Block> SPLITLEAF = registerBlockWithItem("split_leaf", () -> new FlowerBlock(Effects.SYNCOPE::get, Maths.secondsToTicks(5), DefaultBlockProperties.PLANT.apply(MapColor.COLOR_CYAN), Keys.GROUNDRICH, true));

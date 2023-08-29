@@ -69,6 +69,21 @@ public class MobTabIconRenderer extends CyclicalIconRenderer
             int tickCount = (int) SnakerLib.getClientTickCount();
             int index = ((tickCount + 60) / 120) % entities.length;
 
+            /*
+                Index values
+                ------------
+                0 = Cosmo
+                1 = Flare
+                2 = Snipe
+                3 = Cosmic Creeper
+                4 = Utterfly
+                5 = Flutterfly
+                6 = Frolicker
+                7 = Anti Cosmo
+                8 = Eerie Cretin
+                9 = Leet
+             */
+
             switch (index) {
                 case 2, 3 -> scale = 0.7F;
                 case 4 -> {
@@ -78,6 +93,10 @@ public class MobTabIconRenderer extends CyclicalIconRenderer
                 case 5 -> scale = 1.05F;
                 case 6 -> {
                     scale = 1.05F;
+                    stack.translate(0F, 0.3F, 0F);
+                }
+                case 9 -> {
+                    scale = 0.125F;
                     stack.translate(0F, 0.3F, 0F);
                 }
             }

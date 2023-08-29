@@ -1,0 +1,18 @@
+{
+  "type": "tq:add",
+  "conditions": [
+    {
+      "block": "minecraft:large_fern",
+      "condition": "minecraft:block_state_property"
+    },
+    {
+      "chance": 0.1,
+      "condition": "minecraft:random_chance"
+    },
+    {
+      "condition": "minecraft:weather_check",
+      "raining": true
+    }
+  ],
+  "item": "tq:nylon_twine"
+}

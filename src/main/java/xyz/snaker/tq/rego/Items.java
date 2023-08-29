@@ -6,6 +6,7 @@ import xyz.snaker.snakerlib.utility.tools.ColourStuff;
 import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.level.block.ShaderBlockItem;
 import xyz.snaker.tq.level.item.CosmoSpine;
+import xyz.snaker.tq.level.item.EmptyItem;
 import xyz.snaker.tq.level.item.Tourniquet;
 import xyz.snaker.tq.level.item.icon.BlockTabIcon;
 import xyz.snaker.tq.level.item.icon.ItemTabIcon;
@@ -41,6 +42,9 @@ public class Items
     public static final RegistryObject<Item> BLOCK_TAB_ICON = register("block_tab_icon", BlockTabIcon::new);
 
     public static final RegistryObject<Item> TOURNIQUET = register("tourniquet", Tourniquet::new);
+    public static final RegistryObject<Item> TOURNIQUET_CLASP = register("tourniquet_clasp", EmptyItem::new);
+    public static final RegistryObject<Item> TOURNIQUET_WEBBING = register("tourniquet_webbing", EmptyItem::new);
+    public static final RegistryObject<Item> NYLON_TWINE = register("nylon_twine", EmptyItem::new);
 
     public static final RegistryObject<Item> SWIRL_BLOCK = registerShaderBlockItem("swirl_block", Blocks.SWIRL);
     public static final RegistryObject<Item> SNOWFLAKE_BLOCK = registerShaderBlockItem("snowflake_block", Blocks.SNOWFLAKE);
@@ -49,6 +53,7 @@ public class Items
     public static final RegistryObject<Item> FLARE_BLOCK = registerShaderBlockItem("flare_block", Blocks.FLARE);
     public static final RegistryObject<Item> STARRY_BLOCK = registerShaderBlockItem("starry_block", Blocks.STARRY);
     public static final RegistryObject<Item> GEOMETRIC_BLOCK = registerShaderBlockItem("geometric_block", Blocks.GEOMETRIC);
+    public static final RegistryObject<Item> BURNING_BLOCK = registerShaderBlockItem("burning_block", Blocks.BURNING);
 
     public static final RegistryObject<Item> COSMO_SPAWN_EGG = registerSpawnEgg("cosmo_spawn_egg", Entities.COSMO);
     public static final RegistryObject<Item> SNIPE_SPAWN_EGG = registerSpawnEgg("snipe_spawn_egg", Entities.SNIPE);

@@ -10,6 +10,7 @@ import xyz.snaker.snakerlib.client.Icon;
 import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.level.block.ShaderBlock;
 import xyz.snaker.tq.level.item.CosmoSpine;
+import xyz.snaker.tq.level.loot.Add;
 import xyz.snaker.tq.level.world.manager.BiomeManager;
 import xyz.snaker.tq.level.world.manager.FeatureManager;
 import xyz.snaker.tq.rego.*;
@@ -26,18 +27,20 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
+import net.minecraft.world.level.storage.loot.predicates.WeatherCheck;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
-import net.minecraftforge.common.data.BlockTagsProvider;
-import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.common.data.LanguageProvider;
+import net.minecraftforge.common.data.*;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -50,7 +53,8 @@ import static net.minecraft.world.level.block.Blocks.*;
  **/
 public class DataProviders
 {
-    static final Map<Block, Block> BLOCK_2_PARTICLE = Util.make(new HashMap<>(), map -> {
+    static final Map<Block, Block> BLOCK_2_PARTICLE = Util.make(new HashMap<>(), map ->
+    {
         map.put(Blocks.SWIRL.get(), YELLOW_CONCRETE_POWDER);
         map.put(Blocks.SNOWFLAKE.get(), LIGHT_BLUE_CONCRETE_POWDER);
         map.put(Blocks.WATERCOLOUR.get(), PINK_CONCRETE_POWDER);
@@ -58,7 +62,42 @@ public class DataProviders
         map.put(Blocks.FLARE.get(), BROWN_CONCRETE_POWDER);
         map.put(Blocks.STARRY.get(), WHITE_CONCRETE_POWDER);
         map.put(Blocks.GEOMETRIC.get(), BLACK_CONCRETE_POWDER);
+        map.put(Blocks.BURNING.get(), BLACK_CONCRETE_POWDER);
     });
+
+    static class LootModifiers extends GlobalLootModifierProvider
+    {
+        public LootModifiers(PackOutput output)
+        {
+            super(output, Tourniqueted.MODID);
+        }
+
+        @Override
+        public void start()
+        {
+            addWithRainCheck(LARGE_FERN, Items.NYLON_TWINE, 0.1);
+        }
+
+        <T extends ItemLike> void add(Block block, RegistryObject<T> drop, double chance)
+        {
+            add(drop.getId().getPath(), addToBlock(block, drop, chance));
+        }
+
+        <T extends ItemLike> void addWithRainCheck(Block block, RegistryObject<T> drop, double chance)
+        {
+            add(drop.getId().getPath(), addToBlockWithRainCheck(block, drop, chance));
+        }
+
+        <T extends ItemLike> Add addToBlock(Block block, RegistryObject<T> drop, double chance)
+        {
+            return new Add(new LootItemCondition[]{LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).build(), LootItemRandomChanceCondition.randomChance((float) chance).build()}, drop.get().asItem());
+        }
+
+        <T extends ItemLike> Add addToBlockWithRainCheck(Block block, RegistryObject<T> drop, double chance)
+        {
+            return new Add(new LootItemCondition[]{LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).build(), LootItemRandomChanceCondition.randomChance((float) chance).build(), WeatherCheck.weather().setRaining(true).build()}, drop.get().asItem());
+        }
+    }
 
     static class BiomeTags extends TagsProvider<Biome> implements BiomeTagProviderTools<BiomeTags>
     {

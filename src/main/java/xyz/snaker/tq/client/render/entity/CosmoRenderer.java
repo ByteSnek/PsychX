@@ -12,7 +12,6 @@ import xyz.snaker.tq.level.entity.mob.Cosmo;
 
 import net.minecraft.Util;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -27,15 +26,15 @@ import com.mojang.blaze3d.vertex.PoseStack;
  **/
 public class CosmoRenderer extends MobRenderer<Cosmo, CosmoModel>
 {
-    public static final Map<EntityVariants.Cosmo, RenderType> TYPE = Util.make(Maps.newEnumMap(EntityVariants.Cosmo.class), (map) ->
+    public static final Map<EntityVariants.Cosmo, EntityRenderType> TYPE = Util.make(Maps.newEnumMap(EntityVariants.Cosmo.class), (map) ->
     {
-        map.put(EntityVariants.Cosmo.RED, EntityRenderType.RED_STARS.get());
-        map.put(EntityVariants.Cosmo.GREEN, EntityRenderType.GREEN_STARS.get());
-        map.put(EntityVariants.Cosmo.BLUE, EntityRenderType.BLUE_STARS.get());
-        map.put(EntityVariants.Cosmo.YELLOW, EntityRenderType.YELLOW_STARS.get());
-        map.put(EntityVariants.Cosmo.PINK, EntityRenderType.PINK_STARS.get());
-        map.put(EntityVariants.Cosmo.PURPLE, EntityRenderType.PURPLE_STARS.get());
-        map.put(EntityVariants.Cosmo.ALPHA, EntityRenderType.BLACK_STARS.get());
+        map.put(EntityVariants.Cosmo.RED, EntityRenderType.RED_STARS);
+        map.put(EntityVariants.Cosmo.GREEN, EntityRenderType.GREEN_STARS);
+        map.put(EntityVariants.Cosmo.BLUE, EntityRenderType.BLUE_STARS);
+        map.put(EntityVariants.Cosmo.YELLOW, EntityRenderType.YELLOW_STARS);
+        map.put(EntityVariants.Cosmo.PINK, EntityRenderType.PINK_STARS);
+        map.put(EntityVariants.Cosmo.PURPLE, EntityRenderType.PURPLE_STARS);
+        map.put(EntityVariants.Cosmo.ALPHA, EntityRenderType.BLACK_STARS);
     });
 
     public CosmoRenderer(EntityRendererProvider.Context context)

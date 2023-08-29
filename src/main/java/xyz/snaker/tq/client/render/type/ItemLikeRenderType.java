@@ -33,7 +33,8 @@ public enum ItemLikeRenderType implements SimpleRenderTypeProcessor
     SNOWFLAKE(Shaders::getSnowflake),
     WATERCOLOUR(Shaders::getWatercolour),
     MULTICOLOUR(Shaders::getMulticolour),
-    CLIP(Shaders::getClip);
+    CLIP(Shaders::getClip),
+    BURN(Shaders::getBurn);
 
     private final Supplier<ShaderInstance> shader;
     private final RenderType type;

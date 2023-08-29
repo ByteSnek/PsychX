@@ -2,8 +2,8 @@
 
 uniform float Time;
 uniform float Intensity;
-uniform vec3 HSV;
-uniform vec3 RGB;
+uniform vec3 Value;
+uniform vec3 Colour;
 
 in vec2 textureProjection;
 out vec4 fragColor;
@@ -72,8 +72,8 @@ void main() {
 
     vec3 sColour = mix(vec3(0, 0, 0), vec3(0, 0, 0), 1.0);
 
-    sColour = mix(sColour, HSV, clamp(length(sQuaternion), 0.0, Intensity));
-    sColour = mix(sColour, RGB, clamp(length(sNewRandom.x), 0.0, Intensity));
+    sColour = mix(sColour, Value, clamp(length(sQuaternion), 0.0, Intensity));
+    sColour = mix(sColour, Colour, clamp(length(sNewRandom.x), 0.0, Intensity));
 
     sColour = (sFogColour + 0.2) * sColour;
 

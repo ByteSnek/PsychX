@@ -16,6 +16,7 @@ import net.minecraftforge.client.event.RegisterShadersEvent;
 import org.jetbrains.annotations.ApiStatus;
 import org.joml.*;
 
+import com.google.common.base.Preconditions;
 import com.mojang.blaze3d.shaders.Uniform;
 import com.mojang.blaze3d.vertex.VertexFormat;
 
@@ -60,6 +61,41 @@ public class Shader extends ShaderInstance
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public Uniform getTimeUniform(boolean apply, float offset)
+    {
+        Uniform uniform = getUniform("Time");
+        Preconditions.checkNotNull(uniform, "[%s]: Could not find 'Time' uniform in the shader program", SnakerLib.NAME);
+        if (apply) {
+            enqueueTask(() -> uniform.set((SnakerLib.getClientTickCount() + Minecraft.getInstance().getFrameTime()) / offset));
+        }
+        return uniform;
+    }
+
+    public Uniform getTimeUniform(boolean apply)
+    {
+        return getTimeUniform(apply, 20);
+    }
+
+    public Uniform getTimeUniform()
+    {
+        return getTimeUniform(false);
+    }
+
+    public Uniform getColourUniform()
+    {
+        Uniform uniform = getUniform("Colour");
+        Preconditions.checkNotNull(uniform, "[%s]: Could not find 'Colour' uniform in the shader program", SnakerLib.NAME);
+        return uniform;
+    }
+
+
+    public Uniform getAlphaUniform()
+    {
+        Uniform uniform = getUniform("Alpha");
+        Preconditions.checkNotNull(uniform, "[%s]: Could not find 'Alpha' uniform in the shader program", SnakerLib.NAME);
+        return uniform;
     }
 
     /**

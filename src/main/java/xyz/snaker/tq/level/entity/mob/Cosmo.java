@@ -167,7 +167,7 @@ public class Cosmo extends Hostile
 
     public static RenderType getRenderType(EntityVariants.Cosmo type)
     {
-        return CosmoRenderer.TYPE.get(type);
+        return CosmoRenderer.TYPE.get(type).get();
     }
 
     public EntityVariants.Cosmo getVariant()
