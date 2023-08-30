@@ -48,7 +48,7 @@ import org.jetbrains.annotations.Nullable;
  **/
 public class Cosmo extends Hostile
 {
-    private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Cosmo.class, EntityDataSerializers.INT);
+    static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Cosmo.class, EntityDataSerializers.INT);
 
     public Cosmo(EntityType<? extends Monster> type, Level level)
     {
@@ -67,7 +67,7 @@ public class Cosmo extends Hostile
 
     public static <T extends Entity> boolean spawnRules(EntityType<T> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return WorldStuff.isDimension(level, Keys.COMATOSE);
+        return WorldStuff.isDimension(level, Keys.COMATOSE) && WorldStuff.random(random, 75);
     }
 
     @Override
@@ -175,7 +175,7 @@ public class Cosmo extends Hostile
         return EntityVariants.Cosmo.byId(getTypeVariant() & 255);
     }
 
-    private int getTypeVariant()
+    public int getTypeVariant()
     {
         return entityData.get(VARIANT);
     }
@@ -186,7 +186,7 @@ public class Cosmo extends Hostile
     }
 
     @Override
-    protected void defineSynchedData()
+    public void defineSynchedData()
     {
         super.defineSynchedData();
         entityData.define(VARIANT, 0);
@@ -208,19 +208,19 @@ public class Cosmo extends Hostile
 
     @Nullable
     @Override
-    protected SoundEvent getAmbientSound()
+    public SoundEvent getAmbientSound()
     {
         return SoundEvents.SCULK_CLICKING;
     }
 
     @Override
-    protected SoundEvent getHurtSound(@NotNull DamageSource source)
+    public SoundEvent getHurtSound(@NotNull DamageSource source)
     {
         return Sounds.COSMO_HURT.get();
     }
 
     @Override
-    protected SoundEvent getDeathSound()
+    public SoundEvent getDeathSound()
     {
         return Sounds.ENTITY_DEATH.get();
     }

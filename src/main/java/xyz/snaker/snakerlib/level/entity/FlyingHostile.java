@@ -47,7 +47,7 @@ public abstract class FlyingHostile extends FlyingMob implements Enemy
     }
 
     @Override
-    protected boolean shouldDespawnInPeaceful()
+    public boolean shouldDespawnInPeaceful()
     {
         return true;
     }
@@ -59,12 +59,12 @@ public abstract class FlyingHostile extends FlyingMob implements Enemy
     }
 
     @Override
-    protected void checkFallDamage(double y, boolean onGround, @NotNull BlockState state, @NotNull BlockPos pos)
+    public void checkFallDamage(double y, boolean onGround, @NotNull BlockState state, @NotNull BlockPos pos)
     {
         fallDistance = 0;
     }
 
-    protected void registerGoals()
+    public void registerGoals()
     {
         goalSelector.addGoal(4, new FlyGoal(this));
         goalSelector.addGoal(6, new LookAroundGoal(this));

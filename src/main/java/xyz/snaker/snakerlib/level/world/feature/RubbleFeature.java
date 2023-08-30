@@ -86,17 +86,20 @@ public abstract class RubbleFeature extends BlockBlobFeature
     public boolean place(@NotNull FeaturePlaceContext<BlockStateConfiguration> context)
     {
         setLevel(context.level());
+
         BlockPos origin = context.origin();
         RandomSource random = context.random();
         BlockStateConfiguration config = context.config();
+        BlockState state = config.state;
+
         if (random.nextInt(frequency.getValue()) == 0) {
             for (Block block : blocksToPlaceOn) {
                 if (level.getBlockState(origin.below()).is(block)) {
                     if (WorldStuff.isFreeAroundPos(level, origin, false)) {
                         for (int i = 0; i < random.nextInt(minHeightRange, maxHeightRange); i++) {
-                            level.setBlock(origin.above(i), config.state, Block.UPDATE_ALL);
+                            placeBlock(origin.above(i), state);
                             if (i == 0) {
-                                placeBase(random, origin, config.state);
+                                placeBase(random, origin, state);
                             }
                         }
                     }
@@ -104,6 +107,7 @@ public abstract class RubbleFeature extends BlockBlobFeature
                 }
             }
         }
+
         return false;
     }
 }

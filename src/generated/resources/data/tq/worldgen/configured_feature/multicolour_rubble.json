@@ -1,0 +1,8 @@
+{
+  "type": "tq:multicolour_rubble",
+  "config": {
+    "state": {
+      "Name": "tq:multicolour_block"
+    }
+  }
+}

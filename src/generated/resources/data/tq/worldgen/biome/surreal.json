@@ -39,7 +39,8 @@
       "minecraft:lake_lava_surface"
     ],
     [
-      "tq:flare_rubble"
+      "tq:flare_rubble",
+      "tq:burning_rubble"
     ],
     [],
     [],

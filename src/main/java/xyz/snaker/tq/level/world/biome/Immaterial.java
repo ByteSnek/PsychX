@@ -38,6 +38,8 @@ public class Immaterial
         BiomeDefaultFeatures.addDefaultCarversAndLakes(gen);
 
         DefaultFeatures.addDefaultPlants(gen);
+        DefaultFeatures.addGeometricRubble(gen);
+        DefaultFeatures.addMultiColourRubble(gen);
 
         spawns.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(Entities.COSMO.get(), 1, 1, 1));
 

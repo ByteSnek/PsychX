@@ -57,11 +57,11 @@ public class Flare extends Hostile
 
     public static <T extends Entity> boolean spawnRules(EntityType<T> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return WorldStuff.isDimension(level, Keys.COMATOSE);
+        return WorldStuff.isDimension(level, Keys.COMATOSE) && WorldStuff.random(random, 75);
     }
 
     @Override
-    protected void registerGoals()
+    public void registerGoals()
     {
         goalSelector.addGoal(0, new FloatGoal(this));
         goalSelector.addGoal(1, new SwitchGameModeGoal(this));
@@ -79,19 +79,19 @@ public class Flare extends Hostile
     }
 
     @Override
-    protected SoundEvent getAmbientSound()
+    public SoundEvent getAmbientSound()
     {
         return SoundEvents.BLAZE_AMBIENT;
     }
 
     @Override
-    protected SoundEvent getHurtSound(@NotNull DamageSource source)
+    public SoundEvent getHurtSound(@NotNull DamageSource source)
     {
         return SoundEvents.BLAZE_HURT;
     }
 
     @Override
-    protected SoundEvent getDeathSound()
+    public SoundEvent getDeathSound()
     {
         return Sounds.ENTITY_DEATH.get();
     }

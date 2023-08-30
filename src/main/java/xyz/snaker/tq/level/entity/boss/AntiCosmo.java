@@ -41,14 +41,14 @@ public class AntiCosmo extends Boss<AntiCosmo>
 
     @Nullable
     @Override
-    protected SoundEvent getAmbientSound()
+    public SoundEvent getAmbientSound()
     {
         return SoundEvents.SCULK_CLICKING;
     }
 
     @Nullable
     @Override
-    protected SoundEvent getHurtSound(@NotNull DamageSource source)
+    public SoundEvent getHurtSound(@NotNull DamageSource source)
     {
         return SoundEvents.SCULK_SHRIEKER_SHRIEK;
     }

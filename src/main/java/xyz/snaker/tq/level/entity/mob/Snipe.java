@@ -45,6 +45,11 @@ public class Snipe extends FlyingHostile
         super(type, level);
     }
 
+    public static boolean spawnRules(EntityType<Snipe> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
+    {
+        return WorldStuff.isOverworld(level) && WorldStuff.canSeeSky(level, pos) && WorldStuff.random(random, 100);
+    }
+
     public static AttributeSupplier attributes()
     {
         return Monster.createMobAttributes()
@@ -56,13 +61,8 @@ public class Snipe extends FlyingHostile
                 .add(Attributes.FLYING_SPEED, 0.25).build();
     }
 
-    public static boolean spawnRules(EntityType<Snipe> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
-    {
-        return WorldStuff.isDimension(level, Level.OVERWORLD);
-    }
-
     @Override
-    protected void registerGoals()
+    public void registerGoals()
     {
         super.registerGoals();
         goalSelector.addGoal(4, new SnipeAttackGoal(this, 20, 4, 0));
@@ -90,19 +90,19 @@ public class Snipe extends FlyingHostile
     }
 
     @Override
-    protected @NotNull SoundEvent getAmbientSound()
+    public @NotNull SoundEvent getAmbientSound()
     {
         return Sounds.SNIPE_AMBIENT.get();
     }
 
     @Override
-    protected SoundEvent getHurtSound(@NotNull DamageSource source)
+    public SoundEvent getHurtSound(@NotNull DamageSource source)
     {
         return Sounds.SNIPE_HURT.get();
     }
 
     @Override
-    protected SoundEvent getDeathSound()
+    public SoundEvent getDeathSound()
     {
         return Sounds.ENTITY_DEATH.get();
     }
@@ -113,7 +113,7 @@ public class Snipe extends FlyingHostile
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
-    private static class SnipeAttackGoal extends Goal
+    static class SnipeAttackGoal extends Goal
     {
         private final Snipe snipe;
         private int delay;

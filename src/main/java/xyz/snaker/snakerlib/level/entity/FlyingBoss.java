@@ -38,7 +38,7 @@ public abstract class FlyingBoss<T extends FlyingMob> extends FlyingMob implemen
     /**
      * The current boss event
      **/
-    protected final CustomBossEvent bossEvent = new CustomBossEvent(getResourceLocation(), getBossDisplayName());
+    public final CustomBossEvent bossEvent = new CustomBossEvent(getResourceLocation(), getBossDisplayName());
 
     public FlyingBoss(EntityType<? extends FlyingMob> type, Level level, int xpReward)
     {
@@ -73,7 +73,7 @@ public abstract class FlyingBoss<T extends FlyingMob> extends FlyingMob implemen
     }
 
     @Override
-    protected void registerGoals()
+    public void registerGoals()
     {
         goalSelector.addGoal(1, new SwitchGameModeGoal(getBossInstance()));
     }
@@ -121,7 +121,7 @@ public abstract class FlyingBoss<T extends FlyingMob> extends FlyingMob implemen
     }
 
     @Override
-    protected boolean shouldDespawnInPeaceful()
+    public boolean shouldDespawnInPeaceful()
     {
         return true;
     }
@@ -139,13 +139,13 @@ public abstract class FlyingBoss<T extends FlyingMob> extends FlyingMob implemen
     }
 
     @Override
-    protected void playStepSound(@NotNull BlockPos pos, @NotNull BlockState state)
+    public void playStepSound(@NotNull BlockPos pos, @NotNull BlockState state)
     {
 
     }
 
     @Override
-    protected void checkFallDamage(double y, boolean onGround, @NotNull BlockState state, @NotNull BlockPos pos)
+    public void checkFallDamage(double y, boolean onGround, @NotNull BlockState state, @NotNull BlockPos pos)
     {
         fallDistance = 0;
     }

@@ -1,5 +1,7 @@
 package xyz.snaker.snakerlib.utility.tools;
 
+import javax.annotation.Nullable;
+
 import xyz.snaker.snakerlib.math.Maths;
 
 import net.minecraft.core.BlockPos;
@@ -50,6 +52,32 @@ public class WorldStuff
     public static boolean isDimension(ServerLevelAccessor level, ResourceKey<Level> wanted)
     {
         return level.getLevel().dimension().equals(wanted);
+    }
+
+    public static boolean isOverworld(ServerLevelAccessor level)
+    {
+        return isDimension(level, Level.OVERWORLD);
+    }
+
+    public static boolean isNether(ServerLevelAccessor level)
+    {
+        return isDimension(level, Level.NETHER);
+    }
+
+    public static boolean isEnd(ServerLevelAccessor level)
+    {
+        return isDimension(level, Level.END);
+    }
+
+    public static boolean canSeeSky(ServerLevelAccessor level, BlockPos pos)
+    {
+        return isOverworld(level) && level.getLevel().canSeeSky(pos);
+    }
+
+    public static boolean random(@Nullable RandomSource random, int bound)
+    {
+        RandomSource source = random == null ? RandomSource.create() : random;
+        return source.nextInt(bound) == 0;
     }
 
     /**

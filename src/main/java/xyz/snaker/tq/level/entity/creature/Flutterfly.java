@@ -36,6 +36,11 @@ public class Flutterfly extends FlyingPassive
         super(type, level);
     }
 
+    public static <T extends Entity> boolean spawnRules(EntityType<T> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
+    {
+        return WorldStuff.canSeeSky(level, pos) && WorldStuff.random(random, 75);
+    }
+
     public static AttributeSupplier attributes()
     {
         return Animal.createMobAttributes()
@@ -45,7 +50,7 @@ public class Flutterfly extends FlyingPassive
     }
 
     @Override
-    protected void registerGoals()
+    public void registerGoals()
     {
         super.registerGoals();
         goalSelector.addGoal(6, new AvoidEntityGoal<>(this, Spider.class, 6f, 1D, 1.2D));
@@ -54,7 +59,7 @@ public class Flutterfly extends FlyingPassive
 
     @Nullable
     @Override
-    protected SoundEvent getAmbientSound()
+    public SoundEvent getAmbientSound()
     {
         return Sounds.FLUTTERFLY_AMBIENT.get();
     }
@@ -63,10 +68,5 @@ public class Flutterfly extends FlyingPassive
     public @NotNull Packet<ClientGamePacketListener> getAddEntityPacket()
     {
         return NetworkHooks.getEntitySpawningPacket(this);
-    }
-
-    public static <T extends Entity> boolean spawnRules(EntityType<T> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
-    {
-        return WorldStuff.isDimension(level, Level.OVERWORLD);
     }
 }

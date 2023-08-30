@@ -44,6 +44,7 @@ public class ShaderBlockItemRenderer extends PreppedRenderer
         map.put(Items.STARRY_BLOCK.get(), ItemLikeRenderType.BLACK_STARS);
         map.put(Items.GEOMETRIC_BLOCK.get(), ItemLikeRenderType.CLIP);
         map.put(Items.BURNING_BLOCK.get(), ItemLikeRenderType.BURN);
+        map.put(Items.FOGGY_BLOCK.get(), ItemLikeRenderType.BLUR_FOG);
     });
     private final RenderType type;
 
@@ -74,6 +75,7 @@ public class ShaderBlockItemRenderer extends PreppedRenderer
                 case MULTICOLOUR -> overlayBlock = Blocks.SKIN_OVERLAY.get();
                 case BLACK_STARS -> overlayBlock = Blocks.WHITE_OVERLAY.get();
                 case BURN -> overlayBlock = Blocks.LIGHT_OVERLAY.get();
+                case BLUR_FOG -> overlayBlock = Blocks.BRIGHT_OVERLAY.get();
                 case CLIP, FIRE -> overlayBlock = Blocks.DARK_OVERLAY.get();
                 default -> SnakerLib.LOGGER.warnf("RenderType '%s' is not an internal block item render type", renderType);
             }

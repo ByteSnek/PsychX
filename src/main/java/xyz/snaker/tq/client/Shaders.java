@@ -14,6 +14,9 @@ import net.minecraftforge.client.event.RegisterShadersEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
+import org.joml.Vector3f;
+import org.joml.Vector4f;
+
 import com.mojang.blaze3d.shaders.Uniform;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
@@ -160,7 +163,7 @@ public class Shaders
             blackStars.enqueueTask(() ->
             {
                 blackStarsTime.set((SnakerLib.getClientTickCount() + Minecraft.getInstance().getFrameTime()) / 20F);
-                blackStarsColour.set(1F, 1F, 1F);
+                blackStarsColour.set(new Vector3f(1F));
                 blackStarsBackground.set(0);
                 blackStarsInvert.set(0);
             });
@@ -176,7 +179,7 @@ public class Shaders
             whiteStars.enqueueTask(() ->
             {
                 whiteStarsTime.set((SnakerLib.getClientTickCount() + Minecraft.getInstance().getFrameTime()) / 20F);
-                whiteStarsColour.set(1F, 1F, 1F);
+                whiteStarsColour.set(new Vector3f(1F));
                 whiteStarsBackground.set(0);
                 whiteStarsInvert.set(1);
             });
@@ -192,7 +195,7 @@ public class Shaders
             redStars.enqueueTask(() ->
             {
                 redStarsTime.set((SnakerLib.getClientTickCount() + Minecraft.getInstance().getFrameTime()) / 20F);
-                redStarsColour.set(0.85F, 0.1F, 0.25F);
+                redStarsColour.set(new Vector3f(0.85F, 0.1F, 0.25F));
                 redStarsBackground.set(1);
                 redStarsInvert.set(0);
             });
@@ -208,7 +211,7 @@ public class Shaders
             greenStars.enqueueTask(() ->
             {
                 greenStarsTime.set((SnakerLib.getClientTickCount() + Minecraft.getInstance().getFrameTime()) / 20F);
-                greenStarsColour.set(0.5F, 1F, 0.25F);
+                greenStarsColour.set(new Vector3f(0.5F, 1F, 0.25F));
                 greenStarsBackground.set(1);
                 greenStarsInvert.set(0);
             });
@@ -224,7 +227,7 @@ public class Shaders
             blueStars.enqueueTask(() ->
             {
                 blueStarsTime.set((SnakerLib.getClientTickCount() + Minecraft.getInstance().getFrameTime()) / 20F);
-                blueStarsColour.set(0F, 0.5F, 1F);
+                blueStarsColour.set(new Vector3f(0F, 0.5F, 1F));
                 blueStarsBackground.set(1);
                 blueStarsInvert.set(0);
             });
@@ -240,7 +243,7 @@ public class Shaders
             yellowStars.enqueueTask(() ->
             {
                 yellowStarsTime.set((SnakerLib.getClientTickCount() + Minecraft.getInstance().getFrameTime()) / 20F);
-                yellowStarsColour.set(1F, 1F, 0F);
+                yellowStarsColour.set(new Vector3f(1F, 1F, 0F));
                 yellowStarsBackground.set(1);
                 yellowStarsInvert.set(0);
             });
@@ -256,7 +259,7 @@ public class Shaders
             pinkStars.enqueueTask(() ->
             {
                 pinkStarsTime.set((SnakerLib.getClientTickCount() + Minecraft.getInstance().getFrameTime()) / 20F);
-                pinkStarsColour.set(1F, 0.5F, 0.8F);
+                pinkStarsColour.set(new Vector3f(1F, 0.5F, 0.8F));
                 pinkStarsBackground.set(1);
                 pinkStarsInvert.set(0);
             });
@@ -272,7 +275,7 @@ public class Shaders
             purpleStars.enqueueTask(() ->
             {
                 purpleStarsTime.set((SnakerLib.getClientTickCount() + Minecraft.getInstance().getFrameTime()) / 20F);
-                purpleStarsColour.set(0.6F, 0F, 0.8F);
+                purpleStarsColour.set(new Vector3f(0.6F, 0F, 0.8F));
                 purpleStarsBackground.set(1);
                 purpleStarsInvert.set(0);
             });
@@ -282,7 +285,7 @@ public class Shaders
         {
             plain = UnsafeStuff.cast(shaderInstance);
             plainColour = plain.getColourUniform();
-            plain.enqueueTask(() -> plainColour.set(0F, 0F, 0F, 0F));
+            plain.enqueueTask(() -> plainColour.set(new Vector4f(0)));
         });
 
         registerShader("blur_fog", shaderInstance ->
@@ -292,6 +295,12 @@ public class Shaders
             blurFogIntensity = blurFog.getUniform("Intensity");
             blurFogValue = blurFog.getUniform("Value");
             blurFogColour = blurFog.getColourUniform();
+            blurFog.enqueueTask(() ->
+            {
+                Shaders.getBlurFogColour().set(RenderStuff.hexToVec3f("3E00A0"));
+                Shaders.getBlurFogValue().set(RenderStuff.hexToVec3f("FFFFFF"));
+                Shaders.getBlurFogIntensity().set(5F);
+            });
         });
 
         registerShader("pulse", shaderInstance ->

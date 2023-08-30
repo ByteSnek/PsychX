@@ -44,7 +44,8 @@ public class Items
     public static final RegistryObject<Item> TOURNIQUET = register("tourniquet", Tourniquet::new);
     public static final RegistryObject<Item> TOURNIQUET_CLASP = register("tourniquet_clasp", EmptyItem::new);
     public static final RegistryObject<Item> TOURNIQUET_WEBBING = register("tourniquet_webbing", EmptyItem::new);
-    public static final RegistryObject<Item> NYLON_TWINE = register("nylon_twine", EmptyItem::new);
+    public static final RegistryObject<Item> SATURATED_TWINE = register("saturated_twine", EmptyItem::new);
+    public static final RegistryObject<Item> WEATHERED_TWINE = register("weathered_twine", EmptyItem::new);
 
     public static final RegistryObject<Item> SWIRL_BLOCK = registerShaderBlockItem("swirl_block", Blocks.SWIRL);
     public static final RegistryObject<Item> SNOWFLAKE_BLOCK = registerShaderBlockItem("snowflake_block", Blocks.SNOWFLAKE);
@@ -54,6 +55,7 @@ public class Items
     public static final RegistryObject<Item> STARRY_BLOCK = registerShaderBlockItem("starry_block", Blocks.STARRY);
     public static final RegistryObject<Item> GEOMETRIC_BLOCK = registerShaderBlockItem("geometric_block", Blocks.GEOMETRIC);
     public static final RegistryObject<Item> BURNING_BLOCK = registerShaderBlockItem("burning_block", Blocks.BURNING);
+    public static final RegistryObject<Item> FOGGY_BLOCK = registerShaderBlockItem("foggy_block", Blocks.FOGGY);
 
     public static final RegistryObject<Item> COSMO_SPAWN_EGG = registerSpawnEgg("cosmo_spawn_egg", Entities.COSMO);
     public static final RegistryObject<Item> SNIPE_SPAWN_EGG = registerSpawnEgg("snipe_spawn_egg", Entities.SNIPE);
@@ -65,7 +67,6 @@ public class Items
     public static final RegistryObject<Item> ANTI_COSMO_SPAWN_EGG = registerSpawnEgg("anti_cosmo_spawn_egg", Entities.ANTI_COSMO);
     public static final RegistryObject<Item> EERIE_CRETIN_SPAWN_EGG = registerSpawnEgg("eerie_cretin_spawn_egg", Entities.EERIE_CRETIN);
     public static final RegistryObject<Item> LEET_SPAWN_EGG = registerSpawnEgg("leet_spawn_egg", Entities.LEET);
-    public static final RegistryObject<Item> TEST_SPAWN_EGG = registerSpawnEgg("test_spawn_egg", Entities.TEST);
 
     static RegistryObject<Item> register(String name, Supplier<Item> item)
     {

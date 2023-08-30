@@ -1,39 +1,17 @@
 {
     "random_fx": {
         "sounds": [
-            {
-                "name": "tq:misc/randomfx_1"
-            },
-            {
-                "name": "tq:misc/randomfx_2"
-            },
-            {
-                "name": "tq:misc/randomfx_3"
-            },
-            {
-                "name": "tq:misc/randomfx_4"
-            },
-            {
-                "name": "tq:misc/randomfx_5"
-            },
-            {
-                "name": "tq:misc/randomfx_6"
-            },
-            {
-                "name": "tq:misc/randomfx_7"
-            },
-            {
-                "name": "tq:misc/randomfx_8"
-            },
-            {
-                "name": "tq:misc/randomfx_9"
-            },
-            {
-                "name": "tq:misc/randomfx_10"
-            },
-            {
-                "name": "tq:misc/randomfx_11"
-            }
+            "tq:misc/randomfx_1",
+            "tq:misc/randomfx_2",
+            "tq:misc/randomfx_3",
+            "tq:misc/randomfx_4",
+            "tq:misc/randomfx_5",
+            "tq:misc/randomfx_6",
+            "tq:misc/randomfx_7",
+            "tq:misc/randomfx_8",
+            "tq:misc/randomfx_9",
+            "tq:misc/randomfx_10",
+            "tq:misc/randomfx_11"
         ]
     },
     "o": {
@@ -41,7 +19,7 @@
             {
                 "name": "tq:ambient/o",
                 "stream": true,
-                "volume": 0.1
+                "volume": 0.05
             }
         ]
     },
@@ -50,25 +28,16 @@
             {
                 "name": "tq:ambient/xxed",
                 "stream": true,
-                "volume": 0.1
+                "volume": 0.05
             }
         ]
     },
-    "sun_gazer": {
+    "relative_resolute": {
         "sounds": [
             {
-                "name": "tq:ambient/sun_gazer",
+                "name": "tq:ambient/relative_resolute",
                 "stream": true,
-                "volume": 0.1
-            }
-        ]
-    },
-    "relative_resoluter": {
-        "sounds": [
-            {
-                "name": "tq:ambient/relative_resoluter",
-                "stream": true,
-                "volume": 0.1
+                "volume": 0.05
             }
         ]
     },
@@ -77,16 +46,7 @@
             {
                 "name": "tq:ambient/regenerator",
                 "stream": true,
-                "volume": 0.1
-            }
-        ]
-    },
-    "marble_particle": {
-        "sounds": [
-            {
-                "name": "tq:ambient/marble_particle",
-                "stream": true,
-                "volume": 0.1
+                "volume": 0.05
             }
         ]
     },
@@ -95,66 +55,50 @@
             {
                 "name": "tq:ambient/limbo",
                 "stream": true,
-                "volume": 0.1
+                "volume": 0.05
             }
         ]
     },
-    "fly_wire": {
+    "wire": {
         "sounds": [
             {
-                "name": "tq:ambient/fly_wire",
-                "stream": true,
-                "volume": 0.1
-            }
-        ]
-    },
-    "flora": {
-        "sounds": [
-            {
-                "name": "tq:ambient/flora",
+                "name": "tq:ambient/wire",
                 "stream": true,
                 "volume": 0.1
             }
         ]
     },
     "confuse": {
-        "subtitle": "sounds.tq.confuse",
         "sounds": [
             "tq:yn/confuse"
         ]
     },
     "earth": {
-        "subtitle": "sounds.tq.earth",
         "sounds": [
             "tq:yn/earth"
         ]
     },
     "fog": {
-        "subtitle": "sounds.tq.fog",
         "sounds": [
             "tq:yn/fog"
         ]
     },
     "gaze": {
-        "subtitle": "sounds.tq.gaze",
         "sounds": [
             "tq:yn/gaze"
         ]
     },
     "night": {
-        "subtitle": "sounds.tq.night",
         "sounds": [
             "tq:yn/night"
         ]
     },
     "utterfly_shoot": {
-        "subtitle": "sounds.tq.utterfly_shoot",
         "sounds": [
             "tq:utterfly/shoot"
         ]
     },
     "utterfly_ambient": {
-        "subtitle": "sounds.tq.utterfly_ambient",
         "sounds": [
             {
                 "name": "tq:yn/poison"
@@ -162,7 +106,6 @@
         ]
     },
     "flutterfly_ambient": {
-        "subtitle": "sounds.tq.flutterfly_ambient",
         "sounds": [
             {
                 "name": "tq:yn/poison",
@@ -171,19 +114,16 @@
         ]
     },
     "snipe_ambient": {
-        "subtitle": "sounds.tq.snipe_ambient",
         "sounds": [
             "tq:snipe/ambient"
         ]
     },
     "snipe_hurt": {
-        "subtitle": "sounds.tq.snipe_hurt",
         "sounds": [
             "tq:snipe/hurt"
         ]
     },
     "cosmo_hurt": {
-        "subtitle": "sounds.tq.cosmo_hurt",
         "sounds": [
             {
                 "name": "tq:cosmo/hurt1",
@@ -200,7 +140,6 @@
         ]
     },
     "anti_cosmo_hurt": {
-        "subtitle": "sounds.tq.anti_cosmo_hurt",
         "sounds": [
             {
                 "name": "tq:cosmo/hurt1",
@@ -220,13 +159,11 @@
         ]
     },
     "entity_death": {
-        "subtitle": "sounds.tq.entity_death",
         "sounds": [
             "tq:yn/dark"
         ]
     },
     "ting": {
-        "subtitle": "sounds.tq.ting",
         "sounds": [
             {
                 "name": "minecraft:random/anvil_land",
@@ -236,7 +173,6 @@
         ]
     },
     "pew": {
-        "subtitle": "sounds.tq.pew",
         "sounds": [
             "tq:misc/bullet0",
             "tq:misc/bullet1",
@@ -257,25 +193,21 @@
         ]
     },
     "field": {
-        "subtitle": "sounds.tq.field",
         "sounds": [
             "tq:misc/field"
         ]
     },
     "hit": {
-        "subtitle": "sounds.snakerbne.hit",
         "sounds": [
             "tq:misc/hit"
         ]
     },
     "laser": {
-        "subtitle": "sounds.snakerbne.laser",
         "sounds": [
             "tq:misc/laser"
         ]
     },
     "pulse": {
-        "subtitle": "sounds.snakerbne.pulse",
         "sounds": [
             "tq:misc/pulse"
         ]

@@ -33,12 +33,13 @@ public class Spectral
                 .grassColorOverride(0x2e165c)
                 .ambientParticle(particles)
                 .ambientMoodSound(mood)
-                .ambientLoopSound(Holder.direct(Sounds.SUN_GAZER.get()));
+                .ambientLoopSound(Holder.direct(Sounds.RELATIVE_RESOLUTE.get()));
 
         BiomeDefaultFeatures.addDefaultCarversAndLakes(gen);
 
         DefaultFeatures.addDefaultPlants(gen);
         DefaultFeatures.addSwirlRubble(gen);
+        DefaultFeatures.addWaterColourRubble(gen);
 
         spawns.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(Entities.EERIE_CRETIN.get(), 1, 1, 1));
         spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(Entities.FROLICKER.get(), 1, 1, 1));

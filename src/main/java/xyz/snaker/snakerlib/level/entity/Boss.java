@@ -32,7 +32,7 @@ public abstract class Boss<T extends Mob> extends PathfinderMob implements BossM
     /**
      * The current boss event
      **/
-    protected final CustomBossEvent bossEvent = new CustomBossEvent(getResourceLocation(), getBossDisplayName());
+    public final CustomBossEvent bossEvent = new CustomBossEvent(getResourceLocation(), getBossDisplayName());
 
     public Boss(EntityType<? extends PathfinderMob> type, Level level, int xpReward)
     {
@@ -67,7 +67,7 @@ public abstract class Boss<T extends Mob> extends PathfinderMob implements BossM
     }
 
     @Override
-    protected void registerGoals()
+    public void registerGoals()
     {
         goalSelector.addGoal(1, new SwitchGameModeGoal(getBossInstance()));
     }
@@ -115,7 +115,7 @@ public abstract class Boss<T extends Mob> extends PathfinderMob implements BossM
     }
 
     @Override
-    protected boolean shouldDespawnInPeaceful()
+    public boolean shouldDespawnInPeaceful()
     {
         return true;
     }

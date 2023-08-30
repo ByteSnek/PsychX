@@ -47,6 +47,26 @@ public class Maths
      **/
     public static final float TWO_PI = Maths.PI * 2;
 
+    public static int middle(int a, int b)
+    {
+        return (a + b) / 2;
+    }
+
+    public static long middle(long a, long b)
+    {
+        return (a + b) / 2;
+    }
+
+    public static float middle(float a, float b)
+    {
+        return (a + b) / 2;
+    }
+
+    public static double middle(double a, double b)
+    {
+        return (a + b) / 2;
+    }
+
     /**
      * Checks if the difference of a and b are equal to the wanted value
      *

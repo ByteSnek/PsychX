@@ -9,7 +9,7 @@
   "downfall": 0.0,
   "effects": {
     "ambient_sound": {
-      "sound_id": "tq:marble_particle"
+      "sound_id": "tq:limbo"
     },
     "fog_color": 212005,
     "foliage_color": 667424,
@@ -38,7 +38,9 @@
       "minecraft:lake_lava_underground",
       "minecraft:lake_lava_surface"
     ],
-    [],
+    [
+      "tq:foggy_rubble"
+    ],
     [],
     [],
     [],
@@ -47,7 +49,7 @@
     [],
     [
       "minecraft:trees_plains",
-      "tq:geometric",
+      "tq:geometric_tree",
       "tq:snakeroot",
       "tq:tall_snakeroot",
       "tq:splitleaf",

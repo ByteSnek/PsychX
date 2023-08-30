@@ -36,7 +36,7 @@ public abstract class Trajectile extends AbstractArrow
     }
 
     @Override
-    protected @NotNull ItemStack getPickupItem()
+    public @NotNull ItemStack getPickupItem()
     {
         return ItemStack.EMPTY;
     }

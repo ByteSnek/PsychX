@@ -38,7 +38,10 @@
       "minecraft:lake_lava_underground",
       "minecraft:lake_lava_surface"
     ],
-    [],
+    [
+      "tq:geometric_rubble",
+      "tq:multicolour_rubble"
+    ],
     [],
     [],
     [],

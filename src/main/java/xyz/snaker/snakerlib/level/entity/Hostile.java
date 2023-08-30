@@ -38,7 +38,7 @@ public abstract class Hostile extends Monster
     }
 
     @Override
-    protected void registerGoals()
+    public void registerGoals()
     {
         goalSelector.addGoal(1, new SwitchGameModeGoal(this));
         goalSelector.addGoal(6, new RandomStrollGoal(this, 1));

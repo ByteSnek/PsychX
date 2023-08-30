@@ -23,8 +23,8 @@ import net.minecraftforge.registries.RegistryObject;
  **/
 public class EntityDropHandler
 {
-    public final RandomSource random = RandomSource.create();
-    private final Map<EntityVariants.Cosmo, Item> cosmoDropVariants = new AsyncHashMap<>();
+    final RandomSource random = RandomSource.create();
+    final Map<EntityVariants.Cosmo, Item> cosmoDropVariants = new AsyncHashMap<>();
 
     @SubscribeEvent
     public void onLivingDrops(LivingDropsEvent event)

@@ -37,13 +37,10 @@ public class Sounds
 
     public static final RegistryObject<SoundEvent> O = register("o");
     public static final RegistryObject<SoundEvent> XXED = register("xxed");
-    public static final RegistryObject<SoundEvent> SUN_GAZER = register("sun_gazer");
-    public static final RegistryObject<SoundEvent> RELATIVE_RESOLUTER = register("relative_resoluter");
+    public static final RegistryObject<SoundEvent> RELATIVE_RESOLUTE = register("relative_resolute");
     public static final RegistryObject<SoundEvent> REGENERATOR = register("regenerator");
-    public static final RegistryObject<SoundEvent> MARBLE_PARTICLE = register("marble_particle");
     public static final RegistryObject<SoundEvent> LIMBO = register("limbo");
-    public static final RegistryObject<SoundEvent> FLY_WIRE = register("fly_wire");
-    public static final RegistryObject<SoundEvent> FLORA = register("flora");
+    public static final RegistryObject<SoundEvent> WIRE = register("wire");
 
     static RegistryObject<SoundEvent> register(String name)
     {

@@ -39,8 +39,13 @@ public class Leet extends FlyingHostile implements RangedAttackMob
         super(type, level);
     }
 
+    public static <T extends Entity> boolean spawnRules(EntityType<T> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
+    {
+        return WorldStuff.isDimension(level, Keys.COMATOSE) && WorldStuff.random(random, 75);
+    }
+
     @Override
-    protected void registerGoals()
+    public void registerGoals()
     {
         goalSelector.addGoal(0, new FlyGoal(this));
     }
@@ -86,10 +91,5 @@ public class Leet extends FlyingHostile implements RangedAttackMob
         ray.shoot(x, y - ray.getY() + Math.sqrt(x * x + z * z) * 0.2, z, 1.6F, 12);
 
         level().addFreshEntity(ray);
-    }
-
-    public static <T extends Entity> boolean spawnRules(EntityType<T> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
-    {
-        return WorldStuff.isDimension(level, Keys.COMATOSE);
     }
 }

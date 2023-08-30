@@ -37,6 +37,6 @@ public class EerieCretin extends Hostile
 
     public static <T extends Entity> boolean spawnRules(EntityType<T> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return WorldStuff.isDimension(level, Keys.COMATOSE);
+        return WorldStuff.isDimension(level, Keys.COMATOSE) && WorldStuff.random(random, 75);
     }
 }

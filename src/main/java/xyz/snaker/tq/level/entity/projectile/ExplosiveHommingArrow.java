@@ -21,14 +21,16 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by SnakerBone on 20/02/2023 <br>
- * Credit: ProjectE
+ * Created by SnakerBone on 20/02/2023
+ * <p>
+ * Credit: <a href="https://github.com/sinkillerj/ProjectE/blob/mc1.16.x/src/main/java/moze_intel/projecte/gameObjs/entity/EntityHomingArrow.java">ProjectE</a>
  **/
 public class ExplosiveHommingArrow extends Trajectile
 {
-    private static final EntityDataAccessor<Integer> TARGET_ID = SynchedEntityData.defineId(ExplosiveHommingArrow.class, EntityDataSerializers.INT);
-    private static final int NULL_TARGET_ID = -1;
-    private int newTargetCooldown = 0;
+    static final EntityDataAccessor<Integer> TARGET_ID = SynchedEntityData.defineId(ExplosiveHommingArrow.class, EntityDataSerializers.INT);
+    static final int NULL_TARGET_ID = -1;
+
+    int newTargetCooldown = 0;
 
     public ExplosiveHommingArrow(EntityType<ExplosiveHommingArrow> type, Level level)
     {
@@ -56,7 +58,7 @@ public class ExplosiveHommingArrow extends Trajectile
     }
 
     @Override
-    protected void doPostHurtEffects(@NotNull LivingEntity living)
+    public void doPostHurtEffects(@NotNull LivingEntity living)
     {
         super.doPostHurtEffects(living);
         living.invulnerableTime = 0;
@@ -93,7 +95,7 @@ public class ExplosiveHommingArrow extends Trajectile
         super.tick();
     }
 
-    private Vec3 transform(Vec3 axis, double angle, Vec3 normal)
+    public Vec3 transform(Vec3 axis, double angle, Vec3 normal)
     {
         double m00 = 1;
         double m01 = 0;
@@ -129,7 +131,7 @@ public class ExplosiveHommingArrow extends Trajectile
         return new Vec3(m00 * normal.x + m01 * normal.y + m02 * normal.z, m10 * normal.x + m11 * normal.y + m12 * normal.z, m20 * normal.x + m21 * normal.y + m22 * normal.z);
     }
 
-    private void findNewTarget()
+    public void findNewTarget()
     {
         List<Mob> candidates = level().getEntitiesOfClass(Mob.class, this.getBoundingBox().inflate(8, 8, 8));
         if (!candidates.isEmpty()) {
@@ -139,17 +141,17 @@ public class ExplosiveHommingArrow extends Trajectile
         newTargetCooldown = 5;
     }
 
-    private Mob getTarget()
+    public Mob getTarget()
     {
         return (Mob) level().getEntity(entityData.get(TARGET_ID));
     }
 
-    private boolean hasTarget()
+    public boolean hasTarget()
     {
         return getTarget() != null && !(getTarget() instanceof Utterfly);
     }
 
-    private double angleBetween(Vec3 a, Vec3 b)
+    public double angleBetween(Vec3 a, Vec3 b)
     {
         double vDot = a.dot(b) / (a.length() * b.length());
         if (vDot < -1.0) {
@@ -161,7 +163,7 @@ public class ExplosiveHommingArrow extends Trajectile
         return Math.acos(vDot);
     }
 
-    private double wrap180Radian(double radian)
+    public double wrap180Radian(double radian)
     {
         radian %= 2 * Math.PI;
         while (radian >= Math.PI) {
@@ -173,7 +175,7 @@ public class ExplosiveHommingArrow extends Trajectile
         return radian;
     }
 
-    private double clampAbs(double param, double maxMagnitude)
+    public double clampAbs(double param, double maxMagnitude)
     {
         if (Math.abs(param) > maxMagnitude) {
             if (param < 0) {
@@ -186,7 +188,7 @@ public class ExplosiveHommingArrow extends Trajectile
     }
 
     @Override
-    protected void onHit(@NotNull HitResult result)
+    public void onHit(@NotNull HitResult result)
     {
         super.onHit(result);
         level().explode(this, getX(), getY(), getZ(), 1, Level.ExplosionInteraction.NONE);

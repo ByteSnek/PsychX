@@ -44,8 +44,8 @@ import org.jetbrains.annotations.Nullable;
  **/
 public class Frolicker extends FlyingPassive
 {
-    private final Predicate<BlockState> blocksToIgnore = state -> state.is(Blocks.WATER) || state.is(Blocks.LAVA) || state.is(Blocks.AIR) || state.is(BlockTags.LEAVES) || state.is(BlockTags.BEE_GROWABLES) || state.is(BlockTags.FLOWERS);
-    private int onGroundTicks;
+    final Predicate<BlockState> blocksToIgnore = state -> state.is(Blocks.WATER) || state.is(Blocks.LAVA) || state.is(Blocks.AIR) || state.is(BlockTags.LEAVES) || state.is(BlockTags.BEE_GROWABLES) || state.is(BlockTags.FLOWERS);
+    int onGroundTicks;
 
     public Frolicker(EntityType<? extends FlyingPassive> type, Level level)
     {
@@ -54,7 +54,7 @@ public class Frolicker extends FlyingPassive
 
     public static boolean spawnRules(EntityType<Frolicker> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return WorldStuff.isDimension(level, Keys.COMATOSE) || WorldStuff.isDimension(level, Level.OVERWORLD);
+        return (WorldStuff.isDimension(level, Keys.COMATOSE) && WorldStuff.random(random, 100)) || (WorldStuff.canSeeSky(level, pos) && WorldStuff.random(random, 75));
     }
 
     public boolean canDoFunny()
@@ -101,7 +101,7 @@ public class Frolicker extends FlyingPassive
     }
 
     @Override
-    protected void registerGoals()
+    public void registerGoals()
     {
         super.registerGoals();
         goalSelector.addGoal(5, new AvoidEntityGoal<>(this, Spider.class, 6, 1, 1.2));

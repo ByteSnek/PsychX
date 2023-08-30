@@ -39,6 +39,7 @@ public class Surreal
 
         DefaultFeatures.addDefaultPlants(gen);
         DefaultFeatures.addFlareRubble(gen);
+        DefaultFeatures.addBurningRubble(gen);
 
         spawns.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(Entities.FLARE.get(), 1, 1, 1));
 

@@ -39,7 +39,6 @@ public class Entities
     public static final RegistryObject<EntityType<CosmicRay>> COSMIC_RAY = registerMisc("cosmic_ray", CosmicRay::new, 0.1F, 0.1F);
     public static final RegistryObject<EntityType<EerieCretin>> EERIE_CRETIN = registerMob("eerie_cretin", EerieCretin::new, 0.375F, 0.375F);
     public static final RegistryObject<EntityType<Leet>> LEET = registerMob("leet", Leet::new, 0.375F, 0.375F);
-    public static final RegistryObject<EntityType<Test>> TEST = registerMob("test", Test::new, 0.375F, 0.375F);
 
     static <T extends Animal> RegistryObject<EntityType<T>> registerCreature(String name, EntityType.EntityFactory<T> entity, float width, float height)
     {

@@ -41,8 +41,8 @@ import org.jetbrains.annotations.NotNull;
  **/
 public class CosmicCreeper extends Creeper
 {
-    private int teleportTime;
-    private final int radius = 6;
+    int teleportTime;
+    final int radius = 6;
 
     public CosmicCreeper(EntityType<? extends Creeper> type, Level level)
     {
@@ -52,7 +52,7 @@ public class CosmicCreeper extends Creeper
 
     public static boolean spawnRules(EntityType<CosmicCreeper> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return (WorldStuff.isDimension(level, Level.OVERWORLD) && random.nextInt(64) == 0 && checkMonsterSpawnRules(type, level, reason, pos, random)) || WorldStuff.isDimension(level, Keys.COMATOSE) || WorldStuff.isDimension(level, Level.END);
+        return WorldStuff.isDimension(level, Keys.COMATOSE) && WorldStuff.random(random, 75);
     }
 
     public static AttributeSupplier attributes()
@@ -108,13 +108,13 @@ public class CosmicCreeper extends Creeper
         super.tick();
     }
 
-    private void randomTeleport(double x, double y, double z)
+    public void randomTeleport(double x, double y, double z)
     {
         randomTeleport(x, y, z, true);
         level().playSound(null, xo, yo, zo, SoundEvents.FOX_TELEPORT, getSoundSource(), 1, 1);
     }
 
-    private void teleportTargetToCreeper()
+    public void teleportTargetToCreeper()
     {
         if (!level().isClientSide) {
             BlockPos pos = new BlockPos((int) getX(), (int) getY(), (int) getZ());
@@ -137,12 +137,12 @@ public class CosmicCreeper extends Creeper
         }
     }
 
-    private void markDead(boolean isDead)
+    public void markDead(boolean isDead)
     {
         dead = isDead;
     }
 
-    private void setDead(boolean isDead, DamageSource source)
+    public void setDead(boolean isDead, DamageSource source)
     {
         if (isDead) {
             super.kill();
@@ -194,7 +194,7 @@ public class CosmicCreeper extends Creeper
 
     static class MoveCtrl extends MoveControl
     {
-        private final CosmicCreeper entity;
+        final CosmicCreeper entity;
 
         public MoveCtrl(CosmicCreeper creeper)
         {

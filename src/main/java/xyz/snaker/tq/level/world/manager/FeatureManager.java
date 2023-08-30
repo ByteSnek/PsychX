@@ -28,7 +28,13 @@ public class FeatureManager
         registerPlacement(context, "swirl_rubble", simpleSurfacePlacement(2));
         registerPlacement(context, "flare_rubble", simpleSurfacePlacement(2));
         registerPlacement(context, "watercolour_rubble", simpleSurfacePlacement(2));
-        registerPlacement(context, "geometric", simpleTreePlacement(GEOMETRIC_SAPLING, 1, 0.1F, 1));
+        registerPlacement(context, "burning_rubble", simpleSurfacePlacement(2));
+        registerPlacement(context, "geometric_rubble", simpleSurfacePlacement(2));
+        registerPlacement(context, "multicolour_rubble", simpleSurfacePlacement(2));
+        registerPlacement(context, "snowflake_rubble", simpleSurfacePlacement(2));
+        registerPlacement(context, "starry_rubble", simpleSurfacePlacement(2));
+        registerPlacement(context, "foggy_rubble", simpleSurfacePlacement(2));
+        registerPlacement(context, "geometric_tree", simpleTreePlacement(GEOMETRIC_SAPLING, 1, 0.1F, 1));
     }
 
     public static void configs(BootstapContext<ConfiguredFeature<?, ?>> context)
@@ -41,7 +47,13 @@ public class FeatureManager
         registerConfiguredFeature(context, "swirl_rubble", SWIRL_RUBBLE, SWIRL);
         registerConfiguredFeature(context, "flare_rubble", FLARE_RUBBLE, FLARE);
         registerConfiguredFeature(context, "watercolour_rubble", WATERCOLOUR_RUBBLE, WATERCOLOUR);
-        registerConfiguredFeature(context, "geometric", TREE, createGeometricTreeConfig(GEOMETRIC_LOG, GEOMETRIC, COMASTONE));
+        registerConfiguredFeature(context, "burning_rubble", BURNING_RUBBLE, BURNING);
+        registerConfiguredFeature(context, "geometric_rubble", GEOMETRIC_RUBBLE, GEOMETRIC);
+        registerConfiguredFeature(context, "multicolour_rubble", MULTICOLOUR_RUBBLE, MULTICOLOUR);
+        registerConfiguredFeature(context, "snowflake_rubble", SNOWFLAKE_RUBBLE, SNOWFLAKE);
+        registerConfiguredFeature(context, "starry_rubble", STARRY_RUBBLE, STARRY);
+        registerConfiguredFeature(context, "foggy_rubble", FOGGY_RUBBLE, FOGGY);
+        registerConfiguredFeature(context, "geometric_tree", TREE, createGeometricTreeConfig(GEOMETRIC_LOG, GEOMETRIC, COMASTONE));
     }
 
     public static void modifiers(BootstapContext<BiomeModifier> context)
@@ -54,6 +66,12 @@ public class FeatureManager
         registerBiomeModifier(context, "swirl_rubble", LOCAL_MODIFICATIONS);
         registerBiomeModifier(context, "flare_rubble", LOCAL_MODIFICATIONS);
         registerBiomeModifier(context, "watercolour_rubble", LOCAL_MODIFICATIONS);
-        registerBiomeModifier(context, "geometric", VEGETAL_DECORATION);
+        registerBiomeModifier(context, "burning_rubble", LOCAL_MODIFICATIONS);
+        registerBiomeModifier(context, "geometric_rubble", LOCAL_MODIFICATIONS);
+        registerBiomeModifier(context, "multicolour_rubble", LOCAL_MODIFICATIONS);
+        registerBiomeModifier(context, "snowflake_rubble", LOCAL_MODIFICATIONS);
+        registerBiomeModifier(context, "starry_rubble", LOCAL_MODIFICATIONS);
+        registerBiomeModifier(context, "foggy_rubble", LOCAL_MODIFICATIONS);
+        registerBiomeModifier(context, "geometric_tree", VEGETAL_DECORATION);
     }
 }

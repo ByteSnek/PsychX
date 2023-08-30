@@ -33,12 +33,13 @@ public class Delusion
                 .grassColorOverride(0x0a2f20)
                 .ambientParticle(particles)
                 .ambientMoodSound(mood)
-                .ambientLoopSound(Holder.direct(Sounds.MARBLE_PARTICLE.get()));
+                .ambientLoopSound(Holder.direct(Sounds.LIMBO.get()));
 
         BiomeDefaultFeatures.addDefaultCarversAndLakes(gen);
 
         DefaultFeatures.addDefaultTrees(gen);
         DefaultFeatures.addDefaultPlants(gen);
+        DefaultFeatures.addFoggyRubble(gen);
 
         spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(Entities.FROLICKER.get(), 1, 1, 1));
 

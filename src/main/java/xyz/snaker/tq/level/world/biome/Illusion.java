@@ -38,7 +38,8 @@ public class Illusion
         BiomeDefaultFeatures.addDefaultCarversAndLakes(gen);
 
         DefaultFeatures.addDefaultPlants(gen);
-        DefaultFeatures.addWaterColourRubble(gen);
+        DefaultFeatures.addSnowflakeRubble(gen);
+        DefaultFeatures.addStarryRubble(gen);
 
         spawns.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(Entities.LEET.get(), 1, 1, 1));
 

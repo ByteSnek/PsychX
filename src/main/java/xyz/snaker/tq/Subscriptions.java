@@ -77,7 +77,6 @@ public class Subscriptions
             event.registerLayerDefinition(CosmoSpineModel.LAYER_LOCATION, CosmoSpineModel::createBodyLayer);
             event.registerLayerDefinition(EerieCretinModel.LAYER_LOCATION, EerieCretinModel::createBodyLayer);
             event.registerLayerDefinition(LeetModel.LAYER_LOCATION, LeetModel::createBodyLayer);
-            event.registerLayerDefinition(TestModel.LAYER_LOCATION, TestModel::createBodyLayer);
         }
 
         @SubscribeEvent
@@ -92,6 +91,7 @@ public class Subscriptions
             event.registerBlockEntityRenderer(BlockEntities.STARRY.get(), new ShaderBlockRenderer<>(ItemLikeRenderType.BLACK_STARS));
             event.registerBlockEntityRenderer(BlockEntities.GEOMETRIC.get(), new ShaderBlockRenderer<>(ItemLikeRenderType.CLIP));
             event.registerBlockEntityRenderer(BlockEntities.BURNING.get(), new ShaderBlockRenderer<>(ItemLikeRenderType.BURN));
+            event.registerBlockEntityRenderer(BlockEntities.FOGGY.get(), new ShaderBlockRenderer<>(ItemLikeRenderType.BLUR_FOG));
         }
 
         @Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -110,7 +110,6 @@ public class Subscriptions
                 bindAttributes(event, Entities.ANTI_COSMO, AntiCosmo.attributes());
                 bindAttributes(event, Entities.EERIE_CRETIN, EerieCretin.attributes());
                 bindAttributes(event, Entities.LEET, Leet.attributes());
-                bindAttributes(event, Entities.TEST, Test.attributes());
             }
 
             @SubscribeEvent
@@ -130,7 +129,6 @@ public class Subscriptions
                 registerEntityRenderer(Entities.COSMIC_RAY, CosmicRayRenderer::new);
                 registerEntityRenderer(Entities.EERIE_CRETIN, EerieCretinRenderer::new);
                 registerEntityRenderer(Entities.LEET, LeetRenderer::new);
-                registerEntityRenderer(Entities.TEST, TestRenderer::new);
             }
 
             @SubscribeEvent
@@ -144,7 +142,6 @@ public class Subscriptions
                 registerSpawn(event, Entities.LEET, Leet::spawnRules);
                 registerSpawn(event, Entities.SNIPE, Snipe::spawnRules);
                 registerSpawn(event, Entities.FLUTTERFLY, Flutterfly::spawnRules);
-                registerSpawn(event, Entities.TEST, Test::spawnRules);
             }
 
             private static <T extends Entity> void registerSpawn(SpawnPlacementRegisterEvent event, RegistryObject<EntityType<T>> type, SpawnPlacements.SpawnPredicate<T> predicate)

@@ -1,0 +1,8 @@
+{
+  "type": "tq:burning_rubble",
+  "config": {
+    "state": {
+      "Name": "tq:burning_block"
+    }
+  }
+}

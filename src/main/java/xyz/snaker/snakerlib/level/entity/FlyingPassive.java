@@ -36,11 +36,11 @@ public abstract class FlyingPassive extends Animal implements FlyingAnimal
         super(type, level);
         this.moveControl = new FlyingMoveControl(this, 20, true);
         this.xpReward = xpReward;
-        setPathfindingMalus(BlockPathTypes.WATER_BORDER, 16);
-        setPathfindingMalus(BlockPathTypes.DANGER_FIRE, -1);
-        setPathfindingMalus(BlockPathTypes.COCOA, -1);
-        setPathfindingMalus(BlockPathTypes.WATER, -1);
-        setPathfindingMalus(BlockPathTypes.FENCE, -1);
+        this.setPathfindingMalus(BlockPathTypes.WATER_BORDER, 16);
+        this.setPathfindingMalus(BlockPathTypes.DANGER_FIRE, -1);
+        this.setPathfindingMalus(BlockPathTypes.COCOA, -1);
+        this.setPathfindingMalus(BlockPathTypes.WATER, -1);
+        this.setPathfindingMalus(BlockPathTypes.FENCE, -1);
     }
 
     public FlyingPassive(EntityType<? extends Animal> type, Level level)
@@ -59,7 +59,7 @@ public abstract class FlyingPassive extends Animal implements FlyingAnimal
     }
 
     @Override
-    protected void registerGoals()
+    public void registerGoals()
     {
         goalSelector.addGoal(5, new WanderGoal(this));
         goalSelector.addGoal(5, new LookAroundGoal(this));
@@ -69,13 +69,13 @@ public abstract class FlyingPassive extends Animal implements FlyingAnimal
     }
 
     @Override
-    protected void playStepSound(@NotNull BlockPos pos, @NotNull BlockState state)
+    public void playStepSound(@NotNull BlockPos pos, @NotNull BlockState state)
     {
 
     }
 
     @Override
-    protected @NotNull PathNavigation createNavigation(@NotNull Level world)
+    public @NotNull PathNavigation createNavigation(@NotNull Level world)
     {
         return new FlyingPathNavigation(this, world);
     }
@@ -87,7 +87,7 @@ public abstract class FlyingPassive extends Animal implements FlyingAnimal
     }
 
     @Override
-    protected void checkFallDamage(double y, boolean onGround, @NotNull BlockState state, @NotNull BlockPos pos)
+    public void checkFallDamage(double y, boolean onGround, @NotNull BlockState state, @NotNull BlockPos pos)
     {
         fallDistance = 0;
     }

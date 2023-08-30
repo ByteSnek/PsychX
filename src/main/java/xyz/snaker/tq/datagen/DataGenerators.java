@@ -5,6 +5,9 @@ import java.util.function.Supplier;
 
 import xyz.snaker.snakerlib.data.gen.SimpleLootTableProvider;
 import xyz.snaker.tq.Tourniqueted;
+import xyz.snaker.tq.datagen.provider.*;
+import xyz.snaker.tq.datagen.provider.loot.BlockLootTables;
+import xyz.snaker.tq.datagen.provider.tags.BlockTags;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -33,16 +36,15 @@ public class DataGenerators
         CompletableFuture<HolderLookup.Provider> provider = event.getLookupProvider();
         PackOutput output = generator.getPackOutput();
 
-        Pair<Supplier<LootTableSubProvider>, LootContextParamSet> blocks = Pair.of(DataProviders.BlockLootTables::new, LootContextParamSets.BLOCK);
+        Pair<Supplier<LootTableSubProvider>, LootContextParamSet> blocks = Pair.of(BlockLootTables::new, LootContextParamSets.BLOCK);
 
-        generator.addProvider(event.includeClient(), new DataProviders.Languages(output));
-        generator.addProvider(event.includeServer(), new DataProviders.BlockStates(output, helper));
-        generator.addProvider(event.includeServer(), new DataProviders.ItemModels(output, helper));
-        generator.addProvider(event.includeServer(), new DataProviders.DatapackEntries(output, provider));
-        generator.addProvider(event.includeServer(), new DataProviders.BiomeTags(output, provider, helper));
-        generator.addProvider(event.includeServer(), new DataProviders.BlockTags(output, provider, helper));
-        generator.addProvider(event.includeServer(), new DataProviders.Recipes(output));
-        generator.addProvider(event.includeServer(), new DataProviders.LootModifiers(output));
+        generator.addProvider(event.includeClient(), new Languages(output));
+        generator.addProvider(event.includeServer(), new BlockStates(output, helper));
+        generator.addProvider(event.includeServer(), new ItemModels(output, helper));
+        generator.addProvider(event.includeServer(), new DatapackEntries(output, provider));
+        generator.addProvider(event.includeServer(), new BlockTags(output, provider, helper));
+        generator.addProvider(event.includeServer(), new Recipes(output));
+        generator.addProvider(event.includeServer(), new LootModifiers(output));
         generator.addProvider(event.includeServer(), new SimpleLootTableProvider(output, blocks).provider());
     }
 }

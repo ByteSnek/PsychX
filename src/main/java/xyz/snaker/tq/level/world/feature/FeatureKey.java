@@ -20,7 +20,13 @@ public enum FeatureKey
     SWIRL_RUBBLE,
     FLARE_RUBBLE,
     WATERCOLOUR_RUBBLE,
-    GEOMETRIC;
+    BURNING_RUBBLE,
+    GEOMETRIC_RUBBLE,
+    MULTICOLOUR_RUBBLE,
+    SNOWFLAKE_RUBBLE,
+    STARRY_RUBBLE,
+    FOGGY_RUBBLE,
+    GEOMETRIC_TREE;
 
     private final String name;
     private final ResourceKey<PlacedFeature> placedKey;

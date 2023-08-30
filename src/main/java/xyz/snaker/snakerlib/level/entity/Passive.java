@@ -59,7 +59,7 @@ public abstract class Passive extends Animal
     }
 
     @Override
-    protected void registerGoals()
+    public void registerGoals()
     {
         goalSelector.addGoal(6, new RandomStrollGoal(this, 1));
         goalSelector.addGoal(5, new RandomLookAroundGoal(this));

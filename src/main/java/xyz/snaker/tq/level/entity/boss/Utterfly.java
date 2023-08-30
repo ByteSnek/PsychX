@@ -44,10 +44,10 @@ import org.jetbrains.annotations.NotNull;
  **/
 public class Utterfly extends FlyingBoss<Utterfly>
 {
-    public static final EntityDataAccessor<Integer> PHASE = SynchedEntityData.defineId(Utterfly.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Boolean> CHARGING = SynchedEntityData.defineId(Utterfly.class, EntityDataSerializers.BOOLEAN);
-    private final CustomBossEvent bossEvent = new CustomBossEvent(new ResourcePath("utterfly"), getDisplayName());
-    private volatile boolean triggerExplosion;
+    static final EntityDataAccessor<Integer> PHASE = SynchedEntityData.defineId(Utterfly.class, EntityDataSerializers.INT);
+    static final EntityDataAccessor<Boolean> CHARGING = SynchedEntityData.defineId(Utterfly.class, EntityDataSerializers.BOOLEAN);
+    final CustomBossEvent bossEvent = new CustomBossEvent(new ResourcePath("utterfly"), getDisplayName());
+    volatile boolean triggerExplosion;
 
     public Utterfly(EntityType<? extends FlyingBoss> type, Level level)
     {
@@ -96,7 +96,7 @@ public class Utterfly extends FlyingBoss<Utterfly>
     }
 
     @Override
-    protected void registerGoals()
+    public void registerGoals()
     {
         goalSelector.addGoal(5, new FlyGoal(this));
         goalSelector.addGoal(7, new LookAroundGoal(this));
@@ -268,25 +268,25 @@ public class Utterfly extends FlyingBoss<Utterfly>
 
     @Nullable
     @Override
-    protected SoundEvent getAmbientSound()
+    public SoundEvent getAmbientSound()
     {
         return Sounds.UTTERFLY_AMBIENT.get();
     }
 
     @Override
-    protected SoundEvent getDeathSound()
+    public SoundEvent getDeathSound()
     {
         return getPhase() == 3 && getHealth() <= 0 ? Sounds.ENTITY_DEATH.get() : null;
     }
 
     @Override
-    protected SoundEvent getHurtSound(@NotNull DamageSource source)
+    public SoundEvent getHurtSound(@NotNull DamageSource source)
     {
         return SoundEvents.SLIME_BLOCK_PLACE;
     }
 
     @Override
-    protected void defineSynchedData()
+    public void defineSynchedData()
     {
         super.defineSynchedData();
         entityData.define(PHASE, 1);
