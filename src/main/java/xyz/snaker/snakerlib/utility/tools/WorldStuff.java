@@ -15,6 +15,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -54,6 +55,11 @@ public class WorldStuff
         return level.getLevel().dimension().equals(wanted);
     }
 
+    public static boolean isBiome(ServerLevelAccessor level, BlockPos pos, ResourceKey<Biome> wanted)
+    {
+        return level.getLevel().getBiome(pos).is(wanted);
+    }
+
     public static boolean isOverworld(ServerLevelAccessor level)
     {
         return isDimension(level, Level.OVERWORLD);
@@ -72,6 +78,21 @@ public class WorldStuff
     public static boolean canSeeSky(ServerLevelAccessor level, BlockPos pos)
     {
         return isOverworld(level) && level.getLevel().canSeeSky(pos);
+    }
+
+    public static boolean isDay(ServerLevelAccessor level)
+    {
+        return level.getLevel().isDay();
+    }
+
+    public static boolean isNight(ServerLevelAccessor level)
+    {
+        return level.getLevel().isNight();
+    }
+
+    public static boolean hasDaylightCycle(ServerLevelAccessor level)
+    {
+        return level.getLevel().dimensionType().bedWorks() && !level.getLevel().dimensionType().hasFixedTime();
     }
 
     public static boolean random(@Nullable RandomSource random, int bound)

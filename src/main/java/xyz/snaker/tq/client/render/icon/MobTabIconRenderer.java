@@ -3,7 +3,6 @@ package xyz.snaker.tq.client.render.icon;
 import xyz.snaker.snakerlib.SnakerLib;
 import xyz.snaker.snakerlib.client.render.CyclicalIconRenderer;
 import xyz.snaker.snakerlib.math.Maths;
-import xyz.snaker.tq.level.entity.boss.AntiCosmo;
 import xyz.snaker.tq.level.entity.boss.Utterfly;
 import xyz.snaker.tq.level.entity.creature.Flutterfly;
 import xyz.snaker.tq.level.entity.creature.Frolicker;
@@ -57,8 +56,6 @@ public class MobTabIconRenderer extends CyclicalIconRenderer
                             new Utterfly(Entities.UTTERFLY.get(), level),
                             new Flutterfly(Entities.FLUTTERFLY.get(), level),
                             new Frolicker(Entities.FROLICKER.get(), level),
-                            new AntiCosmo(Entities.ANTI_COSMO.get(), level),
-                            new EerieCretin(Entities.EERIE_CRETIN.get(), level),
                             new Leet(Entities.LEET.get(), level)
                     };
 

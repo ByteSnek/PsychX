@@ -10,7 +10,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.BootstapContext;
-import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.*;
 
 /**
@@ -40,8 +39,9 @@ public class Immaterial
         DefaultFeatures.addDefaultPlants(gen);
         DefaultFeatures.addGeometricRubble(gen);
         DefaultFeatures.addMultiColourRubble(gen);
+        DefaultFeatures.addDefaultEntitySpawns(spawns);
 
-        spawns.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(Entities.COSMO.get(), 1, 1, 1));
+        WorldGenStuff.addSpawn(spawns, Entities.COSMO, 7, 1, 3);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(false)

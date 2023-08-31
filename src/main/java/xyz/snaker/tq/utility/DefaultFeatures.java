@@ -1,9 +1,11 @@
 package xyz.snaker.tq.utility;
 
 import xyz.snaker.tq.level.world.feature.FeatureKey;
+import xyz.snaker.tq.rego.Entities;
 
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
 
 /**
@@ -82,5 +84,11 @@ public class DefaultFeatures
     public static void addFoggyRubble(BiomeGenerationSettings.Builder builder)
     {
         builder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, FeatureKey.FOGGY_RUBBLE.getPlacedKey());
+    }
+
+    public static void addDefaultEntitySpawns(MobSpawnSettings.Builder builder)
+    {
+        WorldGenStuff.addSpawn(builder, Entities.FROLICKER, 5, 1, 4);
+        WorldGenStuff.addSpawn(builder, Entities.SNIPE, 7, 1, 3);
     }
 }

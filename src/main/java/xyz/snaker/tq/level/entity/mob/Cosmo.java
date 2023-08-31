@@ -65,9 +65,14 @@ public class Cosmo extends Hostile
                 .add(Attributes.MOVEMENT_SPEED, 0.25).build();
     }
 
-    public static <T extends Entity> boolean spawnRules(EntityType<T> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
+    public static boolean spawnRules(EntityType<Cosmo> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return WorldStuff.isDimension(level, Keys.COMATOSE) && WorldStuff.random(random, 75);
+        return checkComatoseSpawnRules(level, random);
+    }
+
+    private static boolean checkComatoseSpawnRules(ServerLevelAccessor level, RandomSource random)
+    {
+        return WorldStuff.isDimension(level, Keys.COMATOSE) && WorldStuff.random(random, 5);
     }
 
     @Override

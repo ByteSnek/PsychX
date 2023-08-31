@@ -52,7 +52,12 @@ public class CosmicCreeper extends Creeper
 
     public static boolean spawnRules(EntityType<CosmicCreeper> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return WorldStuff.isDimension(level, Keys.COMATOSE) && WorldStuff.random(random, 75);
+        return checkComatoseSpawnRules(level, random);
+    }
+
+    private static boolean checkComatoseSpawnRules(ServerLevelAccessor level, RandomSource random)
+    {
+        return WorldStuff.isDimension(level, Keys.COMATOSE) && WorldStuff.random(random, 5);
     }
 
     public static AttributeSupplier attributes()

@@ -61,16 +61,28 @@
   "spawners": {
     "ambient": [],
     "axolotls": [],
-    "creature": [],
-    "misc": [],
-    "monster": [
+    "creature": [
+      {
+        "type": "tq:frolicker",
+        "maxCount": 4,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "tq:snipe",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 7
+      },
       {
         "type": "tq:leet",
-        "maxCount": 1,
+        "maxCount": 3,
         "minCount": 1,
-        "weight": 1
+        "weight": 9
       }
     ],
+    "misc": [],
+    "monster": [],
     "underground_water_creature": [],
     "water_ambient": [],
     "water_creature": []

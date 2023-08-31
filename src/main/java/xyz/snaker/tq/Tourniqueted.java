@@ -1,7 +1,6 @@
 package xyz.snaker.tq;
 
 import xyz.snaker.snakerlib.SnakerLib;
-import xyz.snaker.tq.client.BossBarHandler;
 import xyz.snaker.tq.client.Shaders;
 import xyz.snaker.tq.config.TqConfig;
 import xyz.snaker.tq.rego.Rego;
@@ -26,7 +25,6 @@ public class Tourniqueted
         SnakerLib.initialize();
         if (FMLEnvironment.dist.isClient()) {
             Shaders.initialize();
-            BossBarHandler.initialize();
         }
     }
 

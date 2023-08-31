@@ -11,7 +11,6 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -36,9 +35,14 @@ public class Flutterfly extends FlyingPassive
         super(type, level);
     }
 
-    public static <T extends Entity> boolean spawnRules(EntityType<T> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
+    public static boolean spawnRules(EntityType<Flutterfly> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return WorldStuff.canSeeSky(level, pos) && WorldStuff.random(random, 75);
+        return checkOverworldSpawnRules(level, pos, random);
+    }
+
+    private static boolean checkOverworldSpawnRules(ServerLevelAccessor level, BlockPos pos, RandomSource random)
+    {
+        return WorldStuff.canSeeSky(level, pos) && WorldStuff.isDay(level) && WorldStuff.random(random, 5);
     }
 
     public static AttributeSupplier attributes()

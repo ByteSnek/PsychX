@@ -4,22 +4,21 @@ import java.util.List;
 import java.util.UUID;
 import javax.annotation.Nullable;
 
-import xyz.snaker.snakerlib.level.entity.FlyingBoss;
+import xyz.snaker.snakerlib.level.entity.Boss;
+import xyz.snaker.snakerlib.level.entity.FlyingHostile;
 import xyz.snaker.snakerlib.level.entity.ai.FlyGoal;
 import xyz.snaker.snakerlib.level.entity.ai.LookAroundGoal;
 import xyz.snaker.snakerlib.math.Maths;
-import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.tq.client.BossBarRenderer;
 import xyz.snaker.tq.level.entity.projectile.ExplosiveHommingArrow;
 import xyz.snaker.tq.level.entity.projectile.HommingArrow;
 import xyz.snaker.tq.rego.Sounds;
 
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.bossevents.CustomBossEvent;
+import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -42,21 +41,19 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by SnakerBone on 4/01/2023
  **/
-public class Utterfly extends FlyingBoss<Utterfly>
+public class Utterfly extends FlyingHostile implements Boss
 {
-    static final EntityDataAccessor<Integer> PHASE = SynchedEntityData.defineId(Utterfly.class, EntityDataSerializers.INT);
-    static final EntityDataAccessor<Boolean> CHARGING = SynchedEntityData.defineId(Utterfly.class, EntityDataSerializers.BOOLEAN);
-    final CustomBossEvent bossEvent = new CustomBossEvent(new ResourcePath("utterfly"), getDisplayName());
-    volatile boolean triggerExplosion;
+    private static final EntityDataAccessor<Integer> PHASE = SynchedEntityData.defineId(Utterfly.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> CHARGING = SynchedEntityData.defineId(Utterfly.class, EntityDataSerializers.BOOLEAN);
 
-    public Utterfly(EntityType<? extends FlyingBoss> type, Level level)
+    private final ServerBossEvent bossEvent = new ServerBossEvent(getDisplayName(), BossEvent.BossBarColor.GREEN, BossEvent.BossBarOverlay.PROGRESS);
+
+    private boolean triggerExplosion;
+    private boolean bossBarActive;
+
+    public Utterfly(EntityType<? extends FlyingHostile> type, Level level)
     {
         super(type, level);
-    }
-
-    public final UUID getBossEventId()
-    {
-        return bossEvent.getId();
     }
 
     private boolean damageSourceMalus(DamageSource source)
@@ -107,7 +104,6 @@ public class Utterfly extends FlyingBoss<Utterfly>
     public void startSeenByPlayer(@NotNull ServerPlayer player)
     {
         super.startSeenByPlayer(player);
-        bossEvent.setColor(BossEvent.BossBarColor.GREEN);
         bossEvent.addPlayer(player);
     }
 
@@ -129,7 +125,6 @@ public class Utterfly extends FlyingBoss<Utterfly>
         }
         boolean result = super.hurt(source, amount);
         if (!level().isClientSide && getHealth() <= 1 && getPhase() < 3) {
-            //extraHealth((int) Maths.pow2b(getPhase() * 8L), AttributeModifier.Operation.ADDITION);
             setCharging(true);
             setPhase(getPhase() + 1);
             getNavigation().stop();
@@ -183,7 +178,6 @@ public class Utterfly extends FlyingBoss<Utterfly>
                 triggerExplosion = false;
             }
         }
-        bossEvent.setProgress(getHealth() / getMaxHealth());
     }
 
     @Override
@@ -310,26 +304,43 @@ public class Utterfly extends FlyingBoss<Utterfly>
     }
 
     @Override
-    public ResourceLocation getResourceLocation()
+    public void aiStep()
     {
-        return ResourcePath.thisClass();
+        super.aiStep();
+        if (!level().isClientSide) {
+            bossEvent.setProgress(getHealth() / getMaxHealth());
+            if (!bossBarActive) {
+                if (BossBarRenderer.requiresUpdate()) {
+                    BossBarRenderer.addUtterfly(this);
+                    bossBarActive = true;
+                }
+            }
+        }
     }
 
     @Override
-    public Component getBossDisplayName()
+    public void onAddedToWorld()
     {
-        return getDisplayName();
+        super.onAddedToWorld();
+        if (!bossBarActive) {
+            BossBarRenderer.addUtterfly(this);
+            bossBarActive = true;
+        }
     }
 
     @Override
-    public BossEvent.BossBarColor getBossBarColour()
+    public void onRemovedFromWorld()
     {
-        return BossEvent.BossBarColor.GREEN;
+        super.onRemovedFromWorld();
+        if (bossBarActive) {
+            BossBarRenderer.removeUtterfly(this);
+            bossBarActive = false;
+        }
     }
 
     @Override
-    public Utterfly getBossInstance()
+    public UUID getBossEventId()
     {
-        return this;
+        return bossEvent.getId();
     }
 }

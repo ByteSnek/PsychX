@@ -44,8 +44,8 @@ import org.jetbrains.annotations.Nullable;
  **/
 public class Frolicker extends FlyingPassive
 {
-    final Predicate<BlockState> blocksToIgnore = state -> state.is(Blocks.WATER) || state.is(Blocks.LAVA) || state.is(Blocks.AIR) || state.is(BlockTags.LEAVES) || state.is(BlockTags.BEE_GROWABLES) || state.is(BlockTags.FLOWERS);
-    int onGroundTicks;
+    private final Predicate<BlockState> blocksToIgnore = state -> state.is(Blocks.WATER) || state.is(Blocks.LAVA) || state.is(Blocks.AIR) || state.is(BlockTags.LEAVES) || state.is(BlockTags.BEE_GROWABLES) || state.is(BlockTags.FLOWERS);
+    private int onGroundTicks;
 
     public Frolicker(EntityType<? extends FlyingPassive> type, Level level)
     {
@@ -54,7 +54,17 @@ public class Frolicker extends FlyingPassive
 
     public static boolean spawnRules(EntityType<Frolicker> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return (WorldStuff.isDimension(level, Keys.COMATOSE) && WorldStuff.random(random, 100)) || (WorldStuff.canSeeSky(level, pos) && WorldStuff.random(random, 75));
+        return checkComatoseSpawnRules(level, random) || checkOverworldSpawnRules(level, pos, random);
+    }
+
+    private static boolean checkComatoseSpawnRules(ServerLevelAccessor level, RandomSource random)
+    {
+        return WorldStuff.isDimension(level, Keys.COMATOSE) && WorldStuff.random(random, 5);
+    }
+
+    private static boolean checkOverworldSpawnRules(ServerLevelAccessor level, BlockPos pos, RandomSource random)
+    {
+        return WorldStuff.canSeeSky(level, pos) && WorldStuff.isDay(level) && WorldStuff.random(random, 5);
     }
 
     public boolean canDoFunny()

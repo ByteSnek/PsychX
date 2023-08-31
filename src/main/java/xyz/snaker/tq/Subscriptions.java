@@ -1,6 +1,9 @@
 package xyz.snaker.tq;
 
-import xyz.snaker.snakerlib.brigader.PlaygroundMode;
+import xyz.snaker.snakerlib.brigader.DiscardAllEntitiesCommand;
+import xyz.snaker.snakerlib.brigader.HurtAllEntitiesCommand;
+import xyz.snaker.snakerlib.brigader.KillAllEntitiesCommand;
+import xyz.snaker.snakerlib.brigader.PlaygroundModeCommand;
 import xyz.snaker.snakerlib.math.PoseStackBuilder;
 import xyz.snaker.snakerlib.utility.tools.EntityStuff;
 import xyz.snaker.snakerlib.utility.tools.TimeStuff;
@@ -13,7 +16,6 @@ import xyz.snaker.tq.client.render.entity.*;
 import xyz.snaker.tq.client.render.type.ItemLikeRenderType;
 import xyz.snaker.tq.config.TqConfig;
 import xyz.snaker.tq.level.effect.Syncope;
-import xyz.snaker.tq.level.entity.boss.AntiCosmo;
 import xyz.snaker.tq.level.entity.boss.Utterfly;
 import xyz.snaker.tq.level.entity.creature.Flutterfly;
 import xyz.snaker.tq.level.entity.creature.Frolicker;
@@ -73,9 +75,7 @@ public class Subscriptions
             event.registerLayerDefinition(FrolickerModel.LAYER_LOCATION, FrolickerModel::createBodyLayer);
             event.registerLayerDefinition(UtterflyModel.LAYER_LOCATION, UtterflyModel::createBodyLayer);
             event.registerLayerDefinition(CosmicCreeperModel.LAYER_LOCATION, CosmicCreeperModel::createBodyLayer);
-            event.registerLayerDefinition(AntiCosmoModel.LAYER_LOCATION, AntiCosmoModel::createBodyLayer);
             event.registerLayerDefinition(CosmoSpineModel.LAYER_LOCATION, CosmoSpineModel::createBodyLayer);
-            event.registerLayerDefinition(EerieCretinModel.LAYER_LOCATION, EerieCretinModel::createBodyLayer);
             event.registerLayerDefinition(LeetModel.LAYER_LOCATION, LeetModel::createBodyLayer);
         }
 
@@ -107,8 +107,6 @@ public class Subscriptions
                 bindAttributes(event, Entities.FROLICKER, Frolicker.attributes());
                 bindAttributes(event, Entities.FLUTTERFLY, Flutterfly.attributes());
                 bindAttributes(event, Entities.UTTERFLY, Utterfly.attributes());
-                bindAttributes(event, Entities.ANTI_COSMO, AntiCosmo.attributes());
-                bindAttributes(event, Entities.EERIE_CRETIN, EerieCretin.attributes());
                 bindAttributes(event, Entities.LEET, Leet.attributes());
             }
 
@@ -123,11 +121,9 @@ public class Subscriptions
                 registerEntityRenderer(Entities.FROLICKER, FrolickerRenderer::new);
                 registerEntityRenderer(Entities.FLUTTERFLY, FlutterflyRenderer::new);
                 registerEntityRenderer(Entities.UTTERFLY, UtterflyRenderer::new);
-                registerEntityRenderer(Entities.ANTI_COSMO, AntiCosmoRenderer::new);
                 registerEntityRenderer(Entities.HOMMING_ARROW, HommingArrowRenderer::new);
                 registerEntityRenderer(Entities.EXPLOSIVE_HOMMING_ARROW, ExplosiveHommingArrowRenderer::new);
                 registerEntityRenderer(Entities.COSMIC_RAY, CosmicRayRenderer::new);
-                registerEntityRenderer(Entities.EERIE_CRETIN, EerieCretinRenderer::new);
                 registerEntityRenderer(Entities.LEET, LeetRenderer::new);
             }
 
@@ -138,7 +134,6 @@ public class Subscriptions
                 registerSpawn(event, Entities.FLARE, Flare::spawnRules);
                 registerSpawn(event, Entities.COSMIC_CREEPER, CosmicCreeper::spawnRules);
                 registerSpawn(event, Entities.FROLICKER, Frolicker::spawnRules);
-                registerSpawn(event, Entities.EERIE_CRETIN, EerieCretin::spawnRules);
                 registerSpawn(event, Entities.LEET, Leet::spawnRules);
                 registerSpawn(event, Entities.SNIPE, Snipe::spawnRules);
                 registerSpawn(event, Entities.FLUTTERFLY, Flutterfly::spawnRules);
@@ -213,7 +208,10 @@ public class Subscriptions
             public static void registerCommands(RegisterCommandsEvent event)
             {
                 CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
-                PlaygroundMode.register(dispatcher);
+                PlaygroundModeCommand.register(dispatcher);
+                HurtAllEntitiesCommand.register(dispatcher);
+                KillAllEntitiesCommand.register(dispatcher);
+                DiscardAllEntitiesCommand.register(dispatcher);
                 ConfigCommand.register(dispatcher);
             }
 

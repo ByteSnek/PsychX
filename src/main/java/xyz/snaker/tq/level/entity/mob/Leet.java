@@ -15,7 +15,6 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
@@ -39,9 +38,14 @@ public class Leet extends FlyingHostile implements RangedAttackMob
         super(type, level);
     }
 
-    public static <T extends Entity> boolean spawnRules(EntityType<T> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
+    public static boolean spawnRules(EntityType<Leet> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return WorldStuff.isDimension(level, Keys.COMATOSE) && WorldStuff.random(random, 75);
+        return checkComatoseSpawnRules(level, random);
+    }
+
+    private static boolean checkComatoseSpawnRules(ServerLevelAccessor level, RandomSource random)
+    {
+        return WorldStuff.isDimension(level, Keys.COMATOSE) && WorldStuff.random(random, 5);
     }
 
     @Override

@@ -2,15 +2,12 @@ package xyz.snaker.snakerlib;
 
 import java.io.File;
 import java.util.Arrays;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import xyz.snaker.snakerlib.concurrent.lock.LockedValue;
 import xyz.snaker.snakerlib.config.SnakerConfig;
 import xyz.snaker.snakerlib.internal.LevelSavingEvent;
 import xyz.snaker.snakerlib.internal.log4j.SnakerLogger;
 import xyz.snaker.snakerlib.internal.log4j.SnakerLoggerManager;
-import xyz.snaker.snakerlib.level.entity.Boss;
 import xyz.snaker.snakerlib.utility.tools.KeyboardStuff;
 import xyz.snaker.snakerlib.utility.tools.StringStuff;
 import xyz.snaker.snakerlib.utility.tools.UnsafeStuff;
@@ -191,23 +188,9 @@ public class SnakerLib
     }
 
     @SubscribeEvent
-    protected void serverStopped(LevelSavingEvent event) throws InterruptedException
+    protected void serverStopped(LevelSavingEvent event)
     {
-        AtomicBoolean hasDiscarded = new AtomicBoolean(true);
-        var bosses = Boss.BOSS_INSTANCES;
-        if (!bosses.isEmpty()) {
-            for (Boss boss : new CopyOnWriteArrayList<>(bosses)) {
-                int bossesSize = bosses.size();
-                boss.discard();
-                if (hasDiscarded.get()) {
-                    SnakerLib.LOGGER.infof("Successfully discarded %s bosses", bossesSize);
-                    hasDiscarded.compareAndSet(true, false);
-                }
-            }
-            Thread.sleep(500);
-            bosses.clear();
-            hasDiscarded.compareAndSet(false, true);
-        }
+
     }
 
     public static long getClientTickCount()

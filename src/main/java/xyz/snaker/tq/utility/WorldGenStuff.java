@@ -20,6 +20,10 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -158,6 +162,16 @@ public class WorldGenStuff
     public static ResourceKey<BiomeModifier> createModifierKey(String name)
     {
         return ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, new ResourcePath(name));
+    }
+
+    public static <T extends Entity> void addSpawn(MobSpawnSettings.Builder builder, RegistryObject<EntityType<T>> creature)
+    {
+        addSpawn(builder, creature, 1, 1, 1);
+    }
+
+    public static <T extends Entity> void addSpawn(MobSpawnSettings.Builder builder, RegistryObject<EntityType<T>> creature, int weight, int minCount, int maxCount)
+    {
+        builder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(creature.get(), weight, minCount, maxCount));
     }
 
     static BlockStateProvider simple(Block block)

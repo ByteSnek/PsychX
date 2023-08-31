@@ -64,8 +64,6 @@ public class Items
     public static final RegistryObject<Item> FROLICKER_SPAWN_EGG = registerSpawnEgg("frolicker_spawn_egg", Entities.FROLICKER);
     public static final RegistryObject<Item> FLUTTERFLY_SPAWN_EGG = registerSpawnEgg("flutterfly_spawn_egg", Entities.FLUTTERFLY);
     public static final RegistryObject<Item> UTTERFLY_SPAWN_EGG = registerSpawnEgg("utterfly_spawn_egg", Entities.UTTERFLY);
-    public static final RegistryObject<Item> ANTI_COSMO_SPAWN_EGG = registerSpawnEgg("anti_cosmo_spawn_egg", Entities.ANTI_COSMO);
-    public static final RegistryObject<Item> EERIE_CRETIN_SPAWN_EGG = registerSpawnEgg("eerie_cretin_spawn_egg", Entities.EERIE_CRETIN);
     public static final RegistryObject<Item> LEET_SPAWN_EGG = registerSpawnEgg("leet_spawn_egg", Entities.LEET);
 
     static RegistryObject<Item> register(String name, Supplier<Item> item)

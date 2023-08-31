@@ -10,7 +10,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.BootstapContext;
-import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.*;
 
 /**
@@ -40,9 +39,9 @@ public class Spectral
         DefaultFeatures.addDefaultPlants(gen);
         DefaultFeatures.addSwirlRubble(gen);
         DefaultFeatures.addWaterColourRubble(gen);
+        DefaultFeatures.addDefaultEntitySpawns(spawns);
 
-        spawns.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(Entities.EERIE_CRETIN.get(), 1, 1, 1));
-        spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(Entities.FROLICKER.get(), 1, 1, 1));
+        WorldGenStuff.addSpawn(spawns, Entities.COSMO, 7, 1, 3);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(false)

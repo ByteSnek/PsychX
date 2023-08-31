@@ -1,6 +1,5 @@
 package xyz.snaker.tq.level.world.biome;
 
-import xyz.snaker.tq.rego.Entities;
 import xyz.snaker.tq.rego.Sounds;
 import xyz.snaker.tq.utility.DefaultFeatures;
 import xyz.snaker.tq.utility.WorldGenStuff;
@@ -10,7 +9,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.BootstapContext;
-import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.*;
 
 /**
@@ -40,8 +38,7 @@ public class Delusion
         DefaultFeatures.addDefaultTrees(gen);
         DefaultFeatures.addDefaultPlants(gen);
         DefaultFeatures.addFoggyRubble(gen);
-
-        spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(Entities.FROLICKER.get(), 1, 1, 1));
+        DefaultFeatures.addDefaultEntitySpawns(spawns);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(false)
