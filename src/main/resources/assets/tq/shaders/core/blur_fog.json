@@ -4,7 +4,7 @@
         "srcrgb": "srcalpha",
         "dstrgb": "1-srcalpha"
     },
-    "vertex": "tq:blur_fog",
+    "vertex": "tq:vertex",
     "fragment": "tq:blur_fog",
     "attributes": [
         "Position",

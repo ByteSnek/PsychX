@@ -1,7 +1,7 @@
 package xyz.snaker.tq.level.world.biome;
 
+import xyz.snaker.tq.rego.Entities;
 import xyz.snaker.tq.rego.Sounds;
-import xyz.snaker.tq.utility.DefaultFeatures;
 import xyz.snaker.tq.utility.WorldGenStuff;
 
 import net.minecraft.core.Holder;
@@ -35,10 +35,12 @@ public class Delusion
 
         BiomeDefaultFeatures.addDefaultCarversAndLakes(gen);
 
-        DefaultFeatures.addDefaultTrees(gen);
-        DefaultFeatures.addDefaultPlants(gen);
-        DefaultFeatures.addFoggyRubble(gen);
-        DefaultFeatures.addDefaultEntitySpawns(spawns);
+        WorldGenStuff.addGeometricTree(gen);
+        WorldGenStuff.addDefaultPlants(gen);
+        WorldGenStuff.addFoggyRubble(gen);
+        WorldGenStuff.addDefaultEntitySpawns(spawns);
+
+        WorldGenStuff.addMonsterSpawn(spawns, Entities.COSMIC_CREEPER, 10, 1, 3);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(false)

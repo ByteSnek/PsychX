@@ -91,9 +91,18 @@ public class Shaders
     static Uniform burnColour;
     static Uniform burnAlpha;
 
+    static Shader strands;
+    static Uniform strandsTime;
+
     static void register(RegisterShadersEvent event)
     {
         setDelegate(event);
+
+        registerShader("strands", shaderInstance ->
+        {
+            strands = UnsafeStuff.cast(shaderInstance);
+            strandsTime = strands.getTimeUniform(true);
+        });
 
         registerShader("burn", shaderInstance ->
         {
@@ -317,7 +326,11 @@ public class Shaders
             crystalizedTime = crystalized.getTimeUniform();
             crystalizedLayers = crystalized.getUniform("Layers");
             crystalizedDensityRatio = crystalized.getUniform("DensityRatio");
-            crystalized.enqueueTask(() -> crystalizedTime.set(RenderSystem.getShaderGameTime()));
+            crystalized.enqueueTask(() ->
+            {
+                crystalizedTime.set(RenderSystem.getShaderGameTime());
+
+            });
         });
     }
 
@@ -325,8 +338,6 @@ public class Shaders
     {
         delegate = event;
     }
-
-    // ========== Shader Instances ========== //
 
     public static Shader getSwirl()
     {
@@ -417,8 +428,6 @@ public class Shaders
     {
         return crystalized;
     }
-
-    // ========== Shader Uniforms ========== //
 
     public static Uniform getSwirlTime()
     {
@@ -588,6 +597,16 @@ public class Shaders
     public static Uniform getBurnAlpha()
     {
         return burnAlpha;
+    }
+
+    public static Shader getStrands()
+    {
+        return strands;
+    }
+
+    public static Uniform getStrandsTime()
+    {
+        return strandsTime;
     }
 
     static Shader shader(String name, VertexFormat format)

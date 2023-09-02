@@ -47,38 +47,39 @@ public class Items
     public static final RegistryObject<Item> SATURATED_TWINE = register("saturated_twine", EmptyItem::new);
     public static final RegistryObject<Item> WEATHERED_TWINE = register("weathered_twine", EmptyItem::new);
 
-    public static final RegistryObject<Item> SWIRL_BLOCK = registerShaderBlockItem("swirl_block", Blocks.SWIRL);
-    public static final RegistryObject<Item> SNOWFLAKE_BLOCK = registerShaderBlockItem("snowflake_block", Blocks.SNOWFLAKE);
-    public static final RegistryObject<Item> WATERCOLOUR_BLOCK = registerShaderBlockItem("watercolour_block", Blocks.WATERCOLOUR);
-    public static final RegistryObject<Item> MULTICOLOUR_BLOCK = registerShaderBlockItem("multicolour_block", Blocks.MULTICOLOUR);
-    public static final RegistryObject<Item> FLARE_BLOCK = registerShaderBlockItem("flare_block", Blocks.FLARE);
-    public static final RegistryObject<Item> STARRY_BLOCK = registerShaderBlockItem("starry_block", Blocks.STARRY);
-    public static final RegistryObject<Item> GEOMETRIC_BLOCK = registerShaderBlockItem("geometric_block", Blocks.GEOMETRIC);
-    public static final RegistryObject<Item> BURNING_BLOCK = registerShaderBlockItem("burning_block", Blocks.BURNING);
-    public static final RegistryObject<Item> FOGGY_BLOCK = registerShaderBlockItem("foggy_block", Blocks.FOGGY);
+    public static final RegistryObject<Item> SWIRL_BLOCK = registerShaderBlockItem(Blocks.SWIRL);
+    public static final RegistryObject<Item> SNOWFLAKE_BLOCK = registerShaderBlockItem(Blocks.SNOWFLAKE);
+    public static final RegistryObject<Item> WATERCOLOUR_BLOCK = registerShaderBlockItem(Blocks.WATERCOLOUR);
+    public static final RegistryObject<Item> MULTICOLOUR_BLOCK = registerShaderBlockItem(Blocks.MULTICOLOUR);
+    public static final RegistryObject<Item> FLARE_BLOCK = registerShaderBlockItem(Blocks.FLARE);
+    public static final RegistryObject<Item> STARRY_BLOCK = registerShaderBlockItem(Blocks.STARRY);
+    public static final RegistryObject<Item> GEOMETRIC_BLOCK = registerShaderBlockItem(Blocks.GEOMETRIC);
+    public static final RegistryObject<Item> BURNING_BLOCK = registerShaderBlockItem(Blocks.BURNING);
+    public static final RegistryObject<Item> FOGGY_BLOCK = registerShaderBlockItem(Blocks.FOGGY);
+    public static final RegistryObject<Item> STATIC_BLOCK = registerShaderBlockItem(Blocks.STATIC);
 
-    public static final RegistryObject<Item> COSMO_SPAWN_EGG = registerSpawnEgg("cosmo_spawn_egg", Entities.COSMO);
-    public static final RegistryObject<Item> SNIPE_SPAWN_EGG = registerSpawnEgg("snipe_spawn_egg", Entities.SNIPE);
-    public static final RegistryObject<Item> FLARE_SPAWN_EGG = registerSpawnEgg("flare_spawn_egg", Entities.FLARE);
-    public static final RegistryObject<Item> COSMIC_CREEPER_SPAWN_EGG = registerSpawnEgg("cosmic_creeper_spawn_egg", Entities.COSMIC_CREEPER);
-    public static final RegistryObject<Item> FROLICKER_SPAWN_EGG = registerSpawnEgg("frolicker_spawn_egg", Entities.FROLICKER);
-    public static final RegistryObject<Item> FLUTTERFLY_SPAWN_EGG = registerSpawnEgg("flutterfly_spawn_egg", Entities.FLUTTERFLY);
-    public static final RegistryObject<Item> UTTERFLY_SPAWN_EGG = registerSpawnEgg("utterfly_spawn_egg", Entities.UTTERFLY);
-    public static final RegistryObject<Item> LEET_SPAWN_EGG = registerSpawnEgg("leet_spawn_egg", Entities.LEET);
+    public static final RegistryObject<Item> COSMO_SPAWN_EGG = registerSpawnEgg(Entities.COSMO);
+    public static final RegistryObject<Item> SNIPE_SPAWN_EGG = registerSpawnEgg(Entities.SNIPE);
+    public static final RegistryObject<Item> FLARE_SPAWN_EGG = registerSpawnEgg(Entities.FLARE);
+    public static final RegistryObject<Item> COSMIC_CREEPER_SPAWN_EGG = registerSpawnEgg(Entities.COSMIC_CREEPER);
+    public static final RegistryObject<Item> FROLICKER_SPAWN_EGG = registerSpawnEgg(Entities.FROLICKER);
+    public static final RegistryObject<Item> FLUTTERFLY_SPAWN_EGG = registerSpawnEgg(Entities.FLUTTERFLY);
+    public static final RegistryObject<Item> UTTERFLY_SPAWN_EGG = registerSpawnEgg(Entities.UTTERFLY);
+    public static final RegistryObject<Item> LEET_SPAWN_EGG = registerSpawnEgg(Entities.LEET);
 
     static RegistryObject<Item> register(String name, Supplier<Item> item)
     {
         return REGISTRAR.register(name, item);
     }
 
-    static RegistryObject<Item> registerSpawnEgg(String name, Supplier<? extends EntityType<? extends Mob>> mob)
+    static RegistryObject<Item> registerSpawnEgg(RegistryObject<? extends EntityType<? extends Mob>> mob)
     {
         Supplier<ForgeSpawnEggItem> egg = () -> new ForgeSpawnEggItem(mob, ColourStuff.randomHex(), ColourStuff.randomHex(), new Item.Properties());
-        return REGISTRAR.register(name, egg);
+        return REGISTRAR.register(mob.getId().getPath() + "_spawn_egg", egg);
     }
 
-    static RegistryObject<Item> registerShaderBlockItem(String name, RegistryObject<Block> parent)
+    static RegistryObject<Item> registerShaderBlockItem(RegistryObject<Block> block)
     {
-        return REGISTRAR.register(name, () -> new ShaderBlockItem(parent));
+        return REGISTRAR.register(block.getId().getPath(), () -> new ShaderBlockItem(block));
     }
 }

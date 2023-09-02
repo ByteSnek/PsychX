@@ -3,11 +3,10 @@ package xyz.snaker.tq.level.entity.mob;
 import java.util.function.Predicate;
 
 import xyz.snaker.snakerlib.level.entity.Hostile;
-import xyz.snaker.snakerlib.utility.tools.WorldStuff;
 import xyz.snaker.tq.client.render.entity.CosmoRenderer;
 import xyz.snaker.tq.level.entity.EntityVariants;
-import xyz.snaker.tq.rego.Keys;
 import xyz.snaker.tq.rego.Sounds;
+import xyz.snaker.tq.utility.WorldGenStuff;
 
 import net.minecraft.Util;
 import net.minecraft.client.renderer.RenderType;
@@ -67,12 +66,7 @@ public class Cosmo extends Hostile
 
     public static boolean spawnRules(EntityType<Cosmo> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return checkComatoseSpawnRules(level, random);
-    }
-
-    private static boolean checkComatoseSpawnRules(ServerLevelAccessor level, RandomSource random)
-    {
-        return WorldStuff.isDimension(level, Keys.COMATOSE) && WorldStuff.random(random, 5);
+        return WorldGenStuff.checkComatoseSpawnRules(level, random);
     }
 
     @Override

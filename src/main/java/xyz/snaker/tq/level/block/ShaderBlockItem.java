@@ -4,6 +4,7 @@ import java.util.function.Consumer;
 
 import xyz.snaker.snakerlib.data.DefaultItemProperties;
 import xyz.snaker.tq.client.render.block.ShaderBlockItemRenderer;
+import xyz.snaker.tq.client.render.type.ItemLikeRenderType;
 
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.BlockItem;
@@ -31,7 +32,7 @@ public class ShaderBlockItem extends BlockItem
         {
             public BlockEntityWithoutLevelRenderer getRenderer()
             {
-                return new ShaderBlockItemRenderer(ShaderBlockItemRenderer.ITEM_2_RENDER_TYPE.get(ShaderBlockItem.this).get());
+                return new ShaderBlockItemRenderer(ItemLikeRenderType.getFromBlockItem(ShaderBlockItem.this).get());
             }
 
             @Override

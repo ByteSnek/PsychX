@@ -2,10 +2,9 @@
 
 uniform vec4 Colour;
 
-in vec2 textureProjection;
-out vec4 fragColor;
+out vec4 fragColour;
 
 void main()
 {
-    fragColor = vec4(Colour);
+    fragColour = vec4(Colour);
 }

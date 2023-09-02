@@ -3,8 +3,8 @@ package xyz.snaker.tq.level.entity.creature;
 import javax.annotation.Nullable;
 
 import xyz.snaker.snakerlib.level.entity.FlyingPassive;
-import xyz.snaker.snakerlib.utility.tools.WorldStuff;
 import xyz.snaker.tq.rego.Sounds;
+import xyz.snaker.tq.utility.WorldGenStuff;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
@@ -37,12 +37,7 @@ public class Flutterfly extends FlyingPassive
 
     public static boolean spawnRules(EntityType<Flutterfly> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return checkOverworldSpawnRules(level, pos, random);
-    }
-
-    private static boolean checkOverworldSpawnRules(ServerLevelAccessor level, BlockPos pos, RandomSource random)
-    {
-        return WorldStuff.canSeeSky(level, pos) && WorldStuff.isDay(level) && WorldStuff.random(random, 5);
+        return WorldGenStuff.checkOverworldSpawnRules(level, pos, random);
     }
 
     public static AttributeSupplier attributes()

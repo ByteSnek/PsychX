@@ -4,11 +4,15 @@ import java.util.List;
 
 import xyz.snaker.snakerlib.utility.ResourcePath;
 import xyz.snaker.snakerlib.utility.tools.UnsafeStuff;
+import xyz.snaker.snakerlib.utility.tools.WorldStuff;
 import xyz.snaker.tq.level.world.feature.FeatureKey;
-import xyz.snaker.tq.level.world.manager.BiomeManager;
 import xyz.snaker.tq.level.world.tree.GeometricTrunkPlacer;
+import xyz.snaker.tq.rego.Biomes;
+import xyz.snaker.tq.rego.Entities;
+import xyz.snaker.tq.rego.Keys;
 import xyz.snaker.tq.rego.Sounds;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
@@ -18,11 +22,14 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.GenerationStep;
@@ -90,10 +97,10 @@ public class WorldGenStuff
         return createAcaciaTreeConfig(stem, foliage, dirt, 5, 2, 2, 2, 0, 1, 0, 2);
     }
 
-    public static List<PlacementModifier> simpleTreePlacement(RegistryObject<Block> sapling, int initialCount, float bonusRollChance, int bonusCount)
+    public static List<PlacementModifier> simpleTreePlacement(RegistryObject<Block> sapling, int count)
     {
         return VegetationPlacements.treePlacement(
-                countExtra(initialCount, bonusRollChance, bonusCount),
+                placement(count),
                 sapling.get()
         );
     }
@@ -121,12 +128,6 @@ public class WorldGenStuff
         context.register(key.getConfigKey(), new ConfiguredFeature<>(feature, configuration));
     }
 
-    public static <FC extends FeatureConfiguration, F extends Feature<FC>> void registerConfiguredFeature(BootstapContext<ConfiguredFeature<?, ?>> context, String name, RegistryObject<F> feature, FC configuration)
-    {
-        FeatureKey key = safeGetKey(name);
-        context.register(key.getConfigKey(), new ConfiguredFeature<>(feature.get(), configuration));
-    }
-
     public static <FC extends FeatureConfiguration, F extends Feature<FC>> void registerConfiguredFeature(BootstapContext<ConfiguredFeature<?, ?>> context, String name, RegistryObject<F> feature, RegistryObject<Block> block)
     {
         FeatureKey key = safeGetKey(name);
@@ -141,11 +142,12 @@ public class WorldGenStuff
         context.register(key.getModifierKey(),
                 new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
                         HolderSet.direct(
-                                biomeSearch.getOrThrow(BiomeManager.DELUSION),
-                                biomeSearch.getOrThrow(BiomeManager.ILLUSION),
-                                biomeSearch.getOrThrow(BiomeManager.IMMATERIAL),
-                                biomeSearch.getOrThrow(BiomeManager.SPECTRAL),
-                                biomeSearch.getOrThrow(BiomeManager.SURREAL)),
+                                biomeSearch.getOrThrow(Biomes.DELUSION),
+                                biomeSearch.getOrThrow(Biomes.ILLUSION),
+                                biomeSearch.getOrThrow(Biomes.IMMATERIAL),
+                                biomeSearch.getOrThrow(Biomes.SPECTRAL),
+                                biomeSearch.getOrThrow(Biomes.SURREAL)
+                        ),
                         HolderSet.direct(featureSearch.getOrThrow(key.getPlacedKey())), step));
     }
 
@@ -164,14 +166,100 @@ public class WorldGenStuff
         return ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, new ResourcePath(name));
     }
 
-    public static <T extends Entity> void addSpawn(MobSpawnSettings.Builder builder, RegistryObject<EntityType<T>> creature)
-    {
-        addSpawn(builder, creature, 1, 1, 1);
-    }
-
-    public static <T extends Entity> void addSpawn(MobSpawnSettings.Builder builder, RegistryObject<EntityType<T>> creature, int weight, int minCount, int maxCount)
+    public static <T extends Entity> void addCreatureSpawn(MobSpawnSettings.Builder builder, RegistryObject<EntityType<T>> creature, int weight, int minCount, int maxCount)
     {
         builder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(creature.get(), weight, minCount, maxCount));
+    }
+
+    public static <T extends Entity> void addMonsterSpawn(MobSpawnSettings.Builder builder, RegistryObject<EntityType<T>> creature, int weight, int minCount, int maxCount)
+    {
+        builder.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(creature.get(), weight, minCount, maxCount));
+    }
+
+    public static boolean checkComatoseSpawnRules(ServerLevelAccessor level, RandomSource random, int bound)
+    {
+        return WorldStuff.isDimension(level, Keys.COMATOSE) && WorldStuff.random(random, bound);
+    }
+
+    public static boolean checkComatoseSpawnRules(ServerLevelAccessor level, RandomSource random)
+    {
+        return checkComatoseSpawnRules(level, random, 75);
+    }
+
+    public static boolean checkOverworldSpawnRules(ServerLevelAccessor level, BlockPos pos, RandomSource random, int bound)
+    {
+        return WorldStuff.canSeeSky(level, pos) && WorldStuff.isDay(level) && WorldStuff.random(random, bound);
+    }
+
+    public static boolean checkOverworldSpawnRules(ServerLevelAccessor level, BlockPos pos, RandomSource random)
+    {
+        return checkOverworldSpawnRules(level, pos, random, 75);
+    }
+
+    public static void addGeometricTree(BiomeGenerationSettings.Builder builder)
+    {
+        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.TREES_PLAINS);
+        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureKey.GEOMETRIC_TREE.getPlacedKey());
+    }
+
+    public static void addDefaultPlants(BiomeGenerationSettings.Builder builder)
+    {
+        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureKey.SNAKEROOT.getPlacedKey());
+        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureKey.TALL_SNAKEROOT.getPlacedKey());
+        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureKey.SPLITLEAF.getPlacedKey());
+        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureKey.CATNIP.getPlacedKey());
+        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureKey.PINKTAILS.getPlacedKey());
+    }
+
+    public static void addSwirlRubble(BiomeGenerationSettings.Builder builder)
+    {
+        builder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, FeatureKey.SWIRL_RUBBLE.getPlacedKey());
+    }
+
+    public static void addFlareRubble(BiomeGenerationSettings.Builder builder)
+    {
+        builder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, FeatureKey.FLARE_RUBBLE.getPlacedKey());
+    }
+
+    public static void addWaterColourRubble(BiomeGenerationSettings.Builder builder)
+    {
+        builder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, FeatureKey.WATERCOLOUR_RUBBLE.getPlacedKey());
+    }
+
+    public static void addBurningRubble(BiomeGenerationSettings.Builder builder)
+    {
+        builder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, FeatureKey.BURNING_RUBBLE.getPlacedKey());
+    }
+
+    public static void addGeometricRubble(BiomeGenerationSettings.Builder builder)
+    {
+        builder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, FeatureKey.GEOMETRIC_RUBBLE.getPlacedKey());
+    }
+
+    public static void addMultiColourRubble(BiomeGenerationSettings.Builder builder)
+    {
+        builder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, FeatureKey.MULTICOLOUR_RUBBLE.getPlacedKey());
+    }
+
+    public static void addSnowflakeRubble(BiomeGenerationSettings.Builder builder)
+    {
+        builder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, FeatureKey.SNOWFLAKE_RUBBLE.getPlacedKey());
+    }
+
+    public static void addStarryRubble(BiomeGenerationSettings.Builder builder)
+    {
+        builder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, FeatureKey.STARRY_RUBBLE.getPlacedKey());
+    }
+
+    public static void addFoggyRubble(BiomeGenerationSettings.Builder builder)
+    {
+        builder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, FeatureKey.FOGGY_RUBBLE.getPlacedKey());
+    }
+
+    public static void addDefaultEntitySpawns(MobSpawnSettings.Builder builder)
+    {
+        WorldGenStuff.addCreatureSpawn(builder, Entities.FROLICKER, 15, 1, 1);
+        WorldGenStuff.addMonsterSpawn(builder, Entities.SNIPE, 20, 1, 1);
     }
 
     static BlockStateProvider simple(Block block)
@@ -187,11 +275,6 @@ public class WorldGenStuff
     static CountPlacement placement(int value)
     {
         return CountPlacement.of(value);
-    }
-
-    static PlacementModifier countExtra(int initialCount, float bonusRollChance, int bonusCount)
-    {
-        return PlacementUtils.countExtra(initialCount, bonusRollChance, bonusCount);
     }
 
     static <FC extends FeatureConfiguration, F extends Feature<FC>> Holder<PlacedFeature> onlyWhenEmpty(F feature, FC config)

@@ -2,11 +2,10 @@ package xyz.snaker.tq.level.entity.mob;
 
 import xyz.snaker.snakerlib.level.entity.FlyingHostile;
 import xyz.snaker.snakerlib.level.entity.ai.FlyGoal;
-import xyz.snaker.snakerlib.utility.tools.WorldStuff;
 import xyz.snaker.tq.level.entity.projectile.CosmicRay;
 import xyz.snaker.tq.rego.Entities;
-import xyz.snaker.tq.rego.Keys;
 import xyz.snaker.tq.rego.Sounds;
+import xyz.snaker.tq.utility.WorldGenStuff;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
@@ -40,12 +39,7 @@ public class Leet extends FlyingHostile implements RangedAttackMob
 
     public static boolean spawnRules(EntityType<Leet> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return checkComatoseSpawnRules(level, random);
-    }
-
-    private static boolean checkComatoseSpawnRules(ServerLevelAccessor level, RandomSource random)
-    {
-        return WorldStuff.isDimension(level, Keys.COMATOSE) && WorldStuff.random(random, 5);
+        return WorldGenStuff.checkComatoseSpawnRules(level, random);
     }
 
     @Override

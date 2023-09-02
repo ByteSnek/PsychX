@@ -4,11 +4,10 @@ import java.util.function.Predicate;
 
 import xyz.snaker.snakerlib.level.entity.FlyingHostile;
 import xyz.snaker.snakerlib.math.Maths;
-import xyz.snaker.snakerlib.utility.tools.WorldStuff;
 import xyz.snaker.tq.level.entity.projectile.CosmicRay;
 import xyz.snaker.tq.rego.Entities;
-import xyz.snaker.tq.rego.Keys;
 import xyz.snaker.tq.rego.Sounds;
+import xyz.snaker.tq.utility.WorldGenStuff;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
@@ -48,12 +47,7 @@ public class Snipe extends FlyingHostile
 
     public static boolean spawnRules(EntityType<Snipe> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return checkComatoseSpawnRules(level, pos, random);
-    }
-
-    private static boolean checkComatoseSpawnRules(ServerLevelAccessor level, BlockPos pos, RandomSource random)
-    {
-        return WorldStuff.isDimension(level, Keys.COMATOSE) && WorldStuff.random(random, 5) && pos.getY() >= 90;
+        return WorldGenStuff.checkComatoseSpawnRules(level, random);
     }
 
     public static AttributeSupplier attributes()

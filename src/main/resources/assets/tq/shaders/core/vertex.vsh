@@ -8,7 +8,8 @@ uniform mat4 ModelViewMat;
 
 out vec2 textureProjection;
 
-void main() {
+void main()
+{
     gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
     textureProjection = UV;
 }

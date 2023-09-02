@@ -6,6 +6,7 @@ import xyz.snaker.snakerlib.level.entity.FlyingPassive;
 import xyz.snaker.snakerlib.utility.tools.WorldStuff;
 import xyz.snaker.tq.rego.Entities;
 import xyz.snaker.tq.rego.Keys;
+import xyz.snaker.tq.utility.WorldGenStuff;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
@@ -54,17 +55,7 @@ public class Frolicker extends FlyingPassive
 
     public static boolean spawnRules(EntityType<Frolicker> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return checkComatoseSpawnRules(level, random) || checkOverworldSpawnRules(level, pos, random);
-    }
-
-    private static boolean checkComatoseSpawnRules(ServerLevelAccessor level, RandomSource random)
-    {
-        return WorldStuff.isDimension(level, Keys.COMATOSE) && WorldStuff.random(random, 5);
-    }
-
-    private static boolean checkOverworldSpawnRules(ServerLevelAccessor level, BlockPos pos, RandomSource random)
-    {
-        return WorldStuff.canSeeSky(level, pos) && WorldStuff.isDay(level) && WorldStuff.random(random, 5);
+        return WorldGenStuff.checkComatoseSpawnRules(level, random) || WorldGenStuff.checkOverworldSpawnRules(level, pos, random);
     }
 
     public boolean canDoFunny()

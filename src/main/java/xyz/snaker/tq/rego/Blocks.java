@@ -40,6 +40,7 @@ public class Blocks
     public static final RegistryObject<Block> GEOMETRIC = registerShaderBlock("geometric", BlockEntities.GEOMETRIC);
     public static final RegistryObject<Block> BURNING = registerShaderBlock("burning", BlockEntities.BURNING);
     public static final RegistryObject<Block> FOGGY = registerShaderBlock("foggy", BlockEntities.FOGGY);
+    public static final RegistryObject<Block> STATIC = registerShaderBlock("static", BlockEntities.STATIC);
 
     public static final RegistryObject<Block> PINKTAILS = registerBlockWithItem("pink_tails", () -> new FlowerBlock(Effects.SYNCOPE::get, Maths.secondsToTicks(5), DefaultBlockProperties.PLANT.apply(MapColor.COLOR_PINK), Keys.GROUNDRICH, true));
     public static final RegistryObject<Block> SPLITLEAF = registerBlockWithItem("split_leaf", () -> new FlowerBlock(Effects.SYNCOPE::get, Maths.secondsToTicks(5), DefaultBlockProperties.PLANT.apply(MapColor.COLOR_CYAN), Keys.GROUNDRICH, true));

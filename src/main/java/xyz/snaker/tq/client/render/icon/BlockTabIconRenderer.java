@@ -47,6 +47,7 @@ public class BlockTabIconRenderer extends CyclicalIconRenderer
                             Items.GEOMETRIC_BLOCK.get().getDefaultInstance(),
                             Items.BURNING_BLOCK.get().getDefaultInstance(),
                             Items.FOGGY_BLOCK.get().getDefaultInstance(),
+                            Items.STATIC_BLOCK.get().getDefaultInstance(),
                     };
 
             float scale = 1;

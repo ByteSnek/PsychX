@@ -6,8 +6,7 @@ import java.util.function.Predicate;
 import xyz.snaker.snakerlib.data.DefaultEntityAttributes;
 import xyz.snaker.snakerlib.math.Maths;
 import xyz.snaker.snakerlib.utility.tools.EntityStuff;
-import xyz.snaker.snakerlib.utility.tools.WorldStuff;
-import xyz.snaker.tq.rego.Keys;
+import xyz.snaker.tq.utility.WorldGenStuff;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -41,8 +40,8 @@ import org.jetbrains.annotations.NotNull;
  **/
 public class CosmicCreeper extends Creeper
 {
-    int teleportTime;
-    final int radius = 6;
+    private int teleportTime;
+    private final int radius = 6;
 
     public CosmicCreeper(EntityType<? extends Creeper> type, Level level)
     {
@@ -52,12 +51,7 @@ public class CosmicCreeper extends Creeper
 
     public static boolean spawnRules(EntityType<CosmicCreeper> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return checkComatoseSpawnRules(level, random);
-    }
-
-    private static boolean checkComatoseSpawnRules(ServerLevelAccessor level, RandomSource random)
-    {
-        return WorldStuff.isDimension(level, Keys.COMATOSE) && WorldStuff.random(random, 5);
+        return WorldGenStuff.checkComatoseSpawnRules(level, random);
     }
 
     public static AttributeSupplier attributes()

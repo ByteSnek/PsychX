@@ -2,7 +2,6 @@ package xyz.snaker.tq.level.world.biome;
 
 import xyz.snaker.tq.rego.Entities;
 import xyz.snaker.tq.rego.Sounds;
-import xyz.snaker.tq.utility.DefaultFeatures;
 import xyz.snaker.tq.utility.WorldGenStuff;
 
 import net.minecraft.core.Holder;
@@ -36,12 +35,12 @@ public class Spectral
 
         BiomeDefaultFeatures.addDefaultCarversAndLakes(gen);
 
-        DefaultFeatures.addDefaultPlants(gen);
-        DefaultFeatures.addSwirlRubble(gen);
-        DefaultFeatures.addWaterColourRubble(gen);
-        DefaultFeatures.addDefaultEntitySpawns(spawns);
+        WorldGenStuff.addDefaultPlants(gen);
+        WorldGenStuff.addSwirlRubble(gen);
+        WorldGenStuff.addWaterColourRubble(gen);
+        WorldGenStuff.addDefaultEntitySpawns(spawns);
 
-        WorldGenStuff.addSpawn(spawns, Entities.COSMO, 7, 1, 3);
+        WorldGenStuff.addMonsterSpawn(spawns, Entities.COSMO, 10, 1, 3);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(false)

@@ -5,23 +5,25 @@ uniform vec3 Colour;
 uniform bool Background;
 uniform bool Invert;
 
-in vec2 textureProjection;
-out vec4 fragColor;
+out vec4 fragColour;
 
-float sStars(vec2 sVecIn, float sNumIn)
+float makeStars(vec2 pPosition, float pAmount)
 {
-    float sWeight = smoothstep(20.0, 0.0, -sVecIn.y * (sNumIn / 10.0));
+    float sWeight = smoothstep(20.0, 0.0, -pPosition.y * (pAmount / 10.0));
 
-    if (sWeight < 0.1) return 0.0;
+    if (sWeight < 0.1)
+    {
+        return 0.0;
+    }
 
-    sVecIn += (Time / 0.3) / sNumIn;
-    sVecIn.y += Time * 0.00000001 / sNumIn;
-    sVecIn.x += sin(sVecIn.y + Time * 0.5) / sNumIn;
-    sVecIn *= sNumIn;
+    pPosition += (Time / 0.3) / pAmount;
+    pPosition.y += Time * 0.00000001 / pAmount;
+    pPosition.x += sin(pPosition.y + Time * 0.5) / pAmount;
+    pPosition *= pAmount;
 
-    vec2 sSpeed = floor(sVecIn);
-    vec2 sFrag = fract(sVecIn);
-    vec2 sProjection = 0.5 + 0.35 * sin(12.0 * fract(sin((sSpeed + 0.0 + sNumIn) * mat2(7, 3, 6, 5)) * 5.0)) - sFrag;
+    vec2 sSpeed = floor(pPosition);
+    vec2 sFrag = fract(pPosition);
+    vec2 sProjection = 0.5 + 0.35 * sin(12.0 * fract(sin((sSpeed + 0.0 + pAmount) * mat2(7, 3, 6, 5)) * 5.0)) - sFrag;
 
     float sDelta = length(sProjection);;
     float sAmount = 1.0;
@@ -35,23 +37,23 @@ float sStars(vec2 sVecIn, float sNumIn)
 void main()
 {
     vec2 sResolution = vec2(256, 256);
-    vec2 sProjection = (gl_FragCoord.xy * 2.0 - sResolution.xy) / min(sResolution.x, sResolution.y);
+    vec2 sUV = (gl_FragCoord.xy * 2.0 - sResolution.xy) / min(sResolution.x, sResolution.y);
 
     float sAlpha = Background ? 0.5 : 1.0;
-    float sRGB = smoothstep(1.0, 0.3, clamp(sProjection.y * 0.0 + 1.0, 0.0, sAlpha));
+    float sMultiplier = smoothstep(1.0, 0.3, clamp(sUV.y * 0.0 + 1.0, 0.0, sAlpha));
 
-    sRGB += sStars(sProjection, 15.0) * 0.8;
-    sRGB += sStars(sProjection, 10.0);
-    sRGB += sStars(sProjection, 8.0);
-    sRGB += sStars(sProjection, 6.0);
-    sRGB += sStars(sProjection, 5.0);
+    sMultiplier += makeStars(sUV, 15.0) * 0.8;
+    sMultiplier += makeStars(sUV, 10.0);
+    sMultiplier += makeStars(sUV, 8.0);
+    sMultiplier += makeStars(sUV, 6.0);
+    sMultiplier += makeStars(sUV, 5.0);
 
-    vec3 sColour = Colour * sRGB;
+    vec3 sColour = Colour * sMultiplier;
 
-    if (Invert) {
+    if (Invert)
+    {
         sColour.rgb = 1.0 - sColour.rgb;
     }
 
-    // gl_FragColor = vec4(sColour, 1);
-    fragColor = vec4(sColour, 1);
+    fragColour = vec4(sColour, 1);
 }

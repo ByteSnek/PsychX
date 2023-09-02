@@ -34,6 +34,7 @@ public class BlockStates extends BlockStateProvider implements BlockStateProvide
         map.put(Blocks.GEOMETRIC.get(), BLACK_CONCRETE_POWDER);
         map.put(Blocks.BURNING.get(), BLACK_CONCRETE_POWDER);
         map.put(Blocks.FOGGY.get(), MAGENTA_CONCRETE_POWDER);
+        map.put(Blocks.STATIC.get(), GRAY_CONCRETE);
     });
 
     public BlockStates(PackOutput output, ExistingFileHelper helper)

@@ -64,25 +64,26 @@
     "creature": [
       {
         "type": "tq:frolicker",
-        "maxCount": 4,
+        "maxCount": 1,
         "minCount": 1,
-        "weight": 5
-      },
+        "weight": 15
+      }
+    ],
+    "misc": [],
+    "monster": [
       {
         "type": "tq:snipe",
-        "maxCount": 3,
+        "maxCount": 1,
         "minCount": 1,
-        "weight": 7
+        "weight": 20
       },
       {
         "type": "tq:cosmo",
         "maxCount": 3,
         "minCount": 1,
-        "weight": 7
+        "weight": 10
       }
     ],
-    "misc": [],
-    "monster": [],
     "underground_water_creature": [],
     "water_ambient": [],
     "water_creature": []

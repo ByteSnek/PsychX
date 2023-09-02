@@ -2,7 +2,6 @@ package xyz.snaker.tq.level.world.biome;
 
 import xyz.snaker.tq.rego.Entities;
 import xyz.snaker.tq.rego.Sounds;
-import xyz.snaker.tq.utility.DefaultFeatures;
 import xyz.snaker.tq.utility.WorldGenStuff;
 
 import net.minecraft.core.Holder;
@@ -36,12 +35,12 @@ public class Illusion
 
         BiomeDefaultFeatures.addDefaultCarversAndLakes(gen);
 
-        DefaultFeatures.addDefaultPlants(gen);
-        DefaultFeatures.addSnowflakeRubble(gen);
-        DefaultFeatures.addStarryRubble(gen);
-        DefaultFeatures.addDefaultEntitySpawns(spawns);
+        WorldGenStuff.addDefaultPlants(gen);
+        WorldGenStuff.addSnowflakeRubble(gen);
+        WorldGenStuff.addStarryRubble(gen);
+        WorldGenStuff.addDefaultEntitySpawns(spawns);
 
-        WorldGenStuff.addSpawn(spawns, Entities.LEET, 9, 1, 3);
+        WorldGenStuff.addMonsterSpawn(spawns, Entities.LEET, 10, 1, 1);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(false)

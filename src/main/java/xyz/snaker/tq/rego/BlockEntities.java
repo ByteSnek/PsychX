@@ -27,6 +27,7 @@ public class BlockEntities
     public static final RegistryObject<BlockEntityType<GeometricBlockEntity>> GEOMETRIC = register("geometric", () -> BlockEntityType.Builder.of(GeometricBlockEntity::new, Blocks.GEOMETRIC.get()).build(null));
     public static final RegistryObject<BlockEntityType<BurningBlockEntity>> BURNING = register("burning", () -> BlockEntityType.Builder.of(BurningBlockEntity::new, Blocks.BURNING.get()).build(null));
     public static final RegistryObject<BlockEntityType<FoggyBlockEntity>> FOGGY = register("foggy", () -> BlockEntityType.Builder.of(FoggyBlockEntity::new, Blocks.FOGGY.get()).build(null));
+    public static final RegistryObject<BlockEntityType<StaticBlockEntity>> STATIC = register("static", () -> BlockEntityType.Builder.of(StaticBlockEntity::new, Blocks.STATIC.get()).build(null));
 
     static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String name, Supplier<BlockEntityType<T>> type)
     {

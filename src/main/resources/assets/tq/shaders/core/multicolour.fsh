@@ -2,23 +2,21 @@
 
 uniform float Time;
 
-in vec2 textureProjection;
-out vec4 fragColor;
+out vec4 fragColour;
 
 void main()
 {
     vec2 sResolution = vec2(256, 256);
-    vec2 sProjection = 6. * (gl_FragCoord.xy / sResolution.xy);
+    vec2 sUV = 6. * (gl_FragCoord.xy / sResolution.xy);
+    vec3 sColour = vec3(0);
 
     for (int i = 1; i < 8; i++)
     {
-        float sTime = Time;
-        float sNumberIn = float(i);
-
-        sProjection += vec2(0.7 / sNumberIn * sin(sNumberIn * sProjection.y + sTime + 0.3 * sNumberIn) + 0.8, 0.4 / sNumberIn * sin(sNumberIn * sProjection.x + sTime + 0.3 * sNumberIn) + 1.6);
+        float sIndex = float(i);
+        sUV += vec2(0.7 / sIndex * sin(sIndex * sUV.y + Time + 0.3 * sIndex) + 0.8, 0.4 / sIndex * sin(sIndex * sUV.x + Time + 0.3 * sIndex) + 1.6);
     }
 
-    vec3 sColour = vec3(0.5 * sin(sProjection.x) + 0.5, 0.5 * sin(sProjection.y) + 0.5, sin(sProjection.x + sProjection.y));
+    sColour = vec3(0.5 * sin(sUV.x) + 0.5, 0.5 * sin(sUV.y) + 0.5, sin(sUV.x + sUV.y));
 
-    fragColor = vec4(sColour, 1.0);
+    fragColour = vec4(sColour, 1.0);
 }

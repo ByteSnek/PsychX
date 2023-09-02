@@ -64,25 +64,26 @@
     "creature": [
       {
         "type": "tq:frolicker",
-        "maxCount": 4,
+        "maxCount": 1,
         "minCount": 1,
-        "weight": 5
-      },
-      {
-        "type": "tq:snipe",
-        "maxCount": 3,
-        "minCount": 1,
-        "weight": 7
-      },
-      {
-        "type": "tq:leet",
-        "maxCount": 3,
-        "minCount": 1,
-        "weight": 9
+        "weight": 15
       }
     ],
     "misc": [],
-    "monster": [],
+    "monster": [
+      {
+        "type": "tq:snipe",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 20
+      },
+      {
+        "type": "tq:leet",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 10
+      }
+    ],
     "underground_water_creature": [],
     "water_ambient": [],
     "water_creature": []

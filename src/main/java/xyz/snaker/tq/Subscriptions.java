@@ -92,6 +92,7 @@ public class Subscriptions
             event.registerBlockEntityRenderer(BlockEntities.GEOMETRIC.get(), new ShaderBlockRenderer<>(ItemLikeRenderType.CLIP));
             event.registerBlockEntityRenderer(BlockEntities.BURNING.get(), new ShaderBlockRenderer<>(ItemLikeRenderType.BURN));
             event.registerBlockEntityRenderer(BlockEntities.FOGGY.get(), new ShaderBlockRenderer<>(ItemLikeRenderType.BLUR_FOG));
+            event.registerBlockEntityRenderer(BlockEntities.STATIC.get(), new ShaderBlockRenderer<>(ItemLikeRenderType.STRANDS));
         }
 
         @Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)

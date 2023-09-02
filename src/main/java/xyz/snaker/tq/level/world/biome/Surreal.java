@@ -2,7 +2,6 @@ package xyz.snaker.tq.level.world.biome;
 
 import xyz.snaker.tq.rego.Entities;
 import xyz.snaker.tq.rego.Sounds;
-import xyz.snaker.tq.utility.DefaultFeatures;
 import xyz.snaker.tq.utility.WorldGenStuff;
 
 import net.minecraft.core.Holder;
@@ -36,12 +35,12 @@ public class Surreal
 
         BiomeDefaultFeatures.addDefaultCarversAndLakes(gen);
 
-        DefaultFeatures.addDefaultPlants(gen);
-        DefaultFeatures.addFlareRubble(gen);
-        DefaultFeatures.addBurningRubble(gen);
-        DefaultFeatures.addDefaultEntitySpawns(spawns);
+        WorldGenStuff.addDefaultPlants(gen);
+        WorldGenStuff.addFlareRubble(gen);
+        WorldGenStuff.addBurningRubble(gen);
+        WorldGenStuff.addDefaultEntitySpawns(spawns);
 
-        WorldGenStuff.addSpawn(spawns, Entities.FLARE, 7, 1, 2);
+        WorldGenStuff.addMonsterSpawn(spawns, Entities.FLARE, 15, 1, 2);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(false)

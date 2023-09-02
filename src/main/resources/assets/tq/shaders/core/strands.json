@@ -5,7 +5,7 @@
         "dstrgb": "1-srcalpha"
     },
     "vertex": "tq:vertex",
-    "fragment": "tq:stars",
+    "fragment": "tq:strands",
     "attributes": [
         "Position",
         "UV"
@@ -64,32 +64,6 @@
             "count": 1,
             "values": [
                 0.0
-            ]
-        },
-        {
-            "name": "Colour",
-            "type": "float",
-            "count": 3,
-            "values": [
-                0.0,
-                0.0,
-                0.0
-            ]
-        },
-        {
-            "name": "Background",
-            "type": "int",
-            "count": 1,
-            "values": [
-                0
-            ]
-        },
-        {
-            "name": "Invert",
-            "type": "int",
-            "count": 1,
-            "values": [
-                0
             ]
         }
     ]
