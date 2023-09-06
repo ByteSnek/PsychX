@@ -23,6 +23,7 @@ minecraft {
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
+
         configureEach {
             workingDirectory project.file("run/${it.name}")
 
@@ -59,7 +60,7 @@ sourceSets.main.resources {
 
 repositories {
     mavenCentral()
-    mavenLocal()
+    maven { url "https://s01.oss.sonatype.org/content/repositories/releases" }
     maven { url "https://cursemaven.com" }
 }
 
@@ -68,6 +69,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:4629624")
     implementation fg.deobf("curse.maven:cyanide-forge-541676:4584675")
     implementation fg.deobf("curse.maven:spark-361579:4587309")
+    implementation fg.deobf("xyz.snaker.snakerlib:SnakerLib:${snakerlib_version}")
 }
 
 mixin {
@@ -109,39 +111,56 @@ tasks.named('jar', Jar).configure {
     finalizedBy 'reobfJar'
 }
 
+tasks.register('docJar', Jar) {
+    build.dependsOn it
+    from javadoc
+    archiveClassifier = 'javadoc'
+}
+
 tasks.register('srcJar', Jar) {
     build.dependsOn it
     from sourceSets.main.allSource
     archiveClassifier = 'sources'
 }
 
-tasks.register('openMavenStream', Exec) {
-    group 'snaker'
-    workingDir 'maven'
-    commandLine 'cmd', '/c', 'mvn.bat' // Start server on localhost and open link in browser
-}
-
 publishing {
     publications {
         register('mavenJava', MavenPublication) {
             artifact jar
-            artifact srcJar // Generate sources
+            artifact srcJar
+            artifact docJar
+            pom {
+                name = project.name
+                description = 'Modding Library'
+                url = 'https://github.com/SnakerBone/Tourniqueted'
+                scm {
+                    url = 'https://github.com/SnakerBone/Tourniqueted'
+                    connection = 'scm:git:git://github.com/SnakerBone/Tourniqueted.git'
+                    developerConnection = 'scm:git:git@github.com:SnakerBone/Tourniqueted.git'
+                }
+                licenses {
+                    license {
+                        name = 'GPLv3'
+                        url = 'https://www.gnu.org/licenses/gpl-3.0.txt'
+                    }
+                }
+            }
         }
     }
     repositories {
         maven {
-            url "http://localhost:8081/releases" // Publish to local site maven
-            allowInsecureProtocol true
+            url "https://s01.oss.sonatype.org/content/repositories/releases"
             credentials {
-                username System.getenv("MVN_USER")
-                password System.getenv("MVN_PASS")
+                username 'snaker'
+                password System.getenv('MAVEN_PASS')
             }
         }
     }
 }
 
+
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
-    options.deprecation(false) // Annoying
-    options.warnings(false) // Annoying
+    options.deprecation(false)
+    options.warnings(false)
 }

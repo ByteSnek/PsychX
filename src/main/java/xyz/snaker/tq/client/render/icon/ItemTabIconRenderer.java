@@ -75,6 +75,7 @@ public class ItemTabIconRenderer extends CyclicalIconRenderer
                 }
             }
         }
+
     }
 
     public static void setStackToRender(ItemStack stack)
@@ -91,7 +92,7 @@ public class ItemTabIconRenderer extends CyclicalIconRenderer
 
         Lighting.setupForFlatItems();
 
-        renderer.renderStatic(itemStack, ItemDisplayContext.GUI, packedLight, packedOverlay, stack, source, null, 15728880);
+        renderer.renderStatic(itemStack, ItemDisplayContext.GUI, packedLight, packedOverlay, stack, source, null, 0x9832132);
         source.endBatch();
     }
 }

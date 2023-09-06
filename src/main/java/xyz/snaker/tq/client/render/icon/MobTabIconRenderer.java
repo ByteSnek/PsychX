@@ -41,7 +41,7 @@ public class MobTabIconRenderer extends CyclicalIconRenderer
     }
 
     @Override
-    public void renderByItem(@NotNull ItemStack itemStack, @NotNull ItemDisplayContext type, @NotNull PoseStack stack, @NotNull MultiBufferSource buf, int light, int overlay)
+    public void renderByItem(@NotNull ItemStack itemStack, @NotNull ItemDisplayContext context, @NotNull PoseStack stack, @NotNull MultiBufferSource buf, int light, int overlay)
     {
         MouseHandler mouseHelper = Minecraft.getInstance().mouseHandler;
         ClientLevel level = Minecraft.getInstance().level;
@@ -76,9 +76,7 @@ public class MobTabIconRenderer extends CyclicalIconRenderer
                 4 = Utterfly
                 5 = Flutterfly
                 6 = Frolicker
-                7 = Anti Cosmo
-                8 = Eerie Cretin
-                9 = Leet
+                7 = Leet
              */
 
             switch (index) {
@@ -92,7 +90,7 @@ public class MobTabIconRenderer extends CyclicalIconRenderer
                     scale = 1.05F;
                     stack.translate(0F, 0.3F, 0F);
                 }
-                case 9 -> {
+                case 7 -> {
                     scale = 0.125F;
                     stack.translate(0F, 0.3F, 0F);
                 }
@@ -104,7 +102,7 @@ public class MobTabIconRenderer extends CyclicalIconRenderer
             stack.mulPose(Axis.XP.rotationDegrees(180));
             stack.mulPose(Axis.YP.rotationDegrees(180));
 
-            if (type != ItemDisplayContext.GUI) {
+            if (context != ItemDisplayContext.GUI) {
                 mouseX = 0;
                 mouseY = 0;
             }
