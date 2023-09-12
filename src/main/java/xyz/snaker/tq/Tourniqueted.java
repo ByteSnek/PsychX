@@ -1,7 +1,5 @@
 package xyz.snaker.tq;
 
-import java.io.IOException;
-
 import xyz.snaker.snakerlib.SnakerLib;
 import xyz.snaker.tq.client.Shaders;
 import xyz.snaker.tq.config.TqConfig;
@@ -30,7 +28,7 @@ public class Tourniqueted
         }
     }
 
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args)
     {
         System.out.println();
     }

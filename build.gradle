@@ -23,7 +23,6 @@ minecraft {
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
-
         configureEach {
             workingDirectory project.file("run/${it.name}")
 
@@ -62,10 +61,12 @@ repositories {
     mavenCentral()
     maven { url "https://s01.oss.sonatype.org/content/repositories/releases" }
     maven { url "https://cursemaven.com" }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
     minecraft "net.neoforged:forge:${minecraft_version}-${neo_version}"
+    minecraftLibrary "com.github.SnakerBone:glslc:${glslc_version}"
     runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:4629624")
     implementation fg.deobf("curse.maven:cyanide-forge-541676:4584675")
     implementation fg.deobf("curse.maven:spark-361579:4587309")
@@ -87,8 +88,7 @@ tasks.withType(ProcessResources).configureEach {
             mod_license            : mod_license,
             mod_version            : mod_version,
             mod_authors            : mod_authors,
-            mod_description        : mod_description,
-            pack_format_number     : pack_format_number
+            mod_description        : mod_description
     ]
     inputs.properties replaceProperties
     filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
