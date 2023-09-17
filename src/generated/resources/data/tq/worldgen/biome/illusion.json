@@ -49,6 +49,8 @@
     [],
     [],
     [
+      "minecraft:trees_plains",
+      "tq:foggy_tree",
       "tq:snakeroot",
       "tq:tall_snakeroot",
       "tq:splitleaf",

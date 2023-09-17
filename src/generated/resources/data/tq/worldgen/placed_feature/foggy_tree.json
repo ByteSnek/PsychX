@@ -1,5 +1,5 @@
 {
-  "feature": "tq:geometric_tree",
+  "feature": "tq:foggy_tree",
   "placement": [
     {
       "type": "minecraft:rarity_filter",
@@ -24,7 +24,7 @@
       "predicate": {
         "type": "minecraft:would_survive",
         "state": {
-          "Name": "tq:geometric_sapling",
+          "Name": "tq:foggy_sapling",
           "Properties": {
             "stage": "0"
           }

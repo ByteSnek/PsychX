@@ -35,6 +35,7 @@ public class Illusion
 
         BiomeDefaultFeatures.addDefaultCarversAndLakes(gen);
 
+        WorldGenStuff.addFoggyTree(gen);
         WorldGenStuff.addDefaultPlants(gen);
         WorldGenStuff.addSnowflakeRubble(gen);
         WorldGenStuff.addStarryRubble(gen);

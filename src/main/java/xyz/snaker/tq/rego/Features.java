@@ -56,6 +56,7 @@ public class Features
         registerPlacement(context, "starry_rubble", simpleSurfacePlacement(2));
         registerPlacement(context, "foggy_rubble", simpleSurfacePlacement(2));
         registerPlacement(context, "geometric_tree", simpleTreePlacement(GEOMETRIC_SAPLING, 1));
+        registerPlacement(context, "foggy_tree", simpleTreePlacement(FOGGY_SAPLING, 1));
     }
 
     public static void configuredFeatures(BootstapContext<ConfiguredFeature<?, ?>> context)
@@ -75,6 +76,7 @@ public class Features
         registerConfiguredFeature(context, "starry_rubble", STARRY_RUBBLE, STARRY);
         registerConfiguredFeature(context, "foggy_rubble", FOGGY_RUBBLE, FOGGY);
         registerConfiguredFeature(context, "geometric_tree", TREE, createGeometricTreeConfig(GEOMETRIC_LOG, GEOMETRIC, COMASTONE));
+        registerConfiguredFeature(context, "foggy_tree", TREE, createFoggyTreeConfig(FOGGY_LOG, COMASTONE));
     }
 
     public static void biomeModifiers(BootstapContext<BiomeModifier> context)
@@ -94,6 +96,7 @@ public class Features
         registerBiomeModifier(context, "starry_rubble", LOCAL_MODIFICATIONS);
         registerBiomeModifier(context, "foggy_rubble", LOCAL_MODIFICATIONS);
         registerBiomeModifier(context, "geometric_tree", VEGETAL_DECORATION);
+        registerBiomeModifier(context, "foggy_tree", VEGETAL_DECORATION);
     }
 
     static <F extends Feature<?>> RegistryObject<F> register(String name, Supplier<F> feature)

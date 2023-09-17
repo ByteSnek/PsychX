@@ -15,9 +15,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by SnakerBone on 6/07/2023
  **/
-public class Syncope extends MobEffect
+public class VisionConvolve extends MobEffect
 {
-    public Syncope()
+    public VisionConvolve()
     {
         super(MobEffectCategory.NEUTRAL, ColourStuff.randomHex());
     }

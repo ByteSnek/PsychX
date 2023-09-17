@@ -42,8 +42,8 @@ public class Blocks
     public static final RegistryObject<Block> FOGGY = registerShaderBlock("foggy", BlockEntities.FOGGY);
     public static final RegistryObject<Block> STATIC = registerShaderBlock("static", BlockEntities.STATIC);
 
-    public static final RegistryObject<Block> PINKTAILS = registerBlockWithItem("pink_tails", () -> new FlowerBlock(Effects.SYNCOPE::get, Maths.secondsToTicks(5), DefaultBlockProperties.PLANT.apply(MapColor.COLOR_PINK), Keys.GROUNDRICH, true));
-    public static final RegistryObject<Block> SPLITLEAF = registerBlockWithItem("split_leaf", () -> new FlowerBlock(Effects.SYNCOPE::get, Maths.secondsToTicks(5), DefaultBlockProperties.PLANT.apply(MapColor.COLOR_CYAN), Keys.GROUNDRICH, true));
+    public static final RegistryObject<Block> PINKTAILS = registerBlockWithItem("pink_tails", () -> new FlowerBlock(Effects.VISION_CONVOLVE::get, Maths.secondsToTicks(5), DefaultBlockProperties.PLANT.apply(MapColor.COLOR_PINK), Keys.GROUNDRICH, true));
+    public static final RegistryObject<Block> SPLITLEAF = registerBlockWithItem("split_leaf", () -> new FlowerBlock(Effects.VISION_CONVOLVE::get, Maths.secondsToTicks(5), DefaultBlockProperties.PLANT.apply(MapColor.COLOR_CYAN), Keys.GROUNDRICH, true));
     public static final RegistryObject<Block> SNAKEROOT = registerBlockWithItem("snake_root", () -> new TallPlantBlock(DefaultBlockProperties.GRASS.apply(MapColor.COLOR_CYAN), Keys.GROUNDRICH, true));
     public static final RegistryObject<Block> TALL_SNAKEROOT = registerBlockWithItem("tall_snake_root", () -> new TallPlantBlock(DefaultBlockProperties.GRASS.apply(MapColor.COLOR_CYAN), Keys.GROUNDRICH, true));
 
@@ -52,6 +52,10 @@ public class Blocks
     public static final RegistryObject<Block> GEOMETRIC_SAPLING = registerBlockWithItem("geometric_sapling", () -> new SaplingBlock(new SimpleTreeGrower(FeatureKey.GEOMETRIC_TREE.getConfigKey()), DefaultBlockProperties.GRASS.apply(MapColor.COLOR_PURPLE), Keys.GROUNDRICH, true));
     public static final RegistryObject<Block> GEOMETRIC_LOG = registerBlockWithItem("geometric_log", () -> new RotatedPillarBlock(DefaultBlockProperties.WOOD.apply(MapColor.COLOR_PURPLE)));
     public static final RegistryObject<Block> GEOMETRIC_PLANKS = registerBlockWithItem("geometric_planks", () -> new Block(DefaultBlockProperties.WOOD.apply(MapColor.COLOR_PURPLE)));
+
+    public static final RegistryObject<Block> FOGGY_SAPLING = registerBlockWithItem("foggy_sapling", () -> new SaplingBlock(new SimpleTreeGrower(FeatureKey.FOGGY_TREE.getConfigKey()), DefaultBlockProperties.GRASS.apply(MapColor.COLOR_MAGENTA), Keys.GROUNDRICH, true));
+    public static final RegistryObject<Block> FOGGY_LOG = registerBlockWithItem("foggy_log", () -> new RotatedPillarBlock(DefaultBlockProperties.WOOD.apply(MapColor.COLOR_MAGENTA)));
+    public static final RegistryObject<Block> FOGGY_PLANKS = registerBlockWithItem("foggy_planks", () -> new Block(DefaultBlockProperties.WOOD.apply(MapColor.COLOR_MAGENTA)));
 
     public static final RegistryObject<Block> DARK_OVERLAY = registerOverlay("dark");
     public static final RegistryObject<Block> WHITE_OVERLAY = registerOverlay("white");

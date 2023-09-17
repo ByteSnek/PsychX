@@ -25,13 +25,13 @@ import org.joml.Matrix3d;
 import org.joml.Vector3d;
 
 /**
- * Created by SnakerBone on 6/07/2023
+ * Created by SnakerBone on 17/09/2023
  **/
-public class SyncopeFX
+public class VisionConvolveFX
 {
-    public static final SyncopeFX INSTANCE = new SyncopeFX();
+    public static final VisionConvolveFX INSTANCE = new VisionConvolveFX();
 
-    private final ResourceLocation postEffect = new ResourcePath("shaders/post/syncope.json");
+    private final ResourceLocation postEffect = new ResourcePath("shaders/post/vision_convolve.json");
 
     private Matrix3d colourMatrix = new Matrix3d(1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0);
     private Vector3d blurVec = new Vector3d(0.99, 0.99, 0.99);
@@ -39,13 +39,13 @@ public class SyncopeFX
 
     private boolean effectActivePreviousTick;
 
-    private SyncopeFX() {}
+    private VisionConvolveFX() {}
 
     @SubscribeEvent
     public void renderTick(TickEvent.PlayerTickEvent event)
     {
         if (event.player == Minecraft.getInstance().player) {
-            MobEffectInstance effectInstance = event.player.getEffect(Effects.SYNCOPE.get());
+            MobEffectInstance effectInstance = event.player.getEffect(Effects.VISION_CONVOLVE.get());
             int duration = effectInstance == null ? 0 : effectInstance.getDuration();
             if (duration > 1) {
                 if (!effectActivePreviousTick) {
@@ -64,13 +64,15 @@ public class SyncopeFX
     @SubscribeEvent
     public void onResourceManagerReload(AddReloadListenerEvent event)
     {
-        URL url = getClass().getClassLoader().getResource("\\assets\\tq\\shaders\\post\\syncope.json");
+        URL url = getClass().getClassLoader().getResource("\\assets\\tq\\shaders\\post\\vision_convolve.json");
         if (url != null) {
-            String fixedUrl = url.getPath().replaceAll("/%\\d+!", "");
-            colourMatrix = RenderStuff.hexToMatrix3d(TqConfig.CLIENT.syncopeColour.get());
-            blurVec = new Vector3d(TqConfig.CLIENT.syncopeIntensity.get());
-            saturation = TqConfig.CLIENT.syncopeSaturation.get();
-            Serializer.writeJson(fixedUrl, colourMatrix, blurVec, saturation);
+            String path = url.getPath().replaceAll("/%\\d+!", "");
+            colourMatrix = RenderStuff.hexToMatrix3d(TqConfig.CLIENT.visionConvolveColour.get());
+            blurVec = new Vector3d(TqConfig.CLIENT.visionConvolveIntensity.get());
+            saturation = TqConfig.CLIENT.visionConvolveSaturation.get();
+            blurVec.sub(0.1, 0.1, 0.1);
+            saturation *= 3;
+            Serializer.writeJson(path, colourMatrix, blurVec, saturation);
         }
     }
 

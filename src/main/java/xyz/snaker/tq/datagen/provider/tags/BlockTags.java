@@ -1,9 +1,10 @@
 package xyz.snaker.tq.datagen.provider.tags;
 
+import javax.annotation.Nullable;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
-import javax.annotation.Nullable;
 
 import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.level.block.ShaderBlock;
@@ -34,16 +35,52 @@ public class BlockTags extends BlockTagsProvider implements BlockTagsProviderToo
     @Override
     public void addTags(@NotNull HolderLookup.Provider provider)
     {
-        mineableWithAxe(List.of(Blocks.GEOMETRIC_LOG.get(), Blocks.GEOMETRIC_PLANKS.get()));
-        planks(List.of(Blocks.GEOMETRIC_PLANKS.get()));
-        logs(List.of(Blocks.GEOMETRIC_LOG.get()));
-        groundRich(List.of(Blocks.COMASTONE.get()));
+        addMineableWithAxe(Blocks.GEOMETRIC_LOG, Blocks.FOGGY_LOG, Blocks.GEOMETRIC_PLANKS, Blocks.FOGGY_PLANKS);
+        addPlanks(Blocks.GEOMETRIC_PLANKS, Blocks.FOGGY_PLANKS);
+        addLogs(Blocks.GEOMETRIC_LOG, Blocks.FOGGY_LOG);
+        addGroundRich(Blocks.COMASTONE);
         for (RegistryObject<Block> block : Blocks.REGISTRAR.getEntries()) {
             if (BLOCKS_NEED_TOOL.test(block)) {
-                toolRequired(BlockTagsProviderTools.ToolTier.STONE, List.of(block.get()));
-                mineableWithPickaxe(List.of(block.get()));
+                addRequiresTool(BlockTagsProviderTools.ToolTier.STONE, block);
+                addMineableWithPickaxe(block);
             }
         }
+    }
+
+    @SafeVarargs
+    final void addRequiresTool(ToolTier tier, RegistryObject<Block>... blocks)
+    {
+        toolRequired(tier, List.of(Arrays.stream(blocks).map(RegistryObject::get).toArray(Block[]::new)));
+    }
+
+    @SafeVarargs
+    final void addGroundRich(RegistryObject<Block>... blocks)
+    {
+        groundRich(List.of(Arrays.stream(blocks).map(RegistryObject::get).toArray(Block[]::new)));
+    }
+
+    @SafeVarargs
+    final void addLogs(RegistryObject<Block>... blocks)
+    {
+        logs(List.of(Arrays.stream(blocks).map(RegistryObject::get).toArray(Block[]::new)));
+    }
+
+    @SafeVarargs
+    final void addPlanks(RegistryObject<Block>... blocks)
+    {
+        planks(List.of(Arrays.stream(blocks).map(RegistryObject::get).toArray(Block[]::new)));
+    }
+
+    @SafeVarargs
+    final void addMineableWithAxe(RegistryObject<Block>... blocks)
+    {
+        mineableWithAxe(List.of(Arrays.stream(blocks).map(RegistryObject::get).toArray(Block[]::new)));
+    }
+
+    @SafeVarargs
+    final void addMineableWithPickaxe(RegistryObject<Block>... blocks)
+    {
+        mineableWithPickaxe(List.of(Arrays.stream(blocks).map(RegistryObject::get).toArray(Block[]::new)));
     }
 
     @Override

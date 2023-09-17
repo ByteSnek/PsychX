@@ -23,8 +23,11 @@ import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.util.valueproviders.WeightedListInt;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -39,13 +42,17 @@ import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.AcaciaFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.CherryFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.CherryTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.ForkingTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.common.world.ForgeBiomeModifiers;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+import static net.minecraft.world.level.block.Blocks.AIR;
 
 /**
  * Created by SnakerBone on 4/08/2023
@@ -81,6 +88,38 @@ public class WorldGenStuff
         return createGeometricTreeConfig(stem, foliage, dirt, 5, 4, 3, 3, 2, 3, 1, 0, 2);
     }
 
+    public static <T extends Block> TreeConfiguration createFoggyTreeConfig(RegistryObject<T> stem, RegistryObject<T> dirt, int foliageRadius, int foliageOffset, int foliageHeight)
+    {
+        return new TreeConfiguration.TreeConfigurationBuilder(
+                simple(stem.get()),
+                new CherryTrunkPlacer(7, 1, 0,
+                        new WeightedListInt(SimpleWeightedRandomList.<IntProvider>builder()
+                                .add(ConstantInt.of(1), 1)
+                                .add(ConstantInt.of(2), 1)
+                                .add(ConstantInt.of(3), 1)
+                                .build()
+                        ),
+                        UniformInt.of(2, 4),
+                        UniformInt.of(-4, -3),
+                        UniformInt.of(-1, 0)),
+                simple(AIR),
+                new CherryFoliagePlacer(
+                        ConstantInt.of(foliageRadius),
+                        ConstantInt.of(foliageOffset),
+                        ConstantInt.of(foliageHeight),
+                        0.25F,
+                        0.5F,
+                        0.16666667F,
+                        0.33333334F),
+                new TwoLayersFeatureSize(1, 0, 2)
+        ).dirt(simple(dirt.get())).ignoreVines().build();
+    }
+
+    public static <T extends Block> TreeConfiguration createFoggyTreeConfig(RegistryObject<T> stem, RegistryObject<T> dirt)
+    {
+        return createFoggyTreeConfig(stem, dirt, 4, 0, 5);
+    }
+
     public static <T extends Block> TreeConfiguration createAcaciaTreeConfig(RegistryObject<T> stem, RegistryObject<T> foliage, RegistryObject<T> dirt, int baseHeight, int heightA, int heightB, int foliageRadius, int foliageOffset, int foliageLimit, int foliageLowerBound, int foliageUpperBound)
     {
         return new TreeConfiguration.TreeConfigurationBuilder(
@@ -100,7 +139,7 @@ public class WorldGenStuff
     public static List<PlacementModifier> simpleTreePlacement(RegistryObject<Block> sapling, int count)
     {
         return VegetationPlacements.treePlacement(
-                placement(count),
+                RarityFilter.onAverageOnceEvery(count),
                 sapling.get()
         );
     }
@@ -200,6 +239,12 @@ public class WorldGenStuff
     {
         builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.TREES_PLAINS);
         builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureKey.GEOMETRIC_TREE.getPlacedKey());
+    }
+
+    public static void addFoggyTree(BiomeGenerationSettings.Builder builder)
+    {
+        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.TREES_PLAINS);
+        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureKey.FOGGY_TREE.getPlacedKey());
     }
 
     public static void addDefaultPlants(BiomeGenerationSettings.Builder builder)

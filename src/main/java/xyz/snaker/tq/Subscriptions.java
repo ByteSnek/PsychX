@@ -4,18 +4,17 @@ import xyz.snaker.snakerlib.brigader.DiscardAllEntitiesCommand;
 import xyz.snaker.snakerlib.brigader.HurtAllEntitiesCommand;
 import xyz.snaker.snakerlib.brigader.KillAllEntitiesCommand;
 import xyz.snaker.snakerlib.brigader.PlaygroundModeCommand;
-import xyz.snaker.snakerlib.math.PoseStackBuilder;
 import xyz.snaker.snakerlib.utility.tools.EntityStuff;
 import xyz.snaker.snakerlib.utility.tools.TimeStuff;
 import xyz.snaker.snakerlib.utility.tools.WorldStuff;
 import xyz.snaker.tq.client.fx.SyncopeFX;
+import xyz.snaker.tq.client.fx.VisionConvolveFX;
 import xyz.snaker.tq.client.model.entity.*;
 import xyz.snaker.tq.client.model.item.CosmoSpineModel;
 import xyz.snaker.tq.client.render.block.ShaderBlockRenderer;
 import xyz.snaker.tq.client.render.entity.*;
 import xyz.snaker.tq.client.render.type.ItemLikeRenderType;
 import xyz.snaker.tq.config.TqConfig;
-import xyz.snaker.tq.level.effect.Syncope;
 import xyz.snaker.tq.level.entity.boss.Utterfly;
 import xyz.snaker.tq.level.entity.creature.Flutterfly;
 import xyz.snaker.tq.level.entity.creature.Frolicker;
@@ -29,7 +28,6 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -40,7 +38,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
@@ -53,8 +50,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.server.command.ConfigCommand;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.brigadier.CommandDispatcher;
 
 /**
@@ -114,7 +109,7 @@ public class Subscriptions
             @SubscribeEvent
             public static void clientSetup(FMLClientSetupEvent event)
             {
-                MinecraftForge.EVENT_BUS.register(new SyncopeFX());
+                registerEffects(SyncopeFX.INSTANCE, VisionConvolveFX.INSTANCE);
                 registerEntityRenderer(Entities.COSMO, CosmoRenderer::new);
                 registerEntityRenderer(Entities.SNIPE, SnipeRenderer::new);
                 registerEntityRenderer(Entities.FLARE, FlareRenderer::new);
@@ -140,6 +135,13 @@ public class Subscriptions
                 registerSpawn(event, Entities.FLUTTERFLY, Flutterfly::spawnRules);
             }
 
+            private static void registerEffects(Object... targets)
+            {
+                for (Object target : targets) {
+                    MinecraftForge.EVENT_BUS.register(target);
+                }
+            }
+
             private static <T extends Entity> void registerSpawn(SpawnPlacementRegisterEvent event, RegistryObject<EntityType<T>> type, SpawnPlacements.SpawnPredicate<T> predicate)
             {
                 event.register(type.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, predicate, SpawnPlacementRegisterEvent.Operation.AND);
@@ -156,39 +158,6 @@ public class Subscriptions
             }
         }
 
-        @Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
-        public static class ForgeClient
-        {
-            @SubscribeEvent
-            @SuppressWarnings("rawtypes")
-            public static void postRenderEntity(RenderLivingEvent.Post event)
-            {
-                PoseStack stack = event.getPoseStack();
-                PoseStackBuilder builder = new PoseStackBuilder(stack);
-                RenderSystem.getProjectionMatrix();
-                builder.popPose();
-            }
-
-            @SubscribeEvent
-            @SuppressWarnings("rawtypes")
-            public static void preRenderEntity(RenderLivingEvent.Pre event)
-            {
-                PoseStack stack = event.getPoseStack();
-                PoseStackBuilder builder = new PoseStackBuilder(stack);
-                LivingEntity entity = event.getEntity();
-                Syncope syncope = Effects.SYNCOPE.get();
-                MobEffectInstance effect = entity.getEffect(syncope);
-                builder.pushPose();
-                if (effect != null) {
-                    int effectDuration = effect.getDuration();
-                    boolean effectOver = effectDuration <= 0;
-                    if (effectOver) {
-                        entity.removeEffect(syncope);
-                    }
-                }
-            }
-        }
-
         @Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
         public static class ForgeCommon
         {
@@ -197,10 +166,10 @@ public class Subscriptions
             {
                 Player player = event.player;
                 Level level = player.level();
-                if (WorldStuff.isDimension(level, Keys.COMATOSE) && TqConfig.COMMON.syncopeActiveInComatoseDimension.get()) {
+                if (WorldStuff.isDimension(level, Keys.COMATOSE) && TqConfig.COMMON.visionConvolveActive.get()) {
                     float tickCount = player.tickCount;
                     if (TimeStuff.secOffs(tickCount, 1)) {
-                        EntityStuff.addEffectDirect(player, Effects.SYNCOPE.get());
+                        EntityStuff.addEffectDirect(player, Effects.VISION_CONVOLVE.get());
                     }
                 }
             }
