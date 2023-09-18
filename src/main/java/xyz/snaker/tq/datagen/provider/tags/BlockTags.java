@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
 
+import xyz.snaker.snakerlib.utility.tools.CollectionStuff;
 import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.level.block.ShaderBlock;
 import xyz.snaker.tq.rego.Blocks;
@@ -25,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
  **/
 public class BlockTags extends BlockTagsProvider implements BlockTagsProviderTools<BlockTags>
 {
-    public static final Predicate<RegistryObject<Block>> BLOCKS_NEED_TOOL = block -> block.get() instanceof ShaderBlock<?> || block.get() == Blocks.COMASTONE.get();
+    public static final Predicate<Block> BLOCKS_NEED_TOOL = block -> block instanceof ShaderBlock<?> || block == Blocks.COMASTONE.get();
 
     public BlockTags(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, @Nullable ExistingFileHelper helper)
     {
@@ -39,18 +40,17 @@ public class BlockTags extends BlockTagsProvider implements BlockTagsProviderToo
         addPlanks(Blocks.GEOMETRIC_PLANKS, Blocks.FOGGY_PLANKS);
         addLogs(Blocks.GEOMETRIC_LOG, Blocks.FOGGY_LOG);
         addGroundRich(Blocks.COMASTONE);
-        for (RegistryObject<Block> block : Blocks.REGISTRAR.getEntries()) {
+        CollectionStuff.mapDeferredRegistries(Blocks.REGISTRAR, Block[]::new).forEach(block -> {
             if (BLOCKS_NEED_TOOL.test(block)) {
                 addRequiresTool(BlockTagsProviderTools.ToolTier.STONE, block);
                 addMineableWithPickaxe(block);
             }
-        }
+        });
     }
 
-    @SafeVarargs
-    final void addRequiresTool(ToolTier tier, RegistryObject<Block>... blocks)
+    final void addRequiresTool(ToolTier tier, Block... blocks)
     {
-        toolRequired(tier, List.of(Arrays.stream(blocks).map(RegistryObject::get).toArray(Block[]::new)));
+        toolRequired(tier, List.of(Arrays.stream(blocks).toArray(Block[]::new)));
     }
 
     @SafeVarargs
@@ -77,10 +77,9 @@ public class BlockTags extends BlockTagsProvider implements BlockTagsProviderToo
         mineableWithAxe(List.of(Arrays.stream(blocks).map(RegistryObject::get).toArray(Block[]::new)));
     }
 
-    @SafeVarargs
-    final void addMineableWithPickaxe(RegistryObject<Block>... blocks)
+    final void addMineableWithPickaxe(Block... blocks)
     {
-        mineableWithPickaxe(List.of(Arrays.stream(blocks).map(RegistryObject::get).toArray(Block[]::new)));
+        mineableWithPickaxe(List.of(Arrays.stream(blocks).toArray(Block[]::new)));
     }
 
     @Override

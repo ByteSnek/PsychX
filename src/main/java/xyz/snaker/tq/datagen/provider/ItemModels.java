@@ -1,6 +1,7 @@
 package xyz.snaker.tq.datagen.provider;
 
 import xyz.snaker.snakerlib.client.Icon;
+import xyz.snaker.snakerlib.utility.tools.CollectionStuff;
 import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.level.item.CosmoSpine;
 import xyz.snaker.tq.rego.Blocks;
@@ -9,6 +10,8 @@ import xyz.snaker.tq.utility.tools.ItemModelProviderTools;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -27,28 +30,27 @@ public class ItemModels extends ItemModelProvider implements ItemModelProviderTo
     @Override
     public void registerModels()
     {
-        for (var obj : Items.REGISTRAR.getEntries()) {
-            var current = obj.get();
-            if (!(current instanceof BlockItem)) {
-                if (current instanceof CosmoSpine) {
-                    cosmoSpine(current);
-                } else if (current instanceof ForgeSpawnEggItem) {
-                    spawnEgg(current);
-                } else if (current instanceof Icon) {
-                    perspective(current);
+        CollectionStuff.mapDeferredRegistries(Items.REGISTRAR, Item[]::new).forEach(item -> {
+            if (!(item instanceof BlockItem)) {
+                if (item instanceof CosmoSpine cosmoSpine) {
+                    cosmoSpine(cosmoSpine);
+                } else if (item instanceof ForgeSpawnEggItem spawnEggItem) {
+                    spawnEgg(spawnEggItem);
+                } else if (item instanceof Icon) {
+                    perspective(item);
                 } else {
-                    item(current);
+                    item(item);
                 }
             }
-        }
-        for (var obj : Blocks.REGISTRAR.getEntries()) {
-            var current = obj.get();
-            if (current instanceof BushBlock) {
-                blockCustom(current);
+        });
+
+        CollectionStuff.mapDeferredRegistries(Blocks.REGISTRAR, Block[]::new).forEach(block -> {
+            if (block instanceof BushBlock bushBlock) {
+                blockCustom(bushBlock);
             } else {
-                blockItem(current);
+                blockItem(block);
             }
-        }
+        });
     }
 
     @Override

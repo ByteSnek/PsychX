@@ -2,6 +2,7 @@ package xyz.snaker.tq.datagen.provider.loot;
 
 import java.util.Set;
 
+import xyz.snaker.snakerlib.utility.tools.CollectionStuff;
 import xyz.snaker.tq.rego.Blocks;
 
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -24,9 +25,7 @@ public class BlockLootTables extends BlockLootSubProvider
     @Override
     public void generate()
     {
-        for (RegistryObject<Block> block : Blocks.REGISTRAR.getEntries()) {
-            dropSelf(block.get());
-        }
+        CollectionStuff.mapDeferredRegistries(Blocks.REGISTRAR, Block[]::new).forEach(this::dropSelf);
     }
 
     @Override

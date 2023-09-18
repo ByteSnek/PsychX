@@ -2,11 +2,18 @@ package xyz.snaker.tq.datagen.provider;
 
 import java.util.Locale;
 
+import xyz.snaker.snakerlib.utility.tools.CollectionStuff;
 import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.rego.*;
 import xyz.snaker.tq.utility.tools.LanguageProviderTools;
 
 import net.minecraft.data.PackOutput;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.LanguageProvider;
 
 /**
@@ -22,26 +29,13 @@ public class Languages extends LanguageProvider implements LanguageProviderTools
     @Override
     public void addTranslations()
     {
-        for (var obj : Blocks.REGISTRAR.getEntries()) {
-            block(obj.get());
-        }
-        for (var obj : Items.REGISTRAR.getEntries()) {
-            item(obj.get());
-        }
-        for (var obj : Effects.REGISTRAR.getEntries()) {
-            effect(obj.get());
-        }
-        for (var obj : Entities.REGISTRAR.getEntries()) {
-            entity(obj.get());
-        }
-        for (var obj : Sounds.REGISTRAR.getEntries()) {
-            sound(obj.get());
-        }
-        for (var obj : Tabs.REGISTRAR.getEntries()) {
-            tab(obj);
-        }
+        CollectionStuff.mapDeferredRegistries(Blocks.REGISTRAR, Block[]::new).forEach(this::block);
+        CollectionStuff.mapDeferredRegistries(Items.REGISTRAR, Item[]::new).forEach(this::item);
+        CollectionStuff.mapDeferredRegistries(Effects.REGISTRAR, MobEffect[]::new).forEach(this::effect);
+        CollectionStuff.mapDeferredRegistries(Entities.REGISTRAR, EntityType<?>[]::new).forEach(this::entity);
+        CollectionStuff.mapDeferredRegistries(Sounds.REGISTRAR, SoundEvent[]::new).forEach(this::sound);
+        CollectionStuff.mapDeferredRegistries(Tabs.REGISTRAR, CreativeModeTab[]::new).forEach(this::tab);
 
-        add("tooltip.tq.possible_issue", "If you're a player and you're seeing this then something with the mod may have gone wrong. Please go report this to github.com/SnakerBone/Tourniqueted/issues");
         add("tooltip.tq.debug_tool_mode.none", "None");
         add("tooltip.tq.debug_tool_mode.biome_tp", "Biome Teleport");
     }

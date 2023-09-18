@@ -3,6 +3,7 @@ package xyz.snaker.tq.datagen.provider;
 import java.util.HashMap;
 import java.util.Map;
 
+import xyz.snaker.snakerlib.utility.tools.CollectionStuff;
 import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.level.block.ShaderBlock;
 import xyz.snaker.tq.rego.Blocks;
@@ -45,18 +46,17 @@ public class BlockStates extends BlockStateProvider implements BlockStateProvide
     @Override
     public void registerStatesAndModels()
     {
-        for (var obj : Blocks.REGISTRAR.getEntries()) {
-            var current = obj.get();
-            if (current instanceof ShaderBlock<?> shaderBlock) {
+        CollectionStuff.mapDeferredRegistries(Blocks.REGISTRAR, Block[]::new).forEach(block -> {
+            if (block instanceof ShaderBlock<?> shaderBlock) {
                 shader(shaderBlock, BLOCK_2_PARTICLE.get(shaderBlock));
-            } else if (current instanceof BushBlock) {
-                plant(current);
-            } else if (current instanceof RotatedPillarBlock) {
-                log(current);
+            } else if (block instanceof BushBlock bushBlock) {
+                plant(bushBlock);
+            } else if (block instanceof RotatedPillarBlock rotatedPillarBlock) {
+                log(rotatedPillarBlock);
             } else {
-                cube(current);
+                cube(block);
             }
-        }
+        });
     }
 
     @Override

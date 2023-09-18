@@ -1,5 +1,7 @@
 package xyz.snaker.tq;
 
+import java.util.Arrays;
+
 import xyz.snaker.snakerlib.brigader.DiscardAllEntitiesCommand;
 import xyz.snaker.snakerlib.brigader.HurtAllEntitiesCommand;
 import xyz.snaker.snakerlib.brigader.KillAllEntitiesCommand;
@@ -137,9 +139,7 @@ public class Subscriptions
 
             private static void registerEffects(Object... targets)
             {
-                for (Object target : targets) {
-                    MinecraftForge.EVENT_BUS.register(target);
-                }
+                Arrays.stream(targets).forEach(MinecraftForge.EVENT_BUS::register);
             }
 
             private static <T extends Entity> void registerSpawn(SpawnPlacementRegisterEvent event, RegistryObject<EntityType<T>> type, SpawnPlacements.SpawnPredicate<T> predicate)

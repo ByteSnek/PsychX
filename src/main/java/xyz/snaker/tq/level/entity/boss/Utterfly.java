@@ -1,15 +1,14 @@
 package xyz.snaker.tq.level.entity.boss;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
-import javax.annotation.Nullable;
 
 import xyz.snaker.snakerlib.level.entity.Boss;
 import xyz.snaker.snakerlib.level.entity.FlyingHostile;
 import xyz.snaker.snakerlib.level.entity.ai.FlyGoal;
 import xyz.snaker.snakerlib.level.entity.ai.LookAroundGoal;
 import xyz.snaker.snakerlib.math.Maths;
-import xyz.snaker.tq.client.BossBarRenderer;
 import xyz.snaker.tq.level.entity.projectile.ExplosiveHommingArrow;
 import xyz.snaker.tq.level.entity.projectile.HommingArrow;
 import xyz.snaker.tq.rego.Sounds;
@@ -49,7 +48,6 @@ public class Utterfly extends FlyingHostile implements Boss
     private final ServerBossEvent bossEvent = new ServerBossEvent(getDisplayName(), BossEvent.BossBarColor.GREEN, BossEvent.BossBarOverlay.PROGRESS);
 
     private boolean triggerExplosion;
-    private boolean bossBarActive;
 
     public Utterfly(EntityType<? extends FlyingHostile> type, Level level)
     {
@@ -304,38 +302,9 @@ public class Utterfly extends FlyingHostile implements Boss
     }
 
     @Override
-    public void aiStep()
+    public void customServerAiStep()
     {
-        super.aiStep();
-        if (!level().isClientSide) {
-            bossEvent.setProgress(getHealth() / getMaxHealth());
-            if (!bossBarActive) {
-                if (BossBarRenderer.requiresUpdate()) {
-                    BossBarRenderer.addUtterfly(this);
-                    bossBarActive = true;
-                }
-            }
-        }
-    }
-
-    @Override
-    public void onAddedToWorld()
-    {
-        super.onAddedToWorld();
-        if (!bossBarActive) {
-            BossBarRenderer.addUtterfly(this);
-            bossBarActive = true;
-        }
-    }
-
-    @Override
-    public void onRemovedFromWorld()
-    {
-        super.onRemovedFromWorld();
-        if (bossBarActive) {
-            BossBarRenderer.removeUtterfly(this);
-            bossBarActive = false;
-        }
+        bossEvent.setProgress(getHealth() / getMaxHealth());
     }
 
     @Override

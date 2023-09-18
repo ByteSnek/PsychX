@@ -11,7 +11,6 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.LanguageProvider;
-import net.minecraftforge.registries.RegistryObject;
 
 /**
  * Created by SnakerBone on 21/08/2023
@@ -20,10 +19,10 @@ public interface LanguageProviderTools<T extends LanguageProvider>
 {
     T getInstance();
 
-    default void tab(RegistryObject<CreativeModeTab> tab)
+    default void tab(CreativeModeTab tab)
     {
-        String name = tab.getId().getPath();
-        getInstance().add("itemGroup." + name, StringStuff.i18nt(name));
+        String name = tab.getDisplayName().getString();
+        getInstance().add(name, StringStuff.i18nt(name.substring(name.indexOf('.') + 1)));
     }
 
     default <I extends EntityType<?>> void entity(I entity)
