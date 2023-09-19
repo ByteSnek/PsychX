@@ -70,6 +70,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:4629624")
     implementation fg.deobf("curse.maven:cyanide-forge-541676:4584675")
     implementation fg.deobf("curse.maven:spark-361579:4587309")
+    implementation fg.deobf("curse.maven:oauth-513857:4575495")
     implementation fg.deobf("xyz.snaker.snakerlib:SnakerLib:${snakerlib_version}")
 }
 

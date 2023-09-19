@@ -6,8 +6,6 @@ import xyz.snaker.snakerlib.brigader.DiscardAllEntitiesCommand;
 import xyz.snaker.snakerlib.brigader.HurtAllEntitiesCommand;
 import xyz.snaker.snakerlib.brigader.KillAllEntitiesCommand;
 import xyz.snaker.snakerlib.brigader.PlaygroundModeCommand;
-import xyz.snaker.snakerlib.utility.tools.EntityStuff;
-import xyz.snaker.snakerlib.utility.tools.TimeStuff;
 import xyz.snaker.snakerlib.utility.tools.WorldStuff;
 import xyz.snaker.tq.client.fx.SyncopeFX;
 import xyz.snaker.tq.client.fx.VisionConvolveFX;
@@ -22,10 +20,10 @@ import xyz.snaker.tq.level.entity.creature.Flutterfly;
 import xyz.snaker.tq.level.entity.creature.Frolicker;
 import xyz.snaker.tq.level.entity.mob.*;
 import xyz.snaker.tq.rego.BlockEntities;
-import xyz.snaker.tq.rego.Effects;
 import xyz.snaker.tq.rego.Entities;
 import xyz.snaker.tq.rego.Keys;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.commands.CommandSourceStack;
@@ -36,7 +34,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -162,14 +159,16 @@ public class Subscriptions
         public static class ForgeCommon
         {
             @SubscribeEvent
-            public static void playerTick(TickEvent.PlayerTickEvent event)
+            public static void playerTick(TickEvent.LevelTickEvent event)
             {
-                Player player = event.player;
-                Level level = player.level();
-                if (WorldStuff.isDimension(level, Keys.COMATOSE) && TqConfig.COMMON.visionConvolveActive.get()) {
-                    float tickCount = player.tickCount;
-                    if (TimeStuff.secOffs(tickCount, 1)) {
-                        EntityStuff.addEffectDirect(player, Effects.VISION_CONVOLVE.get());
+                Player player = Minecraft.getInstance().player;
+                if (player != null) {
+                    if (WorldStuff.isDimension(event.level, Keys.COMATOSE) && TqConfig.COMMON.visionConvolveActive.get()) {
+                        // player.addEffect(new MobEffectInstance(Effects.VISION_CONVOLVE.get(), 80));
+                    } else {
+                        // if (player.hasEffect(Effects.VISION_CONVOLVE.get())) {
+                        // player.removeEffect(Effects.VISION_CONVOLVE.get());
+                        // }
                     }
                 }
             }
