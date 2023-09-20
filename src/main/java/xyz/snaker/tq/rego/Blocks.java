@@ -13,6 +13,7 @@ import xyz.snaker.tq.level.block.OverlayBlock;
 import xyz.snaker.tq.level.block.ShaderBlock;
 import xyz.snaker.tq.level.world.feature.FeatureKey;
 
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -42,8 +43,8 @@ public class Blocks
     public static final RegistryObject<Block> FOGGY = registerShaderBlock("foggy", BlockEntities.FOGGY);
     public static final RegistryObject<Block> STATIC = registerShaderBlock("static", BlockEntities.STATIC);
 
-    public static final RegistryObject<Block> PINKTAILS = registerBlockWithItem("pink_tails", () -> new FlowerBlock(Effects.VISION_CONVOLVE::get, Maths.secondsToTicks(5), DefaultBlockProperties.PLANT.apply(MapColor.COLOR_PINK), Keys.GROUNDRICH, true));
-    public static final RegistryObject<Block> SPLITLEAF = registerBlockWithItem("split_leaf", () -> new FlowerBlock(Effects.VISION_CONVOLVE::get, Maths.secondsToTicks(5), DefaultBlockProperties.PLANT.apply(MapColor.COLOR_CYAN), Keys.GROUNDRICH, true));
+    public static final RegistryObject<Block> PINKTAILS = registerBlockWithItem("pink_tails", () -> new FlowerBlock(() -> MobEffects.HARM, Maths.secondsToTicks(5), DefaultBlockProperties.PLANT.apply(MapColor.COLOR_PINK), Keys.GROUNDRICH, true));
+    public static final RegistryObject<Block> SPLITLEAF = registerBlockWithItem("split_leaf", () -> new FlowerBlock(() -> MobEffects.HARM, Maths.secondsToTicks(5), DefaultBlockProperties.PLANT.apply(MapColor.COLOR_CYAN), Keys.GROUNDRICH, true));
     public static final RegistryObject<Block> SNAKEROOT = registerBlockWithItem("snake_root", () -> new TallPlantBlock(DefaultBlockProperties.GRASS.apply(MapColor.COLOR_CYAN), Keys.GROUNDRICH, true));
     public static final RegistryObject<Block> TALL_SNAKEROOT = registerBlockWithItem("tall_snake_root", () -> new TallPlantBlock(DefaultBlockProperties.GRASS.apply(MapColor.COLOR_CYAN), Keys.GROUNDRICH, true));
 

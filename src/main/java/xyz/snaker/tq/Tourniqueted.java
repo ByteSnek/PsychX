@@ -5,6 +5,7 @@ import xyz.snaker.tq.client.Shaders;
 import xyz.snaker.tq.config.TqConfig;
 import xyz.snaker.tq.rego.Rego;
 
+import net.minecraft.util.RandomSource;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -30,6 +31,9 @@ public class Tourniqueted
 
     public static void main(String[] args)
     {
-        System.out.println();
+        for (int i = 0; i < 100; i++) {
+            System.out.println();
+            System.out.println(RandomSource.create().nextFloat());
+        }
     }
 }

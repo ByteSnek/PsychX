@@ -6,9 +6,8 @@ import xyz.snaker.snakerlib.brigader.DiscardAllEntitiesCommand;
 import xyz.snaker.snakerlib.brigader.HurtAllEntitiesCommand;
 import xyz.snaker.snakerlib.brigader.KillAllEntitiesCommand;
 import xyz.snaker.snakerlib.brigader.PlaygroundModeCommand;
-import xyz.snaker.snakerlib.utility.tools.WorldStuff;
+import xyz.snaker.snakerlib.utility.ResourcePath;
 import xyz.snaker.tq.client.fx.SyncopeFX;
-import xyz.snaker.tq.client.fx.VisionConvolveFX;
 import xyz.snaker.tq.client.model.entity.*;
 import xyz.snaker.tq.client.model.item.CosmoSpineModel;
 import xyz.snaker.tq.client.render.block.ShaderBlockRenderer;
@@ -34,6 +33,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -43,6 +43,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -108,7 +109,7 @@ public class Subscriptions
             @SubscribeEvent
             public static void clientSetup(FMLClientSetupEvent event)
             {
-                registerEffects(SyncopeFX.INSTANCE, VisionConvolveFX.INSTANCE);
+                registerEffects(SyncopeFX.INSTANCE);
                 registerEntityRenderer(Entities.COSMO, CosmoRenderer::new);
                 registerEntityRenderer(Entities.SNIPE, SnipeRenderer::new);
                 registerEntityRenderer(Entities.FLARE, FlareRenderer::new);
@@ -158,18 +159,39 @@ public class Subscriptions
         @Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
         public static class ForgeCommon
         {
+            private static boolean clientEffectActive = false;
+
             @SubscribeEvent
-            public static void playerTick(TickEvent.LevelTickEvent event)
+            public static void onPlayerTick(TickEvent.PlayerTickEvent event)
             {
-                Player player = Minecraft.getInstance().player;
-                if (player != null) {
-                    if (WorldStuff.isDimension(event.level, Keys.COMATOSE) && TqConfig.COMMON.visionConvolveActive.get()) {
-                        // player.addEffect(new MobEffectInstance(Effects.VISION_CONVOLVE.get(), 80));
-                    } else {
-                        // if (player.hasEffect(Effects.VISION_CONVOLVE.get())) {
-                        // player.removeEffect(Effects.VISION_CONVOLVE.get());
-                        // }
+                Player player = event.player;
+                Level level = player.level();
+                if (event.phase == TickEvent.Phase.END) {
+                    if (TqConfig.COMMON.visionConvolveActive.get()) {
+                        if (level.dimension() == Keys.COMATOSE) {
+                            if (level.isClientSide) {
+                                if (!clientEffectActive) {
+                                    Minecraft.getInstance().tell(() -> Minecraft.getInstance().gameRenderer.loadEffect(new ResourcePath("shaders/post/vision_convolve.json")));
+                                    clientEffectActive = true;
+                                }
+                            }
+                        } else {
+                            if (clientEffectActive) {
+                                if (level.isClientSide) {
+                                    Minecraft.getInstance().tell(() -> Minecraft.getInstance().gameRenderer.shutdownEffect());
+                                    clientEffectActive = false;
+                                }
+                            }
+                        }
                     }
+                }
+            }
+
+            @SubscribeEvent
+            public static void onLevelLoaded(LevelEvent.Load event)
+            {
+                if (event.getLevel().isClientSide() && clientEffectActive) {
+                    clientEffectActive = false;
                 }
             }
 

@@ -4,7 +4,6 @@ import java.util.function.Supplier;
 
 import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.level.effect.Syncope;
-import xyz.snaker.tq.level.effect.VisionConvolve;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraftforge.registries.DeferredRegister;
@@ -19,7 +18,6 @@ public class Effects
     public static final DeferredRegister<MobEffect> REGISTRAR = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, Tourniqueted.MODID);
 
     public static final RegistryObject<Syncope> SYNCOPE = register("syncope", Syncope::new);
-    public static final RegistryObject<VisionConvolve> VISION_CONVOLVE = register("vision_convolve", VisionConvolve::new);
 
     static <T extends MobEffect> RegistryObject<T> register(String name, Supplier<T> type)
     {

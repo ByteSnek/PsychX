@@ -41,22 +41,22 @@ public class Features
 
     public static void placedFeatures(BootstapContext<PlacedFeature> context)
     {
-        registerPlacement(context, "catnip", simpleSurfacePlacement(6));
-        registerPlacement(context, "splitleaf", simpleSurfacePlacement(6));
-        registerPlacement(context, "snakeroot", simpleSurfacePlacement(2));
+        registerPlacement(context, "catnip", simpleSurfacePlacement(1));
+        registerPlacement(context, "splitleaf", simpleSurfacePlacement(1));
+        registerPlacement(context, "snakeroot", simpleSurfacePlacement(1));
         registerPlacement(context, "tall_snakeroot", simpleSurfacePlacement(1));
-        registerPlacement(context, "pinktails", simpleSurfacePlacement(2));
-        registerPlacement(context, "swirl_rubble", simpleSurfacePlacement(2));
-        registerPlacement(context, "flare_rubble", simpleSurfacePlacement(2));
-        registerPlacement(context, "watercolour_rubble", simpleSurfacePlacement(2));
-        registerPlacement(context, "burning_rubble", simpleSurfacePlacement(2));
-        registerPlacement(context, "geometric_rubble", simpleSurfacePlacement(2));
-        registerPlacement(context, "multicolour_rubble", simpleSurfacePlacement(2));
-        registerPlacement(context, "snowflake_rubble", simpleSurfacePlacement(2));
-        registerPlacement(context, "starry_rubble", simpleSurfacePlacement(2));
-        registerPlacement(context, "foggy_rubble", simpleSurfacePlacement(2));
-        registerPlacement(context, "geometric_tree", simpleTreePlacement(GEOMETRIC_SAPLING, 1));
-        registerPlacement(context, "foggy_tree", simpleTreePlacement(FOGGY_SAPLING, 1));
+        registerPlacement(context, "pinktails", simpleSurfacePlacement(1));
+        registerPlacement(context, "swirl_rubble", simpleSurfacePlacement(5));
+        registerPlacement(context, "flare_rubble", simpleSurfacePlacement(5));
+        registerPlacement(context, "watercolour_rubble", simpleSurfacePlacement(5));
+        registerPlacement(context, "burning_rubble", simpleSurfacePlacement(5));
+        registerPlacement(context, "geometric_rubble", simpleSurfacePlacement(5));
+        registerPlacement(context, "multicolour_rubble", simpleSurfacePlacement(5));
+        registerPlacement(context, "snowflake_rubble", simpleSurfacePlacement(5));
+        registerPlacement(context, "starry_rubble", simpleSurfacePlacement(5));
+        registerPlacement(context, "foggy_rubble", simpleSurfacePlacement(5));
+        registerPlacement(context, "geometric_tree", simpleTreePlacement(GEOMETRIC_SAPLING, 2));
+        registerPlacement(context, "foggy_tree", simpleTreePlacement(FOGGY_SAPLING, 2));
     }
 
     public static void configuredFeatures(BootstapContext<ConfiguredFeature<?, ?>> context)

@@ -147,7 +147,7 @@ public class WorldGenStuff
     public static List<PlacementModifier> simpleSurfacePlacement(int count)
     {
         return List.of(
-                placement(count),
+                RarityFilter.onAverageOnceEvery(count),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                 BiomeFilter.biome()

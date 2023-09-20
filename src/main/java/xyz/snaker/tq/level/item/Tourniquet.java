@@ -56,6 +56,9 @@ public class Tourniquet extends Item
                                 player.level();
                                 stack.hurtAndBreak(Integer.MAX_VALUE, player, p -> p.broadcastBreakEvent(InteractionHand.MAIN_HAND));
                                 player.changeDimension(dimension, Comatose.getTeleporter());
+                                if (player.hasEffect(syncopeEffect.getEffect())) {
+                                    player.removeEffect(syncopeEffect.getEffect());
+                                }
                             }
                         }
                     }

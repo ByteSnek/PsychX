@@ -2,8 +2,8 @@
   "feature": "tq:catnip",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 6
+      "type": "minecraft:rarity_filter",
+      "chance": 1
     },
     {
       "type": "minecraft:in_square"
