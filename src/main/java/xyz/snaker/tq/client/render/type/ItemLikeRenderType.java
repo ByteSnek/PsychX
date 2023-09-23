@@ -1,10 +1,10 @@
 package xyz.snaker.tq.client.render.type;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
 import xyz.snaker.snakerlib.client.render.processor.SimpleRenderTypeProcessor;
+import xyz.snaker.snakerlib.concurrent.AsyncHashMap;
 import xyz.snaker.snakerlib.utility.Checks;
 import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.client.Shaders;
@@ -50,7 +50,7 @@ public enum ItemLikeRenderType implements SimpleRenderTypeProcessor
 
     private final Supplier<ShaderInstance> shader;
     private final RenderType type;
-    private static final Map<ItemLikeRenderType, Block> overlayMap = Util.make(new HashMap<>(), map ->
+    private static final Map<ItemLikeRenderType, Block> overlayMap = Util.make(new AsyncHashMap<>(), map ->
     {
         map.put(SWIRL, Blocks.SHIMMER_OVERLAY.get());
         map.put(SNOWFLAKE, Blocks.TURQUOISE_OVERLAY.get());
@@ -63,7 +63,7 @@ public enum ItemLikeRenderType implements SimpleRenderTypeProcessor
         map.put(CLIP, Blocks.DARK_OVERLAY.get());
         map.put(FIRE, Blocks.DARK_OVERLAY.get());
     });
-    private static final Map<BlockEntityType<?>, ItemLikeRenderType> blockEntityMap = Util.make(new HashMap<>(), map ->
+    private static final Map<BlockEntityType<?>, ItemLikeRenderType> blockEntityMap = Util.make(new AsyncHashMap<>(), map ->
     {
         map.put(BlockEntities.SWIRL.get(), SWIRL);
         map.put(BlockEntities.SNOWFLAKE.get(), SNOWFLAKE);
@@ -76,7 +76,7 @@ public enum ItemLikeRenderType implements SimpleRenderTypeProcessor
         map.put(BlockEntities.FOGGY.get(), BLUR_FOG);
         map.put(BlockEntities.STATIC.get(), STRANDS);
     });
-    private static final Map<Item, ItemLikeRenderType> blockItemMap = Util.make(new HashMap<>(), map ->
+    private static final Map<Item, ItemLikeRenderType> blockItemMap = Util.make(new AsyncHashMap<>(), map ->
     {
         map.put(Items.SWIRL_BLOCK.get(), ItemLikeRenderType.SWIRL);
         map.put(Items.SNOWFLAKE_BLOCK.get(), ItemLikeRenderType.SNOWFLAKE);

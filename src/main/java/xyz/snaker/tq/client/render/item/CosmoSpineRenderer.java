@@ -1,9 +1,9 @@
 package xyz.snaker.tq.client.render.item;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import xyz.snaker.snakerlib.client.render.PreppedRenderer;
+import xyz.snaker.snakerlib.concurrent.AsyncHashMap;
 import xyz.snaker.snakerlib.math.PoseStackBuilder;
 import xyz.snaker.tq.client.model.item.CosmoSpineModel;
 import xyz.snaker.tq.client.render.type.ItemLikeRenderType;
@@ -18,16 +18,16 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
-import org.jetbrains.annotations.NotNull;
-
 import com.mojang.blaze3d.vertex.PoseStack;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by SnakerBone on 12/03/2023
  **/
 public class CosmoSpineRenderer extends PreppedRenderer
 {
-    public static final Map<Item, RenderType> TYPE = Util.make(new HashMap<>(), map ->
+    public static final Map<Item, RenderType> TYPE = Util.make(new AsyncHashMap<>(), map ->
     {
         map.put(Items.RED_COSMO_SPINE.get(), ItemLikeRenderType.RED_STARS.get());
         map.put(Items.GREEN_COSMO_SPINE.get(), ItemLikeRenderType.GREEN_STARS.get());

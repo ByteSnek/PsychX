@@ -1,8 +1,8 @@
 package xyz.snaker.tq.datagen.provider;
 
-import java.util.HashMap;
 import java.util.Map;
 
+import xyz.snaker.snakerlib.concurrent.AsyncHashMap;
 import xyz.snaker.snakerlib.utility.tools.CollectionStuff;
 import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.level.block.ShaderBlock;
@@ -25,7 +25,7 @@ import static net.minecraft.world.level.block.Blocks.*;
  **/
 public class BlockStates extends BlockStateProvider implements BlockStateProviderTools<BlockStates>
 {
-    static final Map<Block, Block> BLOCK_2_PARTICLE = Util.make(new HashMap<>(), map ->
+    static final Map<Block, Block> BLOCK_2_PARTICLE = Util.make(new AsyncHashMap<>(), map ->
     {
         map.put(Blocks.SWIRL.get(), YELLOW_CONCRETE_POWDER);
         map.put(Blocks.SNOWFLAKE.get(), LIGHT_BLUE_CONCRETE_POWDER);
