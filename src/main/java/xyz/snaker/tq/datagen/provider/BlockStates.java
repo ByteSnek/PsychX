@@ -13,6 +13,7 @@ import net.minecraft.Util;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -51,6 +52,8 @@ public class BlockStates extends BlockStateProvider implements BlockStateProvide
                 shader(shaderBlock, BLOCK_2_PARTICLE.get(shaderBlock));
             } else if (block instanceof BushBlock bushBlock) {
                 plant(bushBlock);
+            } else if (block instanceof LeavesBlock leavesBlock) {
+                leaves(leavesBlock);
             } else if (block instanceof RotatedPillarBlock rotatedPillarBlock) {
                 log(rotatedPillarBlock);
             } else {

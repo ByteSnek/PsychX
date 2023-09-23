@@ -20,13 +20,12 @@ import xyz.snaker.tq.level.entity.creature.Frolicker;
 import xyz.snaker.tq.level.entity.mob.*;
 import xyz.snaker.tq.rego.BlockEntities;
 import xyz.snaker.tq.rego.Entities;
-import xyz.snaker.tq.rego.Keys;
+import xyz.snaker.tq.rego.Levels;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -42,8 +41,6 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -159,7 +156,7 @@ public class Subscriptions
         @Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
         public static class ForgeCommon
         {
-            private static boolean clientEffectActive = false;
+            private static boolean postChainActive;
 
             @SubscribeEvent
             public static void onPlayerTick(TickEvent.PlayerTickEvent event)
@@ -168,30 +165,29 @@ public class Subscriptions
                 Level level = player.level();
                 if (event.phase == TickEvent.Phase.END) {
                     if (TqConfig.COMMON.visionConvolveActive.get()) {
-                        if (level.dimension() == Keys.COMATOSE) {
-                            if (level.isClientSide) {
-                                if (!clientEffectActive) {
-                                    Minecraft.getInstance().tell(() -> Minecraft.getInstance().gameRenderer.loadEffect(new ResourcePath("shaders/post/vision_convolve.json")));
-                                    clientEffectActive = true;
-                                }
-                            }
-                        } else {
-                            if (clientEffectActive) {
-                                if (level.isClientSide) {
-                                    Minecraft.getInstance().tell(() -> Minecraft.getInstance().gameRenderer.shutdownEffect());
-                                    clientEffectActive = false;
-                                }
-                            }
+                        if (level.dimension() == Levels.COMATOSE) {
+                            safeLoadEffect(level, "vision_convolve");
+                        } else if (level.dimension() != Levels.COMATOSE && postChainActive) {
+                            safeShutdownEffect(level);
                         }
                     }
                 }
             }
 
-            @SubscribeEvent
-            public static void onLevelLoaded(LevelEvent.Load event)
+            private static void safeLoadEffect(Level level, String name)
             {
-                if (event.getLevel().isClientSide() && clientEffectActive) {
-                    clientEffectActive = false;
+                if (level.isClientSide) {
+                    ResourcePath path = new ResourcePath("shaders/post/" + name + ".json");
+                    Minecraft.getInstance().tell(() -> Minecraft.getInstance().gameRenderer.loadEffect(path));
+                    postChainActive = true;
+                }
+            }
+
+            private static void safeShutdownEffect(Level level)
+            {
+                if (level.isClientSide) {
+                    Minecraft.getInstance().tell(Minecraft.getInstance().gameRenderer::shutdownEffect);
+                    postChainActive = false;
                 }
             }
 
@@ -204,16 +200,6 @@ public class Subscriptions
                 KillAllEntitiesCommand.register(dispatcher);
                 DiscardAllEntitiesCommand.register(dispatcher);
                 ConfigCommand.register(dispatcher);
-            }
-
-            @SubscribeEvent
-            public static void clone(PlayerEvent.Clone event)
-            {
-                CompoundTag fresh = event.getEntity().getPersistentData();
-                CompoundTag original = event.getOriginal().getPersistentData();
-                if (event.isWasDeath()) {
-                    fresh.putBoolean("PlaygroundMode", original.getBoolean("PlaygroundMode"));
-                }
             }
         }
     }

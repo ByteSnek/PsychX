@@ -19,7 +19,7 @@ public class Surreal
     public static Biome create(BootstapContext<Biome> context)
     {
         AmbientParticleSettings particles = new AmbientParticleSettings(ParticleTypes.FLAME, WorldGenStuff.PARTICLE_SPAWN_CHANCE);
-        AmbientMoodSettings mood = new AmbientMoodSettings(WorldGenStuff.RANDOM_SOUND_FX, 0, 1, 0);
+        AmbientMoodSettings mood = new AmbientMoodSettings(WorldGenStuff.RANDOM_SOUND_FX, 6000, 8, 2);
         MobSpawnSettings.Builder spawns = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder gen = new BiomeGenerationSettings.Builder(context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
         BiomeSpecialEffects.Builder effects = new BiomeSpecialEffects.Builder()

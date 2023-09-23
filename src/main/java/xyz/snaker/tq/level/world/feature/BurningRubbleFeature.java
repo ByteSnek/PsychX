@@ -18,7 +18,7 @@ public class BurningRubbleFeature extends RubbleFeature
 {
     public BurningRubbleFeature(Codec<BlockStateConfiguration> codec)
     {
-        super(codec, Frequency.of(5), Comatose.BLOCKS, 4, 6);
+        super(codec, Frequency.of(5), Comatose.getBlockList(), 4, 6);
     }
 
     @Override

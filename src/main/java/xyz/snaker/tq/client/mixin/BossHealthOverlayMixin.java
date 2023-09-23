@@ -3,8 +3,10 @@ package xyz.snaker.tq.client.mixin;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.function.Function;
 
 import xyz.snaker.snakerlib.SnakerLib;
+import xyz.snaker.snakerlib.client.render.processor.SimpleRenderTypeProcessor;
 import xyz.snaker.snakerlib.utility.ResourcePath;
 import xyz.snaker.snakerlib.utility.tools.ColourStuff;
 import xyz.snaker.snakerlib.utility.tools.StringStuff;
@@ -16,16 +18,16 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.BossHealthOverlay;
 import net.minecraft.client.gui.components.LerpingBossEvent;
-import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.phys.AABB;
+import net.minecraftforge.client.ForgeHooksClient;
 
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.datafixers.util.Pair;
 
 import org.spongepowered.asm.mixin.*;
 
@@ -33,7 +35,7 @@ import org.spongepowered.asm.mixin.*;
  * Created by SnakerBone on 18/09/2023
  **/
 @Mixin(BossHealthOverlay.class)
-public abstract class BossHealthOverlayMixin
+public abstract class BossHealthOverlayMixin implements SimpleRenderTypeProcessor
 {
     @Unique
     private final EntityType<Utterfly> utterfly = Entities.UTTERFLY.get();
@@ -43,7 +45,7 @@ public abstract class BossHealthOverlayMixin
     public Minecraft minecraft;
 
     @Shadow
-    public abstract void drawBar(GuiGraphics pGuiGraphics, int pX, int pY, BossEvent pBossEvent, int p_283619_, int p_281636_);
+    public abstract void drawBar(GuiGraphics pGuiGraphics, int pX, int pY, BossEvent pBossEvent, int pU, int pV);
 
     @Shadow
     @Final
@@ -53,73 +55,51 @@ public abstract class BossHealthOverlayMixin
     @SuppressWarnings({"UnstableApiUsage", "DataFlowIssue"})
     public void render(GuiGraphics graphics)
     {
-        if (!this.events.isEmpty()) {
-            int i = graphics.guiWidth();
-            int j = 12;
-            String samplerName = null;
-            RenderType type = null;
-            int textColour = 16777215;
-            for (LerpingBossEvent lerpingbossevent : this.events.values()) {
-                int k = i / 2 - 91;
-                var event = net.minecraftforge.client.ForgeHooksClient.onCustomizeBossEventProgress(graphics, this.minecraft.getWindow(), lerpingbossevent, k, j, 10 + this.minecraft.font.lineHeight);
-                if (!event.isCanceled()) {
-                    this.drawBar(graphics, k, j, lerpingbossevent);
-                    if (isEvent(lerpingbossevent, utterfly)) {
-                        List<Utterfly> utterflies = minecraft.level.getEntitiesOfClass(Utterfly.class, new AABB(minecraft.player.getOnPos()).inflate(100));
-                        for (Utterfly utterfly : utterflies) {
-                            switch (utterfly.getPhase()) {
+        Function<String, RenderType> sCreator = samplerName -> create(StringStuff.placeholderWithId(), new Pair<>(DefaultVertexFormat.POSITION_TEX, blitSampler(Shaders::getCrystalized, new ResourcePath("textures/sampler/noise_" + samplerName + ".png"), true, false)));
+        if (!events.isEmpty()) {
+            int sWidth = graphics.guiWidth();
+            int sPosY = 12;
+            RenderType sType = sCreator.apply("pink");
+            int sTextColour = 16777215;
+            for (LerpingBossEvent sEvent : events.values()) {
+                int sPosX = sWidth / 2 - 91;
+                var sForgeEvent = ForgeHooksClient.onCustomizeBossEventProgress(graphics, minecraft.getWindow(), sEvent, sPosX, sPosY, 10 + minecraft.font.lineHeight);
+                if (!sForgeEvent.isCanceled()) {
+                    drawBar(graphics, sPosX, sPosY, sEvent);
+                    if (isEvent(sEvent, utterfly)) {
+                        int sRenderDistance = minecraft.options.renderDistance().get();
+                        int sSimulationDistance = minecraft.options.simulationDistance().get();
+                        int sPackedDistance = sRenderDistance <= 0 || sSimulationDistance <= 0 ? 250 : sRenderDistance * sRenderDistance + sSimulationDistance * sSimulationDistance;
+                        List<Utterfly> sUtterflies = minecraft.level.getEntitiesOfClass(Utterfly.class, new AABB(minecraft.player.getOnPos()).inflate(sPackedDistance));
+                        for (Utterfly sUtterfly : sUtterflies) {
+                            switch (sUtterfly.getPhase()) {
                                 case 1 -> {
-                                    textColour = ColourStuff.hexToInt("FFE800");
-                                    type = RenderType.create(StringStuff.placeholderWithId(), DefaultVertexFormat.POSITION_TEX, VertexFormat.Mode.QUADS, RenderType.TRANSIENT_BUFFER_SIZE, RenderType.CompositeState.builder()
-                                            .setShaderState(new RenderStateShard.ShaderStateShard(Shaders::getCrystalized))
-                                            .setTextureState(RenderStateShard.MultiTextureStateShard.builder().add(new ResourcePath("textures/sampler/noise_green.png"), true, false).add(new ResourcePath("textures/sampler/noise_green.png"), true, false).build())
-                                            .setCullState(RenderStateShard.CULL)
-                                            .setWriteMaskState(RenderStateShard.COLOR_DEPTH_WRITE)
-                                            .setTransparencyState(RenderStateShard.NO_TRANSPARENCY)
-                                            .createCompositeState(false));
+                                    sTextColour = ColourStuff.hexToInt("FFE800");
+                                    sType = sCreator.apply("green");
                                 }
                                 case 2 -> {
-                                    textColour = ColourStuff.hexToInt("FF8300");
-                                    type = RenderType.create(StringStuff.placeholderWithId(), DefaultVertexFormat.POSITION_TEX, VertexFormat.Mode.QUADS, RenderType.TRANSIENT_BUFFER_SIZE, RenderType.CompositeState.builder()
-                                            .setShaderState(new RenderStateShard.ShaderStateShard(Shaders::getCrystalized))
-                                            .setTextureState(RenderStateShard.MultiTextureStateShard.builder().add(new ResourcePath("textures/sampler/noise_orange.png"), true, false).add(new ResourcePath("textures/sampler/noise_orange.png"), true, false).build())
-                                            .setCullState(RenderStateShard.CULL)
-                                            .setWriteMaskState(RenderStateShard.COLOR_DEPTH_WRITE)
-                                            .setTransparencyState(RenderStateShard.NO_TRANSPARENCY)
-                                            .createCompositeState(false));
+                                    sTextColour = ColourStuff.hexToInt("FF8300");
+                                    sType = sCreator.apply("orange");
                                 }
                                 case 3, 4 -> {
-                                    textColour = ColourStuff.hexToInt("FF0000");
-                                    type = RenderType.create(StringStuff.placeholderWithId(), DefaultVertexFormat.POSITION_TEX, VertexFormat.Mode.QUADS, RenderType.TRANSIENT_BUFFER_SIZE, RenderType.CompositeState.builder()
-                                            .setShaderState(new RenderStateShard.ShaderStateShard(Shaders::getCrystalized))
-                                            .setTextureState(RenderStateShard.MultiTextureStateShard.builder().add(new ResourcePath("textures/sampler/noise_red.png"), true, false).add(new ResourcePath("textures/sampler/noise_red.png"), true, false).build())
-                                            .setCullState(RenderStateShard.CULL)
-                                            .setWriteMaskState(RenderStateShard.COLOR_DEPTH_WRITE)
-                                            .setTransparencyState(RenderStateShard.NO_TRANSPARENCY)
-                                            .createCompositeState(false));
+                                    sTextColour = ColourStuff.hexToInt("FF0000");
+                                    sType = sCreator.apply("red");
                                 }
                                 default -> {
-                                    SnakerLib.LOGGER.warnf("Unknown phase: %s", utterfly.getPhase());
-                                    type = RenderType.create(StringStuff.placeholderWithId(), DefaultVertexFormat.POSITION_TEX, VertexFormat.Mode.QUADS, RenderType.TRANSIENT_BUFFER_SIZE, RenderType.CompositeState.builder()
-                                            .setShaderState(new RenderStateShard.ShaderStateShard(Shaders::getCrystalized))
-                                            .setTextureState(RenderStateShard.MultiTextureStateShard.builder().add(new ResourcePath("textures/sampler/noise_pink.png"), true, false).add(new ResourcePath("textures/sampler/noise_pink.png"), true, false).build())
-                                            .setCullState(RenderStateShard.CULL)
-                                            .setWriteMaskState(RenderStateShard.COLOR_DEPTH_WRITE)
-                                            .setTransparencyState(RenderStateShard.NO_TRANSPARENCY)
-                                            .createCompositeState(false));
+                                    SnakerLib.LOGGER.warnf("Unknown phase: %s", sUtterfly.getPhase());
                                 }
                             }
                         }
-                        drawRenderOverlay(graphics, type, k, j, lerpingbossevent);
+                        drawRenderOverlay(graphics, sType, sPosX, sPosY, sEvent);
                     }
-                    Component component = lerpingbossevent.getName();
-                    int l = this.minecraft.font.width(component);
-                    int i1 = i / 2 - l / 2;
-                    int j1 = j - 9;
-                    graphics.drawString(minecraft.font, component, i1, j1, textColour);
+                    Component sName = sEvent.getName();
+                    int sFontWidth = minecraft.font.width(sName);
+                    int sFontX = sWidth / 2 - sFontWidth / 2;
+                    int sFontY = sPosY - 9;
+                    graphics.drawString(minecraft.font, sName, sFontX, sFontY, sTextColour);
                 }
-                j += event.getIncrement();
-                if (j >= graphics.guiHeight() / 3) {
+                sPosY += sForgeEvent.getIncrement();
+                if (sPosY >= graphics.guiHeight() / 3) {
                     break;
                 }
             }

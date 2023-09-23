@@ -26,8 +26,8 @@ public class Recipes extends RecipeProvider implements IConditionBuilder, Recipe
     @Override
     public void buildRecipes(@NotNull Consumer<FinishedRecipe> writer)
     {
-        planks(writer, Blocks.GEOMETRIC_PLANKS, Blocks.GEOMETRIC_LOG);
-        planks(writer, Blocks.FOGGY_PLANKS, Blocks.FOGGY_LOG);
+        planks(writer, Blocks.ILLUSIVE_PLANKS, Blocks.ILLUSIVE_LOG);
+        planks(writer, Blocks.DELUSIVE_PLANKS, Blocks.DELUSIVE_LOG);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.TOURNIQUET_WEBBING.get())
                 .pattern("XXX")

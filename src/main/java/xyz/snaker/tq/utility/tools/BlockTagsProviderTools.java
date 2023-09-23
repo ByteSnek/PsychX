@@ -2,7 +2,7 @@ package xyz.snaker.tq.utility.tools;
 
 import java.util.List;
 
-import xyz.snaker.tq.rego.Keys;
+import xyz.snaker.tq.rego.Blocks;
 
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
@@ -36,7 +36,7 @@ public interface BlockTagsProviderTools<T extends BlockTagsProvider>
 
     default void groundRich(List<Block> blocks)
     {
-        custom(Keys.GROUNDRICH, blocks);
+        custom(Blocks.Tags.GROUNDRICH, blocks);
     }
 
     default void mineableWithAxe(List<Block> blocks)

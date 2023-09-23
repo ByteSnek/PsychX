@@ -18,31 +18,56 @@ public interface BlockStateProviderTools<T extends BlockStateProvider>
     default void shader(Block block, Block particle)
     {
         String blockName = ResourceStuff.getPath(block);
-        ModelFile file = getInstance().models()
-                .withExistingParent(blockName, getInstance().modLoc("shader"))
-                .texture("particle", getInstance().blockTexture(particle));
-        getInstance().simpleBlock(block, file);
+        ResourceLocation shaderModel = getInstance().modLoc("shader");
+        ResourceLocation particleTexture = getInstance().blockTexture(particle);
+
+        ModelFile modelFile = getInstance().models()
+                .withExistingParent(blockName, shaderModel)
+                .texture("particle", particleTexture);
+
+        getInstance().simpleBlock(block, modelFile);
     }
 
     default void cube(Block block)
     {
-        String name = ResourceStuff.getPath(block);
-        ModelFile file = getInstance().models().cubeAll(name, getInstance().blockTexture(block)).renderType("cutout");
-        getInstance().simpleBlock(block, file);
+        String blockName = ResourceStuff.getPath(block);
+        ResourceLocation blockTexture = getInstance().blockTexture(block);
+
+        ModelFile modelFile = getInstance().models()
+                .cubeAll(blockName, blockTexture)
+                .renderType("cutout");
+
+        getInstance().simpleBlock(block, modelFile);
     }
 
     default void log(Block block)
     {
-        getInstance().logBlock(UnsafeStuff.cast(block));
+        ResourceLocation blockTexture = getInstance().blockTexture(block);
+
+        getInstance().axisBlock(UnsafeStuff.cast(block), blockTexture, blockTexture);
     }
 
     default void plant(Block plant)
     {
-        ResourceLocation plantVariant = ResourceStuff.getResourceLocation(plant);
-        String plantName = plantVariant.getPath();
+        String plantName = ResourceStuff.getPath(plant);
+        ResourceLocation blockTexture = getInstance().blockTexture(plant);
 
-        getInstance().simpleBlock(plant, getInstance().models()
-                .cross(plantName, getInstance().blockTexture(plant))
-                .renderType("cutout"));
+        ModelFile modelFile = getInstance().models()
+                .cross(plantName, blockTexture)
+                .renderType("cutout");
+
+        getInstance().simpleBlock(plant, modelFile);
+    }
+
+    default void leaves(Block leaves)
+    {
+        String leavesName = ResourceStuff.getPath(leaves);
+        ResourceLocation blockTexture = getInstance().blockTexture(leaves);
+
+        ModelFile modelFile = getInstance().models()
+                .cubeAll(leavesName, blockTexture)
+                .renderType("cutout");
+
+        getInstance().simpleBlock(leaves, modelFile);
     }
 }

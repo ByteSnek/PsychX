@@ -97,6 +97,7 @@ public class Rego
         Effects.REGISTRAR.register(bus);
         TrunkPlacers.REGISTRAR.register(bus);
         Features.REGISTRAR.register(bus);
-        LootModifiers.LOOT_MODIFIERS.register(bus);
+        LootModifiers.REGISTRAR.register(bus);
+        FoliagePlacers.REGISTRAR.register(bus);
     }
 }

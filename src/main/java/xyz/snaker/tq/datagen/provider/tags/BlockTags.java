@@ -21,6 +21,8 @@ import net.minecraftforge.registries.RegistryObject;
 
 import org.jetbrains.annotations.NotNull;
 
+import static net.minecraft.tags.BlockTags.LEAVES;
+
 /**
  * Created by SnakerBone on 30/08/2023
  **/
@@ -36,10 +38,11 @@ public class BlockTags extends BlockTagsProvider implements BlockTagsProviderToo
     @Override
     public void addTags(@NotNull HolderLookup.Provider provider)
     {
-        addMineableWithAxe(Blocks.GEOMETRIC_LOG, Blocks.FOGGY_LOG, Blocks.GEOMETRIC_PLANKS, Blocks.FOGGY_PLANKS);
-        addPlanks(Blocks.GEOMETRIC_PLANKS, Blocks.FOGGY_PLANKS);
-        addLogs(Blocks.GEOMETRIC_LOG, Blocks.FOGGY_LOG);
+        addMineableWithAxe(Blocks.ILLUSIVE_LOG, Blocks.DELUSIVE_LOG, Blocks.ILLUSIVE_PLANKS, Blocks.DELUSIVE_PLANKS);
+        addPlanks(Blocks.ILLUSIVE_PLANKS, Blocks.DELUSIVE_PLANKS);
+        addLogs(Blocks.ILLUSIVE_LOG, Blocks.DELUSIVE_LOG);
         addGroundRich(Blocks.COMASTONE);
+        addLeaves(Blocks.DELUSIVE_LEAVES, Blocks.ILLUSIVE_LEAVES);
         CollectionStuff.mapDeferredRegistries(Blocks.REGISTRAR, Block[]::new).forEach(block -> {
             if (BLOCKS_NEED_TOOL.test(block)) {
                 addRequiresTool(BlockTagsProviderTools.ToolTier.STONE, block);
@@ -80,6 +83,12 @@ public class BlockTags extends BlockTagsProvider implements BlockTagsProviderToo
     final void addMineableWithPickaxe(Block... blocks)
     {
         mineableWithPickaxe(List.of(Arrays.stream(blocks).toArray(Block[]::new)));
+    }
+
+    @SafeVarargs
+    final void addLeaves(RegistryObject<Block>... blocks)
+    {
+        tag(LEAVES).add(Arrays.stream(blocks).map(RegistryObject::get).toArray(Block[]::new));
     }
 
     @Override

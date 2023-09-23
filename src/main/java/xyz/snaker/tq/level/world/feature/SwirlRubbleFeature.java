@@ -18,7 +18,7 @@ public class SwirlRubbleFeature extends RubbleFeature
 {
     public SwirlRubbleFeature(Codec<BlockStateConfiguration> codec)
     {
-        super(codec, Frequency.of(7), Comatose.BLOCKS, 3, 5);
+        super(codec, Frequency.of(7), Comatose.getBlockList(), 3, 5);
     }
 
     @Override

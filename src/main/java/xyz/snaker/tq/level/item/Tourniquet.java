@@ -4,7 +4,7 @@ import xyz.snaker.snakerlib.data.DefaultItemProperties;
 import xyz.snaker.snakerlib.math.Maths;
 import xyz.snaker.tq.level.world.dimension.Comatose;
 import xyz.snaker.tq.rego.Effects;
-import xyz.snaker.tq.rego.Keys;
+import xyz.snaker.tq.rego.Levels;
 
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
@@ -12,6 +12,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -42,29 +43,37 @@ public class Tourniquet extends Item
     {
         MobEffectInstance syncopeEffect = new MobEffectInstance(Effects.SYNCOPE.get(), Maths.secondsToTicks(3));
         int useDuration = getUseDuration(stack);
-        if (!level.isClientSide) {
-            if (entity instanceof Player player) {
-                player.addEffect(syncopeEffect);
-                if (Maths.diffEquals(useDuration, remainingUseDuration, 50)) {
-                    if (player.canChangeDimensions()) {
-                        ResourceKey<Level> key = level.dimension() == Keys.COMATOSE ? Level.OVERWORLD : Keys.COMATOSE;
-                        MinecraftServer server = level.getServer();
-                        if (server != null) {
-                            ServerLevel dimension = server.getLevel(key);
-                            if (dimension != null) {
-                                player.stopUsingItem();
-                                player.level();
-                                stack.hurtAndBreak(Integer.MAX_VALUE, player, p -> p.broadcastBreakEvent(InteractionHand.MAIN_HAND));
-                                player.changeDimension(dimension, Comatose.getTeleporter());
-                                if (player.hasEffect(syncopeEffect.getEffect())) {
-                                    player.removeEffect(syncopeEffect.getEffect());
-                                }
+        if (entity instanceof Player player) {
+            player.addEffect(syncopeEffect);
+            if (Maths.diffEquals(useDuration, remainingUseDuration, 50)) {
+                Level playerLevel = player.level();
+                synchronized (playerLevel) {
+                    if (playerLevel instanceof ServerLevel serverLevel) {
+                        MinecraftServer server = serverLevel.getServer();
+                        ResourceKey<Level> key = playerLevel.dimension() == Levels.COMATOSE ? Level.OVERWORLD : Levels.COMATOSE;
+                        ServerLevel dest = server.getLevel(key);
+                        if (dest != null && player.canChangeDimensions()) {
+                            player.stopUsingItem();
+                            stack.hurtAndBreak(serverLevel.random.nextInt(stack.getMaxDamage() / 2), player, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+                            if (player.hasEffect(Effects.SYNCOPE.get())) {
+                                player.removeEffect(Effects.SYNCOPE.get());
+                            }
+                            if (key == Levels.COMATOSE) {
+                                player.changeDimension(dest, Comatose.getTeleporter().apply(player.getOnPos()));
+                            } else {
+                                player.changeDimension(dest, Comatose.getTeleporter().apply(player.getOnPos()));
                             }
                         }
                     }
                 }
             }
         }
+    }
+
+    @Override
+    public boolean canBeDepleted()
+    {
+        return true;
     }
 
     @Override

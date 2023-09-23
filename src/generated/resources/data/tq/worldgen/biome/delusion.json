@@ -15,12 +15,12 @@
     "foliage_color": 667424,
     "grass_color": 667424,
     "mood_sound": {
-      "block_search_extent": 1,
-      "offset": 0.0,
+      "block_search_extent": 8,
+      "offset": 2.0,
       "sound": {
         "sound_id": "tq:random_fx"
       },
-      "tick_delay": 0
+      "tick_delay": 6000
     },
     "particle": {
       "options": {
@@ -49,7 +49,7 @@
     [],
     [
       "minecraft:trees_plains",
-      "tq:geometric_tree",
+      "tq:illusive_tree",
       "tq:snakeroot",
       "tq:tall_snakeroot",
       "tq:splitleaf",

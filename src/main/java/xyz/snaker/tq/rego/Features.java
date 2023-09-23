@@ -55,17 +55,17 @@ public class Features
         registerPlacement(context, "snowflake_rubble", simpleSurfacePlacement(5));
         registerPlacement(context, "starry_rubble", simpleSurfacePlacement(5));
         registerPlacement(context, "foggy_rubble", simpleSurfacePlacement(5));
-        registerPlacement(context, "geometric_tree", simpleTreePlacement(GEOMETRIC_SAPLING, 2));
-        registerPlacement(context, "foggy_tree", simpleTreePlacement(FOGGY_SAPLING, 2));
+        registerPlacement(context, "illusive_tree", simpleTreePlacement(ILLUSIVE_SAPLING, 2));
+        registerPlacement(context, "delusive_tree", simpleTreePlacement(DELUSIVE_SAPLING, 2));
     }
 
     public static void configuredFeatures(BootstapContext<ConfiguredFeature<?, ?>> context)
     {
         registerConfiguredFeature(context, "catnip", RANDOM_PATCH, simpleRandomConfig(PINKTAILS, 4));
         registerConfiguredFeature(context, "splitleaf", RANDOM_PATCH, simpleRandomConfig(SPLITLEAF, 4));
-        registerConfiguredFeature(context, "snakeroot", RANDOM_PATCH, simpleRandomConfig(SNAKEROOT));
-        registerConfiguredFeature(context, "tall_snakeroot", RANDOM_PATCH, simpleRandomConfig(TALL_SNAKEROOT));
-        registerConfiguredFeature(context, "pinktails", RANDOM_PATCH, simpleRandomConfig(PINKTAILS));
+        registerConfiguredFeature(context, "snakeroot", RANDOM_PATCH, simpleRandomConfig(SNAKEROOT, 32));
+        registerConfiguredFeature(context, "tall_snakeroot", RANDOM_PATCH, simpleRandomConfig(TALL_SNAKEROOT, 32));
+        registerConfiguredFeature(context, "pinktails", RANDOM_PATCH, simpleRandomConfig(PINKTAILS, 32));
         registerConfiguredFeature(context, "swirl_rubble", SWIRL_RUBBLE, SWIRL);
         registerConfiguredFeature(context, "flare_rubble", FLARE_RUBBLE, FLARE);
         registerConfiguredFeature(context, "watercolour_rubble", WATERCOLOUR_RUBBLE, WATERCOLOUR);
@@ -75,8 +75,8 @@ public class Features
         registerConfiguredFeature(context, "snowflake_rubble", SNOWFLAKE_RUBBLE, SNOWFLAKE);
         registerConfiguredFeature(context, "starry_rubble", STARRY_RUBBLE, STARRY);
         registerConfiguredFeature(context, "foggy_rubble", FOGGY_RUBBLE, FOGGY);
-        registerConfiguredFeature(context, "geometric_tree", TREE, createGeometricTreeConfig(GEOMETRIC_LOG, GEOMETRIC, COMASTONE));
-        registerConfiguredFeature(context, "foggy_tree", TREE, createFoggyTreeConfig(FOGGY_LOG, COMASTONE));
+        registerConfiguredFeature(context, "illusive_tree", TREE, createIllusiveTree(ILLUSIVE_LOG, ILLUSIVE_LEAVES, COMASTONE));
+        registerConfiguredFeature(context, "delusive_tree", TREE, createDelusiveTree(DELUSIVE_LOG, DELUSIVE_LEAVES, COMASTONE));
     }
 
     public static void biomeModifiers(BootstapContext<BiomeModifier> context)
@@ -95,8 +95,8 @@ public class Features
         registerBiomeModifier(context, "snowflake_rubble", LOCAL_MODIFICATIONS);
         registerBiomeModifier(context, "starry_rubble", LOCAL_MODIFICATIONS);
         registerBiomeModifier(context, "foggy_rubble", LOCAL_MODIFICATIONS);
-        registerBiomeModifier(context, "geometric_tree", VEGETAL_DECORATION);
-        registerBiomeModifier(context, "foggy_tree", VEGETAL_DECORATION);
+        registerBiomeModifier(context, "illusive_tree", VEGETAL_DECORATION);
+        registerBiomeModifier(context, "delusive_tree", VEGETAL_DECORATION);
     }
 
     static <F extends Feature<?>> RegistryObject<F> register(String name, Supplier<F> feature)

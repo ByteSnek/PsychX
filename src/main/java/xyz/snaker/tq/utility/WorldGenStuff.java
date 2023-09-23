@@ -1,15 +1,17 @@
 package xyz.snaker.tq.utility;
 
 import java.util.List;
+import java.util.function.Function;
 
 import xyz.snaker.snakerlib.utility.ResourcePath;
 import xyz.snaker.snakerlib.utility.tools.UnsafeStuff;
 import xyz.snaker.snakerlib.utility.tools.WorldStuff;
 import xyz.snaker.tq.level.world.feature.FeatureKey;
-import xyz.snaker.tq.level.world.tree.GeometricTrunkPlacer;
+import xyz.snaker.tq.level.world.tree.IllusiveFoliagePlacer;
+import xyz.snaker.tq.level.world.tree.IllusiveTrunkPlacer;
 import xyz.snaker.tq.rego.Biomes;
 import xyz.snaker.tq.rego.Entities;
-import xyz.snaker.tq.rego.Keys;
+import xyz.snaker.tq.rego.Levels;
 import xyz.snaker.tq.rego.Sounds;
 
 import net.minecraft.core.BlockPos;
@@ -41,10 +43,7 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.AcaciaFoliagePlacer;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.CherryFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import net.minecraft.world.level.levelgen.feature.trunkplacers.CherryTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.ForkingTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraftforge.common.world.BiomeModifier;
@@ -52,106 +51,42 @@ import net.minecraftforge.common.world.ForgeBiomeModifiers;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import static net.minecraft.world.level.block.Blocks.AIR;
-
 /**
  * Created by SnakerBone on 4/08/2023
  **/
 public class WorldGenStuff
 {
+    public static final IllusiveTrunkPlacer ILLUSIVE_TRUNK = new IllusiveTrunkPlacer(8, 1, 2, new WeightedListInt(SimpleWeightedRandomList.<IntProvider>builder().add(ConstantInt.of(1), 1).add(ConstantInt.of(2), 1).add(ConstantInt.of(3), 1).build()), UniformInt.of(2, 4), UniformInt.of(-4, -3), UniformInt.of(-1, 0));
+    public static final IllusiveFoliagePlacer ILLUSIVE_FOLIAGE = new IllusiveFoliagePlacer(ConstantInt.of(4), ConstantInt.of(0), ConstantInt.of(5), 0.25F, 0.5F, 0.16666667F, 0.33333334F);
+    public static final TwoLayersFeatureSize DEFAULT_FEATURE_SIZE = new TwoLayersFeatureSize(1, 0, 2);
+    public static final Function<RegistryObject<? extends Block>, BlockStateProvider> BLOCK = block -> BlockStateProvider.simple(block.get());
     public static final Holder<SoundEvent> RANDOM_SOUND_FX = Holder.direct(Sounds.RANDOM_FX.get());
+
     public static final float PARTICLE_SPAWN_CHANCE = 0.001F;
 
     public static <T extends Block> RandomPatchConfiguration simpleRandomConfig(RegistryObject<T> block, int tries)
     {
-        return FeatureUtils.simpleRandomPatchConfiguration(tries, onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(block.get()))));
+        return FeatureUtils.simpleRandomPatchConfiguration(tries, onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BLOCK.apply(block))));
     }
 
-    public static <T extends Block> RandomPatchConfiguration simpleRandomConfig(RegistryObject<T> block)
+    public static <T extends Block> TreeConfiguration createDelusiveTree(RegistryObject<T> stem, RegistryObject<T> foliage, RegistryObject<T> dirt)
     {
-        return simpleRandomConfig(block, 32);
+        return new TreeConfiguration.TreeConfigurationBuilder(BLOCK.apply(stem), ILLUSIVE_TRUNK, BLOCK.apply(foliage), ILLUSIVE_FOLIAGE, DEFAULT_FEATURE_SIZE).dirt(BLOCK.apply(dirt)).ignoreVines().build();
     }
 
-    public static <T extends Block> TreeConfiguration createGeometricTreeConfig(RegistryObject<T> stem, RegistryObject<T> foliage, RegistryObject<T> dirt, int baseHeight, int heightA, int heightB, int foliageRadius, int foliageOffset, int foliageHeight, int sizeLimit, int sizeLowerBound, int sizeUpperBound)
+    public static <T extends Block> TreeConfiguration createIllusiveTree(RegistryObject<T> stem, RegistryObject<T> foliage, RegistryObject<T> dirt)
     {
-        return new TreeConfiguration.TreeConfigurationBuilder(
-                simple(stem.get()),
-                new GeometricTrunkPlacer(baseHeight, heightA, heightB),
-                simple(foliage.get()),
-                new BlobFoliagePlacer(constant(foliageRadius), constant(foliageOffset), foliageHeight),
-                new TwoLayersFeatureSize(sizeLimit, sizeLowerBound, sizeUpperBound)
-        ).dirt(simple(dirt.get())).ignoreVines().build();
-    }
-
-    public static <T extends Block> TreeConfiguration createGeometricTreeConfig(RegistryObject<T> stem, RegistryObject<T> foliage, RegistryObject<T> dirt)
-    {
-        return createGeometricTreeConfig(stem, foliage, dirt, 5, 4, 3, 3, 2, 3, 1, 0, 2);
-    }
-
-    public static <T extends Block> TreeConfiguration createFoggyTreeConfig(RegistryObject<T> stem, RegistryObject<T> dirt, int foliageRadius, int foliageOffset, int foliageHeight)
-    {
-        return new TreeConfiguration.TreeConfigurationBuilder(
-                simple(stem.get()),
-                new CherryTrunkPlacer(7, 1, 0,
-                        new WeightedListInt(SimpleWeightedRandomList.<IntProvider>builder()
-                                .add(ConstantInt.of(1), 1)
-                                .add(ConstantInt.of(2), 1)
-                                .add(ConstantInt.of(3), 1)
-                                .build()
-                        ),
-                        UniformInt.of(2, 4),
-                        UniformInt.of(-4, -3),
-                        UniformInt.of(-1, 0)),
-                simple(AIR),
-                new CherryFoliagePlacer(
-                        ConstantInt.of(foliageRadius),
-                        ConstantInt.of(foliageOffset),
-                        ConstantInt.of(foliageHeight),
-                        0.25F,
-                        0.5F,
-                        0.16666667F,
-                        0.33333334F),
-                new TwoLayersFeatureSize(1, 0, 2)
-        ).dirt(simple(dirt.get())).ignoreVines().build();
-    }
-
-    public static <T extends Block> TreeConfiguration createFoggyTreeConfig(RegistryObject<T> stem, RegistryObject<T> dirt)
-    {
-        return createFoggyTreeConfig(stem, dirt, 4, 0, 5);
-    }
-
-    public static <T extends Block> TreeConfiguration createAcaciaTreeConfig(RegistryObject<T> stem, RegistryObject<T> foliage, RegistryObject<T> dirt, int baseHeight, int heightA, int heightB, int foliageRadius, int foliageOffset, int foliageLimit, int foliageLowerBound, int foliageUpperBound)
-    {
-        return new TreeConfiguration.TreeConfigurationBuilder(
-                simple(stem.get()),
-                new ForkingTrunkPlacer(baseHeight, heightA, heightB),
-                simple(foliage.get()),
-                new AcaciaFoliagePlacer(constant(foliageRadius), constant(foliageOffset)),
-                new TwoLayersFeatureSize(foliageLimit, foliageLowerBound, foliageUpperBound)
-        ).dirt(simple(dirt.get())).ignoreVines().build();
-    }
-
-    public static <T extends Block> TreeConfiguration createAcaciaTreeConfig(RegistryObject<T> stem, RegistryObject<T> foliage, RegistryObject<T> dirt)
-    {
-        return createAcaciaTreeConfig(stem, foliage, dirt, 5, 2, 2, 2, 0, 1, 0, 2);
+        return new TreeConfiguration.TreeConfigurationBuilder(BLOCK.apply(stem), new ForkingTrunkPlacer(5, 2, 2), BLOCK.apply(foliage), new AcaciaFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)), DEFAULT_FEATURE_SIZE).dirt(BLOCK.apply(dirt)).ignoreVines().build();
     }
 
     public static List<PlacementModifier> simpleTreePlacement(RegistryObject<Block> sapling, int count)
     {
-        return VegetationPlacements.treePlacement(
-                RarityFilter.onAverageOnceEvery(count),
-                sapling.get()
-        );
+        return VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(count), sapling.get());
     }
 
     public static List<PlacementModifier> simpleSurfacePlacement(int count)
     {
-        return List.of(
-                RarityFilter.onAverageOnceEvery(count),
-                InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
-                BiomeFilter.biome()
-        );
+        return List.of(RarityFilter.onAverageOnceEvery(count), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
     }
 
     public static void registerPlacement(BootstapContext<PlacedFeature> context, String name, List<PlacementModifier> modifiers)
@@ -217,7 +152,7 @@ public class WorldGenStuff
 
     public static boolean checkComatoseSpawnRules(ServerLevelAccessor level, RandomSource random, int bound)
     {
-        return WorldStuff.isDimension(level, Keys.COMATOSE) && WorldStuff.random(random, bound);
+        return WorldStuff.isDimension(level, Levels.COMATOSE) && WorldStuff.random(random, bound);
     }
 
     public static boolean checkComatoseSpawnRules(ServerLevelAccessor level, RandomSource random)
@@ -238,13 +173,13 @@ public class WorldGenStuff
     public static void addGeometricTree(BiomeGenerationSettings.Builder builder)
     {
         builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.TREES_PLAINS);
-        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureKey.GEOMETRIC_TREE.getPlacedKey());
+        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureKey.ILLUSIVE_TREE.getPlacedKey());
     }
 
     public static void addFoggyTree(BiomeGenerationSettings.Builder builder)
     {
         builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.TREES_PLAINS);
-        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureKey.FOGGY_TREE.getPlacedKey());
+        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureKey.DELUSIVE_TREE.getPlacedKey());
     }
 
     public static void addDefaultPlants(BiomeGenerationSettings.Builder builder)
@@ -305,21 +240,6 @@ public class WorldGenStuff
     {
         WorldGenStuff.addCreatureSpawn(builder, Entities.FROLICKER, 15, 1, 1);
         WorldGenStuff.addMonsterSpawn(builder, Entities.SNIPE, 20, 1, 1);
-    }
-
-    static BlockStateProvider simple(Block block)
-    {
-        return BlockStateProvider.simple(block);
-    }
-
-    static IntProvider constant(int value)
-    {
-        return ConstantInt.of(value);
-    }
-
-    static CountPlacement placement(int value)
-    {
-        return CountPlacement.of(value);
     }
 
     static <FC extends FeatureConfiguration, F extends Feature<FC>> Holder<PlacedFeature> onlyWhenEmpty(F feature, FC config)

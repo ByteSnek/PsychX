@@ -18,7 +18,7 @@ public class WaterColourRubbleFeature extends RubbleFeature
 {
     public WaterColourRubbleFeature(Codec<BlockStateConfiguration> codec)
     {
-        super(codec, Frequency.of(5), Comatose.BLOCKS, 2, 4);
+        super(codec, Frequency.of(5), Comatose.getBlockList(), 2, 4);
     }
 
     @Override

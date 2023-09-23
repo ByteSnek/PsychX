@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 import xyz.snaker.snakerlib.level.entity.FlyingPassive;
 import xyz.snaker.snakerlib.utility.tools.WorldStuff;
 import xyz.snaker.tq.rego.Entities;
-import xyz.snaker.tq.rego.Keys;
+import xyz.snaker.tq.rego.Levels;
 import xyz.snaker.tq.utility.WorldGenStuff;
 
 import net.minecraft.core.BlockPos;
@@ -60,7 +60,7 @@ public class Frolicker extends FlyingPassive
 
     public boolean canDoFunny()
     {
-        return WorldStuff.isDimension(level(), Keys.COMATOSE) && !isActuallyOnGround();
+        return WorldStuff.isDimension(level(), Levels.COMATOSE) && !isActuallyOnGround();
     }
 
     public boolean isActuallyOnGround()
