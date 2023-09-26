@@ -5,7 +5,9 @@ import java.util.function.Predicate;
 
 import xyz.snaker.snakerlib.data.DefaultEntityAttributes;
 import xyz.snaker.snakerlib.math.Maths;
+import xyz.snaker.snakerlib.utility.TriBool;
 import xyz.snaker.snakerlib.utility.tools.EntityStuff;
+import xyz.snaker.tq.level.entity.Comatosian;
 import xyz.snaker.tq.utility.WorldGenStuff;
 
 import net.minecraft.core.BlockPos;
@@ -38,7 +40,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by SnakerBone on 16/03/2023
  **/
-public class CosmicCreeper extends Creeper
+public class CosmicCreeper extends Creeper implements Comatosian
 {
     private int teleportTime;
     private final int radius = 6;
@@ -189,6 +191,18 @@ public class CosmicCreeper extends Creeper
     public @NotNull Packet<ClientGamePacketListener> getAddEntityPacket()
     {
         return NetworkHooks.getEntitySpawningPacket(this);
+    }
+
+    @Override
+    public TriBool hasSpecialRendering()
+    {
+        return TriBool.MAYBE;
+    }
+
+    @Override
+    public TriBool isAdaptive()
+    {
+        return TriBool.YES;
     }
 
     static class MoveCtrl extends MoveControl

@@ -12,15 +12,18 @@ import xyz.snaker.snakerlib.utility.ResourcePath;
 import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.level.block.OverlayBlock;
 import xyz.snaker.tq.level.block.ShaderBlock;
+import xyz.snaker.tq.level.fluid.Comasote;
 import xyz.snaker.tq.level.world.feature.FeatureKey;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -72,6 +75,8 @@ public class Blocks
     public static final RegistryObject<Block> SHIMMER_OVERLAY = registerOverlay("shimmer");
     public static final RegistryObject<Block> SKIN_OVERLAY = registerOverlay("skin");
     public static final RegistryObject<Block> TURQUOISE_OVERLAY = registerOverlay("turquoise");
+
+    public static final RegistryObject<LiquidBlock> COMASOTE = REGISTRAR.register("comasote", () -> new Comasote(Fluids.COMASOTE, Block.Properties.of().noCollission().strength(100).noOcclusion().jumpFactor(0.1F).speedFactor(0.01F).lightLevel(light -> 15).mapColor(DyeColor.BLUE).noLootTable()));
 
     static RegistryObject<Block> register(String name, Supplier<Block> block)
     {

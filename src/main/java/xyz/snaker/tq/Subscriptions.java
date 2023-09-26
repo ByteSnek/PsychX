@@ -20,9 +20,12 @@ import xyz.snaker.tq.level.entity.creature.Frolicker;
 import xyz.snaker.tq.level.entity.mob.*;
 import xyz.snaker.tq.rego.BlockEntities;
 import xyz.snaker.tq.rego.Entities;
+import xyz.snaker.tq.rego.Fluids;
 import xyz.snaker.tq.rego.Levels;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.commands.CommandSourceStack;
@@ -58,6 +61,13 @@ public class Subscriptions
     public static class Client
     {
         @SubscribeEvent
+        public static void onClientSetup(FMLClientSetupEvent event)
+        {
+            ItemBlockRenderTypes.setRenderLayer(Fluids.COMASOTE.get(), RenderType.SOLID);
+            ItemBlockRenderTypes.setRenderLayer(Fluids.FLOWING_COMASOTE.get(), RenderType.SOLID);
+        }
+
+        @SubscribeEvent
         public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event)
         {
             event.registerLayerDefinition(SnipeModel.LAYER_LOCATION, SnipeModel::createBodyLayer);
@@ -86,71 +96,71 @@ public class Subscriptions
             event.registerBlockEntityRenderer(BlockEntities.FOGGY.get(), new ShaderBlockRenderer<>(ItemLikeRenderType.BLUR_FOG));
             event.registerBlockEntityRenderer(BlockEntities.STATIC.get(), new ShaderBlockRenderer<>(ItemLikeRenderType.STRANDS));
         }
+    }
 
-        @Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-        public static class Common
+    @Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class Common
+    {
+        @SubscribeEvent
+        public static void addEntityAttributes(EntityAttributeCreationEvent event)
         {
-            @SubscribeEvent
-            public static void addEntityAttributes(EntityAttributeCreationEvent event)
-            {
-                bindAttributes(event, Entities.COSMO, Cosmo.attributes());
-                bindAttributes(event, Entities.SNIPE, Snipe.attributes());
-                bindAttributes(event, Entities.FLARE, Flare.attributes());
-                bindAttributes(event, Entities.COSMIC_CREEPER, CosmicCreeper.attributes());
-                bindAttributes(event, Entities.FROLICKER, Frolicker.attributes());
-                bindAttributes(event, Entities.FLUTTERFLY, Flutterfly.attributes());
-                bindAttributes(event, Entities.UTTERFLY, Utterfly.attributes());
-                bindAttributes(event, Entities.LEET, Leet.attributes());
-            }
+            bindAttributes(event, Entities.COSMO, Cosmo.attributes());
+            bindAttributes(event, Entities.SNIPE, Snipe.attributes());
+            bindAttributes(event, Entities.FLARE, Flare.attributes());
+            bindAttributes(event, Entities.COSMIC_CREEPER, CosmicCreeper.attributes());
+            bindAttributes(event, Entities.FROLICKER, Frolicker.attributes());
+            bindAttributes(event, Entities.FLUTTERFLY, Flutterfly.attributes());
+            bindAttributes(event, Entities.UTTERFLY, Utterfly.attributes());
+            bindAttributes(event, Entities.LEET, Leet.attributes());
+        }
 
-            @SubscribeEvent
-            public static void clientSetup(FMLClientSetupEvent event)
-            {
-                registerEffects(SyncopeFX.INSTANCE);
-                registerEntityRenderer(Entities.COSMO, CosmoRenderer::new);
-                registerEntityRenderer(Entities.SNIPE, SnipeRenderer::new);
-                registerEntityRenderer(Entities.FLARE, FlareRenderer::new);
-                registerEntityRenderer(Entities.COSMIC_CREEPER, CosmicCreeperRenderer::new);
-                registerEntityRenderer(Entities.FROLICKER, FrolickerRenderer::new);
-                registerEntityRenderer(Entities.FLUTTERFLY, FlutterflyRenderer::new);
-                registerEntityRenderer(Entities.UTTERFLY, UtterflyRenderer::new);
-                registerEntityRenderer(Entities.HOMMING_ARROW, HommingArrowRenderer::new);
-                registerEntityRenderer(Entities.EXPLOSIVE_HOMMING_ARROW, ExplosiveHommingArrowRenderer::new);
-                registerEntityRenderer(Entities.COSMIC_RAY, CosmicRayRenderer::new);
-                registerEntityRenderer(Entities.LEET, LeetRenderer::new);
-            }
+        @SubscribeEvent
+        public static void clientSetup(FMLClientSetupEvent event)
+        {
+            registerEffects(SyncopeFX.INSTANCE);
+            registerEntityRenderer(Entities.COSMO, CosmoRenderer::new);
+            registerEntityRenderer(Entities.SNIPE, SnipeRenderer::new);
+            registerEntityRenderer(Entities.FLARE, FlareRenderer::new);
+            registerEntityRenderer(Entities.COSMIC_CREEPER, CosmicCreeperRenderer::new);
+            registerEntityRenderer(Entities.FROLICKER, FrolickerRenderer::new);
+            registerEntityRenderer(Entities.FLUTTERFLY, FlutterflyRenderer::new);
+            registerEntityRenderer(Entities.UTTERFLY, UtterflyRenderer::new);
+            registerEntityRenderer(Entities.HOMMING_ARROW, HommingArrowRenderer::new);
+            registerEntityRenderer(Entities.EXPLOSIVE_HOMMING_ARROW, ExplosiveHommingArrowRenderer::new);
+            registerEntityRenderer(Entities.COSMIC_RAY, CosmicRayRenderer::new);
+            registerEntityRenderer(Entities.LEET, LeetRenderer::new);
+        }
 
-            @SubscribeEvent
-            public static void registerSpawns(SpawnPlacementRegisterEvent event)
-            {
-                registerSpawn(event, Entities.COSMO, Cosmo::spawnRules);
-                registerSpawn(event, Entities.FLARE, Flare::spawnRules);
-                registerSpawn(event, Entities.COSMIC_CREEPER, CosmicCreeper::spawnRules);
-                registerSpawn(event, Entities.FROLICKER, Frolicker::spawnRules);
-                registerSpawn(event, Entities.LEET, Leet::spawnRules);
-                registerSpawn(event, Entities.SNIPE, Snipe::spawnRules);
-                registerSpawn(event, Entities.FLUTTERFLY, Flutterfly::spawnRules);
-            }
+        @SubscribeEvent
+        public static void registerSpawns(SpawnPlacementRegisterEvent event)
+        {
+            registerSpawn(event, Entities.COSMO, Cosmo::spawnRules);
+            registerSpawn(event, Entities.FLARE, Flare::spawnRules);
+            registerSpawn(event, Entities.COSMIC_CREEPER, CosmicCreeper::spawnRules);
+            registerSpawn(event, Entities.FROLICKER, Frolicker::spawnRules);
+            registerSpawn(event, Entities.LEET, Leet::spawnRules);
+            registerSpawn(event, Entities.SNIPE, Snipe::spawnRules);
+            registerSpawn(event, Entities.FLUTTERFLY, Flutterfly::spawnRules);
+        }
 
-            private static void registerEffects(Object... targets)
-            {
-                Arrays.stream(targets).forEach(MinecraftForge.EVENT_BUS::register);
-            }
+        private static void registerEffects(Object... targets)
+        {
+            Arrays.stream(targets).forEach(MinecraftForge.EVENT_BUS::register);
+        }
 
-            private static <T extends Entity> void registerSpawn(SpawnPlacementRegisterEvent event, RegistryObject<EntityType<T>> type, SpawnPlacements.SpawnPredicate<T> predicate)
-            {
-                event.register(type.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, predicate, SpawnPlacementRegisterEvent.Operation.AND);
-            }
+        private static <T extends Entity> void registerSpawn(SpawnPlacementRegisterEvent event, RegistryObject<EntityType<T>> type, SpawnPlacements.SpawnPredicate<T> predicate)
+        {
+            event.register(type.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, predicate, SpawnPlacementRegisterEvent.Operation.AND);
+        }
 
-            private static <T extends Entity> void registerEntityRenderer(RegistryObject<EntityType<T>> type, EntityRendererProvider<T> renderer)
-            {
-                EntityRenderers.register(type.get(), renderer);
-            }
+        private static <T extends Entity> void registerEntityRenderer(RegistryObject<EntityType<T>> type, EntityRendererProvider<T> renderer)
+        {
+            EntityRenderers.register(type.get(), renderer);
+        }
 
-            private static <T extends LivingEntity> void bindAttributes(EntityAttributeCreationEvent event, RegistryObject<EntityType<T>> entity, AttributeSupplier map)
-            {
-                event.put(entity.get(), map);
-            }
+        private static <T extends LivingEntity> void bindAttributes(EntityAttributeCreationEvent event, RegistryObject<EntityType<T>> entity, AttributeSupplier map)
+        {
+            event.put(entity.get(), map);
         }
 
         @Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)

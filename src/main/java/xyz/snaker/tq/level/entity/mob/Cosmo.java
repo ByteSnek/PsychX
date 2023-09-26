@@ -3,7 +3,9 @@ package xyz.snaker.tq.level.entity.mob;
 import java.util.function.Predicate;
 
 import xyz.snaker.snakerlib.level.entity.Hostile;
+import xyz.snaker.snakerlib.utility.TriBool;
 import xyz.snaker.tq.client.render.entity.CosmoRenderer;
+import xyz.snaker.tq.level.entity.Comatosian;
 import xyz.snaker.tq.level.entity.EntityVariants;
 import xyz.snaker.tq.rego.Sounds;
 import xyz.snaker.tq.utility.WorldGenStuff;
@@ -45,7 +47,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by SnakerBone on 2/01/2023
  **/
-public class Cosmo extends Hostile
+public class Cosmo extends Hostile implements Comatosian
 {
     static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Cosmo.class, EntityDataSerializers.INT);
 
@@ -228,5 +230,17 @@ public class Cosmo extends Hostile
     public @NotNull Packet<ClientGamePacketListener> getAddEntityPacket()
     {
         return NetworkHooks.getEntitySpawningPacket(this);
+    }
+
+    @Override
+    public TriBool hasSpecialRendering()
+    {
+        return TriBool.YES;
+    }
+
+    @Override
+    public TriBool isAdaptive()
+    {
+        return TriBool.YES;
     }
 }

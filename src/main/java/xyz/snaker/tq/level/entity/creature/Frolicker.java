@@ -3,7 +3,9 @@ package xyz.snaker.tq.level.entity.creature;
 import java.util.function.Predicate;
 
 import xyz.snaker.snakerlib.level.entity.FlyingPassive;
+import xyz.snaker.snakerlib.utility.TriBool;
 import xyz.snaker.snakerlib.utility.tools.WorldStuff;
+import xyz.snaker.tq.level.entity.Comatosian;
 import xyz.snaker.tq.rego.Entities;
 import xyz.snaker.tq.rego.Levels;
 import xyz.snaker.tq.utility.WorldGenStuff;
@@ -43,7 +45,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by SnakerBone on 2/01/2023
  **/
-public class Frolicker extends FlyingPassive
+public class Frolicker extends FlyingPassive implements Comatosian
 {
     private final Predicate<BlockState> blocksToIgnore = state -> state.is(Blocks.WATER) || state.is(Blocks.LAVA) || state.is(Blocks.AIR) || state.is(BlockTags.LEAVES) || state.is(BlockTags.BEE_GROWABLES) || state.is(BlockTags.FLOWERS);
     private int onGroundTicks;
@@ -126,5 +128,17 @@ public class Frolicker extends FlyingPassive
     public @NotNull Packet<ClientGamePacketListener> getAddEntityPacket()
     {
         return NetworkHooks.getEntitySpawningPacket(this);
+    }
+
+    @Override
+    public TriBool hasSpecialRendering()
+    {
+        return TriBool.NO;
+    }
+
+    @Override
+    public TriBool isAdaptive()
+    {
+        return TriBool.YES;
     }
 }

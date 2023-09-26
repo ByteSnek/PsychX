@@ -44,6 +44,9 @@ public class BlockTags extends BlockTagsProvider implements BlockTagsProviderToo
         addGroundRich(Blocks.COMASTONE);
         addLeaves(Blocks.DELUSIVE_LEAVES, Blocks.ILLUSIVE_LEAVES);
         CollectionStuff.mapDeferredRegistries(Blocks.REGISTRAR, Block[]::new).forEach(block -> {
+            if (block == Blocks.COMASOTE.get()) {
+                return;
+            }
             if (BLOCKS_NEED_TOOL.test(block)) {
                 addRequiresTool(BlockTagsProviderTools.ToolTier.STONE, block);
                 addMineableWithPickaxe(block);

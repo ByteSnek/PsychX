@@ -25,7 +25,12 @@ public class BlockLootTables extends BlockLootSubProvider
     @Override
     public void generate()
     {
-        CollectionStuff.mapDeferredRegistries(Blocks.REGISTRAR, Block[]::new).forEach(this::dropSelf);
+        CollectionStuff.mapDeferredRegistries(Blocks.REGISTRAR, Block[]::new).forEach(block -> {
+            if (block == Blocks.COMASOTE.get()) {
+                return;
+            }
+            dropSelf(block);
+        });
     }
 
     @Override

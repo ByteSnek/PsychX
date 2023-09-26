@@ -4,6 +4,8 @@ import java.util.function.Predicate;
 
 import xyz.snaker.snakerlib.level.entity.FlyingHostile;
 import xyz.snaker.snakerlib.math.Maths;
+import xyz.snaker.snakerlib.utility.TriBool;
+import xyz.snaker.tq.level.entity.Comatosian;
 import xyz.snaker.tq.level.entity.projectile.CosmicRay;
 import xyz.snaker.tq.rego.Entities;
 import xyz.snaker.tq.rego.Sounds;
@@ -36,7 +38,7 @@ import org.joml.Vector3d;
 /**
  * Created by SnakerBone on 2/01/2023
  **/
-public class Snipe extends FlyingHostile
+public class Snipe extends FlyingHostile implements Comatosian
 {
     private final Predicate<LivingEntity> distance = entity -> Math.abs(entity.getY() - getY()) <= 4;
 
@@ -111,6 +113,18 @@ public class Snipe extends FlyingHostile
     public @NotNull Packet<ClientGamePacketListener> getAddEntityPacket()
     {
         return NetworkHooks.getEntitySpawningPacket(this);
+    }
+
+    @Override
+    public TriBool hasSpecialRendering()
+    {
+        return TriBool.NO;
+    }
+
+    @Override
+    public TriBool isAdaptive()
+    {
+        return TriBool.YES;
     }
 
     static class SnipeAttackGoal extends Goal

@@ -2,6 +2,8 @@ package xyz.snaker.tq.level.entity.mob;
 
 import xyz.snaker.snakerlib.level.entity.FlyingHostile;
 import xyz.snaker.snakerlib.level.entity.ai.FlyGoal;
+import xyz.snaker.snakerlib.utility.TriBool;
+import xyz.snaker.tq.level.entity.Comatosian;
 import xyz.snaker.tq.level.entity.projectile.CosmicRay;
 import xyz.snaker.tq.rego.Entities;
 import xyz.snaker.tq.rego.Sounds;
@@ -30,7 +32,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by SnakerBone on 15/07/2023
  **/
-public class Leet extends FlyingHostile implements RangedAttackMob
+public class Leet extends FlyingHostile implements RangedAttackMob, Comatosian
 {
     public Leet(EntityType<Leet> type, Level level)
     {
@@ -89,5 +91,17 @@ public class Leet extends FlyingHostile implements RangedAttackMob
         ray.shoot(x, y - ray.getY() + Math.sqrt(x * x + z * z) * 0.2, z, 1.6F, 12);
 
         level().addFreshEntity(ray);
+    }
+
+    @Override
+    public TriBool hasSpecialRendering()
+    {
+        return TriBool.YES;
+    }
+
+    @Override
+    public TriBool isAdaptive()
+    {
+        return TriBool.YES;
     }
 }

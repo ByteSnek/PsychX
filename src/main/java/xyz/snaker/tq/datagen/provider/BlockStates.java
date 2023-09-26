@@ -48,6 +48,9 @@ public class BlockStates extends BlockStateProvider implements BlockStateProvide
     public void registerStatesAndModels()
     {
         CollectionStuff.mapDeferredRegistries(Blocks.REGISTRAR, Block[]::new).forEach(block -> {
+            if (block == Blocks.COMASOTE.get()) {
+                return;
+            }
             if (block instanceof ShaderBlock<?> shaderBlock) {
                 shader(shaderBlock, BLOCK_2_PARTICLE.get(shaderBlock));
             } else if (block instanceof BushBlock bushBlock) {

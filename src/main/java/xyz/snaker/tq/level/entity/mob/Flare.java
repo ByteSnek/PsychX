@@ -4,6 +4,8 @@ import java.util.function.Predicate;
 
 import xyz.snaker.snakerlib.level.entity.Hostile;
 import xyz.snaker.snakerlib.level.entity.ai.SwitchGameModeGoal;
+import xyz.snaker.snakerlib.utility.TriBool;
+import xyz.snaker.tq.level.entity.Comatosian;
 import xyz.snaker.tq.rego.Sounds;
 import xyz.snaker.tq.utility.WorldGenStuff;
 
@@ -37,7 +39,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by SnakerBone on 02/01/2023
  **/
-public class Flare extends Hostile
+public class Flare extends Hostile implements Comatosian
 {
     public Flare(EntityType<? extends Flare> type, Level level)
     {
@@ -118,5 +120,17 @@ public class Flare extends Hostile
     public @NotNull Packet<ClientGamePacketListener> getAddEntityPacket()
     {
         return NetworkHooks.getEntitySpawningPacket(this);
+    }
+
+    @Override
+    public TriBool hasSpecialRendering()
+    {
+        return TriBool.YES;
+    }
+
+    @Override
+    public TriBool isAdaptive()
+    {
+        return TriBool.YES;
     }
 }

@@ -14,12 +14,15 @@ import xyz.snaker.tq.level.item.icon.MobTabIcon;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+import static net.minecraft.world.item.Items.AIR;
 
 /**
  * Created by SnakerBone on 15/08/2023
@@ -66,6 +69,8 @@ public class Items
     public static final RegistryObject<Item> FLUTTERFLY_SPAWN_EGG = registerSpawnEgg(Entities.FLUTTERFLY);
     public static final RegistryObject<Item> UTTERFLY_SPAWN_EGG = registerSpawnEgg(Entities.UTTERFLY);
     public static final RegistryObject<Item> LEET_SPAWN_EGG = registerSpawnEgg(Entities.LEET);
+
+    public static final RegistryObject<Item> COMASOTE = register("comasote", () -> new BucketItem(Fluids.COMASOTE, new Item.Properties().craftRemainder(AIR).setNoRepair().requiredFeatures().stacksTo(1)));
 
     static RegistryObject<Item> register(String name, Supplier<Item> item)
     {

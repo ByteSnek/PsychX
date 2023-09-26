@@ -45,6 +45,9 @@ public class ItemModels extends ItemModelProvider implements ItemModelProviderTo
         });
 
         CollectionStuff.mapDeferredRegistries(Blocks.REGISTRAR, Block[]::new).forEach(block -> {
+            if (block == Blocks.COMASOTE.get()) {
+                return;
+            }
             if (block instanceof BushBlock bushBlock) {
                 blockCustom(bushBlock);
             } else {

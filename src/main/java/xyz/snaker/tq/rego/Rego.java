@@ -99,5 +99,7 @@ public class Rego
         Features.REGISTRAR.register(bus);
         LootModifiers.REGISTRAR.register(bus);
         FoliagePlacers.REGISTRAR.register(bus);
+        Fluids.REGISTRAR.register(bus);
+        FluidTypes.REGISTRAR.register(bus);
     }
 }

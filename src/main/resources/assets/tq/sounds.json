@@ -1,215 +1,227 @@
 {
-    "random_fx": {
-        "sounds": [
-            "tq:misc/randomfx_1",
-            "tq:misc/randomfx_2",
-            "tq:misc/randomfx_3",
-            "tq:misc/randomfx_4",
-            "tq:misc/randomfx_5",
-            "tq:misc/randomfx_6",
-            "tq:misc/randomfx_7",
-            "tq:misc/randomfx_8",
-            "tq:misc/randomfx_9",
-            "tq:misc/randomfx_10",
-            "tq:misc/randomfx_11"
-        ]
-    },
-    "o": {
-        "sounds": [
-            {
-                "name": "tq:ambient/o",
-                "stream": true,
-                "volume": 0.05
-            }
-        ]
-    },
-    "xxed": {
-        "sounds": [
-            {
-                "name": "tq:ambient/xxed",
-                "stream": true,
-                "volume": 0.05
-            }
-        ]
-    },
-    "relative_resolute": {
-        "sounds": [
-            {
-                "name": "tq:ambient/relative_resolute",
-                "stream": true,
-                "volume": 0.05
-            }
-        ]
-    },
-    "regenerator": {
-        "sounds": [
-            {
-                "name": "tq:ambient/regenerator",
-                "stream": true,
-                "volume": 0.05
-            }
-        ]
-    },
-    "limbo": {
-        "sounds": [
-            {
-                "name": "tq:ambient/limbo",
-                "stream": true,
-                "volume": 0.05
-            }
-        ]
-    },
-    "wire": {
-        "sounds": [
-            {
-                "name": "tq:ambient/wire",
-                "stream": true,
-                "volume": 0.1
-            }
-        ]
-    },
-    "confuse": {
-        "sounds": [
-            "tq:yn/confuse"
-        ]
-    },
-    "earth": {
-        "sounds": [
-            "tq:yn/earth"
-        ]
-    },
-    "fog": {
-        "sounds": [
-            "tq:yn/fog"
-        ]
-    },
-    "gaze": {
-        "sounds": [
-            "tq:yn/gaze"
-        ]
-    },
-    "night": {
-        "sounds": [
-            "tq:yn/night"
-        ]
-    },
-    "utterfly_shoot": {
-        "sounds": [
-            "tq:utterfly/shoot"
-        ]
-    },
-    "utterfly_ambient": {
-        "sounds": [
-            {
-                "name": "tq:yn/poison"
-            }
-        ]
-    },
-    "flutterfly_ambient": {
-        "sounds": [
-            {
-                "name": "tq:yn/poison",
-                "pitch": 2
-            }
-        ]
-    },
-    "snipe_ambient": {
-        "sounds": [
-            "tq:snipe/ambient"
-        ]
-    },
-    "snipe_hurt": {
-        "sounds": [
-            "tq:snipe/hurt"
-        ]
-    },
-    "cosmo_hurt": {
-        "sounds": [
-            {
-                "name": "tq:cosmo/hurt1",
-                "volume": 0.5
-            },
-            {
-                "name": "tq:cosmo/hurt2",
-                "volume": 0.5
-            },
-            {
-                "name": "tq:cosmo/hurt3",
-                "volume": 0.5
-            }
-        ]
-    },
-    "anti_cosmo_hurt": {
-        "sounds": [
-            {
-                "name": "tq:cosmo/hurt1",
-                "volume": 0.5,
-                "pitch": 0.25
-            },
-            {
-                "name": "tq:cosmo/hurt2",
-                "volume": 0.5,
-                "pitch": 0.25
-            },
-            {
-                "name": "tq:cosmo/hurt3",
-                "volume": 0.5,
-                "pitch": 0.25
-            }
-        ]
-    },
-    "entity_death": {
-        "sounds": [
-            "tq:yn/dark"
-        ]
-    },
-    "ting": {
-        "sounds": [
-            {
-                "name": "minecraft:random/anvil_land",
-                "pitch": 2,
-                "volume": 0.5
-            }
-        ]
-    },
-    "pew": {
-        "sounds": [
-            "tq:misc/bullet0",
-            "tq:misc/bullet1",
-            "tq:misc/bullet2",
-            "tq:misc/bullet3",
-            "tq:misc/bullet4",
-            "tq:misc/bullet5",
-            "tq:misc/bullet6",
-            "tq:misc/bullet7",
-            "tq:misc/bullet8",
-            "tq:misc/bullet9",
-            "tq:misc/bullet10",
-            "tq:misc/bullet11",
-            "tq:misc/bullet12",
-            "tq:misc/bullet13",
-            "tq:misc/bullet14",
-            "tq:misc/bullet15"
-        ]
-    },
-    "field": {
-        "sounds": [
-            "tq:misc/field"
-        ]
-    },
-    "hit": {
-        "sounds": [
-            "tq:misc/hit"
-        ]
-    },
-    "laser": {
-        "sounds": [
-            "tq:misc/laser"
-        ]
-    },
-    "pulse": {
-        "sounds": [
-            "tq:misc/pulse"
-        ]
-    }
+      "click": {
+            "sounds": [
+                  "tq:misc/click1",
+                  "tq:misc/click2",
+                  "tq:misc/click3",
+                  "tq:misc/click4",
+                  "tq:misc/click5",
+                  "tq:misc/click6",
+                  "tq:misc/click7",
+                  "tq:misc/click8"
+            ]
+      },
+      "random_fx": {
+            "sounds": [
+                  "tq:misc/randomfx_1",
+                  "tq:misc/randomfx_2",
+                  "tq:misc/randomfx_3",
+                  "tq:misc/randomfx_4",
+                  "tq:misc/randomfx_5",
+                  "tq:misc/randomfx_6",
+                  "tq:misc/randomfx_7",
+                  "tq:misc/randomfx_8",
+                  "tq:misc/randomfx_9",
+                  "tq:misc/randomfx_10",
+                  "tq:misc/randomfx_11"
+            ]
+      },
+      "o": {
+            "sounds": [
+                  {
+                        "name": "tq:ambient/o",
+                        "stream": true,
+                        "volume": 0.05
+                  }
+            ]
+      },
+      "xxed": {
+            "sounds": [
+                  {
+                        "name": "tq:ambient/xxed",
+                        "stream": true,
+                        "volume": 0.05
+                  }
+            ]
+      },
+      "relative_resolute": {
+            "sounds": [
+                  {
+                        "name": "tq:ambient/relative_resolute",
+                        "stream": true,
+                        "volume": 0.05
+                  }
+            ]
+      },
+      "regenerator": {
+            "sounds": [
+                  {
+                        "name": "tq:ambient/regenerator",
+                        "stream": true,
+                        "volume": 0.05
+                  }
+            ]
+      },
+      "limbo": {
+            "sounds": [
+                  {
+                        "name": "tq:ambient/limbo",
+                        "stream": true,
+                        "volume": 0.05
+                  }
+            ]
+      },
+      "wire": {
+            "sounds": [
+                  {
+                        "name": "tq:ambient/wire",
+                        "stream": true,
+                        "volume": 0.1
+                  }
+            ]
+      },
+      "confuse": {
+            "sounds": [
+                  "tq:yn/confuse"
+            ]
+      },
+      "earth": {
+            "sounds": [
+                  "tq:yn/earth"
+            ]
+      },
+      "fog": {
+            "sounds": [
+                  "tq:yn/fog"
+            ]
+      },
+      "gaze": {
+            "sounds": [
+                  "tq:yn/gaze"
+            ]
+      },
+      "night": {
+            "sounds": [
+                  "tq:yn/night"
+            ]
+      },
+      "utterfly_shoot": {
+            "sounds": [
+                  "tq:utterfly/shoot"
+            ]
+      },
+      "utterfly_ambient": {
+            "sounds": [
+                  {
+                        "name": "tq:yn/poison"
+                  }
+            ]
+      },
+      "flutterfly_ambient": {
+            "sounds": [
+                  {
+                        "name": "tq:yn/poison",
+                        "pitch": 2
+                  }
+            ]
+      },
+      "snipe_ambient": {
+            "sounds": [
+                  "tq:snipe/ambient"
+            ]
+      },
+      "snipe_hurt": {
+            "sounds": [
+                  "tq:snipe/hurt"
+            ]
+      },
+      "cosmo_hurt": {
+            "sounds": [
+                  {
+                        "name": "tq:cosmo/hurt1",
+                        "volume": 0.5
+                  },
+                  {
+                        "name": "tq:cosmo/hurt2",
+                        "volume": 0.5
+                  },
+                  {
+                        "name": "tq:cosmo/hurt3",
+                        "volume": 0.5
+                  }
+            ]
+      },
+      "anti_cosmo_hurt": {
+            "sounds": [
+                  {
+                        "name": "tq:cosmo/hurt1",
+                        "volume": 0.5,
+                        "pitch": 0.25
+                  },
+                  {
+                        "name": "tq:cosmo/hurt2",
+                        "volume": 0.5,
+                        "pitch": 0.25
+                  },
+                  {
+                        "name": "tq:cosmo/hurt3",
+                        "volume": 0.5,
+                        "pitch": 0.25
+                  }
+            ]
+      },
+      "entity_death": {
+            "sounds": [
+                  "tq:yn/dark"
+            ]
+      },
+      "ting": {
+            "sounds": [
+                  {
+                        "name": "minecraft:random/anvil_land",
+                        "pitch": 2,
+                        "volume": 0.5
+                  }
+            ]
+      },
+      "pew": {
+            "sounds": [
+                  "tq:misc/bullet0",
+                  "tq:misc/bullet1",
+                  "tq:misc/bullet2",
+                  "tq:misc/bullet3",
+                  "tq:misc/bullet4",
+                  "tq:misc/bullet5",
+                  "tq:misc/bullet6",
+                  "tq:misc/bullet7",
+                  "tq:misc/bullet8",
+                  "tq:misc/bullet9",
+                  "tq:misc/bullet10",
+                  "tq:misc/bullet11",
+                  "tq:misc/bullet12",
+                  "tq:misc/bullet13",
+                  "tq:misc/bullet14",
+                  "tq:misc/bullet15"
+            ]
+      },
+      "field": {
+            "sounds": [
+                  "tq:misc/field"
+            ]
+      },
+      "hit": {
+            "sounds": [
+                  "tq:misc/hit"
+            ]
+      },
+      "laser": {
+            "sounds": [
+                  "tq:misc/laser"
+            ]
+      },
+      "pulse": {
+            "sounds": [
+                  "tq:misc/pulse"
+            ]
+      }
 }

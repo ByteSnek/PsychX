@@ -9,6 +9,8 @@ import xyz.snaker.snakerlib.level.entity.FlyingHostile;
 import xyz.snaker.snakerlib.level.entity.ai.FlyGoal;
 import xyz.snaker.snakerlib.level.entity.ai.LookAroundGoal;
 import xyz.snaker.snakerlib.math.Maths;
+import xyz.snaker.snakerlib.utility.TriBool;
+import xyz.snaker.tq.level.entity.Comatosian;
 import xyz.snaker.tq.level.entity.projectile.ExplosiveHommingArrow;
 import xyz.snaker.tq.level.entity.projectile.HommingArrow;
 import xyz.snaker.tq.rego.Sounds;
@@ -40,7 +42,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by SnakerBone on 4/01/2023
  **/
-public class Utterfly extends FlyingHostile implements Boss
+public class Utterfly extends FlyingHostile implements Boss, Comatosian
 {
     private static final EntityDataAccessor<Integer> PHASE = SynchedEntityData.defineId(Utterfly.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> CHARGING = SynchedEntityData.defineId(Utterfly.class, EntityDataSerializers.BOOLEAN);
@@ -311,5 +313,17 @@ public class Utterfly extends FlyingHostile implements Boss
     public UUID getBossEventId()
     {
         return bossEvent.getId();
+    }
+
+    @Override
+    public TriBool hasSpecialRendering()
+    {
+        return TriBool.YES;
+    }
+
+    @Override
+    public TriBool isAdaptive()
+    {
+        return TriBool.YES;
     }
 }

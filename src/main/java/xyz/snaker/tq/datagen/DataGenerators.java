@@ -8,6 +8,7 @@ import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.datagen.provider.*;
 import xyz.snaker.tq.datagen.provider.loot.BlockLootTables;
 import xyz.snaker.tq.datagen.provider.tags.BlockTags;
+import xyz.snaker.tq.datagen.provider.tags.FluidTags;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -38,13 +39,14 @@ public class DataGenerators
 
         Pair<Supplier<LootTableSubProvider>, LootContextParamSet> blocks = Pair.of(BlockLootTables::new, LootContextParamSets.BLOCK);
 
-        generator.addProvider(event.includeClient(), new Languages(output));
-        generator.addProvider(event.includeServer(), new BlockStates(output, helper));
-        generator.addProvider(event.includeServer(), new ItemModels(output, helper));
-        generator.addProvider(event.includeServer(), new DatapackEntries(output, provider));
-        generator.addProvider(event.includeServer(), new BlockTags(output, provider, helper));
-        generator.addProvider(event.includeServer(), new Recipes(output));
-        generator.addProvider(event.includeServer(), new LootModifiers(output));
-        generator.addProvider(event.includeServer(), new SimpleLootTableProvider(output, blocks).provider());
+        generator.addProvider(true, new Languages(output));
+        generator.addProvider(true, new BlockStates(output, helper));
+        generator.addProvider(true, new ItemModels(output, helper));
+        generator.addProvider(true, new DatapackEntries(output, provider));
+        generator.addProvider(true, new BlockTags(output, provider, helper));
+        generator.addProvider(true, new Recipes(output));
+        generator.addProvider(true, new LootModifiers(output));
+        generator.addProvider(true, new FluidTags(output, provider, helper));
+        generator.addProvider(true, new SimpleLootTableProvider(output, blocks).provider());
     }
 }

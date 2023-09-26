@@ -34,6 +34,7 @@ public class Sounds
     public static final RegistryObject<SoundEvent> SNIPE_AMBIENT = register("snipe_ambient");
     public static final RegistryObject<SoundEvent> ENTITY_DEATH = register("entity_death");
     public static final RegistryObject<SoundEvent> RANDOM_FX = register("random_fx");
+    public static final RegistryObject<SoundEvent> CLICK = register("click");
 
     public static final RegistryObject<SoundEvent> O = register("o");
     public static final RegistryObject<SoundEvent> XXED = register("xxed");
