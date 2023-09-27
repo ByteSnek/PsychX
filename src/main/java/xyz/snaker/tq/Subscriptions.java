@@ -44,6 +44,7 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
+import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -176,33 +177,18 @@ public class Subscriptions
                 if (event.phase == TickEvent.Phase.END) {
                     if (TqConfig.COMMON.visionConvolveActive.get()) {
                         if (level.dimension() == Levels.COMATOSE) {
-                            safeLoadEffect(level, "vision_convolve");
+                            if (level.isClientSide && !Minecraft.getInstance().gameRenderer.effectActive) {
+                                loadPostChain(player, "vision_convolve");
+                            }
                         } else if (level.dimension() != Levels.COMATOSE && postChainActive) {
-                            safeShutdownEffect(level);
+                            shutDownPostChain(player);
                         }
                     }
                 }
             }
 
-            private static void safeLoadEffect(Level level, String name)
-            {
-                if (level.isClientSide) {
-                    ResourcePath path = new ResourcePath("shaders/post/" + name + ".json");
-                    Minecraft.getInstance().tell(() -> Minecraft.getInstance().gameRenderer.loadEffect(path));
-                    postChainActive = true;
-                }
-            }
-
-            private static void safeShutdownEffect(Level level)
-            {
-                if (level.isClientSide) {
-                    Minecraft.getInstance().tell(Minecraft.getInstance().gameRenderer::shutdownEffect);
-                    postChainActive = false;
-                }
-            }
-
             @SubscribeEvent
-            public static void registerCommands(RegisterCommandsEvent event)
+            public static void onCommandRego(RegisterCommandsEvent event)
             {
                 CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
                 PlaygroundModeCommand.register(dispatcher);
@@ -210,6 +196,33 @@ public class Subscriptions
                 KillAllEntitiesCommand.register(dispatcher);
                 DiscardAllEntitiesCommand.register(dispatcher);
                 ConfigCommand.register(dispatcher);
+            }
+
+            @SubscribeEvent
+            public static void onLevelUnload(LevelEvent.Unload event)
+            {
+                postChainActive = false;
+            }
+
+            private static void loadPostChain(Player player, String name)
+            {
+                if (player.level().isClientSide) {
+                    ResourcePath path = new ResourcePath("shaders/post/" + name + ".json");
+                    Minecraft.getInstance().tell(() -> Minecraft.getInstance().gameRenderer.loadEffect(path));
+                    postChainActive = true;
+                } else {
+                    player.getPersistentData().putBoolean("PostChainActive", postChainActive);
+                }
+            }
+
+            private static void shutDownPostChain(Player player)
+            {
+                if (player.level().isClientSide) {
+                    Minecraft.getInstance().tell(Minecraft.getInstance().gameRenderer::shutdownEffect);
+                    postChainActive = false;
+                } else {
+                    player.getPersistentData().putBoolean("PostChainActive", postChainActive);
+                }
             }
         }
     }

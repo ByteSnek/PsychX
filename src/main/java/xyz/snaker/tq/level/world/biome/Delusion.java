@@ -7,7 +7,6 @@ import xyz.snaker.tq.utility.WorldGenStuff;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.world.level.biome.*;
 
@@ -33,11 +32,10 @@ public class Delusion
                 .ambientMoodSound(mood)
                 .ambientLoopSound(Holder.direct(Sounds.LIMBO.get()));
 
-        BiomeDefaultFeatures.addDefaultCarversAndLakes(gen);
-
         WorldGenStuff.addGeometricTree(gen);
         WorldGenStuff.addDefaultPlants(gen);
         WorldGenStuff.addFoggyRubble(gen);
+        WorldGenStuff.addDefaultCarvers(gen);
         WorldGenStuff.addDefaultEntitySpawns(spawns);
 
         WorldGenStuff.addMonsterSpawn(spawns, Entities.COSMIC_CREEPER, 10, 1, 3);

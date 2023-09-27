@@ -7,7 +7,6 @@ import xyz.snaker.tq.utility.WorldGenStuff;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.world.level.biome.*;
 
@@ -33,11 +32,10 @@ public class Spectral
                 .ambientMoodSound(mood)
                 .ambientLoopSound(Holder.direct(Sounds.RELATIVE_RESOLUTE.get()));
 
-        BiomeDefaultFeatures.addDefaultCarversAndLakes(gen);
-
         WorldGenStuff.addDefaultPlants(gen);
         WorldGenStuff.addSwirlRubble(gen);
         WorldGenStuff.addWaterColourRubble(gen);
+        WorldGenStuff.addDefaultCarvers(gen);
         WorldGenStuff.addDefaultEntitySpawns(spawns);
 
         WorldGenStuff.addMonsterSpawn(spawns, Entities.COSMO, 10, 1, 3);

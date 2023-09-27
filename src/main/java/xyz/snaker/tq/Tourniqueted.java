@@ -1,8 +1,11 @@
 package xyz.snaker.tq;
 
 import xyz.snaker.snakerlib.SnakerLib;
+import xyz.snaker.snakerlib.client.render.skybox.SkyBoxRenderer;
+import xyz.snaker.snakerlib.client.render.skybox.SkyBoxTexture;
 import xyz.snaker.tq.client.Shaders;
 import xyz.snaker.tq.config.TqConfig;
+import xyz.snaker.tq.rego.Levels;
 import xyz.snaker.tq.rego.Rego;
 
 import net.minecraftforge.common.MinecraftForge;
@@ -25,11 +28,7 @@ public class Tourniqueted
         SnakerLib.initialize();
         if (FMLEnvironment.dist.isClient()) {
             Shaders.initialize();
+            SkyBoxRenderer.createForDimension(Levels.COMATOSE, SkyBoxTexture::new);
         }
-    }
-
-    public static void main(String[] strings)
-    {
-
     }
 }

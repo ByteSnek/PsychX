@@ -7,7 +7,6 @@ import xyz.snaker.tq.utility.WorldGenStuff;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.world.level.biome.*;
 
@@ -33,11 +32,10 @@ public class Immaterial
                 .ambientMoodSound(mood)
                 .ambientLoopSound(Holder.direct(Sounds.REGENERATOR.get()));
 
-        BiomeDefaultFeatures.addDefaultCarversAndLakes(gen);
-
         WorldGenStuff.addDefaultPlants(gen);
         WorldGenStuff.addGeometricRubble(gen);
         WorldGenStuff.addMultiColourRubble(gen);
+        WorldGenStuff.addDefaultCarvers(gen);
         WorldGenStuff.addDefaultEntitySpawns(spawns);
 
         WorldGenStuff.addMonsterSpawn(spawns, Entities.COSMO, 10, 1, 3);

@@ -19,6 +19,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.Carvers;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
@@ -189,6 +190,13 @@ public class WorldGenStuff
         builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureKey.SPLITLEAF.getPlacedKey());
         builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureKey.CATNIP.getPlacedKey());
         builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureKey.PINKTAILS.getPlacedKey());
+    }
+
+    public static void addDefaultCarvers(BiomeGenerationSettings.Builder builder)
+    {
+        builder.addCarver(GenerationStep.Carving.AIR, Carvers.CAVE);
+        builder.addCarver(GenerationStep.Carving.AIR, Carvers.CAVE_EXTRA_UNDERGROUND);
+        builder.addCarver(GenerationStep.Carving.AIR, Carvers.CANYON);
     }
 
     public static void addSwirlRubble(BiomeGenerationSettings.Builder builder)

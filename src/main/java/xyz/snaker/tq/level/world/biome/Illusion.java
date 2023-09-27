@@ -7,7 +7,6 @@ import xyz.snaker.tq.utility.WorldGenStuff;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.world.level.biome.*;
 
@@ -33,12 +32,11 @@ public class Illusion
                 .ambientMoodSound(mood)
                 .ambientLoopSound(Holder.direct(Sounds.XXED.get()));
 
-        BiomeDefaultFeatures.addDefaultCarversAndLakes(gen);
-
         WorldGenStuff.addFoggyTree(gen);
         WorldGenStuff.addDefaultPlants(gen);
         WorldGenStuff.addSnowflakeRubble(gen);
         WorldGenStuff.addStarryRubble(gen);
+        WorldGenStuff.addDefaultCarvers(gen);
         WorldGenStuff.addDefaultEntitySpawns(spawns);
 
         WorldGenStuff.addMonsterSpawn(spawns, Entities.LEET, 10, 1, 1);
