@@ -28,6 +28,6 @@ public class FluidTags extends FluidTagsProvider
     @Override
     protected void addTags(@NotNull HolderLookup.Provider provider)
     {
-        tag(WATER).add(Fluids.COMASOTE.get()).add(Fluids.FLOWING_COMASOTE.get());
+        tag(WATER).add(Fluids.COMA_SOTE.get()).add(Fluids.FLOWING_COMA_SOTE.get());
     }
 }

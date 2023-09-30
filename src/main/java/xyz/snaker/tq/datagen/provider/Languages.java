@@ -9,7 +9,6 @@ import xyz.snaker.tq.utility.tools.LanguageProviderTools;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -31,13 +30,9 @@ public class Languages extends LanguageProvider implements LanguageProviderTools
     {
         CollectionStuff.mapDeferredRegistries(Blocks.REGISTRAR, Block[]::new).forEach(this::block);
         CollectionStuff.mapDeferredRegistries(Items.REGISTRAR, Item[]::new).forEach(this::item);
-        CollectionStuff.mapDeferredRegistries(Effects.REGISTRAR, MobEffect[]::new).forEach(this::effect);
         CollectionStuff.mapDeferredRegistries(Entities.REGISTRAR, EntityType<?>[]::new).forEach(this::entity);
         CollectionStuff.mapDeferredRegistries(Sounds.REGISTRAR, SoundEvent[]::new).forEach(this::sound);
         CollectionStuff.mapDeferredRegistries(Tabs.REGISTRAR, CreativeModeTab[]::new).forEach(this::tab);
-
-        add("tooltip.tq.debug_tool_mode.none", "None");
-        add("tooltip.tq.debug_tool_mode.biome_tp", "Biome Teleport");
     }
 
     @Override

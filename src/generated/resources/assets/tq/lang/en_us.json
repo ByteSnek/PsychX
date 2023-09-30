@@ -31,7 +31,6 @@
   "block.tq.turquoise_overlay": "Turquoise Overlay",
   "block.tq.watercolour_block": "Watercolour Block",
   "block.tq.white_overlay": "White Overlay",
-  "effect.tq.syncope": "Syncope",
   "entity.tq.alpha_cosmo": "Alpha Cosmo",
   "entity.tq.cosmic_creeper": "Cosmic Creeper",
   "entity.tq.cosmic_ray": "Cosmic Ray",
@@ -128,7 +127,5 @@
   "sounds.tq.utterfly_ambient": "Utterfly Ambient",
   "sounds.tq.utterfly_shoot": "Utterfly Shoot",
   "sounds.tq.wire": "Wire",
-  "sounds.tq.xxed": "Xxed",
-  "tooltip.tq.debug_tool_mode.biome_tp": "Biome Teleport",
-  "tooltip.tq.debug_tool_mode.none": "None"
+  "sounds.tq.xxed": "Xxed"
 }

@@ -22,7 +22,7 @@ public class BlockEntities
     public static final RegistryObject<BlockEntityType<SnowflakeBlockEntity>> SNOWFLAKE = register("snowflake", () -> BlockEntityType.Builder.of(SnowflakeBlockEntity::new, Blocks.SNOWFLAKE.get()).build(null));
     public static final RegistryObject<BlockEntityType<WatercolourBlockEntity>> WATERCOLOUR = register("watercolour", () -> BlockEntityType.Builder.of(WatercolourBlockEntity::new, Blocks.WATERCOLOUR.get()).build(null));
     public static final RegistryObject<BlockEntityType<MulticolourBlockEntity>> MULTICOLOUR = register("multicolour", () -> BlockEntityType.Builder.of(MulticolourBlockEntity::new, Blocks.MULTICOLOUR.get()).build(null));
-    public static final RegistryObject<BlockEntityType<FlareBlockEntity>> FLARE = register("flare", () -> BlockEntityType.Builder.of(FlareBlockEntity::new, Blocks.FLARE.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FlareBlockEntity>> FLAMES = register("flare", () -> BlockEntityType.Builder.of(FlareBlockEntity::new, Blocks.FLARE.get()).build(null));
     public static final RegistryObject<BlockEntityType<StarryBlockEntity>> STARRY = register("starry", () -> BlockEntityType.Builder.of(StarryBlockEntity::new, Blocks.STARRY.get()).build(null));
     public static final RegistryObject<BlockEntityType<GeometricBlockEntity>> GEOMETRIC = register("geometric", () -> BlockEntityType.Builder.of(GeometricBlockEntity::new, Blocks.GEOMETRIC.get()).build(null));
     public static final RegistryObject<BlockEntityType<BurningBlockEntity>> BURNING = register("burning", () -> BlockEntityType.Builder.of(BurningBlockEntity::new, Blocks.BURNING.get()).build(null));

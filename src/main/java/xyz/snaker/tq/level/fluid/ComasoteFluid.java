@@ -37,13 +37,13 @@ public class ComasoteFluid extends FlowingFluid
     @Override
     public @NotNull Fluid getFlowing()
     {
-        return Fluids.FLOWING_COMASOTE.get();
+        return Fluids.FLOWING_COMA_SOTE.get();
     }
 
     @Override
     public @NotNull Fluid getSource()
     {
-        return Fluids.COMASOTE.get();
+        return Fluids.COMA_SOTE.get();
     }
 
     @Override
@@ -87,7 +87,7 @@ public class ComasoteFluid extends FlowingFluid
     @Override
     protected boolean canBeReplacedWith(@NotNull FluidState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull Fluid fluid, @NotNull Direction direction)
     {
-        return direction == Direction.DOWN && state.getFluidType() != Fluids.COMASOTE.get().getFluidType();
+        return direction == Direction.DOWN && state.getFluidType() != Fluids.COMA_SOTE.get().getFluidType();
     }
 
     @Override
@@ -123,7 +123,7 @@ public class ComasoteFluid extends FlowingFluid
     @Override
     public boolean isSame(@NotNull Fluid fluid)
     {
-        return fluid == Fluids.COMASOTE.get() || fluid == Fluids.FLOWING_COMASOTE.get();
+        return fluid == Fluids.COMA_SOTE.get() || fluid == Fluids.FLOWING_COMA_SOTE.get();
     }
 
     @Nullable

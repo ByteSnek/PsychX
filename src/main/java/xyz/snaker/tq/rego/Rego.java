@@ -95,7 +95,6 @@ public class Rego
         BlockEntities.REGISTRAR.register(bus);
         Sounds.REGISTRAR.register(bus);
         Entities.REGISTRAR.register(bus);
-        Effects.REGISTRAR.register(bus);
         TrunkPlacers.REGISTRAR.register(bus);
         Features.REGISTRAR.register(bus);
         LootModifiers.REGISTRAR.register(bus);

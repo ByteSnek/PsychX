@@ -14,9 +14,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 
-import static org.lwjgl.opengl.GL11C.GL_COLOR_BUFFER_BIT;
-import static org.lwjgl.opengl.GL11C.GL_DEPTH_BUFFER_BIT;
-
 @Mod(Tourniqueted.MODID)
 public class Tourniqueted
 {
@@ -33,10 +30,5 @@ public class Tourniqueted
             Shaders.initialize();
             SkyBoxRenderer.createForDimension(Levels.COMATOSE, SkyBoxTexture::new);
         }
-    }
-
-    public static void main(String[] args)
-    {
-        System.out.println(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 }

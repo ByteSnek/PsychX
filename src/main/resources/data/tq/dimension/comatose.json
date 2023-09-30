@@ -157,10 +157,7 @@
                         "Name": "tq:coma_stone"
                   },
                   "default_fluid": {
-                        "Name": "tq:comasote",
-                        "Properties": {
-                              "level": "0"
-                        }
+                        "Name": "tq:comasote"
                   },
                   "spawn_target": [],
                   "noise": {

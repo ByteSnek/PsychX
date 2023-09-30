@@ -14,13 +14,13 @@ import net.minecraftforge.client.event.RegisterShadersEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-import org.joml.Vector3f;
-import org.joml.Vector4f;
-
 import com.mojang.blaze3d.shaders.Uniform;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
+
+import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 /**
  * Created by SnakerBone on 2/01/2023
@@ -339,22 +339,22 @@ public class Shaders
         delegate = event;
     }
 
-    public static Shader getSwirl()
+    public static Shader getSwirly()
     {
         return swirl;
     }
 
-    public static Shader getSnowflake()
+    public static Shader getWinter()
     {
         return snowflake;
     }
 
-    public static Shader getWatercolour()
+    public static Shader getWcolour()
     {
         return watercolour;
     }
 
-    public static Shader getMulticolour()
+    public static Shader getMcolour()
     {
         return multicolour;
     }

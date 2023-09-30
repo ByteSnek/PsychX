@@ -13,6 +13,6 @@ public class FlareBlockEntity extends ShaderBlockEntity<FlareBlockEntity>
 {
     public FlareBlockEntity(BlockPos pos, BlockState state)
     {
-        super(BlockEntities.FLARE.get(), pos, state);
+        super(BlockEntities.FLAMES.get(), pos, state);
     }
 }

@@ -34,7 +34,7 @@ public class Comatose
         return BLOCKS;
     }
 
-    private static class Teleporter implements ITeleporter
+    public static class Teleporter implements ITeleporter
     {
         public BlockPos pos;
 

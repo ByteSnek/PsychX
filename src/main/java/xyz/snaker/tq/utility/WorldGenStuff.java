@@ -1,6 +1,7 @@
 package xyz.snaker.tq.utility;
 
 import java.util.List;
+import java.util.Set;
 import java.util.function.Function;
 
 import xyz.snaker.snakerlib.utility.ResourcePath;
@@ -21,6 +22,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.Carvers;
 import net.minecraft.data.worldgen.features.FeatureUtils;
+import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
@@ -109,7 +111,7 @@ public class WorldGenStuff
         context.register(key.getConfigKey(), new ConfiguredFeature<>(feature.get(), UnsafeStuff.cast(new BlockStateConfiguration(block.get().defaultBlockState()))));
     }
 
-    public static void registerBiomeModifier(BootstapContext<BiomeModifier> context, String name, GenerationStep.Decoration step)
+    public static void addBiomeModifier(BootstapContext<BiomeModifier> context, String name, GenerationStep.Decoration step)
     {
         var biomeSearch = context.lookup(Registries.BIOME);
         var featureSearch = context.lookup(Registries.PLACED_FEATURE);
@@ -124,6 +126,29 @@ public class WorldGenStuff
                                 biomeSearch.getOrThrow(Biomes.SURREAL)
                         ),
                         HolderSet.direct(featureSearch.getOrThrow(key.getPlacedKey())), step));
+    }
+
+    public static void removeBiomeModifier(BootstapContext<BiomeModifier> context, String name)
+    {
+        var biomeSearch = context.lookup(Registries.BIOME);
+        var featureSearch = context.lookup(Registries.PLACED_FEATURE);
+        FeatureKey key = safeGetKey(name);
+        context.register(key.getModifierKey(), new ForgeBiomeModifiers.RemoveFeaturesBiomeModifier(
+                HolderSet.direct(
+                        biomeSearch.getOrThrow(Biomes.DELUSION),
+                        biomeSearch.getOrThrow(Biomes.ILLUSION),
+                        biomeSearch.getOrThrow(Biomes.IMMATERIAL),
+                        biomeSearch.getOrThrow(Biomes.SPECTRAL),
+                        biomeSearch.getOrThrow(Biomes.SURREAL)
+                ),
+                HolderSet.direct(
+                        featureSearch.getOrThrow(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND),
+                        featureSearch.getOrThrow(MiscOverworldPlacements.LAKE_LAVA_SURFACE),
+                        featureSearch.getOrThrow(MiscOverworldPlacements.SPRING_LAVA),
+                        featureSearch.getOrThrow(MiscOverworldPlacements.SPRING_LAVA_FROZEN),
+                        featureSearch.getOrThrow(MiscOverworldPlacements.SPRING_WATER)
+                ), Set.of(GenerationStep.Decoration.values())
+        ));
     }
 
     public static ResourceKey<PlacedFeature> createPlacedKey(String name)

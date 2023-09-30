@@ -27,7 +27,8 @@ public enum FeatureKey
     STARRY_RUBBLE,
     FOGGY_RUBBLE,
     ILLUSIVE_TREE,
-    DELUSIVE_TREE;
+    DELUSIVE_TREE,
+    NO_LAVA;
 
     private final String name;
     private final ResourceKey<PlacedFeature> placedKey;

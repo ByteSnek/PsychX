@@ -27,7 +27,7 @@ public enum EntityRenderType implements SimpleRenderTypeProcessor
     PINK_STARS(Shaders::getPinkStars, DefaultVertexFormat.POSITION_TEX, true),
     PURPLE_STARS(Shaders::getPurpleStars, DefaultVertexFormat.POSITION_TEX, true),
     FIRE(Shaders::getFire, DefaultVertexFormat.POSITION_TEX, true),
-    SWIRL(Shaders::getSwirl, DefaultVertexFormat.POSITION_TEX, true),
+    SWIRL(Shaders::getSwirly, DefaultVertexFormat.POSITION_TEX, true),
     PULSE(Shaders::getPulse, DefaultVertexFormat.POSITION_TEX, false);
 
     private final Supplier<ShaderInstance> shader;

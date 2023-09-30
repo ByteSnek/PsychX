@@ -66,6 +66,7 @@ repositories {
 dependencies {
     minecraft "net.neoforged:forge:${minecraft_version}-${neo_version}"
     minecraftLibrary "com.github.SnakerBone:glslc:${glslc_version}"
+    minecraftLibrary "org.javassist:javassist:3.29.1-GA"
     implementation fg.deobf("xyz.snaker.snakerlib:SnakerLib:${snakerlib_version}")
     runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:4629624")
     runtimeOnly fg.deobf("curse.maven:cyanide-forge-541676:4584675")

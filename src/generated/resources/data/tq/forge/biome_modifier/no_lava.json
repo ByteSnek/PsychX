@@ -1,0 +1,17 @@
+{
+  "type": "forge:remove_features",
+  "biomes": [
+    "tq:delusion",
+    "tq:illusion",
+    "tq:immaterial",
+    "tq:spectral",
+    "tq:surreal"
+  ],
+  "features": [
+    "minecraft:lake_lava_underground",
+    "minecraft:lake_lava_surface",
+    "minecraft:spring_lava",
+    "minecraft:spring_lava_frozen",
+    "minecraft:spring_water"
+  ]
+}

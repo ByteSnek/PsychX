@@ -43,7 +43,7 @@ public class Blocks
     public static final RegistryObject<Block> SNOWFLAKE = registerShaderBlock("snowflake", BlockEntities.SNOWFLAKE);
     public static final RegistryObject<Block> WATERCOLOUR = registerShaderBlock("watercolour", BlockEntities.WATERCOLOUR);
     public static final RegistryObject<Block> MULTICOLOUR = registerShaderBlock("multicolour", BlockEntities.MULTICOLOUR);
-    public static final RegistryObject<Block> FLARE = registerShaderBlock("flare", BlockEntities.FLARE);
+    public static final RegistryObject<Block> FLARE = registerShaderBlock("flare", BlockEntities.FLAMES);
     public static final RegistryObject<Block> STARRY = registerShaderBlock("starry", BlockEntities.STARRY);
     public static final RegistryObject<Block> GEOMETRIC = registerShaderBlock("geometric", BlockEntities.GEOMETRIC);
     public static final RegistryObject<Block> BURNING = registerShaderBlock("burning", BlockEntities.BURNING);
@@ -76,7 +76,7 @@ public class Blocks
     public static final RegistryObject<Block> SKIN_OVERLAY = registerOverlay("skin");
     public static final RegistryObject<Block> TURQUOISE_OVERLAY = registerOverlay("turquoise");
 
-    public static final RegistryObject<LiquidBlock> COMASOTE = REGISTRAR.register("comasote", () -> new Comasote(Fluids.COMASOTE, Block.Properties.of().noCollission().strength(100).noOcclusion().jumpFactor(0.1F).speedFactor(0.01F).lightLevel(light -> 15).mapColor(DyeColor.BLUE).noLootTable()));
+    public static final RegistryObject<LiquidBlock> COMASOTE = REGISTRAR.register("comasote", () -> new Comasote(Fluids.COMA_SOTE, Block.Properties.of().noCollission().strength(100).noOcclusion().jumpFactor(0.1F).speedFactor(0.01F).lightLevel(light -> 15).mapColor(DyeColor.BLUE).noLootTable()));
 
     static RegistryObject<Block> register(String name, Supplier<Block> block)
     {

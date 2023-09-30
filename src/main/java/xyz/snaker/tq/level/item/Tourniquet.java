@@ -3,7 +3,6 @@ package xyz.snaker.tq.level.item;
 import xyz.snaker.snakerlib.data.DefaultItemProperties;
 import xyz.snaker.snakerlib.math.Maths;
 import xyz.snaker.tq.level.world.dimension.Comatose;
-import xyz.snaker.tq.rego.Effects;
 import xyz.snaker.tq.rego.Levels;
 
 import net.minecraft.resources.ResourceKey;
@@ -11,7 +10,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -28,11 +26,6 @@ import org.jetbrains.annotations.NotNull;
  **/
 public class Tourniquet extends Item
 {
-    public Tourniquet(Properties properties)
-    {
-        super(properties);
-    }
-
     public Tourniquet()
     {
         super(DefaultItemProperties.SPECIAL);
@@ -41,10 +34,8 @@ public class Tourniquet extends Item
     @Override
     public void onUseTick(@NotNull Level level, @NotNull LivingEntity entity, @NotNull ItemStack stack, int remainingUseDuration)
     {
-        MobEffectInstance syncopeEffect = new MobEffectInstance(Effects.SYNCOPE.get(), Maths.secondsToTicks(3));
         int useDuration = getUseDuration(stack);
         if (entity instanceof Player player) {
-            player.addEffect(syncopeEffect);
             if (Maths.diffEquals(useDuration, remainingUseDuration, 50)) {
                 Level playerLevel = player.level();
                 synchronized (playerLevel) {
@@ -55,9 +46,6 @@ public class Tourniquet extends Item
                         if (dest != null && player.canChangeDimensions()) {
                             player.stopUsingItem();
                             stack.hurtAndBreak(serverLevel.random.nextInt(stack.getMaxDamage() / 2), player, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
-                            if (player.hasEffect(Effects.SYNCOPE.get())) {
-                                player.removeEffect(Effects.SYNCOPE.get());
-                            }
                             if (key == Levels.COMATOSE) {
                                 player.changeDimension(dest, Comatose.getTeleporter().apply(player.getOnPos()));
                             } else {

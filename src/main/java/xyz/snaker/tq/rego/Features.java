@@ -81,22 +81,23 @@ public class Features
 
     public static void biomeModifiers(BootstapContext<BiomeModifier> context)
     {
-        registerBiomeModifier(context, "catnip", VEGETAL_DECORATION);
-        registerBiomeModifier(context, "splitleaf", VEGETAL_DECORATION);
-        registerBiomeModifier(context, "snakeroot", VEGETAL_DECORATION);
-        registerBiomeModifier(context, "tall_snakeroot", VEGETAL_DECORATION);
-        registerBiomeModifier(context, "pinktails", VEGETAL_DECORATION);
-        registerBiomeModifier(context, "swirl_rubble", LOCAL_MODIFICATIONS);
-        registerBiomeModifier(context, "flare_rubble", LOCAL_MODIFICATIONS);
-        registerBiomeModifier(context, "watercolour_rubble", LOCAL_MODIFICATIONS);
-        registerBiomeModifier(context, "burning_rubble", LOCAL_MODIFICATIONS);
-        registerBiomeModifier(context, "geometric_rubble", LOCAL_MODIFICATIONS);
-        registerBiomeModifier(context, "multicolour_rubble", LOCAL_MODIFICATIONS);
-        registerBiomeModifier(context, "snowflake_rubble", LOCAL_MODIFICATIONS);
-        registerBiomeModifier(context, "starry_rubble", LOCAL_MODIFICATIONS);
-        registerBiomeModifier(context, "foggy_rubble", LOCAL_MODIFICATIONS);
-        registerBiomeModifier(context, "illusive_tree", VEGETAL_DECORATION);
-        registerBiomeModifier(context, "delusive_tree", VEGETAL_DECORATION);
+        addBiomeModifier(context, "catnip", VEGETAL_DECORATION);
+        addBiomeModifier(context, "splitleaf", VEGETAL_DECORATION);
+        addBiomeModifier(context, "snakeroot", VEGETAL_DECORATION);
+        addBiomeModifier(context, "tall_snakeroot", VEGETAL_DECORATION);
+        addBiomeModifier(context, "pinktails", VEGETAL_DECORATION);
+        addBiomeModifier(context, "swirl_rubble", LOCAL_MODIFICATIONS);
+        addBiomeModifier(context, "flare_rubble", LOCAL_MODIFICATIONS);
+        addBiomeModifier(context, "watercolour_rubble", LOCAL_MODIFICATIONS);
+        addBiomeModifier(context, "burning_rubble", LOCAL_MODIFICATIONS);
+        addBiomeModifier(context, "geometric_rubble", LOCAL_MODIFICATIONS);
+        addBiomeModifier(context, "multicolour_rubble", LOCAL_MODIFICATIONS);
+        addBiomeModifier(context, "snowflake_rubble", LOCAL_MODIFICATIONS);
+        addBiomeModifier(context, "starry_rubble", LOCAL_MODIFICATIONS);
+        addBiomeModifier(context, "foggy_rubble", LOCAL_MODIFICATIONS);
+        addBiomeModifier(context, "illusive_tree", VEGETAL_DECORATION);
+        addBiomeModifier(context, "delusive_tree", VEGETAL_DECORATION);
+        removeBiomeModifier(context, "no_lava");
     }
 
     static <F extends Feature<?>> RegistryObject<F> register(String name, Supplier<F> feature)
