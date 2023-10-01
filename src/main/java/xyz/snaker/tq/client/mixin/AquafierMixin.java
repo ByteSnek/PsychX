@@ -38,7 +38,7 @@ public abstract class AquafierMixin
     private Aquifer.FluidPicker globalFluidPicker;
 
     @Shadow
-    protected abstract int getIndex(int gridX, int gridY, int gridZ);
+    protected abstract int getIndex(int pGridX, int pGridY, int pGridZ);
 
     @Shadow
     @Final
@@ -49,27 +49,27 @@ public abstract class AquafierMixin
     private PositionalRandomFactory positionalRandomFactory;
 
     @Shadow
-    protected static double similarity(int firstFluid, int secondFluid)
+    protected static double similarity(int pFirstFluid, int pSecondFluid)
     {
-        return 1 - Math.abs(secondFluid - firstFluid) / 25D;
+        return 1 - Math.abs(pSecondFluid - pFirstFluid) / 25D;
     }
 
     @Shadow
-    protected abstract Aquifer.FluidStatus getAquiferStatus(long packedPos);
+    protected abstract Aquifer.FluidStatus getAquiferStatus(long pPackedPos);
 
     @Shadow
     @Final
     private static double FLOWING_UPDATE_SIMULARITY;
 
     @Shadow
-    protected abstract double calculatePressure(DensityFunction.FunctionContext context, MutableDouble substance, Aquifer.FluidStatus firstFluid, Aquifer.FluidStatus secondFluid);
+    protected abstract double calculatePressure(DensityFunction.FunctionContext pContext, MutableDouble pSubstance, Aquifer.FluidStatus pFirstFluid, Aquifer.FluidStatus pSecondFluid);
 
     @Overwrite
-    public @Nullable BlockState computeSubstance(DensityFunction.FunctionContext pContext, double pSubstance)
+    public @Nullable BlockState computeSubstance(DensityFunction.FunctionContext context, double pSubstance)
     {
-        int i = pContext.blockX();
-        int j = pContext.blockY();
-        int k = pContext.blockZ();
+        int sBlockX = context.blockX();
+        int sBlockY = context.blockY();
+        int sBlockZ = context.blockZ();
 
         Optional<Level> level = Optional.empty();
 
@@ -83,106 +83,113 @@ public abstract class AquafierMixin
             }
         }
 
-        if (pSubstance > 0.0D) {
-            this.shouldScheduleFluidUpdate = false;
+        if (pSubstance > 0) {
+            shouldScheduleFluidUpdate = false;
             return null;
         } else {
-            Aquifer.FluidStatus aquifer$fluidstatus = this.globalFluidPicker.computeFluid(i, j, k);
-            if (aquifer$fluidstatus.at(j).is(Blocks.LAVA)) {
-                this.shouldScheduleFluidUpdate = false;
+            Aquifer.FluidStatus sFluidStatusPos = globalFluidPicker.computeFluid(sBlockX, sBlockY, sBlockZ);
+            if (sFluidStatusPos.at(sBlockY).is(Blocks.LAVA)) {
+                shouldScheduleFluidUpdate = false;
                 return defaultFluidState;
             } else {
-                int l = Math.floorDiv(i - 5, 16);
-                int i1 = Math.floorDiv(j + 1, 12);
-                int j1 = Math.floorDiv(k - 5, 16);
-                int k1 = Integer.MAX_VALUE;
-                int l1 = Integer.MAX_VALUE;
-                int i2 = Integer.MAX_VALUE;
-                long j2 = 0L;
-                long k2 = 0L;
-                long l2 = 0L;
+                int sPosX = Math.floorDiv(sBlockX - 5, 16);
+                int sPosY = Math.floorDiv(sBlockY + 1, 12);
+                int sPosZ = Math.floorDiv(sBlockZ - 5, 16);
+                int sPosMaxX = Integer.MAX_VALUE;
+                int sPosMaxY = Integer.MAX_VALUE;
+                int sPosMaxZ = Integer.MAX_VALUE;
+                long sSeedX = 0;
+                long sSeedY = 0;
+                long sSeedZ = 0;
 
-                for (int i3 = 0; i3 <= 1; ++i3) {
-                    for (int j3 = -1; j3 <= 1; ++j3) {
-                        for (int k3 = 0; k3 <= 1; ++k3) {
-                            int l3 = l + i3;
-                            int i4 = i1 + j3;
-                            int j4 = j1 + k3;
-                            int k4 = this.getIndex(l3, i4, j4);
-                            long i5 = this.aquiferLocationCache[k4];
-                            long l4;
-                            if (i5 != Long.MAX_VALUE) {
-                                l4 = i5;
+                for (int sX = 0; sX <= 1; ++sX) {
+                    for (int sY = -1; sY <= 1; ++sY) {
+                        for (int sZ = 0; sZ <= 1; ++sZ) {
+                            int sRandPosX = sPosX + sX;
+                            int sRandPosY = sPosY + sY;
+                            int sRandPosZ = sPosZ + sZ;
+                            int sCacheIndex = getIndex(sRandPosX, sRandPosY, sRandPosZ);
+                            long sSeededCache = aquiferLocationCache[sCacheIndex];
+                            long sPackedPos;
+
+                            if (sSeededCache != Long.MAX_VALUE) {
+                                sPackedPos = sSeededCache;
                             } else {
-                                RandomSource randomsource = this.positionalRandomFactory.at(l3, i4, j4);
-                                l4 = BlockPos.asLong(l3 * 16 + randomsource.nextInt(10), i4 * 12 + randomsource.nextInt(9), j4 * 16 + randomsource.nextInt(10));
-                                this.aquiferLocationCache[k4] = l4;
+                                RandomSource sRandom = positionalRandomFactory.at(sRandPosX, sRandPosY, sRandPosZ);
+                                sPackedPos = BlockPos.asLong(sRandPosX * 16 + sRandom.nextInt(10), sRandPosY * 12 + sRandom.nextInt(9), sRandPosZ * 16 + sRandom.nextInt(10));
+                                aquiferLocationCache[sCacheIndex] = sPackedPos;
                             }
 
-                            int i6 = BlockPos.getX(l4) - i;
-                            int j5 = BlockPos.getY(l4) - j;
-                            int k5 = BlockPos.getZ(l4) - k;
-                            int l5 = i6 * i6 + j5 * j5 + k5 * k5;
-                            if (k1 >= l5) {
-                                l2 = k2;
-                                k2 = j2;
-                                j2 = l4;
-                                i2 = l1;
-                                l1 = k1;
-                                k1 = l5;
-                            } else if (l1 >= l5) {
-                                l2 = k2;
-                                k2 = l4;
-                                i2 = l1;
-                                l1 = l5;
-                            } else if (i2 >= l5) {
-                                l2 = l4;
-                                i2 = l5;
+                            int sCachedX = BlockPos.getX(sPackedPos) - sBlockX;
+                            int sCachedY = BlockPos.getY(sPackedPos) - sBlockY;
+                            int sCachedZ = BlockPos.getZ(sPackedPos) - sBlockZ;
+                            int sCachedPos = sCachedX * sCachedX + sCachedY * sCachedY + sCachedZ * sCachedZ;
+
+                            if (sPosMaxX >= sCachedPos) {
+                                sSeedZ = sSeedY;
+                                sSeedY = sSeedX;
+                                sSeedX = sPackedPos;
+                                sPosMaxZ = sPosMaxY;
+                                sPosMaxY = sPosMaxX;
+                                sPosMaxX = sCachedPos;
+                            } else if (sPosMaxY >= sCachedPos) {
+                                sSeedZ = sSeedY;
+                                sSeedY = sPackedPos;
+                                sPosMaxZ = sPosMaxY;
+                                sPosMaxY = sCachedPos;
+                            } else if (sPosMaxZ >= sCachedPos) {
+                                sSeedZ = sPackedPos;
+                                sPosMaxZ = sCachedPos;
                             }
                         }
                     }
                 }
 
-                Aquifer.FluidStatus aquifer$fluidstatus1 = this.getAquiferStatus(j2);
-                double d1 = similarity(k1, l1);
-                BlockState blockstate = aquifer$fluidstatus1.at(j);
+                Aquifer.FluidStatus sFluidStatusX = getAquiferStatus(sSeedX);
+                double sSimXY = similarity(sPosMaxX, sPosMaxY);
+                BlockState sResultState = sFluidStatusX.at(sBlockY);
 
-                if (d1 <= 0.0D) {
-                    this.shouldScheduleFluidUpdate = d1 >= FLOWING_UPDATE_SIMULARITY;
-                    return blockstate;
-                } else if (blockstate.is(Blocks.WATER) && this.globalFluidPicker.computeFluid(i, j - 1, k).at(j - 1).is(Blocks.LAVA)) {
-                    this.shouldScheduleFluidUpdate = true;
-                    return blockstate;
+                if (sSimXY <= 0) {
+                    shouldScheduleFluidUpdate = sSimXY >= FLOWING_UPDATE_SIMULARITY;
+                    return sResultState;
+                } else if (sResultState.is(Blocks.WATER) && globalFluidPicker.computeFluid(sBlockX, sBlockY - 1, sBlockZ).at(sBlockY - 1).is(Blocks.LAVA)) {
+                    shouldScheduleFluidUpdate = true;
+                    return sResultState;
                 } else {
-                    MutableDouble mutabledouble = new MutableDouble(Double.NaN);
-                    Aquifer.FluidStatus aquifer$fluidstatus2 = this.getAquiferStatus(k2);
-                    double d2 = d1 * this.calculatePressure(pContext, mutabledouble, aquifer$fluidstatus1, aquifer$fluidstatus2);
+                    MutableDouble sNaN = new MutableDouble(Double.NaN);
+                    Aquifer.FluidStatus sFluidStatusY = getAquiferStatus(sSeedY);
+                    double sPressureXY = sSimXY * calculatePressure(context, sNaN, sFluidStatusX, sFluidStatusY);
 
-                    if (pSubstance + d2 > 0.0D) {
-                        this.shouldScheduleFluidUpdate = false;
+                    if (pSubstance + sPressureXY > 0) {
+                        shouldScheduleFluidUpdate = false;
                         return null;
                     } else {
-                        Aquifer.FluidStatus aquifer$fluidstatus3 = this.getAquiferStatus(l2);
-                        double d0 = similarity(k1, i2);
-                        if (d0 > 0.0D) {
-                            double d3 = d1 * d0 * this.calculatePressure(pContext, mutabledouble, aquifer$fluidstatus1, aquifer$fluidstatus3);
-                            if (pSubstance + d3 > 0.0D) {
-                                this.shouldScheduleFluidUpdate = false;
+                        Aquifer.FluidStatus sFluidStatusZ = getAquiferStatus(sSeedZ);
+                        double sSimXZ = similarity(sPosMaxX, sPosMaxZ);
+
+                        if (sSimXZ > 0) {
+                            double sPressureXZ = sSimXY * sSimXZ * calculatePressure(context, sNaN, sFluidStatusX, sFluidStatusZ);
+
+                            if (pSubstance + sPressureXZ > 0) {
+                                shouldScheduleFluidUpdate = false;
                                 return null;
                             }
                         }
 
-                        double d4 = similarity(l1, i2);
-                        if (d4 > 0.0D) {
-                            double d5 = d1 * d4 * this.calculatePressure(pContext, mutabledouble, aquifer$fluidstatus2, aquifer$fluidstatus3);
-                            if (pSubstance + d5 > 0.0D) {
-                                this.shouldScheduleFluidUpdate = false;
+                        double sSimYZ = similarity(sPosMaxY, sPosMaxZ);
+
+                        if (sSimYZ > 0) {
+                            double sPressureYZ = sSimXY * sSimYZ * calculatePressure(context, sNaN, sFluidStatusY, sFluidStatusZ);
+
+                            if (pSubstance + sPressureYZ > 0) {
+                                shouldScheduleFluidUpdate = false;
                                 return null;
                             }
                         }
 
-                        this.shouldScheduleFluidUpdate = true;
-                        return blockstate;
+                        shouldScheduleFluidUpdate = true;
+
+                        return sResultState;
                     }
                 }
             }

@@ -179,11 +179,12 @@ public class Subscriptions
             GameRenderer renderer = event.getRenderer();
             Minecraft minecraft = renderer.getMinecraft();
             Level level = minecraft.level;
-            if (!TqConfig.COMMON.visionConvolveActive.get()) {
-                return;
-            }
+
             if (level != null) {
                 ResourceKey<Level> dimension = level.dimension();
+                if (!TqConfig.COMMON.visionConvolveActive.get()) {
+                    return;
+                }
                 if (dimension == Levels.COMATOSE) {
                     if (renderer.postEffect == null || !renderer.effectActive) {
                         loadEffect(minecraft, "vision_convolve");
