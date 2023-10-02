@@ -59,6 +59,16 @@ public class Comatose
 
             entity.setPos(suitablePos.getX(), suitablePos.getY(), suitablePos.getZ());
 
+            if (entity instanceof ServerPlayer player) {
+                if (player.level() instanceof ServerLevel level) {
+                    if (level == destWorld) {
+                        if (player.isUsingItem()) {
+                            player.stopUsingItem();
+                        }
+                    }
+                }
+            }
+
             return entity;
         }
 

@@ -26,6 +26,8 @@ import org.jetbrains.annotations.NotNull;
  **/
 public class Tourniquet extends Item
 {
+    private int remainingUseDuration;
+
     public Tourniquet()
     {
         super(DefaultItemProperties.SPECIAL);
@@ -34,9 +36,9 @@ public class Tourniquet extends Item
     @Override
     public void onUseTick(@NotNull Level level, @NotNull LivingEntity entity, @NotNull ItemStack stack, int remainingUseDuration)
     {
-        int useDuration = getUseDuration(stack);
+        this.remainingUseDuration = remainingUseDuration;
         if (entity instanceof Player player) {
-            if (Maths.diffEquals(useDuration, remainingUseDuration, 50)) {
+            if (shouldTeleportPlayer(stack)) {
                 Level playerLevel = player.level();
                 synchronized (playerLevel) {
                     if (playerLevel instanceof ServerLevel serverLevel) {
@@ -44,13 +46,9 @@ public class Tourniquet extends Item
                         ResourceKey<Level> key = playerLevel.dimension() == Levels.COMATOSE ? Level.OVERWORLD : Levels.COMATOSE;
                         ServerLevel dest = server.getLevel(key);
                         if (dest != null && player.canChangeDimensions()) {
-                            player.stopUsingItem();
                             stack.hurtAndBreak(serverLevel.random.nextInt(stack.getMaxDamage() / 2), player, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
-                            if (key == Levels.COMATOSE) {
-                                player.changeDimension(dest, Comatose.getTeleporter().apply(player.getOnPos()));
-                            } else {
-                                player.changeDimension(dest, Comatose.getTeleporter().apply(player.getOnPos()));
-                            }
+                            player.stopUsingItem();
+                            player.changeDimension(dest, Comatose.getTeleporter().apply(player.getOnPos()));
                         }
                     }
                 }
@@ -80,5 +78,23 @@ public class Tourniquet extends Item
     public int getUseDuration(@NotNull ItemStack stack)
     {
         return 72000;
+    }
+
+    public boolean shouldTeleportPlayer(ItemStack stack)
+    {
+        int useDuration = getUseDuration(stack);
+        int ticksRequiredForTeleport = getTicksRequiredForTeleport();
+
+        return Maths.diffEquals(useDuration, remainingUseDuration, ticksRequiredForTeleport);
+    }
+
+    public int getTicksRequiredForTeleport()
+    {
+        return 50;
+    }
+
+    public int getRemainingUseDuration()
+    {
+        return remainingUseDuration;
     }
 }
