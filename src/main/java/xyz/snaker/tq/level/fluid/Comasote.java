@@ -5,6 +5,11 @@ import java.util.function.Supplier;
 
 import xyz.snaker.snakerlib.utility.tools.ReflectiveStuff;
 import xyz.snaker.tq.level.entity.Comatosian;
+import xyz.snaker.tq.level.entity.creature.Frolicker;
+import xyz.snaker.tq.level.entity.mob.CosmicCreeper;
+import xyz.snaker.tq.level.entity.mob.Flare;
+import xyz.snaker.tq.level.entity.mob.Snipe;
+import xyz.snaker.tq.rego.Entities;
 import xyz.snaker.tq.rego.Sounds;
 
 import net.minecraft.core.BlockPos;
@@ -17,6 +22,10 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.Bee;
+import net.minecraft.world.entity.monster.Blaze;
+import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.monster.Ghast;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
@@ -75,6 +84,20 @@ public class Comasote extends LiquidBlock
 
         if (entity instanceof LivingEntity livingEntity) {
             if (!level.isClientSide) {
+                if (livingEntity.isAlive()) {
+                    if (livingEntity instanceof Bee bee) {
+                        replaceEntity(level, bee, new Frolicker(Entities.FROLICKER.get(), level));
+                    }
+                    if (livingEntity instanceof Blaze blaze) {
+                        replaceEntity(level, blaze, new Flare(Entities.FLARE.get(), level));
+                    }
+                    if (livingEntity instanceof Creeper creeper) {
+                        replaceEntity(level, creeper, new CosmicCreeper(Entities.COSMIC_CREEPER.get(), level));
+                    }
+                    if (livingEntity instanceof Ghast ghast) {
+                        replaceEntity(level, ghast, new Snipe(Entities.SNIPE.get(), level));
+                    }
+                }
                 if (livingEntity instanceof Comatosian comatosian && comatosian.isAdaptive().getValue()) {
                     return;
                 }
@@ -118,5 +141,25 @@ public class Comasote extends LiquidBlock
         level.addParticle(type, pos.getX() + x, pos.getY() + y, pos.getZ() + z, random.nextFloat(), -random.nextFloat(), -random.nextFloat());
         level.addParticle(type, pos.getX() + x, pos.getY() + y, pos.getZ() + z, -random.nextFloat(), random.nextFloat(), -random.nextFloat());
         level.addParticle(type, pos.getX() + x, pos.getY() + y, pos.getZ() + z, -random.nextFloat(), -random.nextFloat(), random.nextFloat());
+    }
+
+    private <E extends LivingEntity> void replaceEntity(Level level, E killed, E spawned)
+    {
+        double killedX = killed.getX();
+        double killedY = killed.getY();
+        double killedZ = killed.getZ();
+
+        float killedXRot = killed.getXRot();
+        float killedYRot = killed.getYRot();
+
+        float health = spawned.getMaxHealth() * killed.getHealth() / killed.getMaxHealth();
+
+        spawned.moveTo(killedX, killedY, killedZ, killedYRot, killedXRot);
+        spawned.yBodyRot = killed.yBodyRot;
+        spawned.setHealth(health);
+
+        killed.discard();
+
+        level.addFreshEntity(spawned);
     }
 }
