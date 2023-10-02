@@ -17,6 +17,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -118,7 +119,7 @@ public class Comasote extends LiquidBlock
 
         if (!level.isClientSide) {
             if (level.getGameRules().getBoolean(GameRules.RULE_DAYLIGHT) && !level.dimensionType().hasFixedTime()) {
-                if (level instanceof ServerLevel serverLevel) {
+                if (level instanceof ServerLevel serverLevel && entity instanceof ServerPlayer) {
                     long time = level.getDayTime();
                     time += level.random.nextInt(8);
                     serverLevel.setDayTime(time);
