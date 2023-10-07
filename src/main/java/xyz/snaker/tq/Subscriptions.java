@@ -52,8 +52,8 @@ import static net.minecraft.client.renderer.RenderType.SOLID;
 import static xyz.snaker.tq.client.render.type.ItemLikeRenderType.*;
 import static xyz.snaker.tq.rego.BlockEntities.*;
 import static xyz.snaker.tq.rego.Entities.*;
-import static xyz.snaker.tq.rego.Fluids.COMA_SOTE;
-import static xyz.snaker.tq.rego.Fluids.FLOWING_COMA_SOTE;
+import static xyz.snaker.tq.rego.Fluids.COMASOTE;
+import static xyz.snaker.tq.rego.Fluids.FLOWING_COMASOTE;
 
 /**
  * Created by SnakerBone on 2/01/2023
@@ -141,8 +141,8 @@ public class Subscriptions
         {
             ClientSetupManager manager = new ClientSetupManager(event);
 
-            manager.setFluidRenderLayer(COMA_SOTE, SOLID);
-            manager.setFluidRenderLayer(FLOWING_COMA_SOTE, SOLID);
+            manager.setFluidRenderLayer(COMASOTE, SOLID);
+            manager.setFluidRenderLayer(FLOWING_COMASOTE, SOLID);
 
             manager.close();
         }
@@ -235,7 +235,8 @@ public class Subscriptions
         private static void shutdownEffect(Minecraft minecraft, String name)
         {
             byte[] nibbles = name.getBytes();
-            minecraft.tell(() -> {
+            minecraft.tell(() ->
+            {
                 minecraft.gameRenderer.shutdownEffect();
                 effectsActive.remove(nibbles);
             });
@@ -245,7 +246,8 @@ public class Subscriptions
         {
             byte[] nibbles = name.getBytes();
             ResourceLocation effect = new ResourcePath("shaders/post/" + name + ".json");
-            minecraft.tell(() -> {
+            minecraft.tell(() ->
+            {
                 minecraft.gameRenderer.loadEffect(effect);
                 effectsActive.put(nibbles, true);
             });

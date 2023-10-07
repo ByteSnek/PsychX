@@ -16,6 +16,6 @@ public class Fluids
 {
     public static final DeferredRegister<Fluid> REGISTRAR = DeferredRegister.create(ForgeRegistries.FLUIDS, Tourniqueted.MODID);
 
-    public static final RegistryObject<FlowingFluid> COMA_SOTE = REGISTRAR.register("comasote", ComasoteFluid.Source::new);
-    public static final RegistryObject<FlowingFluid> FLOWING_COMA_SOTE = REGISTRAR.register("flowing_comasote", ComasoteFluid.Flowing::new);
+    public static final RegistryObject<FlowingFluid> COMASOTE = REGISTRAR.register("comasote", ComasoteFluid.Source::new);
+    public static final RegistryObject<FlowingFluid> FLOWING_COMASOTE = REGISTRAR.register("flowing_comasote", ComasoteFluid.Flowing::new);
 }

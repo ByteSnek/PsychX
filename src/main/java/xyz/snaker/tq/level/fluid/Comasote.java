@@ -1,17 +1,18 @@
 package xyz.snaker.tq.level.fluid;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Supplier;
 
+import xyz.snaker.snakerlib.concurrent.UncaughtExceptionThread;
 import xyz.snaker.snakerlib.utility.tools.ReflectiveStuff;
+import xyz.snaker.snakerlib.utility.tools.UnsafeStuff;
 import xyz.snaker.tq.level.entity.Comatosian;
-import xyz.snaker.tq.level.entity.creature.Frolicker;
-import xyz.snaker.tq.level.entity.mob.CosmicCreeper;
-import xyz.snaker.tq.level.entity.mob.Flare;
-import xyz.snaker.tq.level.entity.mob.Snipe;
 import xyz.snaker.tq.rego.Entities;
 import xyz.snaker.tq.rego.Sounds;
 
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -22,6 +23,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.monster.Blaze;
@@ -35,6 +37,7 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.registries.RegistryObject;
 
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
@@ -44,6 +47,14 @@ import org.jetbrains.annotations.NotNull;
  **/
 public class Comasote extends LiquidBlock
 {
+    private final Map<EntityType<? extends LivingEntity>, RegistryObject<EntityType<? extends LivingEntity>>> entityMap = Util.make(new HashMap<>(), map ->
+    {
+        map.put(EntityType.BEE, UnsafeStuff.cast(Entities.FROLICKER));
+        map.put(EntityType.BLAZE, UnsafeStuff.cast(Entities.FLARE));
+        map.put(EntityType.CREEPER, UnsafeStuff.cast(Entities.COSMIC_CREEPER));
+        map.put(EntityType.GHAST, UnsafeStuff.cast(Entities.SNIPE));
+    });
+
     public Comasote(Supplier<? extends FlowingFluid> fluid, Properties properties)
     {
         super(fluid, properties);
@@ -87,16 +98,16 @@ public class Comasote extends LiquidBlock
             if (!level.isClientSide) {
                 if (livingEntity.isAlive()) {
                     if (livingEntity instanceof Bee bee) {
-                        replaceEntity(level, bee, new Frolicker(Entities.FROLICKER.get(), level));
+                        replaceEntity(level, bee);
                     }
                     if (livingEntity instanceof Blaze blaze) {
-                        replaceEntity(level, blaze, new Flare(Entities.FLARE.get(), level));
+                        replaceEntity(level, blaze);
                     }
                     if (livingEntity instanceof Creeper creeper) {
-                        replaceEntity(level, creeper, new CosmicCreeper(Entities.COSMIC_CREEPER.get(), level));
+                        replaceEntity(level, creeper);
                     }
                     if (livingEntity instanceof Ghast ghast) {
-                        replaceEntity(level, ghast, new Snipe(Entities.SNIPE.get(), level));
+                        replaceEntity(level, ghast);
                     }
                 }
                 if (livingEntity instanceof Comatosian comatosian && comatosian.isAdaptive().getValue()) {
@@ -144,8 +155,17 @@ public class Comasote extends LiquidBlock
         level.addParticle(type, pos.getX() + x, pos.getY() + y, pos.getZ() + z, -random.nextFloat(), -random.nextFloat(), random.nextFloat());
     }
 
-    private <E extends LivingEntity> void replaceEntity(Level level, E killed, E spawned)
+    private void replaceEntity(Level level, LivingEntity killed)
     {
+        EntityType<?> killedType = killed.getType();
+        LivingEntity fresh = entityMap.get(killedType).get().create(level);
+
+        if (fresh == null) {
+            RuntimeException exception = new RuntimeException("Invalid entity for replacement: " + killedType.getDescription().getString());
+            UncaughtExceptionThread.createAndRun(exception);
+            return;
+        }
+
         double killedX = killed.getX();
         double killedY = killed.getY();
         double killedZ = killed.getZ();
@@ -153,14 +173,14 @@ public class Comasote extends LiquidBlock
         float killedXRot = killed.getXRot();
         float killedYRot = killed.getYRot();
 
-        float health = spawned.getMaxHealth() * killed.getHealth() / killed.getMaxHealth();
+        float health = fresh.getMaxHealth() * killed.getHealth() / killed.getMaxHealth();
 
-        spawned.moveTo(killedX, killedY, killedZ, killedYRot, killedXRot);
-        spawned.yBodyRot = killed.yBodyRot;
-        spawned.setHealth(health);
+        fresh.moveTo(killedX, killedY, killedZ, killedYRot, killedXRot);
+        fresh.yBodyRot = killed.yBodyRot;
+        fresh.setHealth(health);
 
         killed.discard();
 
-        level.addFreshEntity(spawned);
+        level.addFreshEntity(fresh);
     }
 }

@@ -70,7 +70,7 @@ public class Items
     public static final RegistryObject<Item> UTTERFLY_SPAWN_EGG = registerSpawnEgg(Entities.UTTERFLY);
     public static final RegistryObject<Item> LEET_SPAWN_EGG = registerSpawnEgg(Entities.LEET);
 
-    public static final RegistryObject<Item> COMASOTE = register("comasote", () -> new BucketItem(Fluids.COMA_SOTE, new Item.Properties().craftRemainder(AIR).setNoRepair().requiredFeatures().stacksTo(1)));
+    public static final RegistryObject<Item> COMASOTE = register("comasote", () -> new BucketItem(Fluids.COMASOTE, new Item.Properties().craftRemainder(AIR).setNoRepair().requiredFeatures().stacksTo(1)));
 
     static RegistryObject<Item> register(String name, Supplier<Item> item)
     {
