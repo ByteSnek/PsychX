@@ -28,7 +28,7 @@ import static xyz.snaker.tq.rego.Blocks.COMASOTE;
 public abstract class AquafierMixin
 {
     @Unique
-    public BlockState defaultFluidState = Blocks.LAVA.defaultBlockState();
+    public BlockState tourniqueted$defaultFluidState = Blocks.LAVA.defaultBlockState();
 
     @Shadow
     protected boolean shouldScheduleFluidUpdate;
@@ -79,7 +79,7 @@ public abstract class AquafierMixin
 
         if (level.isPresent()) {
             if (level.get().dimension() == Levels.COMATOSE) {
-                defaultFluidState = COMASOTE.get().defaultBlockState();
+                tourniqueted$defaultFluidState = COMASOTE.get().defaultBlockState();
             }
         }
 
@@ -90,7 +90,7 @@ public abstract class AquafierMixin
             Aquifer.FluidStatus sFluidStatusPos = globalFluidPicker.computeFluid(sBlockX, sBlockY, sBlockZ);
             if (sFluidStatusPos.at(sBlockY).is(Blocks.LAVA)) {
                 shouldScheduleFluidUpdate = false;
-                return defaultFluidState;
+                return tourniqueted$defaultFluidState;
             } else {
                 int sPosX = Math.floorDiv(sBlockX - 5, 16);
                 int sPosY = Math.floorDiv(sBlockY + 1, 12);

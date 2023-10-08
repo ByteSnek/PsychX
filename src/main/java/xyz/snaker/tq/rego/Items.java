@@ -45,7 +45,6 @@ public class Items
     public static final RegistryObject<Item> BLOCK_TAB_ICON = register("block_tab_icon", BlockTabIcon::new);
 
     public static final RegistryObject<Item> TOURNIQUET = register("tourniquet", Tourniquet::new);
-    public static final RegistryObject<Item> TOURNIQUET_CLASP = register("tourniquet_clasp", EmptyItem::new);
     public static final RegistryObject<Item> TOURNIQUET_WEBBING = register("tourniquet_webbing", EmptyItem::new);
     public static final RegistryObject<Item> SATURATED_TWINE = register("saturated_twine", EmptyItem::new);
     public static final RegistryObject<Item> WEATHERED_TWINE = register("weathered_twine", EmptyItem::new);

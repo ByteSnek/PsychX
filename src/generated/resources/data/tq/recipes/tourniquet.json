@@ -2,17 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "C": {
-      "item": "tq:tourniquet_clasp"
+    "N": {
+      "item": "minecraft:iron_nugget"
     },
     "W": {
       "item": "tq:tourniquet_webbing"
     }
   },
   "pattern": [
-    " CW",
-    "CWC",
-    "WC "
+    " NW",
+    "NWN",
+    "WN "
   ],
   "result": {
     "item": "tq:tourniquet"

@@ -38,18 +38,18 @@ import org.spongepowered.asm.mixin.*;
 public abstract class BossHealthOverlayMixin implements SimpleRenderTypeProcessor
 {
     @Unique
-    private final EntityType<Utterfly> utterfly = Entities.UTTERFLY.get();
+    private final EntityType<Utterfly> tourniqueted$utterfly = Entities.UTTERFLY.get();
 
     @Shadow
     @Final
-    public Minecraft minecraft;
+    private Minecraft minecraft;
 
     @Shadow
-    public abstract void drawBar(GuiGraphics pGuiGraphics, int pX, int pY, BossEvent pBossEvent, int pU, int pV);
+    protected abstract void drawBar(GuiGraphics pGuiGraphics, int pX, int pY, BossEvent pBossEvent, int pU, int pV);
 
     @Shadow
     @Final
-    public Map<UUID, LerpingBossEvent> events;
+    Map<UUID, LerpingBossEvent> events;
 
     @Overwrite
     @SuppressWarnings({"UnstableApiUsage", "DataFlowIssue"})
@@ -66,7 +66,7 @@ public abstract class BossHealthOverlayMixin implements SimpleRenderTypeProcesso
                 var sForgeEvent = ForgeHooksClient.onCustomizeBossEventProgress(graphics, minecraft.getWindow(), sEvent, sPosX, sPosY, 10 + minecraft.font.lineHeight);
                 if (!sForgeEvent.isCanceled()) {
                     drawBar(graphics, sPosX, sPosY, sEvent);
-                    if (isEvent(sEvent, utterfly)) {
+                    if (tourniqueted$isEvent(sEvent, tourniqueted$utterfly)) {
                         int sRenderDistance = minecraft.options.renderDistance().get();
                         int sSimulationDistance = minecraft.options.simulationDistance().get();
                         int sPackedDistance = sRenderDistance <= 0 || sSimulationDistance <= 0 ? 250 : sRenderDistance * sRenderDistance + sSimulationDistance * sSimulationDistance;
@@ -85,12 +85,10 @@ public abstract class BossHealthOverlayMixin implements SimpleRenderTypeProcesso
                                     sTextColour = ColourStuff.hexToInt("FF0000");
                                     sType = sCreator.apply("red");
                                 }
-                                default -> {
-                                    SnakerLib.LOGGER.warnf("Unknown phase: %s", sUtterfly.getPhase());
-                                }
+                                default -> SnakerLib.LOGGER.warnf("Unknown phase: %s", sUtterfly.getPhase());
                             }
                         }
-                        drawRenderOverlay(graphics, sType, sPosX, sPosY, sEvent);
+                        tourniqueted$drawRenderOverlay(graphics, sType, sPosX, sPosY, sEvent);
                     }
                     Component sName = sEvent.getName();
                     int sFontWidth = minecraft.font.width(sName);
@@ -110,7 +108,7 @@ public abstract class BossHealthOverlayMixin implements SimpleRenderTypeProcesso
     public void drawBar(GuiGraphics graphics, int x, int y, BossEvent event)
     {
         if (event instanceof LerpingBossEvent bossEvent) {
-            if (isEvent(bossEvent, utterfly)) {
+            if (tourniqueted$isEvent(bossEvent, tourniqueted$utterfly)) {
                 drawBar(graphics, x, y, event, 182, 0);
             } else {
                 drawBar(graphics, x, y, bossEvent, 182, 0);
@@ -123,19 +121,19 @@ public abstract class BossHealthOverlayMixin implements SimpleRenderTypeProcesso
     }
 
     @Unique
-    private void drawRenderOverlay(GuiGraphics graphics, RenderType type, int x, int y, LerpingBossEvent bossEvent)
+    private void tourniqueted$drawRenderOverlay(GuiGraphics graphics, RenderType type, int x, int y, LerpingBossEvent bossEvent)
     {
-        drawOverlay(graphics.bufferSource().getBuffer(type), x, y, (int) (bossEvent.getProgress() * 182), 5);
+        tourniqueted$drawOverlay(graphics.bufferSource().getBuffer(type), x, y, (int) (bossEvent.getProgress() * 182), 5);
     }
 
     @Unique
-    private void drawOverlay(VertexConsumer consumer, int x, int y, int width, int height)
+    private void tourniqueted$drawOverlay(VertexConsumer consumer, int x, int y, int width, int height)
     {
-        drawQuad(consumer, x, x + width, y, y + height, 0, 0, 1, 0, 1);
+        tourniqueted$drawQuad(consumer, x, x + width, y, y + height, 0, 0, 1, 0, 1);
     }
 
     @Unique
-    private void drawQuad(VertexConsumer consumer, int x, int xMax, int y, int yMax, int z, float u, float uMax, float v, float vMax)
+    private void tourniqueted$drawQuad(VertexConsumer consumer, int x, int xMax, int y, int yMax, int z, float u, float uMax, float v, float vMax)
     {
         consumer.vertex(x + 1, yMax - 1, z).uv(u, vMax).endVertex();
         consumer.vertex(xMax - 1, yMax - 1, z).uv(uMax, vMax).endVertex();
@@ -144,7 +142,7 @@ public abstract class BossHealthOverlayMixin implements SimpleRenderTypeProcesso
     }
 
     @Unique
-    private boolean isEvent(LerpingBossEvent event, EntityType<?> type)
+    private boolean tourniqueted$isEvent(LerpingBossEvent event, EntityType<?> type)
     {
         String bossEvent = event.getName().getString();
         String entityType = type.getDescription().getString();
