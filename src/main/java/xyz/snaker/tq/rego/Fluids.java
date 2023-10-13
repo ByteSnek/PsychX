@@ -14,8 +14,8 @@ import net.minecraftforge.registries.RegistryObject;
  **/
 public class Fluids
 {
-    public static final DeferredRegister<Fluid> REGISTRAR = DeferredRegister.create(ForgeRegistries.FLUIDS, Tourniqueted.MODID);
+    public static final DeferredRegister<Fluid> REGISTER = DeferredRegister.create(ForgeRegistries.FLUIDS, Tourniqueted.MODID);
 
-    public static final RegistryObject<FlowingFluid> COMASOTE = REGISTRAR.register("comasote", ComasoteFluid.Source::new);
-    public static final RegistryObject<FlowingFluid> FLOWING_COMASOTE = REGISTRAR.register("flowing_comasote", ComasoteFluid.Flowing::new);
+    public static final RegistryObject<FlowingFluid> COMASOTE = REGISTER.register("comasote", ComasoteFluid.Source::new);
+    public static final RegistryObject<FlowingFluid> FLOWING_COMASOTE = REGISTER.register("flowing_comasote", ComasoteFluid.Flowing::new);
 }

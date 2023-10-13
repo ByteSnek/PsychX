@@ -4,12 +4,11 @@ import java.util.function.Predicate;
 
 import xyz.snaker.snakerlib.level.entity.FlyingHostile;
 import xyz.snaker.snakerlib.math.Maths;
-import xyz.snaker.snakerlib.utility.TriBool;
 import xyz.snaker.tq.level.entity.Comatosian;
 import xyz.snaker.tq.level.entity.projectile.CosmicRay;
+import xyz.snaker.tq.level.world.EntitySpawner;
 import xyz.snaker.tq.rego.Entities;
 import xyz.snaker.tq.rego.Sounds;
-import xyz.snaker.tq.utility.WorldGenStuff;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
@@ -49,7 +48,7 @@ public class Snipe extends FlyingHostile implements Comatosian
 
     public static boolean spawnRules(EntityType<Snipe> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return WorldGenStuff.checkComatoseSpawnRules(level, random);
+        return EntitySpawner.COMATOSE.check(level, pos, random, 75);
     }
 
     public static AttributeSupplier attributes()
@@ -116,15 +115,9 @@ public class Snipe extends FlyingHostile implements Comatosian
     }
 
     @Override
-    public TriBool hasSpecialRendering()
+    public boolean isAdaptive()
     {
-        return TriBool.NO;
-    }
-
-    @Override
-    public TriBool isAdaptive()
-    {
-        return TriBool.YES;
+        return true;
     }
 
     static class SnipeAttackGoal extends Goal

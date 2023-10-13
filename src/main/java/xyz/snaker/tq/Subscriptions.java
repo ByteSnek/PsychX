@@ -3,10 +3,10 @@ package xyz.snaker.tq;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import xyz.snaker.snakerlib.brigader.DiscardAllEntitiesCommand;
-import xyz.snaker.snakerlib.brigader.HurtAllEntitiesCommand;
-import xyz.snaker.snakerlib.brigader.KillAllEntitiesCommand;
-import xyz.snaker.snakerlib.brigader.PlaygroundModeCommand;
+import xyz.snaker.snakerlib.command.DiscardAllEntitiesCommand;
+import xyz.snaker.snakerlib.command.HurtAllEntitiesCommand;
+import xyz.snaker.snakerlib.command.KillAllEntitiesCommand;
+import xyz.snaker.snakerlib.command.PlaygroundModeCommand;
 import xyz.snaker.snakerlib.concurrent.event.management.*;
 import xyz.snaker.snakerlib.utility.ResourcePath;
 import xyz.snaker.tq.client.model.entity.*;
@@ -19,17 +19,22 @@ import xyz.snaker.tq.level.entity.creature.Flutterfly;
 import xyz.snaker.tq.level.entity.creature.Frolicker;
 import xyz.snaker.tq.level.entity.mob.*;
 import xyz.snaker.tq.level.item.Tourniquet;
+import xyz.snaker.tq.rego.Items;
 import xyz.snaker.tq.rego.Levels;
+import xyz.snaker.tq.utility.ComatoseStuff;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -38,8 +43,10 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -60,7 +67,7 @@ import static xyz.snaker.tq.rego.Fluids.FLOWING_COMASOTE;
  **/
 public class Subscriptions
 {
-    public static final Map<byte[], Boolean> effectsActive = new ConcurrentHashMap<>();
+    static final Map<byte[], Boolean> postChainActivity = new ConcurrentHashMap<>();
 
     @Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class Client
@@ -77,6 +84,7 @@ public class Subscriptions
             manager.register(FrolickerModel.LAYER_LOCATION, FrolickerModel::createBodyLayer);
             manager.register(UtterflyModel.LAYER_LOCATION, UtterflyModel::createBodyLayer);
             manager.register(CosmicCreeperModel.LAYER_LOCATION, CosmicCreeperModel::createBodyLayer);
+            manager.register(CosmicCreeperiteModel.LAYER_LOCATION, CosmicCreeperiteModel::createBodyLayer);
             manager.register(CosmoSpineModel.LAYER_LOCATION, CosmoSpineModel::createBodyLayer);
             manager.register(LeetModel.LAYER_LOCATION, LeetModel::createBodyLayer);
 
@@ -104,6 +112,7 @@ public class Subscriptions
             manager.registerEntity(SNIPE, SnipeRenderer::new);
             manager.registerEntity(FLARE, FlareRenderer::new);
             manager.registerEntity(COSMIC_CREEPER, CosmicCreeperRenderer::new);
+            manager.registerEntity(COSMIC_CREEPERITE, CosmicCreeperiteRenderer::new);
             manager.registerEntity(FROLICKER, FrolickerRenderer::new);
             manager.registerEntity(FLUTTERFLY, FlutterflyRenderer::new);
             manager.registerEntity(UTTERFLY, UtterflyRenderer::new);
@@ -128,6 +137,7 @@ public class Subscriptions
             manager.put(SNIPE, Snipe.attributes());
             manager.put(FLARE, Flare.attributes());
             manager.put(COSMIC_CREEPER, CosmicCreeper.attributes());
+            manager.put(COSMIC_CREEPERITE, CosmicCreeperite.attributes());
             manager.put(FROLICKER, Frolicker.attributes());
             manager.put(FLUTTERFLY, Flutterfly.attributes());
             manager.put(UTTERFLY, Utterfly.attributes());
@@ -167,6 +177,74 @@ public class Subscriptions
     @Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
     public static class ForgeCommon
     {
+        private static long twineTickCount;
+        private static byte comaStage;
+
+        @SubscribeEvent
+        public static void onPlayerTickEvent(TickEvent.PlayerTickEvent event)
+        {
+            Player player = event.player;
+            Level level = player.level();
+            CompoundTag data = player.getPersistentData();
+            RandomSource random = level.getRandom();
+            Inventory inventory = player.getInventory();
+
+            ItemStack saturatedTwine = Items.SATURATED_TWINE.get().getDefaultInstance();
+            ItemStack weatheredTwine = Items.WEATHERED_TWINE.get().getDefaultInstance();
+
+            if (inventory.contains(saturatedTwine)) {
+                twineTickCount++;
+
+                if (twineTickCount >= 720000) {
+                    int index = inventory.findSlotMatchingItem(saturatedTwine);
+                    ItemStack stack = new ItemStack(weatheredTwine.getItem(), inventory.getItem(index).getCount());
+                    inventory.setItem(index, stack);
+                    twineTickCount = 0;
+                }
+            }
+
+            if (level.dimension() == Levels.COMATOSE) {
+                if (!data.contains("ComaStage")) {
+                    data.putByte("ComaStage", comaStage);
+                }
+
+                if (random.nextInt(ComatoseStuff.getComaStageOccurence()) == 0) {
+                    comaStage++;
+                }
+
+                if (comaStage >= 10) {
+                    ComatoseStuff.wakeUpPlayer(player);
+                    comaStage = 0;
+                }
+            }
+        }
+
+        @SubscribeEvent
+        public static void onPlayerLeave(PlayerEvent.PlayerLoggedOutEvent event)
+        {
+            Player player = event.getEntity();
+            CompoundTag data = player.getPersistentData();
+
+            if (twineTickCount != 0) {
+                data.putLong("TwineTickCount", twineTickCount);
+            }
+        }
+
+        @SubscribeEvent
+        public static void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event)
+        {
+            Player player = event.getEntity();
+            CompoundTag data = player.getPersistentData();
+
+            if (data.contains("TwineTickCount")) {
+                twineTickCount = data.getLong("TwineTickCount");
+            }
+
+            if (data.contains("ComaStage")) {
+                comaStage = data.getByte("ComaStage");
+            }
+        }
+
         @SubscribeEvent
         public static void onCommandRego(RegisterCommandsEvent event)
         {
@@ -189,21 +267,33 @@ public class Subscriptions
             Player player = minecraft.player;
             GuiGraphics graphics = event.getGuiGraphics();
             Window window = event.getWindow();
+
             if (player != null) {
                 ItemStack stack = player.getItemInHand(InteractionHand.MAIN_HAND);
+                CompoundTag data = player.getPersistentData();
+
                 if (stack.getItem() instanceof Tourniquet tourniquet) {
                     int useDuration = tourniquet.getUseDuration(stack);
                     int remaningUseDuration = tourniquet.getRemainingUseDuration();
+
                     if (remaningUseDuration != 0) {
                         int width = window.getWidth();
                         int height = window.getHeight();
                         int alpha = useDuration - remaningUseDuration;
+
                         if (!player.isUsingItem()) {
                             alpha = 0;
                             graphics.flush();
                         }
+
                         graphics.fill(RenderType.guiOverlay(), 0, 0, width, height, FastColor.ARGB32.color(alpha, 0, 0, 0));
                     }
+                }
+
+                if (ComatoseStuff.shouldRenderComaStage(player)) {
+                    byte stage = data.getByte("ComaStage");
+                    String text = "Coma Stage: " + stage + "/10";
+                    graphics.drawString(minecraft.fontFilterFishy, text, 5, 5, 0xFFFFFF);
                 }
             }
         }
@@ -217,9 +307,11 @@ public class Subscriptions
 
             if (level != null) {
                 ResourceKey<Level> dimension = level.dimension();
+
                 if (!TqConfig.COMMON.visionConvolveActive.get()) {
                     return;
                 }
+
                 if (dimension == Levels.COMATOSE) {
                     if (renderer.postEffect == null || !renderer.effectActive) {
                         loadEffect(minecraft, "vision_convolve");
@@ -235,10 +327,11 @@ public class Subscriptions
         private static void shutdownEffect(Minecraft minecraft, String name)
         {
             byte[] nibbles = name.getBytes();
+
             minecraft.tell(() ->
             {
                 minecraft.gameRenderer.shutdownEffect();
-                effectsActive.remove(nibbles);
+                postChainActivity.remove(nibbles);
             });
         }
 
@@ -246,10 +339,11 @@ public class Subscriptions
         {
             byte[] nibbles = name.getBytes();
             ResourceLocation effect = new ResourcePath("shaders/post/" + name + ".json");
+
             minecraft.tell(() ->
             {
                 minecraft.gameRenderer.loadEffect(effect);
-                effectsActive.put(nibbles, true);
+                postChainActivity.put(nibbles, true);
             });
         }
     }

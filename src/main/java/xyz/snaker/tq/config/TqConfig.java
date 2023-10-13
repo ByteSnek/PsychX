@@ -29,20 +29,25 @@ public class TqConfig
     public static class Common
     {
         public final ForgeConfigSpec.BooleanValue visionConvolveActive;
+        public final ForgeConfigSpec.IntValue comaStageProgressionOccurrence;
 
         public Common(ForgeConfigSpec.Builder builder)
         {
             builder.push("common");
             visionConvolveActive = builder.comment("Should the vision convolve effect always be active when in the comatose dimension (default: true)").define("visionConvolveActive", true);
+            comaStageProgressionOccurrence = builder.comment("The coma stage progression occurence. The higher the number means the less often it will progress (default: 10)").defineInRange("comaStageProgressionOccurrence", 10, 1, 100);
             builder.pop();
         }
     }
 
     public static class Client
     {
+        public final ForgeConfigSpec.BooleanValue showComaStage;
+
         public Client(ForgeConfigSpec.Builder builder)
         {
             builder.push("client");
+            showComaStage = builder.comment("Should the coma stage be shown in the top left hand corner of the screen (default: true)").define("showComaStage", true);
             builder.pop();
         }
     }

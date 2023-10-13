@@ -15,9 +15,9 @@ import net.minecraftforge.registries.RegistryObject;
  **/
 public class FluidTypes
 {
-    public static final DeferredRegister<FluidType> REGISTRAR = DeferredRegister.create(ForgeRegistries.Keys.FLUID_TYPES, Tourniqueted.MODID);
+    public static final DeferredRegister<FluidType> REGISTER = DeferredRegister.create(ForgeRegistries.Keys.FLUID_TYPES, Tourniqueted.MODID);
 
-    public static final RegistryObject<FluidType> COMASOTE = REGISTRAR.register("comasote", () -> new ComasoteFluidType(FluidType.Properties.create()
+    public static final RegistryObject<FluidType> COMASOTE = REGISTER.register("comasote", () -> new ComasoteFluidType(FluidType.Properties.create()
             .descriptionId("block." + Tourniqueted.MODID + ".comasote")
             .fallDistanceModifier(0)
             .canExtinguish(false)

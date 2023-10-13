@@ -13,7 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
  **/
 public class FoliagePlacers
 {
-    public static final DeferredRegister<FoliagePlacerType<?>> REGISTRAR = DeferredRegister.create(Registries.FOLIAGE_PLACER_TYPE, Tourniqueted.MODID);
+    public static final DeferredRegister<FoliagePlacerType<?>> REGISTER = DeferredRegister.create(Registries.FOLIAGE_PLACER_TYPE, Tourniqueted.MODID);
 
-    public static final RegistryObject<FoliagePlacerType<IllusiveFoliagePlacer>> ILLUSIVE = REGISTRAR.register("illusive", () -> new FoliagePlacerType<>(IllusiveFoliagePlacer.CODEC));
+    public static final RegistryObject<FoliagePlacerType<IllusiveFoliagePlacer>> ILLUSIVE = REGISTER.register("illusive", () -> new FoliagePlacerType<>(IllusiveFoliagePlacer.CODEC));
 }

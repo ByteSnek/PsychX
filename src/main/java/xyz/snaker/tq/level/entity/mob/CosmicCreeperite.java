@@ -1,15 +1,11 @@
 package xyz.snaker.tq.level.entity.mob;
 
 import java.util.EnumSet;
-import java.util.List;
 
 import xyz.snaker.snakerlib.math.Maths;
 import xyz.snaker.snakerlib.utility.tools.EntityStuff;
 import xyz.snaker.tq.level.entity.Comatosian;
-import xyz.snaker.tq.level.world.EntitySpawner;
-import xyz.snaker.tq.rego.Entities;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -21,11 +17,13 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.PowerableMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -38,9 +36,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.phys.AABB;
 import net.minecraftforge.network.NetworkHooks;
 
 import org.jetbrains.annotations.NotNull;
@@ -48,10 +44,11 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by SnakerBone on 16/03/2023
  **/
-public class CosmicCreeper extends Monster implements Comatosian, PowerableMob
+public class CosmicCreeperite extends Monster implements Comatosian, PowerableMob
 {
-    public static final EntityDataAccessor<Integer> SWELL_DIRECTION = SynchedEntityData.defineId(CosmicCreeper.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Boolean> IGNITED = SynchedEntityData.defineId(CosmicCreeper.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Integer> SWELL_DIRECTION = SynchedEntityData.defineId(CosmicCreeperite.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Boolean> POWERED = SynchedEntityData.defineId(CosmicCreeperite.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> IGNITED = SynchedEntityData.defineId(CosmicCreeperite.class, EntityDataSerializers.BOOLEAN);
 
     private int oldSwell;
     private int swell;
@@ -59,16 +56,10 @@ public class CosmicCreeper extends Monster implements Comatosian, PowerableMob
 
     private byte explosionRadius = 3;
     private int teleportTime;
-    private final int targetScanRadius = 6;
 
-    public CosmicCreeper(EntityType<? extends Monster> type, Level level)
+    public CosmicCreeperite(EntityType<? extends Monster> type, Level level)
     {
         super(type, level);
-    }
-
-    public static boolean spawnRules(EntityType<CosmicCreeper> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
-    {
-        return EntitySpawner.COMATOSE.check(level, pos, random, 75);
     }
 
     public static AttributeSupplier attributes()
@@ -83,7 +74,7 @@ public class CosmicCreeper extends Monster implements Comatosian, PowerableMob
 
     public float getSwelling(float partialTicks)
     {
-        return Mth.lerp(partialTicks, oldSwell, swell) / (maxSwell - 2);
+        return Mth.lerp(partialTicks, (float) oldSwell, (float) swell) / (float) (maxSwell - 2);
     }
 
     public int getSwellDirection()
@@ -96,46 +87,14 @@ public class CosmicCreeper extends Monster implements Comatosian, PowerableMob
         entityData.set(SWELL_DIRECTION, state);
     }
 
-    public void explodeCreeper()
+    public void fakeOutExplosion()
     {
         if (level().isClientSide) {
             return;
         }
 
-        double x = getX();
-        double y = getY();
-        double z = getZ();
-
-        BlockPos pos = new BlockPos.MutableBlockPos(x, y, z);
-
-        ignite();
-
-        level().explode(this, pos.getX(), pos.getY(), pos.getZ(), targetScanRadius, Level.ExplosionInteraction.NONE);
-        level().playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.FOX_TELEPORT, getSoundSource(), 1, 1);
-
-        spawnCreeperites();
+        level().playSound(null, getX(), getY(), getZ(), SoundEvents.GENERIC_EXPLODE, getSoundSource(), 1, 2);
         discard();
-    }
-
-    public void spawnCreeperites()
-    {
-        for (int i = 0; i < 4; i++) {
-            CosmicCreeperite creeperite = Entities.COSMIC_CREEPERITE.get().create(level());
-            BlockPos pos = getOnPos().above();
-
-            if (creeperite != null) {
-                switch (i) {
-                    case 0 -> creeperite.moveTo(pos.north(), getYRot(), getXRot());
-                    case 1 -> creeperite.moveTo(pos.south(), getYRot(), getXRot());
-                    case 2 -> creeperite.moveTo(pos.east(), getYRot(), getXRot());
-                    case 3 -> creeperite.moveTo(pos.west(), getYRot(), getXRot());
-                }
-
-                creeperite.setHealth(getMaxHealth() / 5);
-
-                level().addFreshEntity(creeperite);
-            }
-        }
     }
 
     public boolean isIgnited()
@@ -154,27 +113,15 @@ public class CosmicCreeper extends Monster implements Comatosian, PowerableMob
         level().playSound(null, xo, yo, zo, SoundEvents.FOX_TELEPORT, getSoundSource(), 1, 1);
     }
 
-    public void teleportTargetToCreeper()
+    public void teleportCreeperToTarget()
     {
-        if (!level().isClientSide) {
-            BlockPos pos = new BlockPos((int) getX(), (int) getY(), (int) getZ());
-            AABB aabb = new AABB(pos).inflate(targetScanRadius);
-            List<LivingEntity> targets = level().getEntitiesOfClass(LivingEntity.class, aabb);
-
-            if (!targets.isEmpty()) {
-                for (LivingEntity target : targets) {
-                    double x = getX();
-                    double y = getY();
-                    double z = getZ();
-
-                    if (target instanceof ServerPlayer player) {
-                        if (!player.isCreative()) {
-                            target.teleportTo(x, y, z);
-                        }
-                    } else {
-                        target.teleportTo(x, y, z);
-                    }
-                }
+        LivingEntity target = getTarget();
+        if (target != null) {
+            if (hasLineOfSight(target) && target.isAlive()) {
+                double x = target.getX();
+                double y = target.getY();
+                double z = target.getZ();
+                teleportTo(x, y, z);
             }
         }
     }
@@ -204,6 +151,7 @@ public class CosmicCreeper extends Monster implements Comatosian, PowerableMob
     {
         super.defineSynchedData();
         entityData.define(SWELL_DIRECTION, -1);
+        entityData.define(POWERED, false);
         entityData.define(IGNITED, false);
     }
 
@@ -211,6 +159,11 @@ public class CosmicCreeper extends Monster implements Comatosian, PowerableMob
     public void addAdditionalSaveData(@NotNull CompoundTag tag)
     {
         super.addAdditionalSaveData(tag);
+
+        if (entityData.get(POWERED)) {
+            tag.putBoolean("Powered", true);
+        }
+
         tag.putShort("Fuse", maxSwell);
         tag.putByte("ExplosionRadius", explosionRadius);
         tag.putBoolean("Ignited", isIgnited());
@@ -220,6 +173,8 @@ public class CosmicCreeper extends Monster implements Comatosian, PowerableMob
     public void readAdditionalSaveData(@NotNull CompoundTag tag)
     {
         super.readAdditionalSaveData(tag);
+
+        entityData.set(POWERED, tag.getBoolean("Powered"));
 
         if (tag.contains("Fuse", 99)) {
             maxSwell = tag.getShort("Fuse");
@@ -238,15 +193,21 @@ public class CosmicCreeper extends Monster implements Comatosian, PowerableMob
     public void registerGoals()
     {
         goalSelector.addGoal(1, new FloatGoal(this));
-        goalSelector.addGoal(2, new CosmicCreeperSwellGoal(this));
+        goalSelector.addGoal(2, new CosmicCreeperiteSwellGoal(this));
         goalSelector.addGoal(3, new AvoidEntityGoal<>(this, Ocelot.class, 6, 1, 1.2));
         goalSelector.addGoal(3, new AvoidEntityGoal<>(this, Cat.class, 6, 1, 1.2));
         goalSelector.addGoal(4, new MeleeAttackGoal(this, 1, false));
         goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 0.8));
-        goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8));
         goalSelector.addGoal(6, new RandomLookAroundGoal(this));
         targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
         targetSelector.addGoal(2, new HurtByTargetGoal(this));
+    }
+
+    @Override
+    public boolean doHurtTarget(@NotNull Entity entity)
+    {
+        return !(entity instanceof ServerPlayer player && player.isCreative());
     }
 
     @Override
@@ -260,7 +221,7 @@ public class CosmicCreeper extends Monster implements Comatosian, PowerableMob
             level().playSound(player, getX(), getY(), getZ(), event, getSoundSource(), 1, random.nextFloat() * 0.4F + 0.8F);
 
             if (!level().isClientSide) {
-                explodeCreeper();
+                ignite();
 
                 if (!stack.isDamageableItem()) {
                     stack.shrink(1);
@@ -276,6 +237,12 @@ public class CosmicCreeper extends Monster implements Comatosian, PowerableMob
     }
 
     @Override
+    public boolean isInvulnerableTo(@NotNull DamageSource source)
+    {
+        return source == level().damageSources().explosion(source.getEntity(), source.getDirectEntity());
+    }
+
+    @Override
     public void tick()
     {
         LivingEntity target = getTarget();
@@ -285,6 +252,8 @@ public class CosmicCreeper extends Monster implements Comatosian, PowerableMob
 
             if (!isIgnited()) {
                 if (teleportTime >= random.nextInt(80, 440) && !EntityStuff.isEntityMovingXZ(this)) {
+                    int targetScanRadius = 6;
+
                     double x = getRandomX(random.nextInt(targetScanRadius, (targetScanRadius * 2)) * Maths.clamp(random.nextDouble(), 0.875, 3.475)) - 0.5;
                     double y = getY();
                     double z = getRandomZ(random.nextInt(targetScanRadius, (targetScanRadius * 2)) * Maths.clamp(random.nextDouble(), 0.875, 3.475)) - 0.5;
@@ -297,15 +266,7 @@ public class CosmicCreeper extends Monster implements Comatosian, PowerableMob
         } else {
             getLookControl().setLookAt(target);
             if (hasLineOfSight(target)) {
-                teleportTargetToCreeper();
-            }
-        }
-
-        if (swell > 0) {
-            if (target instanceof ServerPlayer player) {
-                if (!player.isCreative() && !level().isClientSide) {
-                    explodeCreeper();
-                }
+                teleportCreeperToTarget();
             }
         }
 
@@ -316,14 +277,14 @@ public class CosmicCreeper extends Monster implements Comatosian, PowerableMob
                 setSwellDirection(1);
             }
 
-            int swellDirection = getSwellDirection();
+            int swellDir = getSwellDirection();
 
-            if (swellDirection > 0 && swell == 0) {
+            if (swellDir > 0 && swell == 0) {
                 playSound(SoundEvents.CREEPER_PRIMED, 1.0F, 0.5F);
                 gameEvent(GameEvent.PRIME_FUSE);
             }
 
-            swell += swellDirection;
+            swell += swellDir;
 
             if (swell < 0) {
                 swell = 0;
@@ -331,7 +292,7 @@ public class CosmicCreeper extends Monster implements Comatosian, PowerableMob
 
             if (swell >= maxSwell) {
                 swell = maxSwell;
-                explodeCreeper();
+                fakeOutExplosion();
             }
         }
 
@@ -351,47 +312,34 @@ public class CosmicCreeper extends Monster implements Comatosian, PowerableMob
     }
 
     @Override
-    public boolean doHurtTarget(@NotNull Entity entity)
-    {
-        return !(entity instanceof ServerPlayer player && player.isCreative());
-    }
-
-    @Override
     public boolean isPowered()
     {
         return false;
     }
 
-    @Override
-    public void die(@NotNull DamageSource source)
+    static class CosmicCreeperiteSwellGoal extends Goal
     {
-        spawnCreeperites();
-        super.die(source);
-    }
-
-    static class CosmicCreeperSwellGoal extends Goal
-    {
-        private final CosmicCreeper creeper;
+        private final CosmicCreeperite creeperite;
         private LivingEntity target;
 
-        public CosmicCreeperSwellGoal(CosmicCreeper creeper)
+        public CosmicCreeperiteSwellGoal(CosmicCreeperite creeperite)
         {
-            this.creeper = creeper;
-            this.setFlags(EnumSet.of(Goal.Flag.MOVE));
+            this.creeperite = creeperite;
+            this.setFlags(EnumSet.of(Flag.MOVE));
         }
 
         @Override
         public boolean canUse()
         {
-            LivingEntity entity = creeper.getTarget();
-            return creeper.getSwellDirection() > 0 || entity != null && creeper.distanceToSqr(entity) < 9;
+            LivingEntity entity = creeperite.getTarget();
+            return creeperite.getSwellDirection() > 0 || entity != null && creeperite.distanceToSqr(entity) < 9;
         }
 
         @Override
         public void start()
         {
-            creeper.getNavigation().stop();
-            target = creeper.getTarget();
+            creeperite.getNavigation().stop();
+            target = creeperite.getTarget();
         }
 
         @Override
@@ -410,13 +358,13 @@ public class CosmicCreeper extends Monster implements Comatosian, PowerableMob
         public void tick()
         {
             if (target == null) {
-                creeper.setSwellDirection(-1);
-            } else if (creeper.distanceToSqr(target) > 49) {
-                creeper.setSwellDirection(-1);
-            } else if (!creeper.getSensing().hasLineOfSight(target)) {
-                creeper.setSwellDirection(-1);
+                creeperite.setSwellDirection(-1);
+            } else if (creeperite.distanceToSqr(target) > 49) {
+                creeperite.setSwellDirection(-1);
+            } else if (!creeperite.getSensing().hasLineOfSight(target)) {
+                creeperite.setSwellDirection(-1);
             } else {
-                creeper.setSwellDirection(1);
+                creeperite.setSwellDirection(1);
             }
         }
     }

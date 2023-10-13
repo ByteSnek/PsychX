@@ -16,7 +16,7 @@ import net.minecraftforge.registries.RegistryObject;
  **/
 public class BlockEntities
 {
-    public static final DeferredRegister<BlockEntityType<?>> REGISTRAR = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, Tourniqueted.MODID);
+    public static final DeferredRegister<BlockEntityType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, Tourniqueted.MODID);
 
     public static final RegistryObject<BlockEntityType<SwirlBlockEntity>> SWIRL = register("swirl", () -> BlockEntityType.Builder.of(SwirlBlockEntity::new, Blocks.SWIRL.get()).build(null));
     public static final RegistryObject<BlockEntityType<SnowflakeBlockEntity>> SNOWFLAKE = register("snowflake", () -> BlockEntityType.Builder.of(SnowflakeBlockEntity::new, Blocks.SNOWFLAKE.get()).build(null));
@@ -31,6 +31,6 @@ public class BlockEntities
 
     static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String name, Supplier<BlockEntityType<T>> type)
     {
-        return REGISTRAR.register(name + "_block_entity", type);
+        return REGISTER.register(name + "_block_entity", type);
     }
 }

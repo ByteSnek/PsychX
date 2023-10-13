@@ -43,7 +43,8 @@ public class BlockTags extends BlockTagsProvider implements BlockTagsProviderToo
         addLogs(Blocks.ILLUSIVE_LOG, Blocks.DELUSIVE_LOG);
         addGroundRich(Blocks.COMASTONE);
         addLeaves(Blocks.DELUSIVE_LEAVES, Blocks.ILLUSIVE_LEAVES);
-        CollectionStuff.mapDeferredRegistries(Blocks.REGISTRAR, Block[]::new).forEach(block -> {
+        CollectionStuff.mapDeferredRegistries(Blocks.REGISTER, Block[]::new).forEach(block ->
+        {
             if (block == Blocks.COMASOTE.get()) {
                 return;
             }

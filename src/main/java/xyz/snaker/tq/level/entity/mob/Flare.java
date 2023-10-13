@@ -4,10 +4,9 @@ import java.util.function.Predicate;
 
 import xyz.snaker.snakerlib.level.entity.Hostile;
 import xyz.snaker.snakerlib.level.entity.ai.SwitchGameModeGoal;
-import xyz.snaker.snakerlib.utility.TriBool;
 import xyz.snaker.tq.level.entity.Comatosian;
+import xyz.snaker.tq.level.world.EntitySpawner;
 import xyz.snaker.tq.rego.Sounds;
-import xyz.snaker.tq.utility.WorldGenStuff;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
@@ -58,7 +57,7 @@ public class Flare extends Hostile implements Comatosian
 
     public static boolean spawnRules(EntityType<Flare> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return WorldGenStuff.checkComatoseSpawnRules(level, random);
+        return EntitySpawner.COMATOSE.check(level, pos, random, 75);
     }
 
     @Override
@@ -123,14 +122,8 @@ public class Flare extends Hostile implements Comatosian
     }
 
     @Override
-    public TriBool hasSpecialRendering()
+    public boolean isAdaptive()
     {
-        return TriBool.YES;
-    }
-
-    @Override
-    public TriBool isAdaptive()
-    {
-        return TriBool.YES;
+        return true;
     }
 }

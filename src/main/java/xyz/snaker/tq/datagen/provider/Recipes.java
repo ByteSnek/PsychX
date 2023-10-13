@@ -13,7 +13,6 @@ import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 
 import org.jetbrains.annotations.NotNull;
 
-import static net.minecraft.world.item.Items.IRON_NUGGET;
 import static net.minecraft.world.item.Items.LEATHER;
 
 /**
@@ -33,19 +32,18 @@ public class Recipes extends RecipeProvider implements IConditionBuilder, Recipe
         planks(writer, Blocks.DELUSIVE_PLANKS, Blocks.DELUSIVE_LOG);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.TOURNIQUET_WEBBING.get())
-                .pattern("TLT")
-                .pattern("TLT")
-                .pattern("TLT")
+                .pattern("LT")
+                .pattern("TL")
                 .define('L', LEATHER)
                 .define('T', Items.WEATHERED_TWINE.get())
                 .unlockedBy("asap", RecipeProviderTools.asap())
                 .save(writer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.TOURNIQUET.get())
-                .pattern(" NW")
-                .pattern("NWN")
-                .pattern("WN ")
-                .define('N', IRON_NUGGET)
+                .pattern(" KW")
+                .pattern("KWK")
+                .pattern("WK ")
+                .define('K', Items.FLUTTERFLY_KERATIN.get())
                 .define('W', Items.TOURNIQUET_WEBBING.get())
                 .unlockedBy("asap", RecipeProviderTools.asap())
                 .save(writer);

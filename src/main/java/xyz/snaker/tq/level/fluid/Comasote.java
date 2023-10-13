@@ -110,7 +110,7 @@ public class Comasote extends LiquidBlock
                         replaceEntity(level, ghast);
                     }
                 }
-                if (livingEntity instanceof Comatosian comatosian && comatosian.isAdaptive().getValue()) {
+                if (livingEntity instanceof Comatosian comatosian && comatosian.isAdaptive()) {
                     return;
                 }
                 entity.hurt(generic, random.nextFloat(livingEntity.getMaxHealth() / random.nextInt(5, 10)));

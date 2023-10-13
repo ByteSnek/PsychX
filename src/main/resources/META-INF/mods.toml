@@ -24,13 +24,6 @@ license="${mod_license}"
     side="BOTH"
 
 [[dependencies.${mod_id}]]
-    modId="cyanide"
-    mandatory=true
-    versionRange="${cyanide_version_range}"
-    ordering="NONE"
-    side="BOTH"
-
-[[dependencies.${mod_id}]]
     modId="snakerlib"
     mandatory=true
     versionRange="${snakerlib_version_range}"

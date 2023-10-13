@@ -10,10 +10,10 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-import org.jetbrains.annotations.NotNull;
-
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+
+import org.jetbrains.annotations.NotNull;
 
 public class CosmicCreeperModel extends EntityModel<CosmicCreeper>
 {
@@ -47,10 +47,10 @@ public class CosmicCreeperModel extends EntityModel<CosmicCreeper>
     {
         base.getChild("head").yRot = netHeadYaw * Maths.DEGREES_TO_RADIANS;
         base.getChild("head").xRot = headPitch * Maths.DEGREES_TO_RADIANS;
-        base.getChild("legBackRight").xRot = net.minecraft.util.Mth.cos(limbSwing * 0.6F) * 1.4F * limbSwingAmount;
-        base.getChild("legBackLeft").xRot = net.minecraft.util.Mth.cos(limbSwing * 0.6F + Maths.PI) * 1.4F * limbSwingAmount;
-        base.getChild("legFrontRight").xRot = net.minecraft.util.Mth.cos(limbSwing * 0.6F + Maths.PI) * 1.4F * limbSwingAmount;
-        base.getChild("legFrontLeft").xRot = net.minecraft.util.Mth.cos(limbSwing * 0.6F) * 1.4F * limbSwingAmount;
+        base.getChild("legBackRight").xRot = Maths.cos(limbSwing * 0.6F) * 1.4F * limbSwingAmount;
+        base.getChild("legBackLeft").xRot = Maths.cos(limbSwing * 0.6F + Maths.PI) * 1.4F * limbSwingAmount;
+        base.getChild("legFrontRight").xRot = Maths.cos(limbSwing * 0.6F + Maths.PI) * 1.4F * limbSwingAmount;
+        base.getChild("legFrontLeft").xRot = Maths.cos(limbSwing * 0.6F) * 1.4F * limbSwingAmount;
     }
 
     @Override

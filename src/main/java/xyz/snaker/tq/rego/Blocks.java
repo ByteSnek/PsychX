@@ -37,7 +37,7 @@ import net.minecraftforge.registries.RegistryObject;
  **/
 public class Blocks
 {
-    public static final DeferredRegister<Block> REGISTRAR = DeferredRegister.create(ForgeRegistries.BLOCKS, Tourniqueted.MODID);
+    public static final DeferredRegister<Block> REGISTER = DeferredRegister.create(ForgeRegistries.BLOCKS, Tourniqueted.MODID);
 
     public static final RegistryObject<Block> SWIRL = registerShaderBlock("swirl", BlockEntities.SWIRL);
     public static final RegistryObject<Block> SNOWFLAKE = registerShaderBlock("snowflake", BlockEntities.SNOWFLAKE);
@@ -76,11 +76,11 @@ public class Blocks
     public static final RegistryObject<Block> SKIN_OVERLAY = registerOverlay("skin");
     public static final RegistryObject<Block> TURQUOISE_OVERLAY = registerOverlay("turquoise");
 
-    public static final RegistryObject<LiquidBlock> COMASOTE = REGISTRAR.register("comasote", () -> new Comasote(Fluids.COMASOTE, Block.Properties.of().noCollission().strength(100).noOcclusion().jumpFactor(0.1F).speedFactor(0.01F).lightLevel(light -> 15).mapColor(DyeColor.BLUE).noLootTable()));
+    public static final RegistryObject<LiquidBlock> COMASOTE = REGISTER.register("comasote", () -> new Comasote(Fluids.COMASOTE, Block.Properties.of().noCollission().strength(100).noOcclusion().jumpFactor(0.1F).speedFactor(0.01F).lightLevel(light -> 15).mapColor(DyeColor.BLUE).noLootTable()));
 
     static RegistryObject<Block> register(String name, Supplier<Block> block)
     {
-        return REGISTRAR.register(name, block);
+        return REGISTER.register(name, block);
     }
 
     static <T extends BlockEntity, B extends RegistryObject<BlockEntityType<T>>> RegistryObject<Block> registerShaderBlock(String name, B blockEntity)
@@ -95,14 +95,14 @@ public class Blocks
 
     static <T extends Block> RegistryObject<T> registerBlockWithItem(String name, Supplier<T> block)
     {
-        RegistryObject<T> obj = REGISTRAR.register(name, block);
+        RegistryObject<T> obj = REGISTER.register(name, block);
         registerBlockItem(name, obj);
         return obj;
     }
 
     static <T extends Block> void registerBlockItem(String name, RegistryObject<T> block)
     {
-        Items.REGISTRAR.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+        Items.REGISTER.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
 
     public static class Tags

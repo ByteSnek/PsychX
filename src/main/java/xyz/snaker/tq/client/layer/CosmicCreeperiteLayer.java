@@ -2,8 +2,8 @@ package xyz.snaker.tq.client.layer;
 
 import xyz.snaker.snakerlib.utility.ResourcePath;
 import xyz.snaker.snakerlib.utility.tools.RenderStuff;
-import xyz.snaker.tq.client.model.entity.CosmicCreeperModel;
-import xyz.snaker.tq.level.entity.mob.CosmicCreeper;
+import xyz.snaker.tq.client.model.entity.CosmicCreeperiteModel;
+import xyz.snaker.tq.level.entity.mob.CosmicCreeperite;
 
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.EntityModelSet;
@@ -23,16 +23,16 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by SnakerBone on 1/06/2023
  **/
-public class CosmicCreeperLayer extends EnergySwirlLayer<CosmicCreeper, CosmicCreeperModel>
+public class CosmicCreeperiteLayer extends EnergySwirlLayer<CosmicCreeperite, CosmicCreeperiteModel>
 {
-    private final CosmicCreeperModel model;
+    private final CosmicCreeperiteModel model;
     private final ResourceLocation texture;
 
-    public CosmicCreeperLayer(RenderLayerParent<CosmicCreeper, CosmicCreeperModel> parent, EntityModelSet set)
+    public CosmicCreeperiteLayer(RenderLayerParent<CosmicCreeperite, CosmicCreeperiteModel> parent, EntityModelSet set)
     {
         super(parent);
-        this.model = new CosmicCreeperModel(set.bakeLayer(CosmicCreeperModel.LAYER_LOCATION));
-        this.texture = new ResourcePath("textures/entity/mob/cosmic_creeper/cosmic_creeper_layer.png");
+        this.model = new CosmicCreeperiteModel(set.bakeLayer(CosmicCreeperiteModel.LAYER_LOCATION));
+        this.texture = new ResourcePath("textures/entity/mob/cosmic_creeperite/cosmic_creeperite_layer.png");
     }
 
     @Override
@@ -48,13 +48,13 @@ public class CosmicCreeperLayer extends EnergySwirlLayer<CosmicCreeper, CosmicCr
     }
 
     @Override
-    protected @NotNull EntityModel<CosmicCreeper> model()
+    protected @NotNull EntityModel<CosmicCreeperite> model()
     {
         return model;
     }
 
     @Override
-    public void render(@NotNull PoseStack stack, @NotNull MultiBufferSource source, int packedLight, @NotNull CosmicCreeper creeper, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch)
+    public void render(@NotNull PoseStack stack, @NotNull MultiBufferSource source, int packedLight, @NotNull CosmicCreeperite creeper, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch)
     {
         float tick = creeper.tickCount + partialTicks;
         VertexConsumer consumer = source.getBuffer(RenderType.energySwirl(texture, xOffset(tick) % 1, tick * 0.01F % 1));
@@ -64,9 +64,9 @@ public class CosmicCreeperLayer extends EnergySwirlLayer<CosmicCreeper, CosmicCr
         model.renderToBuffer(stack, consumer, packedLight, RenderStuff.packOverlay(creeper), 0.5F, 0.5F, 0.5F, 1.0F);
     }
 
-    public static class Eyes extends EyesLayer<CosmicCreeper, CosmicCreeperModel>
+    public static class Eyes extends EyesLayer<CosmicCreeperite, CosmicCreeperiteModel>
     {
-        public Eyes(RenderLayerParent<CosmicCreeper, CosmicCreeperModel> parent)
+        public Eyes(RenderLayerParent<CosmicCreeperite, CosmicCreeperiteModel> parent)
         {
             super(parent);
         }
@@ -74,13 +74,13 @@ public class CosmicCreeperLayer extends EnergySwirlLayer<CosmicCreeper, CosmicCr
         @Override
         public @NotNull RenderType renderType()
         {
-            return RenderType.eyes(new ResourcePath("textures/entity/mob/cosmic_creeper/cosmic_creeper_eyes_layer.png"));
+            return RenderType.eyes(new ResourcePath("textures/entity/mob/cosmic_creeperite/cosmic_creeperite_eyes_layer.png"));
         }
 
         @Override
-        public void render(@NotNull PoseStack stack, @NotNull MultiBufferSource source, int packedLight, @NotNull CosmicCreeper creeper, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch)
+        public void render(@NotNull PoseStack stack, @NotNull MultiBufferSource source, int packedLight, @NotNull CosmicCreeperite creeperite, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch)
         {
-            super.render(stack, source, LightTexture.FULL_BRIGHT, creeper, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch);
+            super.render(stack, source, LightTexture.FULL_BRIGHT, creeperite, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch);
         }
     }
 }

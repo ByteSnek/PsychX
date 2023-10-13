@@ -3,12 +3,11 @@ package xyz.snaker.tq.level.entity.mob;
 import java.util.function.Predicate;
 
 import xyz.snaker.snakerlib.level.entity.Hostile;
-import xyz.snaker.snakerlib.utility.TriBool;
 import xyz.snaker.tq.client.render.entity.CosmoRenderer;
 import xyz.snaker.tq.level.entity.Comatosian;
 import xyz.snaker.tq.level.entity.EntityVariants;
+import xyz.snaker.tq.level.world.EntitySpawner;
 import xyz.snaker.tq.rego.Sounds;
-import xyz.snaker.tq.utility.WorldGenStuff;
 
 import net.minecraft.Util;
 import net.minecraft.client.renderer.RenderType;
@@ -68,7 +67,7 @@ public class Cosmo extends Hostile implements Comatosian
 
     public static boolean spawnRules(EntityType<Cosmo> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return WorldGenStuff.checkComatoseSpawnRules(level, random);
+        return EntitySpawner.COMATOSE.check(level, pos, random, 75);
     }
 
     @Override
@@ -131,11 +130,11 @@ public class Cosmo extends Hostile implements Comatosian
                         return false;
                     }
                 } else {
-                    return super.hurt(source, amount);
+                    return false;
                 }
             }
         }
-        return super.hurt(source, amount);
+        return false;
     }
 
     @Override
@@ -233,14 +232,8 @@ public class Cosmo extends Hostile implements Comatosian
     }
 
     @Override
-    public TriBool hasSpecialRendering()
+    public boolean isAdaptive()
     {
-        return TriBool.YES;
-    }
-
-    @Override
-    public TriBool isAdaptive()
-    {
-        return TriBool.YES;
+        return false;
     }
 }

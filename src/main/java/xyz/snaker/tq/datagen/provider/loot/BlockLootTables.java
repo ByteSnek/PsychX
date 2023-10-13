@@ -25,7 +25,8 @@ public class BlockLootTables extends BlockLootSubProvider
     @Override
     public void generate()
     {
-        CollectionStuff.mapDeferredRegistries(Blocks.REGISTRAR, Block[]::new).forEach(block -> {
+        CollectionStuff.mapDeferredRegistries(Blocks.REGISTER, Block[]::new).forEach(block ->
+        {
             if (block == Blocks.COMASOTE.get()) {
                 return;
             }
@@ -36,6 +37,6 @@ public class BlockLootTables extends BlockLootSubProvider
     @Override
     public @NotNull Iterable<Block> getKnownBlocks()
     {
-        return Blocks.REGISTRAR.getEntries().stream().map(RegistryObject::get)::iterator;
+        return Blocks.REGISTER.getEntries().stream().map(RegistryObject::get)::iterator;
     }
 }

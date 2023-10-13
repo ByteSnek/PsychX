@@ -1,4 +1,4 @@
-package xyz.snaker.tq.client.mixin;
+package xyz.snaker.tq.mixin.client;
 
 import java.util.List;
 import java.util.Map;

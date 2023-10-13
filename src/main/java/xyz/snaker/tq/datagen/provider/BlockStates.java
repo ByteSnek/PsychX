@@ -47,7 +47,8 @@ public class BlockStates extends BlockStateProvider implements BlockStateProvide
     @Override
     public void registerStatesAndModels()
     {
-        CollectionStuff.mapDeferredRegistries(Blocks.REGISTRAR, Block[]::new).forEach(block -> {
+        CollectionStuff.mapDeferredRegistries(Blocks.REGISTER, Block[]::new).forEach(block ->
+        {
             if (block == Blocks.COMASOTE.get()) {
                 return;
             }

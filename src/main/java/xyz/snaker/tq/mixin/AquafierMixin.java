@@ -1,4 +1,4 @@
-package xyz.snaker.tq.client.mixin;
+package xyz.snaker.tq.mixin;
 
 import javax.annotation.Nullable;
 import java.util.Optional;

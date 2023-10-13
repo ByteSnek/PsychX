@@ -30,7 +30,8 @@ public class ItemModels extends ItemModelProvider implements ItemModelProviderTo
     @Override
     public void registerModels()
     {
-        CollectionStuff.mapDeferredRegistries(Items.REGISTRAR, Item[]::new).forEach(item -> {
+        CollectionStuff.mapDeferredRegistries(Items.REGISTER, Item[]::new).forEach(item ->
+        {
             if (!(item instanceof BlockItem)) {
                 if (item instanceof CosmoSpine cosmoSpine) {
                     cosmoSpine(cosmoSpine);
@@ -44,7 +45,8 @@ public class ItemModels extends ItemModelProvider implements ItemModelProviderTo
             }
         });
 
-        CollectionStuff.mapDeferredRegistries(Blocks.REGISTRAR, Block[]::new).forEach(block -> {
+        CollectionStuff.mapDeferredRegistries(Blocks.REGISTER, Block[]::new).forEach(block ->
+        {
             if (block == Blocks.COMASOTE.get()) {
                 return;
             }

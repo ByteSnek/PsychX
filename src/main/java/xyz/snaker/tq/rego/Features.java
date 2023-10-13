@@ -27,7 +27,7 @@ import static xyz.snaker.tq.utility.WorldGenStuff.*;
  **/
 public class Features
 {
-    public static final DeferredRegister<Feature<?>> REGISTRAR = DeferredRegister.create(Registries.FEATURE, Tourniqueted.MODID);
+    public static final DeferredRegister<Feature<?>> REGISTER = DeferredRegister.create(Registries.FEATURE, Tourniqueted.MODID);
 
     public static final RegistryObject<SwirlRubbleFeature> SWIRL_RUBBLE = registerRubble("swirl", () -> new SwirlRubbleFeature(BlockStateConfiguration.CODEC));
     public static final RegistryObject<FlareRubbleFeature> FLARE_RUBBLE = registerRubble("flare", () -> new FlareRubbleFeature(BlockStateConfiguration.CODEC));
@@ -102,7 +102,7 @@ public class Features
 
     static <F extends Feature<?>> RegistryObject<F> register(String name, Supplier<F> feature)
     {
-        return REGISTRAR.register(name, feature);
+        return REGISTER.register(name, feature);
     }
 
     static <F extends Feature<?>> RegistryObject<F> registerRubble(String name, Supplier<F> feature)

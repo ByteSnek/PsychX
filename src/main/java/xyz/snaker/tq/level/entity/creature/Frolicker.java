@@ -3,12 +3,11 @@ package xyz.snaker.tq.level.entity.creature;
 import java.util.function.Predicate;
 
 import xyz.snaker.snakerlib.level.entity.FlyingPassive;
-import xyz.snaker.snakerlib.utility.TriBool;
 import xyz.snaker.snakerlib.utility.tools.WorldStuff;
 import xyz.snaker.tq.level.entity.Comatosian;
+import xyz.snaker.tq.level.world.EntitySpawner;
 import xyz.snaker.tq.rego.Entities;
 import xyz.snaker.tq.rego.Levels;
-import xyz.snaker.tq.utility.WorldGenStuff;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
@@ -57,7 +56,7 @@ public class Frolicker extends FlyingPassive implements Comatosian
 
     public static boolean spawnRules(EntityType<Frolicker> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return WorldGenStuff.checkComatoseSpawnRules(level, random) || WorldGenStuff.checkOverworldSpawnRules(level, pos, random);
+        return EntitySpawner.BUTTERFLY.check(level, pos, random, 75) || EntitySpawner.COMATOSE.check(level, pos, random, 75);
     }
 
     public boolean canDoFunny()
@@ -131,14 +130,8 @@ public class Frolicker extends FlyingPassive implements Comatosian
     }
 
     @Override
-    public TriBool hasSpecialRendering()
+    public boolean isAdaptive()
     {
-        return TriBool.NO;
-    }
-
-    @Override
-    public TriBool isAdaptive()
-    {
-        return TriBool.YES;
+        return true;
     }
 }

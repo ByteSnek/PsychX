@@ -9,7 +9,6 @@ import xyz.snaker.snakerlib.level.entity.FlyingHostile;
 import xyz.snaker.snakerlib.level.entity.ai.FlyGoal;
 import xyz.snaker.snakerlib.level.entity.ai.LookAroundGoal;
 import xyz.snaker.snakerlib.math.Maths;
-import xyz.snaker.snakerlib.utility.TriBool;
 import xyz.snaker.tq.level.entity.Comatosian;
 import xyz.snaker.tq.level.entity.projectile.ExplosiveHommingArrow;
 import xyz.snaker.tq.level.entity.projectile.HommingArrow;
@@ -316,14 +315,8 @@ public class Utterfly extends FlyingHostile implements Boss, Comatosian
     }
 
     @Override
-    public TriBool hasSpecialRendering()
+    public boolean isAdaptive()
     {
-        return TriBool.YES;
-    }
-
-    @Override
-    public TriBool isAdaptive()
-    {
-        return TriBool.YES;
+        return true;
     }
 }

@@ -3,8 +3,8 @@ package xyz.snaker.tq.level.entity.creature;
 import javax.annotation.Nullable;
 
 import xyz.snaker.snakerlib.level.entity.FlyingPassive;
+import xyz.snaker.tq.level.world.EntitySpawner;
 import xyz.snaker.tq.rego.Sounds;
-import xyz.snaker.tq.utility.WorldGenStuff;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
@@ -37,7 +37,7 @@ public class Flutterfly extends FlyingPassive
 
     public static boolean spawnRules(EntityType<Flutterfly> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
-        return WorldGenStuff.checkOverworldSpawnRules(level, pos, random);
+        return EntitySpawner.BUTTERFLY.check(level, pos, random, 75);
     }
 
     public static AttributeSupplier attributes()
@@ -52,8 +52,8 @@ public class Flutterfly extends FlyingPassive
     public void registerGoals()
     {
         super.registerGoals();
-        goalSelector.addGoal(6, new AvoidEntityGoal<>(this, Spider.class, 6f, 1D, 1.2D));
-        goalSelector.addGoal(6, new AvoidEntityGoal<>(this, Parrot.class, 6f, 1D, 1.2D));
+        goalSelector.addGoal(6, new AvoidEntityGoal<>(this, Spider.class, 6, 1, 1.2));
+        goalSelector.addGoal(6, new AvoidEntityGoal<>(this, Parrot.class, 6, 1, 1.2));
     }
 
     @Nullable

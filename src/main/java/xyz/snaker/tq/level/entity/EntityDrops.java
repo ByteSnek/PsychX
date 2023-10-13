@@ -1,12 +1,15 @@
 package xyz.snaker.tq.level.entity;
 
 import java.util.Map;
+import java.util.function.Supplier;
 
 import xyz.snaker.snakerlib.concurrent.AsyncHashMap;
 import xyz.snaker.snakerlib.math.Maths;
+import xyz.snaker.tq.level.entity.creature.Flutterfly;
 import xyz.snaker.tq.level.entity.mob.Cosmo;
 import xyz.snaker.tq.rego.Items;
 
+import net.minecraft.Util;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -21,10 +24,19 @@ import net.minecraftforge.registries.RegistryObject;
 /**
  * Created by SnakerBone on 31/03/2023
  **/
-public class EntityDropHandler
+public class EntityDrops
 {
-    final RandomSource random = RandomSource.create();
-    final Map<EntityVariants.Cosmo, Item> cosmoDropVariants = new AsyncHashMap<>();
+    private final RandomSource random = RandomSource.create();
+    private final Supplier<Map<EntityVariants.Cosmo, Item>> cosmoDropVariants = () -> Util.make(new AsyncHashMap<>(), map ->
+    {
+        map.put(EntityVariants.Cosmo.RED, Items.RED_COSMO_SPINE.get());
+        map.put(EntityVariants.Cosmo.GREEN, Items.GREEN_COSMO_SPINE.get());
+        map.put(EntityVariants.Cosmo.BLUE, Items.BLUE_COSMO_SPINE.get());
+        map.put(EntityVariants.Cosmo.YELLOW, Items.YELLOW_COSMO_SPINE.get());
+        map.put(EntityVariants.Cosmo.PINK, Items.PINK_COSMO_SPINE.get());
+        map.put(EntityVariants.Cosmo.PURPLE, Items.PURPLE_COSMO_SPINE.get());
+        map.put(EntityVariants.Cosmo.ALPHA, Items.ALPHA_COSMO_SPINE.get());
+    });
 
     @SubscribeEvent
     public void onLivingDrops(LivingDropsEvent event)
@@ -33,6 +45,10 @@ public class EntityDropHandler
 
         if (entity instanceof Cosmo) {
             addCosmoDrops(event);
+        }
+
+        if (entity instanceof Flutterfly) {
+            addDrops(event, Items.FLUTTERFLY_KERATIN);
         }
     }
 
@@ -61,20 +77,14 @@ public class EntityDropHandler
     {
         Cosmo cosmo = (Cosmo) event.getEntity();
 
-        if (!cosmoDropVariants.isEmpty()) {
-            cosmoDropVariants.clear();
-        }
-
-        writeCosmoVariants();
-
         switch (cosmo.getVariant()) {
-            case RED -> addDrop(event, cosmoDropVariants.get(EntityVariants.Cosmo.RED));
-            case GREEN -> addDrop(event, cosmoDropVariants.get(EntityVariants.Cosmo.GREEN));
-            case BLUE -> addDrop(event, cosmoDropVariants.get(EntityVariants.Cosmo.BLUE));
-            case YELLOW -> addDrop(event, cosmoDropVariants.get(EntityVariants.Cosmo.YELLOW));
-            case PINK -> addDrop(event, cosmoDropVariants.get(EntityVariants.Cosmo.PINK));
-            case PURPLE -> addDrop(event, cosmoDropVariants.get(EntityVariants.Cosmo.PURPLE));
-            case ALPHA -> addDrop(event, cosmoDropVariants.get(EntityVariants.Cosmo.ALPHA));
+            case RED -> addDrop(event, cosmoDropVariants.get().get(EntityVariants.Cosmo.RED));
+            case GREEN -> addDrop(event, cosmoDropVariants.get().get(EntityVariants.Cosmo.GREEN));
+            case BLUE -> addDrop(event, cosmoDropVariants.get().get(EntityVariants.Cosmo.BLUE));
+            case YELLOW -> addDrop(event, cosmoDropVariants.get().get(EntityVariants.Cosmo.YELLOW));
+            case PINK -> addDrop(event, cosmoDropVariants.get().get(EntityVariants.Cosmo.PINK));
+            case PURPLE -> addDrop(event, cosmoDropVariants.get().get(EntityVariants.Cosmo.PURPLE));
+            case ALPHA -> addDrop(event, cosmoDropVariants.get().get(EntityVariants.Cosmo.ALPHA));
         }
     }
 
@@ -102,19 +112,8 @@ public class EntityDropHandler
         return amount + bonus;
     }
 
-    private void writeCosmoVariants()
-    {
-        cosmoDropVariants.put(EntityVariants.Cosmo.RED, Items.RED_COSMO_SPINE.get());
-        cosmoDropVariants.put(EntityVariants.Cosmo.GREEN, Items.GREEN_COSMO_SPINE.get());
-        cosmoDropVariants.put(EntityVariants.Cosmo.BLUE, Items.BLUE_COSMO_SPINE.get());
-        cosmoDropVariants.put(EntityVariants.Cosmo.YELLOW, Items.YELLOW_COSMO_SPINE.get());
-        cosmoDropVariants.put(EntityVariants.Cosmo.PINK, Items.PINK_COSMO_SPINE.get());
-        cosmoDropVariants.put(EntityVariants.Cosmo.PURPLE, Items.PURPLE_COSMO_SPINE.get());
-        cosmoDropVariants.put(EntityVariants.Cosmo.ALPHA, Items.ALPHA_COSMO_SPINE.get());
-    }
-
     public static void initialize()
     {
-        MinecraftForge.EVENT_BUS.register(new EntityDropHandler());
+        MinecraftForge.EVENT_BUS.register(new EntityDrops());
     }
 }

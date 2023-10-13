@@ -22,11 +22,10 @@ import static net.minecraft.world.level.material.Fluids.WATER;
 public class Comatose
 {
     private static final List<Block> BLOCKS = List.of(Blocks.COMASTONE.get());
-    private static final Function<BlockPos, Teleporter> TELEPORTER = Teleporter::new;
 
     public static Function<BlockPos, Teleporter> getTeleporter()
     {
-        return TELEPORTER;
+        return Teleporter::new;
     }
 
     public static List<Block> getBlockList()

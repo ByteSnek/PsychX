@@ -13,7 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
  **/
 public class Sounds
 {
-    public static final DeferredRegister<SoundEvent> REGISTRAR = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Tourniqueted.MODID);
+    public static final DeferredRegister<SoundEvent> REGISTER = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Tourniqueted.MODID);
 
     public static final RegistryObject<SoundEvent> CONFUSE = register("confuse");
     public static final RegistryObject<SoundEvent> EARTH = register("earth");
@@ -45,6 +45,6 @@ public class Sounds
 
     static RegistryObject<SoundEvent> register(String name)
     {
-        return REGISTRAR.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourcePath(name)));
+        return REGISTER.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourcePath(name)));
     }
 }

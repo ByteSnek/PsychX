@@ -10,9 +10,8 @@
     }
   },
   "pattern": [
-    "TLT",
-    "TLT",
-    "TLT"
+    "LT",
+    "TL"
   ],
   "result": {
     "item": "tq:tourniquet_webbing"

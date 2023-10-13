@@ -28,11 +28,11 @@ public class Languages extends LanguageProvider implements LanguageProviderTools
     @Override
     public void addTranslations()
     {
-        CollectionStuff.mapDeferredRegistries(Blocks.REGISTRAR, Block[]::new).forEach(this::block);
-        CollectionStuff.mapDeferredRegistries(Items.REGISTRAR, Item[]::new).forEach(this::item);
-        CollectionStuff.mapDeferredRegistries(Entities.REGISTRAR, EntityType<?>[]::new).forEach(this::entity);
-        CollectionStuff.mapDeferredRegistries(Sounds.REGISTRAR, SoundEvent[]::new).forEach(this::sound);
-        CollectionStuff.mapDeferredRegistries(Tabs.REGISTRAR, CreativeModeTab[]::new).forEach(this::tab);
+        CollectionStuff.mapDeferredRegistries(Blocks.REGISTER, Block[]::new).forEach(this::block);
+        CollectionStuff.mapDeferredRegistries(Items.REGISTER, Item[]::new).forEach(this::item);
+        CollectionStuff.mapDeferredRegistries(Entities.REGISTER, EntityType<?>[]::new).forEach(this::entity);
+        CollectionStuff.mapDeferredRegistries(Sounds.REGISTER, SoundEvent[]::new).forEach(this::sound);
+        CollectionStuff.mapDeferredRegistries(Tabs.REGISTER, CreativeModeTab[]::new).forEach(this::tab);
     }
 
     @Override

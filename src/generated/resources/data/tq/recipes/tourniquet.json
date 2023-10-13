@@ -2,17 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "N": {
-      "item": "minecraft:iron_nugget"
+    "K": {
+      "item": "tq:flutterfly_keratin"
     },
     "W": {
       "item": "tq:tourniquet_webbing"
     }
   },
   "pattern": [
-    " NW",
-    "NWN",
-    "WN "
+    " KW",
+    "KWK",
+    "WK "
   ],
   "result": {
     "item": "tq:tourniquet"

@@ -8,7 +8,7 @@ import xyz.snaker.snakerlib.concurrent.AsyncHashMap;
 import xyz.snaker.snakerlib.utility.tools.AnnotationStuff;
 import xyz.snaker.snakerlib.utility.tools.CollectionStuff;
 import xyz.snaker.tq.Tourniqueted;
-import xyz.snaker.tq.level.entity.EntityDropHandler;
+import xyz.snaker.tq.level.entity.EntityDrops;
 import xyz.snaker.tq.utility.IgnoreCreativeTab;
 
 import net.minecraft.world.item.BlockItem;
@@ -39,7 +39,8 @@ public class Rego
     public static void buildContents(BuildCreativeModeTabContentsEvent event)
     {
         if (event.getTab().equals(Tabs.ITEMS.get())) {
-            CollectionStuff.mapDeferredRegistries(Items.REGISTRAR, Item[]::new).forEach(item -> {
+            CollectionStuff.mapDeferredRegistries(Items.REGISTER, Item[]::new).forEach(item ->
+            {
                 if (!BLACKLISTED_ITEMS.test(item)) {
                     if (!WHITELISTED_EGGS.test(item)) {
                         safeAccept(event, item);
@@ -49,7 +50,8 @@ public class Rego
         }
 
         if (event.getTab().equals(Tabs.BLOCKS.get())) {
-            CollectionStuff.mapDeferredRegistries(Blocks.REGISTRAR, Block[]::new).forEach(block -> {
+            CollectionStuff.mapDeferredRegistries(Blocks.REGISTER, Block[]::new).forEach(block ->
+            {
                 if (!BLACKLISTED_BLOCKS.test(block)) {
                     safeAccept(event, block);
                 }
@@ -57,7 +59,8 @@ public class Rego
         }
 
         if (event.getTab().equals(Tabs.MOBS.get())) {
-            CollectionStuff.mapDeferredRegistries(Items.REGISTRAR, Item[]::new).forEach(item -> {
+            CollectionStuff.mapDeferredRegistries(Items.REGISTER, Item[]::new).forEach(item ->
+            {
                 if (WHITELISTED_EGGS.test(item)) {
                     safeAccept(event, item);
                 }
@@ -88,18 +91,18 @@ public class Rego
     public static void initialize()
     {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-        EntityDropHandler.initialize();
-        Tabs.REGISTRAR.register(bus);
-        Items.REGISTRAR.register(bus);
-        Blocks.REGISTRAR.register(bus);
-        BlockEntities.REGISTRAR.register(bus);
-        Sounds.REGISTRAR.register(bus);
-        Entities.REGISTRAR.register(bus);
-        TrunkPlacers.REGISTRAR.register(bus);
-        Features.REGISTRAR.register(bus);
-        LootModifiers.REGISTRAR.register(bus);
-        FoliagePlacers.REGISTRAR.register(bus);
-        Fluids.REGISTRAR.register(bus);
-        FluidTypes.REGISTRAR.register(bus);
+        EntityDrops.initialize();
+        Tabs.REGISTER.register(bus);
+        Items.REGISTER.register(bus);
+        Blocks.REGISTER.register(bus);
+        BlockEntities.REGISTER.register(bus);
+        Sounds.REGISTER.register(bus);
+        Entities.REGISTER.register(bus);
+        TrunkPlacers.REGISTER.register(bus);
+        Features.REGISTER.register(bus);
+        LootModifiers.REGISTER.register(bus);
+        FoliagePlacers.REGISTER.register(bus);
+        Fluids.REGISTER.register(bus);
+        FluidTypes.REGISTER.register(bus);
     }
 }

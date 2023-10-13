@@ -13,7 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
  **/
 public class TrunkPlacers
 {
-    public static final DeferredRegister<TrunkPlacerType<?>> REGISTRAR = DeferredRegister.create(Registries.TRUNK_PLACER_TYPE, Tourniqueted.MODID);
+    public static final DeferredRegister<TrunkPlacerType<?>> REGISTER = DeferredRegister.create(Registries.TRUNK_PLACER_TYPE, Tourniqueted.MODID);
 
-    public static final RegistryObject<TrunkPlacerType<IllusiveTrunkPlacer>> ILLUSIVE = REGISTRAR.register("illusive", () -> new TrunkPlacerType<>(IllusiveTrunkPlacer.CODEC));
+    public static final RegistryObject<TrunkPlacerType<IllusiveTrunkPlacer>> ILLUSIVE = REGISTER.register("illusive", () -> new TrunkPlacerType<>(IllusiveTrunkPlacer.CODEC));
 }

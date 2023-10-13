@@ -29,7 +29,7 @@ import static net.minecraft.world.item.Items.AIR;
  **/
 public class Items
 {
-    public static final DeferredRegister<Item> REGISTRAR = DeferredRegister.create(ForgeRegistries.ITEMS, Tourniqueted.MODID);
+    public static final DeferredRegister<Item> REGISTER = DeferredRegister.create(ForgeRegistries.ITEMS, Tourniqueted.MODID);
 
     public static final RegistryObject<Item> RED_COSMO_SPINE = register("red_cosmo_spine", CosmoSpine::new);
     public static final RegistryObject<Item> GREEN_COSMO_SPINE = register("green_cosmo_spine", CosmoSpine::new);
@@ -48,6 +48,7 @@ public class Items
     public static final RegistryObject<Item> TOURNIQUET_WEBBING = register("tourniquet_webbing", EmptyItem::new);
     public static final RegistryObject<Item> SATURATED_TWINE = register("saturated_twine", EmptyItem::new);
     public static final RegistryObject<Item> WEATHERED_TWINE = register("weathered_twine", EmptyItem::new);
+    public static final RegistryObject<Item> FLUTTERFLY_KERATIN = register("flutterfly_keratin", EmptyItem::new);
 
     public static final RegistryObject<Item> SWIRL_BLOCK = registerShaderBlockItem(Blocks.SWIRL);
     public static final RegistryObject<Item> SNOWFLAKE_BLOCK = registerShaderBlockItem(Blocks.SNOWFLAKE);
@@ -64,6 +65,7 @@ public class Items
     public static final RegistryObject<Item> SNIPE_SPAWN_EGG = registerSpawnEgg(Entities.SNIPE);
     public static final RegistryObject<Item> FLARE_SPAWN_EGG = registerSpawnEgg(Entities.FLARE);
     public static final RegistryObject<Item> COSMIC_CREEPER_SPAWN_EGG = registerSpawnEgg(Entities.COSMIC_CREEPER);
+    public static final RegistryObject<Item> COSMIC_CREEPERITE_SPAWN_EGG = registerSpawnEgg(Entities.COSMIC_CREEPERITE);
     public static final RegistryObject<Item> FROLICKER_SPAWN_EGG = registerSpawnEgg(Entities.FROLICKER);
     public static final RegistryObject<Item> FLUTTERFLY_SPAWN_EGG = registerSpawnEgg(Entities.FLUTTERFLY);
     public static final RegistryObject<Item> UTTERFLY_SPAWN_EGG = registerSpawnEgg(Entities.UTTERFLY);
@@ -73,17 +75,17 @@ public class Items
 
     static RegistryObject<Item> register(String name, Supplier<Item> item)
     {
-        return REGISTRAR.register(name, item);
+        return REGISTER.register(name, item);
     }
 
     static RegistryObject<Item> registerSpawnEgg(RegistryObject<? extends EntityType<? extends Mob>> mob)
     {
         Supplier<ForgeSpawnEggItem> egg = () -> new ForgeSpawnEggItem(mob, ColourStuff.randomHex(), ColourStuff.randomHex(), new Item.Properties());
-        return REGISTRAR.register(mob.getId().getPath() + "_spawn_egg", egg);
+        return REGISTER.register(mob.getId().getPath() + "_spawn_egg", egg);
     }
 
     static RegistryObject<Item> registerShaderBlockItem(RegistryObject<Block> block)
     {
-        return REGISTRAR.register(block.getId().getPath(), () -> new ShaderBlockItem(block));
+        return REGISTER.register(block.getId().getPath(), () -> new ShaderBlockItem(block));
     }
 }

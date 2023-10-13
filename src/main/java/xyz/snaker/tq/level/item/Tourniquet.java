@@ -5,7 +5,10 @@ import xyz.snaker.snakerlib.math.Maths;
 import xyz.snaker.tq.level.world.dimension.Comatose;
 import xyz.snaker.tq.rego.Levels;
 
+import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
@@ -43,8 +46,9 @@ public class Tourniquet extends Item
                 synchronized (playerLevel) {
                     if (playerLevel instanceof ServerLevel serverLevel) {
                         MinecraftServer server = serverLevel.getServer();
-                        ResourceKey<Level> key = playerLevel.dimension() == Levels.COMATOSE ? Level.OVERWORLD : Levels.COMATOSE;
+                        ResourceKey<Level> key = playerLevel.dimension() == Levels.COMATOSE ? getOrDelegateWakeUpDest(player) : Levels.COMATOSE;
                         ServerLevel dest = server.getLevel(key);
+                        writeWakeUpDest(player);
                         if (dest != null && player.canChangeDimensions()) {
                             stack.hurtAndBreak(serverLevel.random.nextInt(stack.getMaxDamage() / 2), player, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
                             player.stopUsingItem();
@@ -54,6 +58,25 @@ public class Tourniquet extends Item
                 }
             }
         }
+    }
+
+    public ResourceKey<Level> getOrDelegateWakeUpDest(Player player)
+    {
+        CompoundTag tag = player.getPersistentData();
+        if (tag.contains("PlayerWakeUpDestination")) {
+            return ResourceKey.create(Registries.DIMENSION, new ResourceLocation(tag.getString("PlayerWakeUpDestination")));
+        }
+        return Level.OVERWORLD;
+    }
+
+    public void writeWakeUpDest(Player player)
+    {
+        ResourceKey<Level> key = player.level().dimension();
+        if (key == Levels.COMATOSE) {
+            return;
+        }
+        String dest = key.location().toString();
+        player.getPersistentData().putString("PlayerWakeUpDestination", dest);
     }
 
     @Override
