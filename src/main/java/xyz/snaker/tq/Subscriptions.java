@@ -1,14 +1,17 @@
 package xyz.snaker.tq;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import xyz.snaker.snakerlib.SnakerLib;
 import xyz.snaker.snakerlib.command.DiscardAllEntitiesCommand;
 import xyz.snaker.snakerlib.command.HurtAllEntitiesCommand;
 import xyz.snaker.snakerlib.command.KillAllEntitiesCommand;
 import xyz.snaker.snakerlib.command.PlaygroundModeCommand;
 import xyz.snaker.snakerlib.concurrent.event.management.*;
 import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.snakerlib.utility.tools.KeyboardStuff;
 import xyz.snaker.tq.client.model.entity.*;
 import xyz.snaker.tq.client.model.item.CosmoSpineModel;
 import xyz.snaker.tq.client.render.block.ShaderBlockRenderer;
@@ -22,6 +25,7 @@ import xyz.snaker.tq.level.item.Tourniquet;
 import xyz.snaker.tq.rego.Items;
 import xyz.snaker.tq.rego.Levels;
 import xyz.snaker.tq.utility.ComatoseStuff;
+import xyz.snaker.tq.utility.Once;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -31,6 +35,9 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.packs.repository.PackRepository;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -38,6 +45,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.WorldData;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
@@ -52,6 +60,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.server.command.ConfigCommand;
 
+import com.google.common.collect.Lists;
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.brigadier.CommandDispatcher;
 
@@ -86,8 +95,6 @@ public class Subscriptions
             manager.register(CosmicCreeperModel.LAYER_LOCATION, CosmicCreeperModel::createBodyLayer);
             manager.register(CosmicCreeperiteModel.LAYER_LOCATION, CosmicCreeperiteModel::createBodyLayer);
             manager.register(CosmoSpineModel.LAYER_LOCATION, CosmoSpineModel::createBodyLayer);
-            manager.register(LeetModel.LAYER_LOCATION, LeetModel::createBodyLayer);
-
             manager.close();
         }
 
@@ -119,7 +126,6 @@ public class Subscriptions
             manager.registerEntity(HOMMING_ARROW, HommingArrowRenderer::new);
             manager.registerEntity(EXPLOSIVE_HOMMING_ARROW, ExplosiveHommingArrowRenderer::new);
             manager.registerEntity(COSMIC_RAY, CosmicRayRenderer::new);
-            manager.registerEntity(LEET, LeetRenderer::new);
 
             manager.close();
         }
@@ -141,7 +147,6 @@ public class Subscriptions
             manager.put(FROLICKER, Frolicker.attributes());
             manager.put(FLUTTERFLY, Flutterfly.attributes());
             manager.put(UTTERFLY, Utterfly.attributes());
-            manager.put(LEET, Leet.attributes());
 
             manager.close();
         }
@@ -166,7 +171,6 @@ public class Subscriptions
             manager.register(FLARE, Flare::spawnRules);
             manager.register(COSMIC_CREEPER, CosmicCreeper::spawnRules);
             manager.register(FROLICKER, Frolicker::spawnRules);
-            manager.register(LEET, Leet::spawnRules);
             manager.register(SNIPE, Snipe::spawnRules);
             manager.register(FLUTTERFLY, Flutterfly::spawnRules);
 
@@ -188,6 +192,7 @@ public class Subscriptions
             CompoundTag data = player.getPersistentData();
             RandomSource random = level.getRandom();
             Inventory inventory = player.getInventory();
+            Once once = new Once();
 
             ItemStack saturatedTwine = Items.SATURATED_TWINE.get().getDefaultInstance();
             ItemStack weatheredTwine = Items.WEATHERED_TWINE.get().getDefaultInstance();
@@ -217,6 +222,40 @@ public class Subscriptions
                     comaStage = 0;
                 }
             }
+
+            if (KeyboardStuff.isDebugKeyDown()) {
+                if (!once.once()) {
+                    if (level instanceof ServerLevel serverLevel) {
+                        MinecraftServer server = serverLevel.getServer();
+                        PackRepository repository = server.getPackRepository();
+                        WorldData worldData = server.getWorldData();
+
+                        Collection<String> selectedIds = repository.getSelectedIds();
+                        Collection<String> availableIds = discoverNewPacks(repository, worldData, selectedIds);
+
+                        SnakerLib.LOGGER.info("Reloading packs");
+
+                        server.reloadResources(availableIds).exceptionally(Subscriptions::notifyError);
+                        once.reset();
+                    }
+                }
+            }
+        }
+
+        private static Collection<String> discoverNewPacks(PackRepository repository, WorldData data, Collection<String> selectedIds)
+        {
+            repository.reload();
+
+            Collection<String> avaliablePacks = Lists.newArrayList(selectedIds);
+            Collection<String> disabledPacks = data.getDataConfiguration().dataPacks().getDisabled();
+
+            for (String packId : repository.getAvailableIds()) {
+                if (!disabledPacks.contains(packId) && !avaliablePacks.contains(packId)) {
+                    avaliablePacks.add(packId);
+                }
+            }
+
+            return avaliablePacks;
         }
 
         @SubscribeEvent
@@ -346,5 +385,23 @@ public class Subscriptions
                 postChainActivity.put(nibbles, true);
             });
         }
+    }
+
+    static <MSG> Void notifyInfo(MSG message)
+    {
+        SnakerLib.LOGGER.info(message);
+        return null;
+    }
+
+    static <MSG> Void notifyWarn(MSG message)
+    {
+        SnakerLib.LOGGER.warn(message);
+        return null;
+    }
+
+    static <MSG> Void notifyError(MSG message)
+    {
+        SnakerLib.LOGGER.error(message);
+        return null;
     }
 }

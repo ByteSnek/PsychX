@@ -1,0 +1,23 @@
+{
+    "parent": "root.json",
+    "text": "frolicker.txt",
+    "title": "entity.tq.frolicker",
+    "linked_page_buttons": [],
+    "images": [],
+    "item_renders": [],
+    "recipes": [],
+    "tabula_renders": [],
+    "entity_renders": [
+        {
+            "entity": "tq:frolicker",
+            "x": 90,
+            "y": 120,
+            "page": 0,
+            "scale": 2,
+            "rot_x": 30,
+            "rot_y": 225,
+            "rot_z": 0,
+            "follow_cursor": false
+        }
+    ]
+}

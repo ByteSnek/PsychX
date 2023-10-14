@@ -3,6 +3,7 @@ package xyz.snaker.tq.client.layer;
 import xyz.snaker.snakerlib.utility.tools.RenderStuff;
 import xyz.snaker.tq.client.Shaders;
 import xyz.snaker.tq.client.model.entity.UtterflyModel;
+import xyz.snaker.tq.client.render.entity.UtterflyRenderer;
 import xyz.snaker.tq.client.render.type.EntityRenderType;
 import xyz.snaker.tq.level.entity.boss.Utterfly;
 
@@ -10,9 +11,9 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 
-import org.jetbrains.annotations.NotNull;
-
 import com.mojang.blaze3d.vertex.PoseStack;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by SnakerBone on 25/03/2023
@@ -45,6 +46,8 @@ public class UtterflyLayer extends RenderLayer<Utterfly, UtterflyModel>
             Shaders.getPulseAlpha().set(chargeStatus);
         });
 
-        RenderStuff.renderLayer(this, stack, source, EntityRenderType.PULSE.get(), utterfly, packedLight);
+        if (!UtterflyRenderer.renderForAtlas) {
+            RenderStuff.renderLayer(this, stack, source, EntityRenderType.PULSE.get(), utterfly, packedLight);
+        }
     }
 }

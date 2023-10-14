@@ -1,0 +1,27 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "asap": {
+      "conditions": {},
+      "trigger": "minecraft:tick"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "tq:atlas"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "asap",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "tq:atlas"
+    ]
+  },
+  "sends_telemetry_event": false
+}

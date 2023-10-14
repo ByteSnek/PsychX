@@ -14,15 +14,17 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
-import org.jetbrains.annotations.NotNull;
-
 import com.mojang.blaze3d.vertex.PoseStack;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by SnakerBone on 4/01/2023
  **/
 public class UtterflyRenderer extends MobRenderer<Utterfly, UtterflyModel>
 {
+    public static boolean renderForAtlas;
+
     public UtterflyRenderer(EntityRendererProvider.Context context)
     {
         super(context, new UtterflyModel(context.bakeLayer(UtterflyModel.LAYER_LOCATION)), 0.5F);
@@ -51,29 +53,37 @@ public class UtterflyRenderer extends MobRenderer<Utterfly, UtterflyModel>
     @Override
     public void render(@NotNull Utterfly utterfly, float entityYaw, float partialTicks, @NotNull PoseStack stack, @NotNull MultiBufferSource source, int packedLight)
     {
-        PoseStackBuilder tensor = new PoseStackBuilder(stack);
+        PoseStackBuilder builder = new PoseStackBuilder(stack);
+
         Color colour;
+        double scale;
 
         int phase = utterfly.getPhase();
 
+        if (renderForAtlas) {
+            phase = -1;
+        }
+
         switch (phase) {
             case 1 -> {
-                tensor.scale(4);
+                scale = 4;
                 colour = Color.decode("#FFE800");
             }
             case 2 -> {
-                tensor.scale(6);
+                scale = 6;
                 colour = Color.decode("#FF8300");
             }
             case 3 -> {
-                tensor.scale(8);
+                scale = 8;
                 colour = Color.decode("#FF0000");
             }
             default -> {
-                tensor.scale(8);
+                scale = 1;
                 colour = Color.decode("000000");
             }
         }
+
+        builder.scale(scale);
 
         if (utterfly.getCharging()) {
             RayFX.create(stack, source, colour, 16, 64, 16, 0, 0, 0);

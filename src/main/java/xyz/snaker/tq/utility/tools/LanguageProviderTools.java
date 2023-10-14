@@ -39,6 +39,9 @@ public interface LanguageProviderTools<T extends LanguageProvider>
     default <I extends Item> void item(I item)
     {
         String name = ResourceStuff.getPath(item);
+        if (name.equals("atlas")) {
+            name = Tourniqueted.NAME.toLowerCase() + "_" + name;
+        }
         getInstance().add("item." + Tourniqueted.MODID + "." + name, StringStuff.i18nt(name));
     }
 

@@ -17,6 +17,7 @@ import net.minecraftforge.fml.loading.FMLEnvironment;
 @Mod(Tourniqueted.MODID)
 public class Tourniqueted
 {
+    public static final String NAME = "Tourniqueted";
     public static final String MODID = "tq";
 
     public Tourniqueted()

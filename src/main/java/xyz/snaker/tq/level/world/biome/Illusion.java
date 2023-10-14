@@ -39,7 +39,7 @@ public class Illusion
         WorldGenStuff.addDefaultCarvers(gen);
         WorldGenStuff.addDefaultEntitySpawns(spawns);
 
-        WorldGenStuff.addMonsterSpawn(spawns, Entities.LEET, 10, 1, 1);
+        WorldGenStuff.addMonsterSpawn(spawns, Entities.COSMO, 10, 1, 1);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(false)

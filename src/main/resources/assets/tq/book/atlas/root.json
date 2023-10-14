@@ -1,0 +1,109 @@
+{
+    "parent": "",
+    "text": "root.txt",
+    "title": "item.tq.tourniqueted_atlas",
+    "entity_buttons": [
+        {
+            "entity": "tq:cosmo",
+            "x": 230,
+            "y": 10,
+            "page": 0,
+            "scale": 1.2,
+            "entity_scale": 0.575,
+            "offset_x": 3,
+            "offset_y": -6,
+            "linked_page": "cosmo.json",
+            "hover_text": "entity.tq.cosmo"
+        },
+        {
+            "entity": "tq:snipe",
+            "x": 260,
+            "y": 10,
+            "page": 0,
+            "scale": 1.2,
+            "entity_scale": 0.65,
+            "offset_x": 3,
+            "offset_y": -6.145,
+            "linked_page": "snipe.json",
+            "hover_text": "entity.tq.snipe"
+        },
+        {
+            "entity": "tq:flare",
+            "x": 290,
+            "y": 10,
+            "page": 0,
+            "scale": 1.2,
+            "entity_scale": 0.5,
+            "offset_x": 2,
+            "offset_y": -9,
+            "linked_page": "flare.json",
+            "hover_text": "entity.tq.flare"
+        },
+        {
+            "entity": "tq:cosmic_creeper",
+            "x": 320,
+            "y": 10,
+            "page": 0,
+            "scale": 1.2,
+            "entity_scale": 0.7,
+            "offset_x": 2,
+            "offset_y": -6,
+            "linked_page": "cosmic_creeper.json",
+            "hover_text": "entity.tq.cosmic_creeper"
+        },
+        {
+            "entity": "tq:cosmic_creeperite",
+            "x": 350,
+            "y": 10,
+            "page": 0,
+            "scale": 1.2,
+            "entity_scale": 0.7,
+            "offset_x": 2,
+            "offset_y": -9,
+            "linked_page": "cosmic_creeperite.json",
+            "hover_text": "entity.tq.cosmic_creeperite"
+        },
+        {
+            "entity": "tq:utterfly",
+            "x": 230,
+            "y": 40,
+            "page": 0,
+            "scale": 1.2,
+            "entity_scale": 1,
+            "offset_x": 0,
+            "offset_y": -9,
+            "linked_page": "utterfly.json",
+            "hover_text": "entity.tq.utterfly"
+        },
+        {
+            "entity": "tq:frolicker",
+            "x": 260,
+            "y": 40,
+            "page": 0,
+            "scale": 1.2,
+            "entity_scale": 1.25,
+            "offset_x": 0,
+            "offset_y": -7,
+            "linked_page": "frolicker.json",
+            "hover_text": "entity.tq.frolicker"
+        },
+        {
+            "entity": "tq:flutterfly",
+            "x": 290,
+            "y": 40,
+            "page": 0,
+            "scale": 1.2,
+            "entity_scale": 1.25,
+            "offset_x": 0,
+            "offset_y": -3,
+            "linked_page": "flutterfly.json",
+            "hover_text": "entity.tq.flutterfly"
+        }
+    ],
+    "linked_page_buttons": [],
+    "images": [],
+    "item_renders": [],
+    "recipes": [],
+    "tabula_renders": [],
+    "entity_renders": []
+}

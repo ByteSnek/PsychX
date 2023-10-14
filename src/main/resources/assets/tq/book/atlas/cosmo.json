@@ -1,0 +1,23 @@
+{
+    "parent": "root.json",
+    "text": "cosmo.txt",
+    "title": "entity.tq.cosmo",
+    "linked_page_buttons": [],
+    "images": [],
+    "item_renders": [],
+    "recipes": [],
+    "tabula_renders": [],
+    "entity_renders": [
+        {
+            "entity": "tq:cosmo",
+            "x": 90,
+            "y": 150,
+            "page": 0,
+            "scale": 1.25,
+            "rot_x": 30,
+            "rot_y": 225,
+            "rot_z": 0,
+            "follow_cursor": false
+        }
+    ]
+}

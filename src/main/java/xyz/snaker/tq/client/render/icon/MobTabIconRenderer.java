@@ -6,7 +6,10 @@ import xyz.snaker.snakerlib.math.Maths;
 import xyz.snaker.tq.level.entity.boss.Utterfly;
 import xyz.snaker.tq.level.entity.creature.Flutterfly;
 import xyz.snaker.tq.level.entity.creature.Frolicker;
-import xyz.snaker.tq.level.entity.mob.*;
+import xyz.snaker.tq.level.entity.mob.CosmicCreeper;
+import xyz.snaker.tq.level.entity.mob.Cosmo;
+import xyz.snaker.tq.level.entity.mob.Flare;
+import xyz.snaker.tq.level.entity.mob.Snipe;
 import xyz.snaker.tq.rego.Entities;
 
 import net.minecraft.client.Minecraft;
@@ -20,13 +23,13 @@ import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
-import org.jetbrains.annotations.NotNull;
-import org.joml.Quaternionf;
-
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+
+import org.jetbrains.annotations.NotNull;
+import org.joml.Quaternionf;
 
 /**
  * Created by SnakerBone on 27/05/2023
@@ -55,8 +58,7 @@ public class MobTabIconRenderer extends CyclicalIconRenderer
                             new CosmicCreeper(Entities.COSMIC_CREEPER.get(), level),
                             new Utterfly(Entities.UTTERFLY.get(), level),
                             new Flutterfly(Entities.FLUTTERFLY.get(), level),
-                            new Frolicker(Entities.FROLICKER.get(), level),
-                            new Leet(Entities.LEET.get(), level)
+                            new Frolicker(Entities.FROLICKER.get(), level)
                     };
 
             float mouseX = (float) ((mouseHelper.xpos() * Minecraft.getInstance().getWindow().getGuiScaledWidth()) / Minecraft.getInstance().getWindow().getScreenWidth());

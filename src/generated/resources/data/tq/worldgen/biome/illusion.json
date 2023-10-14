@@ -77,7 +77,7 @@
         "weight": 20
       },
       {
-        "type": "tq:leet",
+        "type": "tq:cosmo",
         "maxCount": 1,
         "minCount": 1,
         "weight": 10

@@ -36,8 +36,7 @@ public class Entities
     public static final RegistryObject<EntityType<HommingArrow>> HOMMING_ARROW = registerMisc("homming_arrow", HommingArrow::new, 0.1F, 0.1F);
     public static final RegistryObject<EntityType<ExplosiveHommingArrow>> EXPLOSIVE_HOMMING_ARROW = registerMisc("explosive_homming_arrow", ExplosiveHommingArrow::new, 0.1F, 0.1F);
     public static final RegistryObject<EntityType<CosmicRay>> COSMIC_RAY = registerMisc("cosmic_ray", CosmicRay::new, 0.1F, 0.1F);
-    public static final RegistryObject<EntityType<Leet>> LEET = registerMob("leet", Leet::new, 0.375F, 0.375F);
-
+    
     static <T extends Animal> RegistryObject<EntityType<T>> registerCreature(String name, EntityType.EntityFactory<T> entity, float width, float height)
     {
         return REGISTER.register(name, () -> EntityType.Builder.of(entity, MobCategory.CREATURE)

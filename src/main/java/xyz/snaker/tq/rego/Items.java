@@ -2,16 +2,20 @@ package xyz.snaker.tq.rego;
 
 import java.util.function.Supplier;
 
+import xyz.snaker.snakerlib.utility.ResourcePath;
 import xyz.snaker.snakerlib.utility.tools.ColourStuff;
 import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.level.block.ShaderBlockItem;
 import xyz.snaker.tq.level.item.CosmoSpine;
 import xyz.snaker.tq.level.item.EmptyItem;
 import xyz.snaker.tq.level.item.Tourniquet;
+import xyz.snaker.tq.level.item.TourniquetedAtlas;
 import xyz.snaker.tq.level.item.icon.BlockTabIcon;
 import xyz.snaker.tq.level.item.icon.ItemTabIcon;
 import xyz.snaker.tq.level.item.icon.MobTabIcon;
 
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.BucketItem;
@@ -49,6 +53,7 @@ public class Items
     public static final RegistryObject<Item> SATURATED_TWINE = register("saturated_twine", EmptyItem::new);
     public static final RegistryObject<Item> WEATHERED_TWINE = register("weathered_twine", EmptyItem::new);
     public static final RegistryObject<Item> FLUTTERFLY_KERATIN = register("flutterfly_keratin", EmptyItem::new);
+    public static final RegistryObject<Item> ATLAS = register("atlas", TourniquetedAtlas::new);
 
     public static final RegistryObject<Item> SWIRL_BLOCK = registerShaderBlockItem(Blocks.SWIRL);
     public static final RegistryObject<Item> SNOWFLAKE_BLOCK = registerShaderBlockItem(Blocks.SNOWFLAKE);
@@ -69,7 +74,6 @@ public class Items
     public static final RegistryObject<Item> FROLICKER_SPAWN_EGG = registerSpawnEgg(Entities.FROLICKER);
     public static final RegistryObject<Item> FLUTTERFLY_SPAWN_EGG = registerSpawnEgg(Entities.FLUTTERFLY);
     public static final RegistryObject<Item> UTTERFLY_SPAWN_EGG = registerSpawnEgg(Entities.UTTERFLY);
-    public static final RegistryObject<Item> LEET_SPAWN_EGG = registerSpawnEgg(Entities.LEET);
 
     public static final RegistryObject<Item> COMASOTE = register("comasote", () -> new BucketItem(Fluids.COMASOTE, new Item.Properties().craftRemainder(AIR).setNoRepair().requiredFeatures().stacksTo(1)));
 
@@ -87,5 +91,16 @@ public class Items
     static RegistryObject<Item> registerShaderBlockItem(RegistryObject<Block> block)
     {
         return REGISTER.register(block.getId().getPath(), () -> new ShaderBlockItem(block));
+    }
+
+    public static class Tags
+    {
+        public static final TagKey<Item> COSMO_SPINES = tag("cosmo_spines");
+        public static final TagKey<Item> DROPS = tag("drops");
+
+        public static TagKey<Item> tag(String name)
+        {
+            return ItemTags.create(new ResourcePath(name));
+        }
     }
 }
