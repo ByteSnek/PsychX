@@ -47,7 +47,7 @@
     [],
     [
       "minecraft:trees_plains",
-      "tq:delusive_tree",
+      "tq:illusive_tree",
       "tq:snakeroot",
       "tq:tall_snakeroot",
       "tq:splitleaf",
@@ -66,6 +66,12 @@
         "maxCount": 1,
         "minCount": 1,
         "weight": 15
+      },
+      {
+        "type": "tq:frolicker",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 6
       }
     ],
     "misc": [],
@@ -77,10 +83,16 @@
         "weight": 20
       },
       {
-        "type": "tq:cosmo",
+        "type": "tq:cosmic_creeper",
         "maxCount": 1,
         "minCount": 1,
-        "weight": 10
+        "weight": 12
+      },
+      {
+        "type": "tq:cosmo",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 8
       }
     ],
     "underground_water_creature": [],

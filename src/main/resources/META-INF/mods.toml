@@ -32,7 +32,7 @@ license="${mod_license}"
 
 [[dependencies.${mod_id}]]
     modId="citadel"
-    mandatory=false
+    mandatory=true
     versionRange="${citadel_version_range}"
     ordering="NONE"
     side="BOTH"

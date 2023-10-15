@@ -1,3 +1,6 @@
-Unlike it's parent counterpart
 <NEWLINE>
-It cannot hurt you
+Cosmic creeperites spawn when a    Cosmic Creeper dies
+<NEWLINE>
+They will attempt to teleport to   their target and explode but the   explosion does not hurt their      target
+<NEWLINE>
+They drop gunpowder and ender      pearls on death

@@ -1,5 +1,5 @@
 {
-    "parent": "root.json",
+    "parent": "mobs.json",
     "text": "snipe.txt",
     "title": "entity.tq.snipe",
     "linked_page_buttons": [],
@@ -10,7 +10,7 @@
     "entity_renders": [
         {
             "entity": "tq:snipe",
-            "x": 90,
+            "x": 290,
             "y": 150,
             "page": 0,
             "scale": 1.25,

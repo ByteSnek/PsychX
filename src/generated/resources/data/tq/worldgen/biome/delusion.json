@@ -46,7 +46,7 @@
     [],
     [
       "minecraft:trees_plains",
-      "tq:illusive_tree",
+      "tq:delusive_tree",
       "tq:snakeroot",
       "tq:tall_snakeroot",
       "tq:splitleaf",
@@ -65,6 +65,12 @@
         "maxCount": 1,
         "minCount": 1,
         "weight": 15
+      },
+      {
+        "type": "tq:frolicker",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 8
       }
     ],
     "misc": [],
@@ -80,6 +86,12 @@
         "maxCount": 3,
         "minCount": 1,
         "weight": 10
+      },
+      {
+        "type": "tq:snipe",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 12
       }
     ],
     "underground_water_creature": [],

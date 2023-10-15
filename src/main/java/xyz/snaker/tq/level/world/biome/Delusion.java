@@ -32,13 +32,15 @@ public class Delusion
                 .ambientMoodSound(mood)
                 .ambientLoopSound(Holder.direct(Sounds.LIMBO.get()));
 
-        WorldGenStuff.addGeometricTree(gen);
+        WorldGenStuff.addDelusiveTree(gen);
         WorldGenStuff.addDefaultPlants(gen);
         WorldGenStuff.addFoggyRubble(gen);
         WorldGenStuff.addDefaultCarvers(gen);
         WorldGenStuff.addDefaultEntitySpawns(spawns);
 
         WorldGenStuff.addMonsterSpawn(spawns, Entities.COSMIC_CREEPER, 10, 1, 3);
+        WorldGenStuff.addMonsterSpawn(spawns, Entities.SNIPE, 12, 1, 2);
+        WorldGenStuff.addCreatureSpawn(spawns, Entities.FROLICKER, 8, 1, 3);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(false)

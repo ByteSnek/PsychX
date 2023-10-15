@@ -39,6 +39,7 @@ public class Surreal
         WorldGenStuff.addDefaultEntitySpawns(spawns);
 
         WorldGenStuff.addMonsterSpawn(spawns, Entities.FLARE, 15, 1, 2);
+        WorldGenStuff.addCreatureSpawn(spawns, Entities.FROLICKER, 8, 1, 3);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(false)

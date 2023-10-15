@@ -1,0 +1,19 @@
+{
+    "parent": "comatose.json",
+    "text": "comasote.txt",
+    "title": "block.tq.comasote",
+    "entity_buttons": [],
+    "linked_page_buttons": [
+        {
+            "linked_page": "comasote_mob_conversions.json",
+            "text": "atlas.tq.element.conversions",
+            "x": 100,
+            "y": 90
+        }
+    ],
+    "images": [],
+    "item_renders": [],
+    "recipes": [],
+    "tabula_renders": [],
+    "entity_renders": []
+}

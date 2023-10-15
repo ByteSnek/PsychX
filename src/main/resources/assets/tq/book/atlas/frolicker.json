@@ -1,5 +1,5 @@
 {
-    "parent": "root.json",
+    "parent": "mobs.json",
     "text": "frolicker.txt",
     "title": "entity.tq.frolicker",
     "linked_page_buttons": [],
@@ -10,7 +10,7 @@
     "entity_renders": [
         {
             "entity": "tq:frolicker",
-            "x": 90,
+            "x": 290,
             "y": 120,
             "page": 0,
             "scale": 2,

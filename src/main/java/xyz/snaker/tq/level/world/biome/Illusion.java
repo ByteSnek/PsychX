@@ -32,14 +32,16 @@ public class Illusion
                 .ambientMoodSound(mood)
                 .ambientLoopSound(Holder.direct(Sounds.XXED.get()));
 
-        WorldGenStuff.addFoggyTree(gen);
+        WorldGenStuff.addIllusiveTree(gen);
         WorldGenStuff.addDefaultPlants(gen);
         WorldGenStuff.addSnowflakeRubble(gen);
         WorldGenStuff.addStarryRubble(gen);
         WorldGenStuff.addDefaultCarvers(gen);
         WorldGenStuff.addDefaultEntitySpawns(spawns);
 
-        WorldGenStuff.addMonsterSpawn(spawns, Entities.COSMO, 10, 1, 1);
+        WorldGenStuff.addMonsterSpawn(spawns, Entities.COSMIC_CREEPER, 12, 1, 1);
+        WorldGenStuff.addMonsterSpawn(spawns, Entities.COSMO, 8, 1, 3);
+        WorldGenStuff.addCreatureSpawn(spawns, Entities.FROLICKER, 6, 1, 2);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(false)

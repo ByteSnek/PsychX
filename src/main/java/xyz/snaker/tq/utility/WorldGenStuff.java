@@ -196,16 +196,16 @@ public class WorldGenStuff
         return checkOverworldSpawnRules(level, pos, random, 75);
     }
 
-    public static void addGeometricTree(BiomeGenerationSettings.Builder builder)
-    {
-        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.TREES_PLAINS);
-        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureKey.ILLUSIVE_TREE.getPlacedKey());
-    }
-
-    public static void addFoggyTree(BiomeGenerationSettings.Builder builder)
+    public static void addDelusiveTree(BiomeGenerationSettings.Builder builder)
     {
         builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.TREES_PLAINS);
         builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureKey.DELUSIVE_TREE.getPlacedKey());
+    }
+
+    public static void addIllusiveTree(BiomeGenerationSettings.Builder builder)
+    {
+        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.TREES_PLAINS);
+        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, FeatureKey.ILLUSIVE_TREE.getPlacedKey());
     }
 
     public static void addDefaultPlants(BiomeGenerationSettings.Builder builder)

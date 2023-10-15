@@ -1,0 +1,12 @@
+{
+    "parent": "items.json",
+    "text": "flutterfly_keratin.txt",
+    "title": "item.tq.flutterfly_keratin",
+    "entity_buttons": [],
+    "linked_page_buttons": [],
+    "images": [],
+    "item_renders": [],
+    "recipes": [],
+    "tabula_renders": [],
+    "entity_renders": []
+}

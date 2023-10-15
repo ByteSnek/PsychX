@@ -1,0 +1,4 @@
+<NEWLINE>
+Weathered twine is obtained from leaving saturated twine in your inventory for 30 in-game Minecraft days (10 real life hours)
+<NEWLINE>
+Alternatively, you can cook saturated twine on a campfire to get weathered twine instantly

@@ -1,0 +1,21 @@
+{
+    "parent": "items.json",
+    "text": "tourniquet_webbing.txt",
+    "title": "item.tq.tourniquet_webbing",
+    "entity_buttons": [],
+    "linked_page_buttons": [],
+    "images": [],
+    "item_renders": [],
+    "recipes": [
+        {
+            "recipe": "tq:tourniquet_webbing",
+            "shapeless": false,
+            "x": 210,
+            "y": 60,
+            "page": 0,
+            "scale": 1.3
+        }
+    ],
+    "tabula_renders": [],
+    "entity_renders": []
+}

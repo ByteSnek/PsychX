@@ -16,6 +16,7 @@ import xyz.snaker.tq.client.model.entity.*;
 import xyz.snaker.tq.client.model.item.CosmoSpineModel;
 import xyz.snaker.tq.client.render.block.ShaderBlockRenderer;
 import xyz.snaker.tq.client.render.entity.*;
+import xyz.snaker.tq.commands.ModifyConfigCommand;
 import xyz.snaker.tq.config.TqConfig;
 import xyz.snaker.tq.level.entity.boss.Utterfly;
 import xyz.snaker.tq.level.entity.creature.Flutterfly;
@@ -57,8 +58,8 @@ import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.server.command.ConfigCommand;
 
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.platform.Window;
@@ -134,6 +135,18 @@ public class Subscriptions
     @Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class Common
     {
+        @SubscribeEvent
+        public static void onConfigLoad(ModConfigEvent.Loading event)
+        {
+
+        }
+
+        @SubscribeEvent
+        public static void onConfigReload(ModConfigEvent.Reloading event)
+        {
+
+        }
+
         @SubscribeEvent
         public static void onEntityAttributeCreation(EntityAttributeCreationEvent event)
         {
@@ -292,7 +305,7 @@ public class Subscriptions
             HurtAllEntitiesCommand.register(dispatcher);
             KillAllEntitiesCommand.register(dispatcher);
             DiscardAllEntitiesCommand.register(dispatcher);
-            ConfigCommand.register(dispatcher);
+            ModifyConfigCommand.register(dispatcher);
         }
     }
 
@@ -348,6 +361,9 @@ public class Subscriptions
                 ResourceKey<Level> dimension = level.dimension();
 
                 if (!TqConfig.COMMON.visionConvolveActive.get()) {
+                    if (renderer.postEffect != null || renderer.effectActive) {
+                        shutdownEffect(minecraft, "vision_convolve");
+                    }
                     return;
                 }
 

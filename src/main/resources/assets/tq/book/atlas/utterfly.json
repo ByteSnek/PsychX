@@ -1,5 +1,5 @@
 {
-    "parent": "root.json",
+    "parent": "mobs.json",
     "text": "utterfly.txt",
     "title": "entity.tq.utterfly",
     "linked_page_buttons": [],
@@ -10,7 +10,7 @@
     "entity_renders": [
         {
             "entity": "tq:utterfly",
-            "x": 90,
+            "x": 290,
             "y": 120,
             "page": 0,
             "scale": 3,

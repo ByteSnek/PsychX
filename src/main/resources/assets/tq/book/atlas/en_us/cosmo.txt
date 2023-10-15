@@ -1,1 +1,8 @@
-Strange spikey creature
+<NEWLINE>
+Cosmo's can only be found in the   Comatose dimension
+<NEWLINE>
+They are only able to be hurt      when the attacker is holding any   type of stone block
+<NEWLINE>
+Cosmo's also have a chance of      spawning as an 'Alpha Cosmo'       which by default will do more      damage and inflict blindness       on hit
+<NEWLINE>
+They drop Cosmo spines on death

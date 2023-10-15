@@ -1,0 +1,12 @@
+{
+    "parent": "items.json",
+    "text": "saturated_twine.txt",
+    "title": "item.tq.saturated_twine",
+    "entity_buttons": [],
+    "linked_page_buttons": [],
+    "images": [],
+    "item_renders": [],
+    "recipes": [],
+    "tabula_renders": [],
+    "entity_renders": []
+}

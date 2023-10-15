@@ -1,0 +1,55 @@
+{
+    "parent": "root.json",
+    "text": "items.txt",
+    "title": "itemGroup.torniqueted_items",
+    "entity_buttons": [],
+    "linked_page_buttons": [
+        {
+            "linked_page": "tourniquet.json",
+            "text": "item.tq.tourniquet",
+            "page": 0,
+            "x": 290,
+            "y": 10
+        },
+        {
+            "linked_page": "tourniquet_webbing.json",
+            "text": "item.tq.tourniquet_webbing",
+            "page": 0,
+            "x": 290,
+            "y": 40
+        },
+        {
+            "linked_page": "saturated_twine.json",
+            "text": "item.tq.saturated_twine",
+            "page": 0,
+            "x": 290,
+            "y": 70
+        },
+        {
+            "linked_page": "weathered_twine.json",
+            "text": "item.tq.weathered_twine",
+            "page": 0,
+            "x": 290,
+            "y": 100
+        },
+        {
+            "linked_page": "flutterfly_keratin.json",
+            "text": "item.tq.flutterfly_keratin",
+            "page": 0,
+            "x": 290,
+            "y": 130
+        },
+        {
+            "linked_page": "cosmo_spine.json",
+            "text": "item.tq.cosmo_spine",
+            "page": 0,
+            "x": 290,
+            "y": 160
+        }
+    ],
+    "images": [],
+    "item_renders": [],
+    "recipes": [],
+    "tabula_renders": [],
+    "entity_renders": []
+}

@@ -1,5 +1,5 @@
 {
-    "parent": "root.json",
+    "parent": "mobs.json",
     "text": "cosmic_creeper.txt",
     "title": "entity.tq.cosmic_creeper",
     "linked_page_buttons": [],
@@ -10,7 +10,7 @@
     "entity_renders": [
         {
             "entity": "tq:cosmic_creeper",
-            "x": 90,
+            "x": 290,
             "y": 150,
             "page": 0,
             "scale": 1.25,

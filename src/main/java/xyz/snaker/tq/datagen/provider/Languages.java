@@ -34,7 +34,8 @@ public class Languages extends LanguageProvider implements LanguageProviderTools
         CollectionStuff.mapDeferredRegistries(Sounds.REGISTER, SoundEvent[]::new).forEach(this::sound);
         CollectionStuff.mapDeferredRegistries(Tabs.REGISTER, CreativeModeTab[]::new).forEach(this::tab);
 
-        add("atlas.tq.title", "Tourniqueted Atlas");
+        addAtlasTranslations();
+        addMiscTranslations();
     }
 
     @Override

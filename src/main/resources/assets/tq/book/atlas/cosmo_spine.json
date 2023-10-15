@@ -1,0 +1,12 @@
+{
+    "parent": "items.json",
+    "text": "cosmo_spine.txt",
+    "title": "item.tq.cosmo_spine",
+    "entity_buttons": [],
+    "linked_page_buttons": [],
+    "images": [],
+    "item_renders": [],
+    "recipes": [],
+    "tabula_renders": [],
+    "entity_renders": []
+}

@@ -1,1 +1,4 @@
-Frolicking and having fun
+<NEWLINE>
+Frolickers can only be found in    the Overworld or the Comatose      dimension
+<NEWLINE>
+They do a 'tumbleweed' animation   when in the Comatose dimension

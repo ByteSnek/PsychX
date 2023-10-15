@@ -38,7 +38,7 @@ public class Immaterial
         WorldGenStuff.addDefaultCarvers(gen);
         WorldGenStuff.addDefaultEntitySpawns(spawns);
 
-        WorldGenStuff.addMonsterSpawn(spawns, Entities.COSMO, 10, 1, 3);
+        WorldGenStuff.addMonsterSpawn(spawns, Entities.SNIPE, 10, 1, 3);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(false)

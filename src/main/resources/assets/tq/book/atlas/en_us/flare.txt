@@ -1,1 +1,6 @@
-Psychopathic blaze
+<NEWLINE>
+Flare's can only be found in the   Comatose dimension
+<NEWLINE>
+They are similar to blaze's and    will only attack players
+<NEWLINE>
+They drop blaze rods on death
