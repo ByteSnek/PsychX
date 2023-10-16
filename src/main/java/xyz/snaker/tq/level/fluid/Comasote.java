@@ -20,6 +20,7 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -110,10 +111,15 @@ public class Comasote extends LiquidBlock
                         replaceEntity(level, ghast);
                     }
                 }
+
                 if (livingEntity instanceof Comatosian comatosian && comatosian.isAdaptive()) {
                     return;
                 }
-                entity.hurt(generic, random.nextFloat(livingEntity.getMaxHealth() / random.nextInt(5, 10)));
+
+                if (livingEntity.hurt(generic, Float.NaN)) {
+                    livingEntity.setHealth(livingEntity.getMaxHealth());
+                    entity.invulnerableTime = Mth.clamp(entity.invulnerableTime, 10, 15);
+                }
             }
         } else {
             if (random.nextInt(50) == 0) {

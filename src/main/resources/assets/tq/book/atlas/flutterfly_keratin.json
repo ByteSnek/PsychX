@@ -5,8 +5,35 @@
     "entity_buttons": [],
     "linked_page_buttons": [],
     "images": [],
-    "item_renders": [],
+    "item_renders": [
+        {
+            "item": "tq:flutterfly_keratin",
+            "x": 130,
+            "y": 30,
+            "page": 0,
+            "scale": 2.5
+        },
+        {
+            "item": "minecraft:diamond_sword",
+            "x": 140,
+            "y": 40,
+            "page": 0,
+            "scale": 2
+        }
+    ],
     "recipes": [],
     "tabula_renders": [],
-    "entity_renders": []
+    "entity_renders": [
+        {
+            "entity": "tq:flutterfly",
+            "x": 240,
+            "y": 115,
+            "page": 0,
+            "scale": 1.5,
+            "rot_x": 30,
+            "rot_y": 225,
+            "rot_z": 0,
+            "follow_cursor": true
+        }
+    ]
 }

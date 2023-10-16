@@ -11,6 +11,7 @@ import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.level.entity.EntityDrops;
 import xyz.snaker.tq.utility.IgnoreCreativeTab;
 
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -34,6 +35,7 @@ public class Rego
     static final Predicate<Item> BLACKLISTED_ITEMS = item -> item instanceof BlockItem || item.equals(Items.MOB_TAB_ICON.get()) || item.equals(Items.BLOCK_TAB_ICON.get()) || item.equals(Items.ITEM_TAB_ICON.get());
     static final Predicate<Block> BLACKLISTED_BLOCKS = block -> block instanceof FlowerPotBlock || block instanceof LiquidBlock;
     static final Predicate<Item> WHITELISTED_EGGS = item -> item instanceof ForgeSpawnEggItem;
+    static final Predicate<EntityType<?>> ENTITIES_WITH_LOOT_TABLES = entity -> entity == Entities.COSMIC_CREEPERITE.get() || entity == Entities.FLARE.get();
 
     @SubscribeEvent
     public static void buildContents(BuildCreativeModeTabContentsEvent event)
@@ -86,6 +88,11 @@ public class Rego
             String itemName = map.get(false).asItem().toString();
             SnakerLib.LOGGER.warnf("ItemStack '%s' is empty or invalid", itemName);
         }
+    }
+
+    public static Predicate<EntityType<?>> entitiesWithLootTables()
+    {
+        return ENTITIES_WITH_LOOT_TABLES;
     }
 
     public static void initialize()
