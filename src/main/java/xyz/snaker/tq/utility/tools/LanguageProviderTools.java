@@ -82,6 +82,8 @@ public interface LanguageProviderTools<T extends LanguageProvider>
     default void addMiscTranslations()
     {
         addDirect("commands.tq.config_set_success", "Config Set");
+        addDirect("commands.tq.force_removal_success", "Successfully force removed you from the world");
+        addDirect("message.tq.health_repair_success", "Successfully repaired your health");
     }
 
     default void addAtlasElement(String key)

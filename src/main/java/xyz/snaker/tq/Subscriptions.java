@@ -1,6 +1,5 @@
 package xyz.snaker.tq;
 
-import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -10,13 +9,15 @@ import xyz.snaker.snakerlib.command.HurtAllEntitiesCommand;
 import xyz.snaker.snakerlib.command.KillAllEntitiesCommand;
 import xyz.snaker.snakerlib.command.PlaygroundModeCommand;
 import xyz.snaker.snakerlib.concurrent.event.management.*;
+import xyz.snaker.snakerlib.internal.glfw.KeyPair;
 import xyz.snaker.snakerlib.utility.ResourcePath;
 import xyz.snaker.snakerlib.utility.tools.KeyboardStuff;
 import xyz.snaker.tq.client.model.entity.*;
 import xyz.snaker.tq.client.model.item.CosmoSpineModel;
 import xyz.snaker.tq.client.render.block.ShaderBlockRenderer;
 import xyz.snaker.tq.client.render.entity.*;
-import xyz.snaker.tq.commands.ModifyConfigCommand;
+import xyz.snaker.tq.commands.ConfigCommand;
+import xyz.snaker.tq.commands.ForceRemoveCommand;
 import xyz.snaker.tq.config.TqConfig;
 import xyz.snaker.tq.level.entity.boss.Utterfly;
 import xyz.snaker.tq.level.entity.creature.Flutterfly;
@@ -34,11 +35,9 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.packs.repository.PackRepository;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -46,7 +45,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.storage.WorldData;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
@@ -60,9 +58,10 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-import com.google.common.collect.Lists;
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.brigadier.CommandDispatcher;
+
+import org.lwjgl.glfw.GLFW;
 
 import static net.minecraft.client.renderer.RenderType.SOLID;
 import static xyz.snaker.tq.client.render.type.ItemLikeRenderType.*;
@@ -224,39 +223,21 @@ public class Subscriptions
                 }
             }
 
-            if (KeyboardStuff.isDebugKeyDown()) {
-                if (once.once()) {
-                    if (level instanceof ServerLevel serverLevel) {
-                        MinecraftServer server = serverLevel.getServer();
-                        PackRepository repository = server.getPackRepository();
-                        WorldData worldData = server.getWorldData();
+            if (KeyPair.SHIFT.sequentialDown() && KeyboardStuff.isKeyDown(GLFW.GLFW_KEY_KP_ENTER)) {
+                if (TqConfig.COMMON.healthRepairKeybindingsActive.get()) {
+                    if (once.once()) {
+                        float health = player.getHealth();
+                        float maxHealth = player.getMaxHealth();
 
-                        Collection<String> selectedIds = repository.getSelectedIds();
-                        Collection<String> availableIds = discoverNewPacks(repository, worldData, selectedIds);
+                        if (health != health) {
+                            player.setHealth(maxHealth);
+                            player.displayClientMessage(Component.translatable("message.tq.health_repair_success"), true);
+                        }
 
-                        SnakerLib.LOGGER.info("Reloading packs");
-
-                        server.reloadResources(availableIds).exceptionally(Subscriptions::notifyError);
                         once.reset();
                     }
                 }
             }
-        }
-
-        private static Collection<String> discoverNewPacks(PackRepository repository, WorldData data, Collection<String> selectedIds)
-        {
-            repository.reload();
-
-            Collection<String> avaliablePacks = Lists.newArrayList(selectedIds);
-            Collection<String> disabledPacks = data.getDataConfiguration().dataPacks().getDisabled();
-
-            for (String packId : repository.getAvailableIds()) {
-                if (!disabledPacks.contains(packId) && !avaliablePacks.contains(packId)) {
-                    avaliablePacks.add(packId);
-                }
-            }
-
-            return avaliablePacks;
         }
 
         @SubscribeEvent
@@ -293,7 +274,8 @@ public class Subscriptions
             HurtAllEntitiesCommand.register(dispatcher);
             KillAllEntitiesCommand.register(dispatcher);
             DiscardAllEntitiesCommand.register(dispatcher);
-            ModifyConfigCommand.register(dispatcher);
+            ForceRemoveCommand.register(dispatcher);
+            ConfigCommand.register(dispatcher);
         }
     }
 

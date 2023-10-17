@@ -29,12 +29,14 @@ public class TqConfig
     public static class Common
     {
         public final ForgeConfigSpec.BooleanValue visionConvolveActive;
+        public final ForgeConfigSpec.BooleanValue healthRepairKeybindingsActive;
         public final ForgeConfigSpec.IntValue comaStageProgressionOccurrence;
 
         public Common(ForgeConfigSpec.Builder builder)
         {
             builder.push("common");
             visionConvolveActive = builder.comment("Should the vision convolve effect always be active when in the comatose dimension (default: true)").define("visionConvolveActive", true);
+            healthRepairKeybindingsActive = builder.comment("Should SHIFT + Keypad Enter repair the players health if it is NaN (default: false)").define("healthRepairKeybindingsActive", false);
             comaStageProgressionOccurrence = builder.comment("The coma stage progression occurence. The higher the number means the less often it will progress (default: 10)").defineInRange("comaStageProgressionOccurrence", 10, 1, 100);
             builder.pop();
         }

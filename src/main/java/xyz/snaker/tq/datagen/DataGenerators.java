@@ -11,6 +11,7 @@ import xyz.snaker.tq.datagen.provider.loot.EntityLootTables;
 import xyz.snaker.tq.datagen.provider.tags.BlockTags;
 import xyz.snaker.tq.datagen.provider.tags.FluidTags;
 import xyz.snaker.tq.datagen.provider.tags.ItemTags;
+import xyz.snaker.tq.rego.LootTables;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -37,8 +38,8 @@ public class DataGenerators
         CompletableFuture<HolderLookup.Provider> provider = event.getLookupProvider();
         PackOutput output = generator.getPackOutput();
 
-        List<LootTableProvider.SubProviderEntry> tables = List.of(new LootTableProvider.SubProviderEntry(BlockLootTables::new, LootContextParamSets.BLOCK), new LootTableProvider.SubProviderEntry(EntityLootTables::new, LootContextParamSets.ENTITY));
-        Set<ResourceLocation> none = Set.of();
+        List<LootTableProvider.SubProviderEntry> entries = List.of(new LootTableProvider.SubProviderEntry(BlockLootTables::new, LootContextParamSets.BLOCK), new LootTableProvider.SubProviderEntry(EntityLootTables::new, LootContextParamSets.ENTITY));
+        Set<ResourceLocation> tables = LootTables.all();
         BlockTags blockTags = new BlockTags(output, provider, helper);
 
         generator.addProvider(true, blockTags);
@@ -50,6 +51,6 @@ public class DataGenerators
         generator.addProvider(true, new LootModifiers(output));
         generator.addProvider(true, new FluidTags(output, provider, helper));
         generator.addProvider(true, new ItemTags(output, provider, blockTags.contentsGetter(), helper));
-        generator.addProvider(true, new LootTableProvider(output, none, tables));
+        generator.addProvider(true, new LootTableProvider(output, tables, entries));
     }
 }
