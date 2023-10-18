@@ -1,0 +1,18 @@
+{
+  "display": "minecraft:white_concrete",
+  "settings": {
+    "biome": "minecraft:plains",
+    "features": false,
+    "lakes": false,
+    "layers": [
+      {
+        "block": "minecraft:bedrock",
+        "height": 1
+      },
+      {
+        "block": "minecraft:white_concrete",
+        "height": 5
+      }
+    ]
+  }
+}

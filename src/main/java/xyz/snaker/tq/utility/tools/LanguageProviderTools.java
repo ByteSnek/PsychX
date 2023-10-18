@@ -42,6 +42,7 @@ public interface LanguageProviderTools<T extends LanguageProvider>
     {
         String name = ResourceStuff.getPath(item);
         if (name.equals("atlas")) {
+            addDirect("item." + Tourniqueted.MODID + "." + name, StringStuff.i18nt(Tourniqueted.NAME.toLowerCase() + "_" + name));
             name = Tourniqueted.NAME.toLowerCase() + "_" + name;
         }
         addDirect("item." + Tourniqueted.MODID + "." + name, StringStuff.i18nt(name));
@@ -81,9 +82,10 @@ public interface LanguageProviderTools<T extends LanguageProvider>
 
     default void addMiscTranslations()
     {
-        addDirect("commands.tq.config_set_success", "Config Set");
         addDirect("commands.tq.force_removal_success", "Successfully force removed you from the world");
         addDirect("message.tq.health_repair_success", "Successfully repaired your health");
+        addDirect("flat_world_preset.tq.iron", "BJ Howes Metaland");
+        addDirect("flat_world_preset.tq.concrete", "White Freeway");
     }
 
     default void addAtlasElement(String key)

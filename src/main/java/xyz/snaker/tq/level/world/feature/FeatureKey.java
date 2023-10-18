@@ -5,7 +5,7 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraftforge.common.world.BiomeModifier;
 
-import static xyz.snaker.tq.utility.WorldGenStuff.*;
+import static xyz.snaker.tq.utility.level.WorldGenStuff.*;
 
 /**
  * Created by SnakerBone on 27/08/2023

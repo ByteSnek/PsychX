@@ -113,6 +113,6 @@ public class ConfigCommand
 
     private Component success()
     {
-        return Component.translatable("commands.tq.config_set_success");
+        return Component.translatable("commands.snakerlib.config_set_success");
     }
 }

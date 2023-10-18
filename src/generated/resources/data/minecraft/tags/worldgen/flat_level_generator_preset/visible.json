@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "tq:iron",
+      "required": false
+    },
+    {
+      "id": "tq:concrete",
+      "required": false
+    }
+  ]
+}

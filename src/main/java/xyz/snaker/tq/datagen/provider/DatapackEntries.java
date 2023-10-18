@@ -6,6 +6,7 @@ import java.util.concurrent.CompletableFuture;
 import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.rego.Biomes;
 import xyz.snaker.tq.rego.Features;
+import xyz.snaker.tq.rego.FlatLevelPresets;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
@@ -23,6 +24,7 @@ public class DatapackEntries extends DatapackBuiltinEntriesProvider
             .add(Registries.CONFIGURED_FEATURE, Features::configuredFeatures)
             .add(Registries.PLACED_FEATURE, Features::placedFeatures)
             .add(ForgeRegistries.Keys.BIOME_MODIFIERS, Features::biomeModifiers)
+            .add(Registries.FLAT_LEVEL_GENERATOR_PRESET, FlatLevelPresets::bootstrap)
             .add(Registries.BIOME, Biomes::bootstrap);
 
     public DatapackEntries(PackOutput output, CompletableFuture<HolderLookup.Provider> registries)

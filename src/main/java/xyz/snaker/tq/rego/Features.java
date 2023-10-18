@@ -20,7 +20,7 @@ import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.VEGET
 import static net.minecraft.world.level.levelgen.feature.Feature.RANDOM_PATCH;
 import static net.minecraft.world.level.levelgen.feature.Feature.TREE;
 import static xyz.snaker.tq.rego.Blocks.*;
-import static xyz.snaker.tq.utility.WorldGenStuff.*;
+import static xyz.snaker.tq.utility.level.WorldGenStuff.*;
 
 /**
  * Created by SnakerBone on 25/08/2023

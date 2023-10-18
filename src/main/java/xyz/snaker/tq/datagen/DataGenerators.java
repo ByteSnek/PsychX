@@ -9,6 +9,7 @@ import xyz.snaker.tq.datagen.provider.*;
 import xyz.snaker.tq.datagen.provider.loot.BlockLootTables;
 import xyz.snaker.tq.datagen.provider.loot.EntityLootTables;
 import xyz.snaker.tq.datagen.provider.tags.BlockTags;
+import xyz.snaker.tq.datagen.provider.tags.FlatLevelPresetTags;
 import xyz.snaker.tq.datagen.provider.tags.FluidTags;
 import xyz.snaker.tq.datagen.provider.tags.ItemTags;
 import xyz.snaker.tq.rego.LootTables;
@@ -52,5 +53,6 @@ public class DataGenerators
         generator.addProvider(true, new FluidTags(output, provider, helper));
         generator.addProvider(true, new ItemTags(output, provider, blockTags.contentsGetter(), helper));
         generator.addProvider(true, new LootTableProvider(output, tables, entries));
+        generator.addProvider(true, new FlatLevelPresetTags(output, provider, helper));
     }
 }

@@ -13,11 +13,11 @@ import net.minecraft.world.level.biome.Biome;
  **/
 public class Biomes
 {
-    public static final ResourceKey<Biome> DELUSION = ResourceKey.create(Registries.BIOME, new ResourcePath("delusion"));
-    public static final ResourceKey<Biome> ILLUSION = ResourceKey.create(Registries.BIOME, new ResourcePath("illusion"));
-    public static final ResourceKey<Biome> IMMATERIAL = ResourceKey.create(Registries.BIOME, new ResourcePath("immaterial"));
-    public static final ResourceKey<Biome> SPECTRAL = ResourceKey.create(Registries.BIOME, new ResourcePath("spectral"));
-    public static final ResourceKey<Biome> SURREAL = ResourceKey.create(Registries.BIOME, new ResourcePath("surreal"));
+    public static final ResourceKey<Biome> DELUSION = key("delusion");
+    public static final ResourceKey<Biome> ILLUSION = key("illusion");
+    public static final ResourceKey<Biome> IMMATERIAL = key("immaterial");
+    public static final ResourceKey<Biome> SPECTRAL = key("spectral");
+    public static final ResourceKey<Biome> SURREAL = key("surreal");
 
     public static void bootstrap(BootstapContext<Biome> context)
     {
@@ -26,5 +26,10 @@ public class Biomes
         context.register(IMMATERIAL, Immaterial.create(context));
         context.register(SPECTRAL, Spectral.create(context));
         context.register(SURREAL, Surreal.create(context));
+    }
+
+    static ResourceKey<Biome> key(String name)
+    {
+        return ResourceKey.create(Registries.BIOME, new ResourcePath(name));
     }
 }

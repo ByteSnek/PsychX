@@ -11,5 +11,10 @@ import net.minecraft.world.level.Level;
  **/
 public class Levels
 {
-    public static final ResourceKey<Level> COMATOSE = ResourceKey.create(Registries.DIMENSION, new ResourcePath("comatose"));
+    public static final ResourceKey<Level> COMATOSE = key("comatose");
+
+    static ResourceKey<Level> key(String name)
+    {
+        return ResourceKey.create(Registries.DIMENSION, new ResourcePath(name));
+    }
 }

@@ -2,7 +2,7 @@ package xyz.snaker.tq.level.world.biome;
 
 import xyz.snaker.tq.rego.Entities;
 import xyz.snaker.tq.rego.Sounds;
-import xyz.snaker.tq.utility.WorldGenStuff;
+import xyz.snaker.tq.utility.level.WorldGenStuff;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;

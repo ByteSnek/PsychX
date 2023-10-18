@@ -1,4 +1,4 @@
-package xyz.snaker.tq.utility;
+package xyz.snaker.tq.utility.level;
 
 import java.util.List;
 import java.util.Set;

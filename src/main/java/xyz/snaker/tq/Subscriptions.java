@@ -4,10 +4,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import xyz.snaker.snakerlib.SnakerLib;
-import xyz.snaker.snakerlib.command.DiscardAllEntitiesCommand;
-import xyz.snaker.snakerlib.command.HurtAllEntitiesCommand;
-import xyz.snaker.snakerlib.command.KillAllEntitiesCommand;
-import xyz.snaker.snakerlib.command.PlaygroundModeCommand;
 import xyz.snaker.snakerlib.concurrent.event.management.*;
 import xyz.snaker.snakerlib.internal.glfw.KeyPair;
 import xyz.snaker.snakerlib.utility.ResourcePath;
@@ -26,8 +22,8 @@ import xyz.snaker.tq.level.entity.mob.*;
 import xyz.snaker.tq.level.item.Tourniquet;
 import xyz.snaker.tq.rego.Items;
 import xyz.snaker.tq.rego.Levels;
-import xyz.snaker.tq.utility.ComatoseStuff;
 import xyz.snaker.tq.utility.Once;
+import xyz.snaker.tq.utility.level.ComatoseStuff;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -270,10 +266,6 @@ public class Subscriptions
         public static void onCommandRego(RegisterCommandsEvent event)
         {
             CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
-            PlaygroundModeCommand.register(dispatcher);
-            HurtAllEntitiesCommand.register(dispatcher);
-            KillAllEntitiesCommand.register(dispatcher);
-            DiscardAllEntitiesCommand.register(dispatcher);
             ForceRemoveCommand.register(dispatcher);
             ConfigCommand.register(dispatcher);
         }
