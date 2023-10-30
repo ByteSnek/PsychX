@@ -1,13 +1,13 @@
 package xyz.snaker.tq.level.world.biome;
 
 import xyz.snaker.tq.rego.Entities;
-import xyz.snaker.tq.rego.Sounds;
 import xyz.snaker.tq.utility.level.WorldGenStuff;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.biome.*;
 
 /**
@@ -30,7 +30,7 @@ public class Surreal
                 .grassColorOverride(0x5e0909)
                 .ambientParticle(particles)
                 .ambientMoodSound(mood)
-                .ambientLoopSound(Holder.direct(Sounds.O.get()));
+                .ambientLoopSound(Holder.direct(SoundEvents.AMBIENT_UNDERWATER_LOOP_ADDITIONS_ULTRA_RARE));
 
         WorldGenStuff.addDefaultPlants(gen);
         WorldGenStuff.addFlareRubble(gen);

@@ -9,7 +9,7 @@
   "downfall": 0.0,
   "effects": {
     "ambient_sound": {
-      "sound_id": "tq:relative_resolute"
+      "sound_id": "tq:ambient1"
     },
     "fog_color": 5439549,
     "foliage_color": 3020380,

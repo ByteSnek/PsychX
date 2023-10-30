@@ -1,0 +1,18 @@
+{
+      "name": "Cosmo",
+      "icon": "tq:cosmo_spawn_egg",
+      "category": "tq:entities",
+      "pages": [
+            {
+                  "type": "patchouli:text",
+                  "text": "Cosmo's can only be hurt if they are attacked with any type of stone block. Cosmo's come in 7 differrent variants; red, green, blue, yellow, pink, purple and alpha. The alpha variant has a 1 in 250 chance of spawning and will do more damage, inflict blindness and randomly teleport you on hit$(br2)Each Cosmo variant drops their corresponding coloured spine on death"
+            },
+            {
+                  "type": "patchouli:entity",
+                  "entity": "tq:cosmo",
+                  "scale": 0.85,
+                  "offset": 0.2,
+                  "text": "Cosmo's are found in a Comatose within the Illusion biome"
+            }
+      ]
+}

@@ -63,6 +63,7 @@ sourceSets.main {
 repositories {
     mavenCentral()
     maven { url "https://s01.oss.sonatype.org/content/repositories/releases" }
+    maven { url 'https://maven.blamejared.com' }
     maven { url "https://cursemaven.com" }
     maven { url 'https://jitpack.io' }
 }
@@ -71,7 +72,7 @@ dependencies {
     minecraft "net.neoforged:forge:${minecraft_version}-${neo_version}"
 
     implementation fg.deobf("xyz.snaker.snakerlib:SnakerLib:${snakerlib_version}")
-    implementation fg.deobf("curse.maven:citadel-331936:4744075")
+    implementation fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}")
 
     runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:4629624")
     runtimeOnly fg.deobf("curse.maven:oauth-513857:4575495")
@@ -95,9 +96,8 @@ tasks.withType(ProcessResources).configureEach {
             mod_version            : mod_version,
             mod_authors            : mod_authors,
             mod_description        : mod_description,
-            cyanide_version_range  : cyanide_version_range,
             snakerlib_version_range: snakerlib_version_range,
-            citadel_version_range  : citadel_version_range
+            patchouli_version_range: patchouli_version_range
     ]
     inputs.properties replaceProperties
     filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {

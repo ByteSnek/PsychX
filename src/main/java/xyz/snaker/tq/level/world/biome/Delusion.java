@@ -30,7 +30,7 @@ public class Delusion
                 .grassColorOverride(0x0a2f20)
                 .ambientParticle(particles)
                 .ambientMoodSound(mood)
-                .ambientLoopSound(Holder.direct(Sounds.LIMBO.get()));
+                .ambientLoopSound(Holder.direct(Sounds.AMBIENT2.get()));
 
         WorldGenStuff.addDelusiveTree(gen);
         WorldGenStuff.addDefaultPlants(gen);

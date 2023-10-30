@@ -169,7 +169,7 @@ public class Snipe extends FlyingHostile implements Comatosian
 
                         ray.shoot(xyz.x, xyz.y, xyz.z, velocity, inaccuracy);
                         level.addFreshEntity(ray);
-                        level.playSound(null, target.getX(), target.getY(), target.getZ(), Sounds.PEW.get(), SoundSource.BLOCKS, 0.5F, (random.nextFloat() - random.nextFloat()) * 0.5F + 1);
+                        level.playSound(null, target.getX(), target.getY(), target.getZ(), Sounds.BULLET.get(), SoundSource.BLOCKS, 0.5F, (random.nextFloat() - random.nextFloat()) * 0.5F + 1);
                     }
                 }
             }

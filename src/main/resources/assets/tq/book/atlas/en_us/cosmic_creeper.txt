@@ -1,8 +1,0 @@
-<NEWLINE>
-Cosmic creeper's can only be       found in the Comatose dimension
-<NEWLINE>
-They are similar to creepers and   endermen and will only attack      players
-<NEWLINE>
-When a cosmic creeper sees a       target it will attempt to run up   to it and teleport the target to   it and instantly blow up
-<NEWLINE>
-On death they will spawn 4 Cosmic  creeperite reinforcements

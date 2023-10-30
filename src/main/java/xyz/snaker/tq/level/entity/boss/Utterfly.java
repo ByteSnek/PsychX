@@ -214,7 +214,7 @@ public class Utterfly extends FlyingHostile implements Boss, Comatosian
             double z = target.getZ() - getZ();
             setXRot(Maths.rotateTowards(y, (x * x + z * z)));
             xRotO = getXRot();
-            level().playSound(null, getX(), getY(), getZ(), Sounds.SHOOT.get(), getSoundSource(), 1, 1);
+            level().playSound(null, getX(), getY(), getZ(), Sounds.UTTERFLY_SHOOT.get(), getSoundSource(), 1, 1);
             if (explosive) {
                 ExplosiveHommingArrow arrow = new ExplosiveHommingArrow(level(), this, 8);
                 arrow.shoot(x, y, z, velocity * getPhase(), inaccuracy);

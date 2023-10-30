@@ -30,7 +30,7 @@ public class Spectral
                 .grassColorOverride(0x2e165c)
                 .ambientParticle(particles)
                 .ambientMoodSound(mood)
-                .ambientLoopSound(Holder.direct(Sounds.RELATIVE_RESOLUTE.get()));
+                .ambientLoopSound(Holder.direct(Sounds.AMBIENT1.get()));
 
         WorldGenStuff.addDefaultPlants(gen);
         WorldGenStuff.addSwirlRubble(gen);

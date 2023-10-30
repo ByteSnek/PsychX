@@ -1,0 +1,18 @@
+{
+      "name": "Cosmic Creeperite",
+      "icon": "tq:cosmic_creeperite_spawn_egg",
+      "category": "tq:entities",
+      "pages": [
+            {
+                  "type": "patchouli:text",
+                  "text": "Cosmic Creeperite's are similar to their parent counterpart but the way they approach their target is reversed. Due to them being born into existence 3 seconds ago, they do not have enough strength to generate a big enough explosion to hurt their target. They also happen to be very clingy and cuddly..."
+            },
+            {
+                  "type": "patchouli:entity",
+                  "entity": "tq:cosmic_creeperite",
+                  "scale": 0.85,
+                  "offset": 0.2,
+                  "text": "Cosmic Creeperite's are spawned in groups of four when a Cosmic Creeper explodes"
+            }
+      ]
+}

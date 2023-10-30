@@ -9,7 +9,7 @@
   "downfall": 0.0,
   "effects": {
     "ambient_sound": {
-      "sound_id": "tq:o"
+      "sound_id": "minecraft:ambient.underwater.loop.additions.ultra_rare"
     },
     "fog_color": 5834760,
     "foliage_color": 6162697,

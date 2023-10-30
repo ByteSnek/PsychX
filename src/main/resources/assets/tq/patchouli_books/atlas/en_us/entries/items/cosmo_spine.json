@@ -1,0 +1,11 @@
+{
+      "name": "Cosmo Spine",
+      "icon": "tq:red_cosmo_spine",
+      "category": "tq:items",
+      "pages": [
+            {
+                  "type": "patchouli:text",
+                  "text": "Cosmo spines are obtained when killing a $(l:entities/cosmo)Cosmo$(/l)"
+            }
+      ]
+}

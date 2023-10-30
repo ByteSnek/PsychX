@@ -36,7 +36,6 @@ public class CosmoSpineRenderer extends PreppedRenderer
         map.put(Items.PINK_COSMO_SPINE.get(), ItemLikeRenderType.PINK_STARS.get());
         map.put(Items.PURPLE_COSMO_SPINE.get(), ItemLikeRenderType.PURPLE_STARS.get());
         map.put(Items.ALPHA_COSMO_SPINE.get(), ItemLikeRenderType.BLACK_STARS.get());
-        map.put(Items.ANTI_COSMO_SPINE.get(), ItemLikeRenderType.WHITE_STARS.get());
     });
     private final RenderType type;
     private CosmoSpineModel model;

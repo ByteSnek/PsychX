@@ -1,0 +1,11 @@
+{
+      "name": "Biomes",
+      "icon": "tq:swirl_block",
+      "category": "tq:level",
+      "pages": [
+            {
+                  "type": "patchouli:text",
+                  "text": "Currently, the Comatose only has 5 biomes$(br)$(li)Delusion$(li)Illusion$(li)Immaterial$(li)Spectral$(li)Surreal$(br2)More are likely going to be added in the future"
+            }
+      ]
+}

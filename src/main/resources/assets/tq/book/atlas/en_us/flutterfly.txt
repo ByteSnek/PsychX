@@ -1,4 +1,0 @@
-<NEWLINE>
-Flutterflies can only be found in  the Overworld (Jungle & Mountain   biomes)
-<NEWLINE>
-They drop Flutterfly keratin on    death

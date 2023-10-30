@@ -31,7 +31,7 @@ public class CosmicRay extends Trajectile
     @Override
     public @NotNull SoundEvent getDefaultHitGroundSoundEvent()
     {
-        return Sounds.PEW.get();
+        return Sounds.BULLET.get();
     }
 
     @Override

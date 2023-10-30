@@ -1,0 +1,18 @@
+{
+      "name": "Frolicker",
+      "icon": "tq:frolicker_spawn_egg",
+      "category": "tq:entities",
+      "pages": [
+            {
+                  "type": "patchouli:text",
+                  "text": "Frolicker's are similar to bees. They can be bred with any type of flower. You may notice something a bit strange about a Frolicker if you come across one while in a Comatose..."
+            },
+            {
+                  "type": "patchouli:entity",
+                  "entity": "tq:frolicker",
+                  "scale": 0.85,
+                  "offset": -0.4,
+                  "text": "Frolicker's are found randomly roaming the Overworld and are also found in a Comatose"
+            }
+      ]
+}

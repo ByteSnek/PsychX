@@ -11,11 +11,11 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
-import org.jetbrains.annotations.NotNull;
-
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by SnakerBone on 28/04/2023
@@ -34,11 +34,13 @@ public class ShaderBlockItemRenderer extends PreppedRenderer
     public void renderByItem(@NotNull ItemStack itemStack, @NotNull ItemDisplayContext context, @NotNull PoseStack stack, @NotNull MultiBufferSource source, int packedLight, int packedOverlay)
     {
         VertexConsumer consumer = source.getBuffer(type);
+
         if (context == ItemDisplayContext.FIXED) {
             stack.translate(0, 0, 0);
         } else {
             stack.translate(0, 0.5, 0);
         }
+
         BasicCube.create(consumer, stack);
         Lighting.setupFor3DItems();
         RenderStuff.renderOverlayTexture(ItemLikeRenderType.getOverlayFromBlockItem(itemStack.getItem()), stack, source, packedLight, packedOverlay);

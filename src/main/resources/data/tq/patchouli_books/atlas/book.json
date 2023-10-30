@@ -1,0 +1,7 @@
+{
+      "name": "Tourniqueted Atlas",
+      "landing_text": "Welcome to Tourniqueted!$(br2)A mod with weird looking blocks, items, creatures and the ability to explore the dimension of your unconscious mind...",
+      "version": 1,
+      "creative_tab": "tq:items_tab",
+      "use_resource_pack": true
+}

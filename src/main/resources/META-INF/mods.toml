@@ -31,8 +31,8 @@ license="${mod_license}"
     side="BOTH"
 
 [[dependencies.${mod_id}]]
-    modId="citadel"
-    mandatory=true
-    versionRange="${citadel_version_range}"
+    modId="patchouli"
+    mandatory=false
+    versionRange="${patchouli_version_range}"
     ordering="NONE"
     side="BOTH"

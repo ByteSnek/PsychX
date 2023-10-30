@@ -1,0 +1,15 @@
+{
+      "name": "Weathered Twine",
+      "icon": "tq:weathered_twine",
+      "category": "tq:items",
+      "pages": [
+            {
+                  "type": "patchouli:text",
+                  "text": "Weathered twine by default is obtained from leaving $(l:items/saturated_twine)saturated twine$(/l) in your inventory for 30 in-game Minecraft days (10 real life hours)$(br2)Alternatively, you can cook saturated twine on a campfire to get weathered twine instantly"
+            },
+            {
+                  "type": "patchouli:campfire",
+                  "recipe": "tq:weathered_twine"
+            }
+      ]
+}

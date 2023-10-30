@@ -30,7 +30,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class Rego
 {
-    static final Predicate<Item> BLACKLISTED_ITEMS = item -> item instanceof BlockItem || item.equals(Items.MOB_TAB_ICON.get()) || item.equals(Items.BLOCK_TAB_ICON.get()) || item.equals(Items.ITEM_TAB_ICON.get());
+    static final Predicate<Item> BLACKLISTED_ITEMS = item -> item instanceof BlockItem || item.equals(Items.ENTITY_TAB_DISPLAY.get()) || item.equals(Items.BLOCK_TAB_DISPLAY.get()) || item.equals(Items.ITEM_TAB_DISPLAY.get());
     static final Predicate<Block> BLACKLISTED_BLOCKS = block -> block instanceof FlowerPotBlock || block instanceof LiquidBlock;
     static final Predicate<Item> WHITELISTED_EGGS = item -> item instanceof ForgeSpawnEggItem;
 
@@ -74,6 +74,10 @@ public class Rego
         boolean valid = stack.getCount() == 1;
         map.put(valid, obj);
         if (valid) {
+            Class<?> itemClass = stack.getItem().getClass();
+            if (AnnotationStuff.isPresent(itemClass, IgnoreCreativeTab.class)) {
+                return;
+            }
             if (stack.getItem() instanceof BlockItem item) {
                 Class<?> blockClass = item.getBlock().getClass();
                 if (AnnotationStuff.isPresent(blockClass, IgnoreCreativeTab.class)) {

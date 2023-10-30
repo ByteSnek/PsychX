@@ -1,0 +1,17 @@
+{
+      "name": "Flutterfly",
+      "icon": "tq:flutterfly_spawn_egg",
+      "category": "tq:entities",
+      "pages": [
+            {
+                  "type": "patchouli:text",
+                  "text": "Flutterflies are similar to bees. They can be bred with any type of flower. On death they drop Flutterfly keratin which is used to make a $(l:items/tourniquet)Tourniquet$(/l)"
+            },
+            {
+                  "type": "patchouli:entity",
+                  "entity": "tq:flutterfly",
+                  "scale": 0.85,
+                  "text": "Flutterflies are found randomly roaming the Overworld"
+            }
+      ]
+}

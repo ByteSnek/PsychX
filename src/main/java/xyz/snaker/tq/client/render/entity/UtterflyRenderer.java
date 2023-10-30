@@ -23,8 +23,6 @@ import org.jetbrains.annotations.NotNull;
  **/
 public class UtterflyRenderer extends MobRenderer<Utterfly, UtterflyModel>
 {
-    public static boolean renderForAtlas;
-
     public UtterflyRenderer(EntityRendererProvider.Context context)
     {
         super(context, new UtterflyModel(context.bakeLayer(UtterflyModel.LAYER_LOCATION)), 0.5F);
@@ -59,10 +57,6 @@ public class UtterflyRenderer extends MobRenderer<Utterfly, UtterflyModel>
         double scale;
 
         int phase = utterfly.getPhase();
-
-        if (renderForAtlas) {
-            phase = -1;
-        }
 
         switch (phase) {
             case 1 -> {

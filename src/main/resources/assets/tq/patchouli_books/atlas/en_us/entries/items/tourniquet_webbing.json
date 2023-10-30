@@ -1,0 +1,15 @@
+{
+      "name": "Tourniquet Webbing",
+      "icon": "tq:tourniquet_webbing",
+      "category": "tq:items",
+      "pages": [
+            {
+                  "type": "patchouli:text",
+                  "text": "Tourniquet webbing is used to make a $(l:items/tourniquet)Tourniquet$(/l)"
+            },
+            {
+                  "type": "patchouli:crafting",
+                  "recipe": "tq:tourniquet_webbing"
+            }
+      ]
+}

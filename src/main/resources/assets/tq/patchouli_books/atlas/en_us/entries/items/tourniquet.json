@@ -1,0 +1,15 @@
+{
+      "name": "Tourniquet",
+      "icon": "tq:tourniquet",
+      "category": "tq:items",
+      "pages": [
+            {
+                  "type": "patchouli:text",
+                  "text": "The Tourniquet is used to put you in a $(l:level/comatose)Comatose$(/l). It's up to you how you decide to use it..."
+            },
+            {
+                  "type": "patchouli:crafting",
+                  "recipe": "tq:tourniquet"
+            }
+      ]
+}

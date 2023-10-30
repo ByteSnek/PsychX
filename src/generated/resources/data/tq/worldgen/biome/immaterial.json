@@ -9,7 +9,7 @@
   "downfall": 0.0,
   "effects": {
     "ambient_sound": {
-      "sound_id": "tq:regenerator"
+      "sound_id": "minecraft:ambient.underwater.loop.additions.ultra_rare"
     },
     "fog_color": -16777216,
     "foliage_color": -16751002,

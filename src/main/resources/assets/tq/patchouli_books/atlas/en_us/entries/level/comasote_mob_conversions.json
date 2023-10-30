@@ -1,0 +1,11 @@
+{
+      "name": "Comasote Conversions",
+      "icon": "tq:cosmo_spawn_egg",
+      "category": "tq:level",
+      "pages": [
+            {
+                  "type": "patchouli:text",
+                  "text": "Conversions happen when a certain vanilla minecraft entity touches Comasote$(br2)Bee >>> $(l:entities/frolicker)Frolicker$(/l)$(br)Blaze >>> $(l:entities/flare)Flare$(/l)$(br)Creeper >>> $(l:entities/cosmic_creeper)Cosmic Creeper$(/l)$(br)Ghast >>> $(l:entities/snipe)Snipe$(/l)"
+            }
+      ]
+}

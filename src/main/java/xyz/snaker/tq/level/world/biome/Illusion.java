@@ -30,7 +30,7 @@ public class Illusion
                 .grassColorOverride(0x012238)
                 .ambientParticle(particles)
                 .ambientMoodSound(mood)
-                .ambientLoopSound(Holder.direct(Sounds.XXED.get()));
+                .ambientLoopSound(Holder.direct(Sounds.AMBIENT0.get()));
 
         WorldGenStuff.addIllusiveTree(gen);
         WorldGenStuff.addDefaultPlants(gen);

@@ -72,6 +72,9 @@ public interface LanguageProviderTools<T extends LanguageProvider>
         addAtlasElement("items");
         addAtlasElement("mobs");
         addAtlasElement("conversions");
+        addAtlasElement("configs");
+        addAtlasElement("changelog");
+        addAtlasElement("about");
         addAtlasElement("title", "Tourniqueted Atlas");
 
         addDirect("item.tq.cosmo_spine", "Cosmo Spine");

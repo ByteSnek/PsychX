@@ -1,0 +1,18 @@
+{
+      "name": "Flare",
+      "icon": "tq:flare_spawn_egg",
+      "category": "tq:entities",
+      "pages": [
+            {
+                  "type": "patchouli:text",
+                  "text": "Flare's are a Comatose's equivalent of a Blaze. However, unlike a Blaze they only attack meele. If a Flare is spinning 'fast' this usually means that it is trying to attack something/someone. On hit they ingite their target$(br2)On death they flashbang their target and drop blaze rods and powder"
+            },
+            {
+                  "type": "patchouli:entity",
+                  "entity": "tq:flare",
+                  "scale": 0.85,
+                  "offset": 0.2,
+                  "text": "Flare's are found in a Comatose within the Surreal biome"
+            }
+      ]
+}

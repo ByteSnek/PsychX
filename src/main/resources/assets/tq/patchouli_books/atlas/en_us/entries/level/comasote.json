@@ -1,0 +1,15 @@
+{
+      "name": "Comasote",
+      "icon": "tq:comasote",
+      "category": "tq:level",
+      "pages": [
+            {
+                  "type": "patchouli:text",
+                  "text": "Comasote (not to be confused with the actual dimension name Comatose) is a very strange acting fluid. It is mainly found in the Surreal and Spectral biomes$(br2)When an entity touches Comasote, a few things happen, firstly if the entity touching it is a player and the dimension they are in has a daylight cycle (e.g. Overworld), then it will speed up the daylight cycle"
+            },
+            {
+                  "type": "patchouli:text",
+                  "text": "Secondly the entity touching the fluid will constantly take NaN (not a number) amount of damage. This means the entity will technically never die but will constantly take 'imaginary' damage$(br2)If an item is dropped in Comasote it will have a 1/50 chance of disappearing and flinging random minecraft particles every tick"
+            }
+      ]
+}

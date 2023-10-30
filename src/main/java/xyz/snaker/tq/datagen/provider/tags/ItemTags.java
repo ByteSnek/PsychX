@@ -28,8 +28,8 @@ public class ItemTags extends ItemTagsProvider implements ItemTagsProviderTools<
     @Override
     protected void addTags(@NotNull HolderLookup.Provider provider)
     {
-        tag(Items.Tags.COSMO_SPINES, List.of(Items.RED_COSMO_SPINE, Items.GREEN_COSMO_SPINE, Items.BLUE_COSMO_SPINE, Items.YELLOW_COSMO_SPINE, Items.PINK_COSMO_SPINE, Items.PURPLE_COSMO_SPINE, Items.ALPHA_COSMO_SPINE, Items.ANTI_COSMO_SPINE));
-        tag(Items.Tags.DROPS, List.of(Items.RED_COSMO_SPINE, Items.GREEN_COSMO_SPINE, Items.BLUE_COSMO_SPINE, Items.YELLOW_COSMO_SPINE, Items.PINK_COSMO_SPINE, Items.PURPLE_COSMO_SPINE, Items.ALPHA_COSMO_SPINE, Items.ANTI_COSMO_SPINE, Items.FLUTTERFLY_KERATIN));
+        tag(Items.Tags.COSMO_SPINES, List.of(Items.RED_COSMO_SPINE, Items.GREEN_COSMO_SPINE, Items.BLUE_COSMO_SPINE, Items.YELLOW_COSMO_SPINE, Items.PINK_COSMO_SPINE, Items.PURPLE_COSMO_SPINE, Items.ALPHA_COSMO_SPINE));
+        tag(Items.Tags.DROPS, List.of(Items.RED_COSMO_SPINE, Items.GREEN_COSMO_SPINE, Items.BLUE_COSMO_SPINE, Items.YELLOW_COSMO_SPINE, Items.PINK_COSMO_SPINE, Items.PURPLE_COSMO_SPINE, Items.ALPHA_COSMO_SPINE, Items.FLUTTERFLY_KERATIN));
     }
 
     @Override

@@ -9,7 +9,7 @@
   "downfall": 0.0,
   "effects": {
     "ambient_sound": {
-      "sound_id": "tq:limbo"
+      "sound_id": "tq:ambient2"
     },
     "fog_color": 212005,
     "foliage_color": 667424,

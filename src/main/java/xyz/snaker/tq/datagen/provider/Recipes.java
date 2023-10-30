@@ -13,7 +13,6 @@ import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 
 import org.jetbrains.annotations.NotNull;
 
-import static net.minecraft.world.item.Items.BOOK;
 import static net.minecraft.world.item.Items.LEATHER;
 
 /**
@@ -31,13 +30,6 @@ public class Recipes extends RecipeProvider implements IConditionBuilder, Recipe
     {
         planks(writer, Blocks.ILLUSIVE_PLANKS, Blocks.ILLUSIVE_LOG);
         planks(writer, Blocks.DELUSIVE_PLANKS, Blocks.DELUSIVE_LOG);
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.ATLAS.get())
-                .pattern("BK")
-                .define('B', BOOK)
-                .define('K', Items.Tags.DROPS)
-                .unlockedBy("asap", RecipeProviderTools.asap())
-                .save(writer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.TOURNIQUET_WEBBING.get())
                 .pattern("LT")

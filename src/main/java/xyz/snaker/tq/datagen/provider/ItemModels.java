@@ -3,6 +3,7 @@ package xyz.snaker.tq.datagen.provider;
 import xyz.snaker.snakerlib.client.Icon;
 import xyz.snaker.snakerlib.utility.tools.CollectionStuff;
 import xyz.snaker.tq.Tourniqueted;
+import xyz.snaker.tq.level.display.entity.EntityDisplay;
 import xyz.snaker.tq.level.item.CosmoSpine;
 import xyz.snaker.tq.rego.Blocks;
 import xyz.snaker.tq.rego.Items;
@@ -37,7 +38,7 @@ public class ItemModels extends ItemModelProvider implements ItemModelProviderTo
                     cosmoSpine(cosmoSpine);
                 } else if (item instanceof ForgeSpawnEggItem spawnEggItem) {
                     spawnEgg(spawnEggItem);
-                } else if (item instanceof Icon) {
+                } else if (item instanceof EntityDisplay || item instanceof Icon) {
                     perspective(item);
                 } else {
                     item(item);

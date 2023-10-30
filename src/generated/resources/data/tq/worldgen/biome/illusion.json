@@ -9,7 +9,7 @@
   "downfall": 0.0,
   "effects": {
     "ambient_sound": {
-      "sound_id": "tq:xxed"
+      "sound_id": "tq:ambient0"
     },
     "fog_color": 406095,
     "foliage_color": 74296,

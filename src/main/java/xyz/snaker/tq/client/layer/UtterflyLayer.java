@@ -3,7 +3,6 @@ package xyz.snaker.tq.client.layer;
 import xyz.snaker.snakerlib.utility.tools.RenderStuff;
 import xyz.snaker.tq.client.Shaders;
 import xyz.snaker.tq.client.model.entity.UtterflyModel;
-import xyz.snaker.tq.client.render.entity.UtterflyRenderer;
 import xyz.snaker.tq.client.render.type.EntityRenderType;
 import xyz.snaker.tq.level.entity.boss.Utterfly;
 
@@ -46,8 +45,6 @@ public class UtterflyLayer extends RenderLayer<Utterfly, UtterflyModel>
             Shaders.getPulseAlpha().set(chargeStatus);
         });
 
-        if (!UtterflyRenderer.renderForAtlas) {
-            RenderStuff.renderLayer(this, stack, source, EntityRenderType.PULSE.get(), utterfly, packedLight);
-        }
+        RenderStuff.renderLayer(this, stack, source, EntityRenderType.PULSE.get(), utterfly, packedLight);
     }
 }

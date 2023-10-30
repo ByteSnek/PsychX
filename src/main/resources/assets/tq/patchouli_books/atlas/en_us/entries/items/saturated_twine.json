@@ -1,0 +1,11 @@
+{
+      "name": "Saturated Twine",
+      "icon": "tq:saturated_twine",
+      "category": "tq:items",
+      "pages": [
+            {
+                  "type": "patchouli:text",
+                  "text": "Saturated twine has a 0.1 percent chance of dropping from a large fern when destroyed with any sword while it's raining"
+            }
+      ]
+}

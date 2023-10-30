@@ -1,0 +1,11 @@
+{
+      "name": "Flutterfly Keratin",
+      "icon": "tq:flutterfly_keratin",
+      "category": "tq:items",
+      "pages": [
+            {
+                  "type": "patchouli:text",
+                  "text": "Flutterfly keratin is obtained when killing an $(l:entities/flutterfly)Flutterfly$(/l)"
+            }
+      ]
+}
