@@ -15,16 +15,17 @@ public class Sounds
 {
     public static final DeferredRegister<SoundEvent> REGISTER = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Tourniqueted.MODID);
 
-    public static final RegistryObject<SoundEvent> BULLET = register("bullet");
+    public static final RegistryObject<SoundEvent> SNIPE_SHOOT = register("snipe_shoot");
     public static final RegistryObject<SoundEvent> COSMO_HURT = register("cosmo_hurt");
     public static final RegistryObject<SoundEvent> UTTERFLY_SHOOT = register("utterfly_shoot");
     public static final RegistryObject<SoundEvent> UTTERFLY_AMBIENT = register("utterfly_ambient");
     public static final RegistryObject<SoundEvent> FLUTTERFLY_AMBIENT = register("flutterfly_ambient");
+    public static final RegistryObject<SoundEvent> FLARE_FLASHBANG = register("flare_flashbang");
     public static final RegistryObject<SoundEvent> SNIPE_HURT = register("snipe_hurt");
     public static final RegistryObject<SoundEvent> SNIPE_AMBIENT = register("snipe_ambient");
     public static final RegistryObject<SoundEvent> ENTITY_DEATH = register("entity_death");
-    public static final RegistryObject<SoundEvent> RANDOM_FX = register("random_fx");
-    public static final RegistryObject<SoundEvent> CLICK = register("click");
+    public static final RegistryObject<SoundEvent> SFX = register("sfx");
+    public static final RegistryObject<SoundEvent> COMASOTE = register("comasote");
 
     public static final RegistryObject<SoundEvent> AMBIENT0 = register("ambient0");
     public static final RegistryObject<SoundEvent> AMBIENT1 = register("ambient1");

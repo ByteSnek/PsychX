@@ -14,12 +14,13 @@ import xyz.snaker.tq.client.render.block.ShaderBlockRenderer;
 import xyz.snaker.tq.client.render.entity.*;
 import xyz.snaker.tq.commands.ConfigCommand;
 import xyz.snaker.tq.commands.ForceRemoveCommand;
-import xyz.snaker.tq.config.TqConfig;
+import xyz.snaker.tq.config.Config;
 import xyz.snaker.tq.level.entity.boss.Utterfly;
 import xyz.snaker.tq.level.entity.creature.Flutterfly;
 import xyz.snaker.tq.level.entity.creature.Frolicker;
 import xyz.snaker.tq.level.entity.mob.*;
 import xyz.snaker.tq.level.item.Tourniquet;
+import xyz.snaker.tq.rego.Effects;
 import xyz.snaker.tq.rego.Items;
 import xyz.snaker.tq.rego.Levels;
 import xyz.snaker.tq.utility.Once;
@@ -37,6 +38,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -220,7 +222,7 @@ public class Subscriptions
             }
 
             if (KeyPair.SHIFT.sequentialDown() && KeyboardStuff.isKeyDown(GLFW.GLFW_KEY_KP_ENTER)) {
-                if (TqConfig.COMMON.healthRepairKeybindingsActive.get()) {
+                if (Config.COMMON.healthRepairKeybindingsActive.get()) {
                     if (once.once()) {
                         float health = player.getHealth();
                         float maxHealth = player.getMaxHealth();
@@ -275,6 +277,12 @@ public class Subscriptions
     public static class ForgeClient
     {
         @SubscribeEvent
+        public static void onClientTick(TickEvent.ClientTickEvent event)
+        {
+
+        }
+
+        @SubscribeEvent
         public static void onGuiOverlayRender(RenderGuiOverlayEvent.Post event)
         {
             Minecraft minecraft = Minecraft.getInstance();
@@ -283,6 +291,18 @@ public class Subscriptions
             Window window = event.getWindow();
 
             if (player != null) {
+                int width = window.getWidth();
+                int height = window.getHeight();
+
+                if (player.hasEffect(Effects.FLASHBANG.get()) && Config.COMMON.flashBangOverlay.get()) {
+                    MobEffectInstance effect = player.getEffect(Effects.FLASHBANG.get());
+                    if (effect != null) {
+                        float percent = Math.min(effect.getDuration() / 150F, 1F);
+                        int alpha = (int) (percent * 255 + 0.5);
+                        graphics.fill(RenderType.guiOverlay(), 0, 0, width, height, FastColor.ARGB32.color(alpha, 255, 255, 255));
+                    }
+                }
+
                 ItemStack stack = player.getItemInHand(InteractionHand.MAIN_HAND);
                 CompoundTag data = player.getPersistentData();
 
@@ -291,8 +311,6 @@ public class Subscriptions
                     int remaningUseDuration = tourniquet.getRemainingUseDuration();
 
                     if (remaningUseDuration != 0) {
-                        int width = window.getWidth();
-                        int height = window.getHeight();
                         int alpha = useDuration - remaningUseDuration;
 
                         if (!player.isUsingItem()) {
@@ -322,7 +340,7 @@ public class Subscriptions
             if (level != null) {
                 ResourceKey<Level> dimension = level.dimension();
 
-                if (!TqConfig.COMMON.visionConvolveActive.get()) {
+                if (!Config.COMMON.visionConvolveActive.get()) {
                     if (renderer.postEffect != null || renderer.effectActive) {
                         shutdownEffect(minecraft, "vision_convolve");
                     }

@@ -1,7 +1,7 @@
 package xyz.snaker.tq.commands;
 
 import xyz.snaker.tq.Tourniqueted;
-import xyz.snaker.tq.config.TqConfig;
+import xyz.snaker.tq.config.Config;
 
 import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
@@ -64,8 +64,8 @@ public class ConfigCommand
         CommandSourceStack stack = context.getSource();
         CommandSource source = stack.source;
 
-        TqConfig.CLIENT.showComaStage.set(value);
-        TqConfig.CLIENT.showComaStage.save();
+        Config.CLIENT.showComaStage.set(value);
+        Config.CLIENT.showComaStage.save();
 
         stack.sendSuccess(this::success, true);
 
@@ -77,8 +77,8 @@ public class ConfigCommand
         CommandSourceStack stack = context.getSource();
         CommandSource source = stack.source;
 
-        TqConfig.COMMON.visionConvolveActive.set(value);
-        TqConfig.COMMON.visionConvolveActive.save();
+        Config.COMMON.visionConvolveActive.set(value);
+        Config.COMMON.visionConvolveActive.save();
 
         stack.sendSuccess(this::success, true);
 
@@ -90,8 +90,8 @@ public class ConfigCommand
         CommandSourceStack stack = context.getSource();
         CommandSource source = stack.source;
 
-        TqConfig.COMMON.comaStageProgressionOccurrence.set(value);
-        TqConfig.COMMON.comaStageProgressionOccurrence.save();
+        Config.COMMON.comaStageProgressionOccurrence.set(value);
+        Config.COMMON.comaStageProgressionOccurrence.save();
 
         stack.sendSuccess(this::success, true);
 
@@ -103,8 +103,8 @@ public class ConfigCommand
         CommandSourceStack stack = context.getSource();
         CommandSource source = stack.source;
 
-        TqConfig.COMMON.healthRepairKeybindingsActive.set(value);
-        TqConfig.COMMON.healthRepairKeybindingsActive.save();
+        Config.COMMON.healthRepairKeybindingsActive.set(value);
+        Config.COMMON.healthRepairKeybindingsActive.save();
 
         stack.sendSuccess(this::success, true);
 

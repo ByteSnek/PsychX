@@ -1,136 +1,132 @@
 {
-    "click": {
-        "sounds": [
-            "tq:click0",
-            "tq:click1",
-            "tq:click2",
-            "tq:click3",
-            "tq:click4",
-            "tq:click5",
-            "tq:click6",
-            "tq:click7"
-        ]
-    },
-    "random_fx": {
-        "sounds": [
-            "tq:randfx0",
-            "tq:randfx1",
-            "tq:randfx2",
-            "tq:randfx3",
-            "tq:randfx4",
-            "tq:randfx5",
-            "tq:randfx6",
-            "tq:randfx7",
-            "tq:randfx8",
-            "tq:randfx9",
-            "tq:randfx10"
-        ]
-    },
-    "ambient0": {
-        "sounds": [
-            {
-                "name": "tq:ambience/ambient0",
-                "stream": true,
-                "volume": 0.05
-            }
-        ]
-    },
-    "ambient1": {
-        "sounds": [
-            {
-                "name": "tq:ambience/ambient1",
-                "stream": true,
-                "volume": 0.05
-            }
-        ]
-    },
-    "ambient2": {
-        "sounds": [
-            {
-                "name": "tq:ambience/ambient2",
-                "stream": true,
-                "volume": 0.05
-            }
-        ]
-    },
-    "ambient3": {
-        "sounds": [
-            {
-                "name": "tq:ambience/ambient3",
-                "stream": true,
-                "volume": 0.05
-            }
-        ]
-    },
-    "utterfly_shoot": {
-        "sounds": [
-            "tq:entity/utterfly_shoot"
-        ]
-    },
-    "utterfly_ambient": {
-        "sounds": [
-            {
-                "name": "tq:entity/butterfly_ambient"
-            }
-        ]
-    },
-    "flutterfly_ambient": {
-        "sounds": [
-            {
-                "name": "tq:entity/butterfly_ambient",
-                "pitch": 2
-            }
-        ]
-    },
-    "snipe_ambient": {
-        "sounds": [
-            "tq:entity/snipe_ambient"
-        ]
-    },
-    "snipe_hurt": {
-        "sounds": [
-            "tq:entity/snipe_hurt"
-        ]
-    },
-    "cosmo_hurt": {
-        "sounds": [
-            {
-                "name": "tq:entity/cosmo_hurt1",
-                "volume": 0.5
-            },
-            {
-                "name": "tq:entity/cosmo_hurt2",
-                "volume": 0.5
-            },
-            {
-                "name": "tq:entity/cosmo_hurt3",
-                "volume": 0.5
-            }
-        ]
-    },
-    "entity_death": {
-        "sounds": [
-            "tq:entity/entity_death"
-        ]
-    },
-    "bullet": {
-        "sounds": [
-            "tq:bullet0",
-            "tq:bullet1",
-            "tq:bullet2",
-            "tq:bullet3",
-            "tq:bullet4",
-            "tq:bullet5",
-            "tq:bullet6",
-            "tq:bullet7",
-            "tq:bullet8",
-            "tq:bullet9",
-            "tq:bullet10",
-            "tq:bullet11",
-            "tq:bullet12",
-            "tq:bullet13",
-            "tq:bullet14",
-            "tq:bullet15"
-        ]
-    }
+      "comasote": {
+            "sounds": [
+                  "tq:fluid/comasote0",
+                  "tq:fluid/comasote1",
+                  "tq:fluid/comasote2",
+                  "tq:fluid/comasote3",
+                  "tq:fluid/comasote4",
+                  "tq:fluid/comasote5",
+                  "tq:fluid/comasote6",
+                  "tq:fluid/comasote7"
+            ]
+      },
+      "sfx": {
+            "sounds": [
+                  "tq:ambient/sfx/sfx0",
+                  "tq:ambient/sfx/sfx1",
+                  "tq:ambient/sfx/sfx2",
+                  "tq:ambient/sfx/sfx3",
+                  "tq:ambient/sfx/sfx4",
+                  "tq:ambient/sfx/sfx5",
+                  "tq:ambient/sfx/sfx6",
+                  "tq:ambient/sfx/sfx7"
+            ]
+      },
+      "ambient0": {
+            "sounds": [
+                  {
+                        "name": "tq:ambient/ambient0",
+                        "stream": true,
+                        "volume": 0.05
+                  }
+            ]
+      },
+      "ambient1": {
+            "sounds": [
+                  {
+                        "name": "tq:ambient/ambient1",
+                        "stream": true,
+                        "volume": 0.05
+                  }
+            ]
+      },
+      "ambient2": {
+            "sounds": [
+                  {
+                        "name": "tq:ambient/ambient2",
+                        "stream": true,
+                        "volume": 0.05
+                  }
+            ]
+      },
+      "ambient3": {
+            "sounds": [
+                  {
+                        "name": "tq:ambient/ambient3",
+                        "stream": true,
+                        "volume": 0.05
+                  }
+            ]
+      },
+      "utterfly_shoot": {
+            "sounds": [
+                  "tq:entity/utterfly_shoot"
+            ]
+      },
+      "utterfly_ambient": {
+            "sounds": [
+                  {
+                        "name": "tq:entity/butterfly_ambient"
+                  }
+            ]
+      },
+      "flutterfly_ambient": {
+            "sounds": [
+                  {
+                        "name": "tq:entity/butterfly_ambient",
+                        "pitch": 2
+                  }
+            ]
+      },
+      "flare_flashbang": {
+            "sounds": [
+                  {
+                        "name": "tq:entity/flare/flashbang"
+                  }
+            ]
+      },
+      "snipe_ambient": {
+            "sounds": [
+                  "tq:entity/snipe_ambient"
+            ]
+      },
+      "snipe_hurt": {
+            "sounds": [
+                  "tq:entity/snipe_hurt"
+            ]
+      },
+      "snipe_shoot": {
+            "sounds": [
+                  "tq:entity/snipe/shoot0",
+                  "tq:entity/snipe/shoot1",
+                  "tq:entity/snipe/shoot2",
+                  "tq:entity/snipe/shoot3",
+                  "tq:entity/snipe/shoot4",
+                  "tq:entity/snipe/shoot5",
+                  "tq:entity/snipe/shoot6",
+                  "tq:entity/snipe/shoot7"
+            ]
+      },
+      "cosmo_hurt": {
+            "sounds": [
+                  {
+                        "name": "tq:entity/cosmo_hurt1",
+                        "volume": 0.5
+                  },
+                  {
+                        "name": "tq:entity/cosmo_hurt2",
+                        "volume": 0.5
+                  },
+                  {
+                        "name": "tq:entity/cosmo_hurt3",
+                        "volume": 0.5
+                  }
+            ]
+      },
+      "entity_death": {
+            "sounds": [
+                  "tq:entity/entity_death"
+            ]
+      }
 }

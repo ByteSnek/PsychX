@@ -127,7 +127,7 @@ public class Comasote extends LiquidBlock
                     for (Direction direction : Direction.values()) {
                         spawnAndFlingRandomParticles(level, pos, level.random, direction);
                     }
-                    level.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), Sounds.CLICK.get(), SoundSource.BLOCKS, 1, 1, false);
+                    level.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), Sounds.COMASOTE.get(), SoundSource.BLOCKS, 1, 1, false);
                 } else {
                     entity.discard();
                 }

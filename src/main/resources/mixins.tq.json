@@ -1,14 +1,14 @@
 {
-    "required": true,
-    "minVersion": "0.8",
-    "package": "xyz.snaker.tq.mixin",
-    "refmap": "mixins.tq.refmap.json",
-    "target": "@env(DEFAULT)",
-    "compatibilityLevel": "JAVA_17",
-    "client": [
-        "client.BossHealthOverlayMixin"
-    ],
-    "mixins": [
-        "AquafierMixin"
-    ]
+      "required": true,
+      "minVersion": "0.8",
+      "package": "xyz.snaker.tq.mixin",
+      "refmap": "mixins.tq.refmap.json",
+      "target": "@env(DEFAULT)",
+      "compatibilityLevel": "JAVA_17",
+      "client": [
+            "client.BossHealthOverlayMixin"
+      ],
+      "mixins": [
+            "AquafierMixin"
+      ]
 }

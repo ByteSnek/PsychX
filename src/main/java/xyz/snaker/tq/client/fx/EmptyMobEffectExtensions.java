@@ -8,7 +8,7 @@ import net.minecraftforge.client.extensions.common.IClientMobEffectExtensions;
  **/
 public interface EmptyMobEffectExtensions extends IClientMobEffectExtensions
 {
-    EmptyMobEffectExtensions INSTANCE = new EmptyMobEffectExtensions() {};
+    EmptyMobEffectExtensions EMPTY = new EmptyMobEffectExtensions() {};
 
     @Override
     default boolean isVisibleInGui(MobEffectInstance instance)

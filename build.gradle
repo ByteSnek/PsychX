@@ -61,11 +61,12 @@ sourceSets.main {
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
     maven { url "https://s01.oss.sonatype.org/content/repositories/releases" }
-    maven { url 'https://maven.blamejared.com' }
+    maven { url "https://maven.blamejared.com" }
     maven { url "https://cursemaven.com" }
-    maven { url 'https://jitpack.io' }
+    maven { url "https://jitpack.io" }
 }
 
 dependencies {
@@ -73,6 +74,7 @@ dependencies {
 
     implementation fg.deobf("xyz.snaker.snakerlib:SnakerLib:${snakerlib_version}")
     implementation fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}")
+    implementation fg.deobf("codechicken:CodeChickenLib:1.20.1-4.4.0.1:universal")
 
     runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:4629624")
     runtimeOnly fg.deobf("curse.maven:oauth-513857:4575495")

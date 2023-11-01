@@ -106,5 +106,6 @@ public class Rego
         FoliagePlacers.REGISTER.register(bus);
         Fluids.REGISTER.register(bus);
         FluidTypes.REGISTER.register(bus);
+        Effects.REGISTER.register(bus);
     }
 }

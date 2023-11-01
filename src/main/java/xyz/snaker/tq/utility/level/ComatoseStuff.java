@@ -2,7 +2,7 @@ package xyz.snaker.tq.utility.level;
 
 import java.util.function.Function;
 
-import xyz.snaker.tq.config.TqConfig;
+import xyz.snaker.tq.config.Config;
 import xyz.snaker.tq.level.world.dimension.Comatose;
 import xyz.snaker.tq.rego.Levels;
 
@@ -50,7 +50,7 @@ public class ComatoseStuff
 
     public static int getComaStageOccurence()
     {
-        return TqConfig.COMMON.comaStageProgressionOccurrence.get() * 1000;
+        return Config.COMMON.comaStageProgressionOccurrence.get() * 1000;
     }
 
     public static boolean isPlayerInComa(Player player)
@@ -60,6 +60,6 @@ public class ComatoseStuff
 
     public static boolean shouldRenderComaStage(Player player)
     {
-        return isPlayerInComa(player) && player.getPersistentData().contains("ComaStage") && TqConfig.CLIENT.showComaStage.get();
+        return isPlayerInComa(player) && player.getPersistentData().contains("ComaStage") && Config.CLIENT.showComaStage.get();
     }
 }

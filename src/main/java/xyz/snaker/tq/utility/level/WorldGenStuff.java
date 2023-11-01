@@ -63,7 +63,7 @@ public class WorldGenStuff
     public static final IllusiveFoliagePlacer ILLUSIVE_FOLIAGE = new IllusiveFoliagePlacer(ConstantInt.of(4), ConstantInt.of(0), ConstantInt.of(5), 0.25F, 0.5F, 0.16666667F, 0.33333334F);
     public static final TwoLayersFeatureSize DEFAULT_FEATURE_SIZE = new TwoLayersFeatureSize(1, 0, 2);
     public static final Function<RegistryObject<? extends Block>, BlockStateProvider> BLOCK = block -> BlockStateProvider.simple(block.get());
-    public static final Holder<SoundEvent> RANDOM_SOUND_FX = Holder.direct(Sounds.RANDOM_FX.get());
+    public static final Holder<SoundEvent> RANDOM_SFX = Holder.direct(Sounds.SFX.get());
 
     public static final float PARTICLE_SPAWN_CHANCE = 0.001F;
 

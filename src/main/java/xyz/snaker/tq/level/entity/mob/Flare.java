@@ -1,11 +1,15 @@
 package xyz.snaker.tq.level.entity.mob;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 import xyz.snaker.snakerlib.level.entity.Hostile;
 import xyz.snaker.snakerlib.level.entity.ai.SwitchGameModeGoal;
+import xyz.snaker.snakerlib.math.Maths;
+import xyz.snaker.tq.config.Config;
 import xyz.snaker.tq.level.entity.Comatosian;
 import xyz.snaker.tq.level.world.EntitySpawner;
+import xyz.snaker.tq.rego.Effects;
 import xyz.snaker.tq.rego.Sounds;
 
 import net.minecraft.core.BlockPos;
@@ -16,6 +20,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -31,6 +36,8 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 
 import org.jetbrains.annotations.NotNull;
@@ -58,6 +65,46 @@ public class Flare extends Hostile implements Comatosian
     public static boolean spawnRules(EntityType<Flare> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random)
     {
         return EntitySpawner.COMATOSE.check(level, pos, random, 75);
+    }
+
+    @Override
+    public void die(@NotNull DamageSource source)
+    {
+        super.die(source);
+
+        if (Config.COMMON.flashBangOverlay.get()) {
+            AABB aabb = new AABB(getOnPos()).inflate(10);
+            List<LivingEntity> entities = level().getEntitiesOfClass(LivingEntity.class, aabb);
+
+            float effectDuration = Config.COMMON.flashBangDuration.get().floatValue();
+
+            for (LivingEntity entity : entities) {
+                if (isFacingInGeneralDirection(entity)) {
+                    entity.addEffect(new MobEffectInstance(Effects.FLASHBANG.get(), Maths.secondsToTicks((int) effectDuration), 0, false, false));
+                }
+            }
+        }
+    }
+
+    public boolean isFacingInGeneralDirection(LivingEntity entity)
+    {
+        Vec3 playerView = entity.getViewVector(1).normalize();
+
+        double distX = getX() - entity.getX();
+        double distY = getEyeY() - entity.getEyeY();
+        double distZ = getZ() - entity.getZ();
+
+        Vec3 distBetween = new Vec3(distX, distY, distZ);
+
+        double length = distBetween.length();
+        double playerViewY = playerView.y;
+
+        distBetween = distBetween.scale(0.1);
+
+        double dot = playerView.dot(distBetween);
+        double threshold = 0.025;
+
+        return dot > 0 - threshold / length && playerViewY < 1 - threshold && entity.hasLineOfSight(this);
     }
 
     @Override

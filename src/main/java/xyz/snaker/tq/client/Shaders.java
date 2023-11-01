@@ -27,6 +27,8 @@ import org.joml.Vector4f;
  **/
 public class Shaders
 {
+    static long time;
+
     static RegisterShadersEvent delegate;
 
     static Shader swirl;
@@ -326,12 +328,10 @@ public class Shaders
             crystalizedTime = crystalized.getTimeUniform();
             crystalizedLayers = crystalized.getUniform("Layers");
             crystalizedDensityRatio = crystalized.getUniform("DensityRatio");
-            crystalized.enqueueTask(() ->
-            {
-                crystalizedTime.set(RenderSystem.getShaderGameTime());
-
-            });
+            crystalized.enqueueTask(() -> crystalizedTime.set(RenderSystem.getShaderGameTime()));
         });
+
+        SnakerLib.LOGGER.infof("Registered all shaders in %sms", time - System.currentTimeMillis());
     }
 
     private static void setDelegate(RegisterShadersEvent event)
@@ -617,6 +617,11 @@ public class Shaders
     static void registerShader(String name, Consumer<ShaderInstance> instance)
     {
         delegate.registerShader(shader(name, DefaultVertexFormat.POSITION_TEX), instance);
+    }
+
+    static void registerShader(String name, VertexFormat format, Consumer<ShaderInstance> instance)
+    {
+        delegate.registerShader(shader(name, format), instance);
     }
 
     public static void initialize()
