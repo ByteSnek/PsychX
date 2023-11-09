@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.snakerlib.resources.ResourceReference;
 
 import net.minecraft.resources.ResourceLocation;
 
@@ -25,7 +25,7 @@ public class LootTables
 
     static ResourceLocation register(String name)
     {
-        ResourcePath path = new ResourcePath(name);
+        ResourceReference path = new ResourceReference(name);
 
         if (LOCATIONS.add(path)) {
             return path;

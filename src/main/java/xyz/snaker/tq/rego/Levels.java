@@ -1,6 +1,6 @@
 package xyz.snaker.tq.rego;
 
-import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.snakerlib.resources.ResourceReference;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -15,6 +15,6 @@ public class Levels
 
     static ResourceKey<Level> key(String name)
     {
-        return ResourceKey.create(Registries.DIMENSION, new ResourcePath(name));
+        return ResourceKey.create(Registries.DIMENSION, new ResourceReference(name));
     }
 }

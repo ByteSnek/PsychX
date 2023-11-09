@@ -1,7 +1,7 @@
 package xyz.snaker.tq.client.render.block;
 
-import xyz.snaker.snakerlib.math.BasicCube;
-import xyz.snaker.snakerlib.utility.tools.RenderStuff;
+import xyz.snaker.snakerlib.math.Cube;
+import xyz.snaker.snakerlib.utility.Rendering;
 import xyz.snaker.tq.client.render.type.ItemLikeRenderType;
 
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -32,9 +32,9 @@ public class ShaderBlockRenderer<T extends BlockEntity> implements BlockEntityRe
     public void render(@NotNull T blockEntity, float partialTick, @NotNull PoseStack stack, @NotNull MultiBufferSource source, int packedLight, int packedOverlay)
     {
         VertexConsumer consumer = source.getBuffer(type);
-        BasicCube.create(consumer, stack);
+        Cube.create(consumer, stack);
         Block block = ItemLikeRenderType.getOverlayFromBlockEntity(blockEntity.getType());
-        RenderStuff.renderOverlayTexture(block, stack, source, packedLight, packedOverlay);
+        Rendering.renderOverlayTexture(block, stack, source, packedLight, packedOverlay);
     }
 
     @Override

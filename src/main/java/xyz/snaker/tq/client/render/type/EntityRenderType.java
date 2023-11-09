@@ -2,7 +2,7 @@ package xyz.snaker.tq.client.render.type;
 
 import java.util.function.Supplier;
 
-import xyz.snaker.snakerlib.client.render.processor.SimpleRenderTypeProcessor;
+import xyz.snaker.snakerlib.client.render.SRTP;
 import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.client.Shaders;
 
@@ -16,7 +16,7 @@ import com.mojang.datafixers.util.Pair;
 /**
  * Created by SnakerBone on 12/08/2023
  **/
-public enum EntityRenderType implements SimpleRenderTypeProcessor
+public enum EntityRenderType implements SRTP
 {
     BLACK_STARS(Shaders::getBlackStars, DefaultVertexFormat.POSITION_TEX, true),
     WHITE_STARS(Shaders::getWhiteStars, DefaultVertexFormat.POSITION_TEX, true),

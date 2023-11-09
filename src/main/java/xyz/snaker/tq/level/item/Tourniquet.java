@@ -1,7 +1,7 @@
 package xyz.snaker.tq.level.item;
 
-import xyz.snaker.snakerlib.data.DefaultItemProperties;
 import xyz.snaker.snakerlib.math.Maths;
+import xyz.snaker.snakerlib.utility.item.ItemProperties;
 import xyz.snaker.tq.level.world.dimension.Comatose;
 import xyz.snaker.tq.rego.Levels;
 
@@ -33,24 +33,28 @@ public class Tourniquet extends Item
 
     public Tourniquet()
     {
-        super(DefaultItemProperties.SPECIAL);
+        super(ItemProperties.SPECIAL.defaultDurability(1));
     }
 
     @Override
     public void onUseTick(@NotNull Level level, @NotNull LivingEntity entity, @NotNull ItemStack stack, int remainingUseDuration)
     {
         this.remainingUseDuration = remainingUseDuration;
+
         if (entity instanceof Player player) {
             if (shouldTeleportPlayer(stack)) {
                 Level playerLevel = player.level();
+
                 synchronized (playerLevel) {
                     if (playerLevel instanceof ServerLevel serverLevel) {
                         MinecraftServer server = serverLevel.getServer();
                         ResourceKey<Level> key = playerLevel.dimension() == Levels.COMATOSE ? getOrDelegateWakeUpDest(player) : Levels.COMATOSE;
                         ServerLevel dest = server.getLevel(key);
+
                         writeWakeUpDest(player);
+
                         if (dest != null && player.canChangeDimensions()) {
-                            stack.hurtAndBreak(serverLevel.random.nextInt(stack.getMaxDamage() / 2), player, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+                            stack.hurtAndBreak(Integer.MAX_VALUE, player, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
                             player.stopUsingItem();
                             player.changeDimension(dest, Comatose.getTeleporter().apply(player.getOnPos()));
                         }
@@ -63,9 +67,11 @@ public class Tourniquet extends Item
     public ResourceKey<Level> getOrDelegateWakeUpDest(Player player)
     {
         CompoundTag tag = player.getPersistentData();
+
         if (tag.contains("PlayerWakeUpDestination")) {
             return ResourceKey.create(Registries.DIMENSION, new ResourceLocation(tag.getString("PlayerWakeUpDestination")));
         }
+
         return Level.OVERWORLD;
     }
 

@@ -1,6 +1,6 @@
 package xyz.snaker.tq.client.layer;
 
-import xyz.snaker.snakerlib.utility.tools.RenderStuff;
+import xyz.snaker.snakerlib.utility.Rendering;
 import xyz.snaker.tq.client.model.entity.FlareModel;
 import xyz.snaker.tq.client.render.type.EntityRenderType;
 import xyz.snaker.tq.level.entity.mob.Flare;
@@ -26,6 +26,6 @@ public class FlareLayer extends RenderLayer<Flare, FlareModel>
     @Override
     public void render(@NotNull PoseStack stack, @NotNull MultiBufferSource source, int packedLight, @NotNull Flare flare, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch)
     {
-        RenderStuff.renderLayer(this, stack, source, EntityRenderType.FIRE.get(), flare, packedLight);
+        Rendering.renderLayer(this, stack, source, EntityRenderType.FIRE.get(), flare, packedLight);
     }
 }

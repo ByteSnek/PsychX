@@ -109,7 +109,7 @@ public class EntityTabDisplayRenderer extends CyclicalIconRenderer
             } catch (Exception e) {
                 String errorMessage = e.getMessage();
                 String className = entity.getClass().getSimpleName();
-                SnakerLib.LOGGER.errorf("Error rendering %s: %s", className, errorMessage);
+                SnakerLib.LOGGER.errorf("Error rendering []: []", className, errorMessage);
             }
         }
     }

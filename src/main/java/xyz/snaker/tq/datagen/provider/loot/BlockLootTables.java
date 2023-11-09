@@ -2,7 +2,7 @@ package xyz.snaker.tq.datagen.provider.loot;
 
 import java.util.Set;
 
-import xyz.snaker.snakerlib.utility.tools.CollectionStuff;
+import xyz.snaker.snakerlib.utility.Streams;
 import xyz.snaker.tq.rego.Blocks;
 
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -25,7 +25,7 @@ public class BlockLootTables extends BlockLootSubProvider
     @Override
     public void generate()
     {
-        CollectionStuff.mapDeferredRegistries(Blocks.REGISTER, Block[]::new).forEach(block ->
+        Streams.mapDeferredRegistries(Blocks.REGISTER, Block[]::new).forEach(block ->
         {
             if (block == Blocks.COMASOTE.get()) {
                 return;

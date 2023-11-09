@@ -6,10 +6,10 @@ import java.util.UUID;
 import java.util.function.Function;
 
 import xyz.snaker.snakerlib.SnakerLib;
-import xyz.snaker.snakerlib.client.render.processor.SimpleRenderTypeProcessor;
-import xyz.snaker.snakerlib.utility.ResourcePath;
-import xyz.snaker.snakerlib.utility.tools.ColourStuff;
-import xyz.snaker.snakerlib.utility.tools.StringStuff;
+import xyz.snaker.snakerlib.client.render.SRTP;
+import xyz.snaker.snakerlib.resources.ResourceReference;
+import xyz.snaker.snakerlib.utility.Colours;
+import xyz.snaker.snakerlib.utility.Strings;
 import xyz.snaker.tq.client.Shaders;
 import xyz.snaker.tq.level.entity.boss.Utterfly;
 import xyz.snaker.tq.rego.Entities;
@@ -35,7 +35,7 @@ import org.spongepowered.asm.mixin.*;
  * Created by SnakerBone on 18/09/2023
  **/
 @Mixin(BossHealthOverlay.class)
-public abstract class BossHealthOverlayMixin implements SimpleRenderTypeProcessor
+public abstract class BossHealthOverlayMixin implements SRTP
 {
     @Unique
     private final EntityType<Utterfly> tourniqueted$utterfly = Entities.UTTERFLY.get();
@@ -55,7 +55,7 @@ public abstract class BossHealthOverlayMixin implements SimpleRenderTypeProcesso
     @SuppressWarnings({"UnstableApiUsage", "DataFlowIssue"})
     public void render(GuiGraphics graphics)
     {
-        Function<String, RenderType> sCreator = samplerName -> create(StringStuff.placeholderWithId(), new Pair<>(DefaultVertexFormat.POSITION_TEX, blitSampler(Shaders::getCrystalized, new ResourcePath("textures/sampler/noise_" + samplerName + ".png"), true, false)));
+        Function<String, RenderType> sCreator = samplerName -> create(Strings.placeholderWithId(), new Pair<>(DefaultVertexFormat.POSITION_TEX, blitSampler(Shaders::getCrystalized, new ResourceReference("textures/sampler/noise_" + samplerName + ".png"), true, false)));
         if (!events.isEmpty()) {
             int sWidth = graphics.guiWidth();
             int sPosY = 12;
@@ -74,18 +74,18 @@ public abstract class BossHealthOverlayMixin implements SimpleRenderTypeProcesso
                         for (Utterfly sUtterfly : sUtterflies) {
                             switch (sUtterfly.getPhase()) {
                                 case 1 -> {
-                                    sTextColour = ColourStuff.hexToInt("FFE800");
+                                    sTextColour = Colours.hexToInt("FFE800");
                                     sType = sCreator.apply("green");
                                 }
                                 case 2 -> {
-                                    sTextColour = ColourStuff.hexToInt("FF8300");
+                                    sTextColour = Colours.hexToInt("FF8300");
                                     sType = sCreator.apply("orange");
                                 }
                                 case 3, 4 -> {
-                                    sTextColour = ColourStuff.hexToInt("FF0000");
+                                    sTextColour = Colours.hexToInt("FF0000");
                                     sType = sCreator.apply("red");
                                 }
-                                default -> SnakerLib.LOGGER.warnf("Unknown phase: %s", sUtterfly.getPhase());
+                                default -> SnakerLib.LOGGER.warnf("Unknown phase: []", sUtterfly.getPhase());
                             }
                         }
                         tourniqueted$drawRenderOverlay(graphics, sType, sPosX, sPosY, sEvent);

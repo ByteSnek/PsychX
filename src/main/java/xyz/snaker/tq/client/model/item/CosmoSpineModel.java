@@ -1,6 +1,6 @@
 package xyz.snaker.tq.client.model.item;
 
-import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.snakerlib.resources.ResourceReference;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -16,7 +16,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 
 public class CosmoSpineModel extends Model
 {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourcePath("cosmo_spine"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceReference("cosmo_spine"), "main");
 
     private final ModelPart base;
 

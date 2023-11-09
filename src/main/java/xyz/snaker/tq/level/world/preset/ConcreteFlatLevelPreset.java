@@ -3,8 +3,8 @@ package xyz.snaker.tq.level.world.preset;
 import java.util.List;
 import java.util.Optional;
 
-import xyz.snaker.snakerlib.level.world.flat.FlatLayer;
-import xyz.snaker.snakerlib.level.world.flat.FlatLayerList;
+import xyz.snaker.snakerlib.level.levelgen.flat.FlatLayer;
+import xyz.snaker.snakerlib.level.levelgen.flat.FlatLayerList;
 
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;

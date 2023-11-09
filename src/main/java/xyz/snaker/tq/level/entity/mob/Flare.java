@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import xyz.snaker.snakerlib.level.entity.Hostile;
-import xyz.snaker.snakerlib.level.entity.ai.SwitchGameModeGoal;
 import xyz.snaker.snakerlib.math.Maths;
 import xyz.snaker.tq.config.Config;
 import xyz.snaker.tq.level.entity.Comatosian;
@@ -111,7 +110,6 @@ public class Flare extends Hostile implements Comatosian
     public void registerGoals()
     {
         goalSelector.addGoal(0, new FloatGoal(this));
-        goalSelector.addGoal(1, new SwitchGameModeGoal(this));
         goalSelector.addGoal(6, new RandomStrollGoal(this, 1));
         goalSelector.addGoal(5, new HurtByTargetGoal(this));
         goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.3, false));

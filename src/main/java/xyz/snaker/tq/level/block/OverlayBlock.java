@@ -1,7 +1,7 @@
 package xyz.snaker.tq.level.block;
 
-import xyz.snaker.snakerlib.data.DefaultBlockProperties;
-import xyz.snaker.tq.utility.IgnoreCreativeTab;
+import xyz.snaker.snakerlib.utility.block.BlockProperties;
+import xyz.snaker.tq.utility.NoCreativeTab;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MapColor;
@@ -9,7 +9,7 @@ import net.minecraft.world.level.material.MapColor;
 /**
  * Created by SnakerBone on 23/08/2023
  **/
-@IgnoreCreativeTab
+@NoCreativeTab
 public class OverlayBlock extends Block
 {
     public OverlayBlock(Properties properties)
@@ -19,6 +19,6 @@ public class OverlayBlock extends Block
 
     public OverlayBlock()
     {
-        this(DefaultBlockProperties.CUTOUT.apply(MapColor.NONE));
+        this(BlockProperties.CUTOUT.apply(MapColor.NONE));
     }
 }

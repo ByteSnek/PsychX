@@ -25,7 +25,7 @@ public class FlatLevelPresetTags extends FlatLevelGeneratorPresetTagsProvider
     }
 
     @Override
-    protected void addTags(@NotNull HolderLookup.Provider provider)
+    public void addTags(@NotNull HolderLookup.Provider provider)
     {
         tag(FlatLevelGeneratorPresetTags.VISIBLE)
                 .addOptional(FlatLevelPresets.IRON.location())

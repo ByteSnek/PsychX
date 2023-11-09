@@ -1,6 +1,6 @@
 package xyz.snaker.tq.client.render.entity;
 
-import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.snakerlib.resources.ResourceReference;
 import xyz.snaker.tq.client.layer.CosmicCreeperLayer;
 import xyz.snaker.tq.client.model.entity.CosmicCreeperModel;
 import xyz.snaker.tq.level.entity.mob.CosmicCreeper;
@@ -30,7 +30,7 @@ public class CosmicCreeperRenderer extends MobRenderer<CosmicCreeper, CosmicCree
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull CosmicCreeper creeper)
     {
-        return new ResourcePath("textures/entity/mob/cosmic_creeper/cosmic_creeper.png");
+        return new ResourceReference("textures/entity/mob/cosmic_creeper/cosmic_creeper.png");
     }
 
     @Override

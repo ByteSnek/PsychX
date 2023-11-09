@@ -1,7 +1,7 @@
 package xyz.snaker.tq.client.render.entity;
 
-import xyz.snaker.snakerlib.math.PoseStackBuilder;
-import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.snakerlib.math.Tensor;
+import xyz.snaker.snakerlib.resources.ResourceReference;
 import xyz.snaker.tq.client.model.entity.FrolickerModel;
 import xyz.snaker.tq.level.entity.creature.Frolicker;
 
@@ -10,9 +10,9 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
-import org.jetbrains.annotations.NotNull;
-
 import com.mojang.blaze3d.vertex.PoseStack;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by SnakerBone on 26/05/2023
@@ -27,18 +27,21 @@ public class FrolickerRenderer extends MobRenderer<Frolicker, FrolickerModel>
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull Frolicker frolicker)
     {
-        return new ResourcePath("textures/entity/creature/frolicker.png");
+        return new ResourceReference("textures/entity/creature/frolicker.png");
     }
 
     @Override
     public void render(@NotNull Frolicker frolicker, float entityYaw, float partialTicks, @NotNull PoseStack stack, @NotNull MultiBufferSource buffer, int packedLight)
     {
-        PoseStackBuilder pose = new PoseStackBuilder(stack);
+        Tensor builder = new Tensor(stack);
+
         if (frolicker.isBaby()) {
-            pose.scale(0.5);
+            builder.scale(0.5);
         }
-        pose.setFunnyStatus(frolicker.canDoFunny());
-        pose.funny(frolicker);
+
+        builder.setFunnyStatus(frolicker.canDoFunny());
+        builder.funny(frolicker);
+
         super.render(frolicker, entityYaw, partialTicks, stack, buffer, packedLight);
     }
 }

@@ -1,6 +1,6 @@
 package xyz.snaker.tq.client.layer;
 
-import xyz.snaker.snakerlib.utility.tools.RenderStuff;
+import xyz.snaker.snakerlib.utility.Rendering;
 import xyz.snaker.tq.client.Shaders;
 import xyz.snaker.tq.client.model.entity.UtterflyModel;
 import xyz.snaker.tq.client.render.type.EntityRenderType;
@@ -33,10 +33,10 @@ public class UtterflyLayer extends RenderLayer<Utterfly, UtterflyModel>
         int phase = utterfly.getPhase();
 
         switch (phase) {
-            case 1 -> colour = RenderStuff.hexToRGB("FFE800");
-            case 2 -> colour = RenderStuff.hexToRGB("FF8300");
-            case 3, 4 -> colour = RenderStuff.hexToRGB("FF0000");
-            default -> colour = RenderStuff.hexToRGB("000000");
+            case 1 -> colour = Rendering.hexToRGB("FFE800");
+            case 2 -> colour = Rendering.hexToRGB("FF8300");
+            case 3, 4 -> colour = Rendering.hexToRGB("FF0000");
+            default -> colour = Rendering.hexToRGB("000000");
         }
 
         Shaders.getPulse().enqueueTask(() ->
@@ -45,6 +45,6 @@ public class UtterflyLayer extends RenderLayer<Utterfly, UtterflyModel>
             Shaders.getPulseAlpha().set(chargeStatus);
         });
 
-        RenderStuff.renderLayer(this, stack, source, EntityRenderType.PULSE.get(), utterfly, packedLight);
+        Rendering.renderLayer(this, stack, source, EntityRenderType.PULSE.get(), utterfly, packedLight);
     }
 }

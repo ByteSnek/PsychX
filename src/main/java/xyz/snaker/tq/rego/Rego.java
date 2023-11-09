@@ -1,14 +1,14 @@
 package xyz.snaker.tq.rego;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
 import xyz.snaker.snakerlib.SnakerLib;
-import xyz.snaker.snakerlib.concurrent.AsyncHashMap;
-import xyz.snaker.snakerlib.utility.tools.AnnotationStuff;
-import xyz.snaker.snakerlib.utility.tools.CollectionStuff;
+import xyz.snaker.snakerlib.utility.Annotations;
+import xyz.snaker.snakerlib.utility.Streams;
 import xyz.snaker.tq.Tourniqueted;
-import xyz.snaker.tq.utility.IgnoreCreativeTab;
+import xyz.snaker.tq.utility.NoCreativeTab;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -38,7 +38,7 @@ public class Rego
     public static void buildContents(BuildCreativeModeTabContentsEvent event)
     {
         if (event.getTab().equals(Tabs.ITEMS.get())) {
-            CollectionStuff.mapDeferredRegistries(Items.REGISTER, Item[]::new).forEach(item ->
+            Streams.mapDeferredRegistries(Items.REGISTER, Item[]::new).forEach(item ->
             {
                 if (!BLACKLISTED_ITEMS.test(item)) {
                     if (!WHITELISTED_EGGS.test(item)) {
@@ -49,7 +49,7 @@ public class Rego
         }
 
         if (event.getTab().equals(Tabs.BLOCKS.get())) {
-            CollectionStuff.mapDeferredRegistries(Blocks.REGISTER, Block[]::new).forEach(block ->
+            Streams.mapDeferredRegistries(Blocks.REGISTER, Block[]::new).forEach(block ->
             {
                 if (!BLACKLISTED_BLOCKS.test(block)) {
                     safeAccept(event, block);
@@ -58,7 +58,7 @@ public class Rego
         }
 
         if (event.getTab().equals(Tabs.MOBS.get())) {
-            CollectionStuff.mapDeferredRegistries(Items.REGISTER, Item[]::new).forEach(item ->
+            Streams.mapDeferredRegistries(Items.REGISTER, Item[]::new).forEach(item ->
             {
                 if (WHITELISTED_EGGS.test(item)) {
                     safeAccept(event, item);
@@ -69,25 +69,25 @@ public class Rego
 
     static <T extends ItemLike> void safeAccept(BuildCreativeModeTabContentsEvent event, T obj)
     {
-        Map<Boolean, T> map = new AsyncHashMap<>();
+        Map<Boolean, T> map = new HashMap<>();
         ItemStack stack = obj.asItem().getDefaultInstance();
         boolean valid = stack.getCount() == 1;
         map.put(valid, obj);
         if (valid) {
             Class<?> itemClass = stack.getItem().getClass();
-            if (AnnotationStuff.isPresent(itemClass, IgnoreCreativeTab.class)) {
+            if (Annotations.isPresent(itemClass, NoCreativeTab.class)) {
                 return;
             }
             if (stack.getItem() instanceof BlockItem item) {
                 Class<?> blockClass = item.getBlock().getClass();
-                if (AnnotationStuff.isPresent(blockClass, IgnoreCreativeTab.class)) {
+                if (Annotations.isPresent(blockClass, NoCreativeTab.class)) {
                     return;
                 }
             }
             event.accept(obj);
         } else {
             String itemName = map.get(false).asItem().toString();
-            SnakerLib.LOGGER.warnf("ItemStack '%s' is empty or invalid", itemName);
+            SnakerLib.LOGGER.warnf("ItemStack '[]' is empty or invalid", itemName);
         }
     }
 

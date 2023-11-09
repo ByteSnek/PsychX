@@ -1,6 +1,6 @@
 package xyz.snaker.tq.rego;
 
-import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.snakerlib.resources.ResourceReference;
 import xyz.snaker.tq.Tourniqueted;
 
 import net.minecraft.sounds.SoundEvent;
@@ -34,6 +34,6 @@ public class Sounds
 
     static RegistryObject<SoundEvent> register(String name)
     {
-        return REGISTER.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourcePath(name)));
+        return REGISTER.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceReference(name)));
     }
 }

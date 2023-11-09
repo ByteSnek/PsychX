@@ -39,7 +39,7 @@ public class Entities
     
     static <T extends Animal> RegistryObject<EntityType<T>> registerCreature(String name, EntityType.EntityFactory<T> entity, float width, float height)
     {
-        return REGISTER.register(name, () -> EntityType.Builder.of(entity, MobCategory.CREATURE)
+        return REGISTER.register(name, () -> EntityType.Builder.of(entity, MobCategory.AMBIENT)
                 .sized(width, height)
                 .build(name));
     }

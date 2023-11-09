@@ -2,9 +2,9 @@ package xyz.snaker.tq.level.display.tab;
 
 import java.util.function.Consumer;
 
-import xyz.snaker.snakerlib.client.Icon;
-import xyz.snaker.snakerlib.data.DefaultItemProperties;
+import xyz.snaker.snakerlib.utility.item.ItemProperties;
 import xyz.snaker.tq.client.render.icon.ItemTabDisplayRenderer;
+import xyz.snaker.tq.utility.NoTexture;
 
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.Item;
@@ -15,7 +15,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by SnakerBone on 12/06/2023
  **/
-public class ItemTabDisplay extends Item implements Icon
+@NoTexture
+public class ItemTabDisplay extends Item
 {
     public ItemTabDisplay(Properties properties)
     {
@@ -24,7 +25,7 @@ public class ItemTabDisplay extends Item implements Icon
 
     public ItemTabDisplay()
     {
-        super(DefaultItemProperties.EMPTY);
+        super(ItemProperties.EMPTY);
     }
 
 

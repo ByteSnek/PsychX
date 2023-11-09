@@ -1,7 +1,6 @@
 package xyz.snaker.tq.level.world.feature;
 
-import xyz.snaker.snakerlib.level.world.feature.RubbleFeature;
-import xyz.snaker.snakerlib.utility.random.Frequency;
+import xyz.snaker.snakerlib.level.levelgen.feature.RubbleFeature;
 import xyz.snaker.tq.level.world.dimension.Comatose;
 
 import net.minecraft.core.BlockPos;
@@ -18,7 +17,7 @@ public class SwirlRubbleFeature extends RubbleFeature
 {
     public SwirlRubbleFeature(Codec<BlockStateConfiguration> codec)
     {
-        super(codec, Frequency.of(7), Comatose.getBlockList(), 3, 5);
+        super(codec, 7, Comatose.getBlockList(), 3, 5);
     }
 
     @Override

@@ -4,9 +4,9 @@ import java.util.function.Consumer;
 
 import xyz.snaker.snakerlib.SnakerLib;
 import xyz.snaker.snakerlib.client.shader.Shader;
-import xyz.snaker.snakerlib.utility.ResourcePath;
-import xyz.snaker.snakerlib.utility.tools.RenderStuff;
-import xyz.snaker.snakerlib.utility.tools.UnsafeStuff;
+import xyz.snaker.snakerlib.resources.ResourceReference;
+import xyz.snaker.snakerlib.utility.Rendering;
+import xyz.snaker.snakerlib.utility.unsafe.TheUnsafe;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ShaderInstance;
@@ -19,6 +19,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 
+import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
@@ -96,68 +97,72 @@ public class Shaders
     static Shader strands;
     static Uniform strandsTime;
 
+    static {
+        time = System.currentTimeMillis();
+    }
+
     static void register(RegisterShadersEvent event)
     {
         setDelegate(event);
 
         registerShader("strands", shaderInstance ->
         {
-            strands = UnsafeStuff.cast(shaderInstance);
+            strands = TheUnsafe.cast(shaderInstance);
             strandsTime = strands.getTimeUniform(true);
         });
 
         registerShader("burn", shaderInstance ->
         {
-            burn = UnsafeStuff.cast(shaderInstance);
+            burn = TheUnsafe.cast(shaderInstance);
             burnTime = burn.getTimeUniform(true);
             burnColour = burn.getColourUniform();
             burnAlpha = burn.getAlphaUniform();
             burn.enqueueTask(() ->
             {
-                burnColour.set(RenderStuff.hexToVec3f("FBA8A1"));
+                burnColour.set(Rendering.hexToVec3f("FBA8A1"));
                 burnAlpha.set(1F);
             });
         });
 
         registerShader("clip", shaderInstance ->
         {
-            clip = UnsafeStuff.cast(shaderInstance);
+            clip = TheUnsafe.cast(shaderInstance);
             clipTime = clip.getTimeUniform(true, 40);
         });
 
         registerShader("swirl", shaderInstance ->
         {
-            swirl = UnsafeStuff.cast(shaderInstance);
+            swirl = TheUnsafe.cast(shaderInstance);
             swirlTime = swirl.getTimeUniform(true);
         });
 
         registerShader("snowflake", shaderInstance ->
         {
-            snowflake = UnsafeStuff.cast(shaderInstance);
+            snowflake = TheUnsafe.cast(shaderInstance);
             snowflakeTime = snowflake.getTimeUniform(true);
         });
 
         registerShader("watercolour", shaderInstance ->
         {
-            watercolour = UnsafeStuff.cast(shaderInstance);
+            watercolour = TheUnsafe.cast(shaderInstance);
             watercolourTime = watercolour.getTimeUniform(true);
         });
 
         registerShader("multicolour", shaderInstance ->
         {
-            multicolour = UnsafeStuff.cast(shaderInstance);
+            multicolour = TheUnsafe.cast(shaderInstance);
             multicolourTime = multicolour.getTimeUniform(true);
         });
 
         registerShader("fire", shaderInstance ->
         {
-            fire = UnsafeStuff.cast(shaderInstance);
+            fire = TheUnsafe.cast(shaderInstance);
             fireTime = fire.getTimeUniform(true);
         });
 
         registerShader("stars", shaderInstance ->
         {
-            stars = UnsafeStuff.cast(shaderInstance);
+            stars = TheUnsafe.cast(shaderInstance);
             starsTime = stars.getTimeUniform(true);
             starsColour = stars.getColourUniform();
             starsBackground = stars.getUniform("Background");
@@ -166,7 +171,7 @@ public class Shaders
 
         registerShader("stars", shaderInstance ->
         {
-            blackStars = UnsafeStuff.cast(shaderInstance);
+            blackStars = TheUnsafe.cast(shaderInstance);
             blackStarsTime = blackStars.getTimeUniform();
             blackStarsColour = blackStars.getColourUniform();
             blackStarsBackground = blackStars.getUniform("Background");
@@ -182,7 +187,7 @@ public class Shaders
 
         registerShader("stars", shaderInstance ->
         {
-            whiteStars = UnsafeStuff.cast(shaderInstance);
+            whiteStars = TheUnsafe.cast(shaderInstance);
             whiteStarsTime = whiteStars.getTimeUniform();
             whiteStarsColour = whiteStars.getColourUniform();
             whiteStarsBackground = whiteStars.getUniform("Background");
@@ -198,7 +203,7 @@ public class Shaders
 
         registerShader("stars", shaderInstance ->
         {
-            redStars = UnsafeStuff.cast(shaderInstance);
+            redStars = TheUnsafe.cast(shaderInstance);
             redStarsTime = redStars.getTimeUniform();
             redStarsColour = redStars.getColourUniform();
             redStarsBackground = redStars.getUniform("Background");
@@ -214,7 +219,7 @@ public class Shaders
 
         registerShader("stars", shaderInstance ->
         {
-            greenStars = UnsafeStuff.cast(shaderInstance);
+            greenStars = TheUnsafe.cast(shaderInstance);
             greenStarsTime = greenStars.getTimeUniform();
             greenStarsColour = greenStars.getColourUniform();
             greenStarsBackground = greenStars.getUniform("Background");
@@ -230,7 +235,7 @@ public class Shaders
 
         registerShader("stars", shaderInstance ->
         {
-            blueStars = UnsafeStuff.cast(shaderInstance);
+            blueStars = TheUnsafe.cast(shaderInstance);
             blueStarsTime = blueStars.getTimeUniform();
             blueStarsColour = blueStars.getColourUniform();
             blueStarsBackground = blueStars.getUniform("Background");
@@ -246,7 +251,7 @@ public class Shaders
 
         registerShader("stars", shaderInstance ->
         {
-            yellowStars = UnsafeStuff.cast(shaderInstance);
+            yellowStars = TheUnsafe.cast(shaderInstance);
             yellowStarsTime = yellowStars.getTimeUniform();
             yellowStarsColour = yellowStars.getColourUniform();
             yellowStarsBackground = yellowStars.getUniform("Background");
@@ -262,7 +267,7 @@ public class Shaders
 
         registerShader("stars", shaderInstance ->
         {
-            pinkStars = UnsafeStuff.cast(shaderInstance);
+            pinkStars = TheUnsafe.cast(shaderInstance);
             pinkStarsTime = pinkStars.getTimeUniform();
             pinkStarsColour = pinkStars.getColourUniform();
             pinkStarsBackground = pinkStars.getUniform("Background");
@@ -278,7 +283,7 @@ public class Shaders
 
         registerShader("stars", shaderInstance ->
         {
-            purpleStars = UnsafeStuff.cast(shaderInstance);
+            purpleStars = TheUnsafe.cast(shaderInstance);
             purpleStarsTime = purpleStars.getTimeUniform();
             purpleStarsColour = purpleStars.getColourUniform();
             purpleStarsBackground = purpleStars.getUniform("Background");
@@ -294,29 +299,29 @@ public class Shaders
 
         registerShader("plain", shaderInstance ->
         {
-            plain = UnsafeStuff.cast(shaderInstance);
+            plain = TheUnsafe.cast(shaderInstance);
             plainColour = plain.getColourUniform();
             plain.enqueueTask(() -> plainColour.set(new Vector4f(0)));
         });
 
         registerShader("blur_fog", shaderInstance ->
         {
-            blurFog = UnsafeStuff.cast(shaderInstance);
+            blurFog = TheUnsafe.cast(shaderInstance);
             blurFogTime = blurFog.getTimeUniform(true);
             blurFogIntensity = blurFog.getUniform("Intensity");
             blurFogValue = blurFog.getUniform("Value");
             blurFogColour = blurFog.getColourUniform();
             blurFog.enqueueTask(() ->
             {
-                Shaders.getBlurFogColour().set(RenderStuff.hexToVec3f("3E00A0"));
-                Shaders.getBlurFogValue().set(RenderStuff.hexToVec3f("FFFFFF"));
+                Shaders.getBlurFogColour().set(Rendering.hexToVec3f("3E00A0"));
+                Shaders.getBlurFogValue().set(Rendering.hexToVec3f("FFFFFF"));
                 Shaders.getBlurFogIntensity().set(5F);
             });
         });
 
         registerShader("pulse", shaderInstance ->
         {
-            pulse = UnsafeStuff.cast(shaderInstance);
+            pulse = TheUnsafe.cast(shaderInstance);
             pulseTime = pulse.getTimeUniform(true);
             pulseColour = pulse.getColourUniform();
             pulseAlpha = pulse.getAlphaUniform();
@@ -324,14 +329,14 @@ public class Shaders
 
         registerShader("crystalized", shaderInstance ->
         {
-            crystalized = UnsafeStuff.cast(shaderInstance);
+            crystalized = TheUnsafe.cast(shaderInstance);
             crystalizedTime = crystalized.getTimeUniform();
             crystalizedLayers = crystalized.getUniform("Layers");
             crystalizedDensityRatio = crystalized.getUniform("DensityRatio");
             crystalized.enqueueTask(() -> crystalizedTime.set(RenderSystem.getShaderGameTime()));
         });
 
-        SnakerLib.LOGGER.infof("Registered all shaders in %sms", time - System.currentTimeMillis());
+        SnakerLib.LOGGER.infof("Registered all shaders in [] seconds", DurationFormatUtils.formatDuration(System.currentTimeMillis() - time, "s.S"));
     }
 
     private static void setDelegate(RegisterShadersEvent event)
@@ -611,7 +616,7 @@ public class Shaders
 
     static Shader shader(String name, VertexFormat format)
     {
-        return Shader.create(delegate.getResourceProvider(), new ResourcePath(name), format);
+        return Shader.create(delegate.getResourceProvider(), new ResourceReference(name), format);
     }
 
     static void registerShader(String name, Consumer<ShaderInstance> instance)

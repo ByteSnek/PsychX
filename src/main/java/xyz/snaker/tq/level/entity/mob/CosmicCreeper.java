@@ -4,7 +4,7 @@ import java.util.EnumSet;
 import java.util.List;
 
 import xyz.snaker.snakerlib.math.Maths;
-import xyz.snaker.snakerlib.utility.tools.EntityStuff;
+import xyz.snaker.snakerlib.utility.Entitys;
 import xyz.snaker.tq.level.entity.Comatosian;
 import xyz.snaker.tq.level.world.EntitySpawner;
 import xyz.snaker.tq.rego.Entities;
@@ -284,7 +284,7 @@ public class CosmicCreeper extends Monster implements Comatosian, PowerableMob
             teleportTime++;
 
             if (!isIgnited()) {
-                if (teleportTime >= random.nextInt(80, 440) && !EntityStuff.isEntityMovingXZ(this)) {
+                if (teleportTime >= random.nextInt(80, 440) && !Entitys.isEntityMovingXZ(this)) {
                     double x = getRandomX(random.nextInt(targetScanRadius, (targetScanRadius * 2)) * Maths.clamp(random.nextDouble(), 0.875, 3.475)) - 0.5;
                     double y = getY();
                     double z = getRandomZ(random.nextInt(targetScanRadius, (targetScanRadius * 2)) * Maths.clamp(random.nextDouble(), 0.875, 3.475)) - 0.5;

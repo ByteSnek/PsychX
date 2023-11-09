@@ -1,7 +1,7 @@
 package xyz.snaker.tq.client.model.entity;
 
 import xyz.snaker.snakerlib.math.Maths;
-import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.snakerlib.resources.ResourceReference;
 import xyz.snaker.tq.level.entity.creature.Flutterfly;
 
 import net.minecraft.client.model.EntityModel;
@@ -10,14 +10,14 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-import org.jetbrains.annotations.NotNull;
-
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
+import org.jetbrains.annotations.NotNull;
+
 public class FlutterflyModel extends EntityModel<Flutterfly>
 {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourcePath("flutterfly"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceReference("flutterfly"), "main");
 
     private final ModelPart base;
 

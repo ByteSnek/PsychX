@@ -1,6 +1,6 @@
 package xyz.snaker.tq.client.render.entity;
 
-import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.snakerlib.resources.ResourceReference;
 import xyz.snaker.tq.level.entity.projectile.ExplosiveHommingArrow;
 
 import net.minecraft.client.renderer.entity.ArrowRenderer;
@@ -22,6 +22,6 @@ public class ExplosiveHommingArrowRenderer extends ArrowRenderer<ExplosiveHommin
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull ExplosiveHommingArrow entity)
     {
-        return new ResourcePath("textures/entity/projectile/homming_arrow.png");
+        return new ResourceReference("textures/entity/projectile/homming_arrow.png");
     }
 }

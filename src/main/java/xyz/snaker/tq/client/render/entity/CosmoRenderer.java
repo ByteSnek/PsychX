@@ -2,8 +2,8 @@ package xyz.snaker.tq.client.render.entity;
 
 import java.util.Map;
 
-import xyz.snaker.snakerlib.math.PoseStackBuilder;
-import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.snakerlib.math.Tensor;
+import xyz.snaker.snakerlib.resources.ResourceReference;
 import xyz.snaker.tq.client.layer.CosmoLayer;
 import xyz.snaker.tq.client.model.entity.CosmoModel;
 import xyz.snaker.tq.client.render.type.EntityRenderType;
@@ -16,10 +16,10 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
-import org.jetbrains.annotations.NotNull;
-
 import com.google.common.collect.Maps;
 import com.mojang.blaze3d.vertex.PoseStack;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by SnakerBone on 2/01/2023
@@ -46,13 +46,13 @@ public class CosmoRenderer extends MobRenderer<Cosmo, CosmoModel>
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull Cosmo cosmo)
     {
-        return ResourcePath.SOLID_TEXTURE;
+        return ResourceReference.SOLID_TEXTURE;
     }
 
     @Override
     public void render(@NotNull Cosmo cosmo, float entityYaw, float partialTicks, @NotNull PoseStack stack, @NotNull MultiBufferSource source, int packedLight)
     {
-        PoseStackBuilder pose = new PoseStackBuilder(stack);
+        Tensor pose = new Tensor(stack);
         if (cosmo.getVariant().getId() == 6) {
             pose.scale(1.25F);
         }

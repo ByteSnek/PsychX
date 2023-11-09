@@ -1,8 +1,8 @@
 package xyz.snaker.tq.client.model.entity;
 
 import xyz.snaker.snakerlib.math.Maths;
-import xyz.snaker.snakerlib.utility.ResourcePath;
-import xyz.snaker.snakerlib.utility.tools.EntityStuff;
+import xyz.snaker.snakerlib.resources.ResourceReference;
+import xyz.snaker.snakerlib.utility.Entitys;
 import xyz.snaker.tq.level.entity.mob.Cosmo;
 
 import net.minecraft.client.model.EntityModel;
@@ -11,14 +11,14 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-import org.jetbrains.annotations.NotNull;
-
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
+import org.jetbrains.annotations.NotNull;
+
 public class CosmoModel extends EntityModel<Cosmo>
 {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourcePath("cosmo"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceReference("cosmo"), "main");
 
     private final ModelPart base;
 
@@ -67,7 +67,7 @@ public class CosmoModel extends EntityModel<Cosmo>
         double speed = 1.35;
         base.getChild("top").y = Maths.sin(ageInTicks / 2) / 2;
         base.getChild("centre").yRot -= Maths.sin(ageInTicks * Math.PI * Math.PI) / 360;
-        if (EntityStuff.isEntityMoving(cosmo)) {
+        if (Entitys.isEntityMoving(cosmo)) {
             base.y = (Maths.sin(ageInTicks * speed) * Maths.E) + 22;
             base.getChild("bottom").getChild("lowerOuter1").zRot = (Maths.sin(ageInTicks * speed) / Maths.E) - 0.6F;
             base.getChild("bottom").getChild("lowerOuter2").zRot = -(Maths.sin(ageInTicks * speed) / Maths.E) + 0.6F;

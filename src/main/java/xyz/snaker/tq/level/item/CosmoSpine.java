@@ -2,7 +2,7 @@ package xyz.snaker.tq.level.item;
 
 import java.util.function.Consumer;
 
-import xyz.snaker.snakerlib.data.DefaultItemProperties;
+import xyz.snaker.snakerlib.utility.item.ItemProperties;
 import xyz.snaker.tq.client.render.item.CosmoSpineRenderer;
 
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -23,7 +23,7 @@ public class CosmoSpine extends Item
 
     public CosmoSpine()
     {
-        super(DefaultItemProperties.EMPTY);
+        super(ItemProperties.EMPTY);
     }
 
     @Override

@@ -1,8 +1,8 @@
 package xyz.snaker.tq.client.render.block;
 
 import xyz.snaker.snakerlib.client.render.PreppedRenderer;
-import xyz.snaker.snakerlib.math.BasicCube;
-import xyz.snaker.snakerlib.utility.tools.RenderStuff;
+import xyz.snaker.snakerlib.math.Cube;
+import xyz.snaker.snakerlib.utility.Rendering;
 import xyz.snaker.tq.client.render.type.ItemLikeRenderType;
 
 import net.minecraft.client.Minecraft;
@@ -41,8 +41,8 @@ public class ShaderBlockItemRenderer extends PreppedRenderer
             stack.translate(0, 0.5, 0);
         }
 
-        BasicCube.create(consumer, stack);
+        Cube.create(consumer, stack);
         Lighting.setupFor3DItems();
-        RenderStuff.renderOverlayTexture(ItemLikeRenderType.getOverlayFromBlockItem(itemStack.getItem()), stack, source, packedLight, packedOverlay);
+        Rendering.renderOverlayTexture(ItemLikeRenderType.getOverlayFromBlockItem(itemStack.getItem()), stack, source, packedLight, packedOverlay);
     }
 }

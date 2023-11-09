@@ -3,7 +3,7 @@ package xyz.snaker.tq.level.display.entity;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import xyz.snaker.snakerlib.data.DefaultItemProperties;
+import xyz.snaker.snakerlib.utility.item.ItemProperties;
 import xyz.snaker.tq.level.display.DisplayObject;
 
 import net.minecraft.world.entity.EntityType;
@@ -29,7 +29,7 @@ public abstract class EntityDisplay extends Item implements DisplayObject<Living
 
     public EntityDisplay(int stackIndex)
     {
-        this(DefaultItemProperties.EMPTY, stackIndex);
+        this(ItemProperties.EMPTY, stackIndex);
     }
 
     public EntityDisplay()

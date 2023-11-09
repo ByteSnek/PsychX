@@ -17,5 +17,5 @@ public class Effects
 {
     public static final DeferredRegister<MobEffect> REGISTER = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, Tourniqueted.MODID);
 
-    public static final RegistryObject<FlashBangEffect> FLASHBANG = REGISTER.register("flashbang", Suppliers.store(new FlashBangEffect(MobEffectCategory.HARMFUL, 0)));
+    public static final RegistryObject<FlashBangEffect> FLASHBANG = REGISTER.register("flashbang", () -> new FlashBangEffect(MobEffectCategory.HARMFUL, 0));
 }

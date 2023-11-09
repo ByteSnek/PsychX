@@ -2,18 +2,18 @@ package xyz.snaker.tq.rego;
 
 import java.util.function.Supplier;
 
-import xyz.snaker.snakerlib.data.DefaultBlockProperties;
 import xyz.snaker.snakerlib.level.block.FlowerBlock;
 import xyz.snaker.snakerlib.level.block.SaplingBlock;
 import xyz.snaker.snakerlib.level.block.TallPlantBlock;
-import xyz.snaker.snakerlib.level.world.SimpleTreeGrower;
+import xyz.snaker.snakerlib.level.block.grower.SimpleTreeGrower;
 import xyz.snaker.snakerlib.math.Maths;
-import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.snakerlib.resources.ResourceReference;
+import xyz.snaker.snakerlib.utility.block.BlockProperties;
 import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.level.block.OverlayBlock;
 import xyz.snaker.tq.level.block.ShaderBlock;
 import xyz.snaker.tq.level.fluid.Comasote;
-import xyz.snaker.tq.level.world.feature.FeatureKey;
+import xyz.snaker.tq.level.world.candidate.FeatureCandidate;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
@@ -50,22 +50,22 @@ public class Blocks
     public static final RegistryObject<Block> FOGGY = registerShaderBlock("foggy", BlockEntities.FOGGY);
     public static final RegistryObject<Block> STATIC = registerShaderBlock("static", BlockEntities.STATIC);
 
-    public static final RegistryObject<Block> PINKTAILS = registerBlockWithItem("pink_tails", () -> new FlowerBlock(() -> MobEffects.HARM, Maths.secondsToTicks(5), DefaultBlockProperties.PLANT.apply(MapColor.COLOR_PINK), Tags.GROUNDRICH, true));
-    public static final RegistryObject<Block> SPLITLEAF = registerBlockWithItem("split_leaf", () -> new FlowerBlock(() -> MobEffects.HARM, Maths.secondsToTicks(5), DefaultBlockProperties.PLANT.apply(MapColor.COLOR_CYAN), Tags.GROUNDRICH, true));
-    public static final RegistryObject<Block> SNAKEROOT = registerBlockWithItem("snake_root", () -> new TallPlantBlock(DefaultBlockProperties.GRASS.apply(MapColor.COLOR_CYAN), Tags.GROUNDRICH, true));
-    public static final RegistryObject<Block> TALL_SNAKEROOT = registerBlockWithItem("tall_snake_root", () -> new TallPlantBlock(DefaultBlockProperties.GRASS.apply(MapColor.COLOR_CYAN), Tags.GROUNDRICH, true));
+    public static final RegistryObject<Block> PINKTAILS = registerBlockWithItem("pink_tails", () -> new FlowerBlock(() -> MobEffects.HARM, Maths.secondsToTicks(5), BlockProperties.PLANT.apply(MapColor.COLOR_PINK), Tags.GROUNDRICH, true));
+    public static final RegistryObject<Block> SPLITLEAF = registerBlockWithItem("split_leaf", () -> new FlowerBlock(() -> MobEffects.HARM, Maths.secondsToTicks(5), BlockProperties.PLANT.apply(MapColor.COLOR_CYAN), Tags.GROUNDRICH, true));
+    public static final RegistryObject<Block> SNAKEROOT = registerBlockWithItem("snake_root", () -> new TallPlantBlock(BlockProperties.GRASS.apply(MapColor.COLOR_CYAN), Tags.GROUNDRICH, true));
+    public static final RegistryObject<Block> TALL_SNAKEROOT = registerBlockWithItem("tall_snake_root", () -> new TallPlantBlock(BlockProperties.GRASS.apply(MapColor.COLOR_CYAN), Tags.GROUNDRICH, true));
 
-    public static final RegistryObject<Block> COMASTONE = registerBlockWithItem("coma_stone", () -> new Block(DefaultBlockProperties.NORMAL.apply(MapColor.COLOR_BLACK)));
+    public static final RegistryObject<Block> COMASTONE = registerBlockWithItem("coma_stone", () -> new Block(BlockProperties.NORMAL.apply(MapColor.COLOR_BLACK)));
 
-    public static final RegistryObject<Block> ILLUSIVE_SAPLING = registerBlockWithItem("illusive_sapling", () -> new SaplingBlock(new SimpleTreeGrower(FeatureKey.ILLUSIVE_TREE.getConfigKey()), DefaultBlockProperties.GRASS.apply(MapColor.COLOR_PURPLE), Tags.GROUNDRICH, true));
-    public static final RegistryObject<Block> ILLUSIVE_LOG = registerBlockWithItem("illusive_log", () -> new RotatedPillarBlock(DefaultBlockProperties.WOOD.apply(MapColor.COLOR_PURPLE)));
-    public static final RegistryObject<Block> ILLUSIVE_PLANKS = registerBlockWithItem("illusive_planks", () -> new Block(DefaultBlockProperties.WOOD.apply(MapColor.COLOR_PURPLE)));
-    public static final RegistryObject<Block> ILLUSIVE_LEAVES = registerBlockWithItem("illusive_leaves", () -> new LeavesBlock(DefaultBlockProperties.LEAVES.apply(MapColor.COLOR_PURPLE)));
+    public static final RegistryObject<Block> ILLUSIVE_SAPLING = registerBlockWithItem("illusive_sapling", () -> new SaplingBlock(new SimpleTreeGrower(FeatureCandidate.ILLUSIVE_TREE.getConfiguredFeatureKey()), BlockProperties.GRASS.apply(MapColor.COLOR_PURPLE), Tags.GROUNDRICH, true));
+    public static final RegistryObject<Block> ILLUSIVE_LOG = registerBlockWithItem("illusive_log", () -> new RotatedPillarBlock(BlockProperties.WOOD.apply(MapColor.COLOR_PURPLE)));
+    public static final RegistryObject<Block> ILLUSIVE_PLANKS = registerBlockWithItem("illusive_planks", () -> new Block(BlockProperties.WOOD.apply(MapColor.COLOR_PURPLE)));
+    public static final RegistryObject<Block> ILLUSIVE_LEAVES = registerBlockWithItem("illusive_leaves", () -> new LeavesBlock(BlockProperties.LEAVES.apply(MapColor.COLOR_PURPLE)));
 
-    public static final RegistryObject<Block> DELUSIVE_SAPLING = registerBlockWithItem("delusive_sapling", () -> new SaplingBlock(new SimpleTreeGrower(FeatureKey.DELUSIVE_TREE.getConfigKey()), DefaultBlockProperties.GRASS.apply(MapColor.COLOR_MAGENTA), Tags.GROUNDRICH, true));
-    public static final RegistryObject<Block> DELUSIVE_LOG = registerBlockWithItem("delusive_log", () -> new RotatedPillarBlock(DefaultBlockProperties.WOOD.apply(MapColor.COLOR_MAGENTA)));
-    public static final RegistryObject<Block> DELUSIVE_PLANKS = registerBlockWithItem("delusive_planks", () -> new Block(DefaultBlockProperties.WOOD.apply(MapColor.COLOR_MAGENTA)));
-    public static final RegistryObject<Block> DELUSIVE_LEAVES = registerBlockWithItem("delusive_leaves", () -> new LeavesBlock(DefaultBlockProperties.LEAVES.apply(MapColor.COLOR_MAGENTA)));
+    public static final RegistryObject<Block> DELUSIVE_SAPLING = registerBlockWithItem("delusive_sapling", () -> new SaplingBlock(new SimpleTreeGrower(FeatureCandidate.DELUSIVE_TREE.getConfiguredFeatureKey()), BlockProperties.GRASS.apply(MapColor.COLOR_MAGENTA), Tags.GROUNDRICH, true));
+    public static final RegistryObject<Block> DELUSIVE_LOG = registerBlockWithItem("delusive_log", () -> new RotatedPillarBlock(BlockProperties.WOOD.apply(MapColor.COLOR_MAGENTA)));
+    public static final RegistryObject<Block> DELUSIVE_PLANKS = registerBlockWithItem("delusive_planks", () -> new Block(BlockProperties.WOOD.apply(MapColor.COLOR_MAGENTA)));
+    public static final RegistryObject<Block> DELUSIVE_LEAVES = registerBlockWithItem("delusive_leaves", () -> new LeavesBlock(BlockProperties.LEAVES.apply(MapColor.COLOR_MAGENTA)));
 
     public static final RegistryObject<Block> DARK_OVERLAY = registerOverlay("dark");
     public static final RegistryObject<Block> WHITE_OVERLAY = registerOverlay("white");
@@ -107,6 +107,6 @@ public class Blocks
 
     public static class Tags
     {
-        public static final TagKey<Block> GROUNDRICH = TagKey.create(Registries.BLOCK, new ResourcePath("groundrich"));
+        public static final TagKey<Block> GROUNDRICH = TagKey.create(Registries.BLOCK, new ResourceReference("groundrich"));
     }
 }

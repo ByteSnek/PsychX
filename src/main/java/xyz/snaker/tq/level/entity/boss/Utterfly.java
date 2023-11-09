@@ -2,12 +2,10 @@ package xyz.snaker.tq.level.entity.boss;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.UUID;
 
-import xyz.snaker.snakerlib.level.entity.Boss;
 import xyz.snaker.snakerlib.level.entity.FlyingHostile;
-import xyz.snaker.snakerlib.level.entity.ai.FlyGoal;
-import xyz.snaker.snakerlib.level.entity.ai.LookAroundGoal;
+import xyz.snaker.snakerlib.level.entity.ai.goal.FlyGoal;
+import xyz.snaker.snakerlib.level.entity.ai.goal.LookAroundGoal;
 import xyz.snaker.snakerlib.math.Maths;
 import xyz.snaker.tq.level.entity.Comatosian;
 import xyz.snaker.tq.level.entity.projectile.ExplosiveHommingArrow;
@@ -41,7 +39,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by SnakerBone on 4/01/2023
  **/
-public class Utterfly extends FlyingHostile implements Boss, Comatosian
+public class Utterfly extends FlyingHostile implements Comatosian
 {
     private static final EntityDataAccessor<Integer> PHASE = SynchedEntityData.defineId(Utterfly.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> CHARGING = SynchedEntityData.defineId(Utterfly.class, EntityDataSerializers.BOOLEAN);
@@ -306,12 +304,6 @@ public class Utterfly extends FlyingHostile implements Boss, Comatosian
     public void customServerAiStep()
     {
         bossEvent.setProgress(getHealth() / getMaxHealth());
-    }
-
-    @Override
-    public UUID getBossEventId()
-    {
-        return bossEvent.getId();
     }
 
     @Override

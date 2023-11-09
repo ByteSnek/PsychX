@@ -1,6 +1,6 @@
 package xyz.snaker.tq.client.model.entity;
 
-import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.snakerlib.resources.ResourceReference;
 import xyz.snaker.tq.level.entity.mob.Snipe;
 
 import net.minecraft.client.model.EntityModel;
@@ -17,7 +17,7 @@ import com.mojang.math.Axis;
 
 public class SnipeModel extends EntityModel<Snipe>
 {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourcePath("snipe"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceReference("snipe"), "main");
 
     private final ModelPart body;
 

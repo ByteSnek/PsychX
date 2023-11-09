@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#tq:spawns_flutterfly",
+  "spawners": {
+    "type": "tq:flutterfly",
+    "maxCount": 3,
+    "minCount": 1,
+    "weight": 35
+  }
+}

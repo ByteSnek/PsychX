@@ -70,7 +70,7 @@ public class ItemTabDisplayRenderer extends CyclicalIconRenderer
                 if (notifyError) {
                     String errorMessage = e.getMessage();
                     String className = item.getClass().getSimpleName();
-                    SnakerLib.LOGGER.warnf("Could not render %s: %s", className, errorMessage);
+                    SnakerLib.LOGGER.warnf("Could not render []: []", className, errorMessage);
                     notifyError = false;
                 }
             }

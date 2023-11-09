@@ -1,10 +1,10 @@
 package xyz.snaker.tq.client.render.item;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import xyz.snaker.snakerlib.client.render.PreppedRenderer;
-import xyz.snaker.snakerlib.concurrent.AsyncHashMap;
-import xyz.snaker.snakerlib.math.PoseStackBuilder;
+import xyz.snaker.snakerlib.math.Tensor;
 import xyz.snaker.tq.client.model.item.CosmoSpineModel;
 import xyz.snaker.tq.client.render.type.ItemLikeRenderType;
 import xyz.snaker.tq.rego.Items;
@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
  **/
 public class CosmoSpineRenderer extends PreppedRenderer
 {
-    public static final Map<Item, RenderType> TYPE = Util.make(new AsyncHashMap<>(), map ->
+    public static final Map<Item, RenderType> TYPE = Util.make(new HashMap<>(), map ->
     {
         map.put(Items.RED_COSMO_SPINE.get(), ItemLikeRenderType.RED_STARS.get());
         map.put(Items.GREEN_COSMO_SPINE.get(), ItemLikeRenderType.GREEN_STARS.get());
@@ -57,7 +57,7 @@ public class CosmoSpineRenderer extends PreppedRenderer
     @Override
     public void renderByItem(@NotNull ItemStack itemStack, @NotNull ItemDisplayContext context, @NotNull PoseStack stack, @NotNull MultiBufferSource source, int packedLight, int packedOverlay)
     {
-        PoseStackBuilder pose = new PoseStackBuilder(stack);
+        Tensor pose = new Tensor(stack);
         switch (context) {
             case GUI -> pose.translate(0.56);
             case FIXED -> stack.translate(0.56, 0.56, 0.5);

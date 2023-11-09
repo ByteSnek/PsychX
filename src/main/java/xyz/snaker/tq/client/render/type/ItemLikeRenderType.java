@@ -1,10 +1,10 @@
 package xyz.snaker.tq.client.render.type;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-import xyz.snaker.snakerlib.client.render.processor.SimpleRenderTypeProcessor;
-import xyz.snaker.snakerlib.concurrent.AsyncHashMap;
+import xyz.snaker.snakerlib.client.render.SRTP;
 import xyz.snaker.snakerlib.utility.Checks;
 import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.client.Shaders;
@@ -28,7 +28,7 @@ import com.mojang.datafixers.util.Pair;
 /**
  * Created by SnakerBone on 12/08/2023
  **/
-public enum ItemLikeRenderType implements SimpleRenderTypeProcessor
+public enum ItemLikeRenderType implements SRTP
 {
     BLACK_STARS(Shaders::getBlackStars),
     WHITE_STARS(Shaders::getWhiteStars),
@@ -52,7 +52,7 @@ public enum ItemLikeRenderType implements SimpleRenderTypeProcessor
 
     private final Supplier<ShaderInstance> shader;
     private final RenderType type;
-    private static final Map<ItemLikeRenderType, Block> overlayMap = Util.make(new AsyncHashMap<>(), map ->
+    private static final Map<ItemLikeRenderType, Block> overlayMap = Util.make(new HashMap<>(), map ->
     {
         map.put(SWIRLY, Blocks.SHIMMER_OVERLAY.get());
         map.put(WINTER, Blocks.TURQUOISE_OVERLAY.get());
@@ -65,7 +65,7 @@ public enum ItemLikeRenderType implements SimpleRenderTypeProcessor
         map.put(CLIP, Blocks.DARK_OVERLAY.get());
         map.put(FIRE, Blocks.DARK_OVERLAY.get());
     });
-    private static final Map<BlockEntityType<?>, ItemLikeRenderType> blockEntityMap = Util.make(new AsyncHashMap<>(), map ->
+    private static final Map<BlockEntityType<?>, ItemLikeRenderType> blockEntityMap = Util.make(new HashMap<>(), map ->
     {
         map.put(BlockEntities.SWIRL.get(), SWIRLY);
         map.put(BlockEntities.SNOWFLAKE.get(), WINTER);
@@ -78,7 +78,7 @@ public enum ItemLikeRenderType implements SimpleRenderTypeProcessor
         map.put(BlockEntities.FOGGY.get(), BLUR_FOG);
         map.put(BlockEntities.STATIC.get(), STRANDS);
     });
-    private static final Map<Item, ItemLikeRenderType> blockItemMap = Util.make(new AsyncHashMap<>(), map ->
+    private static final Map<Item, ItemLikeRenderType> blockItemMap = Util.make(new HashMap<>(), map ->
     {
         map.put(Items.SWIRL_BLOCK.get(), ItemLikeRenderType.SWIRLY);
         map.put(Items.SNOWFLAKE_BLOCK.get(), ItemLikeRenderType.WINTER);
@@ -91,7 +91,7 @@ public enum ItemLikeRenderType implements SimpleRenderTypeProcessor
         map.put(Items.FOGGY_BLOCK.get(), ItemLikeRenderType.BLUR_FOG);
         map.put(Items.STATIC_BLOCK.get(), ItemLikeRenderType.STRANDS);
     });
-    private static final Map<BlockEntityType<?>, ShaderBlockRenderer<?>> shaderBlockRendererMap = Util.make(new AsyncHashMap<>(), map ->
+    private static final Map<BlockEntityType<?>, ShaderBlockRenderer<?>> shaderBlockRendererMap = Util.make(new HashMap<>(), map ->
     {
         map.put(BlockEntities.SWIRL.get(), new ShaderBlockRenderer<>(SWIRLY));
         map.put(BlockEntities.SNOWFLAKE.get(), new ShaderBlockRenderer<>(WINTER));

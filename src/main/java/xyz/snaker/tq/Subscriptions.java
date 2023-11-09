@@ -2,16 +2,19 @@ package xyz.snaker.tq;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
 
 import xyz.snaker.snakerlib.SnakerLib;
-import xyz.snaker.snakerlib.concurrent.event.management.*;
-import xyz.snaker.snakerlib.internal.glfw.KeyPair;
-import xyz.snaker.snakerlib.utility.ResourcePath;
-import xyz.snaker.snakerlib.utility.tools.KeyboardStuff;
+import xyz.snaker.snakerlib.event.*;
+import xyz.snaker.snakerlib.internal.KeyPair;
+import xyz.snaker.snakerlib.resources.ResourceReference;
+import xyz.snaker.snakerlib.utility.ExecuteOnce;
+import xyz.snaker.snakerlib.utility.Keyboard;
 import xyz.snaker.tq.client.model.entity.*;
 import xyz.snaker.tq.client.model.item.CosmoSpineModel;
 import xyz.snaker.tq.client.render.block.ShaderBlockRenderer;
 import xyz.snaker.tq.client.render.entity.*;
+import xyz.snaker.tq.client.render.type.ItemLikeRenderType;
 import xyz.snaker.tq.commands.ConfigCommand;
 import xyz.snaker.tq.commands.ForceRemoveCommand;
 import xyz.snaker.tq.config.Config;
@@ -20,21 +23,22 @@ import xyz.snaker.tq.level.entity.creature.Flutterfly;
 import xyz.snaker.tq.level.entity.creature.Frolicker;
 import xyz.snaker.tq.level.entity.mob.*;
 import xyz.snaker.tq.level.item.Tourniquet;
-import xyz.snaker.tq.rego.Effects;
-import xyz.snaker.tq.rego.Items;
-import xyz.snaker.tq.rego.Levels;
-import xyz.snaker.tq.utility.Once;
-import xyz.snaker.tq.utility.level.ComatoseStuff;
+import xyz.snaker.tq.level.world.dimension.Comatose;
+import xyz.snaker.tq.rego.*;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -60,13 +64,6 @@ import com.mojang.blaze3d.platform.Window;
 import com.mojang.brigadier.CommandDispatcher;
 
 import org.lwjgl.glfw.GLFW;
-
-import static net.minecraft.client.renderer.RenderType.SOLID;
-import static xyz.snaker.tq.client.render.type.ItemLikeRenderType.*;
-import static xyz.snaker.tq.rego.BlockEntities.*;
-import static xyz.snaker.tq.rego.Entities.*;
-import static xyz.snaker.tq.rego.Fluids.COMASOTE;
-import static xyz.snaker.tq.rego.Fluids.FLOWING_COMASOTE;
 
 /**
  * Created by SnakerBone on 2/01/2023
@@ -102,28 +99,39 @@ public class Subscriptions
         {
             EntityRendererRegoManager manager = new EntityRendererRegoManager(event);
 
-            manager.registerBlockEntity(SWIRL, new ShaderBlockRenderer<>(SWIRLY));
-            manager.registerBlockEntity(SNOWFLAKE, new ShaderBlockRenderer<>(WINTER));
-            manager.registerBlockEntity(WATERCOLOUR, new ShaderBlockRenderer<>(WCOLOUR));
-            manager.registerBlockEntity(MULTICOLOUR, new ShaderBlockRenderer<>(MCOLOUR));
-            manager.registerBlockEntity(FLAMES, new ShaderBlockRenderer<>(FIRE));
-            manager.registerBlockEntity(STARRY, new ShaderBlockRenderer<>(BLACK_STARS));
-            manager.registerBlockEntity(GEOMETRIC, new ShaderBlockRenderer<>(CLIP));
-            manager.registerBlockEntity(BURNING, new ShaderBlockRenderer<>(BURN));
-            manager.registerBlockEntity(FOGGY, new ShaderBlockRenderer<>(BLUR_FOG));
-            manager.registerBlockEntity(STATIC, new ShaderBlockRenderer<>(STRANDS));
+            manager.registerBlockEntity(BlockEntities.SWIRL, new ShaderBlockRenderer<>(ItemLikeRenderType.SWIRLY));
+            manager.registerBlockEntity(BlockEntities.SNOWFLAKE, new ShaderBlockRenderer<>(ItemLikeRenderType.WINTER));
+            manager.registerBlockEntity(BlockEntities.WATERCOLOUR, new ShaderBlockRenderer<>(ItemLikeRenderType.WCOLOUR));
+            manager.registerBlockEntity(BlockEntities.MULTICOLOUR, new ShaderBlockRenderer<>(ItemLikeRenderType.MCOLOUR));
+            manager.registerBlockEntity(BlockEntities.FLAMES, new ShaderBlockRenderer<>(ItemLikeRenderType.FIRE));
+            manager.registerBlockEntity(BlockEntities.STARRY, new ShaderBlockRenderer<>(ItemLikeRenderType.BLACK_STARS));
+            manager.registerBlockEntity(BlockEntities.GEOMETRIC, new ShaderBlockRenderer<>(ItemLikeRenderType.CLIP));
+            manager.registerBlockEntity(BlockEntities.BURNING, new ShaderBlockRenderer<>(ItemLikeRenderType.BURN));
+            manager.registerBlockEntity(BlockEntities.FOGGY, new ShaderBlockRenderer<>(ItemLikeRenderType.BLUR_FOG));
+            manager.registerBlockEntity(BlockEntities.STATIC, new ShaderBlockRenderer<>(ItemLikeRenderType.STRANDS));
 
-            manager.registerEntity(COSMO, CosmoRenderer::new);
-            manager.registerEntity(SNIPE, SnipeRenderer::new);
-            manager.registerEntity(FLARE, FlareRenderer::new);
-            manager.registerEntity(COSMIC_CREEPER, CosmicCreeperRenderer::new);
-            manager.registerEntity(COSMIC_CREEPERITE, CosmicCreeperiteRenderer::new);
-            manager.registerEntity(FROLICKER, FrolickerRenderer::new);
-            manager.registerEntity(FLUTTERFLY, FlutterflyRenderer::new);
-            manager.registerEntity(UTTERFLY, UtterflyRenderer::new);
-            manager.registerEntity(HOMMING_ARROW, HommingArrowRenderer::new);
-            manager.registerEntity(EXPLOSIVE_HOMMING_ARROW, ExplosiveHommingArrowRenderer::new);
-            manager.registerEntity(COSMIC_RAY, CosmicRayRenderer::new);
+            manager.registerEntity(Entities.COSMO, CosmoRenderer::new);
+            manager.registerEntity(Entities.SNIPE, SnipeRenderer::new);
+            manager.registerEntity(Entities.FLARE, FlareRenderer::new);
+            manager.registerEntity(Entities.COSMIC_CREEPER, CosmicCreeperRenderer::new);
+            manager.registerEntity(Entities.COSMIC_CREEPERITE, CosmicCreeperiteRenderer::new);
+            manager.registerEntity(Entities.FROLICKER, FrolickerRenderer::new);
+            manager.registerEntity(Entities.FLUTTERFLY, FlutterflyRenderer::new);
+            manager.registerEntity(Entities.UTTERFLY, UtterflyRenderer::new);
+            manager.registerEntity(Entities.HOMMING_ARROW, HommingArrowRenderer::new);
+            manager.registerEntity(Entities.EXPLOSIVE_HOMMING_ARROW, ExplosiveHommingArrowRenderer::new);
+            manager.registerEntity(Entities.COSMIC_RAY, CosmicRayRenderer::new);
+
+            manager.close();
+        }
+
+        @SubscribeEvent
+        public static void onClientSetup(FMLClientSetupEvent event)
+        {
+            ClientSetupManager manager = new ClientSetupManager(event);
+
+            manager.setFluidRenderLayer(Fluids.COMASOTE, RenderType.SOLID);
+            manager.setFluidRenderLayer(Fluids.FLOWING_COMASOTE, RenderType.SOLID);
 
             manager.close();
         }
@@ -137,25 +145,14 @@ public class Subscriptions
         {
             EntityAttrCreationManager manager = new EntityAttrCreationManager(event);
 
-            manager.put(COSMO, Cosmo.attributes());
-            manager.put(SNIPE, Snipe.attributes());
-            manager.put(FLARE, Flare.attributes());
-            manager.put(COSMIC_CREEPER, CosmicCreeper.attributes());
-            manager.put(COSMIC_CREEPERITE, CosmicCreeperite.attributes());
-            manager.put(FROLICKER, Frolicker.attributes());
-            manager.put(FLUTTERFLY, Flutterfly.attributes());
-            manager.put(UTTERFLY, Utterfly.attributes());
-
-            manager.close();
-        }
-
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event)
-        {
-            ClientSetupManager manager = new ClientSetupManager(event);
-
-            manager.setFluidRenderLayer(COMASOTE, SOLID);
-            manager.setFluidRenderLayer(FLOWING_COMASOTE, SOLID);
+            manager.put(Entities.COSMO, Cosmo.attributes());
+            manager.put(Entities.SNIPE, Snipe.attributes());
+            manager.put(Entities.FLARE, Flare.attributes());
+            manager.put(Entities.COSMIC_CREEPER, CosmicCreeper.attributes());
+            manager.put(Entities.COSMIC_CREEPERITE, CosmicCreeperite.attributes());
+            manager.put(Entities.FROLICKER, Frolicker.attributes());
+            manager.put(Entities.FLUTTERFLY, Flutterfly.attributes());
+            manager.put(Entities.UTTERFLY, Utterfly.attributes());
 
             manager.close();
         }
@@ -165,12 +162,12 @@ public class Subscriptions
         {
             SpawnPlacementRegoManager manager = new SpawnPlacementRegoManager(event);
 
-            manager.register(COSMO, Cosmo::spawnRules);
-            manager.register(FLARE, Flare::spawnRules);
-            manager.register(COSMIC_CREEPER, CosmicCreeper::spawnRules);
-            manager.register(FROLICKER, Frolicker::spawnRules);
-            manager.register(SNIPE, Snipe::spawnRules);
-            manager.register(FLUTTERFLY, Flutterfly::spawnRules);
+            manager.register(Entities.COSMO, Cosmo::spawnRules);
+            manager.register(Entities.FLARE, Flare::spawnRules);
+            manager.register(Entities.COSMIC_CREEPER, CosmicCreeper::spawnRules);
+            manager.register(Entities.FROLICKER, Frolicker::spawnRules);
+            manager.register(Entities.SNIPE, Snipe::spawnRules);
+            manager.register(Entities.FLUTTERFLY, Flutterfly::spawnRules);
 
             manager.close();
         }
@@ -190,7 +187,7 @@ public class Subscriptions
             CompoundTag data = player.getPersistentData();
             RandomSource random = level.getRandom();
             Inventory inventory = player.getInventory();
-            Once once = new Once();
+            ExecuteOnce once = new ExecuteOnce();
 
             ItemStack saturatedTwine = Items.SATURATED_TWINE.get().getDefaultInstance();
             ItemStack weatheredTwine = Items.WEATHERED_TWINE.get().getDefaultInstance();
@@ -211,19 +208,19 @@ public class Subscriptions
                     data.putByte("ComaStage", comaStage);
                 }
 
-                if (random.nextInt(ComatoseStuff.getComaStageOccurence()) == 0) {
+                if (random.nextInt(Config.COMMON.comaStageProgressionOccurrence.get() * 1000) == 0) {
                     comaStage++;
                 }
 
                 if (comaStage >= 10) {
-                    ComatoseStuff.wakeUpPlayer(player);
+                    wakeUpPlayer(player);
                     comaStage = 0;
                 }
             }
 
-            if (KeyPair.SHIFT.sequentialDown() && KeyboardStuff.isKeyDown(GLFW.GLFW_KEY_KP_ENTER)) {
+            if (KeyPair.SHIFT.sequentialDown() && Keyboard.isKeyDown(GLFW.GLFW_KEY_KP_ENTER)) {
                 if (Config.COMMON.healthRepairKeybindingsActive.get()) {
-                    if (once.once()) {
+                    if (once.execute()) {
                         float health = player.getHealth();
                         float maxHealth = player.getMaxHealth();
 
@@ -271,17 +268,38 @@ public class Subscriptions
             ForceRemoveCommand.register(dispatcher);
             ConfigCommand.register(dispatcher);
         }
+
+        static void wakeUpPlayer(Player player)
+        {
+            Level level = player.level();
+
+            if (player.level().dimension() != Levels.COMATOSE) {
+                return;
+            }
+
+            if (level instanceof ServerLevel serverLevel) {
+                String wakeUpDest = Level.OVERWORLD.location().toString();
+                CompoundTag data = player.getPersistentData();
+                Function<BlockPos, Comatose.Teleporter> teleporter = Comatose.getTeleporter();
+
+                if (data.contains("PlayerWakeUpDestination")) {
+                    wakeUpDest = data.getString("PlayerWakeUpDestination");
+                }
+
+                MinecraftServer server = serverLevel.getServer();
+                ResourceKey<Level> key = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(wakeUpDest));
+                ServerLevel dest = server.getLevel(key);
+
+                if (dest != null && player.canChangeDimensions()) {
+                    player.changeDimension(dest, teleporter.apply(player.getOnPos()));
+                }
+            }
+        }
     }
 
     @Mod.EventBusSubscriber(modid = Tourniqueted.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
     public static class ForgeClient
     {
-        @SubscribeEvent
-        public static void onClientTick(TickEvent.ClientTickEvent event)
-        {
-
-        }
-
         @SubscribeEvent
         public static void onGuiOverlayRender(RenderGuiOverlayEvent.Post event)
         {
@@ -322,7 +340,7 @@ public class Subscriptions
                     }
                 }
 
-                if (ComatoseStuff.shouldRenderComaStage(player)) {
+                if (player.level().dimension() == Levels.COMATOSE && player.getPersistentData().contains("ComaStage") && Config.CLIENT.showComaStage.get()) {
                     byte stage = data.getByte("ComaStage");
                     String text = "Coma Stage: " + stage + "/10";
                     graphics.drawString(minecraft.fontFilterFishy, text, 5, 5, 0xFFFFFF);
@@ -373,7 +391,7 @@ public class Subscriptions
         private static void loadEffect(Minecraft minecraft, String name)
         {
             byte[] nibbles = name.getBytes();
-            ResourceLocation effect = new ResourcePath("shaders/post/" + name + ".json");
+            ResourceLocation effect = new ResourceReference("shaders/post/" + name + ".json");
 
             minecraft.tell(() ->
             {

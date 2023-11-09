@@ -1,6 +1,6 @@
 package xyz.snaker.tq.rego;
 
-import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.snakerlib.resources.ResourceReference;
 import xyz.snaker.tq.level.world.preset.ConcreteFlatLevelPreset;
 import xyz.snaker.tq.level.world.preset.IronFlatLevelPreset;
 
@@ -25,6 +25,6 @@ public class FlatLevelPresets
 
     static ResourceKey<FlatLevelGeneratorPreset> key(String name)
     {
-        return ResourceKey.create(Registries.FLAT_LEVEL_GENERATOR_PRESET, new ResourcePath(name));
+        return ResourceKey.create(Registries.FLAT_LEVEL_GENERATOR_PRESET, new ResourceReference(name));
     }
 }

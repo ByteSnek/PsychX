@@ -3,7 +3,7 @@ package xyz.snaker.tq.level.entity.mob;
 import java.util.EnumSet;
 
 import xyz.snaker.snakerlib.math.Maths;
-import xyz.snaker.snakerlib.utility.tools.EntityStuff;
+import xyz.snaker.snakerlib.utility.Entitys;
 import xyz.snaker.tq.level.entity.Comatosian;
 
 import net.minecraft.nbt.CompoundTag;
@@ -251,7 +251,7 @@ public class CosmicCreeperite extends Monster implements Comatosian, PowerableMo
             teleportTime++;
 
             if (!isIgnited()) {
-                if (teleportTime >= random.nextInt(80, 440) && !EntityStuff.isEntityMovingXZ(this)) {
+                if (teleportTime >= random.nextInt(80, 440) && !Entitys.isEntityMovingXZ(this)) {
                     int targetScanRadius = 6;
 
                     double x = getRandomX(random.nextInt(targetScanRadius, (targetScanRadius * 2)) * Maths.clamp(random.nextDouble(), 0.875, 3.475)) - 0.5;

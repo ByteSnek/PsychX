@@ -2,8 +2,8 @@ package xyz.snaker.tq.rego;
 
 import java.util.function.Supplier;
 
-import xyz.snaker.snakerlib.utility.ResourcePath;
-import xyz.snaker.snakerlib.utility.tools.ColourStuff;
+import xyz.snaker.snakerlib.resources.ResourceReference;
+import xyz.snaker.snakerlib.utility.Colours;
 import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.level.block.ShaderBlockItem;
 import xyz.snaker.tq.level.display.tab.BlockTabDisplay;
@@ -96,18 +96,18 @@ public class Items
 
     static RegistryObject<ForgeSpawnEggItem> registerSpawnEgg(RegistryObject<? extends EntityType<? extends Mob>> mob)
     {
-        Supplier<ForgeSpawnEggItem> egg = () -> new ForgeSpawnEggItem(mob, ColourStuff.randomHex(), ColourStuff.randomHex(), new Item.Properties());
+        Supplier<ForgeSpawnEggItem> egg = () -> new ForgeSpawnEggItem(mob, Colours.randomHex(), Colours.randomHex(), new Item.Properties());
         return register(mob.getId().getPath() + "_spawn_egg", egg);
     }
 
     public static class Tags
     {
         public static final TagKey<Item> COSMO_SPINES = tag("cosmo_spines");
-        public static final TagKey<Item> DROPS = tag("drops");
+        public static final TagKey<Item> DROPPABLE = tag("droppable");
 
         public static TagKey<Item> tag(String name)
         {
-            return ItemTags.create(new ResourcePath(name));
+            return ItemTags.create(new ResourceReference(name));
         }
     }
 }

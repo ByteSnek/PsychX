@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
-import xyz.snaker.snakerlib.utility.tools.UnsafeStuff;
+import xyz.snaker.snakerlib.utility.unsafe.TheUnsafe;
 import xyz.snaker.tq.rego.Effects;
 import xyz.snaker.tq.rego.Sounds;
 
@@ -82,7 +82,7 @@ public class SoundModification
         Map<SoundInstance, ChannelAccess.ChannelHandle> playingSounds;
 
         try {
-            playingSounds = UnsafeStuff.cast(playingSoundsField.get(soundEngine));
+            playingSounds = TheUnsafe.cast(playingSoundsField.get(soundEngine));
         } catch (IllegalArgumentException | IllegalAccessException e) {
             return;
         }

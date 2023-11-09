@@ -2,8 +2,8 @@ package xyz.snaker.tq.level.block.entity;
 
 import java.util.List;
 
-import xyz.snaker.snakerlib.utility.tools.CollectionStuff;
-import xyz.snaker.snakerlib.utility.tools.UnsafeStuff;
+import xyz.snaker.snakerlib.utility.Streams;
+import xyz.snaker.snakerlib.utility.unsafe.TheUnsafe;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
@@ -55,11 +55,12 @@ public abstract class ShaderBlockEntity<T extends BlockEntity> extends BlockEnti
         if (level != null) {
             Packet<ClientGamePacketListener> packet = blockEntity.getUpdatePacket();
             if (packet != null) {
-                List<Player> players = UnsafeStuff.cast(level.players());
+                List<Player> players = TheUnsafe.cast(level.players());
                 BlockPos pos = blockEntity.getBlockPos();
-                CollectionStuff.newCollectionStream(players, Player[]::new).forEach(player -> {
+                Streams.newCollectionStream(players, Player[]::new).forEach(player ->
+                {
                     if (player instanceof ServerPlayer serverPlayer) {
-                        if (UnsafeStuff.versatileObject()) {
+                        if (TheUnsafe.versatileObject()) {
                             // FIXMEEEEE: make this thing actually do something with
                             // my shader blocks in tq when placed by world gen.
                             // if you have a solution to this please message me RIGHT NOW.

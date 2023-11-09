@@ -1,7 +1,7 @@
 package xyz.snaker.tq.level.block;
 
 import xyz.snaker.snakerlib.SnakerLib;
-import xyz.snaker.snakerlib.data.DefaultBlockProperties;
+import xyz.snaker.snakerlib.utility.block.BlockProperties;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
@@ -27,7 +27,7 @@ public class ShaderBlock<T extends BlockEntity> extends BaseEntityBlock
 
     public ShaderBlock(RegistryObject<BlockEntityType<T>> blockEntity)
     {
-        super(DefaultBlockProperties.PERSPECTIVE.apply(MapColor.NONE));
+        super(BlockProperties.PERSPECTIVE.apply(MapColor.NONE));
         this.blockEntity = blockEntity;
     }
 
@@ -51,7 +51,7 @@ public class ShaderBlock<T extends BlockEntity> extends BaseEntityBlock
         if (!level.isClientSide && placer != null) {
             String placerName = placer.getDisplayName().getString();
             String blockPosition = pos.toShortString();
-            SnakerLib.LOGGER.infof("A shader block has been placed by %s at [ %s ]", placerName, blockPosition);
+            SnakerLib.LOGGER.infof("A shader block has been placed by [] at [ [] ]", placerName, blockPosition);
         }
     }
 }

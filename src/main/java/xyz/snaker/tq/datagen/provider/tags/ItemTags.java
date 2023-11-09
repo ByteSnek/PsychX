@@ -1,11 +1,9 @@
 package xyz.snaker.tq.datagen.provider.tags;
 
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import xyz.snaker.tq.Tourniqueted;
 import xyz.snaker.tq.rego.Items;
-import xyz.snaker.tq.utility.tools.ItemTagsProviderTools;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -15,10 +13,13 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 
 import org.jetbrains.annotations.NotNull;
 
+import static xyz.snaker.tq.rego.Items.Tags.COSMO_SPINES;
+import static xyz.snaker.tq.rego.Items.Tags.DROPPABLE;
+
 /**
  * Created by SnakerBone on 14/10/2023
  **/
-public class ItemTags extends ItemTagsProvider implements ItemTagsProviderTools<ItemTags>
+public class ItemTags extends ItemTagsProvider
 {
     public ItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTagProvider, ExistingFileHelper existingFileHelper)
     {
@@ -26,15 +27,9 @@ public class ItemTags extends ItemTagsProvider implements ItemTagsProviderTools<
     }
 
     @Override
-    protected void addTags(@NotNull HolderLookup.Provider provider)
+    public void addTags(@NotNull HolderLookup.Provider provider)
     {
-        tag(Items.Tags.COSMO_SPINES, List.of(Items.RED_COSMO_SPINE, Items.GREEN_COSMO_SPINE, Items.BLUE_COSMO_SPINE, Items.YELLOW_COSMO_SPINE, Items.PINK_COSMO_SPINE, Items.PURPLE_COSMO_SPINE, Items.ALPHA_COSMO_SPINE));
-        tag(Items.Tags.DROPS, List.of(Items.RED_COSMO_SPINE, Items.GREEN_COSMO_SPINE, Items.BLUE_COSMO_SPINE, Items.YELLOW_COSMO_SPINE, Items.PINK_COSMO_SPINE, Items.PURPLE_COSMO_SPINE, Items.ALPHA_COSMO_SPINE, Items.FLUTTERFLY_KERATIN));
-    }
-
-    @Override
-    public ItemTags getInstance()
-    {
-        return this;
+        tag(COSMO_SPINES).add(Items.RED_COSMO_SPINE.get(), Items.GREEN_COSMO_SPINE.get(), Items.BLUE_COSMO_SPINE.get(), Items.YELLOW_COSMO_SPINE.get(), Items.PINK_COSMO_SPINE.get(), Items.PURPLE_COSMO_SPINE.get(), Items.ALPHA_COSMO_SPINE.get());
+        tag(DROPPABLE).add(Items.RED_COSMO_SPINE.get(), Items.GREEN_COSMO_SPINE.get(), Items.BLUE_COSMO_SPINE.get(), Items.YELLOW_COSMO_SPINE.get(), Items.PINK_COSMO_SPINE.get(), Items.PURPLE_COSMO_SPINE.get(), Items.ALPHA_COSMO_SPINE.get(), Items.FLUTTERFLY_KERATIN.get());
     }
 }

@@ -1,7 +1,7 @@
 package xyz.snaker.tq.client.model.entity;
 
 import xyz.snaker.snakerlib.math.Maths;
-import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.snakerlib.resources.ResourceReference;
 import xyz.snaker.tq.level.entity.mob.CosmicCreeperite;
 
 import net.minecraft.client.model.EntityModel;
@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class CosmicCreeperiteModel extends EntityModel<CosmicCreeperite>
 {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourcePath("cosmic_creeperite"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceReference("cosmic_creeperite"), "main");
 
     private final ModelPart head;
     private final ModelPart body;

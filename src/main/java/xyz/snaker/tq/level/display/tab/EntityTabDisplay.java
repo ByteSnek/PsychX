@@ -3,10 +3,10 @@ package xyz.snaker.tq.level.display.tab;
 import java.util.List;
 import java.util.function.Consumer;
 
-import xyz.snaker.snakerlib.client.Icon;
 import xyz.snaker.tq.client.render.icon.EntityTabDisplayRenderer;
 import xyz.snaker.tq.level.display.entity.EntityDisplay;
 import xyz.snaker.tq.rego.Entities;
+import xyz.snaker.tq.utility.NoTexture;
 
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,7 +18,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by SnakerBone on 29/10/2023
  **/
-public class EntityTabDisplay extends EntityDisplay implements Icon
+@NoTexture
+public class EntityTabDisplay extends EntityDisplay
 {
     @Override
     public List<LivingEntity> getDisplays(Level level)

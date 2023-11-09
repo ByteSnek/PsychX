@@ -2,7 +2,7 @@ package xyz.snaker.tq.client.render.entity;
 
 import java.awt.*;
 
-import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.snakerlib.resources.ResourceReference;
 import xyz.snaker.tq.client.fx.RayFX;
 import xyz.snaker.tq.level.entity.projectile.CosmicRay;
 
@@ -28,7 +28,7 @@ public class CosmicRayRenderer extends ArrowRenderer<CosmicRay>
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull CosmicRay bullet)
     {
-        return ResourcePath.NO_TEXTURE;
+        return ResourceReference.NO_TEXTURE;
     }
 
     @Override

@@ -5,9 +5,9 @@ import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Supplier;
 
-import xyz.snaker.snakerlib.concurrent.UncaughtExceptionThread;
-import xyz.snaker.snakerlib.utility.tools.ReflectiveStuff;
-import xyz.snaker.snakerlib.utility.tools.UnsafeStuff;
+import xyz.snaker.snakerlib.internal.UncaughtExceptionThread;
+import xyz.snaker.snakerlib.utility.unsafe.Reflection;
+import xyz.snaker.snakerlib.utility.unsafe.TheUnsafe;
 import xyz.snaker.tq.level.entity.Comatosian;
 import xyz.snaker.tq.rego.Entities;
 import xyz.snaker.tq.rego.Sounds;
@@ -50,10 +50,10 @@ public class Comasote extends LiquidBlock
 {
     private final Map<EntityType<? extends LivingEntity>, RegistryObject<EntityType<? extends LivingEntity>>> entityMap = Util.make(new HashMap<>(), map ->
     {
-        map.put(EntityType.BEE, UnsafeStuff.cast(Entities.FROLICKER));
-        map.put(EntityType.BLAZE, UnsafeStuff.cast(Entities.FLARE));
-        map.put(EntityType.CREEPER, UnsafeStuff.cast(Entities.COSMIC_CREEPER));
-        map.put(EntityType.GHAST, UnsafeStuff.cast(Entities.SNIPE));
+        map.put(EntityType.BEE, TheUnsafe.cast(Entities.FROLICKER));
+        map.put(EntityType.BLAZE, TheUnsafe.cast(Entities.FLARE));
+        map.put(EntityType.CREEPER, TheUnsafe.cast(Entities.COSMIC_CREEPER));
+        map.put(EntityType.GHAST, TheUnsafe.cast(Entities.SNIPE));
     });
 
     public Comasote(Supplier<? extends FlowingFluid> fluid, Properties properties)
@@ -153,7 +153,7 @@ public class Comasote extends LiquidBlock
         double y = axis == Direction.Axis.Y ? 0.5 + 0.5625 * direction.getStepY() : random.nextFloat();
         double z = axis == Direction.Axis.Z ? 0.5 + 0.5625 * direction.getStepZ() : random.nextFloat();
 
-        SimpleParticleType type = ReflectiveStuff.getRandomFieldInClass(ParticleTypes.class, o -> o instanceof SimpleParticleType, SimpleParticleType[]::new);
+        SimpleParticleType type = Reflection.getRandomFieldInClass(ParticleTypes.class, o -> o instanceof SimpleParticleType, SimpleParticleType[]::new);
 
         level.addParticle(type, pos.getX() + x, pos.getY() + y, pos.getZ() + z, random.nextFloat(), random.nextFloat(), random.nextFloat());
         level.addParticle(type, pos.getX() + x, pos.getY() + y, pos.getZ() + z, random.nextFloat(), -random.nextFloat(), -random.nextFloat());

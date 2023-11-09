@@ -18,7 +18,7 @@
       "block_search_extent": 8,
       "offset": 2.0,
       "sound": {
-        "sound_id": "tq:random_fx"
+        "sound_id": "tq:sfx"
       },
       "tick_delay": 6000
     },
@@ -46,10 +46,9 @@
     [],
     [],
     [
-      "minecraft:trees_plains",
       "tq:illusive_tree",
-      "tq:snakeroot",
       "tq:tall_snakeroot",
+      "tq:snakeroot",
       "tq:splitleaf",
       "tq:catnip",
       "tq:pinktails"
@@ -63,36 +62,18 @@
     "creature": [
       {
         "type": "tq:frolicker",
-        "maxCount": 1,
+        "maxCount": 3,
         "minCount": 1,
-        "weight": 15
-      },
-      {
-        "type": "tq:frolicker",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 6
+        "weight": 35
       }
     ],
     "misc": [],
     "monster": [
       {
-        "type": "tq:snipe",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 20
-      },
-      {
-        "type": "tq:cosmic_creeper",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 12
-      },
-      {
         "type": "tq:cosmo",
-        "maxCount": 3,
+        "maxCount": 2,
         "minCount": 1,
-        "weight": 8
+        "weight": 15
       }
     ],
     "underground_water_creature": [],

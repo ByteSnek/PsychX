@@ -2,8 +2,8 @@ package xyz.snaker.tq.client.render.entity;
 
 import java.awt.*;
 
-import xyz.snaker.snakerlib.math.PoseStackBuilder;
-import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.snakerlib.math.Tensor;
+import xyz.snaker.snakerlib.resources.ResourceReference;
 import xyz.snaker.tq.client.fx.RayFX;
 import xyz.snaker.tq.client.layer.UtterflyLayer;
 import xyz.snaker.tq.client.model.entity.UtterflyModel;
@@ -34,16 +34,16 @@ public class UtterflyRenderer extends MobRenderer<Utterfly, UtterflyModel>
     {
         switch (utterfly.getPhase()) {
             case 1 -> {
-                return new ResourcePath("textures/entity/boss/utterfly0.png");
+                return new ResourceReference("textures/entity/boss/utterfly0.png");
             }
             case 2 -> {
-                return new ResourcePath("textures/entity/boss/utterfly1.png");
+                return new ResourceReference("textures/entity/boss/utterfly1.png");
             }
             case 3, 4 -> {
-                return new ResourcePath("textures/entity/boss/utterfly2.png");
+                return new ResourceReference("textures/entity/boss/utterfly2.png");
             }
             default -> {
-                return new ResourcePath("textures/entity/creature/flutterfly.png");
+                return new ResourceReference("textures/entity/creature/flutterfly.png");
             }
         }
     }
@@ -51,7 +51,7 @@ public class UtterflyRenderer extends MobRenderer<Utterfly, UtterflyModel>
     @Override
     public void render(@NotNull Utterfly utterfly, float entityYaw, float partialTicks, @NotNull PoseStack stack, @NotNull MultiBufferSource source, int packedLight)
     {
-        PoseStackBuilder builder = new PoseStackBuilder(stack);
+        Tensor builder = new Tensor(stack);
 
         Color colour;
         double scale;

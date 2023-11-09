@@ -1,17 +1,41 @@
 package xyz.snaker.tq.rego;
 
+import java.util.List;
 import java.util.function.Supplier;
 
+import xyz.snaker.snakerlib.utility.unsafe.TheUnsafe;
 import xyz.snaker.tq.Tourniqueted;
+import xyz.snaker.tq.level.world.candidate.FeatureCandidate;
+import xyz.snaker.tq.level.world.candidate.SpawnCandidate;
 import xyz.snaker.tq.level.world.feature.*;
+import xyz.snaker.tq.level.world.tree.IllusiveFoliagePlacer;
+import xyz.snaker.tq.level.world.tree.IllusiveTrunkPlacer;
 
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.features.FeatureUtils;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.data.worldgen.placement.VegetationPlacements;
+import net.minecraft.tags.TagKey;
+import net.minecraft.util.random.SimpleWeightedRandomList;
+import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.util.valueproviders.WeightedListInt;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.*;
+import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.AcaciaFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.ForkingTrunkPlacer;
+import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraftforge.common.world.BiomeModifier;
+import net.minecraftforge.common.world.ForgeBiomeModifiers;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -19,8 +43,9 @@ import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.LOCAL
 import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.VEGETAL_DECORATION;
 import static net.minecraft.world.level.levelgen.feature.Feature.RANDOM_PATCH;
 import static net.minecraft.world.level.levelgen.feature.Feature.TREE;
+import static xyz.snaker.tq.rego.Biomes.Tags.SPAWNS_FLUTTERFLY;
+import static xyz.snaker.tq.rego.Biomes.Tags.SPAWNS_FROLICKER;
 import static xyz.snaker.tq.rego.Blocks.*;
-import static xyz.snaker.tq.utility.level.WorldGenStuff.*;
 
 /**
  * Created by SnakerBone on 25/08/2023
@@ -41,63 +66,64 @@ public class Features
 
     public static void placedFeatures(BootstapContext<PlacedFeature> context)
     {
-        registerPlacement(context, "catnip", simpleSurfacePlacement(1));
-        registerPlacement(context, "splitleaf", simpleSurfacePlacement(1));
-        registerPlacement(context, "snakeroot", simpleSurfacePlacement(1));
-        registerPlacement(context, "tall_snakeroot", simpleSurfacePlacement(1));
-        registerPlacement(context, "pinktails", simpleSurfacePlacement(1));
-        registerPlacement(context, "swirl_rubble", simpleSurfacePlacement(5));
-        registerPlacement(context, "flare_rubble", simpleSurfacePlacement(5));
-        registerPlacement(context, "watercolour_rubble", simpleSurfacePlacement(5));
-        registerPlacement(context, "burning_rubble", simpleSurfacePlacement(5));
-        registerPlacement(context, "geometric_rubble", simpleSurfacePlacement(5));
-        registerPlacement(context, "multicolour_rubble", simpleSurfacePlacement(5));
-        registerPlacement(context, "snowflake_rubble", simpleSurfacePlacement(5));
-        registerPlacement(context, "starry_rubble", simpleSurfacePlacement(5));
-        registerPlacement(context, "foggy_rubble", simpleSurfacePlacement(5));
-        registerPlacement(context, "illusive_tree", simpleTreePlacement(ILLUSIVE_SAPLING, 2));
-        registerPlacement(context, "delusive_tree", simpleTreePlacement(DELUSIVE_SAPLING, 2));
+        registerPlacedFeature(context, FeatureCandidate.CATNIP, surfacePlacement(1));
+        registerPlacedFeature(context, FeatureCandidate.SPLITLEAF, surfacePlacement(1));
+        registerPlacedFeature(context, FeatureCandidate.SNAKEROOT, surfacePlacement(1));
+        registerPlacedFeature(context, FeatureCandidate.TALL_SNAKEROOT, surfacePlacement(1));
+        registerPlacedFeature(context, FeatureCandidate.PINKTAILS, surfacePlacement(1));
+        registerPlacedFeature(context, FeatureCandidate.SWIRL_RUBBLE, surfacePlacement(5));
+        registerPlacedFeature(context, FeatureCandidate.FLARE_RUBBLE, surfacePlacement(5));
+        registerPlacedFeature(context, FeatureCandidate.WATERCOLOUR_RUBBLE, surfacePlacement(5));
+        registerPlacedFeature(context, FeatureCandidate.BURNING_RUBBLE, surfacePlacement(5));
+        registerPlacedFeature(context, FeatureCandidate.GEOMETRIC_RUBBLE, surfacePlacement(5));
+        registerPlacedFeature(context, FeatureCandidate.MULTICOLOUR_RUBBLE, surfacePlacement(5));
+        registerPlacedFeature(context, FeatureCandidate.SNOWFLAKE_RUBBLE, surfacePlacement(5));
+        registerPlacedFeature(context, FeatureCandidate.STARRY_RUBBLE, surfacePlacement(5));
+        registerPlacedFeature(context, FeatureCandidate.FOGGY_RUBBLE, surfacePlacement(5));
+        registerPlacedFeature(context, FeatureCandidate.ILLUSIVE_TREE, treePlacement(ILLUSIVE_SAPLING, 2));
+        registerPlacedFeature(context, FeatureCandidate.DELUSIVE_TREE, treePlacement(DELUSIVE_SAPLING, 2));
     }
 
     public static void configuredFeatures(BootstapContext<ConfiguredFeature<?, ?>> context)
     {
-        registerConfiguredFeature(context, "catnip", RANDOM_PATCH, simpleRandomConfig(PINKTAILS, 4));
-        registerConfiguredFeature(context, "splitleaf", RANDOM_PATCH, simpleRandomConfig(SPLITLEAF, 4));
-        registerConfiguredFeature(context, "snakeroot", RANDOM_PATCH, simpleRandomConfig(SNAKEROOT, 32));
-        registerConfiguredFeature(context, "tall_snakeroot", RANDOM_PATCH, simpleRandomConfig(TALL_SNAKEROOT, 32));
-        registerConfiguredFeature(context, "pinktails", RANDOM_PATCH, simpleRandomConfig(PINKTAILS, 32));
-        registerConfiguredFeature(context, "swirl_rubble", SWIRL_RUBBLE, SWIRL);
-        registerConfiguredFeature(context, "flare_rubble", FLARE_RUBBLE, FLARE);
-        registerConfiguredFeature(context, "watercolour_rubble", WATERCOLOUR_RUBBLE, WATERCOLOUR);
-        registerConfiguredFeature(context, "burning_rubble", BURNING_RUBBLE, BURNING);
-        registerConfiguredFeature(context, "geometric_rubble", GEOMETRIC_RUBBLE, GEOMETRIC);
-        registerConfiguredFeature(context, "multicolour_rubble", MULTICOLOUR_RUBBLE, MULTICOLOUR);
-        registerConfiguredFeature(context, "snowflake_rubble", SNOWFLAKE_RUBBLE, SNOWFLAKE);
-        registerConfiguredFeature(context, "starry_rubble", STARRY_RUBBLE, STARRY);
-        registerConfiguredFeature(context, "foggy_rubble", FOGGY_RUBBLE, FOGGY);
-        registerConfiguredFeature(context, "illusive_tree", TREE, createIllusiveTree(ILLUSIVE_LOG, ILLUSIVE_LEAVES, COMASTONE));
-        registerConfiguredFeature(context, "delusive_tree", TREE, createDelusiveTree(DELUSIVE_LOG, DELUSIVE_LEAVES, COMASTONE));
+        registerConfiguredFeature(context, FeatureCandidate.CATNIP, RANDOM_PATCH, randomPatch(PINKTAILS, 4));
+        registerConfiguredFeature(context, FeatureCandidate.SPLITLEAF, RANDOM_PATCH, randomPatch(SPLITLEAF, 4));
+        registerConfiguredFeature(context, FeatureCandidate.SNAKEROOT, RANDOM_PATCH, randomPatch(SNAKEROOT, 32));
+        registerConfiguredFeature(context, FeatureCandidate.TALL_SNAKEROOT, RANDOM_PATCH, randomPatch(TALL_SNAKEROOT, 32));
+        registerConfiguredFeature(context, FeatureCandidate.PINKTAILS, RANDOM_PATCH, randomPatch(PINKTAILS, 32));
+        registerConfiguredFeature(context, FeatureCandidate.SWIRL_RUBBLE, SWIRL_RUBBLE, SWIRL);
+        registerConfiguredFeature(context, FeatureCandidate.FLARE_RUBBLE, FLARE_RUBBLE, FLARE);
+        registerConfiguredFeature(context, FeatureCandidate.WATERCOLOUR_RUBBLE, WATERCOLOUR_RUBBLE, WATERCOLOUR);
+        registerConfiguredFeature(context, FeatureCandidate.BURNING_RUBBLE, BURNING_RUBBLE, BURNING);
+        registerConfiguredFeature(context, FeatureCandidate.GEOMETRIC_RUBBLE, GEOMETRIC_RUBBLE, GEOMETRIC);
+        registerConfiguredFeature(context, FeatureCandidate.MULTICOLOUR_RUBBLE, MULTICOLOUR_RUBBLE, MULTICOLOUR);
+        registerConfiguredFeature(context, FeatureCandidate.SNOWFLAKE_RUBBLE, SNOWFLAKE_RUBBLE, SNOWFLAKE);
+        registerConfiguredFeature(context, FeatureCandidate.STARRY_RUBBLE, STARRY_RUBBLE, STARRY);
+        registerConfiguredFeature(context, FeatureCandidate.FOGGY_RUBBLE, FOGGY_RUBBLE, FOGGY);
+        registerConfiguredFeature(context, FeatureCandidate.ILLUSIVE_TREE, TREE, illusiveTree(ILLUSIVE_LOG, ILLUSIVE_LEAVES, COMASTONE));
+        registerConfiguredFeature(context, FeatureCandidate.DELUSIVE_TREE, TREE, delusiveTree(DELUSIVE_LOG, DELUSIVE_LEAVES, COMASTONE));
     }
 
     public static void biomeModifiers(BootstapContext<BiomeModifier> context)
     {
-        addBiomeModifier(context, "catnip", VEGETAL_DECORATION);
-        addBiomeModifier(context, "splitleaf", VEGETAL_DECORATION);
-        addBiomeModifier(context, "snakeroot", VEGETAL_DECORATION);
-        addBiomeModifier(context, "tall_snakeroot", VEGETAL_DECORATION);
-        addBiomeModifier(context, "pinktails", VEGETAL_DECORATION);
-        addBiomeModifier(context, "swirl_rubble", LOCAL_MODIFICATIONS);
-        addBiomeModifier(context, "flare_rubble", LOCAL_MODIFICATIONS);
-        addBiomeModifier(context, "watercolour_rubble", LOCAL_MODIFICATIONS);
-        addBiomeModifier(context, "burning_rubble", LOCAL_MODIFICATIONS);
-        addBiomeModifier(context, "geometric_rubble", LOCAL_MODIFICATIONS);
-        addBiomeModifier(context, "multicolour_rubble", LOCAL_MODIFICATIONS);
-        addBiomeModifier(context, "snowflake_rubble", LOCAL_MODIFICATIONS);
-        addBiomeModifier(context, "starry_rubble", LOCAL_MODIFICATIONS);
-        addBiomeModifier(context, "foggy_rubble", LOCAL_MODIFICATIONS);
-        addBiomeModifier(context, "illusive_tree", VEGETAL_DECORATION);
-        addBiomeModifier(context, "delusive_tree", VEGETAL_DECORATION);
-        removeBiomeModifier(context, "no_lava");
+        registerBiomeModifier(context, FeatureCandidate.CATNIP, VEGETAL_DECORATION);
+        registerBiomeModifier(context, FeatureCandidate.SPLITLEAF, VEGETAL_DECORATION);
+        registerBiomeModifier(context, FeatureCandidate.SNAKEROOT, VEGETAL_DECORATION);
+        registerBiomeModifier(context, FeatureCandidate.TALL_SNAKEROOT, VEGETAL_DECORATION);
+        registerBiomeModifier(context, FeatureCandidate.PINKTAILS, VEGETAL_DECORATION);
+        registerBiomeModifier(context, FeatureCandidate.SWIRL_RUBBLE, LOCAL_MODIFICATIONS);
+        registerBiomeModifier(context, FeatureCandidate.FLARE_RUBBLE, LOCAL_MODIFICATIONS);
+        registerBiomeModifier(context, FeatureCandidate.WATERCOLOUR_RUBBLE, LOCAL_MODIFICATIONS);
+        registerBiomeModifier(context, FeatureCandidate.BURNING_RUBBLE, LOCAL_MODIFICATIONS);
+        registerBiomeModifier(context, FeatureCandidate.GEOMETRIC_RUBBLE, LOCAL_MODIFICATIONS);
+        registerBiomeModifier(context, FeatureCandidate.MULTICOLOUR_RUBBLE, LOCAL_MODIFICATIONS);
+        registerBiomeModifier(context, FeatureCandidate.SNOWFLAKE_RUBBLE, LOCAL_MODIFICATIONS);
+        registerBiomeModifier(context, FeatureCandidate.STARRY_RUBBLE, LOCAL_MODIFICATIONS);
+        registerBiomeModifier(context, FeatureCandidate.FOGGY_RUBBLE, LOCAL_MODIFICATIONS);
+        registerBiomeModifier(context, FeatureCandidate.ILLUSIVE_TREE, VEGETAL_DECORATION);
+        registerBiomeModifier(context, FeatureCandidate.DELUSIVE_TREE, VEGETAL_DECORATION);
+        registerBiomeSpawnModifier(context, SpawnCandidate.FLUTTERFLY, SPAWNS_FLUTTERFLY);
+        registerBiomeSpawnModifier(context, SpawnCandidate.FROLICKER, SPAWNS_FROLICKER);
     }
 
     static <F extends Feature<?>> RegistryObject<F> register(String name, Supplier<F> feature)
@@ -108,5 +134,139 @@ public class Features
     static <F extends Feature<?>> RegistryObject<F> registerRubble(String name, Supplier<F> feature)
     {
         return register(name + "_rubble", feature);
+    }
+
+    static <FC extends FeatureConfiguration, F extends Feature<FC>> void registerConfiguredFeature(BootstapContext<ConfiguredFeature<?, ?>> context, FeatureCandidate key, F feature, FC configuration)
+    {
+        context.register(key.getConfiguredFeatureKey(),
+                new ConfiguredFeature<>(feature, configuration)
+        );
+    }
+
+    static void registerPlacedFeature(BootstapContext<PlacedFeature> context, FeatureCandidate key, List<PlacementModifier> modifiers)
+    {
+        var featureSearch = context.lookup(Registries.CONFIGURED_FEATURE);
+
+        context.register(key.getPlacedFeatureKey(),
+                new PlacedFeature(
+                        featureSearch.getOrThrow(key.getConfiguredFeatureKey()),
+                        List.copyOf(modifiers)
+                )
+        );
+    }
+
+    static <FC extends FeatureConfiguration, F extends Feature<FC>> void registerConfiguredFeature(BootstapContext<ConfiguredFeature<?, ?>> context, FeatureCandidate key, RegistryObject<F> feature, RegistryObject<Block> block)
+    {
+        context.register(key.getConfiguredFeatureKey(),
+                new ConfiguredFeature<>(feature.get(),
+                        TheUnsafe.cast(
+                                new BlockStateConfiguration(block.get().defaultBlockState())
+                        )
+                )
+        );
+    }
+
+    static void registerBiomeModifier(BootstapContext<BiomeModifier> context, FeatureCandidate key, GenerationStep.Decoration step)
+    {
+        var biomeSearch = context.lookup(Registries.BIOME);
+        var featureSearch = context.lookup(Registries.PLACED_FEATURE);
+
+        context.register(key.getBiomeModifierKey(),
+                new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
+                        HolderSet.direct(
+                                biomeSearch.getOrThrow(Biomes.DELUSION),
+                                biomeSearch.getOrThrow(Biomes.ILLUSION),
+                                biomeSearch.getOrThrow(Biomes.IMMATERIAL),
+                                biomeSearch.getOrThrow(Biomes.SPECTRAL),
+                                biomeSearch.getOrThrow(Biomes.SURREAL)
+                        ),
+                        HolderSet.direct(featureSearch.getOrThrow(key.getPlacedFeatureKey())),
+                        step
+                )
+        );
+    }
+
+    static void registerBiomeSpawnModifier(BootstapContext<BiomeModifier> context, SpawnCandidate candidate, TagKey<Biome> biomeKey)
+    {
+        var biomeSearch = context.lookup(Registries.BIOME);
+
+        context.register(candidate.getModifierKey(),
+                new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
+                        biomeSearch.getOrThrow(biomeKey),
+                        List.of(candidate.getSpawnerData())
+                )
+        );
+    }
+
+    static List<PlacementModifier> surfacePlacement(int chance)
+    {
+        return List.of(
+                RarityFilter.onAverageOnceEvery(chance),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                BiomeFilter.biome()
+        );
+    }
+
+    static List<PlacementModifier> treePlacement(RegistryObject<Block> sapling, int count)
+    {
+        return VegetationPlacements.treePlacement(
+                RarityFilter.onAverageOnceEvery(count),
+                sapling.get()
+        );
+    }
+
+    static <T extends Block> RandomPatchConfiguration randomPatch(RegistryObject<T> block, int tries)
+    {
+        return FeatureUtils.simpleRandomPatchConfiguration(tries,
+                PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
+                        new SimpleBlockConfiguration(
+                                BlockStateProvider.simple(block.get())
+                        )
+                )
+        );
+    }
+
+    static <T extends Block> TreeConfiguration delusiveTree(RegistryObject<T> stem, RegistryObject<T> foliage, RegistryObject<T> dirt)
+    {
+        return new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(stem.get()),
+                new IllusiveTrunkPlacer(8, 1, 2,
+                        new WeightedListInt(SimpleWeightedRandomList.<IntProvider>builder()
+                                .add(ConstantInt.of(1), 1)
+                                .add(ConstantInt.of(2), 1)
+                                .add(ConstantInt.of(3), 1)
+                                .build()
+                        ),
+                        UniformInt.of(2, 4),
+                        UniformInt.of(-4, -3),
+                        UniformInt.of(-1, 0)
+                ),
+                BlockStateProvider.simple(foliage.get()),
+                new IllusiveFoliagePlacer(
+                        ConstantInt.of(4),
+                        ConstantInt.of(0),
+                        ConstantInt.of(5),
+                        0.25F,
+                        0.5F,
+                        0.16666667F,
+                        0.33333334F
+                ),
+                new TwoLayersFeatureSize(1, 0, 2)
+        ).dirt(BlockStateProvider.simple(dirt.get())).ignoreVines().build();
+    }
+
+    static <T extends Block> TreeConfiguration illusiveTree(RegistryObject<T> stem, RegistryObject<T> foliage, RegistryObject<T> dirt)
+    {
+        return new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(stem.get()),
+                new ForkingTrunkPlacer(5, 2, 2),
+                BlockStateProvider.simple(foliage.get()),
+                new AcaciaFoliagePlacer(
+                        ConstantInt.of(2),
+                        ConstantInt.of(0)
+                ),
+                new TwoLayersFeatureSize(1, 0, 2)
+        ).dirt(BlockStateProvider.simple(dirt.get())).ignoreVines().build();
     }
 }

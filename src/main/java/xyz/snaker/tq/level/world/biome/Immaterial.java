@@ -1,52 +1,34 @@
 package xyz.snaker.tq.level.world.biome;
 
-import xyz.snaker.tq.rego.Entities;
-import xyz.snaker.tq.utility.level.WorldGenStuff;
+import xyz.snaker.tq.level.world.candidate.BiomeCandidate;
+import xyz.snaker.tq.level.world.candidate.FeatureCandidate;
+import xyz.snaker.tq.level.world.candidate.SpawnCandidate;
 
-import net.minecraft.core.Holder;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.level.biome.*;
+import net.minecraft.world.level.biome.Biome;
 
 /**
  * Created by SnakerBone on 23/08/2023
  **/
-public class Immaterial
+public class Immaterial extends TourniquetedBiome
 {
-    public static Biome create(BootstapContext<Biome> context)
+    public Immaterial(BootstapContext<Biome> context)
     {
-        AmbientParticleSettings particles = new AmbientParticleSettings(ParticleTypes.ELECTRIC_SPARK, WorldGenStuff.PARTICLE_SPAWN_CHANCE);
-        AmbientMoodSettings mood = new AmbientMoodSettings(WorldGenStuff.RANDOM_SFX, 6000, 8, 2);
-        MobSpawnSettings.Builder spawns = new MobSpawnSettings.Builder();
-        BiomeGenerationSettings.Builder gen = new BiomeGenerationSettings.Builder(context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
-        BiomeSpecialEffects.Builder effects = new BiomeSpecialEffects.Builder()
-                .fogColor(-16777216)
-                .waterColor(-16741991)
-                .waterFogColor(-16750951)
-                .skyColor(-16777216)
-                .foliageColorOverride(-16751002)
-                .grassColorOverride(-16777165)
-                .ambientParticle(particles)
-                .ambientMoodSound(mood)
-                .ambientLoopSound(Holder.direct(SoundEvents.AMBIENT_UNDERWATER_LOOP_ADDITIONS_ULTRA_RARE));
+        super(BiomeCandidate.IMMATERIAL, context);
+    }
 
-        WorldGenStuff.addDefaultPlants(gen);
-        WorldGenStuff.addGeometricRubble(gen);
-        WorldGenStuff.addMultiColourRubble(gen);
-        WorldGenStuff.addDefaultCarvers(gen);
-        WorldGenStuff.addDefaultEntitySpawns(spawns);
+    @Override
+    public Biome create()
+    {
+        addFeature(FeatureCandidate.GEOMETRIC_RUBBLE);
+        addFeature(FeatureCandidate.MULTICOLOUR_RUBBLE);
 
-        WorldGenStuff.addMonsterSpawn(spawns, Entities.SNIPE, 10, 1, 3);
+        addPlants();
+        addCarvers();
 
-        return new Biome.BiomeBuilder()
-                .hasPrecipitation(false)
-                .downfall(0)
-                .temperature(0.7F)
-                .generationSettings(gen.build())
-                .mobSpawnSettings(spawns.build())
-                .specialEffects(effects.build())
-                .build();
+        addSpawn(SpawnCandidate.SNIPE);
+        addSpawn(SpawnCandidate.COSMIC_CREEPER);
+
+        return super.create();
     }
 }

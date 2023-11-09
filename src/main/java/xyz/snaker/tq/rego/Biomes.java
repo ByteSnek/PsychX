@@ -1,11 +1,12 @@
 package xyz.snaker.tq.rego;
 
-import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.snakerlib.resources.ResourceReference;
 import xyz.snaker.tq.level.world.biome.*;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 
 /**
@@ -21,15 +22,31 @@ public class Biomes
 
     public static void bootstrap(BootstapContext<Biome> context)
     {
-        context.register(DELUSION, Delusion.create(context));
-        context.register(ILLUSION, Illusion.create(context));
-        context.register(IMMATERIAL, Immaterial.create(context));
-        context.register(SPECTRAL, Spectral.create(context));
-        context.register(SURREAL, Surreal.create(context));
+        register(context, DELUSION, new Delusion(context));
+        register(context, ILLUSION, new Illusion(context));
+        register(context, IMMATERIAL, new Immaterial(context));
+        register(context, SPECTRAL, new Spectral(context));
+        register(context, SURREAL, new Surreal(context));
+    }
+
+    static <T extends TourniquetedBiome> void register(BootstapContext<Biome> context, ResourceKey<Biome> key, T biome)
+    {
+        context.register(key, biome.create());
     }
 
     static ResourceKey<Biome> key(String name)
     {
-        return ResourceKey.create(Registries.BIOME, new ResourcePath(name));
+        return ResourceKey.create(Registries.BIOME, new ResourceReference(name));
+    }
+
+    public static class Tags
+    {
+        public static final TagKey<Biome> SPAWNS_FLUTTERFLY = key("spawns_flutterfly");
+        public static final TagKey<Biome> SPAWNS_FROLICKER = key("spawns_frolicker");
+
+        static TagKey<Biome> key(String name)
+        {
+            return TagKey.create(Registries.BIOME, new ResourceReference(name));
+        }
     }
 }

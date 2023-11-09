@@ -1,7 +1,7 @@
 package xyz.snaker.tq.client.layer;
 
-import xyz.snaker.snakerlib.utility.ResourcePath;
-import xyz.snaker.snakerlib.utility.tools.RenderStuff;
+import xyz.snaker.snakerlib.utility.Rendering;
+import xyz.snaker.snakerlib.resources.ResourceReference;
 import xyz.snaker.tq.client.model.entity.CosmicCreeperModel;
 import xyz.snaker.tq.level.entity.mob.CosmicCreeper;
 
@@ -32,7 +32,7 @@ public class CosmicCreeperLayer extends EnergySwirlLayer<CosmicCreeper, CosmicCr
     {
         super(parent);
         this.model = new CosmicCreeperModel(set.bakeLayer(CosmicCreeperModel.LAYER_LOCATION));
-        this.texture = new ResourcePath("textures/entity/mob/cosmic_creeper/cosmic_creeper_layer.png");
+        this.texture = new ResourceReference("textures/entity/mob/cosmic_creeper/cosmic_creeper_layer.png");
     }
 
     @Override
@@ -61,7 +61,7 @@ public class CosmicCreeperLayer extends EnergySwirlLayer<CosmicCreeper, CosmicCr
         getParentModel().copyPropertiesTo(model);
         model.prepareMobModel(creeper, limbSwing, limbSwingAmount, partialTicks);
         model.setupAnim(creeper, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-        model.renderToBuffer(stack, consumer, packedLight, RenderStuff.packOverlay(creeper), 0.5F, 0.5F, 0.5F, 1.0F);
+        model.renderToBuffer(stack, consumer, packedLight, Rendering.packOverlay(creeper), 0.5F, 0.5F, 0.5F, 1.0F);
     }
 
     public static class Eyes extends EyesLayer<CosmicCreeper, CosmicCreeperModel>
@@ -74,7 +74,7 @@ public class CosmicCreeperLayer extends EnergySwirlLayer<CosmicCreeper, CosmicCr
         @Override
         public @NotNull RenderType renderType()
         {
-            return RenderType.eyes(new ResourcePath("textures/entity/mob/cosmic_creeper/cosmic_creeper_eyes_layer.png"));
+            return RenderType.eyes(new ResourceReference("textures/entity/mob/cosmic_creeper/cosmic_creeper_eyes_layer.png"));
         }
 
         @Override

@@ -1,6 +1,6 @@
 package xyz.snaker.tq.client.render.entity;
 
-import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.snakerlib.resources.ResourceReference;
 import xyz.snaker.tq.client.layer.FlareLayer;
 import xyz.snaker.tq.client.model.entity.FlareModel;
 import xyz.snaker.tq.level.entity.mob.Flare;
@@ -25,6 +25,6 @@ public class FlareRenderer extends MobRenderer<Flare, FlareModel>
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull Flare flare)
     {
-        return ResourcePath.SOLID_TEXTURE;
+        return ResourceReference.SOLID_TEXTURE;
     }
 }

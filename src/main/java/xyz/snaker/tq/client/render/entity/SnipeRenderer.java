@@ -1,6 +1,6 @@
 package xyz.snaker.tq.client.render.entity;
 
-import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.snakerlib.resources.ResourceReference;
 import xyz.snaker.tq.client.model.entity.SnipeModel;
 import xyz.snaker.tq.level.entity.mob.Snipe;
 
@@ -23,6 +23,6 @@ public class SnipeRenderer extends MobRenderer<Snipe, SnipeModel>
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull Snipe snipe)
     {
-        return new ResourcePath("textures/entity/mob/snipe.png");
+        return new ResourceReference("textures/entity/mob/snipe.png");
     }
 }

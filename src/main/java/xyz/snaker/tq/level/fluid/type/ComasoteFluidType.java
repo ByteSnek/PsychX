@@ -3,7 +3,7 @@ package xyz.snaker.tq.level.fluid.type;
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
 
-import xyz.snaker.snakerlib.utility.ResourcePath;
+import xyz.snaker.snakerlib.resources.ResourceReference;
 
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -45,9 +45,9 @@ public class ComasoteFluidType extends FluidType
     {
         consumer.accept(new IClientFluidTypeExtensions()
         {
-            private static final ResourceLocation OVERLAY = new ResourcePath("textures/block/fluid/under_comasote.png");
-            private static final ResourceLocation STILL = new ResourcePath("block/fluid/comasote_still");
-            private static final ResourceLocation FLOWING = new ResourcePath("block/fluid/comasote_flow");
+            private static final ResourceLocation OVERLAY = new ResourceReference("textures/block/fluid/under_comasote.png");
+            private static final ResourceLocation STILL = new ResourceReference("block/fluid/comasote_still");
+            private static final ResourceLocation FLOWING = new ResourceReference("block/fluid/comasote_flow");
 
             @Override
             public ResourceLocation getStillTexture()

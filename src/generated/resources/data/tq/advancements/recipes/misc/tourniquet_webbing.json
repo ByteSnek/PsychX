@@ -1,20 +1,20 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "asap": {
-      "conditions": {},
-      "trigger": "minecraft:tick"
-    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "tq:tourniquet_webbing"
       },
       "trigger": "minecraft:recipe_unlocked"
+    },
+    "tick": {
+      "conditions": {},
+      "trigger": "minecraft:tick"
     }
   },
   "requirements": [
     [
-      "asap",
+      "tick",
       "has_the_recipe"
     ]
   ],

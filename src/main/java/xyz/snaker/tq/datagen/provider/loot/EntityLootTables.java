@@ -3,7 +3,7 @@ package xyz.snaker.tq.datagen.provider.loot;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-import xyz.snaker.snakerlib.utility.tools.UnsafeStuff;
+import xyz.snaker.snakerlib.utility.unsafe.TheUnsafe;
 import xyz.snaker.tq.rego.Entities;
 import xyz.snaker.tq.rego.Items;
 import xyz.snaker.tq.rego.LootTables;
@@ -104,7 +104,7 @@ public class EntityLootTables extends EntityLootSubProvider
     @Override
     protected @NotNull Stream<EntityType<?>> getKnownEntityTypes()
     {
-        return UnsafeStuff.cast(Entities.REGISTER.getEntries().stream()
+        return TheUnsafe.cast(Entities.REGISTER.getEntries().stream()
                 .map(RegistryObject::get)
                 .filter(EntityLootTables.getEntitiesWithLootTables()));
     }

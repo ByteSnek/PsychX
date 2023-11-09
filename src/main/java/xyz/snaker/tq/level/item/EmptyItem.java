@@ -1,6 +1,6 @@
 package xyz.snaker.tq.level.item;
 
-import xyz.snaker.snakerlib.data.DefaultItemProperties;
+import xyz.snaker.snakerlib.utility.item.ItemProperties;
 
 import net.minecraft.world.item.Item;
 
@@ -11,7 +11,7 @@ public class EmptyItem extends Item
 {
     public EmptyItem()
     {
-        super(DefaultItemProperties.EMPTY);
+        super(ItemProperties.EMPTY);
     }
 
     public EmptyItem(Properties properties)
