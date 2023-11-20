@@ -1,10 +1,10 @@
 {
-  "type": "forge:add_spawns",
-  "biomes": "#tq:spawns_frolicker",
-  "spawners": {
-    "type": "tq:frolicker",
-    "maxCount": 3,
-    "minCount": 1,
-    "weight": 35
-  }
+      "type": "forge:add_spawns",
+      "biomes": "#tq:spawns_frolicker",
+      "spawners": {
+            "type": "tq:frolicker",
+            "maxCount": 3,
+            "minCount": 1,
+            "weight": 35
+      }
 }

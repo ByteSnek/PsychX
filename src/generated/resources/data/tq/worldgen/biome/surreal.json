@@ -1,82 +1,82 @@
 {
-  "carvers": {
-    "air": [
-      "minecraft:cave",
-      "minecraft:cave_extra_underground",
-      "minecraft:canyon"
-    ]
-  },
-  "downfall": 0.0,
-  "effects": {
-    "ambient_sound": {
-      "sound_id": "minecraft:ambient.underwater.loop.additions.ultra_rare"
-    },
-    "fog_color": 5834760,
-    "foliage_color": 6162697,
-    "grass_color": 6162697,
-    "mood_sound": {
-      "block_search_extent": 8,
-      "offset": 2.0,
-      "sound": {
-        "sound_id": "tq:sfx"
+      "carvers": {
+            "air": [
+                  "minecraft:cave",
+                  "minecraft:cave_extra_underground",
+                  "minecraft:canyon"
+            ]
       },
-      "tick_delay": 6000
-    },
-    "particle": {
-      "options": {
-        "type": "minecraft:flame"
+      "downfall": 0.0,
+      "effects": {
+            "ambient_sound": {
+                  "sound_id": "minecraft:ambient.underwater.loop.additions.ultra_rare"
+            },
+            "fog_color": 5834760,
+            "foliage_color": 6162697,
+            "grass_color": 6162697,
+            "mood_sound": {
+                  "block_search_extent": 8,
+                  "offset": 2.0,
+                  "sound": {
+                        "sound_id": "tq:sfx"
+                  },
+                  "tick_delay": 6000
+            },
+            "particle": {
+                  "options": {
+                        "type": "minecraft:flame"
+                  },
+                  "probability": 0.001
+            },
+            "sky_color": -16777216,
+            "water_color": 3670787,
+            "water_fog_color": 2294274
       },
-      "probability": 0.001
-    },
-    "sky_color": -16777216,
-    "water_color": 3670787,
-    "water_fog_color": 2294274
-  },
-  "features": [
-    [],
-    [],
-    [
-      "tq:flare_rubble",
-      "tq:burning_rubble"
-    ],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [
-      "tq:tall_snakeroot",
-      "tq:snakeroot",
-      "tq:splitleaf",
-      "tq:catnip",
-      "tq:pinktails"
-    ]
-  ],
-  "has_precipitation": false,
-  "spawn_costs": {},
-  "spawners": {
-    "ambient": [],
-    "axolotls": [],
-    "creature": [],
-    "misc": [],
-    "monster": [
-      {
-        "type": "tq:flare",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 15
+      "features": [
+            [],
+            [],
+            [
+                  "tq:flare_rubble",
+                  "tq:burning_rubble"
+            ],
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            [
+                  "tq:tall_snakeroot",
+                  "tq:snakeroot",
+                  "tq:splitleaf",
+                  "tq:catnip",
+                  "tq:pinktails"
+            ]
+      ],
+      "has_precipitation": false,
+      "spawn_costs": {},
+      "spawners": {
+            "ambient": [],
+            "axolotls": [],
+            "creature": [],
+            "misc": [],
+            "monster": [
+                  {
+                        "type": "tq:flare",
+                        "maxCount": 2,
+                        "minCount": 1,
+                        "weight": 15
+                  },
+                  {
+                        "type": "tq:cosmo",
+                        "maxCount": 2,
+                        "minCount": 1,
+                        "weight": 15
+                  }
+            ],
+            "underground_water_creature": [],
+            "water_ambient": [],
+            "water_creature": []
       },
-      {
-        "type": "tq:cosmo",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 15
-      }
-    ],
-    "underground_water_creature": [],
-    "water_ambient": [],
-    "water_creature": []
-  },
-  "temperature": 0.7
+      "temperature": 0.7
 }

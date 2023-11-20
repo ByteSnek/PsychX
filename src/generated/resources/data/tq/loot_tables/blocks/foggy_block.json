@@ -1,21 +1,21 @@
 {
-  "type": "minecraft:block",
-  "pools": [
-    {
-      "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
+      "type": "minecraft:block",
+      "pools": [
+            {
+                  "bonus_rolls": 0.0,
+                  "conditions": [
+                        {
+                              "condition": "minecraft:survives_explosion"
+                        }
+                  ],
+                  "entries": [
+                        {
+                              "type": "minecraft:item",
+                              "name": "tq:foggy_block"
+                        }
+                  ],
+                  "rolls": 1.0
+            }
       ],
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "tq:foggy_block"
-        }
-      ],
-      "rolls": 1.0
-    }
-  ],
-  "random_sequence": "tq:blocks/foggy_block"
+      "random_sequence": "tq:blocks/foggy_block"
 }

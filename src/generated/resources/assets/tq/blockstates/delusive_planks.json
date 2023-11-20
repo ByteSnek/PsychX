@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "tq:block/delusive_planks"
-    }
-  }
+      "variants": {
+            "": {
+                  "model": "tq:block/delusive_planks"
+            }
+      }
 }

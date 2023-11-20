@@ -1,27 +1,27 @@
 {
-  "parent": "minecraft:recipes/root",
-  "criteria": {
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "tq:tourniquet_webbing"
+      "parent": "minecraft:recipes/root",
+      "criteria": {
+            "has_the_recipe": {
+                  "conditions": {
+                        "recipe": "tq:tourniquet_webbing"
+                  },
+                  "trigger": "minecraft:recipe_unlocked"
+            },
+            "tick": {
+                  "conditions": {},
+                  "trigger": "minecraft:tick"
+            }
       },
-      "trigger": "minecraft:recipe_unlocked"
-    },
-    "tick": {
-      "conditions": {},
-      "trigger": "minecraft:tick"
-    }
-  },
-  "requirements": [
-    [
-      "tick",
-      "has_the_recipe"
-    ]
-  ],
-  "rewards": {
-    "recipes": [
-      "tq:tourniquet_webbing"
-    ]
-  },
-  "sends_telemetry_event": false
+      "requirements": [
+            [
+                  "tick",
+                  "has_the_recipe"
+            ]
+      ],
+      "rewards": {
+            "recipes": [
+                  "tq:tourniquet_webbing"
+            ]
+      },
+      "sends_telemetry_event": false
 }

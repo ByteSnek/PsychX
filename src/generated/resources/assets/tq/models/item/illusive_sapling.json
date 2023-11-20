@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "tq:block/illusive_sapling"
-  }
+      "parent": "minecraft:item/generated",
+      "textures": {
+            "layer0": "tq:block/illusive_sapling"
+      }
 }

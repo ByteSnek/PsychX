@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "tq:block/dark_overlay"
-    }
-  }
+      "variants": {
+            "": {
+                  "model": "tq:block/dark_overlay"
+            }
+      }
 }

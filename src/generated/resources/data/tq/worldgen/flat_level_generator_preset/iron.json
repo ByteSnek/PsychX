@@ -1,18 +1,18 @@
 {
-  "display": "minecraft:iron_block",
-  "settings": {
-    "biome": "minecraft:plains",
-    "features": false,
-    "lakes": false,
-    "layers": [
-      {
-        "block": "minecraft:bedrock",
-        "height": 1
-      },
-      {
-        "block": "minecraft:iron_block",
-        "height": 5
+      "display": "minecraft:iron_block",
+      "settings": {
+            "biome": "minecraft:plains",
+            "features": false,
+            "lakes": false,
+            "layers": [
+                  {
+                        "block": "minecraft:bedrock",
+                        "height": 1
+                  },
+                  {
+                        "block": "minecraft:iron_block",
+                        "height": 5
+                  }
+            ]
       }
-    ]
-  }
 }

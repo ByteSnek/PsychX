@@ -1,6 +1,6 @@
 {
-  "parent": "tq:block/shader",
-  "textures": {
-    "particle": "minecraft:block/white_concrete_powder"
-  }
+      "parent": "tq:block/shader",
+      "textures": {
+            "particle": "minecraft:block/white_concrete_powder"
+      }
 }

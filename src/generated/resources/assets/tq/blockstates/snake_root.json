@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "tq:block/snake_root"
-    }
-  }
+      "variants": {
+            "": {
+                  "model": "tq:block/snake_root"
+            }
+      }
 }

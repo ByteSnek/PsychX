@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "tq:block/foggy_block"
-    }
-  }
+      "variants": {
+            "": {
+                  "model": "tq:block/foggy_block"
+            }
+      }
 }

@@ -1,8 +1,8 @@
 {
-  "type": "tq:geometric_rubble",
-  "config": {
-    "state": {
-      "Name": "tq:geometric_block"
-    }
-  }
+      "type": "tq:geometric_rubble",
+      "config": {
+            "state": {
+                  "Name": "tq:geometric_block"
+            }
+      }
 }

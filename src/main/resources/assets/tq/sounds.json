@@ -111,15 +111,15 @@
       "cosmo_hurt": {
             "sounds": [
                   {
+                        "name": "tq:entity/cosmo_hurt0",
+                        "volume": 0.5
+                  },
+                  {
                         "name": "tq:entity/cosmo_hurt1",
                         "volume": 0.5
                   },
                   {
                         "name": "tq:entity/cosmo_hurt2",
-                        "volume": 0.5
-                  },
-                  {
-                        "name": "tq:entity/cosmo_hurt3",
                         "volume": 0.5
                   }
             ]
@@ -127,6 +127,13 @@
       "entity_death": {
             "sounds": [
                   "tq:entity/entity_death"
+            ]
+      },
+      "coma_crystal_shoot": {
+            "sounds": [
+                  "tq:entity/coma_crystal/shoot0",
+                  "tq:entity/coma_crystal/shoot1",
+                  "tq:entity/coma_crystal/shoot2"
             ]
       }
 }

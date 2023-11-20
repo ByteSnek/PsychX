@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "tq:block/watercolour_block"
-    }
-  }
+      "variants": {
+            "": {
+                  "model": "tq:block/watercolour_block"
+            }
+      }
 }

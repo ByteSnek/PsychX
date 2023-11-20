@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "tq:block/geometric_block"
-    }
-  }
+      "variants": {
+            "": {
+                  "model": "tq:block/geometric_block"
+            }
+      }
 }

@@ -1,8 +1,8 @@
 {
-  "type": "tq:watercolour_rubble",
-  "config": {
-    "state": {
-      "Name": "tq:watercolour_block"
-    }
-  }
+      "type": "tq:watercolour_rubble",
+      "config": {
+            "state": {
+                  "Name": "tq:watercolour_block"
+            }
+      }
 }

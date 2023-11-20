@@ -1,6 +1,6 @@
 {
-  "parent": "tq:block/shader",
-  "textures": {
-    "particle": "minecraft:block/gray_concrete"
-  }
+      "parent": "tq:block/shader",
+      "textures": {
+            "particle": "minecraft:block/gray_concrete"
+      }
 }

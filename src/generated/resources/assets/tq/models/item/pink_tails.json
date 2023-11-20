@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "tq:block/pink_tails"
-  }
+      "parent": "minecraft:item/generated",
+      "textures": {
+            "layer0": "tq:block/pink_tails"
+      }
 }
