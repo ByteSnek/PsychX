@@ -72,7 +72,7 @@ repositories {
 dependencies {
     minecraft "net.neoforged:forge:${minecraft_version}-${neo_version}"
 
-    implementation fg.deobf("xyz.snaker.snakerlib:SnakerLib:${snakerlib_version}")
+    implementation fg.deobf("bytesnek.snakerlib:SnakerLib:${snakerlib_version}")
     implementation fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}")
     implementation fg.deobf("codechicken:CodeChickenLib:1.20.1-4.4.0.1:universal")
 
@@ -145,17 +145,17 @@ publishing {
             artifact docJar
             pom {
                 name = project.name
-                description = 'Modding Library'
-                url = 'https://github.com/SnakerBone/Tourniqueted'
+                description = 'A Minecraft Mod'
+                url = 'https://github.com/ByteSnek/Tourniqueted'
                 scm {
-                    url = 'https://github.com/SnakerBone/Tourniqueted'
-                    connection = 'scm:git:git://github.com/SnakerBone/Tourniqueted.git'
-                    developerConnection = 'scm:git:git@github.com:SnakerBone/Tourniqueted.git'
+                    url = 'https://github.com/ByteSnek/Tourniqueted'
+                    connection = 'scm:git:git://github.com/ByteSnek/Tourniqueted.git'
+                    developerConnection = 'scm:git:git@github.com:ByteSnek/Tourniqueted.git'
                 }
                 licenses {
                     license {
-                        name = 'GPLv3'
-                        url = 'https://www.gnu.org/licenses/gpl-3.0.txt'
+                        name = 'MIT'
+                        url = 'https://github.com/ByteSnek/Tourniqueted/LICENSE'
                     }
                 }
             }
