@@ -3,8 +3,8 @@ package bytesnek.tq.client.renderer.item;
 import java.util.HashMap;
 import java.util.Map;
 
-import xyz.snaker.snakerlib.client.render.PreppedRenderer;
-import xyz.snaker.snakerlib.math.Tensor;
+import bytesnek.snakerlib.client.render.PreppedRenderer;
+import bytesnek.snakerlib.math.Tensor;
 
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;

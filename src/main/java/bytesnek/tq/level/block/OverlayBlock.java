@@ -1,6 +1,6 @@
 package bytesnek.tq.level.block;
 
-import xyz.snaker.snakerlib.utility.block.BlockProperties;
+import bytesnek.snakerlib.utility.block.BlockProperties;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MapColor;

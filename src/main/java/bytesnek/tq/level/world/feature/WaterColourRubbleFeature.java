@@ -1,6 +1,6 @@
 package bytesnek.tq.level.world.feature;
 
-import xyz.snaker.snakerlib.level.levelgen.feature.RubbleFeature;
+import bytesnek.snakerlib.level.levelgen.feature.RubbleFeature;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;

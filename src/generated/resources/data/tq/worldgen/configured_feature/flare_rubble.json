@@ -1,8 +1,8 @@
 {
-      "type": "tq:flare_rubble",
-      "config": {
-            "state": {
-                  "Name": "tq:flare_block"
-            }
-      }
+  "type": "tq:flare_rubble",
+  "config": {
+    "state": {
+      "Name": "tq:flare_block"
+    }
+  }
 }

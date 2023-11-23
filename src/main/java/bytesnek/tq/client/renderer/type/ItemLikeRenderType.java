@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-import xyz.snaker.snakerlib.client.render.SRTP;
+import bytesnek.snakerlib.client.render.SRTP;
 
 import net.minecraft.Util;
 import net.minecraft.client.renderer.RenderType;

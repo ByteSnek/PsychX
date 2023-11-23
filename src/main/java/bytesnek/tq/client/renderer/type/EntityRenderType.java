@@ -2,7 +2,7 @@ package bytesnek.tq.client.renderer.type;
 
 import java.util.function.Supplier;
 
-import xyz.snaker.snakerlib.client.render.SRTP;
+import bytesnek.snakerlib.client.render.SRTP;
 
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ShaderInstance;

@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import xyz.snaker.snakerlib.resources.ResourceReference;
+import bytesnek.snakerlib.resources.ResourceReference;
 
 import net.minecraft.resources.ResourceLocation;
 

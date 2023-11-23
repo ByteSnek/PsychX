@@ -2,9 +2,6 @@ package bytesnek.tq.level.entity.mob;
 
 import java.util.function.Predicate;
 
-import xyz.snaker.snakerlib.level.entity.FlyingHostile;
-import xyz.snaker.snakerlib.math.Maths;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -29,10 +26,11 @@ import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3d;
 
+import bytesnek.hiss.math.Maths;
+import bytesnek.snakerlib.level.entity.FlyingHostile;
 import bytesnek.tq.level.entity.Comatosian;
 import bytesnek.tq.level.entity.projectile.CosmicRay;
 import bytesnek.tq.level.world.EntitySpawner;
-import bytesnek.tq.rego.Entities;
 import bytesnek.tq.rego.Sounds;
 
 /**
@@ -106,7 +104,7 @@ public class Snipe extends FlyingHostile implements Comatosian
     @Override
     public SoundEvent getDeathSound()
     {
-        return Sounds.ENTITY_DEATH.get();
+        return Sounds.DEATH.get();
     }
 
     @Override
@@ -121,7 +119,7 @@ public class Snipe extends FlyingHostile implements Comatosian
         return true;
     }
 
-    static class SnipeAttackGoal extends Goal
+    class SnipeAttackGoal extends Goal
     {
         private final Snipe snipe;
         private final int delay;
@@ -165,7 +163,7 @@ public class Snipe extends FlyingHostile implements Comatosian
                     snipe.xRotO = snipe.getXRot();
 
                     if (snipe.tickCount % delay == 0) {
-                        CosmicRay ray = new CosmicRay(Entities.COSMIC_RAY.get(), level);
+                        CosmicRay ray = new CosmicRay(Snipe.this, level);
                         Vector3d xyz = new Vector3d(x, y, z);
 
                         ray.shoot(xyz.x, xyz.y, xyz.z, velocity, inaccuracy);

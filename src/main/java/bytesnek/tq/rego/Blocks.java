@@ -2,14 +2,6 @@ package bytesnek.tq.rego;
 
 import java.util.function.Supplier;
 
-import xyz.snaker.snakerlib.level.block.FlowerBlock;
-import xyz.snaker.snakerlib.level.block.SaplingBlock;
-import xyz.snaker.snakerlib.level.block.TallPlantBlock;
-import xyz.snaker.snakerlib.level.block.grower.SimpleTreeGrower;
-import xyz.snaker.snakerlib.math.Maths;
-import xyz.snaker.snakerlib.resources.ResourceReference;
-import xyz.snaker.snakerlib.utility.block.BlockProperties;
-
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffects;
@@ -27,6 +19,13 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import bytesnek.hiss.math.Maths;
+import bytesnek.snakerlib.level.block.FlowerBlock;
+import bytesnek.snakerlib.level.block.SaplingBlock;
+import bytesnek.snakerlib.level.block.TallPlantBlock;
+import bytesnek.snakerlib.level.block.grower.SimpleTreeGrower;
+import bytesnek.snakerlib.resources.ResourceReference;
+import bytesnek.snakerlib.utility.block.BlockProperties;
 import bytesnek.tq.Tourniqueted;
 import bytesnek.tq.level.block.ComasoteBlock;
 import bytesnek.tq.level.block.OverlayBlock;
@@ -79,7 +78,7 @@ public class Blocks
     public static final RegistryObject<Block> SKIN_OVERLAY = registerOverlay("skin");
     public static final RegistryObject<Block> TURQUOISE_OVERLAY = registerOverlay("turquoise");
 
-    public static final RegistryObject<LiquidBlock> COMASOTE = REGISTER.register("comasote", () -> new ComasoteBlock(Fluids.SOURCE_COMASOTE, BlockBehaviour.Properties.copy(LAVA).noLootTable()));
+    public static final RegistryObject<LiquidBlock> COMASOTE = REGISTER.register("comasote", () -> new ComasoteBlock(Fluids.COMASOTE, BlockBehaviour.Properties.copy(LAVA).mapColor(MapColor.COLOR_MAGENTA).noLootTable()));
 
     static RegistryObject<Block> register(String name, Supplier<Block> block)
     {

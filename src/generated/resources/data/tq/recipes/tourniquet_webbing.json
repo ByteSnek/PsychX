@@ -1,20 +1,20 @@
 {
-      "type": "minecraft:crafting_shaped",
-      "category": "misc",
-      "key": {
-            "L": {
-                  "item": "minecraft:leather"
-            },
-            "T": {
-                  "item": "tq:weathered_twine"
-            }
-      },
-      "pattern": [
-            "LT",
-            "TL"
-      ],
-      "result": {
-            "item": "tq:tourniquet_webbing"
-      },
-      "show_notification": true
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "T": {
+      "item": "tq:weathered_twine"
+    }
+  },
+  "pattern": [
+    "LT",
+    "TL"
+  ],
+  "result": {
+    "item": "tq:tourniquet_webbing"
+  },
+  "show_notification": true
 }

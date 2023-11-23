@@ -1,8 +1,5 @@
 package bytesnek.tq.level.entity.creature;
 
-import xyz.snaker.snakerlib.level.entity.FlyingPassive;
-import xyz.snaker.snakerlib.level.entity.ai.goal.FollowSpecificMobGoal;
-
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
@@ -10,6 +7,9 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.monster.Spider;
 import net.minecraft.world.level.Level;
+
+import bytesnek.snakerlib.level.entity.FlyingPassive;
+import bytesnek.snakerlib.level.entity.ai.goal.FollowSpecificMobGoal;
 
 /**
  * Created by SnakerBone on 10/11/2023

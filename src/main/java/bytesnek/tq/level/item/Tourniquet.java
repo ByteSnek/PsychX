@@ -1,7 +1,5 @@
 package bytesnek.tq.level.item;
 
-import xyz.snaker.snakerlib.math.Maths;
-import xyz.snaker.snakerlib.utility.item.ItemProperties;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -22,6 +20,8 @@ import net.minecraft.world.level.Level;
 
 import org.jetbrains.annotations.NotNull;
 
+import bytesnek.hiss.math.Maths;
+import bytesnek.snakerlib.utility.item.ItemProperties;
 import bytesnek.tq.level.world.dimension.Comatose;
 import bytesnek.tq.rego.Levels;
 

@@ -28,6 +28,6 @@ public class FluidTags extends FluidTagsProvider
     @Override
     public void addTags(@NotNull HolderLookup.Provider provider)
     {
-        tag(LAVA).add(Fluids.SOURCE_COMASOTE.get()).add(Fluids.FLOWING_COMASOTE.get());
+        tag(LAVA).add(Fluids.COMASOTE.get()).add(Fluids.FLOWING_COMASOTE.get());
     }
 }

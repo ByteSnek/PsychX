@@ -1,8 +1,5 @@
 package bytesnek.tq.client.renderer.entity;
 
-import xyz.snaker.snakerlib.math.Tensor;
-import xyz.snaker.snakerlib.resources.ResourceReference;
-
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -12,6 +9,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 
 import org.jetbrains.annotations.NotNull;
 
+import bytesnek.snakerlib.math.Tensor;
+import bytesnek.snakerlib.resources.ResourceReference;
 import bytesnek.tq.client.model.entity.FrolickerModel;
 import bytesnek.tq.level.entity.creature.Frolicker;
 

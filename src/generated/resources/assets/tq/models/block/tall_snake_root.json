@@ -1,7 +1,7 @@
 {
-      "parent": "minecraft:block/cross",
-      "render_type": "minecraft:cutout",
-      "textures": {
-            "cross": "tq:block/tall_snake_root"
-      }
+  "parent": "minecraft:block/cross",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "cross": "tq:block/tall_snake_root"
+  }
 }

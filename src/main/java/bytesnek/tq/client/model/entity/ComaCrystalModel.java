@@ -1,7 +1,5 @@
 package bytesnek.tq.client.model.entity;
 
-import xyz.snaker.snakerlib.resources.ResourceReference;
-
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -16,14 +14,15 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 
 import org.jetbrains.annotations.NotNull;
 
-import bytesnek.tq.level.entity.ComaCrystal;
+import bytesnek.snakerlib.resources.ResourceReference;
+import bytesnek.tq.level.entity.crystal.ComaCrystal;
 
 /**
  * Created by SnakerBone on 14/11/2023
  **/
 public class ComaCrystalModel extends EntityModel<ComaCrystal>
 {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceReference("monolith"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceReference("coma_crystal"), "main");
 
     public final ModelPart cube;
     public final ModelPart glass;
@@ -38,14 +37,14 @@ public class ComaCrystalModel extends EntityModel<ComaCrystal>
 
     public static LayerDefinition createBodyLayer()
     {
-        MeshDefinition mesh = new MeshDefinition();
-        PartDefinition root = mesh.getRoot();
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
 
-        root.addOrReplaceChild("glass", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -4.0F, -4.0F, 8.0F, 8.0F, 8.0F), PartPose.ZERO);
-        root.addOrReplaceChild("cube", CubeListBuilder.create().texOffs(32, 0).addBox(-4.0F, -4.0F, -4.0F, 8.0F, 8.0F, 8.0F), PartPose.ZERO);
-        root.addOrReplaceChild("base", CubeListBuilder.create().texOffs(0, 16).addBox(-6.0F, 0.0F, -6.0F, 12.0F, 4.0F, 12.0F), PartPose.ZERO);
+        partdefinition.addOrReplaceChild("glass", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -4.0F, -4.0F, 8.0F, 8.0F, 8.0F), PartPose.ZERO);
+        partdefinition.addOrReplaceChild("cube", CubeListBuilder.create().texOffs(32, 0).addBox(-4.0F, -4.0F, -4.0F, 8.0F, 8.0F, 8.0F), PartPose.ZERO);
+        partdefinition.addOrReplaceChild("base", CubeListBuilder.create().texOffs(0, 16).addBox(-6.0F, 0.0F, -6.0F, 12.0F, 4.0F, 12.0F), PartPose.ZERO);
 
-        return LayerDefinition.create(mesh, 64, 32);
+        return LayerDefinition.create(meshdefinition, 64, 32);
     }
 
     @Override
@@ -55,10 +54,10 @@ public class ComaCrystalModel extends EntityModel<ComaCrystal>
     }
 
     @Override
-    public void renderToBuffer(@NotNull PoseStack stack, @NotNull VertexConsumer consumer, int packedLight, int packedOverlay, float pRed, float pGreen, float pBlue, float pAlpha)
+    public void renderToBuffer(@NotNull PoseStack stack, @NotNull VertexConsumer consumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha)
     {
-        cube.render(stack, consumer, packedLight, packedOverlay);
-        glass.render(stack, consumer, packedLight, packedOverlay);
-        base.render(stack, consumer, packedLight, packedOverlay);
+        cube.render(stack, consumer, packedLight, packedOverlay, red, green, blue, alpha);
+        glass.render(stack, consumer, packedLight, packedOverlay, red, green, blue, alpha);
+        base.render(stack, consumer, packedLight, packedOverlay, red, green, blue, alpha);
     }
 }

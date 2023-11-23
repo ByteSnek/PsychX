@@ -1,27 +1,27 @@
 {
-      "parent": "minecraft:recipes/root",
-      "criteria": {
-            "has_the_recipe": {
-                  "conditions": {
-                        "recipe": "tq:weathered_twine"
-                  },
-                  "trigger": "minecraft:recipe_unlocked"
-            },
-            "tick": {
-                  "conditions": {},
-                  "trigger": "minecraft:tick"
-            }
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "tq:weathered_twine"
       },
-      "requirements": [
-            [
-                  "tick",
-                  "has_the_recipe"
-            ]
-      ],
-      "rewards": {
-            "recipes": [
-                  "tq:weathered_twine"
-            ]
-      },
-      "sends_telemetry_event": false
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "tick": {
+      "conditions": {},
+      "trigger": "minecraft:tick"
+    }
+  },
+  "requirements": [
+    [
+      "tick",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "tq:weathered_twine"
+    ]
+  },
+  "sends_telemetry_event": false
 }

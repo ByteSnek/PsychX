@@ -1,7 +1,7 @@
 package bytesnek.tq.client.renderer.icon;
 
-import xyz.snaker.snakerlib.SnakerLib;
-import xyz.snaker.snakerlib.client.render.CyclicalIconRenderer;
+import bytesnek.snakerlib.SnakerLib;
+import bytesnek.snakerlib.client.render.CyclicalIconRenderer;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;

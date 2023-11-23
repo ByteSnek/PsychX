@@ -61,20 +61,20 @@
       },
       "utterfly_shoot": {
             "sounds": [
-                  "tq:entity/utterfly_shoot"
+                  "tq:entity/butterfly/shoot"
             ]
       },
       "utterfly_ambient": {
             "sounds": [
                   {
-                        "name": "tq:entity/butterfly_ambient"
+                        "name": "tq:entity/butterfly/ambient"
                   }
             ]
       },
       "flutterfly_ambient": {
             "sounds": [
                   {
-                        "name": "tq:entity/butterfly_ambient",
+                        "name": "tq:entity/butterfly/ambient",
                         "pitch": 2
                   }
             ]
@@ -88,12 +88,12 @@
       },
       "snipe_ambient": {
             "sounds": [
-                  "tq:entity/snipe_ambient"
+                  "tq:entity/snipe/ambient"
             ]
       },
       "snipe_hurt": {
             "sounds": [
-                  "tq:entity/snipe_hurt"
+                  "tq:entity/snipe/hurt"
             ]
       },
       "snipe_shoot": {
@@ -111,22 +111,17 @@
       "cosmo_hurt": {
             "sounds": [
                   {
-                        "name": "tq:entity/cosmo_hurt0",
+                        "name": "tq:entity/cosmo/hurt0",
                         "volume": 0.5
                   },
                   {
-                        "name": "tq:entity/cosmo_hurt1",
+                        "name": "tq:entity/cosmo/hurt1",
                         "volume": 0.5
                   },
                   {
-                        "name": "tq:entity/cosmo_hurt2",
+                        "name": "tq:entity/cosmo/hurt2",
                         "volume": 0.5
                   }
-            ]
-      },
-      "entity_death": {
-            "sounds": [
-                  "tq:entity/entity_death"
             ]
       },
       "coma_crystal_shoot": {
@@ -134,6 +129,31 @@
                   "tq:entity/coma_crystal/shoot0",
                   "tq:entity/coma_crystal/shoot1",
                   "tq:entity/coma_crystal/shoot2"
+            ]
+      },
+      "coma_crystal_shield": {
+            "sounds": [
+                  "tq:entity/coma_crystal/shield"
+            ]
+      },
+      "coma_crystal_hit": {
+            "sounds": [
+                  "tq:entity/coma_crystal/hit"
+            ]
+      },
+      "coma_crystal_deplete": {
+            "sounds": [
+                  "tq:entity/coma_crystal/deplete"
+            ]
+      },
+      "coma_crystal_beam": {
+            "sounds": [
+                  "tq:entity/coma_crystal/beam"
+            ]
+      },
+      "death": {
+            "sounds": [
+                  "tq:entity/death"
             ]
       }
 }

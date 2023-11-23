@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
-import xyz.snaker.snakerlib.SnakerLib;
-
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -20,6 +18,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import bytesnek.hiss.utility.Annotations;
+import bytesnek.snakerlib.SnakerLib;
 import bytesnek.tq.utility.NoCreativeTab;
 import bytesnek.tq.utility.RegistryMapper;
 
@@ -105,7 +104,7 @@ public class Rego implements RegistryMapper
         LootModifiers.REGISTER.register(bus);
         FoliagePlacers.REGISTER.register(bus);
         Fluids.REGISTER.register(bus);
-        FluidTypes.REGISTER.register(bus);
+        Fluids.Types.REGISTER.register(bus);
         Effects.REGISTER.register(bus);
         bus.addListener(new Rego()::onBuildCreativeTab);
     }

@@ -3,7 +3,7 @@ package bytesnek.tq.level.display.entity;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import xyz.snaker.snakerlib.utility.item.ItemProperties;
+import bytesnek.snakerlib.utility.item.ItemProperties;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;

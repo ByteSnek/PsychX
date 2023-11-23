@@ -1,11 +1,11 @@
 {
-      "values": [
-            "tq:red_cosmo_spine",
-            "tq:green_cosmo_spine",
-            "tq:blue_cosmo_spine",
-            "tq:yellow_cosmo_spine",
-            "tq:pink_cosmo_spine",
-            "tq:purple_cosmo_spine",
-            "tq:alpha_cosmo_spine"
-      ]
+  "values": [
+    "tq:red_cosmo_spine",
+    "tq:green_cosmo_spine",
+    "tq:blue_cosmo_spine",
+    "tq:yellow_cosmo_spine",
+    "tq:pink_cosmo_spine",
+    "tq:purple_cosmo_spine",
+    "tq:alpha_cosmo_spine"
+  ]
 }

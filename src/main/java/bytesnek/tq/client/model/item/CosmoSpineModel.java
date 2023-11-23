@@ -1,7 +1,5 @@
 package bytesnek.tq.client.model.item;
 
-import xyz.snaker.snakerlib.resources.ResourceReference;
-
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -13,6 +11,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
 import org.jetbrains.annotations.NotNull;
+
+import bytesnek.snakerlib.resources.ResourceReference;
 
 public class CosmoSpineModel extends Model
 {

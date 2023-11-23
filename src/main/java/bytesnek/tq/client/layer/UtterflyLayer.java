@@ -1,7 +1,5 @@
 package bytesnek.tq.client.layer;
 
-import xyz.snaker.snakerlib.utility.Rendering;
-
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
@@ -10,6 +8,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 
 import org.jetbrains.annotations.NotNull;
 
+import bytesnek.snakerlib.utility.Rendering;
 import bytesnek.tq.client.Shaders;
 import bytesnek.tq.client.model.entity.UtterflyModel;
 import bytesnek.tq.client.renderer.type.EntityRenderType;

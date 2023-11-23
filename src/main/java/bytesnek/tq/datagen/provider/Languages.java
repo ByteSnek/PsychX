@@ -6,11 +6,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.Stream;
 
-import xyz.snaker.snakerlib.SnakerLib;
-import xyz.snaker.snakerlib.resources.ResourceLocations;
-
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
@@ -21,6 +20,8 @@ import net.minecraftforge.common.data.LanguageProvider;
 import org.jetbrains.annotations.NotNull;
 
 import bytesnek.hiss.utility.Strings;
+import bytesnek.snakerlib.SnakerLib;
+import bytesnek.snakerlib.resources.ResourceLocations;
 import bytesnek.tq.Tourniqueted;
 import bytesnek.tq.rego.*;
 import bytesnek.tq.utility.RegistryMapper;
@@ -45,10 +46,17 @@ public class Languages extends LanguageProvider implements RegistryMapper
         map(Tabs.REGISTER, CreativeModeTab[]::new).forEach(this::addCreativeTabTranslation);
         map(Effects.REGISTER, MobEffect[]::new).forEach(this::addEffectTranslation);
 
+        addDamageTypeTranslation(DamageTypes.COSMIC, "%1$s was killed by a cosmic ray");
+
         add("command.force_removal_success", "Successfully force removed you from the world");
         add("message.health_repair_success", "Successfully repaired your health");
         add("flat_world_preset.iron", "BJ Howes Metaland");
         add("flat_world_preset.concrete", "Northbound M1 Motorway");
+    }
+
+    private void addDamageTypeTranslation(ResourceKey<DamageType> key, String value)
+    {
+        add("death.attack." + key.location().getPath(), value);
     }
 
     private <T extends Block> void addBlockTranslation(T block)

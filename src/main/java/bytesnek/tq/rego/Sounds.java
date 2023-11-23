@@ -1,12 +1,11 @@
 package bytesnek.tq.rego;
 
-import xyz.snaker.snakerlib.resources.ResourceReference;
-
 import net.minecraft.sounds.SoundEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import bytesnek.snakerlib.resources.ResourceReference;
 import bytesnek.tq.Tourniqueted;
 
 /**
@@ -24,10 +23,14 @@ public class Sounds
     public static final RegistryObject<SoundEvent> FLARE_FLASHBANG = register("flare_flashbang");
     public static final RegistryObject<SoundEvent> SNIPE_HURT = register("snipe_hurt");
     public static final RegistryObject<SoundEvent> SNIPE_AMBIENT = register("snipe_ambient");
-    public static final RegistryObject<SoundEvent> ENTITY_DEATH = register("entity_death");
+    public static final RegistryObject<SoundEvent> DEATH = register("death");
     public static final RegistryObject<SoundEvent> SFX = register("sfx");
     public static final RegistryObject<SoundEvent> COMASOTE = register("comasote");
     public static final RegistryObject<SoundEvent> COMA_CRYSTAL_SHOOT = register("coma_crystal_shoot");
+    public static final RegistryObject<SoundEvent> COMA_CRYSTAL_SHIELD = register("coma_crystal_shield");
+    public static final RegistryObject<SoundEvent> COMA_CRYSTAL_HIT = register("coma_crystal_hit");
+    public static final RegistryObject<SoundEvent> COMA_CRYSTAL_DEPLETE = register("coma_crystal_deplete");
+    public static final RegistryObject<SoundEvent> COMA_CRYSTAL_BEAM = register("coma_crystal_beam");
 
     public static final RegistryObject<SoundEvent> AMBIENT0 = register("ambient0");
     public static final RegistryObject<SoundEvent> AMBIENT1 = register("ambient1");

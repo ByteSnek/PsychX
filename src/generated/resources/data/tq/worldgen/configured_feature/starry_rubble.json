@@ -1,8 +1,8 @@
 {
-      "type": "tq:starry_rubble",
-      "config": {
-            "state": {
-                  "Name": "tq:starry_block"
-            }
-      }
+  "type": "tq:starry_rubble",
+  "config": {
+    "state": {
+      "Name": "tq:starry_block"
+    }
+  }
 }

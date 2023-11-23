@@ -5,8 +5,6 @@ import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Supplier;
 
-import xyz.snaker.snakerlib.internal.UncaughtExceptionThread;
-
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -40,6 +38,7 @@ import org.jetbrains.annotations.NotNull;
 
 import bytesnek.hiss.sneaky.Reflection;
 import bytesnek.hiss.sneaky.Sneaky;
+import bytesnek.hiss.thread.UncaughtExceptionThread;
 import bytesnek.tq.level.entity.Comatosian;
 import bytesnek.tq.rego.Entities;
 import bytesnek.tq.rego.Sounds;

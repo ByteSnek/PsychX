@@ -4,8 +4,6 @@ import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
 
-import xyz.snaker.snakerlib.resources.ResourceLocations;
-
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
@@ -14,6 +12,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 
 import org.jetbrains.annotations.NotNull;
 
+import bytesnek.snakerlib.resources.ResourceLocations;
 import bytesnek.tq.Tourniqueted;
 import bytesnek.tq.level.block.ShaderBlock;
 import bytesnek.tq.rego.Blocks;
@@ -40,7 +39,7 @@ public class BlockTags extends BlockTagsProvider implements RegistryMapper
         tag(PLANKS).add(Blocks.ILLUSIVE_PLANKS.get(), Blocks.DELUSIVE_PLANKS.get());
         tag(LOGS).add(Blocks.ILLUSIVE_LOG.get(), Blocks.DELUSIVE_LOG.get());
         tag(LEAVES).add(Blocks.DELUSIVE_LEAVES.get(), Blocks.ILLUSIVE_LEAVES.get());
-        tag(Blocks.Tags.GROUNDRICH).add(Blocks.COMASOTE.get());
+        tag(Blocks.Tags.GROUNDRICH).add(Blocks.COMASTONE.get());
 
         map(Blocks.REGISTER, RegistryMapper.NEGATE_LIQUID_BLOCK, Block[]::new).forEach(block ->
         {

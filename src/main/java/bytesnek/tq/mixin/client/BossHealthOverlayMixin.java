@@ -5,10 +5,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.function.Function;
 
-import xyz.snaker.snakerlib.SnakerLib;
-import xyz.snaker.snakerlib.client.render.SRTP;
-import xyz.snaker.snakerlib.resources.ResourceReference;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.BossHealthOverlay;
@@ -27,6 +23,9 @@ import com.mojang.datafixers.util.Pair;
 import org.spongepowered.asm.mixin.*;
 
 import bytesnek.hiss.utility.Colours;
+import bytesnek.snakerlib.SnakerLib;
+import bytesnek.snakerlib.client.render.SRTP;
+import bytesnek.snakerlib.resources.ResourceReference;
 import bytesnek.tq.client.Shaders;
 import bytesnek.tq.level.entity.boss.Utterfly;
 import bytesnek.tq.rego.Entities;

@@ -1,21 +1,21 @@
 {
-      "type": "minecraft:crafting_shaped",
-      "category": "misc",
-      "key": {
-            "K": {
-                  "item": "tq:flutterfly_keratin"
-            },
-            "W": {
-                  "item": "tq:tourniquet_webbing"
-            }
-      },
-      "pattern": [
-            " KW",
-            "KWK",
-            "WK "
-      ],
-      "result": {
-            "item": "tq:tourniquet"
-      },
-      "show_notification": true
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "K": {
+      "item": "tq:flutterfly_keratin"
+    },
+    "W": {
+      "item": "tq:tourniquet_webbing"
+    }
+  },
+  "pattern": [
+    " KW",
+    "KWK",
+    "WK "
+  ],
+  "result": {
+    "item": "tq:tourniquet"
+  },
+  "show_notification": true
 }

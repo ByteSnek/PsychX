@@ -3,9 +3,6 @@ package bytesnek.tq.level.entity.mob;
 import java.util.List;
 import java.util.function.Predicate;
 
-import xyz.snaker.snakerlib.level.entity.Hostile;
-import xyz.snaker.snakerlib.math.Maths;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -36,6 +33,8 @@ import net.minecraftforge.network.NetworkHooks;
 
 import org.jetbrains.annotations.NotNull;
 
+import bytesnek.hiss.math.Maths;
+import bytesnek.snakerlib.level.entity.Hostile;
 import bytesnek.tq.config.Config;
 import bytesnek.tq.level.entity.Comatosian;
 import bytesnek.tq.level.world.EntitySpawner;
@@ -139,7 +138,7 @@ public class Flare extends Hostile implements Comatosian
     @Override
     public SoundEvent getDeathSound()
     {
-        return Sounds.ENTITY_DEATH.get();
+        return Sounds.DEATH.get();
     }
 
     @Override

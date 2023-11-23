@@ -1,7 +1,7 @@
 {
-      "parent": "minecraft:block/cube_column",
-      "textures": {
-            "end": "tq:block/delusive_log",
-            "side": "tq:block/delusive_log"
-      }
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "tq:block/delusive_log",
+    "side": "tq:block/delusive_log"
+  }
 }

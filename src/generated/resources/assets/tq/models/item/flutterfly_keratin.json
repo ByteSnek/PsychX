@@ -1,6 +1,6 @@
 {
-      "parent": "minecraft:item/generated",
-      "textures": {
-            "layer0": "tq:item/flutterfly_keratin"
-      }
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "tq:item/flutterfly_keratin"
+  }
 }

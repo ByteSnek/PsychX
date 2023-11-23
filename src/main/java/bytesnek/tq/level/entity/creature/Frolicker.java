@@ -2,8 +2,8 @@ package bytesnek.tq.level.entity.creature;
 
 import java.util.function.Predicate;
 
-import xyz.snaker.snakerlib.level.entity.FlyingPassive;
-import xyz.snaker.snakerlib.utility.Worlds;
+import bytesnek.snakerlib.level.entity.FlyingPassive;
+import bytesnek.snakerlib.utility.Worlds;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;

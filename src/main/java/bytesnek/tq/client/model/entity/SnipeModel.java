@@ -1,7 +1,5 @@
 package bytesnek.tq.client.model.entity;
 
-import xyz.snaker.snakerlib.resources.ResourceReference;
-
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -14,6 +12,7 @@ import com.mojang.math.Axis;
 
 import org.jetbrains.annotations.NotNull;
 
+import bytesnek.snakerlib.resources.ResourceReference;
 import bytesnek.tq.level.entity.mob.Snipe;
 
 public class SnipeModel extends EntityModel<Snipe>

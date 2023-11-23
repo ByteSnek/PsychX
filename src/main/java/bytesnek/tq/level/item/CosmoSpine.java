@@ -2,7 +2,7 @@ package bytesnek.tq.level.item;
 
 import java.util.function.Consumer;
 
-import xyz.snaker.snakerlib.utility.item.ItemProperties;
+import bytesnek.snakerlib.utility.item.ItemProperties;
 
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.Item;

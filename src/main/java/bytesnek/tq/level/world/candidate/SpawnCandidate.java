@@ -2,7 +2,7 @@ package bytesnek.tq.level.world.candidate;
 
 import java.util.function.Supplier;
 
-import xyz.snaker.snakerlib.resources.ResourceReference;
+import bytesnek.snakerlib.resources.ResourceReference;
 
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;

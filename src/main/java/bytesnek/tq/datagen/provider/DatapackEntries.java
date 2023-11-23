@@ -12,6 +12,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import bytesnek.tq.Tourniqueted;
 import bytesnek.tq.rego.Biomes;
+import bytesnek.tq.rego.DamageTypes;
 import bytesnek.tq.rego.Features;
 import bytesnek.tq.rego.FlatLevelPresets;
 
@@ -25,7 +26,8 @@ public class DatapackEntries extends DatapackBuiltinEntriesProvider
             .add(Registries.PLACED_FEATURE, Features::placedFeatures)
             .add(ForgeRegistries.Keys.BIOME_MODIFIERS, Features::biomeModifiers)
             .add(Registries.FLAT_LEVEL_GENERATOR_PRESET, FlatLevelPresets::bootstrap)
-            .add(Registries.BIOME, Biomes::bootstrap);
+            .add(Registries.BIOME, Biomes::bootstrap)
+            .add(Registries.DAMAGE_TYPE, DamageTypes::bootstrap);
 
     public DatapackEntries(PackOutput output, CompletableFuture<HolderLookup.Provider> registries)
     {

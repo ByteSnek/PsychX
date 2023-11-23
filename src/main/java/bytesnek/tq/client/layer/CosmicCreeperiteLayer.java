@@ -1,8 +1,5 @@
 package bytesnek.tq.client.layer;
 
-import xyz.snaker.snakerlib.resources.ResourceReference;
-import xyz.snaker.snakerlib.utility.Rendering;
-
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.LightTexture;
@@ -18,6 +15,8 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 
 import org.jetbrains.annotations.NotNull;
 
+import bytesnek.snakerlib.resources.ResourceReference;
+import bytesnek.snakerlib.utility.Rendering;
 import bytesnek.tq.client.model.entity.CosmicCreeperiteModel;
 import bytesnek.tq.level.entity.mob.CosmicCreeperite;
 

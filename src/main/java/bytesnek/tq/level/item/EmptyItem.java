@@ -1,8 +1,8 @@
 package bytesnek.tq.level.item;
 
-import xyz.snaker.snakerlib.utility.item.ItemProperties;
-
 import net.minecraft.world.item.Item;
+
+import bytesnek.snakerlib.utility.item.ItemProperties;
 
 /**
  * Created by SnakerBone on 29/08/2023

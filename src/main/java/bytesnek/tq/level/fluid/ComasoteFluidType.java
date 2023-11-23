@@ -1,8 +1,7 @@
 package bytesnek.tq.level.fluid;
 
+import javax.annotation.Nullable;
 import java.util.function.Consumer;
-
-import xyz.snaker.snakerlib.resources.ResourceReference;
 
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -18,51 +17,17 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
+import bytesnek.snakerlib.utility.fluid.FluidTypeProperties;
+import bytesnek.tq.Tourniqueted;
+
 /**
  * Created by SnakerBone on 26/09/2023
  **/
 public class ComasoteFluidType extends FluidType
 {
-    private final ResourceLocation stillTexture;
-    private final ResourceLocation flowingTexture;
-    private final ResourceLocation overlayTexture;
-
-    private final int tintColor;
-    private final Vector3f fogColor;
-
-    public ComasoteFluidType(Properties properties)
+    public ComasoteFluidType()
     {
-        super(properties);
-        this.stillTexture = new ResourceReference("textures/block/fluid/comasote_still.png");
-        this.flowingTexture = new ResourceReference("textures/block/fluid/comasote_flow.png");
-        this.overlayTexture = new ResourceReference("textures/block/fluid/comasote_overlay.png");
-        this.tintColor = FastColor.ARGB32.color(255, 116, 7, 168);
-        this.fogColor = new Vector3f(0.2F, 0, 0.2F);
-    }
-
-    public ResourceLocation getStillTexture()
-    {
-        return stillTexture;
-    }
-
-    public ResourceLocation getFlowingTexture()
-    {
-        return flowingTexture;
-    }
-
-    public int getTintColor()
-    {
-        return tintColor;
-    }
-
-    public ResourceLocation getOverlayTexture()
-    {
-        return overlayTexture;
-    }
-
-    public Vector3f getFogColor()
-    {
-        return fogColor;
+        super(FluidTypeProperties.LAVA.apply("block.tq.comasote"));
     }
 
     @Override
@@ -73,40 +38,38 @@ public class ComasoteFluidType extends FluidType
             @Override
             public ResourceLocation getStillTexture()
             {
-                return stillTexture;
+                return new ResourceLocation(Tourniqueted.MODID, "block/comasote_still");
             }
 
             @Override
             public ResourceLocation getFlowingTexture()
             {
-                return flowingTexture;
+                return new ResourceLocation(Tourniqueted.MODID, "block/comasote_flow");
             }
 
             @Override
-            public @NotNull ResourceLocation getOverlayTexture()
+            public @Nullable ResourceLocation getOverlayTexture()
             {
-                return overlayTexture;
+                return null;
             }
 
             @Override
             public int getTintColor()
             {
-                return tintColor;
+                return FastColor.ARGB32.color(255, 255, 0, 255);
             }
 
             @Override
-            public @NotNull Vector3f modifyFogColor(Camera camera, float partialTick, ClientLevel level,
-                                                    int renderDistance, float darkenWorldAmount, Vector3f fluidFogColor)
+            public @NotNull Vector3f modifyFogColor(Camera camera, float partialTick, ClientLevel level, int renderDistance, float darkenWorldAmount, Vector3f fluidFogColor)
             {
-                return fogColor;
+                return new Vector3f(1, 0, 1);
             }
 
             @Override
-            public void modifyFogRender(Camera camera, FogRenderer.FogMode mode, float renderDistance, float partialTick,
-                                        float nearDistance, float farDistance, FogShape shape)
+            public void modifyFogRender(Camera camera, FogRenderer.FogMode mode, float renderDistance, float partialTick, float nearDistance, float farDistance, FogShape shape)
             {
-                RenderSystem.setShaderFogStart(1f);
-                RenderSystem.setShaderFogEnd(6f);
+                RenderSystem.setShaderFogStart(1);
+                RenderSystem.setShaderFogEnd(6);
             }
         });
     }

@@ -2,9 +2,6 @@ package bytesnek.tq.client.renderer.entity;
 
 import java.awt.*;
 
-import xyz.snaker.snakerlib.math.Tensor;
-import xyz.snaker.snakerlib.resources.ResourceReference;
-
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EnderDragonRenderer;
@@ -22,6 +19,8 @@ import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 
+import bytesnek.snakerlib.math.Tensor;
+import bytesnek.snakerlib.resources.ResourceReference;
 import bytesnek.tq.client.fx.RayFX;
 import bytesnek.tq.client.layer.UtterflyLayer;
 import bytesnek.tq.client.model.entity.UtterflyModel;

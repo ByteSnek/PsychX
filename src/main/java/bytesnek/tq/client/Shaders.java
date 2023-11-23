@@ -2,10 +2,10 @@ package bytesnek.tq.client;
 
 import java.util.function.Consumer;
 
-import xyz.snaker.snakerlib.SnakerLib;
-import xyz.snaker.snakerlib.client.shader.Shader;
-import xyz.snaker.snakerlib.resources.ResourceReference;
-import xyz.snaker.snakerlib.utility.Rendering;
+import bytesnek.snakerlib.SnakerLib;
+import bytesnek.snakerlib.client.shader.Shader;
+import bytesnek.snakerlib.resources.ResourceReference;
+import bytesnek.snakerlib.utility.Rendering;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ShaderInstance;

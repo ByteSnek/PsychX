@@ -1,7 +1,7 @@
 {
-      "parent": "minecraft:block/cube_column",
-      "textures": {
-            "end": "tq:block/illusive_log",
-            "side": "tq:block/illusive_log"
-      }
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "tq:block/illusive_log",
+    "side": "tq:block/illusive_log"
+  }
 }

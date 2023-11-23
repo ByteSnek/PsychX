@@ -1,7 +1,7 @@
 {
-      "parent": "minecraft:block/cube_all",
-      "render_type": "minecraft:cutout",
-      "textures": {
-            "all": "tq:block/illusive_leaves"
-      }
+  "parent": "minecraft:block/cube_all",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "all": "tq:block/illusive_leaves"
+  }
 }

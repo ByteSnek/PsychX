@@ -2,8 +2,6 @@ package bytesnek.tq.client.fx;
 
 import java.awt.*;
 
-import xyz.snaker.snakerlib.SnakerLib;
-
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.RandomSource;
@@ -15,6 +13,8 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 
 import org.joml.Matrix4f;
+
+import bytesnek.snakerlib.SnakerLib;
 
 /**
  * Created by SnakerBone on 20/02/2023

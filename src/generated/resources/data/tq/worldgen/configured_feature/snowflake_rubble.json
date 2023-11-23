@@ -1,8 +1,8 @@
 {
-      "type": "tq:snowflake_rubble",
-      "config": {
-            "state": {
-                  "Name": "tq:snowflake_block"
-            }
-      }
+  "type": "tq:snowflake_rubble",
+  "config": {
+    "state": {
+      "Name": "tq:snowflake_block"
+    }
+  }
 }

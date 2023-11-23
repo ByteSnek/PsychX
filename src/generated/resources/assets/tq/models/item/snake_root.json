@@ -1,6 +1,6 @@
 {
-      "parent": "minecraft:item/generated",
-      "textures": {
-            "layer0": "tq:block/snake_root"
-      }
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "tq:block/snake_root"
+  }
 }

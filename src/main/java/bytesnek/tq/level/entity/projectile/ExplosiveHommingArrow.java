@@ -3,8 +3,6 @@ package bytesnek.tq.level.entity.projectile;
 import java.util.Comparator;
 import java.util.List;
 
-import xyz.snaker.snakerlib.level.entity.Trajectile;
-
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -18,6 +16,7 @@ import net.minecraft.world.phys.Vec3;
 
 import org.jetbrains.annotations.NotNull;
 
+import bytesnek.snakerlib.level.entity.Trajectile;
 import bytesnek.tq.level.entity.boss.Utterfly;
 import bytesnek.tq.rego.Entities;
 

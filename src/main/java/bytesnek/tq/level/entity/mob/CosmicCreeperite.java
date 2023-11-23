@@ -2,9 +2,6 @@ package bytesnek.tq.level.entity.mob;
 
 import java.util.EnumSet;
 
-import xyz.snaker.snakerlib.math.Maths;
-import xyz.snaker.snakerlib.utility.Entitys;
-
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -40,6 +37,8 @@ import net.minecraftforge.network.NetworkHooks;
 
 import org.jetbrains.annotations.NotNull;
 
+import bytesnek.hiss.math.Maths;
+import bytesnek.snakerlib.utility.Entitys;
 import bytesnek.tq.level.entity.Comatosian;
 
 /**
@@ -315,7 +314,7 @@ public class CosmicCreeperite extends Monster implements Comatosian, PowerableMo
     @Override
     public boolean isPowered()
     {
-        return false;
+        return true;
     }
 
     static class CosmicCreeperiteSwellGoal extends Goal

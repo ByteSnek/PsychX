@@ -25,14 +25,7 @@ public class BlockLootTables extends BlockLootSubProvider implements RegistryMap
     @Override
     public void generate()
     {
-        map(Blocks.REGISTER, Block[]::new).forEach(block ->
-        {
-            if (block == Blocks.COMASOTE.get()) {
-                return;
-            }
-
-            dropSelf(block);
-        });
+        map(Blocks.REGISTER, RegistryMapper.NEGATE_LIQUID_BLOCK, Block[]::new).forEach(this::dropSelf);
     }
 
     @Override

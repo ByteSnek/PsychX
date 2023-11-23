@@ -2,8 +2,8 @@ package bytesnek.tq.client.renderer.entity;
 
 import java.util.Map;
 
-import xyz.snaker.snakerlib.math.Tensor;
-import xyz.snaker.snakerlib.resources.ResourceReference;
+import bytesnek.snakerlib.math.Tensor;
+import bytesnek.snakerlib.resources.ResourceReference;
 
 import net.minecraft.Util;
 import net.minecraft.client.renderer.MultiBufferSource;

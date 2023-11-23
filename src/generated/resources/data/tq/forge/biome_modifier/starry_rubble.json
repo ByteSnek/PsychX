@@ -1,12 +1,12 @@
 {
-      "type": "forge:add_features",
-      "biomes": [
-            "tq:delusion",
-            "tq:illusion",
-            "tq:immaterial",
-            "tq:spectral",
-            "tq:surreal"
-      ],
-      "features": "tq:starry_rubble",
-      "step": "local_modifications"
+  "type": "forge:add_features",
+  "biomes": [
+    "tq:delusion",
+    "tq:illusion",
+    "tq:immaterial",
+    "tq:spectral",
+    "tq:surreal"
+  ],
+  "features": "tq:starry_rubble",
+  "step": "local_modifications"
 }

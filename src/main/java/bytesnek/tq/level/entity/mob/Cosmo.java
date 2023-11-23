@@ -1,7 +1,5 @@
 package bytesnek.tq.level.entity.mob;
 
-import xyz.snaker.snakerlib.level.entity.Hostile;
-
 import net.minecraft.Util;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
@@ -37,6 +35,7 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import bytesnek.snakerlib.level.entity.Hostile;
 import bytesnek.tq.client.renderer.entity.CosmoRenderer;
 import bytesnek.tq.level.entity.Comatosian;
 import bytesnek.tq.level.entity.EntityVariants;
@@ -218,7 +217,7 @@ public class Cosmo extends Hostile implements Comatosian
     @Override
     public SoundEvent getDeathSound()
     {
-        return Sounds.ENTITY_DEATH.get();
+        return Sounds.DEATH.get();
     }
 
     @Override

@@ -25,7 +25,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import org.jetbrains.annotations.NotNull;
 
-import bytesnek.tq.level.entity.ComaCrystal;
+import bytesnek.tq.level.entity.crystal.ComaCrystal;
 import bytesnek.tq.level.world.feature.configuration.UtterflyShowgroundConfiguration;
 import bytesnek.tq.rego.Blocks;
 import bytesnek.tq.rego.Entities;

@@ -1,9 +1,5 @@
 package bytesnek.tq.client.renderer.entity;
 
-import xyz.snaker.snakerlib.math.Maths;
-import xyz.snaker.snakerlib.math.Tensor;
-import xyz.snaker.snakerlib.resources.ResourceReference;
-
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.culling.Frustum;
@@ -23,16 +19,22 @@ import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
+import bytesnek.hiss.math.Maths;
+import bytesnek.snakerlib.math.Tensor;
+import bytesnek.snakerlib.resources.ResourceReference;
 import bytesnek.tq.client.Shaders;
 import bytesnek.tq.client.model.entity.ComaCrystalModel;
 import bytesnek.tq.client.renderer.type.EntityRenderType;
-import bytesnek.tq.level.entity.ComaCrystal;
+import bytesnek.tq.level.entity.crystal.ComaCrystal;
 
 /**
  * Created by SnakerBone on 14/11/2023
  **/
 public class ComaCrystalRenderer extends EntityRenderer<ComaCrystal>
 {
+    private static final ResourceLocation CRYSTAL_LOCATION = new ResourceReference("textures/entity/coma_crystal/coma_crystal.png");
+    private static final RenderType RENDER_TYPE = RenderType.entityCutoutNoCull(CRYSTAL_LOCATION);
+    private static final float SIN_45 = (float) Math.sin((Math.PI / 4D));
     private final ComaCrystalModel model;
 
     public ComaCrystalRenderer(EntityRendererProvider.Context context)
@@ -42,85 +44,90 @@ public class ComaCrystalRenderer extends EntityRenderer<ComaCrystal>
         this.model = new ComaCrystalModel(context.bakeLayer(ComaCrystalModel.LAYER_LOCATION));
     }
 
-    public void render(@NotNull ComaCrystal crystal, float entityYaw, float partialTicks, @NotNull PoseStack stack, @NotNull MultiBufferSource source, int packedLight)
+    @Override
+    public void render(@NotNull ComaCrystal crystal, float entityYaw, float partialTicks, @NotNull PoseStack stack, MultiBufferSource source, int packedLight)
     {
         Tensor tensor = new Tensor(stack);
 
-        float yBob = getY(crystal, partialTicks);
-        float animTime = (float) crystal.time + partialTicks * 3F;
-        float angleX = Maths.PI / 3F;
-
-        RenderType entityCutoutNoCull = RenderType.entityCutoutNoCull(new ResourceReference("textures/entity/coma_crystal/coma_crystal.png"));
-        VertexConsumer consumer = source.getBuffer(entityCutoutNoCull);
+        float bobY = getY(crystal, partialTicks);
+        float animTime = ((float) crystal.time + partialTicks) * 3.0F;
+        int noOverlay = OverlayTexture.NO_OVERLAY;
+        float uvOffset = (crystal.tickCount + partialTicks) * 0.01F % 1;
 
         tensor.pushPose();
-        tensor.scale(2, 2, 2);
-        tensor.translate(0, -0.5, 0);
-
-        int overlayTexture = OverlayTexture.NO_OVERLAY;
+        tensor.scale(2.0F, 2.0F, 2.0F);
+        tensor.translate(0.0F, -0.5F, 0.0F);
 
         if (crystal.showsBottom()) {
-            model.base.render(tensor.getStack(), consumer, packedLight, overlayTexture);
+            model.base.render(tensor.getStack(), source.getBuffer(RENDER_TYPE), packedLight, noOverlay);
         }
 
+        setupPulseShader(crystal, new Vector3f(1, 0, 1), partialTicks);
+
+        VertexConsumer pulse = source.getBuffer(EntityRenderType.PULSE.get());
+
+        if (crystal.showsBottom()) {
+            model.base.render(tensor.getStack(), pulse, packedLight, noOverlay);
+        }
+
+//        Vector4f baseColour = new Vector4f(crystal.getDepletingTicks() != 0 ? ((60F - (float) crystal.getDepletingTicks()) / 60F) % 1 : 1);
+//
+//        tensor.pushPose();
+//
+//        tensor.mulPose(Axis.YP.rotationDegrees(animTime));
+//        tensor.translate(0.0F, 1.5F + bobY / 2.0F, 0.0F);
+//        tensor.mulPose((new Quaternionf()).setAngleAxis(((float) Math.PI / 3F), SIN_45, 0.0F, SIN_45));
+//        model.glass.render(tensor.getStack(), source.getBuffer(RENDER_TYPE), packedLight, noOverlay, baseColour.x, baseColour.y, baseColour.z, baseColour.w);
+//        tensor.scale(0.875F, 0.875F, 0.875F);
+//        tensor.mulPose((new Quaternionf()).setAngleAxis(((float) Math.PI / 3F), SIN_45, 0.0F, SIN_45));
+//        tensor.mulPose(Axis.YP.rotationDegrees(animTime));
+//        model.glass.render(tensor.getStack(), source.getBuffer(RENDER_TYPE), packedLight, noOverlay, baseColour.x, baseColour.y, baseColour.z, baseColour.w);
+//        tensor.scale(0.875F, 0.875F, 0.875F);
+//        tensor.mulPose((new Quaternionf()).setAngleAxis(((float) Math.PI / 3F), SIN_45, 0.0F, SIN_45));
+//        tensor.mulPose(Axis.YP.rotationDegrees(animTime));
+//        model.cube.render(tensor.getStack(), source.getBuffer(RENDER_TYPE), packedLight, noOverlay, baseColour.x, baseColour.y, baseColour.z, baseColour.w);
+//
+//        tensor.popPose();
+
+        VertexConsumer consumer = source.getBuffer(RenderType.energySwirl(new ResourceReference("textures/entity/coma_crystal/coma_crystal_overlay.png"), uvOffset, uvOffset));
+        Vector4f colour = new Vector4f(crystal.getDepletingTicks() != 0 ? ((60F - (float) crystal.getDepletingTicks()) / 60F) % 1 : -bobY / 2F);
+
+        tensor.mulPose(Axis.YP.rotationDegrees(animTime));
+        tensor.translate(0.0F, 1.5F + bobY / 2.0F, 0.0F);
+        tensor.mulPose((new Quaternionf()).setAngleAxis(((float) Math.PI / 3F), SIN_45, 0.0F, SIN_45));
+        model.glass.render(tensor.getStack(), consumer, packedLight, noOverlay, colour.x, colour.y, colour.z, colour.w);
+        tensor.scale(0.875F, 0.875F, 0.875F);
+        tensor.mulPose((new Quaternionf()).setAngleAxis(((float) Math.PI / 3F), SIN_45, 0.0F, SIN_45));
+        tensor.mulPose(Axis.YP.rotationDegrees(animTime));
+        model.glass.render(tensor.getStack(), consumer, packedLight, noOverlay, colour.x, colour.y, colour.z, colour.w);
+        tensor.scale(0.875F, 0.875F, 0.875F);
+        tensor.mulPose((new Quaternionf()).setAngleAxis(((float) Math.PI / 3F), SIN_45, 0.0F, SIN_45));
+        tensor.mulPose(Axis.YP.rotationDegrees(animTime));
+        model.cube.render(tensor.getStack(), consumer, packedLight, noOverlay, colour.x, colour.y, colour.z, colour.w);
+
         tensor.popPose();
+        
+        renderBeams(crystal, tensor.getStack(), source, packedLight, partialTicks);
 
-        VertexConsumer vc = source.getBuffer(EntityRenderType.PULSE.get());
-        Vector3f baseColour = new Vector3f(1, 0, 1);
-        float alpha = Maths.tan(-yBob / 1.775F);
+        super.render(crystal, entityYaw, partialTicks, stack, source, packedLight);
+    }
 
-        tensor.pushPose();
-        tensor.scale(2, 2, 2);
-        tensor.translate(0, -0.5, 0);
-
+    public void setupPulseShader(ComaCrystal crystal, Vector3f colour, float partialTicks)
+    {
         Shaders.getPulse().enqueueTask(() ->
         {
-            Shaders.getPulseColour().set(baseColour);
-            Shaders.getPulseAlpha().set(alpha);
+            float yBob = getY(crystal, partialTicks);
+            float alpha = Maths.tan(-yBob / 1.775F);
+            float depleteAlpha = (60F - (float) crystal.getDepletingTicks()) / 60F;
+
+            Shaders.getPulseColour().set(colour);
+            Shaders.getPulseAlpha().set(crystal.getDepletingTicks() != 0 ? depleteAlpha % 1 : alpha);
         });
+    }
 
-        if (crystal.showsBottom()) {
-            model.base.render(tensor.getStack(), vc, packedLight, overlayTexture);
-        }
-
-        tensor.popPose();
-
-        if (true) {
-            float uvOffset = crystal.tickCount * 0.01F % 1;
-            float angle = Maths.sin(Maths.PI / 4);
-
-            VertexConsumer overlay = source.getBuffer(RenderType.energySwirl(new ResourceReference("textures/entity/coma_crystal/coma_crystal_overlay.png"), uvOffset, uvOffset));
-            Vector4f colour = new Vector4f(-yBob / 2F);
-
-            tensor.pushPose();
-            tensor.scale(2, 2, 2);
-            tensor.translate(0, -0.5, 0);
-
-            if (crystal.showsBottom() && false) {
-                model.base.render(stack, overlay, packedLight, overlayTexture, colour.x, colour.y, colour.z, colour.w);
-            }
-
-            tensor.mulPose(Axis.YP.rotationDegrees(animTime));
-            tensor.translate(0, 1.5 + yBob / 2, 0);
-            tensor.mulPose((new Quaternionf()).setAngleAxis(angleX, angle, 0F, angle));
-
-            model.glass.render(tensor.getStack(), overlay, packedLight, overlayTexture, colour.x, colour.y, colour.z, colour.w);
-
-            tensor.scale(0.875, 0.875, 0.875);
-            tensor.mulPose((new Quaternionf()).setAngleAxis(angleX, angle, 0F, angle));
-            tensor.mulPose(Axis.YP.rotationDegrees(animTime));
-
-            model.glass.render(tensor.getStack(), overlay, packedLight, overlayTexture, colour.x, colour.y, colour.z, colour.w);
-
-            tensor.scale(0.875, 0.875, 0.875);
-            tensor.mulPose((new Quaternionf()).setAngleAxis(angleX, angle, 0F, angle));
-            tensor.mulPose(Axis.YP.rotationDegrees(animTime));
-
-            model.cube.render(tensor.getStack(), overlay, packedLight, overlayTexture, colour.x, colour.y, colour.z, colour.w);
-
-            tensor.popPose();
-        }
-
+    public void renderBeams(ComaCrystal crystal, PoseStack stack, MultiBufferSource source, int packedLight, float partialTicks)
+    {
+        float yBob = getY(crystal, partialTicks);
         BlockPos target = crystal.getBeamTarget();
 
         if (target != null) {
@@ -132,15 +139,13 @@ public class ComaCrystalRenderer extends EntityRenderer<ComaCrystal>
             float distY = posY - (float) crystal.getY();
             float distZ = posZ - (float) crystal.getZ();
 
-            tensor.translate(distX, distY, distZ);
+            stack.translate(distX, distY, distZ);
 
-            UtterflyRenderer.renderCrystalBeams(-distX, -distY + yBob, -distZ, partialTicks, crystal.time, tensor.getStack(), source, packedLight);
+            UtterflyRenderer.renderCrystalBeams(-distX, -distY + yBob, -distZ, partialTicks, crystal.time, stack, source, packedLight);
         }
-
-        super.render(crystal, entityYaw, partialTicks, tensor.getStack(), source, packedLight);
     }
 
-    public static float getY(ComaCrystal crystal, float partialTick)
+    public float getY(ComaCrystal crystal, float partialTick)
     {
         float time = (float) crystal.time + partialTick;
         float animTime = Mth.sin(time * 0.2F) / 2F + 0.5F;
@@ -152,7 +157,7 @@ public class ComaCrystalRenderer extends EntityRenderer<ComaCrystal>
 
     public @NotNull ResourceLocation getTextureLocation(@NotNull ComaCrystal crystal)
     {
-        return new ResourceReference("textures/entity/coma_crystal/coma_crystal.png");
+        return CRYSTAL_LOCATION;
     }
 
     public boolean shouldRender(@NotNull ComaCrystal crystal, @NotNull Frustum frustum, double camX, double camY, double camZ)

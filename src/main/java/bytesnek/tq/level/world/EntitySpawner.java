@@ -1,6 +1,6 @@
 package bytesnek.tq.level.world;
 
-import xyz.snaker.snakerlib.utility.Worlds;
+import bytesnek.snakerlib.utility.Worlds;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;

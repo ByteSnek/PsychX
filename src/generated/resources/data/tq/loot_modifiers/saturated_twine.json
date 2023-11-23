@@ -1,24 +1,24 @@
 {
-      "type": "tq:add",
-      "conditions": [
-            {
-                  "block": "minecraft:large_fern",
-                  "condition": "minecraft:block_state_property"
-            },
-            {
-                  "chance": 0.1,
-                  "condition": "minecraft:random_chance"
-            },
-            {
-                  "condition": "minecraft:weather_check",
-                  "raining": true
-            },
-            {
-                  "condition": "minecraft:match_tool",
-                  "predicate": {
-                        "tag": "minecraft:swords"
-                  }
-            }
-      ],
-      "item": "tq:saturated_twine"
+  "type": "tq:add",
+  "conditions": [
+    {
+      "block": "minecraft:large_fern",
+      "condition": "minecraft:block_state_property"
+    },
+    {
+      "chance": 0.1,
+      "condition": "minecraft:random_chance"
+    },
+    {
+      "condition": "minecraft:weather_check",
+      "raining": true
+    },
+    {
+      "condition": "minecraft:match_tool",
+      "predicate": {
+        "tag": "minecraft:swords"
+      }
+    }
+  ],
+  "item": "tq:saturated_twine"
 }

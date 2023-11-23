@@ -3,9 +3,6 @@ package bytesnek.tq.level.entity.mob;
 import java.util.EnumSet;
 import java.util.List;
 
-import xyz.snaker.snakerlib.math.Maths;
-import xyz.snaker.snakerlib.utility.Entitys;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -42,6 +39,8 @@ import net.minecraftforge.network.NetworkHooks;
 
 import org.jetbrains.annotations.NotNull;
 
+import bytesnek.hiss.math.Maths;
+import bytesnek.snakerlib.utility.Entitys;
 import bytesnek.tq.level.entity.Comatosian;
 import bytesnek.tq.level.world.EntitySpawner;
 import bytesnek.tq.rego.Entities;

@@ -1,8 +1,5 @@
 package bytesnek.tq.client.model.entity;
 
-import xyz.snaker.snakerlib.math.Maths;
-import xyz.snaker.snakerlib.resources.ResourceReference;
-
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -14,6 +11,8 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 
 import org.jetbrains.annotations.NotNull;
 
+import bytesnek.hiss.math.Maths;
+import bytesnek.snakerlib.resources.ResourceReference;
 import bytesnek.tq.level.entity.mob.CosmicCreeperite;
 
 public class CosmicCreeperiteModel extends EntityModel<CosmicCreeperite>
@@ -57,10 +56,10 @@ public class CosmicCreeperiteModel extends EntityModel<CosmicCreeperite>
     {
         this.head.yRot = netHeadYaw * Maths.DEGREES_TO_RADIANS;
         this.head.xRot = headPitch * Maths.DEGREES_TO_RADIANS;
-        this.leg1.xRot = Maths.cos(limbSwing * Maths.LIMB_SWING_MULTIPLIER) * 1.4F * limbSwingAmount;
-        this.leg2.xRot = Maths.cos(limbSwing * Maths.LIMB_SWING_MULTIPLIER + Maths.PI) * 1.4F * limbSwingAmount;
-        this.leg3.xRot = Maths.cos(limbSwing * Maths.LIMB_SWING_MULTIPLIER + Maths.PI) * 1.4F * limbSwingAmount;
-        this.leg4.xRot = Maths.cos(limbSwing * Maths.LIMB_SWING_MULTIPLIER) * 1.4F * limbSwingAmount;
+        this.leg1.xRot = Maths.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+        this.leg2.xRot = Maths.cos(limbSwing * 0.6662F + Maths.PI) * 1.4F * limbSwingAmount;
+        this.leg3.xRot = Maths.cos(limbSwing * 0.6662F + Maths.PI) * 1.4F * limbSwingAmount;
+        this.leg4.xRot = Maths.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
     }
 
     @Override

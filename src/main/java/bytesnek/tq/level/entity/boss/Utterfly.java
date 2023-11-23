@@ -3,11 +3,6 @@ package bytesnek.tq.level.entity.boss;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import xyz.snaker.snakerlib.level.entity.FlyingHostile;
-import xyz.snaker.snakerlib.level.entity.ai.goal.FlyGoal;
-import xyz.snaker.snakerlib.level.entity.ai.goal.LookAroundGoal;
-import xyz.snaker.snakerlib.math.Maths;
-
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -32,6 +27,10 @@ import net.minecraft.world.phys.Vec3;
 
 import org.jetbrains.annotations.NotNull;
 
+import bytesnek.hiss.math.Maths;
+import bytesnek.snakerlib.level.entity.FlyingHostile;
+import bytesnek.snakerlib.level.entity.ai.goal.FlyGoal;
+import bytesnek.snakerlib.level.entity.ai.goal.LookAroundGoal;
 import bytesnek.tq.level.entity.Comatosian;
 import bytesnek.tq.level.entity.projectile.ExplosiveHommingArrow;
 import bytesnek.tq.level.entity.projectile.HommingArrow;
@@ -268,7 +267,7 @@ public class Utterfly extends FlyingHostile implements Comatosian
     @Override
     public SoundEvent getDeathSound()
     {
-        return getPhase() == 3 && getHealth() <= 0 ? Sounds.ENTITY_DEATH.get() : null;
+        return getPhase() == 3 && getHealth() <= 0 ? Sounds.DEATH.get() : null;
     }
 
     @Override

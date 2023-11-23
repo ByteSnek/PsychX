@@ -1,8 +1,8 @@
 {
-      "type": "tq:foggy_rubble",
-      "config": {
-            "state": {
-                  "Name": "tq:foggy_block"
-            }
-      }
+  "type": "tq:foggy_rubble",
+  "config": {
+    "state": {
+      "Name": "tq:foggy_block"
+    }
+  }
 }

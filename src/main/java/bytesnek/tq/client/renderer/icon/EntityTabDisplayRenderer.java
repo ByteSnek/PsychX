@@ -2,10 +2,6 @@ package bytesnek.tq.client.renderer.icon;
 
 import java.util.List;
 
-import xyz.snaker.snakerlib.SnakerLib;
-import xyz.snaker.snakerlib.client.render.CyclicalIconRenderer;
-import xyz.snaker.snakerlib.math.Maths;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.MouseHandler;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -26,6 +22,9 @@ import com.mojang.math.Axis;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
 
+import bytesnek.hiss.math.Maths;
+import bytesnek.snakerlib.SnakerLib;
+import bytesnek.snakerlib.client.render.CyclicalIconRenderer;
 import bytesnek.tq.level.display.tab.EntityTabDisplay;
 
 /**

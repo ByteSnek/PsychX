@@ -1,7 +1,5 @@
 package bytesnek.tq.datagen.provider;
 
-import xyz.snaker.snakerlib.resources.ResourceLocations;
-
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -13,6 +11,7 @@ import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import bytesnek.hiss.utility.Annotations;
+import bytesnek.snakerlib.resources.ResourceLocations;
 import bytesnek.tq.Tourniqueted;
 import bytesnek.tq.level.item.CosmoSpine;
 import bytesnek.tq.rego.Blocks;
@@ -55,7 +54,7 @@ public class ItemModels extends ItemModelProvider implements RegistryMapper
             }
         });
 
-        map(Blocks.REGISTER, RegistryMapper.NEGATE_LIQUID_BLOCK, Block[]::new).forEach(block ->
+        map(Blocks.REGISTER, Block[]::new).forEach(block ->
         {
             if (block instanceof BushBlock bushBlock) {
                 addAdvancedBlockItem(bushBlock);

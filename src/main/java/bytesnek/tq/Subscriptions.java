@@ -4,11 +4,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
-import xyz.snaker.snakerlib.SnakerLib;
-import xyz.snaker.snakerlib.event.*;
-import xyz.snaker.snakerlib.internal.KeyPair;
-import xyz.snaker.snakerlib.resources.ResourceReference;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -43,15 +38,21 @@ import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.brigadier.CommandDispatcher;
 
 import org.lwjgl.glfw.GLFW;
 
+import bytesnek.hiss.keyboard.KeyPair;
 import bytesnek.hiss.keyboard.Keyboard;
 import bytesnek.hiss.utility.ExecuteOnce;
+import bytesnek.snakerlib.SnakerLib;
+import bytesnek.snakerlib.event.EntityAttrCreationManager;
+import bytesnek.snakerlib.event.EntityLayerDefRegoManager;
+import bytesnek.snakerlib.event.EntityRendererRegoManager;
+import bytesnek.snakerlib.event.SpawnPlacementRegoManager;
+import bytesnek.snakerlib.resources.ResourceReference;
 import bytesnek.tq.client.model.entity.*;
 import bytesnek.tq.client.model.item.CosmoSpineModel;
 import bytesnek.tq.client.renderer.block.ShaderBlockRenderer;
@@ -86,6 +87,7 @@ public class Subscriptions
             manager.register(CosmoModel.LAYER_LOCATION, CosmoModel::createBodyLayer);
             manager.register(FlareModel.LAYER_LOCATION, FlareModel::createBodyLayer);
             manager.register(FlutterflyModel.LAYER_LOCATION, FlutterflyModel::createBodyLayer);
+            manager.register(CrankyFlutterflyModel.LAYER_LOCATION, CrankyFlutterflyModel::createBodyLayer);
             manager.register(FrolickerModel.LAYER_LOCATION, FrolickerModel::createBodyLayer);
             manager.register(UtterflyModel.LAYER_LOCATION, UtterflyModel::createBodyLayer);
             manager.register(CosmicCreeperModel.LAYER_LOCATION, CosmicCreeperModel::createBodyLayer);
@@ -120,22 +122,12 @@ public class Subscriptions
             manager.registerEntity(Entities.COSMIC_CREEPERITE, CosmicCreeperiteRenderer::new);
             manager.registerEntity(Entities.FROLICKER, FrolickerRenderer::new);
             manager.registerEntity(Entities.FLUTTERFLY, FlutterflyRenderer::new);
+            manager.registerEntity(Entities.CRANKY_FLUTTERFLY, CrankyFlutterflyRenderer::new);
             manager.registerEntity(Entities.UTTERFLY, UtterflyRenderer::new);
             manager.registerEntity(Entities.HOMMING_ARROW, HommingArrowRenderer::new);
             manager.registerEntity(Entities.EXPLOSIVE_HOMMING_ARROW, ExplosiveHommingArrowRenderer::new);
             manager.registerEntity(Entities.COSMIC_RAY, CosmicRayRenderer::new);
             manager.registerEntity(Entities.COMA_CRYSTAL, ComaCrystalRenderer::new);
-
-            manager.close();
-        }
-
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event)
-        {
-            ClientSetupManager manager = new ClientSetupManager(event);
-
-            manager.setFluidRenderLayer(Fluids.SOURCE_COMASOTE, RenderType.SOLID);
-            manager.setFluidRenderLayer(Fluids.FLOWING_COMASOTE, RenderType.SOLID);
 
             manager.close();
         }
@@ -156,6 +148,7 @@ public class Subscriptions
             manager.put(Entities.COSMIC_CREEPERITE, CosmicCreeperite.attributes());
             manager.put(Entities.FROLICKER, Frolicker.attributes());
             manager.put(Entities.FLUTTERFLY, Flutterfly.attributes());
+            manager.put(Entities.CRANKY_FLUTTERFLY, CrankyFlutterfly.attributes());
             manager.put(Entities.UTTERFLY, Utterfly.attributes());
 
             manager.close();

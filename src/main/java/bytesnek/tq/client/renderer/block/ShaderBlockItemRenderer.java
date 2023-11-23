@@ -1,9 +1,5 @@
 package bytesnek.tq.client.renderer.block;
 
-import xyz.snaker.snakerlib.client.render.PreppedRenderer;
-import xyz.snaker.snakerlib.math.Cube;
-import xyz.snaker.snakerlib.utility.Rendering;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -16,6 +12,9 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 
 import org.jetbrains.annotations.NotNull;
 
+import bytesnek.snakerlib.client.render.PreppedRenderer;
+import bytesnek.snakerlib.math.Cube;
+import bytesnek.snakerlib.utility.Rendering;
 import bytesnek.tq.client.renderer.type.ItemLikeRenderType;
 
 /**

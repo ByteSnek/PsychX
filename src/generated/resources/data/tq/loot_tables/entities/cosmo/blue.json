@@ -1,45 +1,45 @@
 {
-      "type": "minecraft:entity",
-      "pools": [
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
             {
-                  "bonus_rolls": 0.0,
-                  "entries": [
-                        {
-                              "type": "minecraft:item",
-                              "functions": [
-                                    {
-                                          "add": false,
-                                          "count": {
-                                                "type": "minecraft:uniform",
-                                                "max": 1.0,
-                                                "min": 0.0
-                                          },
-                                          "function": "minecraft:set_count"
-                                    },
-                                    {
-                                          "count": {
-                                                "type": "minecraft:uniform",
-                                                "max": 1.0,
-                                                "min": 0.0
-                                          },
-                                          "function": "minecraft:looting_enchant"
-                                    }
-                              ],
-                              "name": "tq:blue_cosmo_spine"
-                        }
-                  ],
-                  "rolls": 1.0
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 1.0,
+                "min": 0.0
+              },
+              "function": "minecraft:set_count"
             },
             {
-                  "bonus_rolls": 0.0,
-                  "entries": [
-                        {
-                              "type": "minecraft:loot_table",
-                              "name": "tq:entities/cosmo"
-                        }
-                  ],
-                  "rolls": 1.0
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 1.0,
+                "min": 0.0
+              },
+              "function": "minecraft:looting_enchant"
             }
+          ],
+          "name": "tq:blue_cosmo_spine"
+        }
       ],
-      "random_sequence": "tq:entities/cosmo/blue"
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "tq:entities/cosmo"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "tq:entities/cosmo/blue"
 }

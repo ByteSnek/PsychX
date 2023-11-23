@@ -52,13 +52,9 @@ minecraft {
     }
 }
 
-sourceSets.main.resources {
-    srcDir 'src/generated/resources'
-}
+sourceSets.main.resources { srcDir 'src/generated/resources' }
 
-sourceSets.main {
-    ext.refMap = mixinRefmap
-}
+sourceSets.main { ext.refMap = mixinRefMap }
 
 repositories {
     mavenLocal()
@@ -72,7 +68,7 @@ repositories {
 dependencies {
     minecraft "net.neoforged:forge:${minecraft_version}-${neo_version}"
 
-    implementation fg.deobf("bytesnek.snakerlib:SnakerLib:${snakerlib_version}")
+    implementation fg.deobf("bytesnek.snakerlib:SnakerLib:${snakerlib_version}") setChanging(true)
     implementation fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}")
     implementation fg.deobf("codechicken:CodeChickenLib:1.20.1-4.4.0.1:universal")
 
@@ -83,7 +79,7 @@ dependencies {
 }
 
 mixin {
-    add sourceSets.main, mixinRefmap
+    add sourceSets.main, mixinRefMap
     config mixinConfig
 }
 
@@ -102,6 +98,7 @@ tasks.withType(ProcessResources).configureEach {
             patchouli_version_range: patchouli_version_range
     ]
     inputs.properties replaceProperties
+
     filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
         expand replaceProperties + [project: project]
     }
@@ -135,6 +132,11 @@ tasks.register('srcJar', Jar) {
     build.dependsOn it
     from sourceSets.main.allSource
     archiveClassifier = 'sources'
+}
+
+tasks.register('mkFiles', JavaExec) {
+    mainClass = "bytesnek.tq.datagen.DataGeneratorCallback"
+    classpath sourceSets.main.runtimeClasspath
 }
 
 publishing {
@@ -174,6 +176,6 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
-    options.deprecation(false)
-    options.warnings(false)
+    options.deprecation = false
+    options.warnings = false
 }

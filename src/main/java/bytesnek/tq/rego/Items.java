@@ -2,8 +2,6 @@ package bytesnek.tq.rego;
 
 import java.util.function.Supplier;
 
-import xyz.snaker.snakerlib.resources.ResourceReference;
-
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
@@ -17,12 +15,14 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import bytesnek.hiss.utility.Colours;
+import bytesnek.snakerlib.resources.ResourceReference;
 import bytesnek.tq.Tourniqueted;
 import bytesnek.tq.level.block.ShaderBlockItem;
 import bytesnek.tq.level.display.tab.BlockTabDisplay;
 import bytesnek.tq.level.display.tab.EntityTabDisplay;
 import bytesnek.tq.level.display.tab.ItemTabDisplay;
 import bytesnek.tq.level.item.CosmoSpine;
+import bytesnek.tq.level.item.DebugSwordItem;
 import bytesnek.tq.level.item.EmptyItem;
 import bytesnek.tq.level.item.Tourniquet;
 
@@ -52,6 +52,7 @@ public class Items
     public static final RegistryObject<Item> SATURATED_TWINE = register("saturated_twine", EmptyItem::new);
     public static final RegistryObject<Item> WEATHERED_TWINE = register("weathered_twine", EmptyItem::new);
     public static final RegistryObject<Item> FLUTTERFLY_KERATIN = register("flutterfly_keratin", EmptyItem::new);
+    public static final RegistryObject<Item> DEBUG_SWORD = register("debug_sword", DebugSwordItem::new);
 
     public static final RegistryObject<Item> SWIRL_BLOCK = registerShaderBlockItem(Blocks.SWIRL);
     public static final RegistryObject<Item> SNOWFLAKE_BLOCK = registerShaderBlockItem(Blocks.SNOWFLAKE);
@@ -71,9 +72,10 @@ public class Items
     public static final RegistryObject<ForgeSpawnEggItem> COSMIC_CREEPERITE_SPAWN_EGG = registerSpawnEgg(Entities.COSMIC_CREEPERITE);
     public static final RegistryObject<ForgeSpawnEggItem> FROLICKER_SPAWN_EGG = registerSpawnEgg(Entities.FROLICKER);
     public static final RegistryObject<ForgeSpawnEggItem> FLUTTERFLY_SPAWN_EGG = registerSpawnEgg(Entities.FLUTTERFLY);
+    public static final RegistryObject<ForgeSpawnEggItem> CRANKY_FLUTTERFLY_SPAWN_EGG = registerSpawnEgg(Entities.CRANKY_FLUTTERFLY);
     public static final RegistryObject<ForgeSpawnEggItem> UTTERFLY_SPAWN_EGG = registerSpawnEgg(Entities.UTTERFLY);
 
-    public static final RegistryObject<Item> COMASOTE_BUCKET = register("comasote_bucket", () -> new BucketItem(Fluids.SOURCE_COMASOTE, new Item.Properties().craftRemainder(BUCKET).stacksTo(1)));
+    public static final RegistryObject<Item> COMASOTE_BUCKET = REGISTER.register("comasote_bucket", () -> new BucketItem(Fluids.COMASOTE, new Item.Properties().craftRemainder(BUCKET).stacksTo(1)));
 
     static <T extends Item> RegistryObject<T> register(String name, Supplier<T> item)
     {

@@ -1,8 +1,5 @@
 package bytesnek.tq.client.model.entity;
 
-import xyz.snaker.snakerlib.math.Maths;
-import xyz.snaker.snakerlib.resources.ResourceReference;
-
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -14,6 +11,8 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 
 import org.jetbrains.annotations.NotNull;
 
+import bytesnek.hiss.math.Maths;
+import bytesnek.snakerlib.resources.ResourceReference;
 import bytesnek.tq.level.entity.mob.CosmicCreeper;
 
 public class CosmicCreeperModel extends EntityModel<CosmicCreeper>

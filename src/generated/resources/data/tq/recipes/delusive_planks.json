@@ -1,14 +1,14 @@
 {
-      "type": "minecraft:crafting_shapeless",
-      "category": "building",
-      "group": "planks",
-      "ingredients": [
-            {
-                  "item": "tq:delusive_log"
-            }
-      ],
-      "result": {
-            "count": 4,
-            "item": "tq:delusive_planks"
-      }
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    {
+      "item": "tq:delusive_log"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "tq:delusive_planks"
+  }
 }

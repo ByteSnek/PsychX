@@ -1,7 +1,7 @@
 package bytesnek.tq.level.block;
 
-import xyz.snaker.snakerlib.SnakerLib;
-import xyz.snaker.snakerlib.utility.block.BlockProperties;
+import bytesnek.snakerlib.SnakerLib;
+import bytesnek.snakerlib.utility.block.BlockProperties;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;

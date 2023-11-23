@@ -1,7 +1,7 @@
 {
-      "variants": {
-            "": {
-                  "model": "tq:block/flare_block"
-            }
-      }
+  "variants": {
+    "": {
+      "model": "tq:block/flare_block"
+    }
+  }
 }

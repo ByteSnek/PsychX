@@ -1,6 +1,6 @@
 package bytesnek.tq.level.world.candidate;
 
-import xyz.snaker.snakerlib.resources.ResourceReference;
+import bytesnek.snakerlib.resources.ResourceReference;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;

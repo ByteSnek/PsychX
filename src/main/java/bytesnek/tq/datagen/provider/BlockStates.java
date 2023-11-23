@@ -3,20 +3,17 @@ package bytesnek.tq.datagen.provider;
 import java.util.HashMap;
 import java.util.Map;
 
-import xyz.snaker.snakerlib.resources.ResourceLocations;
-
 import net.minecraft.Util;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.BushBlock;
-import net.minecraft.world.level.block.LeavesBlock;
-import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import bytesnek.hiss.sneaky.Sneaky;
+import bytesnek.snakerlib.resources.ResourceLocations;
 import bytesnek.tq.Tourniqueted;
 import bytesnek.tq.level.block.ShaderBlock;
 import bytesnek.tq.rego.Blocks;
@@ -51,7 +48,7 @@ public class BlockStates extends BlockStateProvider implements RegistryMapper
     @Override
     public void registerStatesAndModels()
     {
-        map(Blocks.REGISTER, RegistryMapper.NEGATE_LIQUID_BLOCK, Block[]::new).forEach(block ->
+        map(Blocks.REGISTER, Block[]::new).forEach(block ->
         {
             if (block instanceof ShaderBlock<?> shaderBlock) {
                 addShaderBlock(shaderBlock);
@@ -126,9 +123,24 @@ public class BlockStates extends BlockStateProvider implements RegistryMapper
         String blockName = ResourceLocations.getPath(block);
         ResourceLocation blockTexture = blockTexture(block);
 
+        if (block instanceof LiquidBlock) {
+            addCubeBlockDummy(block);
+            return;
+        }
+
         ModelFile modelFile = models()
-                .cubeAll(blockName, blockTexture)
-                .renderType("cutout");
+                .cubeAll(blockName, blockTexture);
+
+        simpleBlock(block, modelFile);
+    }
+
+    private void addCubeBlockDummy(Block block)
+    {
+        String blockName = ResourceLocations.getPath(block);
+        ResourceLocation blockTexture = modLoc(ModelProvider.BLOCK_FOLDER + "/dummy");
+
+        ModelFile modelFile = models()
+                .cubeAll(blockName, blockTexture);
 
         simpleBlock(block, modelFile);
     }

@@ -1,13 +1,12 @@
 package bytesnek.tq.client.renderer.entity;
 
-import xyz.snaker.snakerlib.resources.ResourceReference;
-
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 import org.jetbrains.annotations.NotNull;
 
+import bytesnek.snakerlib.resources.ResourceReference;
 import bytesnek.tq.client.model.entity.SnipeModel;
 import bytesnek.tq.level.entity.mob.Snipe;
 

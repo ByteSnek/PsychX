@@ -1,7 +1,7 @@
 {
-      "type": "tq:utterfly_showground",
-      "config": {
-            "invulnerable": false,
-            "towers": []
-      }
+  "type": "tq:utterfly_showground",
+  "config": {
+    "invulnerable": false,
+    "towers": []
+  }
 }

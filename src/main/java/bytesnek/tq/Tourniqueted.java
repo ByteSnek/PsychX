@@ -1,15 +1,14 @@
 package bytesnek.tq;
 
-import xyz.snaker.snakerlib.SnakerLib;
-import xyz.snaker.snakerlib.client.render.skybox.SkyBoxRenderer;
-import xyz.snaker.snakerlib.client.render.skybox.SkyBoxTexture;
-
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 
+import bytesnek.snakerlib.SnakerLib;
+import bytesnek.snakerlib.client.render.skybox.SkyBoxRenderer;
+import bytesnek.snakerlib.client.render.skybox.SkyBoxTexture;
 import bytesnek.tq.client.Shaders;
 import bytesnek.tq.client.sound.SoundModification;
 import bytesnek.tq.config.Config;
