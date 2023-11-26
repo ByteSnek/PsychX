@@ -1,4 +1,3 @@
-# eclipse
 bin
 *.launch
 .settings
@@ -6,26 +5,19 @@ bin
 .classpath
 .project
 
-# idea
 out
 *.ipr
 *.iws
 *.iml
 .idea
 
-# gradle
 build
 .gradle
-logs
-
-# other
 eclipse
-runs/*
-maven
+run
+runs
+run-data
+repo
 
-# datagen
 src/generated/resources/.cache
 src/main/resources/pack_output
-
-# Files from Forge MDK
-forge*changelog.txt
