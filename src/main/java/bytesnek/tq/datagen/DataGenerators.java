@@ -10,10 +10,10 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import bytesnek.tq.Tourniqueted;
 import bytesnek.tq.datagen.provider.*;
@@ -45,7 +45,7 @@ public class DataGenerators
         generator.addProvider(true, new BlockStates(output, helper));
         generator.addProvider(true, new ItemModels(output, helper));
         generator.addProvider(true, new DatapackEntries(output, provider));
-        generator.addProvider(true, new Recipes(output));
+        generator.addProvider(true, new Recipes(output, provider));
         generator.addProvider(true, new LootModifiers(output));
         generator.addProvider(true, new FluidTags(output, provider, helper));
         generator.addProvider(true, new ItemTags(output, provider, blockTags.contentsGetter(), helper));

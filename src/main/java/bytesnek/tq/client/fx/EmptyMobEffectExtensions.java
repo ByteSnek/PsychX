@@ -1,7 +1,7 @@
 package bytesnek.tq.client.fx;
 
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraftforge.client.extensions.common.IClientMobEffectExtensions;
+import net.neoforged.neoforge.client.extensions.common.IClientMobEffectExtensions;
 
 /**
  * Created by SnakerBone on 17/09/2023

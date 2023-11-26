@@ -3,16 +3,15 @@ package bytesnek.tq.level.display.entity;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import bytesnek.snakerlib.utility.item.ItemProperties;
-
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
 import org.jetbrains.annotations.NotNull;
 
+import bytesnek.snakerlib.utility.item.ItemProperties;
 import bytesnek.tq.level.display.DisplayObject;
 
 /**

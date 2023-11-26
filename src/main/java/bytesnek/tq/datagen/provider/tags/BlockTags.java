@@ -7,8 +7,8 @@ import java.util.function.Predicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.data.BlockTagsProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -26,7 +26,7 @@ import static net.minecraft.tags.BlockTags.*;
 public class BlockTags extends BlockTagsProvider implements RegistryMapper
 {
     public static final Predicate<Block> NEEDS_PICKAXE = block -> block instanceof ShaderBlock<?> || block == Blocks.COMASTONE.get();
-    public static final Predicate<Block> NEEDS_AXE = block -> ResourceLocations.getPath(block).contains("log") || ResourceLocations.getPath(block).contains("planks") || ResourceLocations.getPath(block).contains("wood") || ResourceLocations.getPath(block).contains("stem");
+    public static final Predicate<Block> NEEDS_AXE = block -> ResourceLocations.BLOCK.getPath(block).contains("log") || ResourceLocations.BLOCK.getPath(block).contains("planks") || ResourceLocations.BLOCK.getPath(block).contains("wood") || ResourceLocations.BLOCK.getPath(block).contains("stem");
 
     public BlockTags(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, @Nullable ExistingFileHelper helper)
     {

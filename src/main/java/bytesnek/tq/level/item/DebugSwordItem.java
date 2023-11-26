@@ -7,8 +7,6 @@ import net.minecraft.world.item.Tiers;
 
 import org.jetbrains.annotations.NotNull;
 
-import codechicken.lib.item.SimpleItemTier;
-
 /**
  * Created by SnakerBone on 23/11/2023
  **/

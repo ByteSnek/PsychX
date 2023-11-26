@@ -11,11 +11,11 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraftforge.common.ForgeSpawnEggItem;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.neoforge.common.DeferredSpawnEggItem;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
 import bytesnek.hiss.utility.Annotations;
 import bytesnek.snakerlib.SnakerLib;
@@ -29,7 +29,7 @@ public class Rego implements RegistryMapper
 {
     static final Predicate<Item> BLACKLISTED_ITEMS = item -> item instanceof BlockItem || item.equals(Items.ENTITY_TAB_DISPLAY.get()) || item.equals(Items.BLOCK_TAB_DISPLAY.get()) || item.equals(Items.ITEM_TAB_DISPLAY.get());
     static final Predicate<Block> BLACKLISTED_BLOCKS = block -> block instanceof FlowerPotBlock || block instanceof LiquidBlock;
-    static final Predicate<Item> WHITELISTED_EGGS = item -> item instanceof ForgeSpawnEggItem;
+    static final Predicate<Item> WHITELISTED_EGGS = item -> item instanceof DeferredSpawnEggItem;
 
     private Rego() {}
 

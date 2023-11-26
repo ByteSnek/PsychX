@@ -1,9 +1,10 @@
 package bytesnek.tq.rego;
 
-import net.minecraftforge.common.loot.IGlobalLootModifier;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import java.util.function.Supplier;
+
+import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import com.mojang.serialization.Codec;
 
@@ -15,7 +16,7 @@ import bytesnek.tq.level.loot.Add;
  **/
 public class LootModifiers
 {
-    public static final DeferredRegister<Codec<? extends IGlobalLootModifier>> REGISTER = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, Tourniqueted.MODID);
+    public static final DeferredRegister<Codec<? extends IGlobalLootModifier>> REGISTER = DeferredRegister.create(NeoForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, Tourniqueted.MODID);
 
-    public static final RegistryObject<Codec<? extends IGlobalLootModifier>> ADD = REGISTER.register("add", Add.CODEC);
+    public static final Supplier<Codec<? extends IGlobalLootModifier>> ADD = REGISTER.register("add", Add.CODEC);
 }

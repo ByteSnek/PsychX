@@ -1,6 +1,6 @@
 package bytesnek.tq.config;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -9,15 +9,15 @@ import org.apache.commons.lang3.tuple.Pair;
  **/
 public class Config
 {
-    public static final ForgeConfigSpec COMMON_SPEC;
+    public static final ModConfigSpec COMMON_SPEC;
     public static final Common COMMON;
 
-    public static final ForgeConfigSpec CLIENT_SPEC;
+    public static final ModConfigSpec CLIENT_SPEC;
     public static final Client CLIENT;
 
     static {
-        Pair<Common, ForgeConfigSpec> commonSpecPair = new ForgeConfigSpec.Builder().configure(Config.Common::new);
-        Pair<Client, ForgeConfigSpec> clientSpecPair = new ForgeConfigSpec.Builder().configure(Config.Client::new);
+        Pair<Common, ModConfigSpec> commonSpecPair = new ModConfigSpec.Builder().configure(Config.Common::new);
+        Pair<Client, ModConfigSpec> clientSpecPair = new ModConfigSpec.Builder().configure(Config.Client::new);
 
         COMMON = commonSpecPair.getLeft();
         COMMON_SPEC = commonSpecPair.getRight();
@@ -28,13 +28,13 @@ public class Config
 
     public static class Common
     {
-        public final ForgeConfigSpec.BooleanValue visionConvolveActive;
-        public final ForgeConfigSpec.BooleanValue healthRepairKeybindingsActive;
-        public final ForgeConfigSpec.IntValue comaStageProgressionOccurrence;
-        public final ForgeConfigSpec.BooleanValue flashBangOverlay;
-        public final ForgeConfigSpec.DoubleValue flashBangDuration;
+        public final ModConfigSpec.BooleanValue visionConvolveActive;
+        public final ModConfigSpec.BooleanValue healthRepairKeybindingsActive;
+        public final ModConfigSpec.IntValue comaStageProgressionOccurrence;
+        public final ModConfigSpec.BooleanValue flashBangOverlay;
+        public final ModConfigSpec.DoubleValue flashBangDuration;
 
-        public Common(ForgeConfigSpec.Builder builder)
+        public Common(ModConfigSpec.Builder builder)
         {
             builder.push("common");
             visionConvolveActive = builder.comment("Should the vision convolve effect always be active when in the comatose dimension (default: true)").define("visionConvolveActive", true);
@@ -48,9 +48,9 @@ public class Config
 
     public static class Client
     {
-        public final ForgeConfigSpec.BooleanValue showComaStage;
+        public final ModConfigSpec.BooleanValue showComaStage;
 
-        public Client(ForgeConfigSpec.Builder builder)
+        public Client(ModConfigSpec.Builder builder)
         {
             builder.push("client");
             showComaStage = builder.comment("Should the coma stage be shown in the top left hand corner of the screen (default: true)").define("showComaStage", true);

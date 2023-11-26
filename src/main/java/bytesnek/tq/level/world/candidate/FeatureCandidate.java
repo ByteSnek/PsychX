@@ -1,14 +1,14 @@
 package bytesnek.tq.level.world.candidate;
 
-import bytesnek.snakerlib.resources.ResourceReference;
-
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraftforge.common.world.BiomeModifier;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.world.BiomeModifier;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
+
+import bytesnek.snakerlib.resources.ResourceReference;
 
 /**
  * Created by SnakerBone on 27/08/2023
@@ -31,7 +31,7 @@ public enum FeatureCandidate
     SNOWFLAKE_RUBBLE(GenerationStep.Decoration.LOCAL_MODIFICATIONS, true),
     STARRY_RUBBLE(GenerationStep.Decoration.LOCAL_MODIFICATIONS, true),
     FOGGY_RUBBLE(GenerationStep.Decoration.LOCAL_MODIFICATIONS, true),
-    UTTERFLY_SHOWGROUND(GenerationStep.Decoration.SURFACE_STRUCTURES, false);
+    COMA_SPIKE(GenerationStep.Decoration.RAW_GENERATION, false);
 
     private final String name;
 
@@ -64,7 +64,7 @@ public enum FeatureCandidate
 
     static ResourceKey<BiomeModifier> createBiomeModifierKey(String name)
     {
-        return ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, new ResourceReference(name));
+        return ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, new ResourceReference(name));
     }
 
     public ResourceKey<PlacedFeature> getPlacedFeatureKey()

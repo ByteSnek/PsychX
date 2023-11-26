@@ -8,9 +8,9 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.predicates.*;
-import net.minecraftforge.common.data.GlobalLootModifierProvider;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;
 
+import bytesnek.snakerlib.resources.ResourceLocations;
 import bytesnek.tq.Tourniqueted;
 import bytesnek.tq.level.loot.Add;
 import bytesnek.tq.rego.Items;
@@ -33,9 +33,9 @@ public class LootModifiers extends GlobalLootModifierProvider
         addTwineModifier(LARGE_FERN, Items.SATURATED_TWINE, 0.1);
     }
 
-    private <T extends ItemLike> void addTwineModifier(Block block, RegistryObject<T> drop, double chance)
+    private <T extends ItemLike> void addTwineModifier(Block block, Supplier<T> drop, double chance)
     {
-        add(drop.getId().getPath(), twineCheck(block, drop, chance));
+        add(ResourceLocations.BLOCK.getResourceLocation(block).getPath(), twineCheck(block, drop, chance));
     }
 
     private <T extends ItemLike> Add twineCheck(Block block, Supplier<T> drop, double chance)

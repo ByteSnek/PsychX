@@ -17,6 +17,7 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.util.valueproviders.WeightedListInt;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
@@ -24,20 +25,17 @@ import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSi
 import net.minecraft.world.level.levelgen.feature.foliageplacers.AcaciaFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.ForkingTrunkPlacer;
+import net.minecraft.world.level.levelgen.heightproviders.ConstantHeight;
 import net.minecraft.world.level.levelgen.placement.*;
-import net.minecraftforge.common.world.BiomeModifier;
-import net.minecraftforge.common.world.ForgeBiomeModifiers;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
-
-import com.google.common.collect.ImmutableList;
+import net.neoforged.neoforge.common.world.BiomeModifier;
+import net.neoforged.neoforge.common.world.BiomeModifiers;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import bytesnek.hiss.sneaky.Sneaky;
 import bytesnek.tq.Tourniqueted;
 import bytesnek.tq.level.world.candidate.FeatureCandidate;
 import bytesnek.tq.level.world.candidate.SpawnCandidate;
 import bytesnek.tq.level.world.feature.*;
-import bytesnek.tq.level.world.feature.configuration.UtterflyShowgroundConfiguration;
 import bytesnek.tq.level.world.tree.IllusiveFoliagePlacer;
 import bytesnek.tq.level.world.tree.IllusiveTrunkPlacer;
 
@@ -54,17 +52,16 @@ public class Features
 {
     public static final DeferredRegister<Feature<?>> REGISTER = DeferredRegister.create(Registries.FEATURE, Tourniqueted.MODID);
 
-    public static final RegistryObject<SwirlRubbleFeature> SWIRL_RUBBLE = registerRubble("swirl", () -> new SwirlRubbleFeature(BlockStateConfiguration.CODEC));
-    public static final RegistryObject<FlareRubbleFeature> FLARE_RUBBLE = registerRubble("flare", () -> new FlareRubbleFeature(BlockStateConfiguration.CODEC));
-    public static final RegistryObject<WaterColourRubbleFeature> WATERCOLOUR_RUBBLE = registerRubble("watercolour", () -> new WaterColourRubbleFeature(BlockStateConfiguration.CODEC));
-    public static final RegistryObject<BurningRubbleFeature> BURNING_RUBBLE = registerRubble("burning", () -> new BurningRubbleFeature(BlockStateConfiguration.CODEC));
-    public static final RegistryObject<GeometricRubbleFeature> GEOMETRIC_RUBBLE = registerRubble("geometric", () -> new GeometricRubbleFeature(BlockStateConfiguration.CODEC));
-    public static final RegistryObject<MultiColourRubbleFeature> MULTICOLOUR_RUBBLE = registerRubble("multicolour", () -> new MultiColourRubbleFeature(BlockStateConfiguration.CODEC));
-    public static final RegistryObject<SnowflakeRubbleFeature> SNOWFLAKE_RUBBLE = registerRubble("snowflake", () -> new SnowflakeRubbleFeature(BlockStateConfiguration.CODEC));
-    public static final RegistryObject<StarryRubbleFeature> STARRY_RUBBLE = registerRubble("starry", () -> new StarryRubbleFeature(BlockStateConfiguration.CODEC));
-    public static final RegistryObject<FoggyRubbleFeature> FOGGY_RUBBLE = registerRubble("foggy", () -> new FoggyRubbleFeature(BlockStateConfiguration.CODEC));
-
-    public static final RegistryObject<UtterflyShowgroundFeature> UTTERFLY_SHOWGROUND = register("utterfly_showground", () -> new UtterflyShowgroundFeature(UtterflyShowgroundConfiguration.CODEC));
+    public static final Supplier<SwirlRubbleFeature> SWIRL_RUBBLE = registerRubble("swirl", () -> new SwirlRubbleFeature(BlockStateConfiguration.CODEC));
+    public static final Supplier<FlareRubbleFeature> FLARE_RUBBLE = registerRubble("flare", () -> new FlareRubbleFeature(BlockStateConfiguration.CODEC));
+    public static final Supplier<WaterColourRubbleFeature> WATERCOLOUR_RUBBLE = registerRubble("watercolour", () -> new WaterColourRubbleFeature(BlockStateConfiguration.CODEC));
+    public static final Supplier<BurningRubbleFeature> BURNING_RUBBLE = registerRubble("burning", () -> new BurningRubbleFeature(BlockStateConfiguration.CODEC));
+    public static final Supplier<GeometricRubbleFeature> GEOMETRIC_RUBBLE = registerRubble("geometric", () -> new GeometricRubbleFeature(BlockStateConfiguration.CODEC));
+    public static final Supplier<MultiColourRubbleFeature> MULTICOLOUR_RUBBLE = registerRubble("multicolour", () -> new MultiColourRubbleFeature(BlockStateConfiguration.CODEC));
+    public static final Supplier<SnowflakeRubbleFeature> SNOWFLAKE_RUBBLE = registerRubble("snowflake", () -> new SnowflakeRubbleFeature(BlockStateConfiguration.CODEC));
+    public static final Supplier<StarryRubbleFeature> STARRY_RUBBLE = registerRubble("starry", () -> new StarryRubbleFeature(BlockStateConfiguration.CODEC));
+    public static final Supplier<FoggyRubbleFeature> FOGGY_RUBBLE = registerRubble("foggy", () -> new FoggyRubbleFeature(BlockStateConfiguration.CODEC));
+    public static final Supplier<ComaSpikeFeature> COMA_SPIKE = register("coma_spike", () -> new ComaSpikeFeature(NoneFeatureConfiguration.CODEC));
 
     public static void placedFeatures(BootstapContext<PlacedFeature> context)
     {
@@ -84,7 +81,18 @@ public class Features
         registerPlacedFeature(context, FeatureCandidate.FOGGY_RUBBLE, surfacePlacement(5));
         registerPlacedFeature(context, FeatureCandidate.ILLUSIVE_TREE, treePlacement(ILLUSIVE_SAPLING, 2));
         registerPlacedFeature(context, FeatureCandidate.DELUSIVE_TREE, treePlacement(DELUSIVE_SAPLING, 2));
-        registerPlacedFeature(context, FeatureCandidate.UTTERFLY_SHOWGROUND, List.of(BiomeFilter.biome()));
+        registerPlacedFeature(context, FeatureCandidate.COMA_SPIKE, List.of(
+                        RarityFilter.onAverageOnceEvery(10),
+                        PlacementUtils.countExtra(1, 0.25F, 1),
+                        InSquarePlacement.spread(),
+                        HeightRangePlacement.of(
+                                ConstantHeight.of(
+                                        VerticalAnchor.absolute(70)
+                                )
+                        ),
+                        BiomeFilter.biome()
+                )
+        );
     }
 
     public static void configuredFeatures(BootstapContext<ConfiguredFeature<?, ?>> context)
@@ -105,38 +113,21 @@ public class Features
         registerConfiguredFeature(context, FeatureCandidate.FOGGY_RUBBLE, FOGGY_RUBBLE, FOGGY);
         registerConfiguredFeature(context, FeatureCandidate.ILLUSIVE_TREE, TREE, illusiveTree(ILLUSIVE_LOG, ILLUSIVE_LEAVES, COMASTONE));
         registerConfiguredFeature(context, FeatureCandidate.DELUSIVE_TREE, TREE, delusiveTree(DELUSIVE_LOG, DELUSIVE_LEAVES, COMASTONE));
-        registerConfiguredFeature(context, FeatureCandidate.UTTERFLY_SHOWGROUND, UTTERFLY_SHOWGROUND.get(), new UtterflyShowgroundConfiguration(false, ImmutableList.of(), null));
+        registerConfiguredFeature(context, FeatureCandidate.COMA_SPIKE, COMA_SPIKE.get(), NoneFeatureConfiguration.INSTANCE);
     }
 
     public static void biomeModifiers(BootstapContext<BiomeModifier> context)
     {
-        registerBiomeModifier(context, FeatureCandidate.CATNIP);
-        registerBiomeModifier(context, FeatureCandidate.SPLITLEAF);
-        registerBiomeModifier(context, FeatureCandidate.SNAKEROOT);
-        registerBiomeModifier(context, FeatureCandidate.TALL_SNAKEROOT);
-        registerBiomeModifier(context, FeatureCandidate.PINKTAILS);
-        registerBiomeModifier(context, FeatureCandidate.SWIRL_RUBBLE);
-        registerBiomeModifier(context, FeatureCandidate.FLARE_RUBBLE);
-        registerBiomeModifier(context, FeatureCandidate.WATERCOLOUR_RUBBLE);
-        registerBiomeModifier(context, FeatureCandidate.BURNING_RUBBLE);
-        registerBiomeModifier(context, FeatureCandidate.GEOMETRIC_RUBBLE);
-        registerBiomeModifier(context, FeatureCandidate.MULTICOLOUR_RUBBLE);
-        registerBiomeModifier(context, FeatureCandidate.SNOWFLAKE_RUBBLE);
-        registerBiomeModifier(context, FeatureCandidate.STARRY_RUBBLE);
-        registerBiomeModifier(context, FeatureCandidate.FOGGY_RUBBLE);
-        registerBiomeModifier(context, FeatureCandidate.ILLUSIVE_TREE);
-        registerBiomeModifier(context, FeatureCandidate.DELUSIVE_TREE);
-        registerBiomeModifier(context, FeatureCandidate.UTTERFLY_SHOWGROUND);
         registerBiomeSpawnModifier(context, SpawnCandidate.FLUTTERFLY, SPAWNS_FLUTTERFLY);
         registerBiomeSpawnModifier(context, SpawnCandidate.FROLICKER, SPAWNS_FROLICKER);
     }
 
-    static <F extends Feature<?>> RegistryObject<F> register(String name, Supplier<F> feature)
+    static <F extends Feature<?>> Supplier<F> register(String name, Supplier<F> feature)
     {
         return REGISTER.register(name, feature);
     }
 
-    static <F extends Feature<?>> RegistryObject<F> registerRubble(String name, Supplier<F> feature)
+    static <F extends Feature<?>> Supplier<F> registerRubble(String name, Supplier<F> feature)
     {
         return register(name + "_rubble", feature);
     }
@@ -160,7 +151,7 @@ public class Features
         );
     }
 
-    static <FC extends FeatureConfiguration, F extends Feature<FC>> void registerConfiguredFeature(BootstapContext<ConfiguredFeature<?, ?>> context, FeatureCandidate key, RegistryObject<F> feature, RegistryObject<Block> block)
+    static <FC extends FeatureConfiguration, F extends Feature<FC>> void registerConfiguredFeature(BootstapContext<ConfiguredFeature<?, ?>> context, FeatureCandidate key, Supplier<F> feature, Supplier<Block> block)
     {
         context.register(key.getConfiguredFeatureKey(),
                 new ConfiguredFeature<>(feature.get(),
@@ -177,7 +168,7 @@ public class Features
         var featureSearch = context.lookup(Registries.PLACED_FEATURE);
 
         context.register(candidate.getBiomeModifierKey(),
-                new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
+                new BiomeModifiers.AddFeaturesBiomeModifier(
                         HolderSet.direct(
                                 biomeSearch.getOrThrow(Biomes.DELUSION),
                                 biomeSearch.getOrThrow(Biomes.ILLUSION),
@@ -196,7 +187,7 @@ public class Features
         var biomeSearch = context.lookup(Registries.BIOME);
 
         context.register(candidate.getModifierKey(),
-                new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
+                new BiomeModifiers.AddSpawnsBiomeModifier(
                         biomeSearch.getOrThrow(biomeKey),
                         List.of(candidate.getSpawnerData())
                 )
@@ -213,7 +204,7 @@ public class Features
         );
     }
 
-    static List<PlacementModifier> treePlacement(RegistryObject<Block> sapling, int count)
+    static List<PlacementModifier> treePlacement(Supplier<Block> sapling, int count)
     {
         return VegetationPlacements.treePlacement(
                 RarityFilter.onAverageOnceEvery(count),
@@ -221,7 +212,7 @@ public class Features
         );
     }
 
-    static <T extends Block> RandomPatchConfiguration randomPatch(RegistryObject<T> block, int tries)
+    static <T extends Block> RandomPatchConfiguration randomPatch(Supplier<T> block, int tries)
     {
         return FeatureUtils.simpleRandomPatchConfiguration(tries,
                 PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
@@ -232,7 +223,7 @@ public class Features
         );
     }
 
-    static <T extends Block> TreeConfiguration delusiveTree(RegistryObject<T> stem, RegistryObject<T> foliage, RegistryObject<T> dirt)
+    static <T extends Block> TreeConfiguration delusiveTree(Supplier<T> stem, Supplier<T> foliage, Supplier<T> dirt)
     {
         return new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(stem.get()),
@@ -261,7 +252,7 @@ public class Features
         ).dirt(BlockStateProvider.simple(dirt.get())).ignoreVines().build();
     }
 
-    static <T extends Block> TreeConfiguration illusiveTree(RegistryObject<T> stem, RegistryObject<T> foliage, RegistryObject<T> dirt)
+    static <T extends Block> TreeConfiguration illusiveTree(Supplier<T> stem, Supplier<T> foliage, Supplier<T> dirt)
     {
         return new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(stem.get()),

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -12,9 +13,11 @@ import net.minecraft.client.gui.components.LerpingBossEvent;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.BossEvent;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.client.ForgeHooksClient;
+import net.neoforged.neoforge.client.ClientHooks;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -22,7 +25,9 @@ import com.mojang.datafixers.util.Pair;
 
 import org.spongepowered.asm.mixin.*;
 
+import bytesnek.hiss.sneaky.Sneaky;
 import bytesnek.hiss.utility.Colours;
+import bytesnek.hiss.utility.Strings;
 import bytesnek.snakerlib.SnakerLib;
 import bytesnek.snakerlib.client.render.SRTP;
 import bytesnek.snakerlib.resources.ResourceReference;
@@ -36,40 +41,45 @@ import bytesnek.tq.rego.Entities;
 @Mixin(BossHealthOverlay.class)
 public abstract class BossHealthOverlayMixin implements SRTP
 {
-    @Unique
-    private final EntityType<Utterfly> tourniqueted$utterfly = Entities.UTTERFLY.get();
-
     @Shadow
     @Final
     private Minecraft minecraft;
 
     @Shadow
-    protected abstract void drawBar(GuiGraphics pGuiGraphics, int pX, int pY, BossEvent pBossEvent, int pU, int pV);
-
-    @Shadow
     @Final
     Map<UUID, LerpingBossEvent> events;
 
+    @Shadow
+    protected abstract void drawBar(GuiGraphics graphics, int posX, int posY, BossEvent event);
+
     @Overwrite
-    @SuppressWarnings({"UnstableApiUsage", "DataFlowIssue"})
+    @SuppressWarnings("DataFlowIssue")
     public void render(GuiGraphics graphics)
     {
         Function<String, RenderType> sCreator = samplerName -> create(SnakerLib.placeholderWithId(), new Pair<>(DefaultVertexFormat.POSITION_TEX, blitSampler(Shaders::getCrystalized, new ResourceReference("textures/sampler/noise_" + samplerName + ".png"), true, false)));
         if (!events.isEmpty()) {
             int sWidth = graphics.guiWidth();
             int sPosY = 12;
+
             RenderType sType = sCreator.apply("pink");
+
             int sTextColour = 16777215;
+
             for (LerpingBossEvent sEvent : events.values()) {
                 int sPosX = sWidth / 2 - 91;
-                var sForgeEvent = ForgeHooksClient.onCustomizeBossEventProgress(graphics, minecraft.getWindow(), sEvent, sPosX, sPosY, 10 + minecraft.font.lineHeight);
+
+                var sForgeEvent = ClientHooks.onCustomizeBossEventProgress(graphics, minecraft.getWindow(), sEvent, sPosX, sPosY, 10 + minecraft.font.lineHeight);
+
                 if (!sForgeEvent.isCanceled()) {
                     drawBar(graphics, sPosX, sPosY, sEvent);
-                    if (tourniqueted$isEvent(sEvent, tourniqueted$utterfly)) {
+
+                    if (tourniqueted$isEvent(sEvent, Entities.UTTERFLY)) {
                         int sRenderDistance = minecraft.options.renderDistance().get();
                         int sSimulationDistance = minecraft.options.simulationDistance().get();
                         int sPackedDistance = sRenderDistance <= 0 || sSimulationDistance <= 0 ? 250 : sRenderDistance * sRenderDistance + sSimulationDistance * sSimulationDistance;
+
                         List<Utterfly> sUtterflies = minecraft.level.getEntitiesOfClass(Utterfly.class, new AABB(minecraft.player.getOnPos()).inflate(sPackedDistance));
+
                         for (Utterfly sUtterfly : sUtterflies) {
                             switch (sUtterfly.getPhase()) {
                                 case 1 -> {
@@ -87,33 +97,23 @@ public abstract class BossHealthOverlayMixin implements SRTP
                                 default -> SnakerLib.LOGGER.warnf("Unknown phase: []", sUtterfly.getPhase());
                             }
                         }
+
                         tourniqueted$drawRenderOverlay(graphics, sType, sPosX, sPosY, sEvent);
                     }
+
                     Component sName = sEvent.getName();
+
                     int sFontWidth = minecraft.font.width(sName);
                     int sFontX = sWidth / 2 - sFontWidth / 2;
                     int sFontY = sPosY - 9;
+
                     graphics.drawString(minecraft.font, sName, sFontX, sFontY, sTextColour);
                 }
+
                 sPosY += sForgeEvent.getIncrement();
+
                 if (sPosY >= graphics.guiHeight() / 3) {
                     break;
-                }
-            }
-        }
-    }
-
-    @Overwrite
-    public void drawBar(GuiGraphics graphics, int x, int y, BossEvent event)
-    {
-        if (event instanceof LerpingBossEvent bossEvent) {
-            if (tourniqueted$isEvent(bossEvent, tourniqueted$utterfly)) {
-                drawBar(graphics, x, y, event, 182, 0);
-            } else {
-                drawBar(graphics, x, y, bossEvent, 182, 0);
-                int progress = (int) (bossEvent.getProgress() * 183);
-                if (progress > 0) {
-                    drawBar(graphics, x, y, bossEvent, progress, 5);
                 }
             }
         }
@@ -141,10 +141,13 @@ public abstract class BossHealthOverlayMixin implements SRTP
     }
 
     @Unique
-    private boolean tourniqueted$isEvent(LerpingBossEvent event, EntityType<?> type)
+    private <T extends Entity> boolean tourniqueted$isEvent(LerpingBossEvent event, Supplier<EntityType<T>> type)
     {
+        DeferredHolder<EntityType<?>, EntityType<?>> holder = Sneaky.cast(type);
+
         String bossEvent = event.getName().getString();
-        String entityType = type.getDescription().getString();
+        String entityType = Strings.i18nt(holder.getId().getPath());
+
         return bossEvent.equals(entityType);
     }
 }

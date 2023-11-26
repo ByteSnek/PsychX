@@ -22,6 +22,7 @@ public class Surreal extends TourniquetedBiome
     {
         addFeature(FeatureCandidate.FLARE_RUBBLE);
         addFeature(FeatureCandidate.BURNING_RUBBLE);
+        addFeature(FeatureCandidate.COMA_SPIKE);
 
         addPlants();
         addCarvers();

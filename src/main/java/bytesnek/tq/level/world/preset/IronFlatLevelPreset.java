@@ -3,10 +3,9 @@ package bytesnek.tq.level.world.preset;
 import java.util.List;
 import java.util.Optional;
 
-import bytesnek.snakerlib.level.levelgen.flat.FlatLayer;
-import bytesnek.snakerlib.level.levelgen.flat.FlatLayerList;
-
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.world.item.Items;
@@ -16,7 +15,10 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.flat.FlatLayerInfo;
 import net.minecraft.world.level.levelgen.flat.FlatLevelGeneratorPreset;
 import net.minecraft.world.level.levelgen.flat.FlatLevelGeneratorSettings;
-import net.minecraftforge.registries.ForgeRegistries;
+
+import bytesnek.snakerlib.level.levelgen.flat.FlatLayer;
+import bytesnek.snakerlib.level.levelgen.flat.FlatLayerList;
+import bytesnek.snakerlib.resources.ResourceLocations;
 
 /**
  * Created by SnakerBone on 18/10/2023
@@ -36,6 +38,6 @@ public class IronFlatLevelPreset
             infos.add(list.getInfo(i));
         }
 
-        return new FlatLevelGeneratorPreset(ForgeRegistries.ITEMS.getDelegateOrThrow(Items.IRON_BLOCK), settings);
+        return new FlatLevelGeneratorPreset(Holder.direct(BuiltInRegistries.ITEM.get(ResourceLocations.ITEM.getResourceLocation(Items.IRON_BLOCK))), settings);
     }
 }

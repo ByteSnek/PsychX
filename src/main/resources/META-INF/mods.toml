@@ -10,7 +10,7 @@ authors = "${mod_authors}"
 description = '''${mod_description}'''
 
 [[dependencies.${ mod_id }]]
-modId = "forge"
+modId = "neoforge"
 mandatory = true
 versionRange = "${neo_version_range}"
 ordering = "NONE"
@@ -27,12 +27,5 @@ side = "BOTH"
 modId = "snakerlib"
 mandatory = true
 versionRange = "${snakerlib_version_range}"
-ordering = "NONE"
-side = "BOTH"
-
-[[dependencies.${ mod_id }]]
-modId = "patchouli"
-mandatory = false
-versionRange = "${patchouli_version_range}"
 ordering = "NONE"
 side = "BOTH"

@@ -1,17 +1,16 @@
 package bytesnek.tq.level.block;
 
 import java.util.function.Consumer;
-
-import bytesnek.snakerlib.utility.item.ItemProperties;
+import java.util.function.Supplier;
 
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
 import org.jetbrains.annotations.NotNull;
 
+import bytesnek.snakerlib.utility.item.ItemProperties;
 import bytesnek.tq.client.renderer.block.ShaderBlockItemRenderer;
 import bytesnek.tq.client.renderer.type.ItemLikeRenderType;
 
@@ -20,7 +19,7 @@ import bytesnek.tq.client.renderer.type.ItemLikeRenderType;
  **/
 public class ShaderBlockItem extends BlockItem
 {
-    public ShaderBlockItem(RegistryObject<Block> block)
+    public ShaderBlockItem(Supplier<Block> block)
     {
         super(block.get(), ItemProperties.EMPTY);
     }

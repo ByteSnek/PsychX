@@ -6,9 +6,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
-import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.common.ForgeSpawnEggItem;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
+import net.neoforged.neoforge.common.DeferredSpawnEggItem;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import bytesnek.hiss.utility.Annotations;
 import bytesnek.snakerlib.resources.ResourceLocations;
@@ -40,7 +40,7 @@ public class ItemModels extends ItemModelProvider implements RegistryMapper
                     return;
                 }
 
-                if (item instanceof ForgeSpawnEggItem spawnEggItem) {
+                if (item instanceof DeferredSpawnEggItem spawnEggItem) {
                     addSpawnEggItem(spawnEggItem);
                     return;
                 }
@@ -67,31 +67,31 @@ public class ItemModels extends ItemModelProvider implements RegistryMapper
 
     private void addCosmoSpineItem(Item item)
     {
-        withExistingParent(ResourceLocations.getPath(item), modLoc("cosmo_spine"));
+        withExistingParent(ResourceLocations.ITEM.getPath(item), modLoc("cosmo_spine"));
     }
 
     private void addSpawnEggItem(Item item)
     {
-        withExistingParent(ResourceLocations.getPath(item), modLoc("egg"));
+        withExistingParent(ResourceLocations.ITEM.getPath(item), modLoc("egg"));
     }
 
     private void addPerspectiveItem(Item item)
     {
-        withExistingParent(ResourceLocations.getPath(item), modLoc("perspective"));
+        withExistingParent(ResourceLocations.ITEM.getPath(item), modLoc("perspective"));
     }
 
     private <I extends ItemLike> void addSimpleItem(I item)
     {
-        withExistingParent(ResourceLocations.getPath((Item) item), mcLoc("item/generated")).texture("layer0", modLoc("item/" + ResourceLocations.getPath((Item) item)));
+        withExistingParent(ResourceLocations.ITEM.getPath((Item) item), mcLoc("item/generated")).texture("layer0", modLoc("item/" + ResourceLocations.ITEM.getPath((Item) item)));
     }
 
     private void addSimpleBlockItem(Block block)
     {
-        withExistingParent(ResourceLocations.getPath(block), modLoc("block/" + ResourceLocations.getPath(block)));
+        withExistingParent(ResourceLocations.BLOCK.getPath(block), modLoc("block/" + ResourceLocations.BLOCK.getPath(block)));
     }
 
     private <B extends ItemLike> void addAdvancedBlockItem(B block)
     {
-        withExistingParent(ResourceLocations.getPath((Block) block), mcLoc("item/generated")).texture("layer0", modLoc("block/" + ResourceLocations.getPath((Block) block)));
+        withExistingParent(ResourceLocations.BLOCK.getPath((Block) block), mcLoc("item/generated")).texture("layer0", modLoc("block/" + ResourceLocations.BLOCK.getPath((Block) block)));
     }
 }

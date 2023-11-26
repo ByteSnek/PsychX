@@ -1,6 +1,5 @@
 package bytesnek.tq.level.item;
 
-
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;

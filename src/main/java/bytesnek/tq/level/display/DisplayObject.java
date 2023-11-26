@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import net.minecraft.world.level.Level;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
 import org.jetbrains.annotations.Nullable;
 

@@ -1,10 +1,11 @@
 package bytesnek.tq.rego;
 
+import java.util.function.Supplier;
+
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import bytesnek.tq.Tourniqueted;
 import bytesnek.tq.level.effect.FlashBangEffect;
@@ -14,7 +15,7 @@ import bytesnek.tq.level.effect.FlashBangEffect;
  **/
 public class Effects
 {
-    public static final DeferredRegister<MobEffect> REGISTER = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, Tourniqueted.MODID);
+    public static final DeferredRegister<MobEffect> REGISTER = DeferredRegister.create(BuiltInRegistries.MOB_EFFECT, Tourniqueted.MODID);
 
-    public static final RegistryObject<FlashBangEffect> FLASHBANG = REGISTER.register("flashbang", () -> new FlashBangEffect(MobEffectCategory.HARMFUL, 0));
+    public static final Supplier<FlashBangEffect> FLASHBANG = REGISTER.register("flashbang", () -> new FlashBangEffect(MobEffectCategory.HARMFUL, 0));
 }

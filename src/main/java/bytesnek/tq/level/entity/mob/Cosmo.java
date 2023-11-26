@@ -28,8 +28,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.network.NetworkHooks;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.network.NetworkHooks;
 
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;

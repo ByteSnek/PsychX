@@ -2,14 +2,13 @@ package bytesnek.tq.level.item;
 
 import java.util.function.Consumer;
 
-import bytesnek.snakerlib.utility.item.ItemProperties;
-
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
 import org.jetbrains.annotations.NotNull;
 
+import bytesnek.snakerlib.utility.item.ItemProperties;
 import bytesnek.tq.client.renderer.item.CosmoSpineRenderer;
 
 /**

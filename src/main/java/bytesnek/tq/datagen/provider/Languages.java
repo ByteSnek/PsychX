@@ -15,7 +15,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.data.LanguageProvider;
+import net.neoforged.neoforge.common.data.LanguageProvider;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -61,14 +61,14 @@ public class Languages extends LanguageProvider implements RegistryMapper
 
     private <T extends Block> void addBlockTranslation(T block)
     {
-        String name = ResourceLocations.getPath(block);
+        String name = ResourceLocations.BLOCK.getPath(block);
 
         add("block." + name, Strings.i18nt(name));
     }
 
     private <T extends Item> void addItemTranslation(T item)
     {
-        String name = ResourceLocations.getPath(item);
+        String name = ResourceLocations.ITEM.getPath(item);
 
         if (name.equals("atlas")) {
             add("item." + name, Strings.i18nt(Tourniqueted.NAME.toLowerCase() + "_" + name));
@@ -81,7 +81,7 @@ public class Languages extends LanguageProvider implements RegistryMapper
 
     private <T extends EntityType<?>> void addEntityTranslation(T entity)
     {
-        String name = ResourceLocations.getPath(entity);
+        String name = ResourceLocations.ENTITY_TYPE.getPath(entity);
 
         if (name.equals("cosmo")) {
             add("entity." + name, Strings.i18nt(name));
@@ -95,14 +95,14 @@ public class Languages extends LanguageProvider implements RegistryMapper
 
     private void addSoundTranslation(SoundEvent sound)
     {
-        String name = ResourceLocations.getPath(sound);
+        String name = ResourceLocations.SOUND_EVENT.getPath(sound);
 
         add("sounds." + name, Strings.i18nt(name));
     }
 
     private <I extends MobEffect> void addEffectTranslation(I effect)
     {
-        String name = ResourceLocations.getPath(effect);
+        String name = ResourceLocations.MOB_EFFECT.getPath(effect);
 
         add("effect." + name, Strings.i18nt(name));
     }

@@ -2,9 +2,6 @@ package bytesnek.tq.level.entity.creature;
 
 import java.util.function.Predicate;
 
-import bytesnek.snakerlib.level.entity.FlyingPassive;
-import bytesnek.snakerlib.utility.Worlds;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -25,11 +22,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.network.NetworkHooks;
+import net.neoforged.neoforge.network.NetworkHooks;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import bytesnek.snakerlib.level.entity.FlyingPassive;
+import bytesnek.snakerlib.utility.Worlds;
 import bytesnek.tq.level.entity.Comatosian;
 import bytesnek.tq.level.world.EntitySpawner;
 import bytesnek.tq.rego.Entities;

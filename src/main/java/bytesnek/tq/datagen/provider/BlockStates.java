@@ -7,10 +7,10 @@ import net.minecraft.Util;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
-import net.minecraftforge.client.model.generators.BlockStateProvider;
-import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.client.model.generators.ModelProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.client.model.generators.ModelProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import bytesnek.hiss.sneaky.Sneaky;
 import bytesnek.snakerlib.resources.ResourceLocations;
@@ -76,7 +76,7 @@ public class BlockStates extends BlockStateProvider implements RegistryMapper
 
     private void addShaderBlock(Block block)
     {
-        String blockName = ResourceLocations.getPath(block);
+        String blockName = ResourceLocations.BLOCK.getPath(block);
         ResourceLocation shaderModel = modLoc("shader");
         ResourceLocation particleTexture = blockTexture(BLOCK_2_PARTICLE.get(block));
 
@@ -89,7 +89,7 @@ public class BlockStates extends BlockStateProvider implements RegistryMapper
 
     private void addPlantBlock(Block block)
     {
-        String plantName = ResourceLocations.getPath(block);
+        String plantName = ResourceLocations.BLOCK.getPath(block);
         ResourceLocation blockTexture = blockTexture(block);
 
         ModelFile modelFile = models()
@@ -101,7 +101,7 @@ public class BlockStates extends BlockStateProvider implements RegistryMapper
 
     private void addLeavesBlock(Block leaves)
     {
-        String leavesName = ResourceLocations.getPath(leaves);
+        String leavesName = ResourceLocations.BLOCK.getPath(leaves);
         ResourceLocation blockTexture = blockTexture(leaves);
 
         ModelFile modelFile = models()
@@ -120,7 +120,7 @@ public class BlockStates extends BlockStateProvider implements RegistryMapper
 
     private void addCubeBlock(Block block)
     {
-        String blockName = ResourceLocations.getPath(block);
+        String blockName = ResourceLocations.BLOCK.getPath(block);
         ResourceLocation blockTexture = blockTexture(block);
 
         if (block instanceof LiquidBlock) {
@@ -136,7 +136,7 @@ public class BlockStates extends BlockStateProvider implements RegistryMapper
 
     private void addCubeBlockDummy(Block block)
     {
-        String blockName = ResourceLocations.getPath(block);
+        String blockName = ResourceLocations.BLOCK.getPath(block);
         ResourceLocation blockTexture = modLoc(ModelProvider.BLOCK_FOLDER + "/dummy");
 
         ModelFile modelFile = models()

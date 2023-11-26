@@ -18,16 +18,16 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraftforge.client.event.sound.PlaySoundEvent;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.client.event.sound.PlaySoundEvent;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.TickEvent;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import bytesnek.hiss.sneaky.Sneaky;
+import bytesnek.hiss.sneaky.Reflection;
+import bytesnek.snakerlib.resources.ResourceLocations;
 import bytesnek.tq.rego.Effects;
 import bytesnek.tq.rego.Sounds;
 
@@ -38,16 +38,11 @@ public class SoundModification
 {
     private static SoundModification handler;
     private final Map<SoundInstance, Float> activeSoundVolumes = new ConcurrentHashMap<>();
-    private final Field playingSoundsField;
+    private Field playingSoundsField;
     private SoundEngine soundEngine;
     private FlashBangSound sound;
 
     private boolean isFlashBanged;
-
-    public SoundModification()
-    {
-        playingSoundsField = ObfuscationReflectionHelper.findField(SoundEngine.class, "f_120226_");
-    }
 
     public static void intialize()
     {
@@ -55,7 +50,7 @@ public class SoundModification
             handler = new SoundModification();
         }
 
-        MinecraftForge.EVENT_BUS.register(handler);
+        NeoForge.EVENT_BUS.register(handler);
     }
 
     @SubscribeEvent
@@ -79,13 +74,7 @@ public class SoundModification
             return;
         }
 
-        Map<SoundInstance, ChannelAccess.ChannelHandle> playingSounds;
-
-        try {
-            playingSounds = Sneaky.cast(playingSoundsField.get(soundEngine));
-        } catch (IllegalArgumentException | IllegalAccessException e) {
-            return;
-        }
+        Map<SoundInstance, ChannelAccess.ChannelHandle> playingSounds = Reflection.getFieldDirect(SoundEngine.class, "instanceToChannel", true, soundEngine);
 
         if (effect != null) {
             try {
@@ -147,7 +136,7 @@ public class SoundModification
 
     private boolean isFlashBangActive(ResourceLocation location)
     {
-        return location == Sounds.FLARE_FLASHBANG.getId();
+        return location == ResourceLocations.SOUND_EVENT.getResourceLocation(Sounds.FLARE_FLASHBANG.get());
     }
 
     private float getMutedVolume(float duration, float volumeBase)

@@ -1,13 +1,13 @@
 plugins {
+    id 'java-library'
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle' version '[6.0.18,6.2)'
-    id 'org.spongepowered.mixin' version '0.7.+'
-    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'net.neoforged.gradle.userdev' version '7.0.45'
+    id 'net.neoforged.gradle.mixin' version '7.0.45'
 }
 
-version = mod_version
+version = minecraft_version + '-' + mod_version
 group = mod_group_id
 
 base {
@@ -16,76 +16,60 @@ base {
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
-minecraft {
-    mappings channel: mapping_channel, version: mapping_version
+minecraft.accessTransformers.file('src/main/resources/META-INF/accesstransformer.cfg')
 
-    copyIdeResources = true
-    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+runs {
+    configureEach {
+        systemProperty 'forge.logging.markers', 'REGISTRIES'
+        systemProperty 'forge.logging.console.level', 'debug'
+        systemProperty 'mixin.env.remapRefMap', 'true'
+        systemProperty 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
 
-    runs {
-        configureEach {
-            workingDirectory project.file("run/${it.name}")
+        modSource project.sourceSets.main
+    }
 
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
+    client {
+        systemProperty 'forge.enabledGameTestNamespaces', mod_id
+    }
 
-            mods {
-                "${mod_id}" {
-                    source sourceSets.main
-                }
-            }
-        }
+    server {
+        systemProperty 'forge.enabledGameTestNamespaces', mod_id
+    }
 
-        client {
-            property 'forge.enabledGameTestNamespaces', mod_id
-        }
-
-        server {
-            property 'forge.enabledGameTestNamespaces', mod_id
-        }
-
-        data {
-            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-        }
+    data {
+        programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
     }
 }
 
-sourceSets.main.resources { srcDir 'src/generated/resources' }
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
+}
 
-sourceSets.main { ext.refMap = mixinRefMap }
+sourceSets.main {
+    ext.refMap = mixinRefMap
+}
 
 repositories {
     mavenLocal()
     mavenCentral()
     maven { url "https://s01.oss.sonatype.org/content/repositories/releases" }
-    maven { url "https://maven.blamejared.com" }
-    maven { url "https://cursemaven.com" }
     maven { url "https://jitpack.io" }
 }
 
 dependencies {
-    minecraft "net.neoforged:forge:${minecraft_version}-${neo_version}"
-
-    implementation fg.deobf("bytesnek.snakerlib:SnakerLib:${snakerlib_version}") setChanging(true)
-    implementation fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}")
-    implementation fg.deobf("codechicken:CodeChickenLib:1.20.1-4.4.0.1:universal")
-
-    runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:4629624")
-    runtimeOnly fg.deobf("curse.maven:oauth-513857:4575495")
-
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    implementation "net.neoforged:neoforge:${neo_version}"
+    implementation "bytesnek.snakerlib:SnakerLib:${minecraft_version}-${snakerlib_version}" setChanging(true)
 }
 
 mixin {
-    add sourceSets.main, mixinRefMap
-    config mixinConfig
+    configs = [mixinConfig]
 }
 
 tasks.withType(ProcessResources).configureEach {
     def replaceProperties = [
+            minecraft_version      : minecraft_version,
             minecraft_version_range: minecraft_version_range,
+            neo_version            : neo_version,
             neo_version_range      : neo_version_range,
             loader_version_range   : loader_version_range,
             mod_id                 : mod_id,
@@ -94,8 +78,10 @@ tasks.withType(ProcessResources).configureEach {
             mod_version            : mod_version,
             mod_authors            : mod_authors,
             mod_description        : mod_description,
+            pack_format_number     : pack_format_number,
+            issue_tracker_url      : issue_tracker_url,
+            logo_file_name         : logo_file_name,
             snakerlib_version_range: snakerlib_version_range,
-            patchouli_version_range: patchouli_version_range
     ]
     inputs.properties replaceProperties
 
@@ -104,56 +90,33 @@ tasks.withType(ProcessResources).configureEach {
     }
 }
 
-tasks.named('jar', Jar).configure {
-    manifest {
-        attributes([
-                'Specification-Title'        : mod_name,
-                'Specification-Vendor'       : mod_authors,
-                'Specification-Version'      : mod_version,
-                'Implementation-Title'       : mod_name,
-                'Implementation-Version'     : mod_version,
-                'Implementation-Vendor'      : mod_authors,
-                'Implementation-Timestamp'   : new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                'TweakClass'                 : mixinTweaker,
-                'MixinConfigs'               : mixinConfig,
-                'FMLCorePluginContainsFMLMod': 'true'
-        ])
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+jar {
+    filesMatching("*.mixin.json") {
+        expand "refmap_target": "${mod_id}."
     }
-    finalizedBy 'reobfJar'
-}
-
-tasks.register('docJar', Jar) {
-    build.dependsOn it
-    from javadoc
-    archiveClassifier = 'javadoc'
-}
-
-tasks.register('srcJar', Jar) {
-    build.dependsOn it
-    from sourceSets.main.allSource
-    archiveClassifier = 'sources'
-}
-
-tasks.register('mkFiles', JavaExec) {
-    mainClass = "bytesnek.tq.datagen.DataGeneratorCallback"
-    classpath sourceSets.main.runtimeClasspath
 }
 
 publishing {
     publications {
         register('mavenJava', MavenPublication) {
-            artifact jar
-            artifact srcJar
-            artifact docJar
+            artifacts = [jar, sourcesJar, javadocJar]
+
             pom {
                 name = project.name
                 description = 'A Minecraft Mod'
                 url = 'https://github.com/ByteSnek/Tourniqueted'
+
                 scm {
                     url = 'https://github.com/ByteSnek/Tourniqueted'
                     connection = 'scm:git:git://github.com/ByteSnek/Tourniqueted.git'
                     developerConnection = 'scm:git:git@github.com:ByteSnek/Tourniqueted.git'
                 }
+
                 licenses {
                     license {
                         name = 'MIT'
@@ -163,9 +126,11 @@ publishing {
             }
         }
     }
+
     repositories {
         maven {
             url "https://s01.oss.sonatype.org/content/repositories/releases"
+
             credentials {
                 username 'snaker'
                 password System.getenv('MAVEN_PASS')
@@ -176,6 +141,4 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
-    options.deprecation = false
-    options.warnings = false
 }

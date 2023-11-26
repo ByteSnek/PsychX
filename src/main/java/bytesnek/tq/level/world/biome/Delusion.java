@@ -22,7 +22,6 @@ public class Delusion extends TourniquetedBiome
     {
         addFeature(FeatureCandidate.DELUSIVE_TREE);
         addFeature(FeatureCandidate.BURNING_RUBBLE);
-        addFeature(FeatureCandidate.UTTERFLY_SHOWGROUND);
 
         addPlants();
         addCarvers();

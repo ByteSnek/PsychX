@@ -1,6 +1,7 @@
 package bytesnek.tq.datagen.provider.loot;
 
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import net.minecraft.advancements.critereon.EntityPredicate;
@@ -22,7 +23,6 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyC
 import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-import net.minecraftforge.registries.RegistryObject;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -105,7 +105,7 @@ public class EntityLootTables extends EntityLootSubProvider
     protected @NotNull Stream<EntityType<?>> getKnownEntityTypes()
     {
         return Sneaky.cast(Entities.REGISTER.getEntries().stream()
-                .map(RegistryObject::get)
+                .map(Supplier::get)
                 .filter(EntityLootTables.getEntitiesWithLootTables()));
     }
 

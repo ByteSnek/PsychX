@@ -1,7 +1,6 @@
 package bytesnek.tq.level.block;
 
-import bytesnek.snakerlib.SnakerLib;
-import bytesnek.snakerlib.utility.block.BlockProperties;
+import java.util.function.Supplier;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,19 +12,21 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraftforge.registries.RegistryObject;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import bytesnek.snakerlib.SnakerLib;
+import bytesnek.snakerlib.utility.block.BlockProperties;
 
 /**
  * Created by SnakerBone on 28/04/2023
  **/
 public class ShaderBlock<T extends BlockEntity> extends BaseEntityBlock
 {
-    private final RegistryObject<BlockEntityType<T>> blockEntity;
+    private final Supplier<BlockEntityType<T>> blockEntity;
 
-    public ShaderBlock(RegistryObject<BlockEntityType<T>> blockEntity)
+    public ShaderBlock(Supplier<BlockEntityType<T>> blockEntity)
     {
         super(BlockProperties.PERSPECTIVE.apply(MapColor.NONE));
         this.blockEntity = blockEntity;

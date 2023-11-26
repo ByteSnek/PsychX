@@ -2,16 +2,15 @@ package bytesnek.tq.level.world.candidate;
 
 import java.util.function.Supplier;
 
-import bytesnek.snakerlib.resources.ResourceReference;
-
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.MobSpawnSettings;
-import net.minecraftforge.common.world.BiomeModifier;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.world.BiomeModifier;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
+import bytesnek.snakerlib.resources.ResourceReference;
 import bytesnek.tq.rego.Entities;
 
 /**
@@ -51,7 +50,7 @@ public enum SpawnCandidate
 
     static ResourceKey<BiomeModifier> createBiomeModifierKey(String name)
     {
-        return ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, new ResourceReference(name));
+        return ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, new ResourceReference(name));
     }
 
     public MobSpawnSettings.SpawnerData getSpawnerData()

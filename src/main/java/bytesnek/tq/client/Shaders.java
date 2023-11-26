@@ -2,16 +2,11 @@ package bytesnek.tq.client;
 
 import java.util.function.Consumer;
 
-import bytesnek.snakerlib.SnakerLib;
-import bytesnek.snakerlib.client.shader.Shader;
-import bytesnek.snakerlib.resources.ResourceReference;
-import bytesnek.snakerlib.utility.Rendering;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ShaderInstance;
-import net.minecraftforge.client.event.RegisterShadersEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.neoforge.client.event.RegisterShadersEvent;
 
 import com.mojang.blaze3d.shaders.Uniform;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -23,6 +18,10 @@ import org.joml.Vector3f;
 import org.joml.Vector4f;
 
 import bytesnek.hiss.sneaky.Sneaky;
+import bytesnek.snakerlib.SnakerLib;
+import bytesnek.snakerlib.client.shader.Shader;
+import bytesnek.snakerlib.resources.ResourceReference;
+import bytesnek.snakerlib.utility.Rendering;
 
 /**
  * Created by SnakerBone on 2/01/2023

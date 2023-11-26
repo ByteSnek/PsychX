@@ -1,10 +1,9 @@
 package bytesnek.tq;
 
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.loading.FMLEnvironment;
 
 import bytesnek.snakerlib.SnakerLib;
 import bytesnek.snakerlib.client.render.skybox.SkyBoxRenderer;
@@ -23,7 +22,6 @@ public class Tourniqueted
 
     public Tourniqueted()
     {
-        MinecraftForge.EVENT_BUS.register(this);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT_SPEC, "tourniqueted-client.toml");
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_SPEC, "tourniqueted-common.toml");
         Rego.initialize();

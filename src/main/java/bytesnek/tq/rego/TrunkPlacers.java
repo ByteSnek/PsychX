@@ -1,9 +1,10 @@
 package bytesnek.tq.rego;
 
+import java.util.function.Supplier;
+
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import bytesnek.tq.Tourniqueted;
 import bytesnek.tq.level.world.tree.IllusiveTrunkPlacer;
@@ -15,5 +16,5 @@ public class TrunkPlacers
 {
     public static final DeferredRegister<TrunkPlacerType<?>> REGISTER = DeferredRegister.create(Registries.TRUNK_PLACER_TYPE, Tourniqueted.MODID);
 
-    public static final RegistryObject<TrunkPlacerType<IllusiveTrunkPlacer>> ILLUSIVE = REGISTER.register("illusive", () -> new TrunkPlacerType<>(IllusiveTrunkPlacer.CODEC));
+    public static final Supplier<TrunkPlacerType<IllusiveTrunkPlacer>> ILLUSIVE = REGISTER.register("illusive", () -> new TrunkPlacerType<>(IllusiveTrunkPlacer.CODEC));
 }

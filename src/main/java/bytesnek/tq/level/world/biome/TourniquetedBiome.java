@@ -1,5 +1,7 @@
 package bytesnek.tq.level.world.biome;
 
+import java.util.LinkedList;
+
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.Carvers;
 import net.minecraft.world.level.biome.Biome;
@@ -17,24 +19,26 @@ import bytesnek.tq.level.world.candidate.SpawnCandidate;
 public abstract class TourniquetedBiome implements BiomeCreator
 {
     private final BiomeCandidate candidate;
-    private final MobSpawnSettings.Builder spawns;
-    private final BiomeGenerationSettings.Builder generation;
+    private final MobSpawnSettings.Builder spawnSettings;
+    private final BiomeGenerationSettings.Builder generationSettings;
+
+    private final LinkedList<FeatureCandidate> features = new LinkedList<>();
 
     public TourniquetedBiome(BiomeCandidate candidate, BootstapContext<Biome> context)
     {
         this.candidate = candidate;
-        this.spawns = candidate.getMobSpawnSettingsBuilder();
-        this.generation = candidate.getBiomeGenerationSettingsBuilder(context);
+        this.spawnSettings = candidate.getMobSpawnSettingsBuilder();
+        this.generationSettings = candidate.getBiomeGenerationSettingsBuilder(context);
     }
 
     public void addSpawn(SpawnCandidate candidate)
     {
-        spawns.addSpawn(candidate.getCategory(), new MobSpawnSettings.SpawnerData(candidate.getEntity(), candidate.getWeight(), candidate.getMinCount(), candidate.getMaxCount()));
+        spawnSettings.addSpawn(candidate.getCategory(), new MobSpawnSettings.SpawnerData(candidate.getEntity(), candidate.getWeight(), candidate.getMinCount(), candidate.getMaxCount()));
     }
 
-    public void addFeature(FeatureCandidate type)
+    public void addFeature(FeatureCandidate candidate)
     {
-        generation.addFeature(type.getStep(), type.getPlacedFeatureKey());
+        features.add(candidate);
     }
 
     public void addPlants()
@@ -48,14 +52,23 @@ public abstract class TourniquetedBiome implements BiomeCreator
 
     public void addCarvers()
     {
-        generation.addCarver(GenerationStep.Carving.AIR, Carvers.CAVE);
-        generation.addCarver(GenerationStep.Carving.AIR, Carvers.CAVE_EXTRA_UNDERGROUND);
-        generation.addCarver(GenerationStep.Carving.AIR, Carvers.CANYON);
+        generationSettings.addCarver(GenerationStep.Carving.AIR, Carvers.CAVE);
+        generationSettings.addCarver(GenerationStep.Carving.AIR, Carvers.CAVE_EXTRA_UNDERGROUND);
+        generationSettings.addCarver(GenerationStep.Carving.AIR, Carvers.CANYON);
+    }
+
+    private void processFeatures()
+    {
+        for (FeatureCandidate feature : features) {
+            generationSettings.addFeature(feature.getStep(), feature.getPlacedFeatureKey());
+        }
     }
 
     @Override
     public Biome create()
     {
-        return candidate.create(spawns, generation);
+        processFeatures();
+
+        return candidate.create(spawnSettings, generationSettings);
     }
 }

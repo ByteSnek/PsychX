@@ -5,7 +5,6 @@ import java.util.Set;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.registries.RegistryObject;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -31,6 +30,6 @@ public class BlockLootTables extends BlockLootSubProvider implements RegistryMap
     @Override
     public @NotNull Iterable<Block> getKnownBlocks()
     {
-        return Blocks.REGISTER.getEntries().stream().map(RegistryObject::get)::iterator;
+        return map(Blocks.REGISTER, Block[]::new)::iterator;
     }
 }

@@ -31,7 +31,6 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.registries.RegistryObject;
 
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
@@ -48,7 +47,7 @@ import bytesnek.tq.rego.Sounds;
  **/
 public class ComasoteBlock extends LiquidBlock
 {
-    private final Map<EntityType<? extends LivingEntity>, RegistryObject<EntityType<? extends LivingEntity>>> entityMap = Util.make(new HashMap<>(), map ->
+    private final Map<EntityType<? extends LivingEntity>, Supplier<EntityType<? extends LivingEntity>>> entityMap = Util.make(new HashMap<>(), map ->
     {
         map.put(EntityType.BEE, Sneaky.cast(Entities.FROLICKER));
         map.put(EntityType.BLAZE, Sneaky.cast(Entities.FLARE));
