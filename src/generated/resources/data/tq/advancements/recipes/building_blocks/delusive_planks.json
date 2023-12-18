@@ -2,7 +2,6 @@
   "parent": "minecraft:recipes/root",
   "criteria": {
     "asap": {
-      "conditions": {},
       "trigger": "minecraft:tick"
     },
     "has_the_recipe": {
@@ -14,8 +13,8 @@
   },
   "requirements": [
     [
-      "asap",
-      "has_the_recipe"
+      "has_the_recipe",
+      "asap"
     ]
   ],
   "rewards": {

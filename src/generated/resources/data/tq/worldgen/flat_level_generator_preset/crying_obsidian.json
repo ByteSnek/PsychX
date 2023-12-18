@@ -1,0 +1,18 @@
+{
+  "display": "minecraft:crying_obsidian",
+  "settings": {
+    "biome": "minecraft:plains",
+    "features": false,
+    "lakes": false,
+    "layers": [
+      {
+        "block": "minecraft:bedrock",
+        "height": 1
+      },
+      {
+        "block": "minecraft:crying_obsidian",
+        "height": 5
+      }
+    ]
+  }
+}

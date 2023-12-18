@@ -33,7 +33,9 @@
     "water_fog_color": -16750951
   },
   "features": [
-    [],
+    [
+      "tq:coma_spike"
+    ],
     [],
     [
       "tq:geometric_rubble",

@@ -8,14 +8,13 @@
       "trigger": "minecraft:recipe_unlocked"
     },
     "tick": {
-      "conditions": {},
       "trigger": "minecraft:tick"
     }
   },
   "requirements": [
     [
-      "tick",
-      "has_the_recipe"
+      "has_the_recipe",
+      "tick"
     ]
   ],
   "rewards": {

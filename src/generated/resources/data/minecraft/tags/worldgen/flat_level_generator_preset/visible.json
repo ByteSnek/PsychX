@@ -7,6 +7,14 @@
     {
       "id": "tq:concrete",
       "required": false
+    },
+    {
+      "id": "tq:obsidian",
+      "required": false
+    },
+    {
+      "id": "tq:crying_obsidian",
+      "required": false
     }
   ]
 }

@@ -52,13 +52,13 @@ sourceSets.main {
 repositories {
     mavenLocal()
     mavenCentral()
+    maven { url "https://cursemaven.com" }
     maven { url "https://s01.oss.sonatype.org/content/repositories/releases" }
-    maven { url "https://jitpack.io" }
 }
 
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
-    implementation "bytesnek.snakerlib:SnakerLib:${minecraft_version}-${snakerlib_version}" setChanging(true)
+    implementation "xyz.snaker.snakerlib:SnakerLib:${minecraft_version}-${snakerlib_version}" setChanging(true)
 }
 
 mixin {

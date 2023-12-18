@@ -1,7 +1,7 @@
 {
       "required": true,
       "minVersion": "0.8",
-      "package": "bytesnek.tq.mixin",
+      "package": "xyz.snaker.tq.mixin",
       "refmap": "mixins.tq.refmap.json",
       "target": "@env(DEFAULT)",
       "compatibilityLevel": "JAVA_17",
