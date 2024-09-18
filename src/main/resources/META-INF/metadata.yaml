@@ -2,7 +2,7 @@ metadata:
   logo:
     context:
       file:
-        "psychx.png"
+        "https://github.com/ByteSnek/Tourniqueted/tree/1.21/src/main/resources/assets/tq/textures/item/protonic_shard.png"
       fallback:
         "https://avatars.githubusercontent.com/u/150658943"
   wipState:
