@@ -2,7 +2,7 @@ metadata:
   logo:
     context:
       file:
-        "item/protonic_shard.png"
+        "assets/psychx/textures/item/protonic_shard.png"
       fallback:
         "https://avatars.githubusercontent.com/u/150658943"
   wipState:
