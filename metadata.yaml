@@ -1,13 +1,10 @@
 metadata:
   logo:
-    useRepoLogo:
-      context:
-        enabled:
-          true
-    ifLogoNull:
-      context:
-        url:
-          "https://avatars.githubusercontent.com/u/150658943"
+    context:
+      file:
+        "psychx.png"
+      fallback:
+        "https://avatars.githubusercontent.com/u/150658943"
   wipState:
     context:
       enabled:
