@@ -1,11 +1,9 @@
 metadata:
   logo:
-    context:
-      file:
-        "src/main/resources/assets/psychx/textures/item/protonic_shard.png"
-      fallback:
-        "https://avatars.githubusercontent.com/u/150658943"
-  wipState:
-    context:
-      enabled:
-        true
+    image:
+      "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGCSURBVDhPY8AFjtoK/IcysYJr2XxgeUYwDwuAGWB9+APjvTKIYhD49EYBymJgMJh3iRHFAJAmkAYQG2TD+0tMDJKW/xhubkwAyyMDdf8FDEpdnxiZoHw4QHa6oB5Es7udHAr+9PUDVAUDA4YBMMDBzcDwcE8Cg5KCClQE6F/J7wwvX7NBeRCAYgDIRhAA+RlmMwjcfsQG1vziEj/D/advwWKi1npgGm4AzOkwPxtoImzm42Rg2LHyNVwzMkBxAcjZIM3IzgZpRtb4+Pl9Bq+p9xh4/Y+AAxtsACjEYTaj+/nC9TtQHkSzzwo+uGYQADP+M1j+36FuysDPJwgWBAELA16w3+89uAMWh2nmtpmCEvVwL4Ci5uOn92C2sJAww4kLn8FsEIA5G10zCKCEAcgQkGKQrTAAEkP2MzoAG/B+6Q8wBwT4uAXgCeXC1TMYfkYHcIl3Sw3/7y7XBbNlJRXB3rGb+w+rs5EBiiTIkJNNtmA2MZqxApAhX4/kwPMDfsDAAACXFKfKZHGYHAAAAABJRU5ErkJggg=="
+    fallback:
+      "https://avatars.githubusercontent.com/u/150658943"
+  wip:
+    state:
+      "enabled"
